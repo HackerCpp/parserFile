@@ -1,4 +1,3 @@
-
 #include "inc/filereader.h"
 #include "QMessageBox"
 

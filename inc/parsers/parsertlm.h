@@ -3,6 +3,7 @@
 
 #include "QString"
 #include "QList"
+#include "inc/parsers/findblocks.h"
 
 struct Pucket{           //***
     uint	time;
@@ -13,25 +14,20 @@ struct Pucket{           //***
 struct TlmPuck{          //**
     uchar state;
     ushort length;
-    QString data;
     Pucket dataPucket;
 };
-struct TlmBlock{         //*
-    int sizeNameBlock;
-    QString nameBlock;
-    uint sizeBodyBlock;
-    QString bodyBlock;
-    QList<TlmPuck> *tlmPuckList;
+struct BlockTlm{
+    QString name;
+    QList<TlmPuck> tlmPuckList;
 };
 
 
 
 class ParserTLM{
-    QString m_tlmFile;
     QString string;
-    QList<TlmBlock> *tlmBlocksList;
+    QList<BlockTlm> *tlmBlocks;
 public:
-    ParserTLM(QString tlmFile);
+    ParserTLM(QString hexTextTlmFile);
     QString getHexString();
 };
 
