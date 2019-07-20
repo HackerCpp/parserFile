@@ -1,10 +1,10 @@
-#include "mainwindow.h"
-#include "filereader.h"
-#include "parsertlm.h"
+#include "inc/mainwindow.h"
+#include "inc/filereader.h"
+#include "inc/parsers/parsertlm.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent){
-    FileReader file("D:\\geofizics05\\kedr-bin\\data\\2019_07_01_14-16-31.tlm");
+    FileReader file("D:\\Project\\ParserFile\\parserFile\\tlm\\2019_07_01_14-16-31.tlm");
     ParserTLM parserTlm(file.getHexString());
 
     //const QString str = parserTlm.getHexString();

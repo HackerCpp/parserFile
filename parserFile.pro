@@ -25,15 +25,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
-    filereader.cpp \
-    parsertlm.cpp
+        src\main.cpp \
+        src\mainwindow.cpp \
+    src\filereader.cpp \
+    src\parsers\parsertlm.cpp
 
 HEADERS += \
-        mainwindow.h \
-    Filereader.h \
-    parsertlm.h
+        inc\mainwindow.h \
+    inc\filereader.h \
+    inc\parsers\parsertlm.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

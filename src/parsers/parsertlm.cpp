@@ -1,8 +1,22 @@
-#include "parsertlm.h"
+#include "inc/parsers/parsertlm.h"
 #include <QMessageBox>
 
+void findPuck(QString tlmPuck,Pucket *pucket,uchar state){
+    bool ok;
+    if(!(state & 0x80)){
+        pucket->time = (tlmPuck.mid(6,2)+tlmPuck.mid(4,2)+tlmPuck.mid(2,2) + tlmPuck.mid(0,2)).toUInt(&ok,16);
+        tlmPuck.remove(0,8);
+    }
+    else {
+        pucket->time = 0;
+    }
+    pucket->dev_type = static_cast<char>(tlmPuck.mid(0,2).toUInt(&ok,16));
+    pucket->inf_type = static_cast<uchar>(tlmPuck.mid(2,2).toUInt(&ok,16));
+    pucket->data = tlmPuck.mid(4);
+}
+
 void findTlmPuck(QString dataBlock,int position,QList<TlmPuck> *tlmPuckList){
-    int size = dataBlock.length();
+    int size = dataBlock.length() - 2;
     bool ok;
     while(size > 0){
         TlmPuck tlmPuck;
@@ -41,7 +55,7 @@ void findTlmBlock(QString file,int position,QList<TlmBlock> *tlmBlocksList){
         }
         else{
             int sizeBodyBlock = static_cast<int>(sizeDataBlock*2);
-            tlmBlock.bodyBlock = file.mid(indexEndBlock + 20,sizeBodyBlock);
+            tlmBlock.bodyBlock = file.mid(indexEndBlock + 20,sizeBodyBlock - 16);
         }
         tlmBlocksList->push_back(tlmBlock);
         findTlmBlock(file,indexEndBlock + 9 + static_cast<int>(sizeDataBlock),tlmBlocksList);
@@ -56,19 +70,26 @@ ParserTLM::ParserTLM(QString tlmFile):m_tlmFile(tlmFile){
         for(auto i = tlmBlocksList->begin(); i < tlmBlocksList->end();++i ){
             i->tlmPuckList = new QList<TlmPuck>;
             findTlmPuck(i->bodyBlock,0,i->tlmPuckList);
+            if(!i->tlmPuckList->isEmpty()){
+                for(auto j = i->tlmPuckList->begin(); j < i->tlmPuckList->end();++j ){
+                    findPuck(j->data,&j->dataPucket,j->state);
+                }
+            }
         }
     }
-    QMessageBox::about(nullptr,"Title", "Все сообщения найдены");
     uint64_t qu= 0;
     if(!tlmBlocksList->isEmpty()){
         for(auto i = tlmBlocksList->begin(); i < tlmBlocksList->end();++i ){
             qu  = 0;
-            //this->string += "<br/>" + i->nameBlock + "<br/>";
+            this->string += "<br/>" + i->nameBlock + "<br/>";
             if(!i->tlmPuckList->isEmpty()){
                 for(auto tlmPuck = i->tlmPuckList->begin(); tlmPuck < i->tlmPuckList->end();++tlmPuck ){
-                    //this->string+= "state = " + QString::number(tlmPuck->state) + ";      "
-                       // "Length = " + QString::number(tlmPuck->length) + ";"
-                       // "data = " + tlmPuck->data.mid(0,10) + "<br>";
+
+                        this->string+="size = " + QString::number(tlmPuck->length)
+                        +"time = " + QString::number(tlmPuck->dataPucket.time)
+                        +"  dev_type = " + tlmPuck->dataPucket.dev_type
+                        +"  inf_type = " + QString::number(tlmPuck->dataPucket.inf_type)
+                        +"  data = " + tlmPuck->dataPucket.data + "<br>";
                     qu++;
                 }
                this->string += "<br> Количество записей: " + QString::number(qu) + "<br>";
