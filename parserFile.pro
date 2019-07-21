@@ -29,13 +29,15 @@ SOURCES += \
         src\mainwindow.cpp \
     src\filereader.cpp \
     src\parsers\parsertlm.cpp \
-    src/parsers/findblocks.cpp
+    src/parsers/findblocks.cpp \
+    src/models/modeltlm.cpp
 
 HEADERS += \
         inc\mainwindow.h \
     inc\filereader.h \
     inc\parsers\parsertlm.h \
-    inc/parsers/findblocks.h
+    inc/parsers/findblocks.h \
+    inc/models/modeltlm.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -16,7 +16,7 @@ void FindBlocks::findBlocksFFFE(QString hexTextFile,int position){
         Block block;
         uint sizeDataBlock =(hexTextFile.mid(indexEndBlock + 10,2)+hexTextFile.mid(indexEndBlock + 8,2)+hexTextFile.mid(indexEndBlock + 6,2) + hexTextFile.mid(indexEndBlock + 4,2)).toUInt(&ok,16);
         block.sizeNameBlock = sizeNameBlock;
-        block.nameBlock = hexTextFile.mid(indexBeginBlock,sizeNameBlock * 2);
+        block.nameBlock = hexTextFile.mid(indexBeginBlock,sizeNameBlock * 2).remove("00");
         block.sizeBodyBlock = sizeDataBlock;
         if(sizeDataBlock > INT_MAX/2){
             block.bodyBlock = hexTextFile.mid(indexEndBlock + 20);

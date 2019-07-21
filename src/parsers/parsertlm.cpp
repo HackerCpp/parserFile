@@ -1,5 +1,6 @@
 #include "inc/parsers/parsertlm.h"
 #include <QMessageBox>
+#include <QTextCodec>
 
 void findPuckFFFE(QString tlmPuckString,TlmPuck *tlmPuck){
     bool ok;
@@ -18,14 +19,13 @@ void findTlmPuckFFFE(QString blockTlmString,BlockTlm* blockTlm){
     int position = 0;
     int size = blockTlmString.length() - 2;
     bool ok;
-    while(size > 0){
+    while(position < size){
         TlmPuck tlmPuck;
         tlmPuck.state = static_cast<uchar>(blockTlmString.mid(position,2).toUInt(&ok,16));
         tlmPuck.length = static_cast<ushort>((blockTlmString.mid(position + 4,2)+blockTlmString.mid(position + 2,2)).toUInt(&ok,16));
         findPuckFFFE(blockTlmString.mid(position + 6,tlmPuck.length * 2),&tlmPuck);
         blockTlm->tlmPuckList.push_back(tlmPuck);
         position+=(tlmPuck.length * 2) + 6;
-        size -= (tlmPuck.length * 2) + 6;
     }
 }
 
@@ -39,10 +39,18 @@ ParserTLM::ParserTLM(QString hexTextTlmFile){
         return;
     BlockTlm blockTlm;
     for(auto i = tlmBlocksList->begin(); i < tlmBlocksList->end();++i ){
-        blockTlm.name = i->nameBlock;
-        findTlmPuckFFFE(i->bodyBlock,&blockTlm);
+        blockTlm.name = QByteArray::fromHex(i->nameBlock.toLocal8Bit());
+        blockTlm.boom = boom;
+        if(boom == "fffe")
+            findTlmPuckFFFE(i->bodyBlock,&blockTlm);
+        else if(boom == "feff")
+            QMessageBox::about(nullptr,"Warning", "Кодировка FEFF не реализована, пожалуйста обратитесь к разработчику");
+        else
+            QMessageBox::about(nullptr,"Warning", "Неизвестная кодировка файла.");
         this->tlmBlocks->push_back(blockTlm);
     }
+    delete blocks;
+    blocks = nullptr;
 
     uint64_t qu= 0;
 
@@ -67,4 +75,7 @@ ParserTLM::ParserTLM(QString hexTextTlmFile){
 
 QString ParserTLM::getHexString(){
     return this->string;
+}
+QList<BlockTlm> *ParserTLM::getBlocks(){
+    return this->tlmBlocks;
 }

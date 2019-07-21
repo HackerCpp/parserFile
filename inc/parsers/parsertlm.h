@@ -17,6 +17,7 @@ struct TlmPuck{          //**
     Pucket dataPucket;
 };
 struct BlockTlm{
+    QString boom;
     QString name;
     QList<TlmPuck> tlmPuckList;
 };
@@ -29,6 +30,7 @@ class ParserTLM{
 public:
     ParserTLM(QString hexTextTlmFile);
     QString getHexString();
+    QList<BlockTlm> *getBlocks();
 };
 
 #endif // PARSERTLM_H
