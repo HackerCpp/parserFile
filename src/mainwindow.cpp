@@ -6,11 +6,11 @@
 
 MainWindow::MainWindow(QWidget *parent){
     this->setParent(parent);
-    FileReader file("D:\\Project\\ParserFile\\parserFile\\tlm\\2019_01_18_07-01-51.tlm");
+    FileReader file("D:\\geofizics05\\kedr-bin\\data\\2019_06_28_10-03-23.tlm");
     ParserTLM parserTlm(file.getHexString());
 
     //QTextEdit * text = new QTextEdit(parserTlm.getHexString());
-    ModelTlm *model = new ModelTlm(*parserTlm.getBlocks());
+    ModelTlm *model = new ModelTlm();
     //model->setStringList(QStringList() <<"tfg"<<"tfbt"<<"tbrb"<<"tbrb"<<"tbrb"<<"tbrb");
     QTreeView * trv= new QTreeView();
     trv->setAnimated(true);
@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent){
     trv->setItemsExpandable(true);
     trv->setAllColumnsShowFocus(true);
 
-    trv->setModel(model->getTlmModel());
+    trv->setModel(model);
     QHBoxLayout *blay = new QHBoxLayout(this);
     //blay->addWidget(text);
     blay->addWidget(trv);

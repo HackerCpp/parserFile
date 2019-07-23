@@ -1,33 +1,87 @@
 #include "inc/models/modeltlm.h"
+#include <QMessageBox>
 
-ModelTlm::ModelTlm(QList<BlockTlm> &tlmBlocks)
-    :m_tlmBlocks(tlmBlocks){
-    int count;
-    this->model = new QStandardItemModel(m_tlmBlocks.size(),7);
-    for(int row = 0; row < m_tlmBlocks.size();row++){
-        QModelIndex indexName = model->index(row,0);
-        QModelIndex indexBoom = model->index(row,1);
-        QModelIndex indexPuck;
-        model->setData(indexName,tlmBlocks.at(row).name);
-        model->setData(indexBoom,tlmBlocks.at(row).boom);
-        model->insertRows(0,m_tlmBlocks.at(row).tlmPuckList.size(),indexName);
-        model->insertColumns(0,7,indexName);
-        count = 0;
-        /**/
-        for(int r = 0; r < m_tlmBlocks.at(row).tlmPuckList.size();r++){
-            model->setData(model->index(r,0,indexName),count++);
-            model->setData(model->index(r,1,indexName),m_tlmBlocks.at(row).tlmPuckList.at(r).state);
-            model->setData(model->index(r,2,indexName),m_tlmBlocks.at(row).tlmPuckList.at(r).length);
-            model->setData(model->index(r,3,indexName),m_tlmBlocks.at(row).tlmPuckList.at(r).dataPucket.time);
-            model->setData(model->index(r,4,indexName),m_tlmBlocks.at(row).tlmPuckList.at(r).dataPucket.dev_type);
-            model->setData(model->index(r,5,indexName),m_tlmBlocks.at(row).tlmPuckList.at(r).dataPucket.inf_type);
-            model->setData(model->index(r,6,indexName),m_tlmBlocks.at(row).tlmPuckList.at(r).dataPucket.data);
+ModelTlm::ModelTlm(QObject *parent)
+    : QAbstractItemModel(parent){
+    m_tlmBlocks = new QList<Data>;
+    Data *blockPrev = nullptr;
+    for(int i = 0;i < 12;i++){
+        Data blo;
+        blo.name = "W" + QString::number(i);
+        blo.child = nullptr;
+        blo.par = nullptr;
+        if(!m_tlmBlocks->isEmpty()){
+            blockPrev = const_cast<Data*>(&m_tlmBlocks->at(i-1));
+            blo.par = blockPrev;
         }
+        m_tlmBlocks->push_back(blo);
+        if(blockPrev != nullptr){
+            blockPrev->child = const_cast<Data*>(&m_tlmBlocks->at(i));
+        }
+        blockPrev = nullptr;
     }
 }
 
 
-QStandardItemModel *ModelTlm::getTlmModel(){
-    return this->model;
+
+QModelIndex ModelTlm::index(int row, int column, const QModelIndex &parent) const{
+    if (!hasIndex(row, column, parent))
+            return QModelIndex();
+
+    if (!parent.isValid()) // запрашивают индексы корневых узлов
+            return createIndex(row, 0, const_cast<Data*>(&m_tlmBlocks->at(row)));
+    Data * puck = static_cast<Data*>(parent.internalPointer());
+
+    if(puck->child != nullptr){
+        //QMessageBox::about(nullptr,"Warning", puck->child->name);
+        return createIndex(0, 0, const_cast<Data*>(puck->child));
+    }
+    QMessageBox::about(nullptr,"Warning", "modelndex");
+    return QModelIndex();
 }
 
+QModelIndex ModelTlm::parent(const QModelIndex &child) const{
+    if (!child.isValid()) {
+        return QModelIndex();
+    }
+    Data* childInfo = static_cast<Data*>(child.internalPointer());
+    Data* parentInfo = childInfo->par;
+    if (parentInfo != nullptr) { // parent запрашивается не у корневого элемента
+        return createIndex(0, 0, parentInfo);
+    }
+    else {
+        return QModelIndex();
+    }
+}
+
+int ModelTlm::rowCount(const QModelIndex &parent) const{
+    if(!parent.isValid()){
+        return 1;
+    }
+    else {
+        Data* parentInfo = static_cast<Data*>(parent.internalPointer());
+
+        if(parentInfo->child == nullptr ){
+            return 0;
+        }
+        else {
+            return 1;
+        }
+    }
+
+}
+int ModelTlm::columnCount(const QModelIndex &parent) const{
+    return 1;
+}
+QVariant ModelTlm::data(const QModelIndex &index, int role) const{
+    if (!index.isValid()){
+        return QVariant();
+    }
+    if (role == Qt::DisplayRole){
+        Data * puck = static_cast<Data*>(index.internalPointer());
+        return puck->name;
+    }
+    else
+        return QVariant();
+
+}
