@@ -13,6 +13,7 @@ ModelTlm::ModelTlm(QList<BlockTlm> &tlmBlocks)
         model->insertRows(0,m_tlmBlocks.at(row).tlmPuckList.size(),indexName);
         model->insertColumns(0,7,indexName);
         count = 0;
+        /**/
         for(int r = 0; r < m_tlmBlocks.at(row).tlmPuckList.size();r++){
             model->setData(model->index(r,0,indexName),count++);
             model->setData(model->index(r,1,indexName),m_tlmBlocks.at(row).tlmPuckList.at(r).state);
@@ -20,12 +21,6 @@ ModelTlm::ModelTlm(QList<BlockTlm> &tlmBlocks)
             model->setData(model->index(r,3,indexName),m_tlmBlocks.at(row).tlmPuckList.at(r).dataPucket.time);
             model->setData(model->index(r,4,indexName),m_tlmBlocks.at(row).tlmPuckList.at(r).dataPucket.dev_type);
             model->setData(model->index(r,5,indexName),m_tlmBlocks.at(row).tlmPuckList.at(r).dataPucket.inf_type);
-            /*indexPuck = model->index(r,0,indexName);
-            model->insertRows(0,1,indexPuck);
-            model->insertColumns(0,5,indexPuck);
-            indexPuck = model->index(0,4,indexPuck);
-
-            model->setData(indexPuck,m_tlmBlocks.at(row).tlmPuckList.at(r).dataPucket.data);*/
             model->setData(model->index(r,6,indexName),m_tlmBlocks.at(row).tlmPuckList.at(r).dataPucket.data);
         }
     }
