@@ -4,15 +4,14 @@
 #include "QString"
 #include "QList"
 #include "inc/parsers/findblocks.h"
-struct BlockTlm;
+
 struct Pucket{           //***
     uint	time;
     char    dev_type;
     uchar	inf_type;
     QString data;
 };
-struct TlmPuck{          //**
-    BlockTlm *parent;
+struct TlmPack{          //**
     uchar state;
     ushort length;
     Pucket dataPucket;
@@ -20,20 +19,18 @@ struct TlmPuck{          //**
 struct BlockTlm{
     QString boom;
     QString name;
-    QList<TlmPuck> tlmPuckList;
+    QList<TlmPack> TlmPackList;
 };
 
 
 
 class ParserTLM{
-    QString string;
     QList<BlockTlm> *tlmBlocks;
 
-    void findPuckFFFE(QString tlmPuckString,TlmPuck *tlmPuck);
-    void findTlmPuckFFFE(QString blockTlmString,BlockTlm* blockTlm);
+    void findPuckFFFE(QString TlmPackString,TlmPack *TlmPack);
+    void findTlmPackFFFE(QString blockTlmString,BlockTlm* blockTlm);
 public:
     ParserTLM(QString hexTextTlmFile);
-    QString getHexString();
     QList<BlockTlm> *getBlocks();
 };
 

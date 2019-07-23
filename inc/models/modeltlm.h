@@ -3,20 +3,30 @@
 
 #include <QAbstractItemModel>
 #include "inc/parsers/parsertlm.h"
+#include <QVector>
 
-struct Data{
+/*struct Data{
     QString name;
     Data* par;
     Data* child;
+};*/
+struct TlmBlockData;
+struct TlmPackData{
+    TlmPack data;
+    TlmBlockData* parent;
 };
-
+struct TlmBlockData{
+    QString name;
+    QString bom;
+    QVector<TlmPackData> *dataArray;
+};
 
 class ModelTlm : public  QAbstractItemModel{
 
-    QList<Data> *m_tlmBlocks;
+    QVector<TlmBlockData> *m_tlmBlocks;
 
 public:
-    ModelTlm(QObject *parent = Q_NULLPTR);
+    ModelTlm(QList<BlockTlm> *tlmBlocks,QObject *parent = Q_NULLPTR);
     virtual QModelIndex index(int row, int column, const QModelIndex &parent) const;
     virtual QModelIndex parent(const QModelIndex &child) const;
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;

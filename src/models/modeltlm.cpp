@@ -1,7 +1,7 @@
 #include "inc/models/modeltlm.h"
 #include <QMessageBox>
 
-ModelTlm::ModelTlm(QObject *parent)
+/*ModelTlm::ModelTlm(QObject *parent)
     : QAbstractItemModel(parent){
     m_tlmBlocks = new QList<Data>;
     Data *blockPrev = nullptr;
@@ -80,6 +80,100 @@ QVariant ModelTlm::data(const QModelIndex &index, int role) const{
     if (role == Qt::DisplayRole){
         Data * puck = static_cast<Data*>(index.internalPointer());
         return puck->name;
+    }
+    else
+        return QVariant();
+
+}*/
+ModelTlm::ModelTlm(QList<BlockTlm> *tlmBlocks,QObject *parent)
+    : QAbstractItemModel(parent){
+    this->m_tlmBlocks = new QVector<TlmBlockData>(2);
+    for(int blockId = 0;blockId < tlmBlocks->size();blockId++){
+        m_tlmBlocks->data()[blockId].dataArray = new QVector<TlmPackData>;
+
+        for(int packId = 0;packId < tlmBlocks->at(blockId).TlmPackList.size();packId++){
+            TlmPackData packData;
+            packData.parent = &m_tlmBlocks->data()[blockId];
+            packData.data.state = tlmBlocks->at(blockId).TlmPackList.at(packId).state;
+            packData.data.length = tlmBlocks->at(blockId).TlmPackList.at(packId).length;
+            packData.data.dataPucket.time = tlmBlocks->at(blockId).TlmPackList.at(packId).dataPucket.time;
+            packData.data.dataPucket.dev_type = tlmBlocks->at(blockId).TlmPackList.at(packId).dataPucket.dev_type;
+            packData.data.dataPucket.inf_type = tlmBlocks->at(blockId).TlmPackList.at(packId).dataPucket.inf_type;
+            packData.data.dataPucket.data = tlmBlocks->at(blockId).TlmPackList.at(packId).dataPucket.data;
+            m_tlmBlocks->data()[blockId].dataArray->insert(packId,packData);
+        }
+    }
+    QMessageBox::about(nullptr,"Warning", "конец конструктора");
+}
+
+
+
+QModelIndex ModelTlm::index(int row, int column, const QModelIndex &parent) const{
+    if (!hasIndex(row, column, parent))
+            return QModelIndex();
+
+    if (!parent.isValid()){ // запрашивают индексы корневых узлов
+        QMessageBox::about(nullptr,"Warning", "index parent");
+            return createIndex(row, 0, const_cast<TlmBlockData*>(&m_tlmBlocks->data()[row]));
+    }
+    TlmBlockData * puck = static_cast<TlmBlockData*>(parent.internalPointer());
+    QMessageBox::about(nullptr,"Warning", "index child");
+    return createIndex(row,column,&puck->dataArray->data()[row]);
+}
+
+QModelIndex ModelTlm::parent(const QModelIndex &child) const{
+    if (!child.isValid()) {
+        return QModelIndex();
+    }
+    TlmPackData* childInfo = static_cast<TlmPackData*>(child.internalPointer());
+    if(childInfo != nullptr){
+        TlmBlockData* parentInfo = childInfo->parent;
+        QMessageBox::about(nullptr,"Warning", parentInfo->name);
+        if (parentInfo != nullptr) { // parent запрашивается не у корневого элемента
+            QMessageBox::about(nullptr,"Warning", "парент не у корневого запра");
+            if(m_tlmBlocks->data()[0].name == parentInfo->name){
+                QMessageBox::about(nullptr,"Warning", "парент не у корневого запра");
+                return createIndex(0, 0, parentInfo);
+        }
+        else {
+            QMessageBox::about(nullptr,"Warning", "парент не у корневого запра");
+            return createIndex(1, 0, parentInfo);
+        }
+
+    }
+    else {
+        return QModelIndex();
+    }
+    }
+}
+
+int ModelTlm::rowCount(const QModelIndex &parent) const{
+    if(!parent.isValid())
+        return 2;
+
+        TlmBlockData* parentInfo = static_cast<TlmBlockData*>(parent.internalPointer());
+
+        if(parentInfo != nullptr ){
+            QMessageBox::about(nullptr,"warning",QString::number(parentInfo->dataArray->size()));
+            return parentInfo->dataArray->size();
+        }
+        else {
+            QMessageBox::about(nullptr,"Warning", "0 строк");
+            return 0;
+        }
+
+}
+
+int ModelTlm::columnCount(const QModelIndex &parent) const{
+    return 1;
+}
+QVariant ModelTlm::data(const QModelIndex &index, int role) const{
+    if (!index.isValid()){
+        return QVariant();
+    }
+    if (role == Qt::DisplayRole){
+        //Data * puck = static_cast<Data*>(index.internalPointer());
+        return "puck->name";
     }
     else
         return QVariant();
