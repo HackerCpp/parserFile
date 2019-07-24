@@ -6,7 +6,7 @@
 
 MainWindow::MainWindow(QWidget *parent){
     this->setParent(parent);
-    FileReader file("D:\\Project\\ParserFile\\parserFile\\tlm\\2019_07_01_14-16-31.tlm");
+    FileReader file("D:\\MyQtProgram\\parserGfm\\parserFile\\tlm\\2019_07_01_14-16-31.tlm");
     ParserTLM parserTlm(file.getHexString());
 
     //QTextEdit * text = new QTextEdit(parserTlm.getHexString());

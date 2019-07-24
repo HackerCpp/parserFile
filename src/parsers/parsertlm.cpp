@@ -10,8 +10,8 @@ void ParserTLM::findPuckFFFE(QString TlmPackString,TlmPack *TlmPack){
     }
     else
         TlmPack->dataPucket.time = 0;
-    TlmPack->dataPucket.dev_type = static_cast<char>(TlmPackString.mid(0,2).toUInt(&ok,16));
-    TlmPack->dataPucket.inf_type = static_cast<uchar>(TlmPackString.mid(2,2).toUInt(&ok,16));
+    TlmPack->dataPucket.dev_type = devTypeArray[static_cast<char>(TlmPackString.mid(0,2).toUInt(&ok,16)) - 0x41];
+    TlmPack->dataPucket.inf_type = infTypeArray[static_cast<uchar>(TlmPackString.mid(2,2).toUInt(&ok,16))];
     TlmPack->dataPucket.data = TlmPackString.mid(4);
 }
 
