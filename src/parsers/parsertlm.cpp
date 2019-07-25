@@ -34,7 +34,7 @@ ParserTLM::ParserTLM(QString hexTextTlmFile){
     this->tlmBlocks = new QList<BlockTlm>;
     FindBlocks *blocks = new FindBlocks(hexTextTlmFile);
     QList<Block> *tlmBlocksList = blocks->getBlockList();
-    QString boom = blocks->getBoom();
+    QString boom = blocks->getBom();
     if(tlmBlocksList->isEmpty())
         return;
     BlockTlm blockTlm;

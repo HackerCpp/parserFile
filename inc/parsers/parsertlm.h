@@ -25,7 +25,8 @@ struct BlockTlm{
 
 
 class ParserTLM{
-    QString devTypeArray[10] = {"UPS1","UPS2","UPS3","UPS4","CPU","PLOT","SU","MTK","Reserve","ADSP"};
+    QString devTypeArray[10] //!< Названия приборов откуда(куда) могут приходить данные
+                    = {"UPS1","UPS2","UPS3","UPS4","CPU","PLOT","SU","MTK","Reserve","ADSP"};
     QString infTypeArray[14] = {"GETVERSION","GETBLOCKINF","ERROR","STARTMON","WRITEDATA","STARTPROG",
                             "WRITEPARAM","GETPARAM","CMD","GETDATA","WRITEBLOCKINF","CLEARSECTOR","GETCLEARSTATUS","UIPCOMMAND"};
     QList<BlockTlm> *tlmBlocks;

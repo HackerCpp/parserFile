@@ -24,7 +24,6 @@ class ModelTlm : public  QAbstractItemModel{
     QVector<TlmBlockData> *m_tlmBlocks;
 public:
     ModelTlm(QList<BlockTlm> *tlmBlocks,QObject *parent = Q_NULLPTR);
-    //ModelTlm(QList<BlockTlm> *tlmBlocks,QObject *parent = Q_NULLPTR);
     QModelIndex index(int row, int column, const QModelIndex &parent) const;
     QModelIndex parent(const QModelIndex &child) const;
     int rowCount(const QModelIndex &parent = QModelIndex()) const;

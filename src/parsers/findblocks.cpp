@@ -40,14 +40,14 @@ FindBlocks::FindBlocks(QString hexTextFile){
     }
     else if (this->bom == "feff")
         QMessageBox::about(nullptr,"Warning", "Поиск блоков с кодировкой FEFF не реализован, пожалуйста обратитесь к разработчику");
-    else {
+    else
         QMessageBox::about(nullptr,"Warning", "Неизвестная кодировка файла, пожалуйста обратитесь к разработчику");
-    }
+
     this->blocksList = nullptr;
 }
 QList<Block> *FindBlocks::getBlockList(){
     return this->blocksList;
 }
-QString FindBlocks::getBoom(){
+QString FindBlocks::getBom(){
     return this->bom;
 }
