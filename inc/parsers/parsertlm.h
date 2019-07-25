@@ -5,7 +5,7 @@
 #include "QList"
 #include "inc/parsers/findblocks.h"
 
-struct Pucket{           //***
+struct Packet{           //***
     uint	time;
     QString dev_type;
     QString	inf_type;
@@ -14,7 +14,7 @@ struct Pucket{           //***
 struct TlmPack{          //**
     uchar state;
     ushort length;
-    Pucket dataPucket;
+    Packet dataPucket;
 };
 struct BlockTlm{
     QString boom;
