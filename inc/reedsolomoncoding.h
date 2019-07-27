@@ -11,8 +11,8 @@ class ReedSolomonCoding{
     const short Ks = (LENGTH_WORD-2*Ts);
     bool deepness = 0; //!< 0 - deepness nasa; 1 - deepness shortened
     const int pp[M + 1] = { 1, 0, 1, 1, 1, 0, 0, 0, 1 };
-    int alpha_to[LENGTH_WORD + 1];
-    int index_of[LENGTH_WORD + 1];
+    unsigned char alpha_to[LENGTH_WORD + 1];
+    unsigned char index_of[LENGTH_WORD + 1];
     unsigned char gn[2 * Tn + 1];
     unsigned char gs[2 * Ts + 1];
     void generate_gf(void);

@@ -5,7 +5,7 @@ inline int max(int a,int b){
 }
 
 void ReedSolomonCoding::generate_gf(void){
-    int i, mask = 1;
+    int i,mask = 1;
     alpha_to[M] = 0;
     for (i = 0; i < M; i++){
         alpha_to[i] = mask;
@@ -24,6 +24,7 @@ void ReedSolomonCoding::generate_gf(void){
         index_of[alpha_to[i]] = i;
     }
     index_of[0] = 0xff;
+    alpha_to[0xff] = 0;
 }
 void ReedSolomonCoding::gen_poly(unsigned short TT, unsigned char *g){
     int i, j;

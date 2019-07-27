@@ -35,14 +35,14 @@ struct PacketDeviceData{
 };
 
 
-class ParserDeviceDataTlm{
+class ParserDataCm{
     Crc16 crc;
     ReedSolomonCoding cod;
     QList<TlmPack> *tlmDeviceData;
     QList<PacketDeviceData> *deviceData;
     void findServiseFFFE();
 public:
-    ParserDeviceDataTlm(QList<BlockTlm> *tlmBlocks);
+    ParserDataCm(QList<BlockTlm> *tlmBlocks);
 };
 
 #endif // PARSERDEVICEDATATLM_H

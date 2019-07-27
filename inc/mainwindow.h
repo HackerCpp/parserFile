@@ -9,7 +9,7 @@
 class MainWindow : public QWidget
 {
     Q_OBJECT
-
+QMenuBar * mnuBar;
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
