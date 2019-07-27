@@ -292,10 +292,12 @@ int ReedSolomonCoding::decode_rs_nasa(unsigned char* recd){
 }
 
 /* Shortened code (255,249) -> (28,22) */
-int ReedSolomonCoding::decode_rs_short(unsigned char* recd){
+int ReedSolomonCoding::decode_rs_short(unsigned char* recd)
+
+{
     int i, j;
     /* переводим recd[i] в индексную форму */
-    for (i = 0; i < LENGTH_WORD; i++)
+    for (i = 0; i < 255; i++)
         recd[i] = index_of[recd[i]];
 
     /*
@@ -306,9 +308,9 @@ int ReedSolomonCoding::decode_rs_short(unsigned char* recd){
     for (int i = 1; i <= 2 * Ts; i++)
     {
         s[i] = 0;
-        for (j = 0; j < LENGTH_WORD; j++)
+        for (j = 0; j < 255; j++)
             if (recd[j] != 0xff)
-                s[i] ^= alpha_to[(recd[j] + i * j) % LENGTH_WORD]; /* recd[j] в индексной форме */
+                s[i] ^= alpha_to[(recd[j] + i * j) % 255]; /* recd[j] в индексной форме */
         if (s[i] != 0)
             syn_error = true;        /* установить флаг ошибки */
         /* преобразовать синдром из полиномиальной в индексную форму */
@@ -317,7 +319,7 @@ int ReedSolomonCoding::decode_rs_short(unsigned char* recd){
 
     if (!syn_error)       /* нет ненулевых синдромов => ошибок нет */
     {
-        for (i = 0; i < LENGTH_WORD; i++)        /* преобразвать recd[] обратно */
+        for (i = 0; i < 255; i++)        /* преобразвать recd[] обратно */
             recd[i] = alpha_to[recd[i]];
         return 0;
     }
@@ -387,7 +389,7 @@ int ReedSolomonCoding::decode_rs_short(unsigned char* recd){
                 elp[u + 1][i] = 0;
             for (i = 0; i <= l[q]; i++)
                 if (elp[q][i] != -1)
-                    elp[u + 1][i + u - q] = alpha_to[(d[u] + LENGTH_WORD - d[q] + elp[q][i]) % LENGTH_WORD];
+                    elp[u + 1][i + u - q] = alpha_to[(d[u] + 255 - d[q] + elp[q][i]) % 255];
             for (i = 0; i <= l[u]; i++)
             {
                 elp[u + 1][i] ^= elp[u][i];
@@ -405,7 +407,7 @@ int ReedSolomonCoding::decode_rs_short(unsigned char* recd){
                 d[u + 1] = 0;
             for (i = 1; i <= l[u + 1]; i++)
                 if ((s[u + 1 - i] != 0xff) && (elp[u + 1][i] != 0))
-                    d[u + 1] ^= alpha_to[(s[u + 1 - i] + index_of[elp[u + 1][i]]) % LENGTH_WORD];
+                    d[u + 1] ^= alpha_to[(s[u + 1 - i] + index_of[elp[u + 1][i]]) % 255];
             d[u + 1] = index_of[d[u + 1]];	/* d[u+1] в индексную форму */
         }
     } while ((u < 2 * Ts) && (l[u + 1] <= Ts));
@@ -415,7 +417,7 @@ int ReedSolomonCoding::decode_rs_short(unsigned char* recd){
     ++u;
     if (l[u] > Ts)		/* степень elp >Ts - решение невозможно */
     {
-        for (i = 0; i < LENGTH_WORD; i++)
+        for (i = 0; i < 255; i++)
             recd[i] = alpha_to[recd[i]];
         return 3;		/* флаг ошибки */
     }
@@ -434,25 +436,25 @@ int ReedSolomonCoding::decode_rs_short(unsigned char* recd){
 
     int count = 0;
     int root[Ts], loc[Ts];
-    for (i = 1; i <= LENGTH_WORD; i++)
+    for (i = 1; i <= 255; i++)
     {
         int q = 1;
         for (j = 1; j <= l[u]; j++)
             if (reg[j] != 0xff)
             {
-                reg[j] = (reg[j] + j) % LENGTH_WORD;
+                reg[j] = (reg[j] + j) % 255;
                 q ^= alpha_to[reg[j]];
             }
         if (!q)        /* записываем корень и индекс номера локатора ошибки */
         {
             root[count] = i;
-            loc[count] = LENGTH_WORD - i;
+            loc[count] = 255 - i;
             count++;
         }
     }
     if (count != l[u])    /* количество корней != степени elp => >Ts ошибок, решение невозможно */
     {
-        for (i = 0; i < LENGTH_WORD; i++)
+        for (i = 0; i < 255; i++)
             recd[i] = alpha_to[recd[i]];	/* преобразвать recd[] обратно */
         return 2;
     }
@@ -473,7 +475,7 @@ int ReedSolomonCoding::decode_rs_short(unsigned char* recd){
             z[i] = 0;
         for (j = 1; j < i; j++)
             if ((s[j] != 0xff) && (elp[u][i - j] != -1))
-                z[i] ^= alpha_to[(elp[u][i - j] + s[j]) % LENGTH_WORD];
+                z[i] ^= alpha_to[(elp[u][i - j] + s[j]) % 255];
         z[i] = index_of[z[i]];		/* в индексную форму */
     }
 
@@ -481,8 +483,8 @@ int ReedSolomonCoding::decode_rs_short(unsigned char* recd){
        4) вычисляем ошибки в позициях loc[i] и исправляем их
     */
 
-    int err[LENGTH_WORD];
-    for (i = 0; i < LENGTH_WORD; i++)
+    int err[255];
+    for (i = 0; i < 255; i++)
     {
         err[i] = 0;
         recd[i] = alpha_to[recd[i]];
@@ -492,16 +494,16 @@ int ReedSolomonCoding::decode_rs_short(unsigned char* recd){
         err[loc[i]] = 1;			/* accounts for z[0] */
         for (j = 1; j <= l[u]; j++)
             if (z[j] != 0xff)
-                err[loc[i]] ^= alpha_to[(z[j] + j * root[i]) % LENGTH_WORD];
+                err[loc[i]] ^= alpha_to[(z[j] + j * root[i]) % 255];
         if (err[loc[i]] != 0)
         {
             err[loc[i]] = index_of[err[loc[i]]];
             int q = 0;				/* формируем знаменатель */
             for (j = 0; j < l[u]; j++)
                 if (j != i)
-                    q += index_of[1 ^ alpha_to[(loc[j] + root[i]) % LENGTH_WORD]];
-            q = q % LENGTH_WORD;
-            err[loc[i]] = alpha_to[(err[loc[i]] - q + LENGTH_WORD) % LENGTH_WORD];
+                    q += index_of[1 ^ alpha_to[(loc[j] + root[i]) % 255]];
+            q = q % 255;
+            err[loc[i]] = alpha_to[(err[loc[i]] - q + 255) % 255];
             recd[loc[i]] ^= err[loc[i]]; /* исправляем ошибку */
         }
     }
