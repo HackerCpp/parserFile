@@ -33,7 +33,8 @@ SOURCES += \
     src/models/modeltlm.cpp \
     src/reedsolomoncoding.cpp \
     src/crc16.cpp \
-    src/parsers/parserDataCm.cpp
+    src/parsers/parserDataCm.cpp \
+    src/parsers/parser38k.cpp
 
 HEADERS += \
         inc\mainwindow.h \
@@ -43,7 +44,8 @@ HEADERS += \
     inc/models/modeltlm.h \
     inc/reedsolomoncoding.h \
     inc/crc16.h \
-    inc/parsers/parserDataCm.h
+    inc/parsers/parserDataCm.h \
+    inc/parsers/parser38k.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

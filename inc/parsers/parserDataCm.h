@@ -6,7 +6,7 @@
 #include "inc/crc16.h"
 #include <QDebug>
 
-struct Servise{
+struct ServiseCm{
     int status;
     uint length;
     uchar segmentNum;
@@ -30,7 +30,7 @@ struct Data{
 };
 
 struct PacketDeviceData{
-    Servise serv;
+    ServiseCm serv;
     Data data;
 };
 

@@ -3,6 +3,7 @@
 #include "inc/parsers/parsertlm.h"
 #include "inc/models/modeltlm.h"
 #include "inc/parsers/parserDataCm.h"
+#include "inc/parsers/parser38k.h"
 #include <QtWidgets>
 #include <QDebug>
 
@@ -10,21 +11,21 @@
 MainWindow::MainWindow(QWidget *parent){
     this->setParent(parent);
 
-    FileReader file("D:\\Project\\ParserFile\\parserFile\\tlm\\2019_07_25_09-40-06.tlm");
+    //FileReader file("D:\\Project\\ParserFile\\parserFile\\tlm\\2019_07_25_09-40-06.tlm");
 
-    //FileReader file("D:\\MyQtProgram\\parserGfm\\parserFile\\tlm\\2019_07_25_09-40-06.tlm");
+    FileReader file("D:\\MyQtProgram\\parserGfm\\parserFile\\tlm\\2019_04_02_11-00-38.tlm");
 
     ParserTLM parserTlm(file.getHexString());
 
     ModelTlm *model = new ModelTlm(parserTlm.getBlocks());
-    ParserDataCm deviceData(parserTlm.getBlocks());
+    Parser38k deviceData(parserTlm.getBlocks());
     QTreeView * trv= new QTreeView();
     QTableView *table = new QTableView();
     trv->setAnimated(true);
     QVBoxLayout *verticalLayout = new QVBoxLayout(this);
     QWidget *header = new QWidget();
     QVBoxLayout *verticalLayoutHeader = new QVBoxLayout();
-    header->setMinimumHeight(100);
+    header->setMinimumHeight(50);
 
     header->setLayout(verticalLayoutHeader);
     table->setModel(model);
