@@ -41,9 +41,9 @@ struct HeaderModules38k{
    unsigned int requestTime;
 };
 struct PacketModulesData38k{
-    unsigned char bias;
+    int status;
     HeaderModules38k header;
-    Data38k data;
+    QString data;
 };
 
 class Parser38k{

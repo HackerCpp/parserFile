@@ -6,7 +6,6 @@ void Parser38k::findServiseFFFE(){
     for (auto pack = this->tlmDeviceData->begin();pack < tlmDeviceData->end();pack++){
         QString data = pack->dataPucket.data.mid(4);
         QByteArray byteArray = QByteArray::fromHex(data.toLocal8Bit());
-
         QString bl255 = "";
         PacketDeviceData38k packetDeviceData;
         packetDeviceData.data.status = 0;
@@ -15,21 +14,15 @@ void Parser38k::findServiseFFFE(){
             byteArray = QByteArray::fromHex(bl255.toLocal8Bit());
             memset(array,0,255);
             memcpy(array,byteArray.toStdString().c_str(),byteArray.size());
-
             packetDeviceData.data.status |= cod.decode_rs_nasa(array);
             packetDeviceData.data.data += bl255.mid(66);
-            //qDebug()<< bl255.mid(64,2);
         }
-        //qDebug() << endl;
-
         QString serv = packetDeviceData.data.data.mid(0,24);
         byteArray = QByteArray::fromHex(serv.toLocal8Bit());
         memset(array,0,255);
         memcpy(array,byteArray.toStdString().c_str(),byteArray.size());
-        //qDebug()<<crc.crcFast(array,12);
         if((packetDeviceData.data.status == 2 && crc.crcFast(array,12)) || serv.size() == 0)
             continue;
-
         packetDeviceData.data.data = packetDeviceData.data.data.mid(24);
         data = QByteArray::fromRawData(reinterpret_cast<const char *>(array),30).toHex();
         packetDeviceData.serv.systemTime = (serv.mid(6,2) + serv.mid(4,2)+serv.mid(2,2) + serv.mid(0,2)).toUInt(&ok,16);
@@ -40,7 +33,6 @@ void Parser38k::findServiseFFFE(){
         packetDeviceData.serv.commandCounter = static_cast<unsigned char>(serv.mid(16,2).toUInt(&ok,16));
         packetDeviceData.serv.reserved = static_cast<unsigned char>(serv.mid(18,2).toUInt(&ok,16));
         packetDeviceData.serv.crc16 = static_cast<unsigned short>((data.mid(22,2) + data.mid(20,2)).toUInt(&ok,16));
-        //qDebug() << packetDeviceData.serv.totalModules;
 
         this->deviceData->push_back(packetDeviceData);
     }
@@ -53,27 +45,47 @@ void Parser38k::findModulesData(){
     QString moduleDataString;
     int position = 0;
     for (auto pack = this->deviceData->begin();pack < deviceData->end();pack++){
-        data += pack->data.data.mid(0,pack->data.data.size() - 4);
+        data += pack->data.data.mid(0,pack->data.data.size());
         int size = data.size();
-        while(true){
+        while(position < size){
             PacketModulesData38k moduleData;
-            moduleData.header.moduleAddress = static_cast<unsigned char>(data.mid(0,2).toUInt(&ok,16));
-            moduleData.header.data_state = static_cast<unsigned char>(data.mid(2,2).toUInt(&ok,16));
-            moduleData.header.totalSize = static_cast<unsigned short>((data.mid(6,2) + data.mid(4,2)).toUInt(&ok,16));
-            if(moduleData.header.totalSize > size - position)
+            moduleData.header.moduleAddress = static_cast<unsigned char>(data.mid(position,2).toUInt(&ok,16));
+            moduleData.header.data_state = static_cast<unsigned char>(data.mid(position + 2,2).toUInt(&ok,16));
+            moduleData.header.totalSize = static_cast<unsigned short>((data.mid(position + 6,2) + data.mid(position +4,2)).toUInt(&ok,16));
+            if(moduleData.header.totalSize * 2 > size - position || moduleData.header.totalSize < 12)
                 break;
             moduleDataString = data.mid(position,moduleData.header.totalSize*2);
-            position += moduleData.header.totalSize*2;
-            qDebug()<< moduleData.header.moduleAddress<<"  "<<moduleData.header.data_state<<"  "<<moduleData.header.totalSize;
+            unsigned char array[moduleData.header.totalSize];
+            memset(array,0,moduleData.header.totalSize);
+            QByteArray byteArray = QByteArray::fromHex(moduleDataString.toLocal8Bit());
+            memcpy(array,byteArray.toStdString().c_str(),moduleData.header.totalSize);
+            moduleData.status =  crc.crcFast(array,moduleData.header.totalSize)?0x80:0;
+            int posLastComSt = 0;
             if(moduleData.header.data_state & 0x80){
                 moduleData.header.totalDataSize = 0;
                 moduleData.header.totalParts = 1;
                 moduleData.header.currentPartNo = 0;
             }
+            else{
+                moduleData.header.totalDataSize = static_cast<unsigned short>((data.mid(position + 10,2) + data.mid(position +8,2)).toUInt(&ok,16));
+                moduleData.header.totalParts = static_cast<unsigned char>(data.mid(position + 12,2).toUInt(&ok,16));
+                moduleData.header.currentPartNo = static_cast<unsigned char>(data.mid(position + 14,2).toUInt(&ok,16));
+                posLastComSt = 8;
+            }
+            int pos = position + posLastComSt;
+            moduleData.header.lastCommandState = static_cast<unsigned char>(data.mid(pos + 8,2).toUInt(&ok,16));
+            moduleData.header.commandCounter = static_cast<unsigned char>(data.mid(pos + 10,2).toUInt(&ok,16));
+            moduleData.header.lastCommandCrc = static_cast<unsigned char>(data.mid(pos + 12,2).toUInt(&ok,16));
+            moduleData.header.lastCommandCode = static_cast<unsigned char>(data.mid(pos + 14,2).toUInt(&ok,16));
+            moduleData.header.requestTime = (data.mid(pos +22,2) + data.mid(pos +20,2)+data.mid(pos +18,2) + data.mid(pos +16,2)).toUInt(&ok,16);
+            moduleData.data = moduleDataString.mid(24);
+            this->modulesData->push_back(moduleData);
+            position += moduleDataString.size();
         }
-
         data.remove(0,position);
         position = 0;
+        if(data == "00")
+            data ="";
         qDebug()<<endl<<data<<endl;
     }
 }
@@ -89,5 +101,4 @@ Parser38k::Parser38k(QList<BlockTlm> *tlmBlocks){
                 this->tlmDeviceData->push_back(*pack);
     findServiseFFFE();
     findModulesData();
-
 }
