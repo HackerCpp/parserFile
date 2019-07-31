@@ -35,7 +35,7 @@ public:
      * \brief возвращает тип файла
      * \return тип файла (.txt,.tlm,.gfm и тд.)
      */
-    QString getType();
+    QString getType(){return type;}
 };
 
 #endif // FILEREADER_H

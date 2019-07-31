@@ -35,7 +35,9 @@ SOURCES += \
     src/crc16.cpp \
     src/parsers/parserDataCm.cpp \
     src/parsers/parser38k.cpp \
-    src/models/model38k.cpp
+    src/models/model38k.cpp \
+    src/menu.cpp \
+    src/filehandler.cpp
 
 HEADERS += \
         inc\mainwindow.h \
@@ -47,7 +49,9 @@ HEADERS += \
     inc/crc16.h \
     inc/parsers/parserDataCm.h \
     inc/parsers/parser38k.h \
-    inc/models/model38k.h
+    inc/models/model38k.h \
+    inc/menu.h \
+    inc/filehandler.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

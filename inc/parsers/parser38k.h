@@ -47,6 +47,9 @@ struct PacketModulesData38k{
 };
 
 class Parser38k{
+    unsigned int numberOfChecks;
+    unsigned int numberOfError;
+    unsigned int probabilityOfError;
     Crc16 crc;
     ReedSolomonCoding cod;
     QList<TlmPack> *tlmDeviceData;
@@ -57,6 +60,8 @@ class Parser38k{
     void findModulesData();
 public:
     Parser38k(QList<BlockTlm> *tlmBlocks);
+    QList<PacketModulesData38k> *getModulesData(){return modulesData;}
+    unsigned int getProbabilityOfError(){return probabilityOfError;}
 };
 
 #endif // PARSER38K_H

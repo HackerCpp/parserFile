@@ -2,17 +2,21 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QTextEdit>
 #include <QString>
 #include <QVBoxLayout>
+#include "inc/menu.h"
 
-class MainWindow : public QWidget
-{
+class MainWindow : public QWidget{
+
     Q_OBJECT
-QMenuBar * mnuBar;
+
+    Menu *menu;
+    QTabWidget *tabWid;
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+public slots:
+    void openFile();
 };
 
 #endif // MAINWINDOW_H

@@ -1,68 +1,58 @@
 #include "inc/mainwindow.h"
-#include "inc/filereader.h"
-#include "inc/parsers/parsertlm.h"
-#include "inc/models/modeltlm.h"
-#include "inc/parsers/parserDataCm.h"
-#include "inc/parsers/parser38k.h"
+#include "inc/filehandler.h"
+#include <QFileDialog>
+#include <QTabWidget>
 #include <QtWidgets>
 #include <QDebug>
 
 
 MainWindow::MainWindow(QWidget *parent){
     this->setParent(parent);
-
-    //FileReader file("D:\\Project\\ParserFile\\parserFile\\tlm\\2019_07_25_09-40-06.tlm");
-
-    FileReader file("D:\\MyQtProgram\\parserGfm\\parserFile\\tlm\\2019_04_02_11-00-38.tlm");
-
-    ParserTLM parserTlm(file.getHexString());
-
-    ModelTlm *model = new ModelTlm(parserTlm.getBlocks());
-    Parser38k deviceData(parserTlm.getBlocks());
-    QTreeView * trv= new QTreeView();
-    QTableView *table = new QTableView();
-    trv->setAnimated(true);
+    tabWid = new QTabWidget();
+    menu = new Menu(this);
     QVBoxLayout *verticalLayout = new QVBoxLayout(this);
     QWidget *header = new QWidget();
     QVBoxLayout *verticalLayoutHeader = new QVBoxLayout();
     header->setMinimumHeight(50);
-
     header->setLayout(verticalLayoutHeader);
-    table->setModel(model);
-    trv->setModel(model);
     QHBoxLayout *blay = new QHBoxLayout();
-
-    mnuBar = new QMenuBar();
-    QMenuBar *mnuBar2 = new QMenuBar();
-    QVBoxLayout *g = new QVBoxLayout();
-    mnuBar->setMaximumHeight(30);
-    mnuBar->setMaximumWidth(60);
-    mnuBar2->setMaximumWidth(60);
-    QMenu*   pmnu   = new QMenu("&Menu");
-    QMenu*   pmn   = new QMenu("&Menu");
-    g->addWidget(mnuBar);
-    g->addWidget(mnuBar2);
-
-    pmnu->addAction("&About Qt", qApp,SLOT(aboutQt()),Qt::CTRL + Qt::Key_Q);
-    pmnu->addAction("&About Qt", qApp,SLOT(aboutQt()),Qt::CTRL + Qt::Key_Q);
-    pmnu->addAction("&About Qt", qApp,SLOT(aboutQt()),Qt::CTRL + Qt::Key_Q);
-    mnuBar->addMenu(pmnu);
-    mnuBar2->addMenu(pmn);
-
-    blay->addLayout(g);
-    blay->addWidget(trv);
-    blay->addWidget(table);
+    QVBoxLayout *forMenu = new QVBoxLayout();
+    forMenu->addWidget(menu);
+    forMenu->addStretch(1000);
+    blay->addLayout(forMenu);
+    blay->addWidget(tabWid);
 
     verticalLayout->addWidget(header);
     verticalLayout->addLayout(blay);
     this->setLayout(verticalLayout);
-    qApp->setStyleSheet("QWidget {background-color:#FFFACD;position:absolute;left:20px;}"
+    qApp->setStyleSheet("QWidget {background-color:#B0E0E6;position:absolute;left:20px;}"
                         "QTreeView:header {background-color:green;position:absolute;left:20px;}");
 
 
 }
 
 MainWindow::~MainWindow(){
-
+    delete this->menu;
+    this->menu = nullptr;
+    delete this->tabWid;
+    this->tabWid = nullptr;
 
 }
+
+void MainWindow::openFile(){
+    QFileDialog fileDialog;
+    QString filePath = fileDialog.getOpenFileName(this, tr("Open File"),"C:/",tr("*.tlm"));
+    if(filePath == "")
+        return;
+    FileHandler *file = new FileHandler(filePath);
+    if(!file->getWidget()){
+        qDebug() << "FILE nOT";
+        return;
+    }
+    this->tabWid->addTab(file->getWidget(),filePath);
+}
+
+
+
+
+
