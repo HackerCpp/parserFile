@@ -62,6 +62,7 @@ public:
     Parser38k(QList<BlockTlm> *tlmBlocks);
     QList<PacketModulesData38k> *getModulesData(){return modulesData;}
     unsigned int getProbabilityOfError(){return probabilityOfError;}
+    ~Parser38k();
 };
 
 #endif // PARSER38K_H

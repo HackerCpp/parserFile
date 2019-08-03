@@ -1,10 +1,9 @@
 #include "inc/mainwindow.h"
-#include "inc/filehandler.h"
 #include <QFileDialog>
 #include <QTabWidget>
 #include <QtWidgets>
 #include <QDebug>
-
+#include "inc/tabs/tab38k.h"
 
 MainWindow::MainWindow(QWidget *parent){
     this->setParent(parent);
@@ -27,8 +26,9 @@ MainWindow::MainWindow(QWidget *parent){
     this->setLayout(verticalLayout);
     qApp->setStyleSheet("QWidget {background-color:#B0E0E6;position:absolute;left:20px;}"
                         "QTreeView:header {background-color:green;position:absolute;left:20px;}");
-
-
+    this->tabWid->setTabsClosable(true);
+    this->setMinimumSize(500,500);
+    connect(this->tabWid, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
 }
 
 MainWindow::~MainWindow(){
@@ -44,15 +44,18 @@ void MainWindow::openFile(){
     QString filePath = fileDialog.getOpenFileName(this, tr("Open File"),"C:/",tr("*.tlm"));
     if(filePath == "")
         return;
-    FileHandler *file = new FileHandler(filePath);
-    if(!file->getWidget()){
+    QWidget *w = file.getWidget(filePath);
+    if(!w){
         qDebug() << "FILE nOT";
         return;
     }
-    this->tabWid->addTab(file->getWidget(),filePath);
+    this->tabWid->addTab(w,filePath);
 }
 
 
-
+void MainWindow::closeTab(int index){
+    this->tabWid->widget(index)->deleteLater();
+    this->tabWid->removeTab(index);
+}
 
 

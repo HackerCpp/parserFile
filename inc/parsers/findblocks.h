@@ -48,6 +48,7 @@ public:
      */
     QList<Block> *getBlockList();
     QString getBom();
+    ~FindBlocks();
 };
 
 #endif // FINDBLOCKS_H

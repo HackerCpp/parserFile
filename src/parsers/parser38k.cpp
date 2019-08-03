@@ -115,3 +115,9 @@ Parser38k::Parser38k(QList<BlockTlm> *tlmBlocks){
         return;
     findModulesData();  
 }
+
+Parser38k::~Parser38k(){
+    delete this->tlmDeviceData;
+    delete this->deviceData;
+    delete this->modulesData;
+}

@@ -37,7 +37,8 @@ SOURCES += \
     src/parsers/parser38k.cpp \
     src/models/model38k.cpp \
     src/menu.cpp \
-    src/filehandler.cpp
+    src/filehandler.cpp \
+    src/tabs/tab38k.cpp
 
 HEADERS += \
         inc\mainwindow.h \
@@ -51,7 +52,8 @@ HEADERS += \
     inc/parsers/parser38k.h \
     inc/models/model38k.h \
     inc/menu.h \
-    inc/filehandler.h
+    inc/filehandler.h \
+    inc/tabs/tab38k.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

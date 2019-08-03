@@ -5,11 +5,14 @@
 #include <QString>
 #include <QVBoxLayout>
 #include "inc/menu.h"
+#include "inc/filehandler.h"
+#include <QVector>
 
 class MainWindow : public QWidget{
 
     Q_OBJECT
 
+    FileHandler file;
     Menu *menu;
     QTabWidget *tabWid;
 public:
@@ -17,6 +20,7 @@ public:
     ~MainWindow();
 public slots:
     void openFile();
+    void closeTab(int index);
 };
 
 #endif // MAINWINDOW_H

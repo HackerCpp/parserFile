@@ -5,7 +5,6 @@ Model38k::Model38k(QList<PacketModulesData38k> *modulesData){
     for (auto modData = modulesData->begin();modData < modulesData->end();modData++){
         this->modulesData->push_back(*modData);
     }
-
 }
 
 QVariant Model38k::data(const QModelIndex &index, int role ) const{
@@ -53,6 +52,7 @@ int Model38k::rowCount(const QModelIndex &parent) const {
 int Model38k::columnCount(const QModelIndex &parent) const {
     return 12;
 }
+
 QVariant Model38k::headerData(int section, Qt::Orientation orientation, int role) const{
     if (role != Qt::DisplayRole)
        return QVariant();
@@ -63,9 +63,20 @@ QVariant Model38k::headerData(int section, Qt::Orientation orientation, int role
         return section;
     return QVariant();
 }
+
 Qt::ItemFlags Model38k::flags(const QModelIndex &index) const{
     return Qt :: ItemIsEnabled | Qt :: ItemIsSelectable | Qt :: ItemNeverHasChildren;
 }
 
+void Model38k::sort(int column, Qt::SortOrder order){
+    if(column == 0 && order == Qt::AscendingOrder ){
+
+    }
+}
+
+Model38k::~Model38k(){
+    delete this->modulesData;
+    this->modulesData = nullptr;
+}
 
 

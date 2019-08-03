@@ -1,6 +1,7 @@
 #include "inc/parsers/parsertlm.h"
 #include <QMessageBox>
 #include <QTextCodec>
+#include <QDebug>
 
 void ParserTLM::findPuckFFFE(QString TlmPackString,TlmPack *TlmPack){
     bool ok;
@@ -10,8 +11,10 @@ void ParserTLM::findPuckFFFE(QString TlmPackString,TlmPack *TlmPack){
     }
     else
         TlmPack->dataPucket.time = 0;
-    TlmPack->dataPucket.dev_type = devTypeArray[static_cast<char>(TlmPackString.mid(0,2).toUInt(&ok,16)) - 0x41];
-    TlmPack->dataPucket.inf_type = infTypeArray[static_cast<uchar>(TlmPackString.mid(2,2).toUInt(&ok,16))];
+    int index = static_cast<char>(TlmPackString.mid(0,2).toUInt(&ok,16)) - 0x41;
+    TlmPack->dataPucket.dev_type = devTypeArray[index<10?index:8];
+    index = static_cast<uchar>(TlmPackString.mid(2,2).toUInt(&ok,16));
+    TlmPack->dataPucket.inf_type = infTypeArray[index<14?index:2];
     TlmPack->dataPucket.data = TlmPackString.mid(4);
 }
 
@@ -19,8 +22,8 @@ void ParserTLM::findTlmPackFFFE(QString blockTlmString,BlockTlm* blockTlm){
     int position = 0;
     int size = blockTlmString.length() - 2;
     bool ok;
+    TlmPack TlmPack;
     while(position < size){
-        TlmPack TlmPack;
         TlmPack.state = static_cast<uchar>(blockTlmString.mid(position,2).toUInt(&ok,16));
         TlmPack.length = static_cast<ushort>((blockTlmString.mid(position + 4,2)+blockTlmString.mid(position + 2,2)).toUInt(&ok,16));
         findPuckFFFE(blockTlmString.mid(position + 6,TlmPack.length * 2),&TlmPack);
@@ -51,8 +54,14 @@ ParserTLM::ParserTLM(QString hexTextTlmFile){
     }
     delete blocks;
     blocks = nullptr;
+    tlmBlocksList = nullptr;
 }
 
 QList<BlockTlm> *ParserTLM::getBlocks(){
     return this->tlmBlocks;
+}
+
+ParserTLM::~ParserTLM(){
+    delete this->tlmBlocks;
+    this->tlmBlocks = nullptr;
 }

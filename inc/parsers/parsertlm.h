@@ -36,6 +36,7 @@ class ParserTLM{
 public:
     ParserTLM(QString hexTextTlmFile);
     QList<BlockTlm> *getBlocks();
+    ~ParserTLM();
 };
 
 #endif // PARSERTLM_H

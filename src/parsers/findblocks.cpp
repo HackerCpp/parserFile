@@ -51,3 +51,7 @@ QList<Block> *FindBlocks::getBlockList(){
 QString FindBlocks::getBom(){
     return this->bom;
 }
+FindBlocks::~FindBlocks(){
+    delete this->blocksList;
+    this->blocksList = nullptr;
+}
