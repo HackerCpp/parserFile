@@ -3,7 +3,7 @@
 #include <QTextCodec>
 #include <QDebug>
 
-void ParserTLM::findPuckFFFE(QString TlmPackString,TlmPack *TlmPack){
+void ParserTLM::findPackFFFE(QString TlmPackString,TlmPack *TlmPack){
     bool ok;
     if(!(TlmPack->state & 0x80)){
         TlmPack->dataPucket.time = (TlmPackString.mid(6,2)+TlmPackString.mid(4,2)+TlmPackString.mid(2,2) + TlmPackString.mid(0,2)).toUInt(&ok,16);
@@ -26,7 +26,7 @@ void ParserTLM::findTlmPackFFFE(QString blockTlmString,BlockTlm* blockTlm){
     while(position < size){
         TlmPack.state = static_cast<uchar>(blockTlmString.mid(position,2).toUInt(&ok,16));
         TlmPack.length = static_cast<ushort>((blockTlmString.mid(position + 4,2)+blockTlmString.mid(position + 2,2)).toUInt(&ok,16));
-        findPuckFFFE(blockTlmString.mid(position + 6,TlmPack.length * 2),&TlmPack);
+        findPackFFFE(blockTlmString.mid(position + 6,TlmPack.length * 2),&TlmPack);
         blockTlm->TlmPackList.push_back(TlmPack);
         position+=(TlmPack.length * 2) + 6;
     }

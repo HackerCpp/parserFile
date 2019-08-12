@@ -12,6 +12,7 @@ Tab38k::Tab38k(QList<PacketModulesData38k> *modulesData,QWidget *parent) : QWidg
 
     prModel->setSourceModel(model);
     table->setModel(prModel);
+
     sp = new QSplitter(Qt::Horizontal);
     tableAndFilterWidget = new QWidget();
     filter = new QWidget();
@@ -19,12 +20,16 @@ Tab38k::Tab38k(QList<PacketModulesData38k> *modulesData,QWidget *parent) : QWidg
     column = new QLabel("column:");
     filterLineEdit = new QLineEdit();
     filterColumnSB = new QSpinBox();
+    sortingLabel = new QLabel("sorting:");
+    sortingCheckBox = new QCheckBox();
     filterColumnSB->setMaximum(11);
     filterLayout = new QHBoxLayout();
     filterLayout->addWidget(filtration);
     filterLayout->addWidget(filterLineEdit);
     filterLayout->addWidget(column);
     filterLayout->addWidget(filterColumnSB);
+    filterLayout->addWidget(sortingLabel);
+    filterLayout->addWidget(sortingCheckBox);
     filter->setLayout(filterLayout);
     tableAndFilterWidget->setLayout(tableAndFilterLayout);
     this->tableAndFilterLayout->addWidget(filter);
@@ -35,6 +40,7 @@ Tab38k::Tab38k(QList<PacketModulesData38k> *modulesData,QWidget *parent) : QWidg
     this->setLayout(horBoxLayout);
     QObject::connect(this->table, SIGNAL(activated(QModelIndex const&)),this, SLOT(showText(QModelIndex const&)));
     QObject::connect(this->filterLineEdit, SIGNAL(returnPressed()),this, SLOT(setFilter()));
+    QObject::connect(this->sortingCheckBox, SIGNAL(stateChanged(int)),this, SLOT(setSorting(int)));
 }
 
 void Tab38k::showText(QModelIndex const& index){
@@ -47,6 +53,11 @@ void Tab38k::setFilter(){
     prModel->setFilterRegExp(filter);
     int column = this->filterColumnSB->text().toInt();
     prModel->setFilterKeyColumn(column);
+}
+void Tab38k::setSorting(int value){
+       table->setSortingEnabled(value);
+       if(!value)
+           prModel->sort(-1);
 }
 
 Tab38k::~Tab38k(){

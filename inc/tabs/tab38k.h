@@ -11,6 +11,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QSpinBox>
+#include <QCheckBox>
 
 class Tab38k : public QWidget
 {
@@ -22,6 +23,8 @@ class Tab38k : public QWidget
     QWidget *filter;
     QLabel * filtration;
     QLabel * column;
+    QLabel * sortingLabel;
+    QCheckBox *sortingCheckBox;
     QLineEdit * filterLineEdit;
     QSpinBox * filterColumnSB;
     QHBoxLayout *filterLayout;
@@ -38,6 +41,7 @@ signals:
 public slots:
     void showText(QModelIndex const& index);
     void setFilter();
+    void setSorting(int value);
 };
 
 #endif // TAB38K_H
