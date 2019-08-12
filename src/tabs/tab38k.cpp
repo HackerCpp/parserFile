@@ -10,8 +10,8 @@ Tab38k::Tab38k(QList<PacketModulesData38k> *modulesData,QWidget *parent) : QWidg
     this->tableAndFilterLayout = new QVBoxLayout();
     textEdit->setFont(QFont("arial",16));
 
-    prModel->setSourceModel(model);
-    table->setModel(prModel);
+    //prModel->setSourceModel(model);
+    table->setModel(model);
 
     sp = new QSplitter(Qt::Horizontal);
     tableAndFilterWidget = new QWidget();
@@ -59,7 +59,9 @@ void Tab38k::setSorting(int value){
        if(!value)
            prModel->sort(-1);
 }
-
+void Tab38k::addModulesData(PacketModulesData38k pack){
+    this->model->setData(pack);
+}
 Tab38k::~Tab38k(){
     delete model;
     model = nullptr;

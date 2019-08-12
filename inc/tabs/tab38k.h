@@ -42,6 +42,7 @@ public slots:
     void showText(QModelIndex const& index);
     void setFilter();
     void setSorting(int value);
+    void addModulesData(PacketModulesData38k pack);
 };
 
 #endif // TAB38K_H

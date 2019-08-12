@@ -4,6 +4,7 @@
 #include "inc/reedsolomoncoding.h"
 #include "inc/crc16.h"
 #include <QDebug>
+#include <QThread>
 
 struct Servise38k{
     unsigned int systemTime;
@@ -26,6 +27,7 @@ struct PacketDeviceData38k{
     Servise38k serv;
     Data38k data;
 };
+Q_DECLARE_METATYPE(PacketDeviceData38k);
 
 struct HeaderModules38k{
    unsigned char moduleAddress;
@@ -40,13 +42,16 @@ struct HeaderModules38k{
    unsigned char lastCommandCode;
    unsigned int requestTime;
 };
+
 struct PacketModulesData38k{
     int status;
     HeaderModules38k header;
     QString data;
 };
 
-class Parser38k{
+class Parser38k : public QThread{
+    Q_OBJECT
+
     unsigned int numberOfChecks;
     unsigned int numberOfError;
     unsigned int probabilityOfError;
@@ -60,9 +65,13 @@ class Parser38k{
     void findModulesData();
 public:
     Parser38k(QList<BlockTlm> *tlmBlocks);
+    void run();
     QList<PacketModulesData38k> *getModulesData(){return modulesData;}
     unsigned int getProbabilityOfError(){return probabilityOfError;}
     ~Parser38k();
+signals:
+    void getModData38k(PacketModulesData38k pack);
+
 };
 
 #endif // PARSER38K_H

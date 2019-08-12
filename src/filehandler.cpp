@@ -9,25 +9,26 @@
 
 
 
-FileHandler::FileHandler(QWidget *parent){
 
+FileHandler::FileHandler(QWidget *parent){
+    qRegisterMetaType<PacketModulesData38k>("PacketModulesData38k");
 }
 
 QWidget *FileHandler::getWidget(QString path){
     FileReader *file = new FileReader(path);
     if(file->getType() == ".tlm"){
+        Tab38k *tab = new Tab38k(nullptr);
         ParserTLM *parserTlm = new ParserTLM(file->getHexString());
         delete file;
         file = nullptr;
         Parser38k *deviceData = new Parser38k(parserTlm->getBlocks());
-        if(deviceData->getProbabilityOfError() > 20){
-            return nullptr;
-        }
+        connect(deviceData, SIGNAL(getModData38k(PacketModulesData38k)), tab, SLOT(addModulesData(PacketModulesData38k)));
+        deviceData->start();
+        //if(deviceData->getProbabilityOfError() > 20){
+         //   return nullptr;
+        //}
         delete parserTlm;
         parserTlm = nullptr;
-        Tab38k *tab = new Tab38k(deviceData->getModulesData());
-        delete deviceData;
-        deviceData = nullptr;
         return tab;
     }
 }

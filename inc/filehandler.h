@@ -4,6 +4,7 @@
 #include <QWidget>
 #include "inc/models/model38k.h"
 
+
 class FileHandler : public QWidget{
 
     Q_OBJECT
@@ -11,7 +12,6 @@ class FileHandler : public QWidget{
 public:
     FileHandler(QWidget *parent = nullptr);
     QWidget *getWidget(QString path);
-public slots:
 };
 
 #endif // FILEHANDLER_H

@@ -87,7 +87,8 @@ void Parser38k::findModulesData(){
             moduleData.header.lastCommandCode = static_cast<unsigned char>(data.mid(pos + 14,2).toUInt(&ok,16));
             moduleData.header.requestTime = (data.mid(pos +22,2) + data.mid(pos +20,2)+data.mid(pos +18,2) + data.mid(pos +16,2)).toUInt(&ok,16);
             moduleData.data = moduleDataString.mid(24,moduleData.header.totalSize*2 - 28);
-            this->modulesData->push_back(moduleData);
+            emit  getModData38k(moduleData);
+            //this->modulesData->push_back(moduleData);
             position += moduleDataString.size();
         }
         data.remove(0,position);
@@ -106,16 +107,17 @@ Parser38k::Parser38k(QList<BlockTlm> *tlmBlocks){
         for(auto pack = block->TlmPackList.begin();pack < block->TlmPackList.end();pack++)
             if(pack->dataPucket.dev_type == "ADSP" && pack->dataPucket.inf_type == "GETDATA")
                 this->tlmDeviceData->push_back(*pack);
+}
+void Parser38k::run(){
     numberOfChecks = 0;
     numberOfError = 0;
     findServiseFFFE();
-    double sr = numberOfError/(numberOfChecks/100);
-    this->probabilityOfError = sr;
-    if(this->probabilityOfError > 20)
-        return;
-    findModulesData();  
+    //double sr = numberOfError/(numberOfChecks/100);
+    //this->probabilityOfError = sr;
+    //if(this->probabilityOfError > 20)
+       // return;
+    findModulesData();
 }
-
 Parser38k::~Parser38k(){
     delete this->tlmDeviceData;
     delete this->deviceData;

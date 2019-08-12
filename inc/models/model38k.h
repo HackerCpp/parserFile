@@ -20,7 +20,10 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;
     Qt::ItemFlags flags(const QModelIndex &index) const;
     void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
+    bool setData(PacketModulesData38k pack);
     ~Model38k();
+
+
 };
 
 #endif // MODEL38K_H

@@ -2,6 +2,9 @@
 
 Model38k::Model38k(QList<PacketModulesData38k> *modulesData){
     this->modulesData = new QList<PacketModulesData38k>;
+    if(modulesData == nullptr)
+        return;
+
     for (auto modData = modulesData->begin();modData < modulesData->end();modData++){
         this->modulesData->push_back(*modData);
     }
@@ -46,7 +49,8 @@ QVariant Model38k::data(const QModelIndex &index, int role ) const{
 }
 
 int Model38k::rowCount(const QModelIndex &parent) const {
-    return this->modulesData->size();
+    int row = this->modulesData->size();
+    return row;
 }
 
 int Model38k::columnCount(const QModelIndex &parent) const {
@@ -73,7 +77,11 @@ void Model38k::sort(int column, Qt::SortOrder order){
 
     }
 }
-
+bool Model38k::setData(PacketModulesData38k pack){
+    beginInsertRows(QModelIndex(), modulesData->size(), modulesData->size() + 1);
+    this->modulesData->push_back(pack);
+    endInsertRows();
+}
 Model38k::~Model38k(){
     delete this->modulesData;
     this->modulesData = nullptr;
