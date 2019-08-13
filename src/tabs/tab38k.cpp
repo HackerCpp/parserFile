@@ -3,16 +3,14 @@
 
 Tab38k::Tab38k(QList<PacketModulesData38k> *modulesData,QWidget *parent) : QWidget(parent){
     this->model = new Model38k(modulesData);
-    prModel = new QSortFilterProxyModel();
+    prModel = new ProxyModel38k();
     table = new QTableView();
     textEdit = new QPlainTextEdit();
     horBoxLayout = new QHBoxLayout();
     this->tableAndFilterLayout = new QVBoxLayout();
     textEdit->setFont(QFont("arial",16));
-
     //prModel->setSourceModel(model);
     table->setModel(model);
-
     sp = new QSplitter(Qt::Horizontal);
     tableAndFilterWidget = new QWidget();
     filter = new QWidget();
@@ -36,6 +34,8 @@ Tab38k::Tab38k(QList<PacketModulesData38k> *modulesData,QWidget *parent) : QWidg
     this->tableAndFilterLayout->addWidget(table);
     sp->addWidget(tableAndFilterWidget);
     sp->addWidget(textEdit);
+    filter->hide();
+    textEdit->hide();
     horBoxLayout->addWidget(sp);
     this->setLayout(horBoxLayout);
     QObject::connect(this->table, SIGNAL(activated(QModelIndex const&)),this, SLOT(showText(QModelIndex const&)));
@@ -61,6 +61,12 @@ void Tab38k::setSorting(int value){
 }
 void Tab38k::addModulesData(PacketModulesData38k pack){
     this->model->setData(pack);
+}
+void Tab38k::allUploaded(){
+    this->prModel->setSourceModel(this->model);
+    this->table->setModel(prModel);
+    filter->show();
+    textEdit->show();
 }
 Tab38k::~Tab38k(){
     delete model;

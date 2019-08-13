@@ -18,17 +18,11 @@ QWidget *FileHandler::getWidget(QString path){
     FileReader *file = new FileReader(path);
     if(file->getType() == ".tlm"){
         Tab38k *tab = new Tab38k(nullptr);
-        ParserTLM *parserTlm = new ParserTLM(file->getHexString());
-        delete file;
-        file = nullptr;
-        Parser38k *deviceData = new Parser38k(parserTlm->getBlocks());
+        Parser38k *deviceData = new Parser38k(file);
         connect(deviceData, SIGNAL(getModData38k(PacketModulesData38k)), tab, SLOT(addModulesData(PacketModulesData38k)));
+        connect(deviceData, SIGNAL(finished(void)), tab, SLOT(allUploaded(void)));
         deviceData->start();
-        //if(deviceData->getProbabilityOfError() > 20){
-         //   return nullptr;
-        //}
-        delete parserTlm;
-        parserTlm = nullptr;
         return tab;
     }
+    return nullptr;
 }

@@ -32,7 +32,7 @@ class Tab38k : public QWidget
     QPlainTextEdit *textEdit;
     QSplitter *sp;
     Model38k *model;
-    QSortFilterProxyModel *prModel;
+    ProxyModel38k *prModel;
 public:
     explicit Tab38k(QList<PacketModulesData38k> *modulesData,QWidget *parent = nullptr);
     ~Tab38k();
@@ -43,6 +43,7 @@ public slots:
     void setFilter();
     void setSorting(int value);
     void addModulesData(PacketModulesData38k pack);
+    void allUploaded();
 };
 
 #endif // TAB38K_H

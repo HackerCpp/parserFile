@@ -5,6 +5,7 @@
 #include "inc/crc16.h"
 #include <QDebug>
 #include <QThread>
+#include "inc/filereader.h"
 
 struct Servise38k{
     unsigned int systemTime;
@@ -57,20 +58,24 @@ class Parser38k : public QThread{
     unsigned int probabilityOfError;
     Crc16 crc;
     ReedSolomonCoding cod;
+    QString hexString;
     QList<TlmPack> *tlmDeviceData;
-    QList<PacketDeviceData38k> *deviceData;
-    QList<PacketModulesData38k> *modulesData;
+    //QList<PacketDeviceData38k> *deviceData;
+    //QList<PacketModulesData38k> *modulesData;
 
-    void findServiseFFFE();
-    void findModulesData();
+    void findServiseFFFE(TlmPack pack);
+    void findModulesData(PacketDeviceData38k pack);
 public:
-    Parser38k(QList<BlockTlm> *tlmBlocks);
+    Parser38k(FileReader *file);
     void run();
-    QList<PacketModulesData38k> *getModulesData(){return modulesData;}
+    //QList<PacketModulesData38k> *getModulesData(){return modulesData;}
     unsigned int getProbabilityOfError(){return probabilityOfError;}
     ~Parser38k();
+public slots:
+    void destroy();
 signals:
-    void getModData38k(PacketModulesData38k pack);
+    void getModData38k(PacketModulesData38k);
+
 
 };
 

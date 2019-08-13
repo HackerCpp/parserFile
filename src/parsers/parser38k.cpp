@@ -1,10 +1,10 @@
 #include "inc/parsers/parser38k.h"
 
-void Parser38k::findServiseFFFE(){
+void Parser38k::findServiseFFFE(TlmPack pack){
     bool ok;
     unsigned char array[255];
-    for (auto pack = this->tlmDeviceData->begin();pack < tlmDeviceData->end();pack++){
-        QString data = pack->dataPucket.data.mid(4);
+    //for (auto pack = this->tlmDeviceData->begin();pack < tlmDeviceData->end();pack++){
+        QString data = pack.dataPucket.data.mid(4);
         QByteArray byteArray = QByteArray::fromHex(data.toLocal8Bit());
         QString bl255 = "";
         PacketDeviceData38k packetDeviceData;
@@ -29,7 +29,7 @@ void Parser38k::findServiseFFFE(){
         if(crcF)
             this->numberOfError++;
         if((packetDeviceData.data.status == 2 && crcF) || serv.size() == 0)
-            continue;
+            return;//continue;
 
         packetDeviceData.data.data = packetDeviceData.data.data.mid(24);
         data = QByteArray::fromRawData(reinterpret_cast<const char *>(array),30).toHex();
@@ -41,19 +41,19 @@ void Parser38k::findServiseFFFE(){
         packetDeviceData.serv.commandCounter = static_cast<unsigned char>(serv.mid(16,2).toUInt(&ok,16));
         packetDeviceData.serv.reserved = static_cast<unsigned char>(serv.mid(18,2).toUInt(&ok,16));
         packetDeviceData.serv.crc16 = static_cast<unsigned short>((data.mid(22,2) + data.mid(20,2)).toUInt(&ok,16));
-
-        this->deviceData->push_back(packetDeviceData);
-    }
+        findModulesData(packetDeviceData);
+        //this->deviceData->push_back(packetDeviceData);
+    //}
 }
 
 
-void Parser38k::findModulesData(){
-    bool ok;
-    QString data ="";
+void Parser38k::findModulesData(PacketDeviceData38k pack){
+    static bool ok;
+    static QString data ="";
     QString moduleDataString;
     int position = 0;
-    for (auto pack = this->deviceData->begin();pack < deviceData->end();pack++){
-        data += pack->data.data.mid(0,pack->data.data.size());
+    //for (auto pack = this->deviceData->begin();pack < deviceData->end();pack++){
+        data += pack.data.data.mid(0,pack.data.data.size());
         int size = data.size();
         while(position < size){
             PacketModulesData38k moduleData;
@@ -86,40 +86,50 @@ void Parser38k::findModulesData(){
             moduleData.header.lastCommandCrc = static_cast<unsigned char>(data.mid(pos + 12,2).toUInt(&ok,16));
             moduleData.header.lastCommandCode = static_cast<unsigned char>(data.mid(pos + 14,2).toUInt(&ok,16));
             moduleData.header.requestTime = (data.mid(pos +22,2) + data.mid(pos +20,2)+data.mid(pos +18,2) + data.mid(pos +16,2)).toUInt(&ok,16);
-            moduleData.data = moduleDataString.mid(24,moduleData.header.totalSize*2 - 28);
-            emit  getModData38k(moduleData);
+            moduleData.data = moduleDataString.mid(24,moduleData.header.totalSize*2 - 28); 
             //this->modulesData->push_back(moduleData);
+            emit  getModData38k(moduleData);
             position += moduleDataString.size();
         }
         data.remove(0,position);
         position = 0;
         if(data == "00")
             data ="";
-    }
+    //}
 }
 
-Parser38k::Parser38k(QList<BlockTlm> *tlmBlocks){
+Parser38k::Parser38k(FileReader *file){
     this->tlmDeviceData = new QList<TlmPack>;
-    this->deviceData = new QList<PacketDeviceData38k>;
-    this->modulesData = new QList<PacketModulesData38k>;
-
-    for(auto block = tlmBlocks->begin();block < tlmBlocks->end();block++)
-        for(auto pack = block->TlmPackList.begin();pack < block->TlmPackList.end();pack++)
-            if(pack->dataPucket.dev_type == "ADSP" && pack->dataPucket.inf_type == "GETDATA")
-                this->tlmDeviceData->push_back(*pack);
+    //this->deviceData = new QList<PacketDeviceData38k>;
+    //this->modulesData = new QList<PacketModulesData38k>;
+    this->hexString = file->getHexString();
+    delete file;
+    file = nullptr;
+    connect(this, SIGNAL(finished()), this, SLOT(destroy()));
 }
+
 void Parser38k::run(){
     numberOfChecks = 0;
     numberOfError = 0;
-    findServiseFFFE();
-    //double sr = numberOfError/(numberOfChecks/100);
-    //this->probabilityOfError = sr;
-    //if(this->probabilityOfError > 20)
-       // return;
-    findModulesData();
+    ParserTLM *parserTlm = new ParserTLM(this->hexString);
+    QList<BlockTlm> *tlmBlocks = parserTlm->getBlocks();
+    for(auto block = tlmBlocks->begin();block < tlmBlocks->end();block++)
+        for(auto pack = block->TlmPackList.begin();pack < block->TlmPackList.end();pack++)
+            if(pack->dataPucket.dev_type == "ADSP" && pack->dataPucket.inf_type == "GETDATA")
+                findServiseFFFE(*pack);//this->tlmDeviceData->push_back(*pack);
+    delete parserTlm;
+    parserTlm = nullptr;
+    //findServiseFFFE();
+    double sr = numberOfError/(numberOfChecks/100);
+    this->probabilityOfError = sr;
+    //findModulesData();
+}
+void Parser38k::destroy(){
+   this->~Parser38k();
 }
 Parser38k::~Parser38k(){
     delete this->tlmDeviceData;
-    delete this->deviceData;
-    delete this->modulesData;
+    //delete this->deviceData;
+    //delete this->modulesData;
+    this->quit();
 }

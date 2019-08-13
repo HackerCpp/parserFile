@@ -3,6 +3,15 @@
 
 #include "inc/parsers/parser38k.h"
 #include <QAbstractListModel>
+#include <QSortFilterProxyModel>
+#include <QCoreApplication>
+
+class ProxyModel38k : public QSortFilterProxyModel{
+public:
+    ProxyModel38k();
+    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
+    bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const;
+};
 
 class Model38k : public QAbstractListModel{
     Q_OBJECT
@@ -20,9 +29,8 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;
     Qt::ItemFlags flags(const QModelIndex &index) const;
     void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
-    bool setData(PacketModulesData38k pack);
+    void setData(PacketModulesData38k pack);
     ~Model38k();
-
 
 };
 
