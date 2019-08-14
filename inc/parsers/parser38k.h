@@ -18,7 +18,6 @@ struct Servise38k{
     ushort crc16;
 };
 
-
 struct Data38k{
     int status;
     QString data;
@@ -49,7 +48,10 @@ struct PacketModulesData38k{
     HeaderModules38k header;
     QString data;
 };
-
+struct NumberType{
+    unsigned char moduleAddress;
+    int type;
+};
 class Parser38k : public QThread{
     Q_OBJECT
 
@@ -59,23 +61,21 @@ class Parser38k : public QThread{
     Crc16 crc;
     ReedSolomonCoding cod;
     QString hexString;
+    QList<NumberType> *listOfFoundModules;
     QList<TlmPack> *tlmDeviceData;
-    //QList<PacketDeviceData38k> *deviceData;
-    //QList<PacketModulesData38k> *modulesData;
 
     void findServiseFFFE(TlmPack pack);
     void findModulesData(PacketDeviceData38k pack);
+    void moduleDataParsing(QString *data,unsigned char data_state);
 public:
     Parser38k(FileReader *file);
     void run();
-    //QList<PacketModulesData38k> *getModulesData(){return modulesData;}
     unsigned int getProbabilityOfError(){return probabilityOfError;}
     ~Parser38k();
 public slots:
     void destroy();
 signals:
     void getModData38k(PacketModulesData38k);
-
 
 };
 

@@ -35,7 +35,6 @@ Tab38k::Tab38k(QList<PacketModulesData38k> *modulesData,QWidget *parent) : QWidg
     sp->addWidget(tableAndFilterWidget);
     sp->addWidget(textEdit);
     filter->hide();
-    textEdit->hide();
     horBoxLayout->addWidget(sp);
     this->setLayout(horBoxLayout);
     QObject::connect(this->table, SIGNAL(activated(QModelIndex const&)),this, SLOT(showText(QModelIndex const&)));
@@ -44,7 +43,7 @@ Tab38k::Tab38k(QList<PacketModulesData38k> *modulesData,QWidget *parent) : QWidg
 }
 
 void Tab38k::showText(QModelIndex const& index){
-    QString str = this->prModel->data(prModel->index(index.row(),11,index.parent())).toString();
+    QString str = this->model->data(model->index(index.row(),11,index.parent())).toString();
     this->textEdit->setPlainText(str);
 }
 
@@ -63,10 +62,10 @@ void Tab38k::addModulesData(PacketModulesData38k pack){
     this->model->setData(pack);
 }
 void Tab38k::allUploaded(){
-    this->prModel->setSourceModel(this->model);
-    this->table->setModel(prModel);
+    //this->prModel->setSourceModel(this->model);
+    //this->table->setModel(prModel);
     filter->show();
-    textEdit->show();
+
 }
 Tab38k::~Tab38k(){
     delete model;

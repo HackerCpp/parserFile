@@ -5,15 +5,10 @@ ProxyModel38k::ProxyModel38k(){
 }
 
 bool ProxyModel38k::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const{
-    //for(int i = 0; i < sourceModel()->columnCount(); i ++)
-        //{
-    QCoreApplication::processEvents();
-            QModelIndex index = sourceModel()->index(source_row, filterKeyColumn(), source_parent);
-            if(sourceModel()->data(index).toString().contains(filterRegExp()))
-                return true;
-       // }
-
-        return false;
+    QModelIndex index = sourceModel()->index(source_row, filterKeyColumn(), source_parent);
+    if(sourceModel()->data(index).toString().contains(filterRegExp()))
+        return true;
+    return false;
 }
 
 bool ProxyModel38k::filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const{
