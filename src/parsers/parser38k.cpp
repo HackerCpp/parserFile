@@ -137,6 +137,7 @@ crc16 : %30\n\t";
             .arg((*data).mid(154,2) + (*data).mid(152,2));
     *data = paramFlash;
 }
+
 void paramFlashAG(QString * data){
     bool ok;
     QString paramFlash = "\n\ttotal_length : %1\n\t\
@@ -165,6 +166,7 @@ CRC16 : %12\n\t";
             .arg((*data).mid(44,2) + (*data).mid(42,2));
     *data = paramFlash;
 }
+
 void paramFlashP02(QString * data){
     bool ok;
     QString paramFlash = "\n\ttotal_length : %1\n\t\
@@ -179,9 +181,127 @@ CRC16 : %5\n\t";
             .arg((*data).mid(16,2) + (*data).mid(14,2));
     *data = paramFlash;
 }
-void Parser38k::moduleDataParsing(QString *data,unsigned char data_state){
+
+void channelGKT(QString * data){
     bool ok;
-    if(data_state & 0x02){
+    QString channel = "\n\ttemperature_internal : %1\n\t\
+locator_amp : %2\n\t\
+locator_amp_interval_max : %3\n\t\
+locator_amp_interval_min : %4\n\t\
+gk_time : %5\n\t\
+gk_impulses : %6\n\t\
+gk_uhv : %7\n\t\
+hygrometer : %8\n\t\
+power_supply : %9\n\t\
+emds_supply : %10\n\t\
+temperature_external : %11\n\t\
+sti_1 : %12\n\t\
+sti_2 : %13\n\t\
+p_corr : %14\n\t\
+p_bw : %15\n\t\
+acceleration_x : %16\n\t\
+acceleration_y : %17\n\t\
+acceleration_z : %18\n\t\
+locator_amp : %19\n\t\
+resistance : %20\n\t\
+sti_pwm : %21\n\t\
+pressure : %22\n\t\
+temperature : %23\n\t\
+gk_dac : %24\n\t";
+            channel = channel.arg(((*data).mid(2,2) + (*data).mid(0,2)).toUInt(&ok,16))
+            .arg(((*data).mid(6,2) + (*data).mid(4,2)).toUInt(&ok,16))
+            .arg(((*data).mid(10,2) + (*data).mid(8,2)).toUInt(&ok,16))
+            .arg(((*data).mid(14,2) + (*data).mid(12,2)).toUInt(&ok,16))
+            .arg(((*data).mid(18,2) + (*data).mid(16,2)).toUInt(&ok,16))
+            .arg(((*data).mid(22,2) + (*data).mid(20,2)).toUInt(&ok,16))
+            .arg(((*data).mid(26,2) + (*data).mid(24,2)).toUInt(&ok,16))
+            .arg(((*data).mid(30,2) + (*data).mid(28,2)).toUInt(&ok,16))
+            .arg(((*data).mid(34,2) + (*data).mid(32,2)).toUInt(&ok,16))
+            .arg(((*data).mid(38,2) + (*data).mid(36,2)).toUInt(&ok,16))
+            .arg(((*data).mid(44,2) + (*data).mid(42,2)+ (*data).mid(40,2)).toUInt(&ok,16))
+            .arg(((*data).mid(50,2) + (*data).mid(48,2)+ (*data).mid(46,2)).toUInt(&ok,16))
+            .arg(((*data).mid(56,2) + (*data).mid(54,2)+ (*data).mid(52,2)).toUInt(&ok,16))
+            .arg(((*data).mid(62,2) + (*data).mid(60,2)+ (*data).mid(58,2)).toUInt(&ok,16))
+            .arg(((*data).mid(68,2) + (*data).mid(66,2)+ (*data).mid(64,2)).toUInt(&ok,16))
+            .arg(((*data).mid(74,2) + (*data).mid(72,2)+ (*data).mid(70,2)).toUInt(&ok,16))
+            .arg(((*data).mid(80,2) + (*data).mid(78,2)+ (*data).mid(76,2)).toUInt(&ok,16))
+            .arg(((*data).mid(86,2) + (*data).mid(84,2)+ (*data).mid(82,2)).toUInt(&ok,16))
+            .arg(((*data).mid(92,2) + (*data).mid(90,2)+ (*data).mid(88,2)).toUInt(&ok,16))
+            .arg(((*data).mid(98,2) + (*data).mid(96,2)+ (*data).mid(94,2)).toUInt(&ok,16))
+            .arg(((*data).mid(102,2) + (*data).mid(100,2)).toUInt(&ok,16))
+            .arg(((*data).mid(110,2) + (*data).mid(108,2)+ (*data).mid(106,2)+ (*data).mid(104,2)).toUInt(&ok,16))
+            .arg(((*data).mid(118,2) + (*data).mid(116,2)+ (*data).mid(114,2)+ (*data).mid(112,2)).toUInt(&ok,16))
+            .arg(((*data).mid(122,2) + (*data).mid(120,2)).toUInt(&ok,16));
+    *data = channel;
+}
+
+void channelSHM(QString * data,unsigned char currentPartNo){
+    bool ok;
+    int size = (data->size()/2);
+    int pos = 0;
+    static uint wordPerChannel;
+    static uint currentWordPerChannel;
+    static uint currentChannel;
+    static uint isWave;
+    QString channel;
+    if(!currentPartNo){
+        channel = "\n\tperiph_status : %1\n\t\
+work_mode_MSB : %2\n\t\
+work_mode_LSB : %3\n\t\
+channels_map : %4\n\t\
+words_per_channel : %5\n\t\
+channel_frequency : %6\n\t\
+pga_gain : %7\n\t\
+temperature_internal : %8\n\t\
+accel_z_mean : %9\n\t\
+accel_z_variance : %10\n\t\
+accel_z_flags : %11\n\t\
+Data :\n\t";
+        currentChannel = 0;
+        currentWordPerChannel = 0;
+        wordPerChannel = ((*data).mid(12,2) + (*data).mid(10,2)).toUInt(&ok,16);
+        isWave = ("0"+(*data).mid(7,1)).toUInt(&ok,16);
+        channel = channel.arg(((*data).mid(2,2) + (*data).mid(0,2)).toUInt(&ok,16))
+            .arg(("0"+(*data).mid(6,1)).toUInt(&ok,16)).arg(isWave)
+            .arg(((*data).mid(8,2)).toUInt(&ok,16))
+            .arg(wordPerChannel)
+            .arg(((*data).mid(20,2) + (*data).mid(18,2)+ (*data).mid(16,2)+ (*data).mid(14,2)).toUInt(&ok,16))
+            .arg((*data).mid(22,2).toUInt(&ok,16))
+            .arg(((*data).mid(26,2) + (*data).mid(24,2)).toUInt(&ok,16))
+            .arg(((*data).mid(30,2) + (*data).mid(28,2)).toUInt(&ok,16))
+            .arg(((*data).mid(34,2) + (*data).mid(32,2)).toUInt(&ok,16))
+            .arg(((*data).mid(38,2) + (*data).mid(36,2)).toUInt(&ok,16));
+        size  = (data->size()/2)-20;
+        pos = 42;
+    }
+
+    if(!isWave){
+        for(int i = 0; i < size;i+=4){
+            if(!currentWordPerChannel){
+               channel += "\nChannel" + QString::number(currentChannel++) + "\n\n\t";
+               currentWordPerChannel = wordPerChannel;
+            }
+            QByteArray string =  QByteArray::fromHex( ((*data).mid((i*2)+pos+6,2) + (*data).mid((i*2)+pos+4,2) + (*data).mid((i*2)+pos+2,2) + (*data).mid((i*2)+pos,2)).toLocal8Bit());
+            channel += " \n\t" + QString::number(*reinterpret_cast<double*>( string.data() ));
+            currentWordPerChannel--;
+        }
+    }
+    else{
+        for(int i = 0; i < size;i+=2){
+            if(!currentWordPerChannel){
+               channel += "\nChannel" + QString::number(currentChannel) + "\n\n\t";
+               currentWordPerChannel = wordPerChannel;
+            }
+            channel += " \n\t" + QString::number(((*data).mid((i*2)+pos+6,2) + (*data).mid((i*2)+pos+4,2)).toUInt(&ok,16));
+            currentWordPerChannel--;
+        }
+    }
+    *data = channel;
+}
+void Parser38k::moduleDataParsing(PacketModulesData38k * moduleData){
+    bool ok;
+    QString * data = &moduleData->data;
+    if(moduleData->header.data_state & 0x02){
         QString hardFlash = "HardFlash:\n\t\
 total_length : %1\n\t\
 device_type : %2\n\t\
@@ -200,7 +320,19 @@ device_length : %14\n\t\
 device_tech_header_size : %15\n\t\
 device_data_size : %16\n\t\
 data_parts_max : %17";
+
+        bool moduleAdded = false;
         uint deviceType = ((*data).mid(6,2) + (*data).mid(4,2)).toUInt(&ok,16);
+        if(listOfFoundModules->size() != 0)
+            for(auto value = listOfFoundModules->begin();value < listOfFoundModules->end();value++)
+                if(value->moduleAddress == moduleData->header.moduleAddress){
+                    moduleAdded = true;
+                    break;
+                }
+        if(!moduleAdded){
+            NumberType module = {moduleData->header.moduleAddress,deviceType};
+            listOfFoundModules->push_back(module);
+        }
         hardFlash = hardFlash.arg(((*data).mid(2,2) + (*data).mid(0,2)).toUInt(&ok,16)).arg(deviceType)
         .arg(((*data).mid(30,2) + (*data).mid(28,2)+ (*data).mid(26,2)+ (*data).mid(24,2)+
         (*data).mid(22,2) + (*data).mid(20,2)+ (*data).mid(18,2)+ (*data).mid(16,2)+
@@ -243,6 +375,19 @@ data_parts_max : %17";
         paramFlash += paramFlashString;
         QString calibFlash = "\nCalibFlash:\n\t" + (*data).mid(178 +(numberOfChannels * 16) + (length-2)*2);
         *data = hardFlash + paramFlash + calibFlash;
+    }
+    else if(!(moduleData->header.data_state & 0x01)){
+        uint type = 124;
+        if(listOfFoundModules->size() != 0)
+            for(auto value = listOfFoundModules->begin();value < listOfFoundModules->end();value++)
+                if(value->moduleAddress == moduleData->header.moduleAddress){
+                    type = value->type;
+                    break;
+                }
+        if(type == 0)
+           channelGKT(data);
+        else if(type == 1)
+           channelSHM(data,moduleData->header.currentPartNo);
     }
 }
 
@@ -328,7 +473,7 @@ void Parser38k::findModulesData(PacketDeviceData38k pack){
             moduleData.header.lastCommandCode = static_cast<unsigned char>(data.mid(pos + 14,2).toUInt(&ok,16));
             moduleData.header.requestTime = (data.mid(pos +22,2) + data.mid(pos +20,2)+data.mid(pos +18,2) + data.mid(pos +16,2)).toUInt(&ok,16);
             moduleData.data = moduleDataString.mid(24,moduleData.header.totalSize*2 - 28);
-            moduleDataParsing(&moduleData.data,moduleData.header.data_state);
+            moduleDataParsing(&moduleData);
             emit  getModData38k(moduleData);
             position += moduleDataString.size();
         }

@@ -5,9 +5,13 @@ ProxyModel38k::ProxyModel38k(){
 }
 
 bool ProxyModel38k::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const{
+    QString str = filterRegExp().pattern();
+
     QModelIndex index = sourceModel()->index(source_row, filterKeyColumn(), source_parent);
-    if(sourceModel()->data(index).toString().contains(filterRegExp()))
-        return true;
+    if(sourceModel()->data(index).toString().contains(str))
+            return true;
+    //if(sourceModel()->data(index).toString().contains(filterRegExp()))
+       // return true;
     return false;
 }
 

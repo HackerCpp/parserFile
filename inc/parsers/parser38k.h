@@ -50,7 +50,7 @@ struct PacketModulesData38k{
 };
 struct NumberType{
     unsigned char moduleAddress;
-    int type;
+    uint type;
 };
 class Parser38k : public QThread{
     Q_OBJECT
@@ -66,7 +66,7 @@ class Parser38k : public QThread{
 
     void findServiseFFFE(TlmPack pack);
     void findModulesData(PacketDeviceData38k pack);
-    void moduleDataParsing(QString *data,unsigned char data_state);
+    void moduleDataParsing(PacketModulesData38k * moduleData);
 public:
     Parser38k(FileReader *file);
     void run();

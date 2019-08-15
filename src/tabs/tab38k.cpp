@@ -3,7 +3,7 @@
 
 Tab38k::Tab38k(QList<PacketModulesData38k> *modulesData,QWidget *parent) : QWidget(parent){
     this->model = new Model38k(modulesData);
-    prModel = new ProxyModel38k();
+    prModel = nullptr;
     table = new QTableView();
     textEdit = new QPlainTextEdit();
     horBoxLayout = new QHBoxLayout();
@@ -43,15 +43,17 @@ Tab38k::Tab38k(QList<PacketModulesData38k> *modulesData,QWidget *parent) : QWidg
 }
 
 void Tab38k::showText(QModelIndex const& index){
-    QString str = this->model->data(model->index(index.row(),11,index.parent())).toString();
+    QString str = this->table->model()->data(table->model()->index(index.row(),11,index.parent())).toString();
     this->textEdit->setPlainText(str);
 }
 
-void Tab38k::setFilter(){
-    QString filter = this->filterLineEdit->text();
-    prModel->setFilterRegExp(filter);
+void Tab38k::setFilter(){    
     int column = this->filterColumnSB->text().toInt();
     prModel->setFilterKeyColumn(column);
+    QString filter = this->filterLineEdit->text();
+    prModel->setFilterRegExp(filter);
+
+
 }
 void Tab38k::setSorting(int value){
        table->setSortingEnabled(value);
@@ -62,8 +64,9 @@ void Tab38k::addModulesData(PacketModulesData38k pack){
     this->model->setData(pack);
 }
 void Tab38k::allUploaded(){
-    //this->prModel->setSourceModel(this->model);
-    //this->table->setModel(prModel);
+    this->prModel = new ProxyModel38k();
+    this->prModel->setSourceModel(this->model);
+    this->table->setModel(prModel);
     filter->show();
 
 }
