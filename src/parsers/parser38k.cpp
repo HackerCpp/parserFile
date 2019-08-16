@@ -166,7 +166,9 @@ CRC16 : %12\n\t";
             .arg((*data).mid(44,2) + (*data).mid(42,2));
     *data = paramFlash;
 }
+void paramFlashP(QString * data){
 
+}
 void paramFlashP02(QString * data){
     bool ok;
     QString paramFlash = "\n\ttotal_length : %1\n\t\
