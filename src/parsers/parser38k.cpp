@@ -298,7 +298,134 @@ Data :\n\t";
     }
     *data = channel;
 }
-void Parser38k::moduleDataParsing(PacketModulesData38k * moduleData){
+
+void channelAG(QString * data){
+    bool ok;
+    QString channel = "\n\tperiph_status : %1\n\t\
+work_mode : %2\n\t\
+temperature_internal : %3\n\t\
+discharge_voltage : %4\n\t";
+            channel = channel.arg(((*data).mid(2,2) + (*data).mid(0,2)).toUInt(&ok,16))
+            .arg(((*data).mid(6,2) + (*data).mid(4,2)).toUInt(&ok,16))
+            .arg(((*data).mid(10,2) + (*data).mid(8,2)).toUInt(&ok,16))
+            .arg(((*data).mid(14,2) + (*data).mid(12,2)).toUInt(&ok,16));
+    *data = channel;
+}
+void channelP(QString * data){
+    bool ok;
+    QString channel = "\n\tperiph_status : %1\n\t\
+angle : %2\n\t\
+rate : %3\n\t\
+temperature_internal : %4\n\t";
+            channel = channel.arg(((*data).mid(2,2) + (*data).mid(0,2)).toUInt(&ok,16))
+            .arg(((*data).mid(6,2) + (*data).mid(4,2)).toUInt(&ok,16))
+            .arg(QString::number(*reinterpret_cast<double*>( QByteArray::fromHex( ((*data).mid(14,2) + (*data).mid(12,2) + (*data).mid(10,2) + (*data).mid(8,2)).toLocal8Bit()).data() )))
+            .arg(((*data).mid(18,2) + (*data).mid(16,2)).toUInt(&ok,16));
+    *data = channel;
+}
+
+void channelP02(QString * data){
+    bool ok;
+    QString channel = "\n\trate : %1\n\t\
+diameter : %2\n\t\
+temperature_internal : %3\n\t";
+            channel = channel.arg(QString::number(*reinterpret_cast<double*>( QByteArray::fromHex( ((*data).mid(6,2) + (*data).mid(4,2) + (*data).mid(2,2) + (*data).mid(0,2)).toLocal8Bit()).data() )))
+            .arg(((*data).mid(10,2) + (*data).mid(8,2)).toUInt(&ok,16))
+            .arg(((*data).mid(14,2) + (*data).mid(12,2)).toUInt(&ok,16));
+    *data = channel;
+}
+
+void channelP04(QString * data){
+    bool ok;
+    QString channel = "\n\trate : %1\n\t\
+temperature_internal : %2\n\t";
+            channel = channel.arg(((*data).mid(2,2) + (*data).mid(0,2)).toUInt(&ok,16))
+            .arg(((*data).mid(4,2)).toUInt(&ok,16));
+    *data = channel;
+}
+void channel2NNKt(QString * data){
+    bool ok;
+    QString channel = "\n\tperiph_status : %1\n\t\
+count_time : %2\n\t\
+near_count : %3\n\t\
+far_count : %4\n\t\
+gk_uhv : %5\n\t\
+gk_dac : %6\n\t\
+temperature_internal : %7\n\t\
+comp_edac1_value : %8\n\t\
+comp_edac2_value : %9\n\t";
+            channel = channel.arg(((*data).mid(0,2)).toUInt(&ok,16))
+            .arg(((*data).mid(4,2) + (*data).mid(2,2)).toUInt(&ok,16))
+            .arg(((*data).mid(12,2) + (*data).mid(10,2)+ (*data).mid(8,2)+ (*data).mid(6,2)).toUInt(&ok,16))
+            .arg(((*data).mid(20,2) + (*data).mid(18,2)+ (*data).mid(16,2)+ (*data).mid(14,2)).toUInt(&ok,16))
+            .arg(((*data).mid(24,2) + (*data).mid(22,2)).toUInt(&ok,16))
+            .arg(((*data).mid(28,2) + (*data).mid(26,2)).toUInt(&ok,16))
+            .arg(((*data).mid(32,2) + (*data).mid(30,2)).toUInt(&ok,16))
+            .arg(((*data).mid(36,2) + (*data).mid(34,2)).toUInt(&ok,16))
+            .arg(((*data).mid(40,2) + (*data).mid(38,2)).toUInt(&ok,16));
+    *data = channel;
+}
+void channelGGP(QString * data){
+    bool ok;
+    QString channel = "\n\tperiph_status : %1\n\t\
+count_time : %2\n\t\
+count : %3\n\t\
+gk_uhv : %4\n\t\
+gk_dac : %5\n\t\
+temperature_internal : %6\n\t\
+comp_edac_value : %7\n\t";
+            channel = channel.arg(((*data).mid(0,2)).toUInt(&ok,16))
+            .arg(((*data).mid(4,2) + (*data).mid(2,2)).toUInt(&ok,16))
+            .arg(((*data).mid(12,2) + (*data).mid(10,2)+ (*data).mid(8,2)+ (*data).mid(6,2)).toUInt(&ok,16))
+            .arg(((*data).mid(16,2) + (*data).mid(14,2)).toUInt(&ok,16))
+            .arg(((*data).mid(20,2) + (*data).mid(18,2)).toUInt(&ok,16))
+            .arg(((*data).mid(24,2) + (*data).mid(22,2)).toUInt(&ok,16))
+            .arg(((*data).mid(28,2) + (*data).mid(26,2)).toUInt(&ok,16));
+    *data = channel;
+}
+void channelGVK(QString * data){
+    bool ok;
+    QString channel = "\n\ttemperature_internal : %1\n\t\
+locator_amp : %2\n\t\
+locator_amp_interval_max : %3\n\t\
+locator_amp_interval_min : %4\n\t\
+gk_time : %5\n\t\
+gk_impulses : %6\n\t\
+gk_uhv : %7\n\t\
+power_supply : %8\n\t\
+temperature_external : %9\n\t\
+temperature_external_2 : %10\n\t\
+temperature_external_3 : %11\n\t\
+p_corr : %12\n\t\
+p_bw : %13\n\t\
+acceleration_x : %14\n\t\
+acceleration_y : %15\n\t\
+acceleration_z : %16\n\t\
+locator_amp : %17\n\t\
+temperature_external_4 : %18\n\t\
+gk_dac : %19\n\t";
+            channel = channel.arg(((*data).mid(2,2) + (*data).mid(0,2)).toUInt(&ok,16))
+            .arg(((*data).mid(6,2) + (*data).mid(4,2)).toUInt(&ok,16))
+            .arg(((*data).mid(10,2) + (*data).mid(8,2)).toUInt(&ok,16))
+            .arg(((*data).mid(14,2) + (*data).mid(12,2)).toUInt(&ok,16))
+            .arg(((*data).mid(18,2) + (*data).mid(16,2)).toUInt(&ok,16))
+            .arg(((*data).mid(22,2) + (*data).mid(20,2)).toUInt(&ok,16))
+            .arg(((*data).mid(26,2) + (*data).mid(24,2)).toUInt(&ok,16))
+            .arg(((*data).mid(30,2) + (*data).mid(28,2)).toUInt(&ok,16))
+            .arg(((*data).mid(36,2) + (*data).mid(34,2)+ (*data).mid(32,2)).toUInt(&ok,16))
+            .arg(((*data).mid(42,2) + (*data).mid(40,2)+ (*data).mid(38,2)).toUInt(&ok,16))
+            .arg(((*data).mid(48,2) + (*data).mid(46,2)+ (*data).mid(44,2)).toUInt(&ok,16))
+            .arg(((*data).mid(54,2) + (*data).mid(52,2)+ (*data).mid(50,2)).toUInt(&ok,16))
+            .arg(((*data).mid(60,2) + (*data).mid(58,2)+ (*data).mid(56,2)).toUInt(&ok,16))
+            .arg(((*data).mid(66,2) + (*data).mid(64,2)+ (*data).mid(62,2)).toUInt(&ok,16))
+            .arg(((*data).mid(72,2) + (*data).mid(70,2)+ (*data).mid(68,2)).toUInt(&ok,16))
+            .arg(((*data).mid(78,2) + (*data).mid(76,2)+ (*data).mid(74,2)).toUInt(&ok,16))
+            .arg(((*data).mid(84,2) + (*data).mid(82,2)+ (*data).mid(80,2)).toUInt(&ok,16))
+            .arg(((*data).mid(90,2) + (*data).mid(88,2)+ (*data).mid(86,2)).toUInt(&ok,16))
+            .arg(((*data).mid(94,2) + (*data).mid(92,2)).toUInt(&ok,16));
+    *data = channel;
+}
+void Parser38kModules::moduleDataParsing(PacketModulesData38k * moduleData){
     bool ok;
     QString * data = &moduleData->data;
     if(moduleData->header.data_state & 0x02){
@@ -388,8 +515,32 @@ data_parts_max : %17";
            channelGKT(data);
         else if(type == 1)
            channelSHM(data,moduleData->header.currentPartNo);
+        else if(type == 2)
+           channelAG(data);
+        else if(type == 7)
+           channelP02(data);
     }
 }
+Parser38kModules::Parser38kModules(QList<PacketModulesData38k> *modulesData){
+    this->modulesData = modulesData;
+    this->listOfFoundModules = new QList<NumberType>;
+}
+void Parser38kModules::run(){
+    //int quantity = 0;
+    //QThread::sleep(20);
+    //while(modulesData->size() == 0){};
+    for(auto value = modulesData->begin();value < modulesData->end(); value++){
+        moduleDataParsing(&*value);
+        //quantity++;
+        //while(quantity == modulesData->size()){}
+    }
+}
+
+Parser38kModules::~Parser38kModules(){
+
+}
+
+
 
 void Parser38k::findServiseFFFE(TlmPack pack){
     bool ok;
@@ -473,7 +624,7 @@ void Parser38k::findModulesData(PacketDeviceData38k pack){
             moduleData.header.lastCommandCode = static_cast<unsigned char>(data.mid(pos + 14,2).toUInt(&ok,16));
             moduleData.header.requestTime = (data.mid(pos +22,2) + data.mid(pos +20,2)+data.mid(pos +18,2) + data.mid(pos +16,2)).toUInt(&ok,16);
             moduleData.data = moduleDataString.mid(24,moduleData.header.totalSize*2 - 28);
-            moduleDataParsing(&moduleData);
+            //moduleDataParsing(&moduleData);
             emit  getModData38k(moduleData);
             position += moduleDataString.size();
         }

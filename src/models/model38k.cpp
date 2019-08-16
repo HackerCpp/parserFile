@@ -1,30 +1,9 @@
 #include "inc/models/model38k.h"
 
-ProxyModel38k::ProxyModel38k(){
-
-}
-
-bool ProxyModel38k::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const{
-    QString str = filterRegExp().pattern();
-
-    QModelIndex index = sourceModel()->index(source_row, filterKeyColumn(), source_parent);
-    if(sourceModel()->data(index).toString().contains(str))
-            return true;
-    //if(sourceModel()->data(index).toString().contains(filterRegExp()))
-       // return true;
-    return false;
-}
-
-bool ProxyModel38k::filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const{
-
-}
-
-
-
-
 
 Model38k::Model38k(QList<PacketModulesData38k> *modulesData){
     this->modulesData = new QList<PacketModulesData38k>;
+    parserModules = new Parser38kModules(this->modulesData);
     if(modulesData == nullptr)
         return;
 
@@ -102,11 +81,13 @@ void Model38k::sort(int column, Qt::SortOrder order){
 }
 
  void Model38k::setData(PacketModulesData38k pack){
-    beginInsertRows(QModelIndex(), modulesData->size(), modulesData->size());
+    beginInsertRows(QModelIndex(),modulesData->size(), modulesData->size());
     this->modulesData->push_back(pack);
     endInsertRows();
 }
-
+ void Model38k::startParsingMdules(){
+      parserModules->start();
+ }
 Model38k::~Model38k(){
     delete this->modulesData;
     this->modulesData = nullptr;

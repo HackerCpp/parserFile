@@ -32,7 +32,7 @@ class Tab38k : public QWidget
     QPlainTextEdit *textEdit;
     QSplitter *sp;
     Model38k *model;
-    ProxyModel38k *prModel;
+    QSortFilterProxyModel *prModel;
 public:
     explicit Tab38k(QList<PacketModulesData38k> *modulesData,QWidget *parent = nullptr);
     ~Tab38k();

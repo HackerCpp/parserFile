@@ -3,7 +3,7 @@
 
 Tab38k::Tab38k(QList<PacketModulesData38k> *modulesData,QWidget *parent) : QWidget(parent){
     this->model = new Model38k(modulesData);
-    prModel = nullptr;
+    this->prModel = new QSortFilterProxyModel();
     table = new QTableView();
     textEdit = new QPlainTextEdit();
     horBoxLayout = new QHBoxLayout();
@@ -47,13 +47,15 @@ void Tab38k::showText(QModelIndex const& index){
     this->textEdit->setPlainText(str);
 }
 
-void Tab38k::setFilter(){    
+void Tab38k::setFilter(){
+    delete prModel;
+    prModel = new QSortFilterProxyModel();
     int column = this->filterColumnSB->text().toInt();
     prModel->setFilterKeyColumn(column);
     QString filter = this->filterLineEdit->text();
-    prModel->setFilterRegExp(filter);
-
-
+    prModel->setFilterRegExp(QRegExp(filter,Qt::CaseInsensitive));
+    prModel->setSourceModel(model);
+    this->table->setModel(prModel);
 }
 void Tab38k::setSorting(int value){
        table->setSortingEnabled(value);
@@ -64,7 +66,7 @@ void Tab38k::addModulesData(PacketModulesData38k pack){
     this->model->setData(pack);
 }
 void Tab38k::allUploaded(){
-    this->prModel = new ProxyModel38k();
+    model->startParsingMdules();
     this->prModel->setSourceModel(this->model);
     this->table->setModel(prModel);
     filter->show();
