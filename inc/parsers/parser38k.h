@@ -77,6 +77,7 @@ class Parser38k : public QThread{
     QString hexString;
     QList<NumberType> *listOfFoundModules;
     QList<TlmPack> *tlmDeviceData;
+    static QString data;
 
     void findServiseFFFE(TlmPack pack);
     void findModulesData(PacketDeviceData38k pack);

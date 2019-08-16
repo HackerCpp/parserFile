@@ -34,7 +34,7 @@ Tab38k::Tab38k(QList<PacketModulesData38k> *modulesData,QWidget *parent) : QWidg
     this->tableAndFilterLayout->addWidget(table);
     sp->addWidget(tableAndFilterWidget);
     sp->addWidget(textEdit);
-    filter->hide();
+    //filter->hide();
     horBoxLayout->addWidget(sp);
     this->setLayout(horBoxLayout);
     QObject::connect(this->table, SIGNAL(activated(QModelIndex const&)),this, SLOT(showText(QModelIndex const&)));

@@ -586,8 +586,7 @@ void Parser38k::findServiseFFFE(TlmPack pack){
 }
 
 void Parser38k::findModulesData(PacketDeviceData38k pack){
-    static bool ok;
-    static QString data ="";
+    bool ok;
     QString moduleDataString;
     int position = 0;
         data += pack.data.data.mid(0,pack.data.data.size());
@@ -633,8 +632,9 @@ void Parser38k::findModulesData(PacketDeviceData38k pack){
         if(data == "00")
             data ="";
 }
-
+QString Parser38k::data;
 Parser38k::Parser38k(FileReader *file){
+    data = "";
     this->tlmDeviceData = new QList<TlmPack>;
     this->listOfFoundModules = new QList<NumberType>;
     this->hexString = file->getHexString();
