@@ -8,6 +8,7 @@
 
 
 class Model38k : public QAbstractListModel{
+
     Q_OBJECT
 
     QString headerArray[12] = {"MOD ADDR(0)","DATA STAT(1)","SIZE OLL(2)","SIZE DATA(3)",
@@ -16,6 +17,7 @@ class Model38k : public QAbstractListModel{
                               "REQ TIME(10)","DATA(11)"};
     QList<PacketModulesData38k> *modulesData;
     Parser38kModules *parserModules;
+    int size;
 public:
     Model38k(QList<PacketModulesData38k> *modulesData);
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
@@ -23,10 +25,12 @@ public:
     int columnCount(const QModelIndex &parent = QModelIndex()) const ;
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;
     Qt::ItemFlags flags(const QModelIndex &index) const;
-    void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
     void setData(PacketModulesData38k pack);
     void startParsingMdules();
     ~Model38k();
+public slots:
+    void stopParsingMdules();
+
 
 };
 

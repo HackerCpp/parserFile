@@ -21,6 +21,7 @@ public:
 public slots:
     void openFile();
     void closeTab(int index);
+    void applyStyle();
 };
 
 #endif // MAINWINDOW_H

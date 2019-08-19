@@ -237,14 +237,10 @@ gk_dac : %24\n\t";
     *data = channel;
 }
 
-void channelSHM(QString * data,unsigned char currentPartNo){
+void Parser38kModules::channelSHM(QString * data,unsigned char currentPartNo){
     bool ok;
     int size = (data->size()/2);
     int pos = 0;
-    static uint wordPerChannel;
-    static uint currentWordPerChannel;
-    static uint currentChannel;
-    static uint isWave;
     QString channel;
     if(!currentPartNo){
         channel = "\n\tperiph_status : %1\n\t\
@@ -526,20 +522,25 @@ data_parts_max : %17";
 Parser38kModules::Parser38kModules(QList<PacketModulesData38k> *modulesData){
     this->modulesData = modulesData;
     this->listOfFoundModules = new QList<NumberType>;
+    enabled = true;
+    connect(this, SIGNAL(finished(void)), this, SLOT(del()));
 }
 void Parser38kModules::run(){
-    //int quantity = 0;
-    //QThread::sleep(20);
-    //while(modulesData->size() == 0){};
-    for(auto value = modulesData->begin();value < modulesData->end(); value++){
-        moduleDataParsing(&*value);
-        //quantity++;
-        //while(quantity == modulesData->size()){}
-    }
+    for(auto value = modulesData->begin();value < modulesData->end(); value++)
+        if(enabled)
+            moduleDataParsing(&*value);
+        else
+           return;
 }
-
+void Parser38kModules::stop(){
+    enabled = false;
+}
+void Parser38kModules::del(){
+    this->~Parser38kModules();
+}
 Parser38kModules::~Parser38kModules(){
-
+    delete this->listOfFoundModules;
+    this->listOfFoundModules = nullptr;
 }
 
 
@@ -634,7 +635,7 @@ void Parser38k::findModulesData(PacketDeviceData38k pack){
         if(data == "00")
             data ="";
 }
-QString Parser38k::data;
+
 Parser38k::Parser38k(FileReader *file){
     data = "";
     this->tlmDeviceData = new QList<TlmPack>;
@@ -671,5 +672,6 @@ void Parser38k::destroy(){
 
 Parser38k::~Parser38k(){
     delete this->tlmDeviceData;
+    this->tlmDeviceData = nullptr;
     this->quit();
 }

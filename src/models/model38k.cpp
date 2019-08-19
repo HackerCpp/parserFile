@@ -3,13 +3,15 @@
 
 Model38k::Model38k(QList<PacketModulesData38k> *modulesData){
     this->modulesData = new QList<PacketModulesData38k>;
-    parserModules = new Parser38kModules(this->modulesData);
+    parserModules = nullptr;
+    size = 0;
     if(modulesData == nullptr)
         return;
 
     for (auto modData = modulesData->begin();modData < modulesData->end();modData++){
         this->modulesData->push_back(*modData);
     }
+    size = modulesData->size();
 }
 
 QVariant Model38k::data(const QModelIndex &index, int role ) const{
@@ -17,7 +19,7 @@ QVariant Model38k::data(const QModelIndex &index, int role ) const{
         return QVariant();
     if (!index.isValid())
         return QVariant();
-    if (index.row() >= this->modulesData->size())
+    if (index.row() >= size)
         return QVariant();
     int column = index.column();
     switch (column){
@@ -51,8 +53,7 @@ QVariant Model38k::data(const QModelIndex &index, int role ) const{
 }
 
 int Model38k::rowCount(const QModelIndex &parent) const {
-    int row = this->modulesData->size();
-    return row;
+    return size;
 }
 
 int Model38k::columnCount(const QModelIndex &parent) const {
@@ -74,21 +75,26 @@ Qt::ItemFlags Model38k::flags(const QModelIndex &index) const{
     return Qt :: ItemIsEnabled | Qt :: ItemIsSelectable | Qt :: ItemNeverHasChildren;
 }
 
-void Model38k::sort(int column, Qt::SortOrder order){
-    if(column == 0 && order == Qt::AscendingOrder ){
-
-    }
-}
-
  void Model38k::setData(PacketModulesData38k pack){
-    beginInsertRows(QModelIndex(),modulesData->size(), modulesData->size());
+    beginInsertRows(QModelIndex(),size, size);
     this->modulesData->push_back(pack);
+    size++;
     endInsertRows();
 }
  void Model38k::startParsingMdules(){
-      parserModules->start();
+     parserModules = new Parser38kModules(this->modulesData);
+     connect(parserModules, SIGNAL(finished(void)), this, SLOT(stopParsingMdules(void)));
+     parserModules->start();
+ }
+ void Model38k::stopParsingMdules(){
+     if(parserModules)
+        parserModules->stop();
+     parserModules = nullptr;
  }
 Model38k::~Model38k(){
+    if(parserModules)
+        parserModules->stop();
+    parserModules = nullptr;
     delete this->modulesData;
     this->modulesData = nullptr;
 }

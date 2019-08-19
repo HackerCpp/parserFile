@@ -1,0 +1,21 @@
+QWidget 
+{
+	background-color:#B0E0E6;
+}
+
+QPlainTextEdit,QLineEdit
+{
+	background-color:#E0FFFF;
+	selection-background-color: qlineargradient(x1: 0, y1: 0, x2:0.6,y2: 0.4,stop: 0 #4682B4, stop: 1 #1E90FF);		
+}
+
+QTableView
+{
+	background-color:#E0FFFF;
+	selection-background-color: qlineargradient(x1: 0, y1: 0, x2:0.5,y2: 0.5,stop: 0 #AFEEEE, stop: 1 #E0FFFF);
+	selection-color:black;
+
+}
+QHeaderView::section{
+	background-color:#AFEEEE;
+}

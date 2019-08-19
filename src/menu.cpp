@@ -1,4 +1,5 @@
 #include "inc/menu.h"
+#include <QCoreApplication>
 
 Menu::Menu(QWidget *parent)
     : QWidget(parent){
@@ -7,6 +8,7 @@ Menu::Menu(QWidget *parent)
     this->layoutForMenu = new QVBoxLayout();
     QMenu * mainMenu= new QMenu("&Menu");
     mainMenu->addAction("&About Qt",qApp, SLOT(aboutQt()), Qt::CTRL + Qt::Key_Q);
+    mainMenu->addAction("&ApplyStyle",this, SIGNAL(applyStyle()), Qt::CTRL + Qt::Key_A);
     mainMenu->addSeparator();
     mainMenu->addAction("&Exit", qApp, SLOT(quit()),Qt::Key_Escape);
     mnuArray->push_back(mainMenu);

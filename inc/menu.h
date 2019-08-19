@@ -20,8 +20,9 @@ public:
     explicit Menu(QWidget *parent = nullptr);
     ~Menu();
 signals:
-
+    void applyStyle();
 public slots:
+
 
 };
 

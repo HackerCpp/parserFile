@@ -1,5 +1,5 @@
 #include "inc/tabs/tab38k.h"
-
+#include <QPropertyAnimation>
 
 Tab38k::Tab38k(QList<PacketModulesData38k> *modulesData,QWidget *parent) : QWidget(parent){
     this->model = new Model38k(modulesData);
@@ -9,7 +9,6 @@ Tab38k::Tab38k(QList<PacketModulesData38k> *modulesData,QWidget *parent) : QWidg
     horBoxLayout = new QHBoxLayout();
     this->tableAndFilterLayout = new QVBoxLayout();
     textEdit->setFont(QFont("arial",16));
-    //prModel->setSourceModel(model);
     table->setModel(model);
     sp = new QSplitter(Qt::Horizontal);
     tableAndFilterWidget = new QWidget();
@@ -21,6 +20,7 @@ Tab38k::Tab38k(QList<PacketModulesData38k> *modulesData,QWidget *parent) : QWidg
     sortingLabel = new QLabel("sorting:");
     sortingCheckBox = new QCheckBox();
     filterColumnSB->setMaximum(11);
+    filterColumnSB->setMinimum(-1);
     filterLayout = new QHBoxLayout();
     filterLayout->addWidget(filtration);
     filterLayout->addWidget(filterLineEdit);
@@ -34,12 +34,13 @@ Tab38k::Tab38k(QList<PacketModulesData38k> *modulesData,QWidget *parent) : QWidg
     this->tableAndFilterLayout->addWidget(table);
     sp->addWidget(tableAndFilterWidget);
     sp->addWidget(textEdit);
-    //filter->hide();
     horBoxLayout->addWidget(sp);
     this->setLayout(horBoxLayout);
     QObject::connect(this->table, SIGNAL(activated(QModelIndex const&)),this, SLOT(showText(QModelIndex const&)));
     QObject::connect(this->filterLineEdit, SIGNAL(returnPressed()),this, SLOT(setFilter()));
     QObject::connect(this->sortingCheckBox, SIGNAL(stateChanged(int)),this, SLOT(setSorting(int)));
+
+
 }
 
 void Tab38k::showText(QModelIndex const& index){
@@ -67,12 +68,10 @@ void Tab38k::addModulesData(PacketModulesData38k pack){
 }
 void Tab38k::allUploaded(){
     model->startParsingMdules();
-    this->prModel->setSourceModel(this->model);
-    this->table->setModel(prModel);
-    filter->show();
-
 }
 Tab38k::~Tab38k(){
+    delete table;
+    table = nullptr;
     delete model;
     model = nullptr;
     delete prModel;

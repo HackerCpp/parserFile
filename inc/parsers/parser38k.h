@@ -57,13 +57,22 @@ class Parser38kModules : public QThread{
 
     QList<NumberType> *listOfFoundModules;
     QList<PacketModulesData38k> *modulesData;
+    uint wordPerChannel;
+    uint currentWordPerChannel;
+    uint currentChannel;
+    uint isWave;
+    bool enabled;
 
+    void channelSHM(QString * data,unsigned char currentPartNo);
     void moduleDataParsing(PacketModulesData38k * moduleData);
 public:
     Parser38kModules(QList<PacketModulesData38k> *modulesData);
     void run();
 
     ~Parser38kModules();
+public slots:
+    void stop();
+    void del();
 
 };
 class Parser38k : public QThread{
@@ -77,7 +86,7 @@ class Parser38k : public QThread{
     QString hexString;
     QList<NumberType> *listOfFoundModules;
     QList<TlmPack> *tlmDeviceData;
-    static QString data;
+    QString data;
 
     void findServiseFFFE(TlmPack pack);
     void findModulesData(PacketDeviceData38k pack);
