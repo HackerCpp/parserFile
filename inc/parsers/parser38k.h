@@ -84,11 +84,13 @@ class Parser38k : public QThread{
     Crc16 crc;
     ReedSolomonCoding cod;
     QString hexString;
+    QByteArray byteArrayData;
     QList<NumberType> *listOfFoundModules;
     QList<TlmPack> *tlmDeviceData;
     QString data;
 
     void findServiseFFFE(TlmPack pack);
+    void findServiseFFFEBytes(TlmPack pack);
     void findModulesData(PacketDeviceData38k pack);
 public:
     Parser38k(FileReader *file);

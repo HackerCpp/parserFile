@@ -12,7 +12,7 @@ QPlainTextEdit,QLineEdit
 QTableView
 {
 	background-color:#E0FFFF;
-	selection-background-color: qlineargradient(x1: 0, y1: 0, x2:0.5,y2: 0.5,stop: 0 #AFEEEE, stop: 1 #E0FFFF);
+	selection-background-color: qlineargradient(x1: 0, y1: 0, x2:0.5,y2: 0.5,stop: 0 green, stop: 1 #E0FFFF);
 	selection-color:black;
 
 }

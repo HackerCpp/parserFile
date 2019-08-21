@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent){
     QPropertyAnimation *animation = new QPropertyAnimation(this, "geometry");
      animation->setDuration(1000);
      animation->setStartValue(QRect(0, 0, 0, 0));
-     animation->setEndValue(QRect(100, 100, 700, 700));
+     animation->setEndValue(QRect(100, 100, 800, 800));
      animation->start();
 }
 void MainWindow::applyStyle(){

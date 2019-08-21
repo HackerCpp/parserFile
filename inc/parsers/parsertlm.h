@@ -11,10 +11,17 @@ struct Packet{           //***
     QString	inf_type;
     QString data;
 };
+struct PacketBytes{
+    uint	time;
+    QString dev_type;
+    QString	inf_type;
+    QByteArray data;
+};
 struct TlmPack{          //**
     uchar state;
     ushort length;
-    Packet dataPucket;
+    Packet dataPacket;
+    PacketBytes dataPacketBytes;
 };
 struct BlockTlm{
     QString boom;
@@ -48,12 +55,15 @@ class ParserTLM{
 
     void findPackFFFE(QString TlmPackString,TlmPack *TlmPack);
     void findTlmPackFFFE(QString blockTlmString,BlockTlm* blockTlm);
+    void findPackFFFE(QByteArray TlmPackByteArray,TlmPack *TlmPack);
+    void findTlmPackFFFE(QByteArray blockTlmByteArray,BlockTlm* blockTlm);
 public:
     /*!
     * \brief Конструктор принимает HEX строку .tlm файла и разбивает её на пакеты данных
     * \param [in] hexTextTlmFile строка символов
     */
     ParserTLM(QString hexTextTlmFile);
+    ParserTLM(QByteArray byteArrayTlmFile);
     QList<BlockTlm> *getBlocks();
     ~ParserTLM();
 };

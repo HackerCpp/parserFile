@@ -15,10 +15,10 @@ ModelTlm::ModelTlm(QList<BlockTlm> *tlmBlocks,QObject *parent)
             packData.parent = &m_tlmBlocks->data()[blockId];
             packData.data.state = tlmBlocks->at(blockId).TlmPackList.at(packId).state;
             packData.data.length = tlmBlocks->at(blockId).TlmPackList.at(packId).length;
-            packData.data.dataPucket.time = tlmBlocks->at(blockId).TlmPackList.at(packId).dataPucket.time;
-            packData.data.dataPucket.dev_type = tlmBlocks->at(blockId).TlmPackList.at(packId).dataPucket.dev_type;
-            packData.data.dataPucket.inf_type = tlmBlocks->at(blockId).TlmPackList.at(packId).dataPucket.inf_type;
-            packData.data.dataPucket.data = tlmBlocks->at(blockId).TlmPackList.at(packId).dataPucket.data;
+            packData.data.dataPacket.time = tlmBlocks->at(blockId).TlmPackList.at(packId).dataPacket.time;
+            packData.data.dataPacket.dev_type = tlmBlocks->at(blockId).TlmPackList.at(packId).dataPacket.dev_type;
+            packData.data.dataPacket.inf_type = tlmBlocks->at(blockId).TlmPackList.at(packId).dataPacket.inf_type;
+            packData.data.dataPacket.data = tlmBlocks->at(blockId).TlmPackList.at(packId).dataPacket.data;
             m_tlmBlocks->data()[blockId].dataArray->insert(packId,packData);
         }
     }
@@ -92,13 +92,13 @@ QVariant ModelTlm::data(const QModelIndex &index, int role) const{
              case 2:
                  return blockData->data.length;
              case 3:
-                 return blockData->data.dataPucket.time;
+                 return blockData->data.dataPacket.time;
              case 4:
-                 return blockData->data.dataPucket.dev_type;
+                 return blockData->data.dataPacket.dev_type;
              case 5:
-                 return blockData->data.dataPucket.inf_type;
+                 return blockData->data.dataPacket.inf_type;
              case 6:
-                 return blockData->data.dataPucket.data;
+                 return blockData->data.dataPacket.data;
              default:
                  return QVariant();
           }

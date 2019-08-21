@@ -76,4 +76,16 @@ Tab38k::~Tab38k(){
     model = nullptr;
     delete prModel;
     prModel = nullptr;
+    delete table;
+    delete textEdit;
+    delete horBoxLayout;
+    delete filtration;
+    delete column;
+    delete filterLineEdit;
+    delete filterColumnSB;
+    delete sortingLabel;
+    delete sortingCheckBox;
+    delete filter;
+    delete tableAndFilterWidget;
+    delete sp;
 }

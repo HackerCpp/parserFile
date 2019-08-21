@@ -1,5 +1,6 @@
 #include "inc/parsers/parser38k.h"
 #include <QTextCodec>
+#include <Qtime>
 
 void paramFlashGKT(QString * data){
     bool ok;
@@ -548,7 +549,7 @@ Parser38kModules::~Parser38kModules(){
 void Parser38k::findServiseFFFE(TlmPack pack){
     bool ok;
     unsigned char array[255];
-        QString data = pack.dataPucket.data.mid(4);
+        QString data = pack.dataPacket.data.mid(4);
         QByteArray byteArray = QByteArray::fromHex(data.toLocal8Bit());
         QString bl255 = "";
         PacketDeviceData38k packetDeviceData;
@@ -635,12 +636,55 @@ void Parser38k::findModulesData(PacketDeviceData38k pack){
         if(data == "00")
             data ="";
 }
+void Parser38k::findServiseFFFEBytes(TlmPack pack){
+    bool ok;
+    unsigned char array[255];
+        QByteArray data = pack.dataPacketBytes.data.mid(2);
+        QByteArray bl255;bl255.resize(255);
+        QByteArray byteArray;
+        PacketDeviceData38k packetDeviceData;
+        packetDeviceData.data.status = 0;
+        for(int position = 0; position < data.length();position+=255 ){
+            memset(array,0,255);
+            bl255 = data.mid(position,255);
+            memcpy(array,bl255.data(),bl255.size());
+            int decod = cod.decode_rs_nasa(array);
+            this->numberOfChecks++;
+            this->numberOfError += decod?1:0;
+            packetDeviceData.data.status |= decod;
+            packetDeviceData.data.data += bl255.mid(33).toHex();
+        }
 
+        QString serv = packetDeviceData.data.data.mid(0,24);
+        byteArray = QByteArray::fromHex(serv.toLocal8Bit());
+        memset(array,0,255);
+        memcpy(array,byteArray.toStdString().c_str(),byteArray.size());
+        this->numberOfChecks++;
+        int crcF = crc.crcFast(array,12);
+        if(crcF)
+            this->numberOfError++;
+        if((packetDeviceData.data.status == 2 && crcF) || serv.size() == 0){
+            return;
+        }
+
+        packetDeviceData.data.data = packetDeviceData.data.data.mid(24);
+        data = QByteArray::fromRawData(reinterpret_cast<const char *>(array),30).toHex();
+        packetDeviceData.serv.systemTime = (serv.mid(6,2) + serv.mid(4,2)+serv.mid(2,2) + serv.mid(0,2)).toUInt(&ok,16);
+        packetDeviceData.serv.transmissionCounter = static_cast<unsigned short>((serv.mid(10,2) + serv.mid(8,2)).toUInt(&ok,16));
+        packetDeviceData.serv.totalModules = static_cast<unsigned char>(serv.mid(12,2).toUInt(&ok,16));
+        packetDeviceData.serv.speedTelemetry = static_cast<unsigned char>(("0"+serv.mid(14,1)).toUInt(&ok,16));
+        packetDeviceData.serv.bitDepthTelemetry = static_cast<unsigned char>(("0"+serv.mid(15,1)).toUInt(&ok,16));
+        packetDeviceData.serv.commandCounter = static_cast<unsigned char>(serv.mid(16,2).toUInt(&ok,16));
+        packetDeviceData.serv.reserved = static_cast<unsigned char>(serv.mid(18,2).toUInt(&ok,16));
+        packetDeviceData.serv.crc16 = static_cast<unsigned short>((data.mid(22,2) + data.mid(20,2)).toUInt(&ok,16));
+        findModulesData(packetDeviceData);
+}
 Parser38k::Parser38k(FileReader *file){
     data = "";
     this->tlmDeviceData = new QList<TlmPack>;
     this->listOfFoundModules = new QList<NumberType>;
-    this->hexString = file->getHexString();
+    //this->hexString = file->getHexString();
+    this->byteArrayData = file->getByteArray();
     delete file;
     file = nullptr;
     connect(this, SIGNAL(finished()), this, SLOT(destroy()));
@@ -649,12 +693,17 @@ Parser38k::Parser38k(FileReader *file){
 void Parser38k::run(){
     numberOfChecks = 0;
     numberOfError = 0;
-    ParserTLM *parserTlm = new ParserTLM(this->hexString);
+    QTime time = QTime::currentTime();
+    //ParserTLM *parserTlm = new ParserTLM(this->hexString);
+    ParserTLM *parserTlm = new ParserTLM(this->byteArrayData);
     QList<BlockTlm> *tlmBlocks = parserTlm->getBlocks();
+    qDebug() << " time:" << time.elapsed();
     for(auto block = tlmBlocks->begin();block < tlmBlocks->end();block++)
         for(auto pack = block->TlmPackList.begin();pack < block->TlmPackList.end();pack++)
-            if(pack->dataPucket.dev_type == "ADSP" && pack->dataPucket.inf_type == "GETDATA")
-                findServiseFFFE(*pack);
+            if(pack->dataPacketBytes.dev_type == "ADSP" && pack->dataPacketBytes.inf_type == "GETDATA"){
+                findServiseFFFEBytes(*pack);
+            }
+
     delete parserTlm;
     parserTlm = nullptr;
     double sr;

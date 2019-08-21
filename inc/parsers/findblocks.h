@@ -20,6 +20,12 @@ struct Block{
     uint sizeBodyBlock;
     QString bodyBlock;
 };
+struct BlockByte{
+    int sizeNameBlock;
+    QString nameBlock;
+    uint sizeBodyBlock;
+    QByteArray bodyBlock;
+};
 /*!
  * \brief Класс разбирает hex текст на блоки данных
  * \author Пряников Алексей Владимирович
@@ -27,7 +33,7 @@ struct Block{
 class FindBlocks{
     QString bom;//!< кодировка файла (fffe,feff)
     QList<Block> *blocksList;
-
+    QList<BlockByte> *blocksListByte;
     /*!
      * \brief Функция заполняет список блоков,
      * которые найдёт в строке начиная с position
@@ -35,6 +41,7 @@ class FindBlocks{
      * \param [in] position позиция с какой нужно искать блоки
      */
     void findBlocksFFFE(QString hexTextFile,int position);
+    void findBlocksByteFFFE(QByteArray byteArrayFile,int position);
 public:
     /*!
     * \brief Конструктор вызывае функцию разбора hex строки
@@ -42,11 +49,13 @@ public:
     * \param [in] hexTextFile строка символов
     */
     FindBlocks(QString hexTextFile);
+    FindBlocks(QByteArray byteArrayFile);
     /*!
      * \brief getBlockList
      * \return список блоков
      */
     QList<Block> *getBlockList();
+    QList<BlockByte> *getBlockListBytes();
     QString getBom();
     ~FindBlocks();
 };
