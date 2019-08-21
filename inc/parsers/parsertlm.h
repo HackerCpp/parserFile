@@ -5,12 +5,6 @@
 #include "QList"
 #include "inc/parsers/findblocks.h"
 
-struct Packet{           //***
-    uint	time;
-    QString dev_type;
-    QString	inf_type;
-    QString data;
-};
 struct PacketBytes{
     uint	time;
     QString dev_type;
@@ -20,7 +14,6 @@ struct PacketBytes{
 struct TlmPack{          //**
     uchar state;
     ushort length;
-    Packet dataPacket;
     PacketBytes dataPacketBytes;
 };
 struct BlockTlm{
@@ -53,8 +46,6 @@ class ParserTLM{
                             "WRITEPARAM","GETPARAM","CMD","GETDATA","WRITEBLOCKINF","CLEARSECTOR","GETCLEARSTATUS","UIPCOMMAND"};
     QList<BlockTlm> *tlmBlocks;
 
-    void findPackFFFE(QString TlmPackString,TlmPack *TlmPack);
-    void findTlmPackFFFE(QString blockTlmString,BlockTlm* blockTlm);
     void findPackFFFE(QByteArray TlmPackByteArray,TlmPack *TlmPack);
     void findTlmPackFFFE(QByteArray blockTlmByteArray,BlockTlm* blockTlm);
 public:
@@ -62,7 +53,7 @@ public:
     * \brief Конструктор принимает HEX строку .tlm файла и разбивает её на пакеты данных
     * \param [in] hexTextTlmFile строка символов
     */
-    ParserTLM(QString hexTextTlmFile);
+
     ParserTLM(QByteArray byteArrayTlmFile);
     QList<BlockTlm> *getBlocks();
     ~ParserTLM();

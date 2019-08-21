@@ -6,8 +6,8 @@ void ParserDataCm::findServiseFFFE(){
     bool ok;
     unsigned char array[255];
     for (auto pack = this->tlmDeviceData->begin();pack < tlmDeviceData->end();pack++){
-        QString serv = pack->dataPacket.data.mid(0,60);
-        QString data = pack->dataPacket.data.mid(60);
+        QString serv = pack->dataPacketBytes.data.mid(0,60);
+        QString data = pack->dataPacketBytes.data.mid(60);
         QByteArray byteArray = QByteArray::fromHex(serv.toLocal8Bit());
         memset(array,0,255);
         memcpy(array,byteArray.toStdString().c_str() + 2,static_cast<size_t>(byteArray.size() - 2));
@@ -51,7 +51,7 @@ ParserDataCm::ParserDataCm(QList<BlockTlm> *tlmBlocks){
 
     for(auto block = tlmBlocks->begin();block < tlmBlocks->end();block++)
         for(auto pack = block->TlmPackList.begin();pack < block->TlmPackList.end();pack++)
-            if(pack->dataPacket.dev_type == "ADSP" && pack->dataPacket.inf_type == "GETDATA")
+            if(pack->dataPacketBytes.dev_type == "ADSP" && pack->dataPacketBytes.inf_type == "GETDATA")
                 this->tlmDeviceData->push_back(*pack);
 
     findServiseFFFE();

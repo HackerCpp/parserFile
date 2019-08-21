@@ -14,12 +14,6 @@
  * следом идёт размер содержимого блока 4 байта,
  * потом само содержимое
  */
-struct Block{
-    int sizeNameBlock;
-    QString nameBlock;
-    uint sizeBodyBlock;
-    QString bodyBlock;
-};
 struct BlockByte{
     int sizeNameBlock;
     QString nameBlock;
@@ -32,15 +26,14 @@ struct BlockByte{
  */
 class FindBlocks{
     QString bom;//!< кодировка файла (fffe,feff)
-    QList<Block> *blocksList;
     QList<BlockByte> *blocksListByte;
+
     /*!
      * \brief Функция заполняет список блоков,
      * которые найдёт в строке начиная с position
-     * \param [in] hexTextFile строка hex символов
+     * \param [in] byteArrayFile массив байтов файла
      * \param [in] position позиция с какой нужно искать блоки
      */
-    void findBlocksFFFE(QString hexTextFile,int position);
     void findBlocksByteFFFE(QByteArray byteArrayFile,int position);
 public:
     /*!
@@ -54,7 +47,7 @@ public:
      * \brief getBlockList
      * \return список блоков
      */
-    QList<Block> *getBlockList();
+
     QList<BlockByte> *getBlockListBytes();
     QString getBom();
     ~FindBlocks();

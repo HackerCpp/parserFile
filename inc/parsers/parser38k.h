@@ -20,7 +20,7 @@ struct Servise38k{
 
 struct Data38k{
     int status;
-    QString data;
+    QByteArray dataByte;
 };
 
 struct PacketDeviceData38k{
@@ -88,10 +88,10 @@ class Parser38k : public QThread{
     QList<NumberType> *listOfFoundModules;
     QList<TlmPack> *tlmDeviceData;
     QString data;
+    QByteArray dataBytes;
 
-    void findServiseFFFE(TlmPack pack);
     void findServiseFFFEBytes(TlmPack pack);
-    void findModulesData(PacketDeviceData38k pack);
+    void findModulesDataBytes(PacketDeviceData38k pack);
 public:
     Parser38k(FileReader *file);
     void run();
