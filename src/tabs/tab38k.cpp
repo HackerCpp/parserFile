@@ -5,7 +5,7 @@ Tab38k::Tab38k(QList<PacketModulesData38k> *modulesData,QWidget *parent) : QWidg
     this->model = new Model38k(modulesData);
     this->prModel = new QSortFilterProxyModel();
     table = new QTableView();
-    textEdit = new QPlainTextEdit();
+    textEdit = new QTextEdit();
     horBoxLayout = new QHBoxLayout();
     this->tableAndFilterLayout = new QVBoxLayout();
     textEdit->setFont(QFont("arial",16));
@@ -39,13 +39,11 @@ Tab38k::Tab38k(QList<PacketModulesData38k> *modulesData,QWidget *parent) : QWidg
     QObject::connect(this->table, SIGNAL(activated(QModelIndex const&)),this, SLOT(showText(QModelIndex const&)));
     QObject::connect(this->filterLineEdit, SIGNAL(returnPressed()),this, SLOT(setFilter()));
     QObject::connect(this->sortingCheckBox, SIGNAL(stateChanged(int)),this, SLOT(setSorting(int)));
-
-
 }
 
 void Tab38k::showText(QModelIndex const& index){
     QString str = this->table->model()->data(table->model()->index(index.row(),11,index.parent())).toString();
-    this->textEdit->setPlainText(str);
+    this->textEdit->setText(str);
 }
 
 void Tab38k::setFilter(){

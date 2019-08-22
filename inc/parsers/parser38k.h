@@ -46,6 +46,7 @@ struct HeaderModules38k{
 struct PacketModulesData38k{
     int status;
     HeaderModules38k header;
+    QByteArray dataBytes;
     QString data;
 };
 struct NumberType{
@@ -83,11 +84,8 @@ class Parser38k : public QThread{
     unsigned int probabilityOfError;
     Crc16 crc;
     ReedSolomonCoding cod;
-    QString hexString;
     QByteArray byteArrayData;
-    QList<NumberType> *listOfFoundModules;
     QList<TlmPack> *tlmDeviceData;
-    QString data;
     QByteArray dataBytes;
 
     void findServiseFFFEBytes(TlmPack pack);

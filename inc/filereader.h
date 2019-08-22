@@ -22,11 +22,6 @@ public:
      */
     FileReader(QString path);
     /*!
-     * \brief Считывает файл в строку 16 ричных символов
-     * \return hex строка файла
-     */
-    QString getHexString();
-    /*!
      * \brief Считывает файл в массив байтов
      * \return массив байтов файла
      */

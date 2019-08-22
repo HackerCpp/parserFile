@@ -61,6 +61,7 @@ void MainWindow::openFile(){
     }
 
     this->tabWid->addTab(w,filePath);
+    this->tabWid->setCurrentWidget(w);
     QPropertyAnimation *animation = new QPropertyAnimation(w, "geometry");
      animation->setDuration(1000);
      animation->setStartValue(QRect(0, 0, 0, 0));

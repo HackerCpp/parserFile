@@ -29,7 +29,7 @@ class Tab38k : public QWidget
     QSpinBox * filterColumnSB;
     QHBoxLayout *filterLayout;
     QTableView *table;
-    QPlainTextEdit *textEdit;
+    QTextEdit *textEdit;
     QSplitter *sp;
     Model38k *model;
     QSortFilterProxyModel *prModel;
