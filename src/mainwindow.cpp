@@ -26,7 +26,6 @@ MainWindow::MainWindow(QWidget *parent){
     this->setLayout(verticalLayout);
     applyStyle();
     this->tabWid->setTabsClosable(true);
-    //this->setMinimumSize(500,500);
     connect(this->tabWid, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
     connect(this->menu, SIGNAL(applyStyle()), this, SLOT(applyStyle()));
     QPropertyAnimation *animation = new QPropertyAnimation(this, "geometry");
@@ -34,6 +33,23 @@ MainWindow::MainWindow(QWidget *parent){
      animation->setStartValue(QRect(0, 0, 0, 0));
      animation->setEndValue(QRect(100, 100, 800, 800));
      animation->start();
+    menu->installEventFilter(this);
+}
+bool MainWindow::eventFilter(QObject *o, QEvent *e){
+    if(o == this->menu){
+            if(e->type() == QEvent::Enter) {
+                            this->menu->showRight();
+                                return true;
+                            }
+            if(e->type() == QEvent::Leave) {
+                            this->menu->hideLeft();
+                                return true;
+                            }
+
+            }
+
+    return false;
+
 }
 void MainWindow::applyStyle(){
     QFile File("debug\\css\\style.css");

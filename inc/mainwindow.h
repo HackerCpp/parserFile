@@ -17,6 +17,7 @@ class MainWindow : public QWidget{
     QTabWidget *tabWid;
 public:
     MainWindow(QWidget *parent = nullptr);
+    bool eventFilter(QObject *o, QEvent *e);
     ~MainWindow();
 public slots:
     void openFile();

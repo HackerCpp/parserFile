@@ -162,9 +162,12 @@ void paramFlashAG(QString & data,QByteArray &ba){
             .arg(*reinterpret_cast<ushort*>(ba.data()+21));
 }
 void paramFlashP(QString & data,QByteArray &ba){
-
+    data += "<tr><td>total_length </td><td> %1</td></tr>\
+             <tr><td>CRC16 </td><td> %2</td></tr>";
+            data = data.arg(*reinterpret_cast<ushort*>(ba.data()))
+            .arg(*reinterpret_cast<ushort*>(ba.data()+2));
 }
-void paramFlashP02(QString & data,QByteArray &ba){
+void paramFlashP0204(QString & data,QByteArray &ba){
     data += "<tr><td>total_length </td><td> %1</td></tr>\
 <tr><td>channel_1_offset </td><td> %2</td></tr>\
 <tr><td>channel_2_offset </td><td> %3</td></tr>\
@@ -176,118 +179,184 @@ void paramFlashP02(QString & data,QByteArray &ba){
             .arg(*reinterpret_cast<uchar*>(ba.data()+6))
             .arg(*reinterpret_cast<ushort*>(ba.data()+7));
 }
-
-void channelGKT(QString * data){
-    bool ok;
-    QString channel = "\n\ttemperature_internal : %1\n\t\
-locator_amp : %2\n\t\
-locator_amp_interval_max : %3\n\t\
-locator_amp_interval_min : %4\n\t\
-gk_time : %5\n\t\
-gk_impulses : %6\n\t\
-gk_uhv : %7\n\t\
-hygrometer : %8\n\t\
-power_supply : %9\n\t\
-emds_supply : %10\n\t\
-temperature_external : %11\n\t\
-sti_1 : %12\n\t\
-sti_2 : %13\n\t\
-p_corr : %14\n\t\
-p_bw : %15\n\t\
-acceleration_x : %16\n\t\
-acceleration_y : %17\n\t\
-acceleration_z : %18\n\t\
-locator_amp : %19\n\t\
-resistance : %20\n\t\
-sti_pwm : %21\n\t\
-pressure : %22\n\t\
-temperature : %23\n\t\
-gk_dac : %24\n\t";
-            channel = channel.arg(((*data).mid(2,2) + (*data).mid(0,2)).toUInt(&ok,16))
-            .arg(((*data).mid(6,2) + (*data).mid(4,2)).toUInt(&ok,16))
-            .arg(((*data).mid(10,2) + (*data).mid(8,2)).toUInt(&ok,16))
-            .arg(((*data).mid(14,2) + (*data).mid(12,2)).toUInt(&ok,16))
-            .arg(((*data).mid(18,2) + (*data).mid(16,2)).toUInt(&ok,16))
-            .arg(((*data).mid(22,2) + (*data).mid(20,2)).toUInt(&ok,16))
-            .arg(((*data).mid(26,2) + (*data).mid(24,2)).toUInt(&ok,16))
-            .arg(((*data).mid(30,2) + (*data).mid(28,2)).toUInt(&ok,16))
-            .arg(((*data).mid(34,2) + (*data).mid(32,2)).toUInt(&ok,16))
-            .arg(((*data).mid(38,2) + (*data).mid(36,2)).toUInt(&ok,16))
-            .arg(((*data).mid(44,2) + (*data).mid(42,2)+ (*data).mid(40,2)).toUInt(&ok,16))
-            .arg(((*data).mid(50,2) + (*data).mid(48,2)+ (*data).mid(46,2)).toUInt(&ok,16))
-            .arg(((*data).mid(56,2) + (*data).mid(54,2)+ (*data).mid(52,2)).toUInt(&ok,16))
-            .arg(((*data).mid(62,2) + (*data).mid(60,2)+ (*data).mid(58,2)).toUInt(&ok,16))
-            .arg(((*data).mid(68,2) + (*data).mid(66,2)+ (*data).mid(64,2)).toUInt(&ok,16))
-            .arg(((*data).mid(74,2) + (*data).mid(72,2)+ (*data).mid(70,2)).toUInt(&ok,16))
-            .arg(((*data).mid(80,2) + (*data).mid(78,2)+ (*data).mid(76,2)).toUInt(&ok,16))
-            .arg(((*data).mid(86,2) + (*data).mid(84,2)+ (*data).mid(82,2)).toUInt(&ok,16))
-            .arg(((*data).mid(92,2) + (*data).mid(90,2)+ (*data).mid(88,2)).toUInt(&ok,16))
-            .arg(((*data).mid(98,2) + (*data).mid(96,2)+ (*data).mid(94,2)).toUInt(&ok,16))
-            .arg(((*data).mid(102,2) + (*data).mid(100,2)).toUInt(&ok,16))
-            .arg(((*data).mid(110,2) + (*data).mid(108,2)+ (*data).mid(106,2)+ (*data).mid(104,2)).toUInt(&ok,16))
-            .arg(((*data).mid(118,2) + (*data).mid(116,2)+ (*data).mid(114,2)+ (*data).mid(112,2)).toUInt(&ok,16))
-            .arg(((*data).mid(122,2) + (*data).mid(120,2)).toUInt(&ok,16));
-    *data = channel;
+void paramFlashGVK(QString & data,QByteArray &ba){
+    data += "<tr><td>total_length </td><td> %1</td></tr>\
+<tr><td>telemetry_speed </td><td> %2</td></tr>\
+<tr><td>telemetry_resolution </td><td> %3</td></tr>\
+<tr><td>gk_dac_set_value </td><td> %4</td></tr>\
+<tr><td>gk_dac_min_value : %5</td></tr>\
+<tr><td>gk_dac_max_value </td><td> %6</td></tr>\
+<tr><td>extern_adc_temperature_config </td><td> %7</td></tr>\
+<tr><td>extern_adc_temperature_2_config </td><td> %8</td></tr>\
+<tr><td>extern_adc_pcorr_config </td><td> %9</td></tr>\
+<tr><td>extern_adc_pbw_config </td><td> %10</td></tr>\
+<tr><td>extern_adc_locator_config </td><td> %11</td></tr>\
+<tr><td>extern_adc_accel_config </td><td> %12</td></tr>\
+<tr><td>extern_adc_temperature_4_config </td><td> %13</td></tr>\
+<tr><td>reserve </td><td> %14</td></tr>\
+<tr><td>temperature_volatile </td><td> %15</td></tr>\
+<tr><td>temperature_maximum </td><td> %16</td></tr>\
+<tr><td>gk_dac_temperature_volatile </td><td> %17</td></tr>\
+<tr><td>gk_dac_temperature_maximum </td><td> %18</td></tr>\
+<tr><td>reserve </td><td> %19</td></tr>\
+<tr><td>reserve </td><td> %20</td></tr>\
+<tr><td>extern_adc_locator_offset </td><td> %21</td></tr>\
+<tr><td>crc16 </td><td> %22</td></tr>";
+            data = data.arg(*reinterpret_cast<ushort*>(ba.data()))
+            .arg(*reinterpret_cast<uchar*>(ba.data()+2)).arg(*reinterpret_cast<uchar*>(ba.data()+3))
+            .arg(*reinterpret_cast<ushort*>(ba.data()+4))
+            .arg(*reinterpret_cast<short*>(ba.data()+6))
+            .arg(*reinterpret_cast<short*>(ba.data()+8))
+            .arg(*reinterpret_cast<ushort*>(ba.data()+10))
+            .arg(*reinterpret_cast<ushort*>(ba.data()+12))
+            .arg(*reinterpret_cast<ushort*>(ba.data()+14))
+            .arg(*reinterpret_cast<ushort*>(ba.data()+16))
+            .arg(*reinterpret_cast<ushort*>(ba.data()+18))
+            .arg(*reinterpret_cast<ushort*>(ba.data()+20))
+            .arg(*reinterpret_cast<ushort*>(ba.data()+22))
+            .arg(*reinterpret_cast<uchar*>(ba.data()+24))
+            .arg(*reinterpret_cast<float*>(ba.data()+25))
+            .arg(*reinterpret_cast<float*>(ba.data()+29))
+            .arg(*reinterpret_cast<ushort*>(ba.data()+33))
+            .arg(*reinterpret_cast<ushort*>(ba.data()+35))
+            .arg(*reinterpret_cast<ushort*>(ba.data()+37))
+            .arg(*reinterpret_cast<uint*>(ba.data()+39))
+            .arg(*reinterpret_cast<uint*>(ba.data()+43))
+            .arg(*reinterpret_cast<ushort*>(ba.data()+47));
+}
+void channelGKT(PacketModulesData38k * moduleData){
+    QByteArray &data = moduleData->dataBytes;
+    moduleData->dataStruct = new DataGKT();
+    DataGKT *dS = reinterpret_cast<DataGKT*>(moduleData->dataStruct);
+    dS->type = 0;
+    dS->temperature_internal = *reinterpret_cast<ushort*>(data.data());
+    dS->locator_amp16 = *reinterpret_cast<short*>(data.data()+2);
+    dS->locator_amp_interval_max = *reinterpret_cast<short*>(data.data()+4);
+    dS->locator_amp_interval_min = *reinterpret_cast<short*>(data.data()+6);
+    dS->gk_time = *reinterpret_cast<ushort*>(data.data()+8);
+    dS->gk_impulses = *reinterpret_cast<ushort*>(data.data()+10);
+    dS->gk_uhv = *reinterpret_cast<ushort*>(data.data()+12);
+    dS->hygrometer = *reinterpret_cast<ushort*>(data.data()+14);
+    dS->power_supply = *reinterpret_cast<ushort*>(data.data()+16);
+    dS->emds_supply = *reinterpret_cast<ushort*>(data.data()+18);
+    dS->temperature_external = *reinterpret_cast<uint*>(data.mid(20,3).data());
+    dS->sti_1 = *reinterpret_cast<uint*>(data.mid(23,3).data());
+    dS->sti_2 = *reinterpret_cast<uint*>(data.mid(26,3).data());
+    dS->p_corr = *reinterpret_cast<uint*>(data.mid(29,3).data());
+    dS->p_bw = *reinterpret_cast<uint*>(data.mid(32,3).data());
+    dS->acceleration_x = *reinterpret_cast<uint*>(data.mid(35,3).data());
+    dS->acceleration_y = *reinterpret_cast<uint*>(data.mid(38,3).data());
+    dS->acceleration_z = *reinterpret_cast<uint*>(data.mid(41,3).data());
+    dS->locator_amp24 = *reinterpret_cast<uint*>(data.mid(44,3).data());
+    dS->resistance = *reinterpret_cast<uint*>(data.mid(47,3).data());
+    dS->sti_pwm = *reinterpret_cast<ushort*>(data.data()+50);
+    dS->pressure = *reinterpret_cast<uint*>(data.data()+52);
+    dS->temperature = *reinterpret_cast<uint*>(data.data()+56);
+    dS->gk_dac = *reinterpret_cast<ushort*>(data.data()+60);
+    moduleData->data = "<table border='1'><tr><td>temperature_internal </td><td> %1</td></tr>\
+<tr><td>locator_amp </td><td> %2</td></tr>\
+<tr><td>locator_amp_interval_max </td><td> %3</td></tr>\
+<tr><td>locator_amp_interval_min </td><td> %4</td></tr>\
+<tr><td>gk_time </td><td> %5</td></tr>\
+<tr><td>gk_impulses </td><td> %6</td></tr>\
+<tr><td>gk_uhv </td><td> %7</td></tr>\
+<tr><td>hygrometer </td><td> %8</td></tr>\
+<tr><td>power_supply </td><td> %9</td></tr>\
+<tr><td>emds_supply </td><td> %10</td></tr>\
+<tr><td>temperature_external </td><td> %11</td></tr>\
+<tr><td>sti_1 </td><td> %12</td></tr>\
+<tr><td>sti_2 </td><td> %13</td></tr>\
+<tr><td>p_corr </td><td> %14</td></tr>\
+<tr><td>p_bw </td><td> %15</td></tr>\
+<tr><td>acceleration_x </td><td> %16</td></tr>\
+<tr><td>acceleration_y </td><td> %17</td></tr>\
+<tr><td>acceleration_z </td><td> %18</td></tr>\
+<tr><td>locator_amp </td><td> %19</td></tr>\
+<tr><td>resistance </td><td> %20</td></tr>\
+<tr><td>sti_pwm </td><td> %21</td></tr>\
+<tr><td>pressure </td><td> %22</td></tr>\
+<tr><td>temperature </td><td> %23</td></tr>\
+<tr><td>gk_dac </td><td> %24</td></tr></table>";
+    moduleData->data = moduleData->data.arg(dS->temperature_internal)
+            .arg(dS->locator_amp16).arg(dS->locator_amp_interval_max)
+            .arg(dS->locator_amp_interval_min).arg(dS->gk_time)
+            .arg(dS->gk_impulses).arg(dS->gk_uhv).arg(dS->hygrometer)
+            .arg(dS->power_supply).arg(dS->emds_supply).arg(dS->temperature_external)
+            .arg(dS->sti_1).arg(dS->sti_2).arg(dS->p_corr).arg(dS->p_bw).arg(dS->acceleration_x)
+            .arg(dS->acceleration_y).arg(dS->acceleration_z).arg(dS->locator_amp24).arg(dS->resistance)
+            .arg(dS->sti_pwm).arg(dS->pressure).arg(dS->temperature).arg(dS->gk_dac);
 }
 
-void Parser38kModules::channelSHM(QString * data,unsigned char currentPartNo){
-    bool ok;
-    int size = (data->size()/2);
+void Parser38kModules::channelSHM(PacketModulesData38k * moduleData){
     int pos = 0;
-    QString channel;
-    if(!currentPartNo){
-        channel = "\n\tperiph_status : %1\n\t\
-work_mode_MSB : %2\n\t\
-work_mode_LSB : %3\n\t\
-channels_map : %4\n\t\
-words_per_channel : %5\n\t\
-channel_frequency : %6\n\t\
-pga_gain : %7\n\t\
-temperature_internal : %8\n\t\
-accel_z_mean : %9\n\t\
-accel_z_variance : %10\n\t\
-accel_z_flags : %11\n\t\
-Data :\n\t";
+    int size = moduleData->dataBytes.size();
+    if(!moduleData->header.currentPartNo){
+        QByteArray &data = moduleData->dataBytes;
+        moduleData->dataStruct = new DataSHM0();
+        DataSHM0 *dS = reinterpret_cast<DataSHM0*>(moduleData->dataStruct);
+        dS->type = 1;
+        dS->periph_status = *reinterpret_cast<ushort*>(data.data());
+        dS->work_mode = *reinterpret_cast<ushort*>(data.data()+2);
+        dS->channels_map = *reinterpret_cast<uchar*>(data.data()+4);
+        dS->words_per_channel = *reinterpret_cast<ushort*>(data.data()+5);
+        dS->channel_frequency = *reinterpret_cast<uint*>(data.data()+7);
+        dS->pga_gain = *reinterpret_cast<uchar*>(data.data()+11);
+        dS->temperature_internal = *reinterpret_cast<ushort*>(data.data()+12);
+        dS->accel_z_mean = *reinterpret_cast<ushort*>(data.data()+14);
+        dS->accel_z_variance = *reinterpret_cast<ushort*>(data.data()+16);
+        dS->accel_z_flags = *reinterpret_cast<ushort*>(data.data()+18);
+        isWave = dS->work_mode&0x00ff;
+        wordPerChannel = dS->words_per_channel;
+        moduleData->data = "<table border='1'><tr><td>periph_status </td><td> %1</td></tr>\
+<tr><td>work_mode_MSB </td><td> %2</td></tr>\
+<tr><td>work_mode_LSB </td><td> %3</td></tr>\
+<tr><td>channels_map </td><td> %4</td></tr>\
+<tr><td>words_per_channel </td><td> %5</td></tr>\
+<tr><td>channel_frequency </td><td> %6</td></tr>\
+<tr><td>pga_gain </td><td> %7</td></tr>\
+<tr><td>temperature_internal </td><td> %8</td></tr>\
+<tr><td>accel_z_mean </td><td> %9</td></tr>\
+<tr><td>accel_z_variance </td><td> %10</td></tr>\
+<tr><td>accel_z_flags </td><td> %11</td></tr>\
+<tr><td>Data </td></tr>";
         currentChannel = 0;
         currentWordPerChannel = 0;
-        wordPerChannel = ((*data).mid(12,2) + (*data).mid(10,2)).toUInt(&ok,16);
-        isWave = ("0"+(*data).mid(7,1)).toUInt(&ok,16);
-        channel = channel.arg(((*data).mid(2,2) + (*data).mid(0,2)).toUInt(&ok,16))
-            .arg(("0"+(*data).mid(6,1)).toUInt(&ok,16)).arg(isWave)
-            .arg(((*data).mid(8,2)).toUInt(&ok,16))
-            .arg(wordPerChannel)
-            .arg(((*data).mid(20,2) + (*data).mid(18,2)+ (*data).mid(16,2)+ (*data).mid(14,2)).toUInt(&ok,16))
-            .arg((*data).mid(22,2).toUInt(&ok,16))
-            .arg(((*data).mid(26,2) + (*data).mid(24,2)).toUInt(&ok,16))
-            .arg(((*data).mid(30,2) + (*data).mid(28,2)).toUInt(&ok,16))
-            .arg(((*data).mid(34,2) + (*data).mid(32,2)).toUInt(&ok,16))
-            .arg(((*data).mid(38,2) + (*data).mid(36,2)).toUInt(&ok,16));
-        size  = (data->size()/2)-20;
-        pos = 42;
+        moduleData->data = moduleData->data.arg(dS->periph_status)
+                .arg(dS->work_mode>>8).arg(dS->work_mode&0x00ff).arg(dS->channels_map).arg(dS->words_per_channel)
+                .arg(dS->channel_frequency).arg(dS->pga_gain).arg(dS->temperature_internal)
+                .arg(dS->accel_z_mean).arg(dS->accel_z_variance).arg(dS->accel_z_flags);
+        if(!isWave){
+            dS->Wave_1int = nullptr;
+            dS->Wave_1float = new QVector<float>();
+            for(int i = 20; i < size-20;i+=4){
+                if(!currentWordPerChannel){
+                   moduleData->data += "<tr><td>Channel " + QString::number(currentChannel++) + "</td></tr>";
+                   currentWordPerChannel = wordPerChannel;
+                }
+                dS->Wave_1float->push_back(*reinterpret_cast<float*>(data.mid(i,4).data()));
+                currentWordPerChannel--;
+            }
+            for(auto value = dS->Wave_1float->begin();value < dS->Wave_1float->end();value++)
+                moduleData->data += QString::number(*value) + "\n<br>";
+        }
+        else{
+            dS->Wave_1int = new QVector<ushort>();
+            dS->Wave_1float = nullptr;
+            for(int i = 20; i < size;i+=2){
+                if(!currentWordPerChannel){
+                    moduleData->data += "<tr><td>Channel " + QString::number(currentChannel++) + "</td></tr>";
+                    currentWordPerChannel = wordPerChannel;
+                }
+                dS->Wave_1int->push_back(*reinterpret_cast<ushort*>(data.data()+i));
+                currentWordPerChannel--;
+            }
+            for(auto value = dS->Wave_1int->begin();value < dS->Wave_1int->end();value++)
+                moduleData->data += QString::number(*value) + "  ";
+        }
+
     }
 
-    if(!isWave){
-        for(int i = 0; i < size;i+=4){
-            if(!currentWordPerChannel){
-               channel += "\nChannel" + QString::number(currentChannel++) + "\n\n\t";
-               currentWordPerChannel = wordPerChannel;
-            }
-            QByteArray string =  QByteArray::fromHex( ((*data).mid((i*2)+pos+6,2) + (*data).mid((i*2)+pos+4,2) + (*data).mid((i*2)+pos+2,2) + (*data).mid((i*2)+pos,2)).toLocal8Bit());
-            channel += " \n\t" + QString::number(*reinterpret_cast<double*>( string.data()));
-            currentWordPerChannel--;
-        }
-    }
-    else{
-        for(int i = 0; i < size;i+=2){
-            if(!currentWordPerChannel){
-               channel += "\nChannel" + QString::number(currentChannel) + "\n\n\t";
-               currentWordPerChannel = wordPerChannel;
-            }
-            channel += " \n\t" + QString::number(((*data).mid((i*2)+pos+6,2) + (*data).mid((i*2)+pos+4,2)).toUInt(&ok,16));
-            currentWordPerChannel--;
-        }
-    }
-    *data = channel;
+
 }
 
 void channelAG(QString * data){
@@ -481,7 +550,6 @@ void Parser38kModules::moduleDataParsing(PacketModulesData38k * moduleData){
         hardFlash+= "<tr><td>CRC16</td><td>" + moduleData->dataBytes.mid(85+(numberOfChannels*8),2).toHex() + "</td></tr>";
         length = *reinterpret_cast<ushort*>(moduleData->dataBytes.data()+87);
         QString paramFlash = "<tr><td colspan = '2' align='center'> ParamFlash: </td></tr>";
-        //QString paramFlashString = moduleData->dataBytes.mid(87 +(numberOfChannels * 8),length).toHex();
         QByteArray paramFlashArray = moduleData->dataBytes.mid(87 +(numberOfChannels * 8),length);
         if(deviceType == 0)
            paramFlashGKT(paramFlash,paramFlashArray);
@@ -489,8 +557,12 @@ void Parser38kModules::moduleDataParsing(PacketModulesData38k * moduleData){
            paramFlashSHM(paramFlash,paramFlashArray);
         else if(deviceType == 2)
            paramFlashAG(paramFlash,paramFlashArray);
-        else if(deviceType == 7)
-           paramFlashP02(paramFlash,paramFlashArray);
+        else if(deviceType == 3)
+           paramFlashP(paramFlash,paramFlashArray);
+        else if(deviceType == 7 || deviceType == 6)
+           paramFlashP0204(paramFlash,paramFlashArray);
+        else if(deviceType == 7 || deviceType == 6)
+           paramFlashGVK(paramFlash,paramFlashArray);
 
         QString calibFlash = "<tr><td colspan = '2' align='center'>CalibFlash:</td></tr>" + moduleData->dataBytes.mid(87 +(numberOfChannels * 8) + (length)).toHex();
         *data = hardFlash + paramFlash + calibFlash + "</table>";
@@ -504,9 +576,9 @@ void Parser38kModules::moduleDataParsing(PacketModulesData38k * moduleData){
                     break;
                 }
         if(type == 0)
-           ;//channelGKT(data);
+           channelGKT(moduleData);
         else if(type == 1)
-           channelSHM(data,moduleData->header.currentPartNo);
+           channelSHM(moduleData);
         else if(type == 2)
            channelAG(data);
         else if(type == 7)

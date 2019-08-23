@@ -27,9 +27,15 @@ Menu::Menu(QWidget *parent)
     this->setLayout(this->layoutForMenu);
     this->setMaximumWidth(100);
     this->setMaximumHeight(40 * mnuBarArray->size());
+
 }
 
-
+void Menu::hideLeft(){
+    this->setMaximumWidth(30);
+}
+void Menu::showRight(){
+    this->setMaximumWidth(100);
+}
 Menu::~Menu(){
     delete this->mnuArray;
     mnuArray = nullptr;

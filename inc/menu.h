@@ -22,6 +22,8 @@ public:
 signals:
     void applyStyle();
 public slots:
+    void hideLeft();
+    void showRight();
 
 
 };
