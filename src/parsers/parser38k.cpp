@@ -288,7 +288,6 @@ void channelGKT(PacketModulesData38k * moduleData){
 }
 
 void Parser38kModules::channelSHM(PacketModulesData38k * moduleData){
-    int pos = 0;
     int size = moduleData->dataBytes.size();
     if(!moduleData->header.currentPartNo){
         QByteArray &data = moduleData->dataBytes;
@@ -328,32 +327,64 @@ void Parser38kModules::channelSHM(PacketModulesData38k * moduleData){
         if(!isWave){
             dS->Wave_1int = nullptr;
             dS->Wave_1float = new QVector<float>();
-            for(int i = 20; i < size-20;i+=4){
+            for(int i = 20; i < size;i+=4){
                 if(!currentWordPerChannel){
-                   moduleData->data += "<tr><td>Channel " + QString::number(currentChannel++) + "</td></tr>";
+                   moduleData->data += "<tr><td colspan = '2' align='center'>Channel " + QString::number(currentChannel++) + "</td></tr>";
                    currentWordPerChannel = wordPerChannel;
                 }
                 dS->Wave_1float->push_back(*reinterpret_cast<float*>(data.mid(i,4).data()));
+                moduleData->data += QString::number(*dS->Wave_1float->end()) + "  ";
                 currentWordPerChannel--;
             }
-            for(auto value = dS->Wave_1float->begin();value < dS->Wave_1float->end();value++)
-                moduleData->data += QString::number(*value) + "\n<br>";
         }
         else{
             dS->Wave_1int = new QVector<ushort>();
             dS->Wave_1float = nullptr;
             for(int i = 20; i < size;i+=2){
                 if(!currentWordPerChannel){
-                    moduleData->data += "<tr><td>Channel " + QString::number(currentChannel++) + "</td></tr>";
+                    moduleData->data += "<tr><td colspan = '2' align='center'>Channel " + QString::number(currentChannel++) + "</td></tr>";
                     currentWordPerChannel = wordPerChannel;
                 }
                 dS->Wave_1int->push_back(*reinterpret_cast<ushort*>(data.data()+i));
+                moduleData->data += QString::number(*dS->Wave_1int->end()) + "  ";
                 currentWordPerChannel--;
             }
-            for(auto value = dS->Wave_1int->begin();value < dS->Wave_1int->end();value++)
-                moduleData->data += QString::number(*value) + "  ";
         }
 
+    }
+    else{
+        moduleData->data += "<table border='1'><tr><td>";
+        QByteArray &data = moduleData->dataBytes;
+        moduleData->dataStruct = new DataSHM1();
+        DataSHM1 *dS = reinterpret_cast<DataSHM1*>(moduleData->dataStruct);
+        dS->type = 100;
+        if(!isWave){
+            dS->Wave_1int = nullptr;
+            dS->Wave_1float = new QVector<float>();
+            for(int i = 20; i < size;i+=4){
+                if(!currentWordPerChannel){
+                   moduleData->data += "</td></tr><tr><td  align='center'>Channel " + QString::number(currentChannel++)+ "</td></tr>";
+                   currentWordPerChannel = wordPerChannel;
+                }
+                dS->Wave_1float->push_back(*reinterpret_cast<float*>(data.mid(i,4).data()));
+                moduleData->data += QString::number(*dS->Wave_1float->end()) + " ";
+                currentWordPerChannel--;
+            }
+        }
+        else{
+            dS->Wave_1int = new QVector<ushort>();
+            dS->Wave_1float = nullptr;
+            for(int i = 20; i < size;i+=2){
+                if(!currentWordPerChannel){
+                    moduleData->data += "<tr><td align='center'>Channel " + QString::number(currentChannel++) + "</td></tr>";
+                    currentWordPerChannel = wordPerChannel;
+                }
+                dS->Wave_1int->push_back(*reinterpret_cast<ushort*>(data.data()+i));
+                moduleData->data += QString::number(*dS->Wave_1int->end()) + "  ";
+                currentWordPerChannel--;
+            }
+        }
+        moduleData->data += "</table>";
     }
 
 
@@ -486,7 +517,7 @@ gk_dac : %19\n\t";
     *data = channel;
 }
 void Parser38kModules::moduleDataParsing(PacketModulesData38k * moduleData){
-    bool ok;
+     moduleData->dataStruct = nullptr;
     QString * data = &moduleData->data;
     if(moduleData->header.data_state & 0x02){
         QString hardFlash = "<table border='1' >\
@@ -551,6 +582,7 @@ void Parser38kModules::moduleDataParsing(PacketModulesData38k * moduleData){
         length = *reinterpret_cast<ushort*>(moduleData->dataBytes.data()+87);
         QString paramFlash = "<tr><td colspan = '2' align='center'> ParamFlash: </td></tr>";
         QByteArray paramFlashArray = moduleData->dataBytes.mid(87 +(numberOfChannels * 8),length);
+
         if(deviceType == 0)
            paramFlashGKT(paramFlash,paramFlashArray);
         else if(deviceType == 1)
@@ -611,7 +643,6 @@ Parser38kModules::~Parser38kModules(){
 
 
 void Parser38k::findModulesDataBytes(PacketDeviceData38k pack){
-    bool ok;
     QByteArray moduleDataByteArray;
     int position = 0;
         dataBytes += pack.data.dataByte.mid(0);
@@ -654,7 +685,6 @@ void Parser38k::findModulesDataBytes(PacketDeviceData38k pack){
             dataBytes.resize(0);
 }
 void Parser38k::findServiseFFFEBytes(TlmPack pack){
-    bool ok;
     unsigned char array[255];
         QByteArray data = pack.dataPacketBytes.data.mid(2);
         QByteArray bl255;

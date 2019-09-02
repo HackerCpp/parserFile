@@ -95,6 +95,30 @@ Model38k::~Model38k(){
     if(parserModules)
         parserModules->stop();
     parserModules = nullptr;
+    for(auto value = modulesData->begin();value < modulesData->end();value++)
+        if(value->dataStruct){
+            if(value->dataStruct->type == 1){
+                DataSHM0 *s = reinterpret_cast<DataSHM0*>(value->dataStruct);
+                if(s->Wave_1int)
+                    delete s->Wave_1int;
+                if(s->Wave_1float)
+                    delete s->Wave_1float;
+                delete s;
+            }
+            else if(value->dataStruct->type == 100){
+                DataSHM1 *s = reinterpret_cast<DataSHM1*>(value->dataStruct);
+                if(s->Wave_1int)
+                    delete s->Wave_1int;
+                if(s->Wave_1float)
+                    delete s->Wave_1float;
+                delete s;
+            }
+            else if(!value->dataStruct->type)
+                delete reinterpret_cast<DataGKT*>(value->dataStruct);
+            else
+                 delete value->dataStruct;
+        }
+
     delete this->modulesData;
     this->modulesData = nullptr;
 }
