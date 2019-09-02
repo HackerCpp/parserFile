@@ -7,6 +7,8 @@
 #include <QThread>
 #include "inc/filereader.h"
 
+
+enum {GKT,SHM,AG,MP,AMDS,GKTSHM,P04,P02,GVK,NNKt,GGP};
 struct Servise38k{
     unsigned int systemTime;
     unsigned short transmissionCounter;
