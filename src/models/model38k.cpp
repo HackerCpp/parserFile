@@ -1,4 +1,5 @@
 #include "inc/models/model38k.h"
+#include "inc/fileCreation/csv.h"
 
 
 Model38k::Model38k(QList<PacketModulesData38k> *modulesData){
@@ -91,6 +92,9 @@ Qt::ItemFlags Model38k::flags(const QModelIndex &index) const{
         parserModules->stop();
      parserModules = nullptr;
  }
+ void Model38k::saveFile(){
+     CSV *saveFile = new CSV(this->modulesData,2);
+ }
 Model38k::~Model38k(){
     if(parserModules)
         parserModules->stop();
@@ -115,6 +119,8 @@ Model38k::~Model38k(){
             }
             else if(!value->dataStruct->type)
                 delete reinterpret_cast<DataGKT*>(value->dataStruct);
+            else if(value->dataStruct->type == AG)
+                delete reinterpret_cast<DataAG*>(value->dataStruct);
             else
                  delete value->dataStruct;
         }

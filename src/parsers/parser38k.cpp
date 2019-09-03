@@ -228,17 +228,8 @@ void channelGKT(PacketModulesData38k * moduleData){
     QByteArray &data = moduleData->dataBytes;
     moduleData->dataStruct = new DataGKT();
     DataGKT *dS = reinterpret_cast<DataGKT*>(moduleData->dataStruct);
-    dS->type = 0;
-    dS->temperature_internal = *reinterpret_cast<ushort*>(data.data());
-    dS->locator_amp16 = *reinterpret_cast<short*>(data.data()+2);
-    dS->locator_amp_interval_max = *reinterpret_cast<short*>(data.data()+4);
-    dS->locator_amp_interval_min = *reinterpret_cast<short*>(data.data()+6);
-    dS->gk_time = *reinterpret_cast<ushort*>(data.data()+8);
-    dS->gk_impulses = *reinterpret_cast<ushort*>(data.data()+10);
-    dS->gk_uhv = *reinterpret_cast<ushort*>(data.data()+12);
-    dS->hygrometer = *reinterpret_cast<ushort*>(data.data()+14);
-    dS->power_supply = *reinterpret_cast<ushort*>(data.data()+16);
-    dS->emds_supply = *reinterpret_cast<ushort*>(data.data()+18);
+    memcpy(&dS->temperature_internal,data.data(),20);
+    dS->type = GKT;
     dS->temperature_external = *reinterpret_cast<uint*>(data.mid(20,3).data());
     dS->sti_1 = *reinterpret_cast<uint*>(data.mid(23,3).data());
     dS->sti_2 = *reinterpret_cast<uint*>(data.mid(26,3).data());
@@ -249,10 +240,7 @@ void channelGKT(PacketModulesData38k * moduleData){
     dS->acceleration_z = *reinterpret_cast<uint*>(data.mid(41,3).data());
     dS->locator_amp24 = *reinterpret_cast<uint*>(data.mid(44,3).data());
     dS->resistance = *reinterpret_cast<uint*>(data.mid(47,3).data());
-    dS->sti_pwm = *reinterpret_cast<ushort*>(data.data()+50);
-    dS->pressure = *reinterpret_cast<uint*>(data.data()+52);
-    dS->temperature = *reinterpret_cast<uint*>(data.data()+56);
-    dS->gk_dac = *reinterpret_cast<ushort*>(data.data()+60);
+    memcpy(&dS->sti_pwm,data.data() + 50,12);
     moduleData->data = "<table border='1'><tr><td>temperature_internal </td><td> %1</td></tr>\
 <tr><td>locator_amp </td><td> %2</td></tr>\
 <tr><td>locator_amp_interval_max </td><td> %3</td></tr>\
@@ -290,20 +278,11 @@ void channelGKT(PacketModulesData38k * moduleData){
 void Parser38kModules::channelSHM(PacketModulesData38k * moduleData){
     int size = moduleData->dataBytes.size();
     if(!moduleData->header.currentPartNo){
-        QByteArray &data = moduleData->dataBytes;
+        QByteArray *data = &moduleData->dataBytes;
         moduleData->dataStruct = new DataSHM0();
         DataSHM0 *dS = reinterpret_cast<DataSHM0*>(moduleData->dataStruct);
-        dS->type = 1;
-        dS->periph_status = *reinterpret_cast<ushort*>(data.data());
-        dS->work_mode = *reinterpret_cast<ushort*>(data.data()+2);
-        dS->channels_map = *reinterpret_cast<uchar*>(data.data()+4);
-        dS->words_per_channel = *reinterpret_cast<ushort*>(data.data()+5);
-        dS->channel_frequency = *reinterpret_cast<uint*>(data.data()+7);
-        dS->pga_gain = *reinterpret_cast<uchar*>(data.data()+11);
-        dS->temperature_internal = *reinterpret_cast<ushort*>(data.data()+12);
-        dS->accel_z_mean = *reinterpret_cast<ushort*>(data.data()+14);
-        dS->accel_z_variance = *reinterpret_cast<ushort*>(data.data()+16);
-        dS->accel_z_flags = *reinterpret_cast<ushort*>(data.data()+18);
+        memcpy(&dS->periph_status,data->data(),20);
+        dS->type = SHM;
         isWave = dS->work_mode&0x00ff;
         wordPerChannel = dS->words_per_channel;
         moduleData->data = "<table border='1'><tr><td>periph_status </td><td> %1</td></tr>\
@@ -332,8 +311,8 @@ void Parser38kModules::channelSHM(PacketModulesData38k * moduleData){
                    moduleData->data += "<tr><td colspan = '2' align='center'>Channel " + QString::number(currentChannel++) + "</td></tr>";
                    currentWordPerChannel = wordPerChannel;
                 }
-                dS->Wave_1float->push_back(*reinterpret_cast<float*>(data.mid(i,4).data()));
-                moduleData->data += QString::number(*dS->Wave_1float->end()) + "  ";
+                dS->Wave_1float->push_back(*reinterpret_cast<float*>(data->mid(i,4).data()));
+                moduleData->data += QString::number(dS->Wave_1float->last()) + "  ";
                 currentWordPerChannel--;
             }
         }
@@ -345,8 +324,8 @@ void Parser38kModules::channelSHM(PacketModulesData38k * moduleData){
                     moduleData->data += "<tr><td colspan = '2' align='center'>Channel " + QString::number(currentChannel++) + "</td></tr>";
                     currentWordPerChannel = wordPerChannel;
                 }
-                dS->Wave_1int->push_back(*reinterpret_cast<ushort*>(data.data()+i));
-                moduleData->data += QString::number(*dS->Wave_1int->end()) + "  ";
+                dS->Wave_1int->push_back(*reinterpret_cast<ushort*>(data->data()+i));
+                moduleData->data += QString::number(dS->Wave_1int->last()) + "  ";
                 currentWordPerChannel--;
             }
         }
@@ -354,33 +333,33 @@ void Parser38kModules::channelSHM(PacketModulesData38k * moduleData){
     }
     else{
         moduleData->data += "<table border='1'><tr><td>";
-        QByteArray &data = moduleData->dataBytes;
+        QByteArray *data = &moduleData->dataBytes;
         moduleData->dataStruct = new DataSHM1();
         DataSHM1 *dS = reinterpret_cast<DataSHM1*>(moduleData->dataStruct);
         dS->type = 100;
         if(!isWave){
             dS->Wave_1int = nullptr;
             dS->Wave_1float = new QVector<float>();
-            for(int i = 20; i < size;i+=4){
+            for(int i = 0; i < size;i+=4){
                 if(!currentWordPerChannel){
                    moduleData->data += "</td></tr><tr><td  align='center'>Channel " + QString::number(currentChannel++)+ "</td></tr>";
                    currentWordPerChannel = wordPerChannel;
                 }
-                dS->Wave_1float->push_back(*reinterpret_cast<float*>(data.mid(i,4).data()));
-                moduleData->data += QString::number(*dS->Wave_1float->end()) + " ";
+                dS->Wave_1float->push_back(*reinterpret_cast<float*>(data->mid(i,4).data()));
+                moduleData->data += QString::number(dS->Wave_1float->last()) + " ";
                 currentWordPerChannel--;
             }
         }
         else{
             dS->Wave_1int = new QVector<ushort>();
             dS->Wave_1float = nullptr;
-            for(int i = 20; i < size;i+=2){
+            for(int i = 0; i < size;i+=2){
                 if(!currentWordPerChannel){
                     moduleData->data += "<tr><td align='center'>Channel " + QString::number(currentChannel++) + "</td></tr>";
                     currentWordPerChannel = wordPerChannel;
                 }
-                dS->Wave_1int->push_back(*reinterpret_cast<ushort*>(data.data()+i));
-                moduleData->data += QString::number(*dS->Wave_1int->end()) + "  ";
+                dS->Wave_1int->push_back(*reinterpret_cast<ushort*>(data->data()+i));
+                moduleData->data += QString::number(dS->Wave_1int->last()) + "  ";
                 currentWordPerChannel--;
             }
         }
@@ -390,17 +369,20 @@ void Parser38kModules::channelSHM(PacketModulesData38k * moduleData){
 
 }
 
-void channelAG(QString * data){
-    bool ok;
-    QString channel = "\n\tperiph_status : %1\n\t\
-work_mode : %2\n\t\
-temperature_internal : %3\n\t\
-discharge_voltage : %4\n\t";
-            channel = channel.arg(((*data).mid(2,2) + (*data).mid(0,2)).toUInt(&ok,16))
-            .arg(((*data).mid(6,2) + (*data).mid(4,2)).toUInt(&ok,16))
-            .arg(((*data).mid(10,2) + (*data).mid(8,2)).toUInt(&ok,16))
-            .arg(((*data).mid(14,2) + (*data).mid(12,2)).toUInt(&ok,16));
-    *data = channel;
+void channelAG(PacketModulesData38k * moduleData){
+    QByteArray &data = moduleData->dataBytes;
+    moduleData->dataStruct = new DataAG();
+    DataAG *dS = reinterpret_cast<DataAG*>(moduleData->dataStruct);
+    memcpy(&dS->periph_status,data.data(),8);
+    dS->type = AG;
+    moduleData->data = "<table border='1'><tr><td>periph_status </td><td> %1</td></tr>\
+<tr><td>work_mode </td><td> %2</td></tr>\
+<tr><td>temperature_internal </td><td> %3</td></tr>\
+<tr><td>discharge_voltage </td><td> %4</td></tr></table>";
+            moduleData->data = moduleData->data.arg(dS->periph_status)
+            .arg(dS->work_mode)
+            .arg(dS->temperature_internal)
+            .arg(dS->discharge_voltage);
 }
 void channelP(QString * data){
     bool ok;
@@ -517,7 +499,7 @@ gk_dac : %19\n\t";
     *data = channel;
 }
 void Parser38kModules::moduleDataParsing(PacketModulesData38k * moduleData){
-     moduleData->dataStruct = nullptr;
+    moduleData->dataStruct = nullptr;
     QString * data = &moduleData->data;
     if(moduleData->header.data_state & 0x02){
         QString hardFlash = "<table border='1' >\
@@ -583,17 +565,17 @@ void Parser38kModules::moduleDataParsing(PacketModulesData38k * moduleData){
         QString paramFlash = "<tr><td colspan = '2' align='center'> ParamFlash: </td></tr>";
         QByteArray paramFlashArray = moduleData->dataBytes.mid(87 +(numberOfChannels * 8),length);
 
-        if(deviceType == 0)
+        if(deviceType == GKT)
            paramFlashGKT(paramFlash,paramFlashArray);
-        else if(deviceType == 1)
+        else if(deviceType == SHM)
            paramFlashSHM(paramFlash,paramFlashArray);
-        else if(deviceType == 2)
+        else if(deviceType == AG)
            paramFlashAG(paramFlash,paramFlashArray);
-        else if(deviceType == 3)
+        else if(deviceType == MP)
            paramFlashP(paramFlash,paramFlashArray);
-        else if(deviceType == 7 || deviceType == 6)
+        else if(deviceType == P02 || deviceType == P04)
            paramFlashP0204(paramFlash,paramFlashArray);
-        else if(deviceType == 7 || deviceType == 6)
+        else if(deviceType == GVK)
            paramFlashGVK(paramFlash,paramFlashArray);
 
         QString calibFlash = "<tr><td colspan = '2' align='center'>CalibFlash:</td></tr>" + moduleData->dataBytes.mid(87 +(numberOfChannels * 8) + (length)).toHex();
@@ -607,13 +589,13 @@ void Parser38kModules::moduleDataParsing(PacketModulesData38k * moduleData){
                     type = value->type;
                     break;
                 }
-        if(type == 0)
+        if(type == GKT)
            channelGKT(moduleData);
-        else if(type == 1)
+        else if(type == SHM)
            channelSHM(moduleData);
-        else if(type == 2)
-           channelAG(data);
-        else if(type == 7)
+        else if(type == AG)
+           channelAG(moduleData);
+        else if(type == P02)
            channelP02(data);
     }
 }
@@ -661,12 +643,14 @@ void Parser38k::findModulesDataBytes(PacketDeviceData38k pack){
                 moduleData.header.totalDataSize = moduleData.header.totalSize - 14;
                 moduleData.header.totalParts = 1;
                 moduleData.header.currentPartNo = 0;
+                moduleData.dataBytes = moduleDataByteArray.mid(12,moduleData.header.totalSize - 14);
             }
             else{
                 moduleData.header.totalDataSize = *reinterpret_cast<unsigned short*>((dataBytes.data()+position+4));
                 moduleData.header.totalParts = *reinterpret_cast<unsigned char*>(dataBytes.data()+position+6);
                 moduleData.header.currentPartNo = *reinterpret_cast<unsigned char*>(dataBytes.data()+position+7);
                 posLastComSt = 4;
+                moduleData.dataBytes = moduleDataByteArray.mid(16,moduleData.header.totalSize - 14);
             }
             int pos = position + posLastComSt + 4;
             moduleData.header.lastCommandState = *reinterpret_cast<unsigned char*>(dataBytes.data()+pos);
@@ -674,7 +658,7 @@ void Parser38k::findModulesDataBytes(PacketDeviceData38k pack){
             moduleData.header.lastCommandCrc = *reinterpret_cast<unsigned char*>(dataBytes.data()+pos+2);
             moduleData.header.lastCommandCode = *reinterpret_cast<unsigned char*>(dataBytes.data()+pos+3);
             moduleData.header.requestTime = *reinterpret_cast<uint*>(dataBytes.data()+pos+4);
-            moduleData.dataBytes = moduleDataByteArray.mid(12,moduleData.header.totalSize - 14);
+
             //moduleDataParsing(&moduleData);
             emit  getModData38k(moduleData);
             position += moduleDataByteArray.size();
@@ -692,13 +676,13 @@ void Parser38k::findServiseFFFEBytes(TlmPack pack){
         PacketDeviceData38k packetDeviceData;
         packetDeviceData.data.status = 0;
         for(int position = 0; position < data.length();position+=255 ){
-            memset(array,0,255);
+            //memset(array,0,255);
             bl255 = data.mid(position,255);
-            memcpy(array,bl255.data(),bl255.size());
-            int decod = cod.decode_rs_nasa(array);
-            this->numberOfChecks++;
-            this->numberOfError += decod?1:0;
-            packetDeviceData.data.status |= decod;
+            //memcpy(array,bl255.data(),bl255.size());
+            //int decod = cod.decode_rs_nasa(array);
+            //this->numberOfChecks++;
+            //this->numberOfError += decod?1:0;
+            //packetDeviceData.data.status |= decod;
             packetDeviceData.data.dataByte += bl255.mid(33);
         }
 

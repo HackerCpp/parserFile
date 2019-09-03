@@ -35,6 +35,7 @@ class Tab38k : public QWidget
     QSortFilterProxyModel *prModel;
 public:
     explicit Tab38k(QList<PacketModulesData38k> *modulesData,QWidget *parent = nullptr);
+    void saveFile();
     ~Tab38k();
 signals:
 

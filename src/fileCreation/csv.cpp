@@ -36,6 +36,8 @@ CSV::CSV(QList<PacketModulesData38k> *modulesData38k,ushort type){
     else if(type == GGP)
         fileString ="periph_status,count_time,count,gk_uhv,gk_dac,temperature_internal,comp_edac_value \n";
     foreach(PacketModulesData38k data,*modulesData38k){
+        if(!data.dataStruct)
+            continue;
         if(data.dataStruct->type == type){
             if(type == GKT){
                 DataGKT * dataGKT = reinterpret_cast<DataGKT*>(data.dataStruct);
@@ -55,12 +57,12 @@ CSV::CSV(QList<PacketModulesData38k> *modulesData38k,ushort type){
             else if(type == SHM){
                 DataSHM0 * dataSHM0 = reinterpret_cast<DataSHM0*>(data.dataStruct);
                 if(dataSHM0->Wave_1int){
-                    foreach(int data,dataSHM0->Wave_1int)
+                    foreach(int data,*dataSHM0->Wave_1int)
                         fileString+= QString::number(data) + ",";
                     fileString += "\n";
                 }
                 else if(dataSHM0->Wave_1float){
-                    foreach(float data,dataSHM0->Wave_1float)
+                    foreach(float data,*dataSHM0->Wave_1float)
                         fileString+= QString::number(data) + ",";
                     fileString += "\n";
                 }
@@ -68,12 +70,12 @@ CSV::CSV(QList<PacketModulesData38k> *modulesData38k,ushort type){
             else if(type == 100){
                 DataSHM1 * dataSHM1 = reinterpret_cast<DataSHM1*>(data.dataStruct);
                 if(dataSHM1->Wave_1int){
-                    foreach(int data,dataSHM1->Wave_1int)
+                    foreach(int data,*dataSHM1->Wave_1int)
                         fileString+= QString::number(data) + ",";
                     fileString += "\n";
                 }
                 else if(dataSHM1->Wave_1float){
-                    foreach(float data,dataSHM1->Wave_1float)
+                    foreach(float data,*dataSHM1->Wave_1float)
                         fileString+= QString::number(data) + ",";
                     fileString += "\n";
                 }
@@ -131,7 +133,7 @@ CSV::CSV(QList<PacketModulesData38k> *modulesData38k,ushort type){
     QString filePath = fileDialog.getSaveFileName(nullptr, "Save File","C:/","*.csv");
     QTextDocumentWriter writer;
     writer.setFormat("plaintext");
-    QString docPath = filePath + ".csv";
+    QString docPath = filePath;
     writer.setFileName(docPath);
     bool ok = writer.write(ptxt->document());
     delete ptxt;

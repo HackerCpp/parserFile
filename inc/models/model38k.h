@@ -27,10 +27,10 @@ public:
     Qt::ItemFlags flags(const QModelIndex &index) const;
     void setData(PacketModulesData38k pack);
     void startParsingMdules();
+    void saveFile();
     ~Model38k();
 public slots:
     void stopParsingMdules();
-
 
 };
 

@@ -9,6 +9,7 @@
 
 
 enum {GKT,SHM,AG,MP,AMDS,GKTSHM,P04,P02,GVK,NNKt,GGP};
+#pragma pack(push,1)
 struct Servise38k{
     unsigned int systemTime;
     unsigned short transmissionCounter;
@@ -173,6 +174,7 @@ struct NumberType{
     unsigned char moduleAddress;
     uint type;
 };
+#pragma pack(pop)
 class Parser38kModules : public QThread{
     Q_OBJECT
 

@@ -37,19 +37,18 @@ MainWindow::MainWindow(QWidget *parent){
 }
 bool MainWindow::eventFilter(QObject *o, QEvent *e){
     if(o == this->menu){
-            if(e->type() == QEvent::Enter) {
-                            this->menu->showRight();
-                                return true;
-                            }
-            if(e->type() == QEvent::Leave) {
-                            this->menu->hideLeft();
-                                return true;
-                            }
+        if(e->type() == QEvent::Enter){
+            this->menu->showRight();
+            return true;
+        }
+        if(e->type() == QEvent::Leave){
+            this->menu->hideLeft();
+            return true;
+        }
 
-            }
+    }
 
     return false;
-
 }
 void MainWindow::applyStyle(){
     QFile File("debug\\css\\style.css");
@@ -64,7 +63,11 @@ MainWindow::~MainWindow(){
     this->tabWid = nullptr;
 
 }
-
+void MainWindow::saveFile(){
+   Tab38k * tab = dynamic_cast<Tab38k *>(this->tabWid->currentWidget());
+   if(tab)
+       tab->saveFile();
+}
 void MainWindow::openFile(){
     QFileDialog fileDialog;
     QString filePath = fileDialog.getOpenFileName(this, tr("Open File"),"C:/",tr("*.tlm"));

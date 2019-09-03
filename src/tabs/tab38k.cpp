@@ -39,7 +39,12 @@ Tab38k::Tab38k(QList<PacketModulesData38k> *modulesData,QWidget *parent) : QWidg
     QObject::connect(this->table, SIGNAL(activated(QModelIndex const&)),this, SLOT(showText(QModelIndex const&)));
     QObject::connect(this->filterLineEdit, SIGNAL(returnPressed()),this, SLOT(setFilter()));
     QObject::connect(this->sortingCheckBox, SIGNAL(stateChanged(int)),this, SLOT(setSorting(int)));
+    this->table->hideColumn(11);
 }
+void Tab38k::saveFile(){
+    this->model->saveFile();
+}
+
 
 void Tab38k::showText(QModelIndex const& index){
     QString str = this->table->model()->data(table->model()->index(index.row(),11,index.parent())).toString();
