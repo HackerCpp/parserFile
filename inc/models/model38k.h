@@ -5,6 +5,31 @@
 #include <QAbstractListModel>
 #include <QSortFilterProxyModel>
 #include <QCoreApplication>
+#include <QHBoxLayout>
+#include <QComboBox>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPushButton>
+
+class SaveCSVModal : public QWidget{
+    Q_OBJECT
+    QHBoxLayout *horBoxLayout;
+    QVBoxLayout * vBoxLayoutType;
+    QVBoxLayout * vBoxLayoutSeparator;
+    QLabel *labelType;
+    QLabel *labelSeparator;
+    QComboBox *comboBox;
+    QLineEdit *lineEdit;
+    QPushButton *btnOk;
+    QPushButton *btnCansel;
+    QList<PacketModulesData38k> * m_data;
+    QVector<QString> modArray = {"GKT","SHM","AG","MP","AMDS","GKTSHM","P04","P02","GVK","NNKt","GGP"};
+public:
+    SaveCSVModal(QList<PacketModulesData38k> * data);
+public slots:
+    void saveFile();
+
+};
 
 
 class Model38k : public QAbstractListModel{

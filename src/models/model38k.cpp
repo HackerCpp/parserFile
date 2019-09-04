@@ -1,6 +1,44 @@
 #include "inc/models/model38k.h"
 #include "inc/fileCreation/csv.h"
 
+SaveCSVModal::SaveCSVModal(QList<PacketModulesData38k> * data):m_data(data){
+     horBoxLayout = new QHBoxLayout;
+     vBoxLayoutType = new QVBoxLayout;
+     vBoxLayoutSeparator = new QVBoxLayout;
+     labelType = new QLabel("module type:");
+     labelSeparator = new QLabel("separator:");
+     comboBox = new QComboBox;
+     lineEdit = new QLineEdit;
+     btnOk = new QPushButton("OK");
+     btnCansel = new QPushButton("Cancel");
+     vBoxLayoutType->addWidget(labelType);
+     vBoxLayoutType->addWidget(comboBox);
+     vBoxLayoutType->addWidget(btnOk);
+     vBoxLayoutSeparator->addWidget(labelSeparator);
+     vBoxLayoutSeparator->addWidget(lineEdit);
+     vBoxLayoutSeparator->addWidget(btnCansel);
+     horBoxLayout->addLayout(vBoxLayoutType);
+     horBoxLayout->addLayout(vBoxLayoutSeparator);
+     this->setLayout(horBoxLayout);
+     QList<QString> modList;
+     bool added = true;
+     foreach(PacketModulesData38k data,*m_data){
+         if(!data.dataStruct)
+             continue;
+         foreach(QString module,modList)
+            if(this->modArray[data.dataStruct->type] == module){
+                added = false;
+                continue;
+            }
+         if(added){
+             modList << this->modArray[data.dataStruct->type];
+         }
+         added = true;
+     }
+     this->comboBox->addItems(modList);
+     connect(this->btnOk, SIGNAL(clicked(bool)), this, SLOT(saveFile(void)));
+
+}
 
 Model38k::Model38k(QList<PacketModulesData38k> *modulesData){
     this->modulesData = new QList<PacketModulesData38k>;
@@ -93,7 +131,11 @@ Qt::ItemFlags Model38k::flags(const QModelIndex &index) const{
      parserModules = nullptr;
  }
  void Model38k::saveFile(){
-     CSV *saveFile = new CSV(this->modulesData,2);
+     QList<QString> lStr;
+     lStr <<"fijo";
+     SaveCSVModal *mod = new SaveCSVModal(this->modulesData);
+     mod->show();
+     //CSV *saveFile = new CSV(this->modulesData,7,"  |  ");
  }
 Model38k::~Model38k(){
     if(parserModules)
@@ -101,15 +143,7 @@ Model38k::~Model38k(){
     parserModules = nullptr;
     for(auto value = modulesData->begin();value < modulesData->end();value++)
         if(value->dataStruct){
-            if(value->dataStruct->type == 1){
-                DataSHM0 *s = reinterpret_cast<DataSHM0*>(value->dataStruct);
-                if(s->Wave_1int)
-                    delete s->Wave_1int;
-                if(s->Wave_1float)
-                    delete s->Wave_1float;
-                delete s;
-            }
-            else if(value->dataStruct->type == 100){
+            if(value->dataStruct->type == SHM){
                 DataSHM1 *s = reinterpret_cast<DataSHM1*>(value->dataStruct);
                 if(s->Wave_1int)
                     delete s->Wave_1int;

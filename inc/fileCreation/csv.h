@@ -8,7 +8,7 @@ class CSV{
     QString path;
 public:
     CSV(QList<QString> header,QList<QList<QString>> data);
-    CSV(QList<PacketModulesData38k> *modulesData38k,ushort type);
+    CSV(QList<PacketModulesData38k> *modulesData38k,ushort type,QString separator);
 };
 
 #endif // CSV_H

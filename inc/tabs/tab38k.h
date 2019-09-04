@@ -13,6 +13,7 @@
 #include <QSpinBox>
 #include <QCheckBox>
 
+
 class Tab38k : public QWidget
 {
     Q_OBJECT

@@ -74,7 +74,11 @@ struct DataGKT : public ModuleData{
     uint temperature;
     ushort gk_dac;
 };
-struct DataSHM0 : public ModuleData{
+struct DataSHM1 : public ModuleData{
+    QVector<short> * Wave_1int;
+    QVector<float> * Wave_1float;
+};
+struct DataSHM0 : public DataSHM1{
     ushort periph_status;
     ushort work_mode;
     uchar channels_map;
@@ -85,13 +89,8 @@ struct DataSHM0 : public ModuleData{
     ushort accel_z_mean;
     ushort accel_z_variance;
     ushort accel_z_flags;
-    QVector<ushort> * Wave_1int;
-    QVector<float> * Wave_1float;
 };
-struct DataSHM1 : public ModuleData{
-    QVector<ushort> * Wave_1int;
-    QVector<float> * Wave_1float;
-};
+
 struct DataAG : public ModuleData{
     ushort periph_status;
     ushort work_mode;
