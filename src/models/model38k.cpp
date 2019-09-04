@@ -39,7 +39,9 @@ SaveCSVModal::SaveCSVModal(QList<PacketModulesData38k> * data):m_data(data){
      connect(this->btnOk, SIGNAL(clicked(bool)), this, SLOT(saveFile(void)));
 
 }
+void SaveCSVModal::saveFile(){
 
+}
 Model38k::Model38k(QList<PacketModulesData38k> *modulesData){
     this->modulesData = new QList<PacketModulesData38k>;
     parserModules = nullptr;
