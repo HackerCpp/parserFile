@@ -26,8 +26,10 @@ class SaveCSVModal : public QWidget{
     QVector<QString> modArray = {"GKT","SHM","AG","MP","AMDS","GKTSHM","P04","P02","GVK","NNKt","GGP"};
 public:
     SaveCSVModal(QList<PacketModulesData38k> * data);
+    ~SaveCSVModal();
 public slots:
     void saveFile();
+    void cansel();
 
 };
 

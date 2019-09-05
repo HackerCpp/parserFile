@@ -241,7 +241,7 @@ void channelGKT(PacketModulesData38k * moduleData){
     dS->locator_amp24 = *reinterpret_cast<uint*>(data.mid(44,3).data());
     dS->resistance = *reinterpret_cast<uint*>(data.mid(47,3).data());
     memcpy(&dS->sti_pwm,data.data() + 50,12);
-    moduleData->data = "<table border='1'><tr><td>temperature_internal </td><td> %1</td></tr>\
+    /*moduleData->data = "<table border='1'><tr><td>temperature_internal </td><td> %1</td></tr>\
 <tr><td>locator_amp </td><td> %2</td></tr>\
 <tr><td>locator_amp_interval_max </td><td> %3</td></tr>\
 <tr><td>locator_amp_interval_min </td><td> %4</td></tr>\
@@ -272,7 +272,7 @@ void channelGKT(PacketModulesData38k * moduleData){
             .arg(dS->power_supply).arg(dS->emds_supply).arg(dS->temperature_external)
             .arg(dS->sti_1).arg(dS->sti_2).arg(dS->p_corr).arg(dS->p_bw).arg(dS->acceleration_x)
             .arg(dS->acceleration_y).arg(dS->acceleration_z).arg(dS->locator_amp24).arg(dS->resistance)
-            .arg(dS->sti_pwm).arg(dS->pressure).arg(dS->temperature).arg(dS->gk_dac);
+            .arg(dS->sti_pwm).arg(dS->pressure).arg(dS->temperature).arg(dS->gk_dac);*/
 }
 
 void Parser38kModules::channelSHM(PacketModulesData38k * moduleData){
@@ -286,10 +286,11 @@ void Parser38kModules::channelSHM(PacketModulesData38k * moduleData){
         QByteArray *data = &moduleData->dataBytes;
         moduleData->dataStruct = new DataSHM0();
         DataSHM0 *dS = reinterpret_cast<DataSHM0*>(moduleData->dataStruct);
+        dS->type = SHM;
         memcpy(&dS->periph_status,data->data(),20);
         isWave = dS->work_mode&0x0001;
         wordPerChannel = dS->words_per_channel;
-        moduleData->data = "<table border='1'><tr><td>periph_status </td><td> %1</td></tr>\
+        /*moduleData->data = "<table border='1'><tr><td>periph_status </td><td> %1</td></tr>\
 <tr><td>work_mode_MSB </td><td> %2</td></tr>\
 <tr><td>work_mode_LSB </td><td> %3</td></tr>\
 <tr><td>channels_map </td><td> %4</td></tr>\
@@ -306,7 +307,7 @@ void Parser38kModules::channelSHM(PacketModulesData38k * moduleData){
         moduleData->data = moduleData->data.arg(dS->periph_status)
                 .arg(dS->work_mode&0x8000).arg(dS->work_mode&0x0001).arg(dS->channels_map).arg(dS->words_per_channel)
                 .arg(dS->channel_frequency).arg(dS->pga_gain).arg(dS->temperature_internal)
-                .arg(dS->accel_z_mean).arg(dS->accel_z_variance).arg(dS->accel_z_flags);
+                .arg(dS->accel_z_mean).arg(dS->accel_z_variance).arg(dS->accel_z_flags);*/
         position = 20;
     }
     moduleData->data += "<table border='1'><tr><td>";
@@ -328,15 +329,15 @@ void Parser38kModules::channelSHM(PacketModulesData38k * moduleData){
         dS->Wave_1float = nullptr;
         for(int i = position; i < size - 2;i += 2){
             if(!currentWordPerChannel){
-                moduleData->data += "<tr><td align='center'>Channel " + QString::number(currentChannel++) + "</td></tr>";
+                //moduleData->data += "<tr><td align='center'>Channel " + QString::number(currentChannel++) + "</td></tr>";
                 currentWordPerChannel = wordPerChannel;
             }
             dS->Wave_1int->push_back(*reinterpret_cast<short*>(data->data()+i));
-            moduleData->data += QString::number(dS->Wave_1int->last()) + "  ";
+            //moduleData->data += QString::number(dS->Wave_1int->last()) + "  ";
             currentWordPerChannel--;
         }
    }
-   moduleData->data += "</table>";
+   //moduleData->data += "</table>";
 }
 
 void channelAG(PacketModulesData38k * moduleData){
@@ -345,14 +346,14 @@ void channelAG(PacketModulesData38k * moduleData){
     DataAG *dS = reinterpret_cast<DataAG*>(moduleData->dataStruct);
     memcpy(&dS->periph_status,data.data(),8);
     dS->type = AG;
-    moduleData->data = "<table border='1'><tr><td>periph_status </td><td> %1</td></tr>\
+    /*moduleData->data = "<table border='1'><tr><td>periph_status </td><td> %1</td></tr>\
 <tr><td>work_mode </td><td> %2</td></tr>\
 <tr><td>temperature_internal </td><td> %3</td></tr>\
 <tr><td>discharge_voltage </td><td> %4</td></tr></table>";
             moduleData->data = moduleData->data.arg(dS->periph_status)
             .arg(dS->work_mode)
             .arg(dS->temperature_internal)
-            .arg(dS->discharge_voltage);
+            .arg(dS->discharge_voltage);*/
 }
 void channelP(PacketModulesData38k * moduleData){
     QByteArray &data = moduleData->dataBytes;
@@ -374,101 +375,92 @@ void channelP02(PacketModulesData38k * moduleData){
     DataP02 *dS = reinterpret_cast<DataP02*>(moduleData->dataStruct);
     memcpy(&dS->rate,data.data(),8);
     dS->type = P02;
-    moduleData->data = "<table border='1'><tr><td>rate </td><td> %1</td></tr>\
+    /*moduleData->data = "<table border='1'><tr><td>rate </td><td> %1</td></tr>\
 <tr><td>diameter </td><td> %2</td></tr>\
-<tr><td>temperature_internal </td><td> %3</td></tr>";
-            moduleData->data = moduleData->data.arg(dS->rate).arg(dS->diameter).arg(dS->temperature_internal);
+<tr><td>temperature_internal </td><td> %3</td></tr></table>";
+            moduleData->data = moduleData->data.arg(dS->rate).arg(dS->diameter).arg(dS->temperature_internal);*/
 }
 
-void channelP04(QString * data){
-    bool ok;
-    QString channel = "\n\trate : %1\n\t\
-temperature_internal : %2\n\t";
-            channel = channel.arg(((*data).mid(2,2) + (*data).mid(0,2)).toUInt(&ok,16))
-            .arg(((*data).mid(4,2)).toUInt(&ok,16));
-    *data = channel;
+void channelP04(PacketModulesData38k * moduleData){
+    QByteArray &data = moduleData->dataBytes;
+    moduleData->dataStruct = new DataP04();
+    DataP04 *dS = reinterpret_cast<DataP04*>(moduleData->dataStruct);
+    memcpy(&dS->rate,data.data(),3);
+    /*QString channel = "<table border='1'><tr><td>rate </td><td> %1</td></tr>\
+<tr><td>temperature_internal </td><td> %2</td></tr></table>";
+            channel = channel.arg(dS->rate)
+            .arg(dS->temperature_internal);*/
 }
-void channel2NNKt(QString * data){
-    bool ok;
-    QString channel = "\n\tperiph_status : %1\n\t\
-count_time : %2\n\t\
-near_count : %3\n\t\
-far_count : %4\n\t\
-gk_uhv : %5\n\t\
-gk_dac : %6\n\t\
-temperature_internal : %7\n\t\
-comp_edac1_value : %8\n\t\
-comp_edac2_value : %9\n\t";
-            channel = channel.arg(((*data).mid(0,2)).toUInt(&ok,16))
-            .arg(((*data).mid(4,2) + (*data).mid(2,2)).toUInt(&ok,16))
-            .arg(((*data).mid(12,2) + (*data).mid(10,2)+ (*data).mid(8,2)+ (*data).mid(6,2)).toUInt(&ok,16))
-            .arg(((*data).mid(20,2) + (*data).mid(18,2)+ (*data).mid(16,2)+ (*data).mid(14,2)).toUInt(&ok,16))
-            .arg(((*data).mid(24,2) + (*data).mid(22,2)).toUInt(&ok,16))
-            .arg(((*data).mid(28,2) + (*data).mid(26,2)).toUInt(&ok,16))
-            .arg(((*data).mid(32,2) + (*data).mid(30,2)).toUInt(&ok,16))
-            .arg(((*data).mid(36,2) + (*data).mid(34,2)).toUInt(&ok,16))
-            .arg(((*data).mid(40,2) + (*data).mid(38,2)).toUInt(&ok,16));
-    *data = channel;
+
+void channel2NNKt(PacketModulesData38k * moduleData){
+    QByteArray &data = moduleData->dataBytes;
+    moduleData->dataStruct = new Data2NNKT();
+    Data2NNKT *dS = reinterpret_cast<Data2NNKT*>(moduleData->dataStruct);
+    memcpy(&dS->periph_status,data.data(),21);
+    QString channel = "<table border='1'><tr><td>periph_status </td><td> %1</td></tr>\
+<tr><td>count_time </td><td> %2</td></tr>\
+<tr><td>near_count </td><td> %3</td></tr>\
+<tr><td>far_count </td><td> %4</td></tr>\
+<tr><td>gk_uhv </td><td> %5</td></tr>\
+<tr><td>gk_dac </td><td> %6</td></tr>\
+<tr><td>temperature_internal </td><td> %7</td></tr>\
+<tr><td>comp_edac1_value </td><td> %8</td></tr>\
+<tr><td>comp_edac2_value </td><td> %9</td></tr></table>";
+    channel = channel.arg(dS->periph_status).arg(dS->count_time).arg(dS->near_count)
+            .arg(dS->far_count).arg(dS->gk_uhv).arg(dS->gk_dac).arg(dS->temperature_internal)
+            .arg(dS->comp_edac1_value).arg(dS->comp_edac2_value);
 }
-void channelGGP(QString * data){
-    bool ok;
-    QString channel = "\n\tperiph_status : %1\n\t\
-count_time : %2\n\t\
-count : %3\n\t\
-gk_uhv : %4\n\t\
-gk_dac : %5\n\t\
-temperature_internal : %6\n\t\
-comp_edac_value : %7\n\t";
-            channel = channel.arg(((*data).mid(0,2)).toUInt(&ok,16))
-            .arg(((*data).mid(4,2) + (*data).mid(2,2)).toUInt(&ok,16))
-            .arg(((*data).mid(12,2) + (*data).mid(10,2)+ (*data).mid(8,2)+ (*data).mid(6,2)).toUInt(&ok,16))
-            .arg(((*data).mid(16,2) + (*data).mid(14,2)).toUInt(&ok,16))
-            .arg(((*data).mid(20,2) + (*data).mid(18,2)).toUInt(&ok,16))
-            .arg(((*data).mid(24,2) + (*data).mid(22,2)).toUInt(&ok,16))
-            .arg(((*data).mid(28,2) + (*data).mid(26,2)).toUInt(&ok,16));
-    *data = channel;
+void channelGGP(PacketModulesData38k * moduleData){
+    QByteArray &data = moduleData->dataBytes;
+    moduleData->dataStruct = new DataGGP();
+    DataGGP *dS = reinterpret_cast<DataGGP*>(moduleData->dataStruct);
+    memcpy(&dS->periph_status,data.data(),15);
+    QString channel = "<table border='1'><tr><td>periph_status </td><td> %1</td></tr>\
+<tr><td>count_time </td><td> %2</td></tr>\
+<tr><td>count </td><td> %3</td></tr>\
+<tr><td>gk_uhv </td><td> %4</td></tr>\
+<tr><td>gk_dac </td><td> %5</td></tr>\
+<tr><td>temperature_internal </td><td> %6</td></tr>\
+<tr><td>comp_edac_value </td><td> %7</td></tr></table>";
+            channel = channel.arg(dS->periph_status)
+            .arg(dS->count_time)
+            .arg(dS->count)
+            .arg(dS->gk_uhv)
+            .arg(dS->gk_dac)
+            .arg(dS->temperature_internal)
+            .arg(dS->comp_edac_value);
 }
-void channelGVK(QString * data){
-    bool ok;
-    QString channel = "\n\ttemperature_internal : %1\n\t\
-locator_amp : %2\n\t\
-locator_amp_interval_max : %3\n\t\
-locator_amp_interval_min : %4\n\t\
-gk_time : %5\n\t\
-gk_impulses : %6\n\t\
-gk_uhv : %7\n\t\
-power_supply : %8\n\t\
-temperature_external : %9\n\t\
-temperature_external_2 : %10\n\t\
-temperature_external_3 : %11\n\t\
-p_corr : %12\n\t\
-p_bw : %13\n\t\
-acceleration_x : %14\n\t\
-acceleration_y : %15\n\t\
-acceleration_z : %16\n\t\
-locator_amp : %17\n\t\
-temperature_external_4 : %18\n\t\
-gk_dac : %19\n\t";
-            channel = channel.arg(((*data).mid(2,2) + (*data).mid(0,2)).toUInt(&ok,16))
-            .arg(((*data).mid(6,2) + (*data).mid(4,2)).toUInt(&ok,16))
-            .arg(((*data).mid(10,2) + (*data).mid(8,2)).toUInt(&ok,16))
-            .arg(((*data).mid(14,2) + (*data).mid(12,2)).toUInt(&ok,16))
-            .arg(((*data).mid(18,2) + (*data).mid(16,2)).toUInt(&ok,16))
-            .arg(((*data).mid(22,2) + (*data).mid(20,2)).toUInt(&ok,16))
-            .arg(((*data).mid(26,2) + (*data).mid(24,2)).toUInt(&ok,16))
-            .arg(((*data).mid(30,2) + (*data).mid(28,2)).toUInt(&ok,16))
-            .arg(((*data).mid(36,2) + (*data).mid(34,2)+ (*data).mid(32,2)).toUInt(&ok,16))
-            .arg(((*data).mid(42,2) + (*data).mid(40,2)+ (*data).mid(38,2)).toUInt(&ok,16))
-            .arg(((*data).mid(48,2) + (*data).mid(46,2)+ (*data).mid(44,2)).toUInt(&ok,16))
-            .arg(((*data).mid(54,2) + (*data).mid(52,2)+ (*data).mid(50,2)).toUInt(&ok,16))
-            .arg(((*data).mid(60,2) + (*data).mid(58,2)+ (*data).mid(56,2)).toUInt(&ok,16))
-            .arg(((*data).mid(66,2) + (*data).mid(64,2)+ (*data).mid(62,2)).toUInt(&ok,16))
-            .arg(((*data).mid(72,2) + (*data).mid(70,2)+ (*data).mid(68,2)).toUInt(&ok,16))
-            .arg(((*data).mid(78,2) + (*data).mid(76,2)+ (*data).mid(74,2)).toUInt(&ok,16))
-            .arg(((*data).mid(84,2) + (*data).mid(82,2)+ (*data).mid(80,2)).toUInt(&ok,16))
-            .arg(((*data).mid(90,2) + (*data).mid(88,2)+ (*data).mid(86,2)).toUInt(&ok,16))
-            .arg(((*data).mid(94,2) + (*data).mid(92,2)).toUInt(&ok,16));
-    *data = channel;
+void channelGVK(PacketModulesData38k * moduleData){
+    QByteArray &data = moduleData->dataBytes;
+    moduleData->dataStruct = new DataGVK();
+    DataGVK *dS = reinterpret_cast<DataGVK*>(moduleData->dataStruct);
+    memcpy(&dS->temperature_internal,data.data(),48);
+    QString channel = "<table border='1'><tr><td>temperature_internal </td><td> %1</td></tr>\
+<tr><td>locator_amp </td><td> %2</td></tr>\
+<tr><td>locator_amp_interval_max </td><td> %3</td></tr>\
+<tr><td>locator_amp_interval_min </td><td> %4</td></tr>\
+<tr><td>gk_time </td><td> %5</td></tr>\
+<tr><td>gk_impulses </td><td> %6</td></tr>\
+<tr><td>gk_uhv </td><td> %7</td></tr>\
+<tr><td>power_supply </td><td> %8</td></tr>\
+<tr><td>temperature_external </td><td> %9</td></tr>\
+<tr><td>temperature_external_2 </td><td> %10</td></tr>\
+<tr><td>temperature_external_3 </td><td> %11</td></tr>\
+<tr><td>p_corr </td><td> %12</td></tr>\
+<tr><td>p_bw </td><td> %13</td></tr>\
+<tr><td>acceleration_x </td><td> %14</td></tr>\
+<tr><td>acceleration_y </td><td> %15</td></tr>\
+<tr><td>acceleration_z </td><td> %16</td></tr>\
+<tr><td>locator_amp </td><td> %17</td></tr>\
+<tr><td>temperature_external_4 </td><td> %18</td></tr>\
+<tr><td>gk_dac </td><td> %19</td></tr></table>";
+    channel = channel.arg(dS->temperature_internal).arg(dS->locator_amp16)
+            .arg(dS->locator_amp_interval_max).arg(dS->locator_amp_interval_min)
+            .arg(dS->gk_time).arg(dS->gk_impulses).arg(dS->gk_uhv)
+            .arg(dS->power_supply).arg(dS->temperature_external).arg(dS->temperature_external2)
+            .arg(dS->temperature_external3).arg(dS->p_corr).arg(dS->p_bw)
+            .arg(dS->acceleration_x).arg(dS->acceleration_y).arg(dS->acceleration_z)
+            .arg(dS->locator_amp24).arg(dS->temperature_external4).arg(dS->gk_dac);
 }
 void Parser38kModules::moduleDataParsing(PacketModulesData38k * moduleData){
     moduleData->dataStruct = nullptr;
@@ -569,8 +561,16 @@ void Parser38kModules::moduleDataParsing(PacketModulesData38k * moduleData){
            channelAG(moduleData);
         else if(type == MP)
            channelP(moduleData);
+        else if(type == P04)
+           channelP04(moduleData);
         else if(type == P02)
            channelP02(moduleData);
+        else if(type == GVK)
+           channelGVK(moduleData);
+        else if(type == NNKt)
+           channel2NNKt(moduleData);
+        else if(type == GGP)
+           channelGGP(moduleData);
     }
 }
 Parser38kModules::Parser38kModules(QList<PacketModulesData38k> *modulesData){
@@ -580,11 +580,13 @@ Parser38kModules::Parser38kModules(QList<PacketModulesData38k> *modulesData){
     connect(this, SIGNAL(finished(void)), this, SLOT(del()));
 }
 void Parser38kModules::run(){
+    QTime time =  QTime::currentTime();
     for(auto value = modulesData->begin();value < modulesData->end(); value++)
         if(enabled)
             moduleDataParsing(&*value);
         else
            return;
+    qDebug() <<   time.msecsTo(QTime::currentTime());
 }
 void Parser38kModules::stop(){
     enabled = false;
@@ -593,7 +595,8 @@ void Parser38kModules::del(){
     this->~Parser38kModules();
 }
 Parser38kModules::~Parser38kModules(){
-    delete this->listOfFoundModules;
+    if(this->listOfFoundModules)
+        delete this->listOfFoundModules;
     this->listOfFoundModules = nullptr;
 }
 
@@ -634,6 +637,7 @@ void Parser38k::findModulesDataBytes(PacketDeviceData38k pack){
             moduleData.header.requestTime = *reinterpret_cast<uint*>(dataBytes.data()+pos+4);
 
             //moduleDataParsing(&moduleData);
+            moduleData.dataStruct = nullptr;
             emit  getModData38k(moduleData);
             position += moduleDataByteArray.size();
         }
@@ -705,7 +709,7 @@ void Parser38k::run(){
     parserTlm = nullptr;
     double sr;
     if(numberOfError != 0 & numberOfChecks != 0)
-         sr = numberOfError/(numberOfChecks/100);
+        sr = numberOfError/(numberOfChecks/100);
     else
         sr = 100;
 

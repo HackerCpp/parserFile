@@ -1,5 +1,6 @@
 #include "inc/models/model38k.h"
 #include "inc/fileCreation/csv.h"
+#include <QMessageBox>
 
 SaveCSVModal::SaveCSVModal(QList<PacketModulesData38k> * data):m_data(data){
      horBoxLayout = new QHBoxLayout;
@@ -9,6 +10,7 @@ SaveCSVModal::SaveCSVModal(QList<PacketModulesData38k> * data):m_data(data){
      labelSeparator = new QLabel("separator:");
      comboBox = new QComboBox;
      lineEdit = new QLineEdit;
+     lineEdit->setText(",");
      btnOk = new QPushButton("OK");
      btnCansel = new QPushButton("Cancel");
      vBoxLayoutType->addWidget(labelType);
@@ -37,11 +39,31 @@ SaveCSVModal::SaveCSVModal(QList<PacketModulesData38k> * data):m_data(data){
      }
      this->comboBox->addItems(modList);
      connect(this->btnOk, SIGNAL(clicked(bool)), this, SLOT(saveFile(void)));
+     connect(this->btnCansel, SIGNAL(clicked(bool)), this, SLOT(cansel(void)));
 
 }
+
 void SaveCSVModal::saveFile(){
-
+    int index = 0;
+    index = this->modArray.indexOf(this->comboBox->currentText());
+    CSV *saveFile = new CSV(this->m_data,index,this->lineEdit->text());
+    delete this;
 }
+void SaveCSVModal::cansel(){
+    this->~SaveCSVModal();
+}
+SaveCSVModal::~SaveCSVModal(){
+    delete labelType;
+    delete labelSeparator;
+    delete comboBox;
+    delete lineEdit;
+    delete btnOk;
+    delete btnCansel;
+    delete vBoxLayoutType;
+    delete vBoxLayoutSeparator;
+    delete horBoxLayout;
+}
+
 Model38k::Model38k(QList<PacketModulesData38k> *modulesData){
     this->modulesData = new QList<PacketModulesData38k>;
     parserModules = nullptr;
@@ -133,11 +155,12 @@ Qt::ItemFlags Model38k::flags(const QModelIndex &index) const{
      parserModules = nullptr;
  }
  void Model38k::saveFile(){
-     QList<QString> lStr;
-     lStr <<"fijo";
+     if(parserModules){
+        QMessageBox::warning(nullptr,"Обратите внимание", "Дождитесь полного разбора файла",QMessageBox::Ok);
+        return;
+     }
      SaveCSVModal *mod = new SaveCSVModal(this->modulesData);
      mod->show();
-     //CSV *saveFile = new CSV(this->modulesData,7,"  |  ");
  }
 Model38k::~Model38k(){
     if(parserModules)

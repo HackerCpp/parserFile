@@ -141,16 +141,16 @@ struct DataGVK : public ModuleData{
     ushort gk_impulses;
     ushort gk_uhv;
     ushort power_supply;
-    uint temperature_external;
-    uint temperature_external2;
-    uint temperature_external3;
-    uint p_corr;
-    uint p_bw;
-    uint acceleration_x;
-    uint acceleration_y;
-    uint acceleration_z;
-    uint locator_amp24;
-    uint temperature_external4;
+    uint temperature_external : 24;
+    uint temperature_external2 : 24;
+    uint temperature_external3 : 24;
+    uint p_corr : 24;
+    uint p_bw : 24;
+    uint acceleration_x : 24;
+    uint acceleration_y : 24;
+    uint acceleration_z : 24;
+    uint locator_amp24 : 24;
+    uint temperature_external4 : 24;
     ushort gk_dac;
 };
 struct DataGKTVirtual : public ModuleData{
