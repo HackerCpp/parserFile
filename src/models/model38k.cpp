@@ -108,8 +108,6 @@ QVariant Model38k::data(const QModelIndex &index, int role ) const{
             return modulesData->at(index.row()).header.lastCommandCode;
         case 10:
             return modulesData->at(index.row()).header.requestTime;
-        case 11:
-            return modulesData->at(index.row()).data;
          default:
              return QVariant();
       }
@@ -120,7 +118,7 @@ int Model38k::rowCount(const QModelIndex &parent) const {
 }
 
 int Model38k::columnCount(const QModelIndex &parent) const {
-    return 12;
+    return 11;
 }
 
 QVariant Model38k::headerData(int section, Qt::Orientation orientation, int role) const{

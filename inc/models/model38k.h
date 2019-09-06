@@ -55,6 +55,7 @@ public:
     void setData(PacketModulesData38k pack);
     void startParsingMdules();
     void saveFile();
+    QList<PacketModulesData38k> *getData(){return modulesData;}
     ~Model38k();
 public slots:
     void stopParsingMdules();
