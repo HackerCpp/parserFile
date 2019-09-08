@@ -167,19 +167,27 @@ Model38k::~Model38k(){
     for(auto value = modulesData->begin();value < modulesData->end();value++)
         if(value->dataStruct){
             if(value->dataStruct->type == SHM){
-                DataSHM1 *s = reinterpret_cast<DataSHM1*>(value->dataStruct);
-                if(s->Wave_1int)
-                    delete s->Wave_1int;
-                if(s->Wave_1float)
-                    delete s->Wave_1float;
-                delete s;
+                if(value->header.data_state & 0x02){
+                    delete reinterpret_cast<ParamFlashSHM*>(value->dataStruct);
+                }
+                else if(!(value->header.data_state & 0x01)){
+                    DataSHM1 *s = reinterpret_cast<DataSHM1*>(value->dataStruct);
+                    if(s->Wave_1int)
+                        delete s->Wave_1int;
+                    if(s->Wave_1float)
+                        delete s->Wave_1float;
+                    delete s;
+                }
+
             }
             else if(!value->dataStruct->type)
-                delete reinterpret_cast<DataGKT*>(value->dataStruct);
+                if(!(value->header.data_state & 0x01))
+                    delete reinterpret_cast<DataGKT*>(value->dataStruct);
             else if(value->dataStruct->type == AG)
-                delete reinterpret_cast<DataAG*>(value->dataStruct);
+                if(!(value->header.data_state & 0x01))
+                    delete reinterpret_cast<DataAG*>(value->dataStruct);
             else
-                 delete value->dataStruct;
+                delete value->dataStruct;
         }
 
     delete this->modulesData;

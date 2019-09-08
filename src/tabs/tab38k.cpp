@@ -55,7 +55,8 @@ QString paramFlashGKT(const PacketModulesData38k & moduleData){
 QString paramFlashSHM(const PacketModulesData38k & moduleData){
     Flash *dS = reinterpret_cast<Flash*>(moduleData.dataStruct);
     ParamFlashSHM *pF = reinterpret_cast<ParamFlashSHM*>(dS->paramFlash);
-    QString str = "<tr><td>total_length </td><td> %1</td></tr>\
+    QString str = "<tr><td colspan = '2' align='center'> ParamFlash: </td></tr>\
+<tr><td>total_length </td><td> %1</td></tr>\
 <tr><td>sensors_number </td><td> %2</td></tr>\
 <tr><td>channel_coefficients </td><td> %3</td></tr>\
 <tr><td>head_to_sensor_length </td><td> %4</td></tr>\
@@ -437,7 +438,7 @@ QString dataString(const PacketModulesData38k &moduleData){
         if(type == GKT)
             str += paramFlashGKT(moduleData);
         else if(type == SHM)
-            return channelSHM(moduleData);
+            str += paramFlashSHM(moduleData);
         /*else if(type == AG)
             return channelAG(moduleData);
         else if(type == MP)

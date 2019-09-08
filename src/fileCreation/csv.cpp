@@ -47,7 +47,7 @@ comp_edac1_value,comp_edac2_value \n";
     fileString.replace(",",separator);
     writeFile << fileString;
     foreach(PacketModulesData38k data,*modulesData38k){
-        if(!data.dataStruct)
+        if(!data.dataStruct || data.header.data_state & 0x02)
             continue;      
         if(data.dataStruct->type == type){
             writeFile << data.header.requestTime << separator;
