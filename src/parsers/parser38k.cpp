@@ -73,6 +73,7 @@ void channelAG(PacketModulesData38k * moduleData){
     memcpy(&dS->periph_status,data.data(),8);
     dS->type = AG;
 }
+
 void channelP(PacketModulesData38k * moduleData){
     QByteArray &data = moduleData->dataBytes;
     moduleData->dataStruct = new DataP();
@@ -104,6 +105,7 @@ void channel2NNKt(PacketModulesData38k * moduleData){
     memcpy(&dS->periph_status,data.data(),21);
     dS->type = NNKt;
 }
+
 void channelGGP(PacketModulesData38k * moduleData){
     QByteArray &data = moduleData->dataBytes;
     moduleData->dataStruct = new DataGGP();
@@ -111,6 +113,7 @@ void channelGGP(PacketModulesData38k * moduleData){
     memcpy(&dS->periph_status,data.data(),15);
     dS->type = GGP;
 }
+
 void channelGVK(PacketModulesData38k * moduleData){
     QByteArray &data = moduleData->dataBytes;
     moduleData->dataStruct = new DataGVK();
@@ -118,6 +121,7 @@ void channelGVK(PacketModulesData38k * moduleData){
     memcpy(&dS->temperature_internal,data.data(),48);
     dS->type = GVK;
 }
+
 void Parser38kModules::moduleDataParsing(PacketModulesData38k * moduleData){
     moduleData->dataStruct = nullptr;
     QString * data = &moduleData->data;

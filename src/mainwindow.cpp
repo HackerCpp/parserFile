@@ -4,8 +4,10 @@
 #include <QtWidgets>
 #include <QDebug>
 #include "inc/tabs/tab38k.h"
-
+#include "inc/men.h"
 MainWindow::MainWindow(QWidget *parent){
+    men *tab = new men();
+    tab->show();
     this->setParent(parent);
     tabWid = new QTabWidget();
     menu = new Menu(this);

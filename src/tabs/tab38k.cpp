@@ -4,50 +4,15 @@
 QString paramFlashGKT(const PacketModulesData38k & moduleData){
     Flash *dS = reinterpret_cast<Flash*>(moduleData.dataStruct);
     ParamFlashGKT *pF = reinterpret_cast<ParamFlashGKT*>(dS->paramFlash);
-    QString str = "<tr><td colspan = '2' align='center'> ParamFlash: </td></tr>\
-<tr><td>ttotal_length </td><td> %1</td></tr>\
-<tr><td>telemetry_speed </td><td> %2</td></tr>\
-<tr><td>telemetry_resolution </td><td> %3</td></tr>\
-<tr><td>resistance_divisor </td><td> %4</td></tr>\
-<tr><td>resistance_phase_one </td><td> %5</td></tr>\
-<tr><td>resistance_phase_two </td><td> %6</td></tr>\
-<tr><td>gk_dac_set_value </td><td> %7</td></tr>\
-<tr><td>gk_dac_min_value </td><td> %8</td></tr>\
-<tr><td>gk_dac_max_value </td><td> %9</td></tr>\
-<tr><td>hygro_hi_prescaler </td><td> %10</td></tr>\
-<tr><td>hygro_hi_timeout </td><td> %11</td></tr>\
-<tr><td>hygro_lo_pulses </td><td> %12</td></tr>\
-<tr><td>sti_max_temperature </td><td> %13</td></tr>\
-<tr><td>sti_min_temperature </td><td> %14</td></tr>\
-<tr><td>emds_disabled </td><td> %15</td></tr>\
-<tr><td>gk_noisemeter_mode </td><td> %16</td></tr>\
-<tr><td>sti_start_duty_value </td><td> %17</td></tr>\
-<tr><td>extern_adc_temperature_config </td><td> %18</td></tr>\
-<tr><td>extern_adc_std_config </td><td> %19</td></tr>\
-<tr><td>extern_adc_pcorr_config </td><td> %20</td></tr>\
-<tr><td>extern_adc_pbw_config </td><td> %21</td></tr>\
-<tr><td>extern_adc_locator_config </td><td> %22</td></tr>\
-<tr><td>extern_adc_accel_config </td><td> %23</td></tr>\
-<tr><td>extern_adc_resist_config </td><td> %24</td></tr>\
-<tr><td>add_command_dump </td><td> %25</td></tr>\
-<tr><td>temperature_volatile </td><td> %26</td></tr>\
-<tr><td>temperature_volatile </td><td> %27</td></tr>\
-<tr><td>gk_dac_temperature_volatile </td><td> %28</td></tr>\
-<tr><td>gk_dac_temperature_maximum </td><td> %29</td></tr>\
-<tr><td>temperature_addition </td><td> %30</td></tr>\
-<tr><td>reserve </td><td> %31</td></tr>\
-<tr><td>extern_adc_locator_offset </td><td> %32</td></tr>\
-<tr><td>CRC16 </td><td> %33</td></tr>";
-    str = str.arg(pF->total_length).arg(pF->telemetry_speed).arg(pF->telemetry_resolution)
-            .arg(pF->resistance_divisor).arg(pF->resistance_phase_one).arg(pF->resistance_phase_two)
-            .arg(pF->gk_dac_set_value).arg(pF->gk_dac_min_value).arg(pF->gk_dac_max_value)
-            .arg(pF->hygro_hi_prescaler).arg(pF->hygro_hi_timeout).arg(pF->hygro_lo_pulses)
-            .arg(pF->sti_max_temperature).arg(pF->sti_min_temperature).arg(pF->emds_disable).arg(pF->gk_noisemeter_mode)
-            .arg(pF->sti_start_duty_value).arg(pF->extern_adc_temperature_config).arg(pF->extern_adc_std_config)
-            .arg(pF->extern_adc_pcorr_config).arg(pF->extern_adc_pbw_config).arg(pF->extern_adc_locator_config)
-            .arg(pF->extern_adc_accel_config).arg(pF->extern_adc_resist_config).arg(pF->add_command_dump)
-            .arg(pF->temperature_volatile).arg(pF->temperature_maximum).arg(pF->gk_dac_temperature_volatile)
-            .arg(pF->gk_dac_temperature_maximum).arg(pF->temperature_addition).arg(pF->reserve)
+    QFile file("debug\\template\\38k\\paramFlashGKT.html");
+    file.open(QFile::ReadOnly);
+    QString str = QLatin1String(file.readAll());
+    file.close();
+    str = str.arg(pF->total_length).arg(pF->telemetry_speed).arg(pF->telemetry_resolution).arg(pF->resistance_divisor).arg(pF->resistance_phase_one).arg(pF->resistance_phase_two)
+            .arg(pF->gk_dac_set_value).arg(pF->gk_dac_min_value).arg(pF->gk_dac_max_value).arg(pF->hygro_hi_prescaler).arg(pF->hygro_hi_timeout).arg(pF->hygro_lo_pulses)
+            .arg(pF->sti_max_temperature).arg(pF->sti_min_temperature).arg(pF->emds_disable).arg(pF->gk_noisemeter_mode).arg(pF->sti_start_duty_value).arg(pF->extern_adc_temperature_config).arg(pF->extern_adc_std_config)
+            .arg(pF->extern_adc_pcorr_config).arg(pF->extern_adc_pbw_config).arg(pF->extern_adc_locator_config).arg(pF->extern_adc_accel_config).arg(pF->extern_adc_resist_config).arg(pF->add_command_dump)
+            .arg(pF->temperature_volatile).arg(pF->temperature_maximum).arg(pF->gk_dac_temperature_volatile).arg(pF->gk_dac_temperature_maximum).arg(pF->temperature_addition).arg(pF->reserve)
             .arg(pF->extern_adc_locator_offset).arg(pF->crc16);
     return str;
 }
@@ -55,179 +20,88 @@ QString paramFlashGKT(const PacketModulesData38k & moduleData){
 QString paramFlashSHM(const PacketModulesData38k & moduleData){
     Flash *dS = reinterpret_cast<Flash*>(moduleData.dataStruct);
     ParamFlashSHM *pF = reinterpret_cast<ParamFlashSHM*>(dS->paramFlash);
-    QString str = "<tr><td colspan = '2' align='center'> ParamFlash: </td></tr>\
-<tr><td>total_length </td><td> %1</td></tr>\
-<tr><td>sensors_number </td><td> %2</td></tr>\
-<tr><td>channel_coefficients </td><td> %3</td></tr>\
-<tr><td>head_to_sensor_length </td><td> %4</td></tr>\
-<tr><td>startup_mode </td><td> %5</td></tr>\
-<tr><td>hardware_swap_channels </td><td> %6</td></tr>\
-<tr><td>hardware_invert_channels </td><td> %7</td></tr>\
-<tr><td>acoustics_startup_channels </td><td> %8</td></tr>\
-<tr><td>acoustics_startup_adc_time </td><td> %9</td></tr>\
-<tr><td>acoustics_startup_period </td><td> %10</td></tr>\
-<tr><td>acoustics_start_offset </td><td> %11</td></tr>\
-<tr><td>acoustics_gain </td><td> %12</td></tr>\
-<tr><td>acoustics_gain_off_words </td><td> %13</td></tr>\
-<tr><td>acoustics_preconversion_pause </td><td> %14</td></tr>\
-<tr><td>generator_wait_interval </td><td> %15</td></tr>\
-<tr><td>noisemeter_startup_channels </td><td> %16</td></tr>\
-<tr><td>noisemeter_startup_words </td><td> %17</td></tr>\
-<tr><td>noisemeter_startup_freq </td><td> %18</td></tr>\
-<tr><td>noisemeter_warm_cycles </td><td> %19</td></tr>\
-<tr><td>noisemeter_window_fuction </td><td> %20</td></tr>\
-<tr><td>noisemeter_smooth_number </td><td> %21</td></tr>\
-<tr><td>noisemeter_gain </td><td> %22</td></tr>\
-<tr><td>noisemeter_gain_off_words </td><td> %23</td></tr>\
-<tr><td>noisemeter_preconversion_pause </td><td> %24</td></tr>\
-<tr><td>part_max_size </td><td> %25</td></tr>\
-<tr><td>movement_variance_limit </td><td> %26</td></tr>\
-<tr><td>variance_settle_period </td><td> %27</td></tr>\
-<tr><td>bus_survey </td><td> %28</td></tr>\
-<tr><td>reserve </td><td> %29</td></tr>\
-<tr><td>crc16 </td><td> %30</td></tr>";
+    QFile file("debug\\template\\38k\\paramFlashSHM.html");
+    file.open(QFile::ReadOnly);
+    QString str = QLatin1String(file.readAll());
+    file.close();
     QString coeff = QString::number(pF->channel_coefficients[0]) + "; " + QString::number(pF->channel_coefficients[1]);
     QString sensorLenght = QString::number(pF->head_to_sensor_length[0]) + "; " + QString::number(pF->head_to_sensor_length[1]);
     QString smuth = QString::number(pF->noisemeter_smooth_number[0]) + "; " + QString::number(pF->noisemeter_smooth_number[1]);
-    str = str.arg(pF->total_length).arg(pF->sensor_number).arg(coeff).arg(sensorLenght)
-            .arg(pF->startup_mode).arg(pF->hardware_swap_channels).arg(pF->hardware_invert_channels).arg(pF->acoustics_startup_channels)
-            .arg(pF->acoustics_startup_adc_time).arg(pF->acoustics_startup_period).arg(pF->acoustics_start_offset).arg(pF->acoustics_gain)
-            .arg(pF->acoustics_gain_off_words).arg(pF->acoustics_preconversion_pause).arg(pF->generator_wait_interval).arg(pF->noisemetr_startup_channels)
-            .arg(pF->noisemetr_startup_words).arg(pF->noisemeter_startup_freq)
-            .arg(pF->noisemeter_warm_cycles).arg(pF->noisemeter_window_function)
-            .arg(smuth).arg(pF->noisemeter_gain)
-            .arg(pF->noisemeter_gain_off_words).arg(pF->noisemeter_preconversion_pause)
-            .arg(pF->part_max_size).arg(pF->movement_variance_limit)
-            .arg(pF->variance_settle_period).arg(pF->bus_survey)
-            .arg(0).arg(pF->crc16);
+    str = str.arg(pF->total_length).arg(pF->sensor_number).arg(coeff).arg(sensorLenght).arg(pF->startup_mode).arg(pF->hardware_swap_channels).arg(pF->hardware_invert_channels).arg(pF->acoustics_startup_channels)
+            .arg(pF->acoustics_startup_adc_time).arg(pF->acoustics_startup_period).arg(pF->acoustics_start_offset).arg(pF->acoustics_gain).arg(pF->acoustics_gain_off_words).arg(pF->acoustics_preconversion_pause).arg(pF->generator_wait_interval).arg(pF->noisemetr_startup_channels)
+            .arg(pF->noisemetr_startup_words).arg(pF->noisemeter_startup_freq).arg(pF->noisemeter_warm_cycles).arg(pF->noisemeter_window_function).arg(smuth).arg(pF->noisemeter_gain).arg(pF->noisemeter_gain_off_words).arg(pF->noisemeter_preconversion_pause)
+            .arg(pF->part_max_size).arg(pF->movement_variance_limit).arg(pF->variance_settle_period).arg(pF->bus_survey).arg(0).arg(pF->crc16);
     return str;
 }
 
 QString paramFlashAG(const PacketModulesData38k & moduleData){
-    /*data += "<tr><td>total_length </td><td> %1</td></tr>\
-<tr><td>head_to_discharger_length </td><td> %2</td></tr>\
-<tr><td>click_interval_low_freq </td><td> %3</td></tr>\
-<tr><td>click_interval_hi_freq </td><td> %4</td></tr>\
-<tr><td>click_channel </td><td> %5</td></tr>\
-<tr><td>stop_pwm_interval </td><td> %6</td></tr>\
-<tr><td>wait_interval </td><td> %7</td></tr>\
-<tr><td>start_pwm_interval </td><td> %8</td></tr>\
-<tr><td>reception_enable_interval </td><td> %9</td></tr>\
-<tr><td>pwm_period </td><td> %10</td></tr>\
-<tr><td>set_voltage </td><td> %11</td></tr>\
-<tr><td>CRC16 </td><td> %12</td></tr>";
-            data = data.arg(*reinterpret_cast<ushort*>(ba.data()))
-            .arg(*reinterpret_cast<ushort*>(ba.data()+2))
-            .arg(*reinterpret_cast<ushort*>(ba.data()+4))
-            .arg(*reinterpret_cast<ushort*>(ba.data()+6))
-            .arg(*reinterpret_cast<uchar*>(ba.data()+8))
-            .arg(*reinterpret_cast<ushort*>(ba.data()+9))
-            .arg(*reinterpret_cast<ushort*>(ba.data()+11))
-            .arg(*reinterpret_cast<ushort*>(ba.data()+13))
-            .arg(*reinterpret_cast<ushort*>(ba.data()+15))
-            .arg(*reinterpret_cast<ushort*>(ba.data()+17))
-            .arg(*reinterpret_cast<ushort*>(ba.data()+19))
-            .arg(*reinterpret_cast<ushort*>(ba.data()+21));*/
+    Flash *dS = reinterpret_cast<Flash*>(moduleData.dataStruct);
+    ParamFlashAG *pF = reinterpret_cast<ParamFlashAG*>(dS->paramFlash);
+    QFile file("debug\\template\\38k\\paramFlashAG.html");
+    file.open(QFile::ReadOnly);
+    QString str = QLatin1String(file.readAll());file.close();
+    str = str.arg(pF->total_length).arg(pF->head_to_discharger_length).arg(pF->click_interval_low_freq).arg(pF->click_interval_hi_freq).arg(pF->click_channel).arg(pF->stop_pwm_interval)
+            .arg(pF->wait_interval).arg(pF->start_pwm_interval).arg(pF->reception_enable_interval).arg(pF->pwm_period).arg(pF->set_voltage).arg(pF->crc16);
+    return str;
 }
 QString paramFlashP(const PacketModulesData38k & moduleData){
-    /*data += "<tr><td>total_length </td><td> %1</td></tr>\
-             <tr><td>CRC16 </td><td> %2</td></tr>";
-            data = data.arg(*reinterpret_cast<ushort*>(ba.data()))
-            .arg(*reinterpret_cast<ushort*>(ba.data()+2));*/
+    Flash *dS = reinterpret_cast<Flash*>(moduleData.dataStruct);
+    ParamFlashP *pF = reinterpret_cast<ParamFlashP*>(dS->paramFlash);
+    QString str = "<tr><td colspan = '2' align='center'> ParamFlash: </td></tr>\
+<tr><td>total_length </td><td> %1</td></tr>\
+<tr><td>CRC16 </td><td> %2</td></tr>";
+    str = str.arg(pF->total_length).arg(pF->crc16);
+    return str;
 }
 QString paramFlashP0204(const PacketModulesData38k & moduleData){
-    /*data += "<tr><td>total_length </td><td> %1</td></tr>\
-<tr><td>channel_1_offset </td><td> %2</td></tr>\
-<tr><td>channel_2_offset </td><td> %3</td></tr>\
-<tr><td>invert_rate_signum </td><td> %4</td></tr>\
-<tr><td>CRC16 </td><td> %5</td></tr>";
-            data = data.arg(*reinterpret_cast<ushort*>(ba.data()))
-            .arg(*reinterpret_cast<ushort*>(ba.data()+2))
-            .arg(*reinterpret_cast<ushort*>(ba.data()+4))
-            .arg(*reinterpret_cast<uchar*>(ba.data()+6))
-            .arg(*reinterpret_cast<ushort*>(ba.data()+7));*/
+    Flash *dS = reinterpret_cast<Flash*>(moduleData.dataStruct);
+    ParamFlashP02P04 *pF = reinterpret_cast<ParamFlashP02P04*>(dS->paramFlash);
+    QFile file("debug\\template\\38k\\paramFlashP02P04.html");
+    file.open(QFile::ReadOnly);
+    QString str = QLatin1String(file.readAll());file.close();
+    str = str.arg(pF->total_length).arg(pF->channel_1_offset).arg(pF->channel_2_offset).arg(pF->invert_rate_signum).arg(pF->crc16);
+    return str;
 }
 QString paramFlashGVK(const PacketModulesData38k & moduleData){
-    /*data += "<tr><td>total_length </td><td> %1</td></tr>\
-<tr><td>telemetry_speed </td><td> %2</td></tr>\
-<tr><td>telemetry_resolution </td><td> %3</td></tr>\
-<tr><td>gk_dac_set_value </td><td> %4</td></tr>\
-<tr><td>gk_dac_min_value : %5</td></tr>\
-<tr><td>gk_dac_max_value </td><td> %6</td></tr>\
-<tr><td>extern_adc_temperature_config </td><td> %7</td></tr>\
-<tr><td>extern_adc_temperature_2_config </td><td> %8</td></tr>\
-<tr><td>extern_adc_pcorr_config </td><td> %9</td></tr>\
-<tr><td>extern_adc_pbw_config </td><td> %10</td></tr>\
-<tr><td>extern_adc_locator_config </td><td> %11</td></tr>\
-<tr><td>extern_adc_accel_config </td><td> %12</td></tr>\
-<tr><td>extern_adc_temperature_4_config </td><td> %13</td></tr>\
-<tr><td>reserve </td><td> %14</td></tr>\
-<tr><td>temperature_volatile </td><td> %15</td></tr>\
-<tr><td>temperature_maximum </td><td> %16</td></tr>\
-<tr><td>gk_dac_temperature_volatile </td><td> %17</td></tr>\
-<tr><td>gk_dac_temperature_maximum </td><td> %18</td></tr>\
-<tr><td>reserve </td><td> %19</td></tr>\
-<tr><td>reserve </td><td> %20</td></tr>\
-<tr><td>extern_adc_locator_offset </td><td> %21</td></tr>\
-<tr><td>crc16 </td><td> %22</td></tr>";
-            data = data.arg(*reinterpret_cast<ushort*>(ba.data()))
-            .arg(*reinterpret_cast<uchar*>(ba.data()+2)).arg(*reinterpret_cast<uchar*>(ba.data()+3))
-            .arg(*reinterpret_cast<ushort*>(ba.data()+4))
-            .arg(*reinterpret_cast<short*>(ba.data()+6))
-            .arg(*reinterpret_cast<short*>(ba.data()+8))
-            .arg(*reinterpret_cast<ushort*>(ba.data()+10))
-            .arg(*reinterpret_cast<ushort*>(ba.data()+12))
-            .arg(*reinterpret_cast<ushort*>(ba.data()+14))
-            .arg(*reinterpret_cast<ushort*>(ba.data()+16))
-            .arg(*reinterpret_cast<ushort*>(ba.data()+18))
-            .arg(*reinterpret_cast<ushort*>(ba.data()+20))
-            .arg(*reinterpret_cast<ushort*>(ba.data()+22))
-            .arg(*reinterpret_cast<uchar*>(ba.data()+24))
-            .arg(*reinterpret_cast<float*>(ba.data()+25))
-            .arg(*reinterpret_cast<float*>(ba.data()+29))
-            .arg(*reinterpret_cast<ushort*>(ba.data()+33))
-            .arg(*reinterpret_cast<ushort*>(ba.data()+35))
-            .arg(*reinterpret_cast<ushort*>(ba.data()+37))
-            .arg(*reinterpret_cast<uint*>(ba.data()+39))
-            .arg(*reinterpret_cast<uint*>(ba.data()+43))
-            .arg(*reinterpret_cast<ushort*>(ba.data()+47));*/
+    Flash *dS = reinterpret_cast<Flash*>(moduleData.dataStruct);
+    ParamFlashGVK *pF = reinterpret_cast<ParamFlashGVK*>(dS->paramFlash);
+    QFile file("debug\\template\\38k\\paramFlashGVK.html");
+    file.open(QFile::ReadOnly);
+    QString str = QLatin1String(file.readAll());file.close();
+    str = str.arg(pF->total_length).arg(pF->telemetry_speed).arg(pF->telemetry_resolution).arg(pF->gk_dac_set_value).arg(pF->gk_dac_min_value).arg(pF->gk_dac_max_value).arg(pF->extern_adc_temperature_config)
+            .arg(pF->extern_adc_temperature_2_config).arg(pF->extern_adc_pcorr_config).arg(pF->extern_adc_pbw_config).arg(pF->extern_adc_locator_config).arg(pF->extern_adc_accel_config)
+            .arg(pF->extern_adc_temperature_4_config).arg(pF->reserve).arg(pF->temperature_volatile).arg(pF->temperature_maximum).arg(pF->reserve2).arg(pF->reserve3).arg(pF->extern_adc_locator_offset).arg(pF->crc16);
+    return str;
 }
-
+QString paramFlashNNKt(const PacketModulesData38k & moduleData){
+    Flash *dS = reinterpret_cast<Flash*>(moduleData.dataStruct);
+    ParamFlashNNKt *pF = reinterpret_cast<ParamFlashNNKt*>(dS->paramFlash);
+    QFile file("debug\\template\\38k\\paramFlashNNKt.html");
+    file.open(QFile::ReadOnly);
+    QString str = QLatin1String(file.readAll());file.close();
+    str = str.arg(pF->total_length).arg(pF->near_counter_threshold).arg(pF->far_counter_threshold).arg(pF->swap_shannels).arg(pF->dac_set_value).arg(pF->dac_min_value).arg(pF->dac_max_value).arg(pF->temperature_volatile)
+            .arg(pF->temperature_maximum).arg(pF->dac_temperature_volatile).arg(pF->dac_temperature_maximum).arg(pF->temperature_addition).arg(0).arg(pF->crc16);
+    return str;
+}
+QString paramFlashGGP(const PacketModulesData38k & moduleData){
+    Flash *dS = reinterpret_cast<Flash*>(moduleData.dataStruct);
+    ParamFlashGGP *pF = reinterpret_cast<ParamFlashGGP*>(dS->paramFlash);
+    QFile file("debug\\template\\38k\\paramFlashGGP.html");
+    file.open(QFile::ReadOnly);
+    QString str = QLatin1String(file.readAll());file.close();
+    str = str.arg(pF->total_length).arg(pF->counter_threshold).arg(pF->swap_channels).arg(pF->dac_set_value).arg(pF->dac_min_value).arg(pF->dac_max_value)
+            .arg(pF->temperature_volatile).arg(pF->temperature_maximum).arg(pF->dac_temperature_volatile).arg(pF->dac_temperature_maximum).arg(pF->temperature_addition).arg(0).arg(pF->crc16);
+    return str;
+}
 
 QString channelGKT(const PacketModulesData38k & moduleData){
     DataGKT *dS = reinterpret_cast<DataGKT*>(moduleData.dataStruct);
-    QString str = "<table border='1'><tr><td>temperature_internal </td><td> %1</td></tr>\
-<tr><td>locator_amp </td><td> %2</td></tr>\
-<tr><td>locator_amp_interval_max </td><td> %3</td></tr>\
-<tr><td>locator_amp_interval_min </td><td> %4</td></tr>\
-<tr><td>gk_time </td><td> %5</td></tr>\
-<tr><td>gk_impulses </td><td> %6</td></tr>\
-<tr><td>gk_uhv </td><td> %7</td></tr>\
-<tr><td>hygrometer </td><td> %8</td></tr>\
-<tr><td>power_supply </td><td> %9</td></tr>\
-<tr><td>emds_supply </td><td> %10</td></tr>\
-<tr><td>temperature_external </td><td> %11</td></tr>\
-<tr><td>sti_1 </td><td> %12</td></tr>\
-<tr><td>sti_2 </td><td> %13</td></tr>\
-<tr><td>p_corr </td><td> %14</td></tr>\
-<tr><td>p_bw </td><td> %15</td></tr>\
-<tr><td>acceleration_x </td><td> %16</td></tr>\
-<tr><td>acceleration_y </td><td> %17</td></tr>\
-<tr><td>acceleration_z </td><td> %18</td></tr>\
-<tr><td>locator_amp </td><td> %19</td></tr>\
-<tr><td>resistance </td><td> %20</td></tr>\
-<tr><td>sti_pwm </td><td> %21</td></tr>\
-<tr><td>pressure </td><td> %22</td></tr>\
-<tr><td>temperature </td><td> %23</td></tr>\
-<tr><td>gk_dac </td><td> %24</td></tr></table>";
-    str = str.arg(dS->temperature_internal)
-            .arg(dS->locator_amp16).arg(dS->locator_amp_interval_max)
-            .arg(dS->locator_amp_interval_min).arg(dS->gk_time)
-            .arg(dS->gk_impulses).arg(dS->gk_uhv).arg(dS->hygrometer)
-            .arg(dS->power_supply).arg(dS->emds_supply).arg(dS->temperature_external)
-            .arg(dS->sti_1).arg(dS->sti_2).arg(dS->p_corr).arg(dS->p_bw).arg(dS->acceleration_x)
-            .arg(dS->acceleration_y).arg(dS->acceleration_z).arg(dS->locator_amp24).arg(dS->resistance)
-            .arg(dS->sti_pwm).arg(dS->pressure).arg(dS->temperature).arg(dS->gk_dac);
+    QFile file("debug\\template\\38k\\channelGKT.html");
+    file.open(QFile::ReadOnly);
+    QString str = QLatin1String(file.readAll());file.close();
+    str = str.arg(dS->temperature_internal).arg(dS->locator_amp16).arg(dS->locator_amp_interval_max).arg(dS->locator_amp_interval_min).arg(dS->gk_time)
+            .arg(dS->gk_impulses).arg(dS->gk_uhv).arg(dS->hygrometer).arg(dS->power_supply).arg(dS->emds_supply).arg(dS->temperature_external).arg(dS->sti_1).arg(dS->sti_2).arg(dS->p_corr).arg(dS->p_bw).arg(dS->acceleration_x)
+            .arg(dS->acceleration_y).arg(dS->acceleration_z).arg(dS->locator_amp24).arg(dS->resistance).arg(dS->sti_pwm).arg(dS->pressure).arg(dS->temperature).arg(dS->gk_dac);
     return str;
 }
 
@@ -359,25 +233,9 @@ QString channelGGP(const PacketModulesData38k & moduleData){
 }
 QString channelGVK(const PacketModulesData38k & moduleData){
     DataGVK *dS = reinterpret_cast<DataGVK*>(moduleData.dataStruct);
-    QString str = "<table border='1'><tr><td>temperature_internal </td><td> %1</td></tr>\
-<tr><td>locator_amp </td><td> %2</td></tr>\
-<tr><td>locator_amp_interval_max </td><td> %3</td></tr>\
-<tr><td>locator_amp_interval_min </td><td> %4</td></tr>\
-<tr><td>gk_time </td><td> %5</td></tr>\
-<tr><td>gk_impulses </td><td> %6</td></tr>\
-<tr><td>gk_uhv </td><td> %7</td></tr>\
-<tr><td>power_supply </td><td> %8</td></tr>\
-<tr><td>temperature_external </td><td> %9</td></tr>\
-<tr><td>temperature_external_2 </td><td> %10</td></tr>\
-<tr><td>temperature_external_3 </td><td> %11</td></tr>\
-<tr><td>p_corr </td><td> %12</td></tr>\
-<tr><td>p_bw </td><td> %13</td></tr>\
-<tr><td>acceleration_x </td><td> %14</td></tr>\
-<tr><td>acceleration_y </td><td> %15</td></tr>\
-<tr><td>acceleration_z </td><td> %16</td></tr>\
-<tr><td>locator_amp </td><td> %17</td></tr>\
-<tr><td>temperature_external_4 </td><td> %18</td></tr>\
-<tr><td>gk_dac </td><td> %19</td></tr></table>";
+    QFile file("debug\\template\\38k\\channelGVK.html");
+    file.open(QFile::ReadOnly);
+    QString str = QLatin1String(file.readAll());file.close();
     str = str.arg(dS->temperature_internal).arg(dS->locator_amp16)
             .arg(dS->locator_amp_interval_max).arg(dS->locator_amp_interval_min)
             .arg(dS->gk_time).arg(dS->gk_impulses).arg(dS->gk_uhv)
@@ -393,66 +251,36 @@ QString dataString(const PacketModulesData38k &moduleData){
     int type = moduleData.dataStruct->type;
     if(moduleData.header.data_state & 0x02){
         Flash *dS = reinterpret_cast<Flash*>(moduleData.dataStruct);
-        QString str = "<table border='1' >\
-<tr><td colspan = '2' align='center'> HardFlash: </td></tr>\
-<tr><td> total_length </td><td>  %1 </td></tr>\
-<tr><td> device_type </td><td>  %2 </td></tr>\
-<tr><td> device_number </td><td>  %3 </td></tr>\
-<tr><td> production_day </td><td>  %4 </td></tr>\
-<tr><td> production_month </td><td>  %5 </td></tr>\
-<tr><td> production_year </td><td>  %6 </td></tr>\
-<tr><td> device_name </td><td>  %7 </td></tr>\
-<tr><td> device_code </td><td>  %8 </td></tr>\
-<tr><td> device_decimal </td><td>  %9 </td></tr>\
-<tr><td> flash_version </td><td>  %10 </td></tr>\
-<tr><td> firmware_version </td><td>  %11 </td></tr>\
-<tr><td> reserved </td><td>  %12 </td></tr>\
-<tr><td> device_tag </td><td>  %13 </td></tr>\
-<tr><td> device_length </td><td>  %14 </td></tr>\
-<tr><td> device_tech_header_size </td><td>  %15 </td></tr>\
-<tr><td> device_data_size </td><td>  %16 </td></tr>\
-<tr><td> data_parts_max </td><td>  %17 </td></tr>";
-    str = str.arg(dS->hardFlash.total_length).arg(dS->hardFlash.device_tipe)
-                .arg(dS->hardFlash.device_number)
-                .arg(dS->hardFlash.production_day)
-                .arg(dS->hardFlash.production_month)
-                .arg(dS->hardFlash.production_year)
-                .arg(dS->hardFlash.device_name)
-                .arg(dS->hardFlash.device_code)
-                .arg(dS->hardFlash.device_decimal)
-                .arg(dS->hardFlash.flash_version)
-                .arg(dS->hardFlash.firmware_version)
-                .arg(dS->hardFlash.reserved)
-                .arg(dS->hardFlash.device_tag)
-                .arg(dS->hardFlash.device_length)
-                .arg(dS->hardFlash.device_tech_header_size)
-                .arg(dS->hardFlash.device_data_size)
-                .arg(dS->hardFlash.data_parts_max);
+        QFile file("debug\\template\\38k\\hardFlash.html");
+        file.open(QFile::ReadOnly);
+        QString str = QLatin1String(file.readAll());file.close();
+        str = str.arg(dS->hardFlash.total_length).arg(dS->hardFlash.device_tipe).arg(dS->hardFlash.device_number)
+                .arg(dS->hardFlash.production_day).arg(dS->hardFlash.production_month).arg(dS->hardFlash.production_year)
+                .arg(dS->hardFlash.device_name).arg(dS->hardFlash.device_code).arg(dS->hardFlash.device_decimal)
+                .arg(dS->hardFlash.flash_version).arg(dS->hardFlash.firmware_version).arg(dS->hardFlash.reserved)
+                .arg(dS->hardFlash.device_tag).arg(dS->hardFlash.device_length).arg(dS->hardFlash.device_tech_header_size)
+                .arg(dS->hardFlash.device_data_size).arg(dS->hardFlash.data_parts_max);
      foreach(ChannelInformation value,dS->hardFlash.channel){
-                str += "<tr><td colspan = '2' align='center' > Channel </td></tr>\
-    <tr><td> channel_mnemonics </td><td>  %1 </td></tr>\
-    <tr><td> channel_write_point </td><td>  %2 </td></tr>\
-    <tr><td> channel_flags </td><td>  %3 </td></tr>";
+                str += "<tr><td colspan = '2' align='center' > Channel </td></tr><tr><td> channel_mnemonics </td><td>  %1 </td></tr>\
+<tr><td> channel_write_point </td><td>  %2 </td></tr><tr><td> channel_flags </td><td>  %3 </td></tr>";
                 str = str.arg(value.channel_mnemonics).arg(value.channel_write_point).arg(value.channel_flags);
      }
         if(type == GKT)
             str += paramFlashGKT(moduleData);
         else if(type == SHM)
             str += paramFlashSHM(moduleData);
-        /*else if(type == AG)
-            return channelAG(moduleData);
+        else if(type == AG)
+            str += paramFlashAG(moduleData);
         else if(type == MP)
-            return channelP(moduleData);
-        else if(type == P04)
-            return channelP04(moduleData);
-        else if(type == P02)
-            return channelP02(moduleData);
+            str += paramFlashP(moduleData);
+        else if(type == P04 | type == P02)
+            str += paramFlashP0204(moduleData);
         else if(type == GVK)
-            return channelGVK(moduleData);
+            str += paramFlashGVK(moduleData);
         else if(type == NNKt)
-            return channel2NNKt(moduleData);
+            str += channel2NNKt(moduleData);
         else if(type == GGP)
-            return channelGGP(moduleData);*/
+            str += channelGGP(moduleData);
         return str += "<tr><td colspan = '2' align='center'> CalibFlash: </td></tr><tr><td colspan = '2'>" + dS->calibFlash.toHex() + "</td></tr>";
     }
     else{

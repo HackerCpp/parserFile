@@ -75,9 +75,9 @@ struct HardFlash{
    ushort crc16;
 };
 struct  ParamFlash{
-};
-struct ParamFlashGKT : public ParamFlash{
     ushort total_length;
+};
+struct ParamFlashGKT : public ParamFlash{  
     uchar telemetry_speed;
     uchar telemetry_resolution;
     ushort resistance_divisor;
@@ -112,7 +112,6 @@ struct ParamFlashGKT : public ParamFlash{
     ushort crc16;
 };
 struct ParamFlashSHM : public ParamFlash{
-    ushort total_length;
     ushort sensor_number;
     float channel_coefficients[2];
     ushort head_to_sensor_length[2];
@@ -144,7 +143,6 @@ struct ParamFlashSHM : public ParamFlash{
     ushort crc16;
 };
 struct ParamFlashAG : public ParamFlash{
-    ushort total_length;
     ushort head_to_discharger_length;
     ushort click_interval_low_freq;
     ushort click_interval_hi_freq;
@@ -158,18 +156,15 @@ struct ParamFlashAG : public ParamFlash{
     ushort crc16;
 };
 struct ParamFlashP : public ParamFlash{
-   ushort total_length;
    ushort crc16;
 };
 struct  ParamFlashP02P04 : public ParamFlash{
-    ushort total_length;
     ushort channel_1_offset;
     ushort channel_2_offset;
     bool invert_rate_signum;
     ushort crc16;
 };
 struct ParamFlashGVK : public ParamFlash{
-    ushort total_length;
     uchar telemetry_speed;
     uchar telemetry_resolution;
     ushort gk_dac_set_value;
@@ -186,13 +181,12 @@ struct ParamFlashGVK : public ParamFlash{
     float temperature_volatile;
     float temperature_maximum;
     ushort reserve2;
-    uchar reserve3[4];
+    int reserve3;
     uint extern_adc_locator_offset;
     ushort crc16;
 
 };
 struct ParamFlashNNKt : public ParamFlash{
-  ushort total_length;
   ushort near_counter_threshold;
   ushort far_counter_threshold;
   uchar swap_shannels;
@@ -208,7 +202,6 @@ struct ParamFlashNNKt : public ParamFlash{
   ushort crc16;
 };
 struct ParamFlashGGP : public ParamFlash{
-    short total_length;
     short counter_threshold;
     uchar swap_channels;
     short dac_set_value;
@@ -269,6 +262,7 @@ struct DataSHM0 : public DataSHM1{
     ushort accel_z_mean;
     ushort accel_z_variance;
     ushort accel_z_flags;
+
 };
 
 struct DataAG : public ModuleData{

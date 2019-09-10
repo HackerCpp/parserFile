@@ -39,7 +39,8 @@ SOURCES += \
     src/menu.cpp \
     src/filehandler.cpp \
     src/tabs/tab38k.cpp \
-    src/fileCreation/csv.cpp
+    src/fileCreation/csv.cpp \
+    inc/men.cpp
 
 HEADERS += \
         inc\mainwindow.h \
@@ -55,7 +56,8 @@ HEADERS += \
     inc/menu.h \
     inc/filehandler.h \
     inc/tabs/tab38k.h \
-    inc/fileCreation/csv.h
+    inc/fileCreation/csv.h \
+    inc/men.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
