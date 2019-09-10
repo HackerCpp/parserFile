@@ -15,7 +15,7 @@ men::men(QWidget *parent) : QWidget(parent){
     this->setWindowFlags(Qt::CustomizeWindowHint | Qt::FramelessWindowHint);
     vBoxLayout = new QVBoxLayout;
     hBoxLayout = new QHBoxLayout;
-    hBoxLayout->setMargin(0);
+    hBoxLayout->setContentsMargins(0,0,0,0);
 
     leftBtnsWidg = new QWidget();
     leftBtnsLayuot = new QHBoxLayout();
