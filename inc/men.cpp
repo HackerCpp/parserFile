@@ -1,6 +1,7 @@
 #include "men.h"
 #include <QFile>
 #include <QToolButton>
+#include <QStyleOptionSlider>
 
 
 
@@ -10,8 +11,22 @@ men::men(QWidget *parent) : QWidget(parent){
     QString StyleSheet = QLatin1String(File.readAll());
     this->setStyleSheet(StyleSheet);
 
+    slyderColor = new QSlider(Qt::Horizontal);
+    slyderColor->setObjectName("sliderColor");
+    slyderThickness = new QSlider(Qt::Horizontal);
+    slydersLayout = new QHBoxLayout();
+    slydersLayout->addWidget(slyderColor);
+    slydersLayout->addSpacing(50);
+    slydersLayout->addWidget(slyderThickness);
+
+
+
+
     up = new QWidget();
     down= new QWidget();
+    down->setFixedSize(400,40);
+    down->setLayout(slydersLayout);
+
     this->setWindowFlags(Qt::CustomizeWindowHint | Qt::FramelessWindowHint);
     vBoxLayout = new QVBoxLayout;
     hBoxLayout = new QHBoxLayout;
@@ -54,7 +69,7 @@ men::men(QWidget *parent) : QWidget(parent){
     }
     this->toolBar->setFixedHeight(40);
     leftBtnsLayuot->addWidget(toolBar);
-    leftBtnsWidg->setFixedHeight(40);
+    leftBtnsWidg->setFixedSize(400,40);
 
     rBtnW->setFixedSize(55,40);
     rBtnW->setAttribute(Qt::WA_TranslucentBackground, true );
@@ -63,6 +78,7 @@ men::men(QWidget *parent) : QWidget(parent){
     btnMenu->setFixedSize(15,40);
 
     hBoxLayout->addWidget(leftBtnsWidg);
+    hBoxLayout->addStretch(100);
     hBoxLayout->addWidget(rBtnW);
     up->setAttribute( Qt::WA_TranslucentBackground, true );
     up->setLayout(hBoxLayout);
@@ -73,8 +89,8 @@ men::men(QWidget *parent) : QWidget(parent){
 
 
     setAttribute( Qt::WA_TranslucentBackground, true );
-    setFixedSize(500,100);
-
+    setFixedSize(500,80);
+    //this->down->hide();
 
 
 }

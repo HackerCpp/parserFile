@@ -5,6 +5,7 @@
 #include <QDebug>
 #include "inc/tabs/tab38k.h"
 #include "inc/men.h"
+
 MainWindow::MainWindow(QWidget *parent){
     men *tab = new men();
     tab->show();
@@ -57,13 +58,13 @@ void MainWindow::applyStyle(){
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());
     qApp->setStyleSheet(StyleSheet);
+
 }
 MainWindow::~MainWindow(){
     delete this->menu;
     this->menu = nullptr;
     delete this->tabWid;
     this->tabWid = nullptr;
-
 }
 void MainWindow::saveFile(){
    Tab38k * tab = dynamic_cast<Tab38k *>(this->tabWid->currentWidget());

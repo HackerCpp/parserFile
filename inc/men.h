@@ -7,11 +7,17 @@
 #include <QToolBar>
 #include <QPushButton>
 #include <QGroupBox>
+#include <QSlider>
 
 
 class men : public QWidget
 {
     Q_OBJECT
+
+    QSlider *slyderColor,*slyderThickness;
+    QHBoxLayout * slydersLayout;
+
+
     QWidget *up,*down;
     QPushButton * btn[5];
 
