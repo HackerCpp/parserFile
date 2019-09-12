@@ -6,10 +6,6 @@
 
 
 men::men(QWidget *parent) : QWidget(parent){
-    QFile File("debug\\m.css");
-    File.open(QFile::ReadOnly);
-    QString StyleSheet = QLatin1String(File.readAll());
-    this->setStyleSheet(StyleSheet);
 
     slyderColor = new QSlider(Qt::Horizontal);
     slyderColor->setObjectName("sliderColor");
