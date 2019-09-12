@@ -9,6 +9,31 @@
 #include <QGroupBox>
 #include <QSlider>
 #include <QGridLayout>
+#include <QLabel>
+#include <QSystemTrayIcon>
+
+class Wind : public QWidget{
+     Q_OBJECT
+    QSystemTrayIcon *trayIcon;
+    QHBoxLayout *headerLayout;
+    QLabel * headerLabelIcon,*headerLabelText;
+    QPushButton * headerBtn;
+    QVBoxLayout * mainVBoxLayout;
+    QGridLayout * gridLayoutUp;
+    QHBoxLayout * hBoxLayoutAver,*hBoxLayoutDown;
+    QGroupBox * groupBoxUp,* groupBoxAver;
+    QWidget * downWidg;
+    QPushButton * pushBtn[6];
+    QLabel * labelleft,*labelRight;
+    void setObgectName();
+public:
+    Wind();
+public slots:
+    void hideWin();
+    void showWin();
+};
+
+
 
 
 class men : public QWidget
