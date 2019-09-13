@@ -7,10 +7,10 @@
 #include "inc/men.h"
 
 MainWindow::MainWindow(QWidget *parent){
-    //men *tab = new men();
-    //tab->show();
-    Wind *tab = new Wind();
+    men *tab = new men();
     tab->show();
+    Wind *t = new Wind();
+    t->show();
     this->setParent(parent);
     tabWid = new QTabWidget();
     menu = new Menu(this);
