@@ -4,7 +4,7 @@
 QString paramFlashGKT(const PacketModulesData38k & moduleData){
     Flash *dS = reinterpret_cast<Flash*>(moduleData.dataStruct);
     ParamFlashGKT *pF = reinterpret_cast<ParamFlashGKT*>(dS->paramFlash);
-    QFile file("debug\\template\\38k\\paramFlashGKT.html");
+    QFile file("template\\38k\\paramFlashGKT.html");
     file.open(QFile::ReadOnly);
     QString str = QLatin1String(file.readAll());
     file.close();
@@ -20,7 +20,7 @@ QString paramFlashGKT(const PacketModulesData38k & moduleData){
 QString paramFlashSHM(const PacketModulesData38k & moduleData){
     Flash *dS = reinterpret_cast<Flash*>(moduleData.dataStruct);
     ParamFlashSHM *pF = reinterpret_cast<ParamFlashSHM*>(dS->paramFlash);
-    QFile file("debug\\template\\38k\\paramFlashSHM.html");
+    QFile file("template\\38k\\paramFlashSHM.html");
     file.open(QFile::ReadOnly);
     QString str = QLatin1String(file.readAll());
     file.close();
@@ -37,7 +37,7 @@ QString paramFlashSHM(const PacketModulesData38k & moduleData){
 QString paramFlashAG(const PacketModulesData38k & moduleData){
     Flash *dS = reinterpret_cast<Flash*>(moduleData.dataStruct);
     ParamFlashAG *pF = reinterpret_cast<ParamFlashAG*>(dS->paramFlash);
-    QFile file("debug\\template\\38k\\paramFlashAG.html");
+    QFile file("template\\38k\\paramFlashAG.html");
     file.open(QFile::ReadOnly);
     QString str = QLatin1String(file.readAll());file.close();
     str = str.arg(pF->total_length).arg(pF->head_to_discharger_length).arg(pF->click_interval_low_freq).arg(pF->click_interval_hi_freq).arg(pF->click_channel).arg(pF->stop_pwm_interval)
@@ -56,7 +56,7 @@ QString paramFlashP(const PacketModulesData38k & moduleData){
 QString paramFlashP0204(const PacketModulesData38k & moduleData){
     Flash *dS = reinterpret_cast<Flash*>(moduleData.dataStruct);
     ParamFlashP02P04 *pF = reinterpret_cast<ParamFlashP02P04*>(dS->paramFlash);
-    QFile file("debug\\template\\38k\\paramFlashP02P04.html");
+    QFile file("template\\38k\\paramFlashP02P04.html");
     file.open(QFile::ReadOnly);
     QString str = QLatin1String(file.readAll());file.close();
     str = str.arg(pF->total_length).arg(pF->channel_1_offset).arg(pF->channel_2_offset).arg(pF->invert_rate_signum).arg(pF->crc16);
@@ -65,7 +65,7 @@ QString paramFlashP0204(const PacketModulesData38k & moduleData){
 QString paramFlashGVK(const PacketModulesData38k & moduleData){
     Flash *dS = reinterpret_cast<Flash*>(moduleData.dataStruct);
     ParamFlashGVK *pF = reinterpret_cast<ParamFlashGVK*>(dS->paramFlash);
-    QFile file("debug\\template\\38k\\paramFlashGVK.html");
+    QFile file("template\\38k\\paramFlashGVK.html");
     file.open(QFile::ReadOnly);
     QString str = QLatin1String(file.readAll());file.close();
     str = str.arg(pF->total_length).arg(pF->telemetry_speed).arg(pF->telemetry_resolution).arg(pF->gk_dac_set_value).arg(pF->gk_dac_min_value).arg(pF->gk_dac_max_value).arg(pF->extern_adc_temperature_config)
@@ -76,7 +76,7 @@ QString paramFlashGVK(const PacketModulesData38k & moduleData){
 QString paramFlashNNKt(const PacketModulesData38k & moduleData){
     Flash *dS = reinterpret_cast<Flash*>(moduleData.dataStruct);
     ParamFlashNNKt *pF = reinterpret_cast<ParamFlashNNKt*>(dS->paramFlash);
-    QFile file("debug\\template\\38k\\paramFlashNNKt.html");
+    QFile file("template\\38k\\paramFlashNNKt.html");
     file.open(QFile::ReadOnly);
     QString str = QLatin1String(file.readAll());file.close();
     str = str.arg(pF->total_length).arg(pF->near_counter_threshold).arg(pF->far_counter_threshold).arg(pF->swap_shannels).arg(pF->dac_set_value).arg(pF->dac_min_value).arg(pF->dac_max_value).arg(pF->temperature_volatile)
@@ -86,7 +86,7 @@ QString paramFlashNNKt(const PacketModulesData38k & moduleData){
 QString paramFlashGGP(const PacketModulesData38k & moduleData){
     Flash *dS = reinterpret_cast<Flash*>(moduleData.dataStruct);
     ParamFlashGGP *pF = reinterpret_cast<ParamFlashGGP*>(dS->paramFlash);
-    QFile file("debug\\template\\38k\\paramFlashGGP.html");
+    QFile file("template\\38k\\paramFlashGGP.html");
     file.open(QFile::ReadOnly);
     QString str = QLatin1String(file.readAll());file.close();
     str = str.arg(pF->total_length).arg(pF->counter_threshold).arg(pF->swap_channels).arg(pF->dac_set_value).arg(pF->dac_min_value).arg(pF->dac_max_value)
@@ -96,7 +96,7 @@ QString paramFlashGGP(const PacketModulesData38k & moduleData){
 
 QString channelGKT(const PacketModulesData38k & moduleData){
     DataGKT *dS = reinterpret_cast<DataGKT*>(moduleData.dataStruct);
-    QFile file("debug\\template\\38k\\channelGKT.html");
+    QFile file("template\\38k\\channelGKT.html");
     file.open(QFile::ReadOnly);
     QString str = QLatin1String(file.readAll());file.close();
     str = str.arg(dS->temperature_internal).arg(dS->locator_amp16).arg(dS->locator_amp_interval_max).arg(dS->locator_amp_interval_min).arg(dS->gk_time)
@@ -233,7 +233,7 @@ QString channelGGP(const PacketModulesData38k & moduleData){
 }
 QString channelGVK(const PacketModulesData38k & moduleData){
     DataGVK *dS = reinterpret_cast<DataGVK*>(moduleData.dataStruct);
-    QFile file("debug\\template\\38k\\channelGVK.html");
+    QFile file("template\\38k\\channelGVK.html");
     file.open(QFile::ReadOnly);
     QString str = QLatin1String(file.readAll());file.close();
     str = str.arg(dS->temperature_internal).arg(dS->locator_amp16)
@@ -243,6 +243,7 @@ QString channelGVK(const PacketModulesData38k & moduleData){
             .arg(dS->temperature_external3).arg(dS->p_corr).arg(dS->p_bw)
             .arg(dS->acceleration_x).arg(dS->acceleration_y).arg(dS->acceleration_z)
             .arg(dS->locator_amp24).arg(dS->temperature_external4).arg(dS->gk_dac);
+    return str;
 }
 
 QString dataString(const PacketModulesData38k &moduleData){
@@ -251,7 +252,7 @@ QString dataString(const PacketModulesData38k &moduleData){
     int type = moduleData.dataStruct->type;
     if(moduleData.header.data_state & 0x02){
         Flash *dS = reinterpret_cast<Flash*>(moduleData.dataStruct);
-        QFile file("debug\\template\\38k\\hardFlash.html");
+        QFile file("template\\38k\\hardFlash.html");
         file.open(QFile::ReadOnly);
         QString str = QLatin1String(file.readAll());file.close();
         str = str.arg(dS->hardFlash.total_length).arg(dS->hardFlash.device_tipe).arg(dS->hardFlash.device_number)
@@ -278,9 +279,9 @@ QString dataString(const PacketModulesData38k &moduleData){
         else if(type == GVK)
             str += paramFlashGVK(moduleData);
         else if(type == NNKt)
-            str += channel2NNKt(moduleData);
+            str += paramFlashNNKt(moduleData);
         else if(type == GGP)
-            str += channelGGP(moduleData);
+            str += paramFlashGGP(moduleData);
         return str += "<tr><td colspan = '2' align='center'> CalibFlash: </td></tr><tr><td colspan = '2'>" + dS->calibFlash.toHex() + "</td></tr>";
     }
     else{
