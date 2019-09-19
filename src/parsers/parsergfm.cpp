@@ -12,8 +12,7 @@ void ParserGFM::parserHeaderBlock(QByteArray *bodyBlock,BlockGFMData *data){
         indexEndString = bodyBlock->indexOf("\n",position);
         HeaderData info ={bodyBlock->mid(position,indexEndString - position + 2)};
         position += indexEndString - position + 2;
-        //QString str = info.dataString.toHex();
-        //qDebug() << QTextCodec::codecForName("Windows-1251")->toUnicode(QByteArray::fromHex(str.remove("00").toLocal8Bit()));
+        //qDebug() << QTextCodec::codecForMib(1015)->toUnicode(info.dataString);
         header->data.push_back(info);
     }while (indexEndString != -1);
 }
@@ -26,15 +25,66 @@ void ParserGFM::parserToolInfoBlock(QByteArray *bodyBlock,BlockGFMData *data){
         indexEndString = bodyBlock->indexOf("\n",position);
         ToolInfoData info ={bodyBlock->mid(position,indexEndString - position + 2)};
         position += indexEndString - position + 2;
-        //QString str = info.dataString.toHex();
-        //qDebug() << QTextCodec::codecForName("Windows-1251")->toUnicode(QByteArray::fromHex(str.remove("00").toLocal8Bit()));
+        //qDebug() << QTextCodec::codecForMib(1015)->toUnicode(info.dataString);
         header->data.push_back(info);
     }while (indexEndString != -1);
 }
+void parserDataBlockHeader(QByteArray *header,int position,QList<DataBlockData> *data){
+    int pos = position;
+    DataBlockData dataBlock;
+    int indexBeginOffset = header->indexOf("[",pos);
+    if(indexBeginOffset == -1){
+        qDebug() << "end of moduls";
+        return;
+    }
+    int indexEndOffset = header->indexOf("]",pos);
+    dataBlock.offset = QTextCodec::codecForMib(1015)->toUnicode(header->mid(indexBeginOffset+2,indexEndOffset - indexBeginOffset-2)).toUInt();
+    pos = indexEndOffset + 2;
+    int indexEndsize = header->indexOf("]",pos);
+    dataBlock.size = QTextCodec::codecForMib(1015)->toUnicode(header->mid(indexEndOffset + 4,indexEndsize - indexEndOffset - 4)).toUInt();
+    pos = indexEndsize + 2;
+    int indexBeginParamMnemon = header->indexOf(":",pos);
+    int indexEndParamMnemon =   header->indexOf(":",indexBeginParamMnemon+2);
+    dataBlock.parameterMnemonics = header->mid(indexBeginParamMnemon+2,indexEndParamMnemon - indexBeginParamMnemon - 4);
+    if(indexEndParamMnemon == -1)
+        return;
+    pos = indexEndParamMnemon + 2;
+    int indexbeginRecordPoint = header->indexOf(":",pos);
+    int indexEndDataType;
+    if(indexbeginRecordPoint - indexEndParamMnemon > 40 || indexbeginRecordPoint == -1 ){
+        indexEndDataType = header->indexOf("<",pos);
+    }
+    else {
+        indexEndDataType = indexbeginRecordPoint;
+        dataBlock.recordPoint = header->mid(indexbeginRecordPoint+4,header->indexOf("<",pos) - indexbeginRecordPoint - 6);
+    }
+    dataBlock.dataType = header->mid(indexEndParamMnemon+4,indexEndDataType - indexEndParamMnemon - 6);
+    qDebug() << dataBlock.offset << dataBlock.size
+             << QTextCodec::codecForMib(1015)->toUnicode(dataBlock.parameterMnemonics)
+             << QTextCodec::codecForMib(1015)->toUnicode(dataBlock.dataType)
+             << QTextCodec::codecForMib(1015)->toUnicode(dataBlock.recordPoint);
+    pos = indexEndDataType + 2;
+    parserDataBlockHeader(header,pos,data);
+}
 void ParserGFM::parserDataBlock(QByteArray *bodyBlock,BlockGFMData *data){
-    uint headerSize = bodyBlock->indexOf("< / ");
-    //QString str = bodyBlock->mid(0,5000).toHex();
-    qDebug() << QString::number(headerSize);
+    data = new DataBlock();
+    DataBlock *dataBlock = reinterpret_cast<DataBlock *>(data);
+    QByteArray endHeader = "</PARAMETERS>",beginHeader = "<PARAMETERS";
+    QTextCodec *codec1 = QTextCodec::codecForMib(1015);
+    int beginHeaderIndex = bodyBlock->indexOf(codec1->fromUnicode(beginHeader).mid(4));
+    int endHeaderIndex = bodyBlock->indexOf(codec1->fromUnicode(endHeader).mid(4));
+    dataBlock->header = bodyBlock->mid(beginHeaderIndex-2,endHeaderIndex-beginHeaderIndex + endHeader.size()*2);
+    dataBlock->numberOfVectors = *reinterpret_cast<uint*>(bodyBlock->mid(endHeaderIndex+endHeader.size()*2+2,4).data());
+    QByteArray nameStartMark = "NAME=\"",moduleMnemEndMarc = "\"/>";
+    int indexBeginName = dataBlock->header.indexOf(codec1->fromUnicode(nameStartMark).mid(4)) + sizeof(nameStartMark)*2 + 2;
+    int indexEndName = dataBlock->header.indexOf(".",indexBeginName);
+    dataBlock->nameRecord = dataBlock->header.mid(indexBeginName,indexEndName - indexBeginName);
+    int indexEndmoduleMnem = dataBlock->header.indexOf(codec1->fromUnicode(moduleMnemEndMarc).mid(4),indexEndName);
+    dataBlock->moduleMnemonics = dataBlock->header.mid(indexEndName+2,indexEndmoduleMnem - indexEndName - 4);
+
+    dataBlock->data = new QList<DataBlockData>();
+    parserDataBlockHeader(&dataBlock->header,indexEndmoduleMnem,dataBlock->data);
+    //qDebug() << QTextCodec::codecForMib(1015)->toUnicode(dataBlock->moduleMnemonics);
 }
 void ParserGFM::parserUnknownBlock(QByteArray *bodyBlock,BlockGFMData *data){
     data = new UnknownBlock();
@@ -45,8 +95,6 @@ void ParserGFM::parserUnknownBlock(QByteArray *bodyBlock,BlockGFMData *data){
         indexEndString = bodyBlock->indexOf("\n",position);
         UnknownData info ={bodyBlock->mid(position,indexEndString - position + 2)};
         position += indexEndString - position + 2;
-        //QString str = info.dataString.toHex();
-        //qDebug() << QTextCodec::codecForName("Windows-1251")->toUnicode(QByteArray::fromHex(str.remove("00").toLocal8Bit()));
         header->data.push_back(info);
     }while (indexEndString != -1);
 }

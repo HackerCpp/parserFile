@@ -13,7 +13,12 @@ struct ToolInfoData{
     QByteArray dataString;
 };
 struct DataBlockData{
-    QByteArray header;
+    uint offset;
+    uint size;
+    QByteArray parameterMnemonics;
+    QByteArray dataType;
+    QByteArray recordPoint;
+    QByteArray desc;
     QByteArray data;
 };
 struct UnknownData{
@@ -29,7 +34,11 @@ struct ToolInfoBlock : public BlockGFMData{
     QList<ToolInfoData> data;
 };
 struct DataBlock : public BlockGFMData{
-    DataBlockData data;
+    QByteArray header;
+    uint numberOfVectors;
+    QByteArray nameRecord;
+    QByteArray moduleMnemonics;
+    QList<DataBlockData> *data;
 };
 struct UnknownBlock : public BlockGFMData{
     QList<UnknownData> data;
