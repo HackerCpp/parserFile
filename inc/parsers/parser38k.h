@@ -31,6 +31,7 @@ struct PacketDeviceData38k{
     Data38k data;
 };
 Q_DECLARE_METATYPE(PacketDeviceData38k);
+Q_DECLARE_TYPEINFO (PacketDeviceData38k, Q_PRIMITIVE_TYPE);
 
 struct HeaderModules38k{
    unsigned char moduleAddress;

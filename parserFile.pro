@@ -40,7 +40,10 @@ SOURCES += \
     src/menu.cpp \
     src/filehandler.cpp \
     src/tabs/tab38k.cpp \
-    src/fileCreation/csv.cpp
+    src/fileCreation/csv.cpp \
+    src/tabs/tabgfm.cpp \
+    src/models/modelgfm.cpp \
+    src/graphic/curveline.cpp
 
 HEADERS += \
         inc/mainwindow.h \
@@ -57,7 +60,10 @@ HEADERS += \
     inc/menu.h \
     inc/filehandler.h \
     inc/tabs/tab38k.h \
-    inc/fileCreation/csv.h
+    inc/fileCreation/csv.h \
+    inc/tabs/tabgfm.h \
+    inc/models/modelgfm.h \
+    inc/graphic/curveline.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

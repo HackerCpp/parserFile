@@ -2,6 +2,7 @@
 #include "inc/filereader.h"
 #include "inc/parsers/parsergfm.h"
 #include "inc/tabs/tab38k.h"
+#include "inc/tabs/tabgfm.h"
 
 
 
@@ -21,7 +22,8 @@ QWidget *FileHandler::getWidget(QString path){
         return tab;
     }
     else if(file->getType() == ".gfm"){
-        ParserGFM *pGfm = new ParserGFM(file);
+        TabGFM * tab = new TabGFM(file);
+        return tab;
     }
     return nullptr;
 }

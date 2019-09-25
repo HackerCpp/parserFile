@@ -6,20 +6,22 @@
 #include "inc/parsers/findblocks.h"
 #include "inc/filereader.h"
 
+#pragma pack(push,1)
 struct HeaderData{
     QByteArray dataString;
 };
 struct ToolInfoData{
     QByteArray dataString;
 };
-struct DataBlockData{
+struct DataBlockCurve{
     uint offset;
     uint size;
-    QByteArray parameterMnemonics;
-    QByteArray dataType;
+    uint sizeofType;
+    QString parameterMnemonics;
+    QString dataType;
     QByteArray recordPoint;
     QByteArray desc;
-    QByteArray data;
+    QVector<qreal> *data;
 };
 struct UnknownData{
     QByteArray dataString;
@@ -34,11 +36,11 @@ struct ToolInfoBlock : public BlockGFMData{
     QList<ToolInfoData> data;
 };
 struct DataBlock : public BlockGFMData{
-    QByteArray header;
     uint numberOfVectors;
-    QByteArray nameRecord;
-    QByteArray moduleMnemonics;
-    QList<DataBlockData> *data;
+    QString nameRecord;
+    QString moduleMnemonics;
+    QString plugins;
+    QList<DataBlockCurve> *curves;
 };
 struct UnknownBlock : public BlockGFMData{
     QList<UnknownData> data;
@@ -48,7 +50,7 @@ struct BlockGFM{
     QString name;
     BlockGFMData *data;
 };
-
+#pragma pack(pop)
 
 class ParserGFM{
 
@@ -56,10 +58,11 @@ class ParserGFM{
 public:
 
     ParserGFM(FileReader *file);
-    void parserHeaderBlock(QByteArray *bodyBlock,BlockGFMData *data);
-    void parserToolInfoBlock(QByteArray *bodyBlock,BlockGFMData *data);
-    void parserDataBlock(QByteArray *bodyBlock,BlockGFMData *data);
-    void parserUnknownBlock(QByteArray *bodyBlock,BlockGFMData *data);
+    void parserHeaderBlock(QByteArray *bodyBlock,BlockGFM *block);
+    void parserToolInfoBlock(QByteArray *bodyBlock,BlockGFM *block);
+    void parserDataBlock(QByteArray *bodyBlock,BlockGFM *block);
+    void parserUnknownBlock(QByteArray *bodyBlock,BlockGFM *block);
+    QList<BlockGFM> *getGFMBlocks();
     ~ParserGFM();
 };
 
