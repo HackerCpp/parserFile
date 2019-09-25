@@ -8,8 +8,6 @@
 class FileHandler : public QWidget{
 
     Q_OBJECT
-
-    QList<QWidget*> *widgets;
 public:
     FileHandler(QWidget *parent = nullptr);
     QWidget *getWidget(QString path);

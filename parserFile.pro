@@ -25,10 +25,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        src\main.cpp \
-        src\mainwindow.cpp \
-    src\filereader.cpp \
-    src\parsers\parsertlm.cpp \
+        src/main.cpp \
+        src/mainwindow.cpp \
+    src/filereader.cpp \
+    src/parsers/parsertlm.cpp \
+    src/parsers/parsergfm.cpp \
     src/parsers/findblocks.cpp \
     src/models/modeltlm.cpp \
     src/reedsolomoncoding.cpp \
@@ -40,12 +41,15 @@ SOURCES += \
     src/filehandler.cpp \
     src/tabs/tab38k.cpp \
     src/fileCreation/csv.cpp \
-    inc/men.cpp
+    src/tabs/tabgfm.cpp \
+    src/models/modelgfm.cpp \
+    src/graphic/curveline.cpp
 
 HEADERS += \
-        inc\mainwindow.h \
-    inc\filereader.h \
-    inc\parsers\parsertlm.h \
+        inc/mainwindow.h \
+    inc/filereader.h \
+    inc/parsers/parsertlm.h \
+    inc/parsers/parsergfm.h \
     inc/parsers/findblocks.h \
     inc/models/modeltlm.h \
     inc/reedsolomoncoding.h \
@@ -57,7 +61,9 @@ HEADERS += \
     inc/filehandler.h \
     inc/tabs/tab38k.h \
     inc/fileCreation/csv.h \
-    inc/men.h
+    inc/tabs/tabgfm.h \
+    inc/models/modelgfm.h \
+    inc/graphic/curveline.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

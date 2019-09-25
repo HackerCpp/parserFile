@@ -4,13 +4,8 @@
 #include <QtWidgets>
 #include <QDebug>
 #include "inc/tabs/tab38k.h"
-#include "inc/men.h"
 
 MainWindow::MainWindow(QWidget *parent){
-    //men *tab = new men();
-    //tab->show();
-    Wind *tab = new Wind();
-    tab->show();
     this->setParent(parent);
     tabWid = new QTabWidget();
     menu = new Menu(this);
@@ -56,7 +51,7 @@ bool MainWindow::eventFilter(QObject *o, QEvent *e){
     return false;
 }
 void MainWindow::applyStyle(){
-    QFile File("debug\\css\\style.css");
+    QFile File("css\\style.css");
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());
     qApp->setStyleSheet(StyleSheet);
@@ -75,7 +70,7 @@ void MainWindow::saveFile(){
 }
 void MainWindow::openFile(){
     QFileDialog fileDialog;
-    QString filePath = fileDialog.getOpenFileName(this, tr("Open File"),"C:/",tr("*.tlm"));
+    QString filePath = fileDialog.getOpenFileName(this, tr("Open File"),"C:/",tr("*.tlm *.gfm"));
     if(filePath == "")
         return;
     QWidget *w = file.getWidget(filePath);
