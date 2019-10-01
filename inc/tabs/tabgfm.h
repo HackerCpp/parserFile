@@ -7,19 +7,23 @@
 #include <inc/parsers/parsergfm.h>
 #include "inc/models/modelgfm.h"
 #include <QGraphicsView>
+#include "inc/tabs/graphicsview.h"
 
 class TabGFM : public QWidget{
     Q_OBJECT
 
     ModelGFM * modelGfMScene;
     QWidget * sceneWidget;
-    QGraphicsView * graphicsView;
+    OGLGraphicsView * graphicsView;
     QHBoxLayout *mainHLayout;
     QScrollArea *scroll;
 public:
     explicit TabGFM(FileReader *file,QWidget *parent = nullptr);
+    void resizeEvent(QResizeEvent *event);
 
 signals:
+    void tabGFMNewSize(QSize  size);
+
 
 public slots:
 };

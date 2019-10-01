@@ -5,14 +5,13 @@
 #include <QtGlobal>
 #include <QStyleOptionGraphicsItem>
 #include <QCoreApplication>
+#include <QTime>
 
 CurveLine::CurveLine(QVector<qreal>*dataLine){
     m_dataLine = dataLine;
-    m_del =500;
-    m_step = 2;
-    m_scale = 0.001;
+    m_scale = 0.0001;
     m_width = 2;
-    isPaint = false;
+    isPaint = true;
     QColor tableColor[36]= {QColor(255, 0, 0),QColor(139, 0, 0),QColor(255, 20, 147),QColor(255, 69, 0),QColor(255, 0, 255),
                                 QColor(147, 112, 219),QColor(138, 43, 226),QColor(75, 0, 130),QColor(210, 105, 30),QColor(139, 69, 19),
                            QColor(128, 0, 0),QColor(255, 0, 255),QColor(128, 0, 128),QColor(255, 0, 0),QColor(0, 0, 255),
@@ -27,30 +26,27 @@ CurveLine::CurveLine(QVector<qreal>*dataLine){
     }
     m_min=m_min<0?m_min:0;
     m_pen = new QPen(tableColor[qrand()%35]);
-    m_pen->setWidthF(5);
-    m_pen->setCosmetic(true);
-    //qDebug() << m_pen->width();
-    path = new QPainterPath(QPointF(saturation(m_dataLine->data()[0]),0));
-    for(int i = 1; i < m_dataLine->size();i++){
-
-        if(amountOfSaturation(m_dataLine->data()[i]) > amountOfSaturation(m_dataLine->data()[i-1])){
-            path->lineTo(QPointF(m_del,(i-1)*m_step));
-            path->moveTo(QPointF(0,(i)*m_step));
-            path->lineTo(QPointF(saturation(m_dataLine->data()[i]),i*m_step));
-        }
-        else if(amountOfSaturation(m_dataLine->data()[i]) < amountOfSaturation(m_dataLine->data()[i-1])){
-            path->lineTo(QPointF(0,(i-1)*m_step));
-            path->moveTo(QPointF(m_del,(i)*m_step));
-            path->lineTo(QPointF(saturation(m_dataLine->data()[i]),i*m_step));
-        }
-        else{
-            path->lineTo(QPointF(saturation(m_dataLine->data()[i]),i*m_step));
-        }
-    }
+    m_pen->setWidthF(2);
 }
 void CurveLine::paint(QPainter *painter, const QStyleOptionGraphicsItem*option, QWidget*){
-        painter->setPen(*m_pen);
-        painter->drawPath(*path);
+    painter->setPen(*m_pen);
+    if(m_dataLine->size() <= m_indexBegin)
+        return;
+    QPointF prevPoint = QPointF(saturation(m_dataLine->data()[m_indexBegin]),0);
+    for(int i = m_indexBegin+1; i < (m_dataLine->size()< m_indexEnd?m_dataLine->size():m_indexEnd);i++){
+        if(amountOfSaturation(m_dataLine->data()[i]) > amountOfSaturation(m_dataLine->data()[i-1])){
+            painter->drawLine(prevPoint,QPointF(m_del,(i-1)*m_step));
+            painter->drawLine(QPointF(0,i*m_step),QPointF(saturation(m_dataLine->data()[i]),i*m_step));
+        }
+        else if(amountOfSaturation(m_dataLine->data()[i]) < amountOfSaturation(m_dataLine->data()[i-1])){
+            painter->drawLine(prevPoint,QPointF(0,(i-1)*m_step));
+            painter->drawLine(QPointF(m_del,i*m_step),QPointF(saturation(m_dataLine->data()[i]),i*m_step));
+        }
+        else{
+            painter->drawLine(QPointF(saturation(m_dataLine->data()[i]),i*m_step),prevPoint);
+        }
+        prevPoint = QPointF(saturation(m_dataLine->data()[i]),i*m_step);
+    }
 }
 CurveLine::CurveLine(){
     qDebug()<<"";

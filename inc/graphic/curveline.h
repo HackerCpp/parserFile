@@ -1,17 +1,18 @@
 #ifndef CURVELINE_H
 #define CURVELINE_H
 
-#include <QGraphicsItem>
+#include <inc/graphic/basecurveclass.h>
 #include <QColor>
 
-class CurveLine : public QGraphicsItem{
+class CurveLine : public BaseCurveClass{
     QVector<qreal>* m_dataLine;
     QPen *m_pen;
-    double m_min,m_max,m_width,m_scale;
-    QPainterPath *path;
-    double m_step;
-    int m_del;
+    double m_min,m_max,m_scale;
+    int m_width;
+    QPainterPath path;
     bool isPaint;
+    QRectF *m_rect;
+    int m_rectheight;
 public:
     CurveLine(QVector<qreal>*dataLine);
     CurveLine();

@@ -6,7 +6,7 @@
 
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets opengl
 
 TARGET = parserFile
 TEMPLATE = app
@@ -25,6 +25,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    src/graphic/basecurveclass.cpp \
+    src/graphic/grid.cpp \
         src/main.cpp \
         src/mainwindow.cpp \
     src/filereader.cpp \
@@ -43,7 +45,8 @@ SOURCES += \
     src/fileCreation/csv.cpp \
     src/tabs/tabgfm.cpp \
     src/models/modelgfm.cpp \
-    src/graphic/curveline.cpp
+    src/graphic/curveline.cpp\
+    src/tabs/graphicsview.cpp
 
 HEADERS += \
         inc/mainwindow.h \
@@ -63,7 +66,10 @@ HEADERS += \
     inc/fileCreation/csv.h \
     inc/tabs/tabgfm.h \
     inc/models/modelgfm.h \
-    inc/graphic/curveline.h
+    inc/graphic/curveline.h \
+    inc/tabs/graphicsview.h \
+    inc/graphic/basecurveclass.h \
+    inc/graphic/grid.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
