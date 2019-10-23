@@ -8,24 +8,23 @@
 #include "inc/models/modelgfm.h"
 #include <QGraphicsView>
 #include "inc/tabs/graphicsview.h"
+#include <QSplitter>
+#include "inc/tabs/abstracttab.h"
+#include "inc/tabs/abstracttabsavefiles.h"
+#include "gfm.h"
 
-class TabGFM : public QWidget{
-    Q_OBJECT
-
-    ModelGFM * modelGfMScene;
-    QWidget * sceneWidget;
-    OGLGraphicsView * graphicsView;
-    QHBoxLayout *mainHLayout;
-    QScrollArea *scroll;
+class TabGFM : public AbstractTab,public AbstractTabSaveFiles{
+    QList<ModelGFM *> m_modelGfMScene;
+    QList<OGLGraphicsView *> m_graphicsView;
+    QHBoxLayout *m_mainHLayout;
+    QScrollArea *m_scroll;
+    QSplitter *m_splitter;
+    QList<BlockGFM> * m_blocks;
+    GFM *m_gfm;
 public:
-    explicit TabGFM(FileReader *file,QWidget *parent = nullptr);
-    void resizeEvent(QResizeEvent *event);
-
-signals:
-    void tabGFMNewSize(QSize  size);
-
-
-public slots:
+    explicit TabGFM(QString path,QWidget *parent = nullptr);
+    void saveGFM();
+    ~TabGFM();
 };
 
 #endif // TABGFM_H

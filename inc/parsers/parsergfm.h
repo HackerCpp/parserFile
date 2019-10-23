@@ -19,7 +19,7 @@ struct DataBlockCurve{
     uint sizeofType;
     QString parameterMnemonics;
     QString dataType;
-    QByteArray recordPoint;
+    QString recordPoint;
     QByteArray desc;
     QVector<qreal> *data;
 };

@@ -23,15 +23,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 CONFIG += c++11
-
+INCLUDEPATH+= ../gfm_lib/inc
+LIBS += ../build/debug/GFM.dll
 SOURCES += \
+    src/tabs/abstracttab.cpp \
+    src/fileCreation/creategfm.cpp \
+    src/graphic/wave.cpp \
     src/graphic/basecurveclass.cpp \
     src/graphic/grid.cpp \
+    src/graphic/spectr.cpp \
         src/main.cpp \
         src/mainwindow.cpp \
     src/filereader.cpp \
     src/parsers/parsertlm.cpp \
-    src/parsers/parsergfm.cpp \
+    #src/parsers/parsergfm.cpp \
     src/parsers/findblocks.cpp \
     src/models/modeltlm.cpp \
     src/reedsolomoncoding.cpp \
@@ -41,6 +46,7 @@ SOURCES += \
     src/models/model38k.cpp \
     src/menu.cpp \
     src/filehandler.cpp \
+    src/tabs/abstracttabsavefiles.cpp \
     src/tabs/tab38k.cpp \
     src/fileCreation/csv.cpp \
     src/tabs/tabgfm.cpp \
@@ -49,10 +55,13 @@ SOURCES += \
     src/tabs/graphicsview.cpp
 
 HEADERS += \
+    inc/fileCreation/creategfm.h \
+    inc/graphic/IndexColor.h \
+    inc/graphic/wave.h \
         inc/mainwindow.h \
     inc/filereader.h \
     inc/parsers/parsertlm.h \
-    inc/parsers/parsergfm.h \
+    #inc/parsers/parsergfm.h \
     inc/parsers/findblocks.h \
     inc/models/modeltlm.h \
     inc/reedsolomoncoding.h \
@@ -62,6 +71,8 @@ HEADERS += \
     inc/models/model38k.h \
     inc/menu.h \
     inc/filehandler.h \
+    inc/tabs/abstracttab.h \
+    inc/tabs/abstracttabsavefiles.h \
     inc/tabs/tab38k.h \
     inc/fileCreation/csv.h \
     inc/tabs/tabgfm.h \
@@ -69,7 +80,8 @@ HEADERS += \
     inc/graphic/curveline.h \
     inc/tabs/graphicsview.h \
     inc/graphic/basecurveclass.h \
-    inc/graphic/grid.h
+    inc/graphic/grid.h \
+    inc/graphic/spectr.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

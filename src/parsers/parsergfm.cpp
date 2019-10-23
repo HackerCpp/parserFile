@@ -30,20 +30,21 @@ void ParserGFM::parserToolInfoBlock(QByteArray *bodyBlock,BlockGFM *block){
     }while (indexEndString != -1);
 }
 void parserDataBlockHeader(QByteArray *header,int position,QList<DataBlockCurve> *data){
+    QTextCodec *USC2LEBOOM = QTextCodec::codecForMib(1015);
     int pos = position;
     DataBlockCurve dataBlock;
     int indexBeginOffset = header->indexOf("[",pos);
     if(indexBeginOffset == -1)
         return;
     int indexEndOffset = header->indexOf("]",pos);
-    dataBlock.offset = QTextCodec::codecForMib(1015)->toUnicode(header->mid(indexBeginOffset+2,indexEndOffset - indexBeginOffset-2)).toUInt();
+    dataBlock.offset = USC2LEBOOM->toUnicode(header->mid(indexBeginOffset+2,indexEndOffset - indexBeginOffset-2)).toUInt();
     pos = indexEndOffset + 2;
     int indexEndsize = header->indexOf("]",pos);
-    dataBlock.size = QTextCodec::codecForMib(1015)->toUnicode(header->mid(indexEndOffset + 4,indexEndsize - indexEndOffset - 4)).toUInt();
+    dataBlock.size = USC2LEBOOM->toUnicode(header->mid(indexEndOffset + 4,indexEndsize - indexEndOffset - 4)).toUInt();
     pos = indexEndsize + 2;
     int indexBeginParamMnemon = header->indexOf(":",pos);
     int indexEndParamMnemon =   header->indexOf(":",indexBeginParamMnemon+2);
-    dataBlock.parameterMnemonics = QTextCodec::codecForMib(1015)->toUnicode(header->mid(indexBeginParamMnemon+2,indexEndParamMnemon - indexBeginParamMnemon - 4));
+    dataBlock.parameterMnemonics = USC2LEBOOM->toUnicode(header->mid(indexBeginParamMnemon+2,indexEndParamMnemon - indexBeginParamMnemon - 4));
     if(indexEndParamMnemon == -1)
         return;
     pos = indexEndParamMnemon + 2;
@@ -54,9 +55,9 @@ void parserDataBlockHeader(QByteArray *header,int position,QList<DataBlockCurve>
     }
     else {
         indexEndDataType = indexbeginRecordPoint;
-        dataBlock.recordPoint = header->mid(indexbeginRecordPoint+4,header->indexOf("<",pos) - indexbeginRecordPoint - 6);
+        dataBlock.recordPoint = USC2LEBOOM->toUnicode(header->mid(indexbeginRecordPoint+4,header->indexOf("<",pos) - indexbeginRecordPoint - 6));
     }
-    dataBlock.dataType = QTextCodec::codecForMib(1015)->toUnicode(header->mid(indexEndParamMnemon+4,indexEndDataType - indexEndParamMnemon - 6));
+    dataBlock.dataType = USC2LEBOOM->toUnicode(header->mid(indexEndParamMnemon+4,indexEndDataType - indexEndParamMnemon - 6));
     pos = indexEndDataType + 2;
     int indexEndMnem = header->indexOf("\n",indexEndDataType+4);
     int indexBeginMnem = header->indexOf("<",indexEndParamMnemon + 2);
@@ -69,13 +70,14 @@ void parserDataBlockHeader(QByteArray *header,int position,QList<DataBlockCurve>
 void dataToQreal(QList<DataBlockCurve>::iterator curve,DataBlock *dataBlock,QByteArray *bodyBlock,int indexBeginData){
     uint offset = curve->offset * dataBlock->numberOfVectors;
     uint dataSizeInBytes = dataBlock->numberOfVectors * curve->size;
+
     if(curve->dataType.indexOf("UINT8") != -1){
         curve->sizeofType = 1;
         uint dataSize = dataBlock->numberOfVectors*(curve->size/curve->sizeofType);
         QVector<uchar> *ptr = new QVector<uchar>(dataSize);
         memcpy(ptr->data(),bodyBlock->data() + indexBeginData + offset,dataSizeInBytes);
         curve->data = new QVector<qreal>(dataSize);
-        for(uint i = 0; i < dataBlock->numberOfVectors;i++)
+        for(uint i = 0; i < dataSize;i++)
             curve->data->data()[i] = ptr->data()[i];
         delete ptr;
         ptr = nullptr;
@@ -86,7 +88,7 @@ void dataToQreal(QList<DataBlockCurve>::iterator curve,DataBlock *dataBlock,QByt
         QVector<char> *ptr = new QVector<char>(dataSize);
         memcpy(ptr->data(),bodyBlock->data() + indexBeginData + offset,dataSizeInBytes);
         curve->data = new QVector<qreal>(dataSize);
-        for(uint i = 0; i < dataBlock->numberOfVectors;i++)
+        for(uint i = 0; i < dataSize;i++)
             curve->data->data()[i] = ptr->data()[i];
         delete ptr;
         ptr = nullptr;
@@ -97,7 +99,7 @@ void dataToQreal(QList<DataBlockCurve>::iterator curve,DataBlock *dataBlock,QByt
         QVector<uint> *ptr = new QVector<uint>(dataSize);
         memcpy(ptr->data(),bodyBlock->data() + indexBeginData + offset,dataSizeInBytes);
         curve->data = new QVector<qreal>(dataSize);
-        for(uint i = 0; i < dataBlock->numberOfVectors;i++)
+        for(uint i = 0; i < dataSize;i++)
             curve->data->data()[i] = ptr->data()[i];
         delete ptr;
         ptr = nullptr;
@@ -108,7 +110,7 @@ void dataToQreal(QList<DataBlockCurve>::iterator curve,DataBlock *dataBlock,QByt
         QVector<int> *ptr = new QVector<int>(dataSize);
         memcpy(ptr->data(),bodyBlock->data() + indexBeginData + offset,dataSizeInBytes);
         curve->data = new QVector<qreal>(dataSize);
-        for(uint i = 0; i < dataBlock->numberOfVectors;i++)
+        for(uint i = 0; i < dataSize;i++)
             curve->data->data()[i] = ptr->data()[i];
         delete ptr;
         ptr = nullptr;
@@ -119,8 +121,9 @@ void dataToQreal(QList<DataBlockCurve>::iterator curve,DataBlock *dataBlock,QByt
         QVector<ushort> *ptr = new QVector<ushort>(dataSize);
         memcpy(ptr->data(),bodyBlock->data() + indexBeginData + offset,dataSizeInBytes);
         curve->data = new QVector<qreal>(dataSize);
-        for(uint i = 0; i < dataBlock->numberOfVectors;i++)
+        for(uint i = 0; i <dataSize;i++){
             curve->data->data()[i] = ptr->data()[i];
+        }
         delete ptr;
         ptr = nullptr;
     }
@@ -130,8 +133,9 @@ void dataToQreal(QList<DataBlockCurve>::iterator curve,DataBlock *dataBlock,QByt
         QVector<short> *ptr = new QVector<short>(dataSize);
         memcpy(ptr->data(),bodyBlock->data() + indexBeginData + offset,dataSizeInBytes);
         curve->data = new QVector<qreal>(dataSize);
-        for(uint i = 0; i < dataBlock->numberOfVectors;i++)
+        for(uint i = 0; i < dataSize;++i){
             curve->data->data()[i] = ptr->data()[i];
+        }
         delete ptr;
         ptr = nullptr;
     }
@@ -171,7 +175,7 @@ void ParserGFM::parserDataBlock(QByteArray *bodyBlock,BlockGFM *block){
     QByteArray nameStartMark = "NAME=\"",moduleMnemEndMarc = "\"/>";
     int indexBeginName = header.indexOf(codec1->fromUnicode(nameStartMark).mid(4)) + sizeof(nameStartMark)*2 + 2;
     int indexEndName = header.indexOf(".",indexBeginName);
-    dataBlock->nameRecord = codec1->toUnicode(header.mid(indexBeginName,indexEndName - indexBeginName));
+    dataBlock->nameRecord = codec1->toUnicode(header.mid(indexBeginName-4,indexEndName - indexBeginName + 4));
     int indexEndmoduleMnem = header.indexOf(codec1->fromUnicode(moduleMnemEndMarc).mid(4),indexEndName);
     dataBlock->moduleMnemonics = codec1->toUnicode(header.mid(indexEndName+2,indexEndmoduleMnem - indexEndName - 4));
     dataBlock->curves = new QList<DataBlockCurve>();

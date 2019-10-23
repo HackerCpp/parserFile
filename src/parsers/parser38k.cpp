@@ -201,12 +201,12 @@ void Parser38kModules::moduleDataParsing(PacketModulesData38k * moduleData){
             ParamFlashGVK *pF = reinterpret_cast<ParamFlashGVK*>(dS->paramFlash);
             memcpy(&pF->total_length,paramFlashArray.data(),sizeof(*pF));
         }
-        else if(deviceType == GVK){
+        else if(deviceType == NNKt){
             dS->paramFlash = new ParamFlashNNKt;
             ParamFlashNNKt *pF = reinterpret_cast<ParamFlashNNKt*>(dS->paramFlash);
             memcpy(&pF->total_length,paramFlashArray.data(),sizeof(*pF));
         }
-        else if(deviceType == GVK){
+        else if(deviceType == GGP){
             dS->paramFlash = new ParamFlashGGP;
             ParamFlashGGP *pF = reinterpret_cast<ParamFlashGGP*>(dS->paramFlash);
             memcpy(&pF->total_length,paramFlashArray.data(),sizeof(*pF));
@@ -249,13 +249,13 @@ Parser38kModules::Parser38kModules(QList<PacketModulesData38k> *modulesData){
     connect(this, SIGNAL(finished(void)), this, SLOT(del()));
 }
 void Parser38kModules::run(){
-    QTime time =  QTime::currentTime();
+    //QTime time =  QTime::currentTime();
     for(auto value = modulesData->begin();value < modulesData->end(); value++)
         if(enabled)
             moduleDataParsing(&*value);
         else
            return;
-    qDebug() <<   time.msecsTo(QTime::currentTime());
+    //qDebug() <<   time.msecsTo(QTime::currentTime());
 }
 void Parser38kModules::stop(){
     enabled = false;

@@ -22,7 +22,7 @@ QWidget *FileHandler::getWidget(QString path){
         return tab;
     }
     else if(file->getType() == ".gfm"){
-        TabGFM * tab = new TabGFM(file);
+        TabGFM * tab = new TabGFM(path);
         return tab;
     }
     return nullptr;

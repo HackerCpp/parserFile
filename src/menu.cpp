@@ -14,7 +14,10 @@ Menu::Menu(QWidget *parent)
     mnuArray->push_back(mainMenu);
     QMenu * fileMenu= new QMenu("&File");
     fileMenu->addAction("&Open file",this->parent(), SLOT(openFile()));
-    fileMenu->addAction("&Save file",this->parent(), SLOT(saveFile()));
+    QMenu *saveFileMenu = new QMenu("Save");
+    saveFileMenu->addAction("&CSV",this->parent(), SLOT(saveCSV()));
+    saveFileMenu->addAction("&GFM",this->parent(), SLOT(saveGFM()));
+    fileMenu->addMenu(saveFileMenu);
     mnuArray->push_back(fileMenu);
     for(auto mnu = mnuArray->begin(); mnu < mnuArray->end(); mnu++){
         QMenuBar *bar = new QMenuBar();

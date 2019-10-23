@@ -7,10 +7,10 @@
 
 MainWindow::MainWindow(QWidget *parent){
     this->setParent(parent);
-    tabWid = new QTabWidget();
+    tabWid = new QTabWidget(this);
     menu = new Menu(this);
-    QVBoxLayout *verticalLayout = new QVBoxLayout(this);
-    QWidget *header = new QWidget();
+    QVBoxLayout *verticalLayout = new QVBoxLayout();
+    QWidget *header = new QWidget(this);
     QVBoxLayout *verticalLayoutHeader = new QVBoxLayout();
     header->setMinimumHeight(50);
     header->setLayout(verticalLayoutHeader);
@@ -34,19 +34,28 @@ MainWindow::MainWindow(QWidget *parent){
      animation->setEndValue(QRect(100, 100, 800, 800));
      animation->start();
     menu->installEventFilter(this);
+    tabWid->installEventFilter(this);
 }
 bool MainWindow::eventFilter(QObject *o, QEvent *e){
-    if(o == this->menu){
+    if(o == this->tabWid){
+        if(e->type() == QEvent::Enter){
+            this->menu->hideLeft();
+            return true;
+        }
+    }
+    else if(o == this->menu){
         if(e->type() == QEvent::Enter){
             this->menu->showRight();
             return true;
         }
-        if(e->type() == QEvent::Leave){
+
+        /*if(e->type() == QEvent::Leave){
             this->menu->hideLeft();
             return true;
-        }
+        }*/
 
     }
+
 
     return false;
 }
@@ -63,10 +72,15 @@ MainWindow::~MainWindow(){
     delete this->tabWid;
     this->tabWid = nullptr;
 }
-void MainWindow::saveFile(){
-   Tab38k * tab = dynamic_cast<Tab38k *>(this->tabWid->currentWidget());
+void MainWindow::saveCSV(){
+   AbstractTabSaveFiles * tab = dynamic_cast<AbstractTabSaveFiles *>(this->tabWid->currentWidget());
    if(tab)
-       tab->saveFile();
+       tab->saveCSV();
+}
+void MainWindow::saveGFM(){
+   AbstractTabSaveFiles * tab = dynamic_cast<AbstractTabSaveFiles *>(this->tabWid->currentWidget());
+   if(tab)
+       tab->saveGFM();
 }
 void MainWindow::openFile(){
     QFileDialog fileDialog;
@@ -75,10 +89,9 @@ void MainWindow::openFile(){
         return;
     QWidget *w = file.getWidget(filePath);
     if(!w){
-        qDebug() << "FILE nOT";
+        qDebug() << "Тип файла не опознан";
         return;
     }
-
     this->tabWid->addTab(w,filePath);
     this->tabWid->setCurrentWidget(w);
     QPropertyAnimation *animation = new QPropertyAnimation(w, "geometry");

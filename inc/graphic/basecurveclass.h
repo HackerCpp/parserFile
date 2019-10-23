@@ -2,19 +2,17 @@
 #define BASECURVECLASS_H
 
 #include <QGraphicsItem>
+#include "inc/models/modelgfm.h"
+#include <cmath>
 
 
 class BaseCurveClass : public QObject,public QGraphicsItem {
     Q_OBJECT
 protected:
-    int m_del;
-    qreal m_step;
-    int m_indexBegin;
-    int m_indexEnd;
+    ScaleFactor *m_scaleFactor;
 public:
-    BaseCurveClass();
-public slots:
-    void scrollChange(qreal leftX,qreal topY,qreal rightX,qreal downY);
+    BaseCurveClass(ScaleFactor *scaleFactor);
+
 };
 
 #endif // BASECURVECLASS_H

@@ -12,10 +12,11 @@
 #include <QLineEdit>
 #include <QSpinBox>
 #include <QCheckBox>
+#include "inc/tabs/abstracttabsavefiles.h"
+#include "inc/tabs/abstracttab.h"
 
 
-class Tab38k : public QWidget
-{
+class Tab38k : public AbstractTab,public AbstractTabSaveFiles{
     Q_OBJECT
 
     QHBoxLayout *horBoxLayout;
@@ -36,7 +37,7 @@ class Tab38k : public QWidget
     QSortFilterProxyModel *prModel;
 public:
     explicit Tab38k(QList<PacketModulesData38k> *modulesData,QWidget *parent = nullptr);
-    void saveFile();
+    void saveCSV();
     ~Tab38k();
 signals:
 

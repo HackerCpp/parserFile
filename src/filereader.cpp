@@ -4,7 +4,7 @@
 
 FileReader::FileReader(QString path):m_path(path){
    filestream.setFileName(path);
-   this->type = m_path.mid(m_path.indexOf(".",0));
+   this->type = m_path.mid(m_path.lastIndexOf("."));
 }
 
 QByteArray FileReader::getByteArray(){

@@ -307,7 +307,7 @@ QString dataString(const PacketModulesData38k &moduleData){
     return "...";
 }
 
-Tab38k::Tab38k(QList<PacketModulesData38k> *modulesData,QWidget *parent) : QWidget(parent){
+Tab38k::Tab38k(QList<PacketModulesData38k> *modulesData,QWidget *parent) : AbstractTab(parent){
     this->model = new Model38k(modulesData);
     this->prModel = new QSortFilterProxyModel();
     table = new QTableView();
@@ -347,7 +347,7 @@ Tab38k::Tab38k(QList<PacketModulesData38k> *modulesData,QWidget *parent) : QWidg
     QObject::connect(this->sortingCheckBox, SIGNAL(stateChanged(int)),this, SLOT(setSorting(int)));
     this->table->hideColumn(11);
 }
-void Tab38k::saveFile(){
+void Tab38k::saveCSV(){
     this->model->saveFile();
 }
 

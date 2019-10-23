@@ -20,7 +20,8 @@ public:
     bool eventFilter(QObject *o, QEvent *e);
     ~MainWindow();
 public slots:
-    void saveFile();
+    void saveCSV();
+    void saveGFM();
     void openFile();
     void closeTab(int index);
     void applyStyle();

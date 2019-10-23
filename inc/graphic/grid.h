@@ -5,9 +5,11 @@
 class Grid : public BaseCurveClass{
     Q_OBJECT
 
+    int m_stepY, m_stepX;
     int m_ollHeight;
+    int m_mainValueMin;
 public:
-    Grid(int height);
+    Grid(ScaleFactor *scaleFactor);
 protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*);
     QRectF boundingRect() const;

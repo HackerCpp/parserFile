@@ -3,19 +3,15 @@
 
 #include <inc/graphic/basecurveclass.h>
 #include <QColor>
+#include <QHash>
 
 class CurveLine : public BaseCurveClass{
     QVector<qreal>* m_dataLine;
+    QVector<qreal>* m_mainValue;
     QPen *m_pen;
-    double m_min,m_max,m_scale;
-    int m_width;
-    QPainterPath path;
-    bool isPaint;
-    QRectF *m_rect;
-    int m_rectheight;
+    double m_min,m_max,m_scaleX;
 public:
-    CurveLine(QVector<qreal>*dataLine);
-    CurveLine();
+    CurveLine(ScaleFactor *scaleFactor,QVector<qreal>*mainValue,QVector<qreal>*dataLine);
 protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*);
     QRectF boundingRect() const;

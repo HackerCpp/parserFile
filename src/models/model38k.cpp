@@ -40,7 +40,6 @@ SaveCSVModal::SaveCSVModal(QList<PacketModulesData38k> * data):m_data(data){
      this->comboBox->addItems(modList);
      connect(this->btnOk, SIGNAL(clicked(bool)), this, SLOT(saveFile(void)));
      connect(this->btnCansel, SIGNAL(clicked(bool)), this, SLOT(cansel(void)));
-
 }
 
 void SaveCSVModal::saveFile(){

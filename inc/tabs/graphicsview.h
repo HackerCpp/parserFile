@@ -11,6 +11,7 @@ class OGLGraphicsView : public QGraphicsView{
 
 public:
     OGLGraphicsView(QWidget *parent = nullptr);
+    void resizeEvent(QResizeEvent *event);
 public slots:
     void scrollBar();
 signals:
