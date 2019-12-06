@@ -21,6 +21,7 @@ public slots:
     void changeColor(int hsl);
     void changeScale(int scale);
     void changeWidth(int width);
+    void changeLeftShift(int shift);
 };
 
 #endif // TABCURVESETTINGS_H

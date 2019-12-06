@@ -6,11 +6,14 @@
 #include <QTimer>
 
 class CurveLineItem : public CurveBaseItem{
+
 public:
     CurveLineItem(Curve *curve);
-    void paint(QPainter *painter,qreal y) override;
+    void paint(QPainter *painter,QPainter *painterHeader,qreal y) override;
     bool isCrosses(QPoint point,int y) override;
-    virtual ~CurveLineItem();
+    qreal operator[](int index);
+    virtual uint amountSaturation(uint index)override;
+    virtual ~CurveLineItem()override;
 
 
 };

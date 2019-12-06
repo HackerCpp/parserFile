@@ -16,14 +16,13 @@ class Group : public BaseGroup{
     bool m_isMoveHeader;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*) override;
     void run()override;
-
+    virtual void swapPixMap()override;
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event)override;
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event)override;
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event)override;
+    void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)override;
 public:
-    void setDrawTypeTime();
-    void setDrawTypeDepth();
     void addCurve(CurveBaseItem *curve);
     Group(int leftX,int rightX);
 

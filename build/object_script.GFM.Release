@@ -1,3 +1,7 @@
+release/track.o
+release/board.o
+release/forms.o
+release/formsblockgfm.o
 release/desc.o
 release/shortcut.o
 release/curvefloat32.o

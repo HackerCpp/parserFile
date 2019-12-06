@@ -8,23 +8,21 @@
 #include "group.h"
 #include "ruler.h"
 #include "tabgeneralsettings.h"
+#include "mainvalue.h"
 
 class  Graphics : public QGraphicsView{
     Q_OBJECT
     bool m_isDrawTime;
     QVector<Group*> *m_groups;
-    QList<Curve*> *m_mainTimes;
-    QList<Curve*> *m_mainDepts;
+    QList<MainValue*> *m_mainValues;
+    QList<Curve*> *m_curves;
     qreal m_maximumTime, m_minimumDepth,m_maximumDepth;
     BaseGroup *m_substrate;
     BaseGroup *m_grid;
     Ruler *m_ruler;
-    qreal m_scaleForTime;
-    qreal m_scaleForDepth;
     Canvas *m_canvas;
     TabGeneralSettings *m_tabGenSett;
-    bool checkPointerInTime(Curve *ptr);
-    bool checkPointerInDepth(Curve *ptr);
+    MainValue *checkPointerInMainValues(Curve *time,Curve *depth);
 public:
     Graphics(QList<Curve*> *curves);
     void newGroup();
@@ -32,8 +30,6 @@ public:
     void drawDepth();
     void drawTime();
     void applyDrawingType();
-    void setScaleForDepth(qreal scale);
-    void setScaleForTime(qreal scale);
     ~Graphics()override;
 protected:
     void mousePressEvent(QMouseEvent *event)override;
@@ -42,7 +38,7 @@ protected:
 public slots:
     void scroll(int value);
     void changeWidth();
-    void changeScale(int scale);
+    void changeScale(qreal scale);
     void rulerRightClick();
 signals:
     void scrollHasMoved(QPointF leftUp,QPointF rightDown);

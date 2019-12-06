@@ -1,5 +1,4 @@
 debug/abstracttab.o
-debug/creategfm.o
 debug/wave.o
 debug/basecurveclass.o
 debug/spectr.o

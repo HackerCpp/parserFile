@@ -1,6 +1,7 @@
 #include "curvebaseitem.h"
 #include "curvelineitem.h"
 
+int CurveBaseItem::m_headerSliceHeight = 20;
 CurveBaseItem *CurveBaseItem::createCurveItem(Curve *curve){
     QString curveType = curve->desc()->getParam("draw_type");
     if(curveType.indexOf("LINE") != -1)
@@ -9,9 +10,31 @@ CurveBaseItem *CurveBaseItem::createCurveItem(Curve *curve){
         return nullptr;
 
 }
-bool CurveBaseItem::setScale(qreal scale){
-    m_curve->setScale(scale);
+uint CurveBaseItem::amountSaturation(uint index){
+    return 0;
 }
+CurveBaseItem::CurveBaseItem(Curve *curve):
+    m_curve(curve){
+    m_isActive = false;
+    m_positionInHeader = 0;
+    m_pen = nullptr;
+    m_brush = nullptr;
+    m_curentWidthLine = 2;
+    m_mainValue = nullptr;
+    m_scale = 1;
+    m_leftShift = 0;
+}
+
+void CurveBaseItem::setScale(qreal scale){
+    m_scale = scale;
+}
+void CurveBaseItem::setLeftShift(int leftShift){
+    m_leftShift = leftShift;
+}
+void CurveBaseItem::setMainValue(MainValue *mainValue){
+    m_mainValue = mainValue;
+}
+
 qreal CurveBaseItem::topTime(){
     return m_curve->getTime()->minimum();
 }
@@ -30,21 +53,19 @@ void CurveBaseItem::setWidthLine(int widthLine){
     emit updateL();
 }
 void CurveBaseItem::setLimit(int limit){
-    m_curve->setLimit(limit);
+    m_limit = limit;
 }
-CurveBaseItem::CurveBaseItem(Curve *curve):
-    m_curve(curve){
-    m_pen = nullptr;
-    m_brush = nullptr;
-    m_curentWidthLine = 2;
+void CurveBaseItem::setPositionInHeader(int pos){
+   m_positionInHeader = pos;
 }
+
 Curve *CurveBaseItem::getCurve(){
     return m_curve;
 }
 bool CurveBaseItem::isCrosses(QPoint point,int y){
     return false;
 }
-void CurveBaseItem::paint(QPainter *painter,qreal y){
+void CurveBaseItem::paint(QPainter *painter,QPainter *painterHeader,qreal y){
 
 }
 void CurveBaseItem::setActive(bool active){

@@ -27,7 +27,7 @@ INCLUDEPATH+= ../gfm_lib/inc ../graphics_lib/inc
 LIBS += ../build/debug/GFM.dll ../build/debug/graphics.dll
 SOURCES += \
     src/tabs/abstracttab.cpp \
-    src/fileCreation/creategfm.cpp \
+    #src/fileCreation/creategfm.cpp \
     src/graphic/wave.cpp \
     src/graphic/basecurveclass.cpp \
     #src/graphic/grid.cpp \
@@ -55,7 +55,7 @@ SOURCES += \
     src/tabs/graphicsview.cpp
 
 HEADERS += \
-    inc/fileCreation/creategfm.h \
+    #inc/fileCreation/creategfm.h \
     inc/graphic/IndexColor.h \
     inc/graphic/wave.h \
         inc/mainwindow.h \

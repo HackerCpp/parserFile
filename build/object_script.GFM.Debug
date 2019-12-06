@@ -1,3 +1,7 @@
+debug/track.o
+debug/board.o
+debug/forms.o
+debug/formsblockgfm.o
 debug/desc.o
 debug/shortcut.o
 debug/curvefloat32.o

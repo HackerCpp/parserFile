@@ -5,34 +5,49 @@
 #include <QPen>
 #include <QGraphicsItem>
 #include <QThread>
+#include "mainvalue.h"
+
 
 class CurveBaseItem:public QObject{
     Q_OBJECT
 protected:
+    int m_leftShift;
+    qreal m_scale;
+    int m_limit;
+    static int m_headerSliceHeight;
+    int m_positionInHeader;
     bool m_isActive;
     int m_maximumTime;
     int m_maximumDepth;
+    MainValue *m_mainValue;
     Curve *m_curve;
     QPen *m_pen;
     QBrush *m_brush;
     int m_curentWidthLine;
     virtual QRectF boundingRect() const;
 public:
-    virtual void paint(QPainter *painter,qreal y);
+    void setPositionInHeader(int pos);
+    virtual void paint(QPainter *painter,QPainter *painterHeader,qreal y);
     virtual bool isCrosses(QPoint point,int y);
     static CurveBaseItem *createCurveItem(Curve *curve);
     CurveBaseItem(Curve *curve);
     Curve *getCurve();
     void setLimit(int limit);
+    int limit(){return m_limit;}
     QPen *getPen(){return m_pen;}
     void setActive(bool active);
     bool isActive();
-    bool setScale(qreal scale);
+    void setScale(qreal scale);
+    void setLeftShift(int leftShift);
+    int leftShift(){return m_leftShift;}
     qreal topTime();
     qreal bottomTime();
     qreal topDepth();
     qreal bottomDepth();
     void setWidthLine(int widthLine);
+    void setMainValue(MainValue *mainValue);
+    virtual uint amountSaturation(uint index);
+    qreal scale(){return m_scale;}
 signals:
     void updateL();
 };

@@ -79,7 +79,7 @@ static const uint qt_meta_data_Graphics[] = {
  // slots: parameters
     QMetaType::Void, QMetaType::Int,    6,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,    9,
+    QMetaType::Void, QMetaType::QReal,    9,
     QMetaType::Void,
 
        0        // eod
@@ -94,7 +94,7 @@ void Graphics::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 0: _t->scrollHasMoved((*reinterpret_cast< QPointF(*)>(_a[1])),(*reinterpret_cast< QPointF(*)>(_a[2]))); break;
         case 1: _t->scroll((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 2: _t->changeWidth(); break;
-        case 3: _t->changeScale((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 3: _t->changeScale((*reinterpret_cast< qreal(*)>(_a[1]))); break;
         case 4: _t->rulerRightClick(); break;
         default: ;
         }

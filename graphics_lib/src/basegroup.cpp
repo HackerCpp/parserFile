@@ -24,8 +24,8 @@ void BaseGroup::setLeftPosition(int leftPosition){
 }
 void BaseGroup::shift(int leftPosition){
     QGraphicsItem::prepareGeometryChange();
-    m_rightX = leftPosition + m_rightX - m_leftX;
-    m_leftX = leftPosition;
+    m_rightX = leftPosition + m_rightX - m_leftX + 10;
+    m_leftX = leftPosition + 10;
     emit rightPositionChanged(m_rightX);
 }
 QRectF BaseGroup::boundingRect()const{

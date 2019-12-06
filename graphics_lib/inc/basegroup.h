@@ -20,7 +20,7 @@ protected:
 
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*) override;
     virtual void run()override;
-    void swapPixMap();
+    virtual void swapPixMap();
 public:
     static void setTopAndBottom(qreal top,qreal bottom);
     BaseGroup();

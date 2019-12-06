@@ -1,5 +1,4 @@
 release/abstracttab.o
-release/creategfm.o
 release/wave.o
 release/basecurveclass.o
 release/spectr.o

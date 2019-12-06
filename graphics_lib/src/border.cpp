@@ -55,9 +55,9 @@ void Border::run(){
     QPainter p(m_doublePixMap);
     p.setPen(QPen(QColor(0,0,0,0),1));
     if(m_isMove)
-        p.setBrush(QColor(0,255,0,200));
+        p.setBrush(QColor(0,255,0,150));
     else
-        p.setBrush(QColor(0,0,0,200));
+        p.setBrush(QColor(0,0,0,150));
     p.drawRect(0,0,m_rightX - m_leftX,m_doublePixMap->height());
     swapPixMap();
 }

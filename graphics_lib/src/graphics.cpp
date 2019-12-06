@@ -11,8 +11,8 @@
 
 Graphics::Graphics(QList<Curve*> *curves){  
     m_groups = new QVector<Group*>;
-    m_mainTimes = new QList<Curve*>;
-    m_mainDepts = new QList<Curve*>;
+    m_mainValues = new QList<MainValue*>;
+    m_curves = curves;
     m_isDrawTime = false;
     m_substrate = nullptr;
     m_grid = nullptr;
@@ -22,29 +22,27 @@ Graphics::Graphics(QList<Curve*> *curves){
     m_maximumDepth = 0;
     this->setupViewport(new QGLWidget(QGLFormat(QGL::DoubleBuffer)));
     setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
-    m_scaleForTime = 2;
-    m_scaleForDepth = 10;
     m_canvas = new Canvas();
-    QThread::sleep(2);
+    QThread::sleep(4);
     newGroup();
     newGroup();
     int i = 0;
-    foreach(auto curve,*curves){
+    foreach(auto curve,*m_curves){
         i++;
-        if(i < 15){
+        //if(i < 15){
             addCurve(curve,1);
-        }
+        //}
     }
-    drawTime();
-    setScaleForTime(1);
-    //drawDepth();
-    //setScaleForDepth(1);
+    //drawTime();
+    drawDepth();
+    changeScale(1);
     this->setScene(m_canvas);
     connect(horizontalScrollBar(), &QScrollBar::valueChanged, this, &Graphics::scroll);
     connect(verticalScrollBar(), &QScrollBar::valueChanged, this, &Graphics::scroll);
     connect(m_canvas,&QGraphicsScene::sceneRectChanged,this,&Graphics::changeWidth);
     m_tabGenSett = new TabGeneralSettings;
     connect(m_tabGenSett,&TabGeneralSettings::changeScale,this,&Graphics::changeScale);
+    BaseGroup::setTopAndBottom(-10,1000000);
 }
 void Graphics::rulerRightClick(){
     if(m_tabGenSett){
@@ -53,13 +51,12 @@ void Graphics::rulerRightClick(){
         m_tabGenSett->activateWindow();
     }
 }
-void Graphics::changeScale(int scale){
-    if(m_isDrawTime){
-        setScaleForTime(static_cast<qreal>(scale)/100);
+void Graphics::changeScale(qreal scale){
+    foreach(auto mainValue,*m_mainValues){
+        mainValue->setScale(scale/1000);
     }
-    else{
-        setScaleForDepth(static_cast<qreal>(scale)/100);
-    }
+    if(m_ruler)
+        m_ruler->setScale(scale/1000);
     scroll(0);
 }
 void Graphics::drawDepth(){
@@ -72,46 +69,29 @@ void Graphics::drawTime(){
 }
 void Graphics::applyDrawingType(){
     if(m_isDrawTime){
-        foreach(auto group,*m_groups){
-            group->setDrawTypeTime();
+        foreach(auto mainValue,*m_mainValues){
+            mainValue->setMainTime();
         }
-        //BaseGroup::setTopAndBottom(-10,m_maximumTime*m_scaleForTime + 500);
-        //m_canvas->setSceneRect(m_canvas->sceneRect().x(),0,m_canvas->sceneRect().width(),m_maximumTime*m_scaleForTime + 500);
-
+        /*int height = static_cast<int>(m_maximumTime * m_scaleForTime + 400);
+        BaseGroup::setTopAndBottom(-10,height);
+        setSceneRect(QRect(m_canvas->sceneRect().x(),-10,m_canvas->sceneRect().width(),height));
         if(m_ruler)
-            m_ruler->setScale(m_scaleForTime);
+            m_ruler->setScale(m_scaleForTime);*/
     }
     else{
-        foreach(auto group,*m_groups){
-            group->setDrawTypeDepth();
+        foreach(auto mainValue,*m_mainValues){
+            mainValue->setMainDepth();
         }
-        //BaseGroup::setTopAndBottom(m_minimumDepth*m_scaleForDepth,m_maximumDepth*m_scaleForDepth + 500);
-        if(m_ruler)
-            m_ruler->setScale(m_scaleForDepth);
+        /*int top = static_cast<int>(m_minimumDepth*m_scaleForDepth) - 20;
+        int height = static_cast<int>((m_maximumDepth * m_scaleForDepth) - (top) + 400);
+        BaseGroup::setTopAndBottom(m_minimumDepth*m_scaleForDepth,height);
+        setSceneRect(QRect(m_canvas->sceneRect().x(),top,m_canvas->sceneRect().width(),height));*/
     }
+    if(m_ruler && !m_mainValues->isEmpty())
+        m_ruler->setScale(m_mainValues->first()->scale());
 }
-void Graphics::setScaleForDepth(qreal scale){
-    m_scaleForDepth = scale;
-    BaseGroup::setTopAndBottom(m_minimumDepth*m_scaleForDepth,m_maximumDepth*m_scaleForDepth + 500);
-    foreach(auto curveDepth,*m_mainDepts){
-        curveDepth->setScale(m_scaleForDepth);
-    }
-    if(m_ruler)
-        m_ruler->setScale(m_scaleForDepth);
-}
-void Graphics::setScaleForTime(qreal scale){
-    m_scaleForTime = scale;
-    qDebug() << m_maximumTime * m_scaleForTime << "height";
-    BaseGroup::setTopAndBottom(-10,m_maximumTime*m_scaleForTime);
-    m_canvas->setSceneRect(QRect(m_canvas->sceneRect().x(),-10,m_canvas->sceneRect().width(),m_maximumTime*m_scaleForTime));
-    qDebug() << "scale: " << m_scaleForTime;
-    setSceneRect(m_canvas->sceneRect());
-    foreach(auto curveTime,*m_mainTimes){
-        curveTime->setScale(m_scaleForTime);
-    }
-    if(m_ruler)
-        m_ruler->setScale(m_scaleForTime);
-}
+
+
 void Graphics::changeWidth(){
     WhiteSubstrate * substr = dynamic_cast<WhiteSubstrate *>(m_substrate);
     if(substr)
@@ -122,6 +102,7 @@ void Graphics::changeWidth(){
     Ruler * ruler = dynamic_cast<Ruler *>(m_ruler);
     if(m_ruler)
         ruler->setSize(m_canvas->sceneRect());
+    //setSceneRect(sceneRect());
 }
 
 void Graphics::scroll(int value){
@@ -169,37 +150,27 @@ void Graphics::newGroup(){
     changeWidth();
 }
 
-bool Graphics::checkPointerInTime(Curve *ptr){
-    foreach(auto value,*m_mainTimes){
-        if(value == ptr)
-            return true;
+MainValue *Graphics::checkPointerInMainValues(Curve *time,Curve *depth){
+    foreach(auto mainValue,*m_mainValues){
+        if(mainValue->checkPoint(time,depth))
+            return mainValue;
     }
-    return false;
+    return nullptr;
 }
-bool Graphics::checkPointerInDepth(Curve *ptr){
-    foreach(auto value,*m_mainDepts){
-        if(value == ptr)
-            return true;
-    }
-    return false;
-}
+
 bool Graphics::addCurve(Curve* curve,int indexTab){
     if(m_groups->isEmpty() || indexTab >= m_groups->size())
         return false;
     CurveBaseItem * item = CurveBaseItem::createCurveItem(curve);
     if(item){
-        m_groups->operator[](indexTab)->addCurve(item);
-        if(!checkPointerInDepth(curve->getDepth())){
-            m_mainDepts->push_back(curve->getDepth());
-            curve->getDepth()->setScale(m_scaleForDepth);
-            m_minimumDepth = qMin(m_minimumDepth,curve->getDepth()->minimum());
-            m_maximumDepth = qMax(m_maximumDepth,curve->getDepth()->maximum());
+        (*m_groups)[indexTab]->addCurve(item);
+        MainValue * mainValue = checkPointerInMainValues(curve->getTime(),curve->getDepth());
+        if(!mainValue){
+            mainValue = new MainValue(curve->getTime(),curve->getDepth());
+            m_mainValues->push_back(mainValue);
         }
-        if(!checkPointerInTime(curve->getTime())){
-            m_mainTimes->push_back(curve->getTime());
-            curve->getTime()->setScale(m_scaleForTime);
-            m_maximumTime = qMax(m_maximumTime,curve->getTime()->maximum());
-        }
+        item->setMainValue(mainValue);
+
         applyDrawingType();
 
         return true;

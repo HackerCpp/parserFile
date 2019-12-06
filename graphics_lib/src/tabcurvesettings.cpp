@@ -13,15 +13,22 @@ TabCurveSettings::TabCurveSettings(CurveBaseItem* item)
 
     m_sliderWidthLine = new QSlider(Qt::Horizontal);
     m_sliderWidthLine->setMinimum(1);
-    m_sliderWidthLine->setMaximum(100);
+    m_sliderWidthLine->setMaximum(8);
     m_sliderWidthLine->setTickInterval(1);
+
 
     m_cliderScale = new QSlider(Qt::Horizontal);
     m_cliderScale->setMinimum(1);
-    m_cliderScale->setMaximum(6000);
+    m_cliderScale->setMaximum(1000000);
     m_cliderScale->setTickInterval(1);
+    m_cliderScale->setValue(item->scale()*100000);
 
     m_sliderOffset = new QSlider(Qt::Horizontal);
+    m_sliderOffset->setMinimum(0);
+    m_sliderOffset->setMaximum(item->limit());
+    m_sliderOffset->setTickInterval(1);
+    m_sliderOffset->setValue(item->leftShift());
+
     m_mainLayout = new QVBoxLayout;
     this->setLayout(m_mainLayout);
     m_mainLayout->addWidget(m_sliderColor);
@@ -31,7 +38,13 @@ TabCurveSettings::TabCurveSettings(CurveBaseItem* item)
     connect(m_sliderColor,&QSlider::valueChanged,this,&TabCurveSettings::changeColor);
     connect(m_cliderScale,&QSlider::valueChanged,this,&TabCurveSettings::changeScale);
     connect(m_sliderWidthLine,&QSlider::valueChanged,this,&TabCurveSettings::changeWidth);
+    connect(m_sliderOffset,&QSlider::valueChanged,this,&TabCurveSettings::changeLeftShift);
+
     show();
+}
+void TabCurveSettings::changeLeftShift(int shift){
+    m_item->setLeftShift(shift);
+    emit m_item->updateL();
 }
 void TabCurveSettings::changeColor(int hsl){
     QColor color;
@@ -40,7 +53,7 @@ void TabCurveSettings::changeColor(int hsl){
     emit m_item->updateL();
 }
 void TabCurveSettings::changeScale(int scale){
-    m_item->setScale(static_cast<qreal>(scale)/1000);
+    m_item->setScale(static_cast<qreal>(scale)/100000);
     emit m_item->updateL();
 }
 void TabCurveSettings::changeWidth(int width){

@@ -14,12 +14,7 @@
 #include "gfm.h"
 
 class TabGFM : public AbstractTab,public AbstractTabSaveFiles{
-    QList<ModelGFM *> m_modelGfMScene;
-    QList<OGLGraphicsView *> m_graphicsView;
     QHBoxLayout *m_mainHLayout;
-    QScrollArea *m_scroll;
-    QSplitter *m_splitter;
-    QList<BlockGFM> * m_blocks;
     GFM *m_gfm;
 public:
     explicit TabGFM(QString path,QWidget *parent = nullptr);
