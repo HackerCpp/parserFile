@@ -104,8 +104,8 @@ void Border::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
         m_leftX = m_leftX < m_leftLimiter?m_leftLimiter:m_leftX;
         m_rightX = m_leftX + m_width;
         start();
-        emit leftPositionChanged(m_leftX);
-        emit rightPositionChanged(m_rightX);
+        //emit leftPositionChanged(m_leftX);
+        //emit rightPositionChanged(m_rightX);
         m_prevPoint = event->scenePos();
     }
 }
@@ -120,5 +120,7 @@ void Border::updateP(QPointF leftUp,QPointF rightDown){
 void Border::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     wait();
     m_isMove = false;
+    emit leftPositionChanged(m_leftX);
+    emit rightPositionChanged(m_rightX);
     start();
 }

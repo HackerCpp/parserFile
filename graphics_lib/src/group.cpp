@@ -60,28 +60,40 @@ void Group::resize(int position){
     start();
 }
 
-void Group::updateP(QPointF leftUp,QPointF rightDown){
+/*void Group::updateP(QPointF leftUp,QPointF rightDown){
     if(leftUp.x() > m_rightX || rightDown.x() < m_leftX)
         return;
     wait();
     m_visibilitySquare->setTopLeft(leftUp);
     m_visibilitySquare->setBottomRight(rightDown);
     start();
-}
+}*/
 
 void Group::mousePressEvent(QGraphicsSceneMouseEvent *event){
     int x = static_cast<int>(event->scenePos().x());
     int y = static_cast<int>(event->scenePos().y());
     Qt::MouseButton btn = event->button();
     if(event->scenePos().y() >= (m_visibilitySquare->y()) + m_headerTopOffset + 20 &&
-        event->scenePos().y() <= (m_visibilitySquare->y() + m_headerTopOffset + m_curves->size() * 20 + 20)){
+        event->scenePos().y() <= (m_visibilitySquare->y() + m_headerTopOffset + m_sizeVisibleItem * 20 + 20))
+    {
         m_prevPoint = event->scenePos();
         if(btn == Qt::RightButton){
             int index = (event->scenePos().y() - m_visibilitySquare->y() - m_headerTopOffset - 20)/20;
-            if(index < m_curves->size()){
-                m_curves->data()[index]->setActive(false);
-                start();
+            int i = 0;
+            foreach (auto value, *m_curves){
+                if(value->isShow() ){
+                    if(i==index){
+                        value->setActive(true);
+                        m_settings->addCurve(value);
+                        m_settings->show();
+                        start();
+                    }
+                    ++i;
+                }
             }
+        }
+        else{
+           m_settings->hideL();
         }
         m_isMoveHeader = true;
         return;
@@ -103,13 +115,15 @@ void Group::mousePressEvent(QGraphicsSceneMouseEvent *event){
         if(m_curves->isEmpty())
             return;
         foreach(auto curve,*m_curves){
-            if(curve->isCrosses(QPoint(x - m_leftX,static_cast<int>(y - m_visibilitySquare->y())),m_visibilitySquare->y())){
-                curve->setActive(true);
-                m_settings->addCurve(curve);
-                m_settings->show();
-            }
-            else{
-                curve->setActive(false);
+            if(curve->isShow()){
+                if(curve->isCrosses(QPoint(x - m_leftX,static_cast<int>(y - m_visibilitySquare->y())),m_visibilitySquare->y())){
+                    curve->setActive(true);
+                    m_settings->addCurve(curve);
+                    m_settings->show();
+                }
+                else{
+                    curve->setActive(false);
+                }
             }
         }
     }
@@ -119,7 +133,7 @@ void Group::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
     wait();
     if(m_isMoveHeader){
         m_headerTopOffset += static_cast<int>(event->scenePos().y() - m_prevPoint.y());
-        m_headerTopOffset = m_headerTopOffset < -(m_curves->size() *15) + 5?-(m_curves->size() *15) + 5:m_headerTopOffset;
+        m_headerTopOffset = m_headerTopOffset < -(m_curves->size() *20) + 5?-(m_sizeVisibleItem *20) + 5:m_headerTopOffset;
         m_headerTopOffset = m_headerTopOffset > m_visibilitySquare->height()-50?m_visibilitySquare->height()-50:m_headerTopOffset;
         m_prevPoint = event->scenePos();
         scene()->update();
@@ -130,12 +144,12 @@ void Group::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
 }
 void Group::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event){
     if(event->scenePos().y() >= (m_visibilitySquare->y()) + m_headerTopOffset + 20 &&
-        event->scenePos().y() <= (m_visibilitySquare->y() + m_headerTopOffset + m_curves->size() * 20 + 20)){
-        int index = (event->scenePos().y() - m_visibilitySquare->y() - m_headerTopOffset - 20)/20;
+        event->scenePos().y() <= (m_visibilitySquare->y() + m_headerTopOffset + m_sizeVisibleItem * 20 + 20)){
+        /*int index = (event->scenePos().y() - m_visibilitySquare->y() - m_headerTopOffset - 20)/20;
         if(index < m_curves->size()){
             m_curves->data()[index]->setActive(true);
             start();
-        }
+        }*/
     }
 
 }
@@ -144,22 +158,30 @@ void Group::addCurve(CurveBaseItem *curve){
     curve->setLimit(limit);
     if(m_curves)
         m_curves->push_back(curve);
-    curve->setPositionInHeader(m_curves->size());
+    m_sizeVisibleItem = m_curves->size();
+    curve->setPositionInHeader(m_sizeVisibleItem);
     connect(curve,&CurveBaseItem::updateL,this,&Group::updatePL);
+
 }
 void Group::updatePL(){
     wait();
     start();
 }
 void Group::run(){
-    QTime time = QTime::currentTime();
+    //QTime time = QTime::currentTime();
     QPainter painter(m_doublePixMap);
     QPainter painterHeader(m_doubleHeader);
     m_doubleHeader->fill(QColor(0,0,0,0));
     m_doublePixMap->fill(QColor(0,0,0,0));
+    int i = 1;
     foreach (auto value, *m_curves){
-        value->paint(&painter,&painterHeader,m_visibilitySquare->y());
+        if(value->isShow()){
+            value->setPositionInHeader(i);
+            value->paint(&painter,&painterHeader,m_visibilitySquare->y(),m_visibilitySquare->y()+m_visibilitySquare->height());
+            ++i;
+        }
     }
+    m_sizeVisibleItem = i;
     swapPixMap();
-    qDebug() << time.msecsTo( QTime::currentTime() );
+    //qDebug() << time.msecsTo( QTime::currentTime() );
 }

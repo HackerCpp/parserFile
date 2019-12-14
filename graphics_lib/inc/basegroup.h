@@ -17,6 +17,7 @@ protected:
     QRectF *m_visibilitySquare;
     int m_leftX, m_rightX;
     QImage *m_curentPixmap,*m_doublePixMap;
+    QTimer timer;
 
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*) override;
     virtual void run()override;
@@ -27,6 +28,7 @@ public:
     virtual QRectF boundingRect()const override;
     int getRightX();
 public slots:
+    void updateTimer();
     virtual void updateP(QPointF leftUp,QPointF rightDown);
     void setRightPosition(int rightPosition);
     void setLeftPosition(int leftPosition);

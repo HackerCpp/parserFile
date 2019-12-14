@@ -24,7 +24,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG += c++11
 INCLUDEPATH+= ../gfm_lib/inc ../graphics_lib/inc
-LIBS += ../build/debug/GFM.dll ../build/debug/graphics.dll
+LIBS += ../build/release/GFM.dll ../build/release/graphics.dll
 SOURCES += \
     src/tabs/abstracttab.cpp \
     #src/fileCreation/creategfm.cpp \

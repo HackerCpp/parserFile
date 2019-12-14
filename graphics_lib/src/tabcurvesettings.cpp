@@ -29,18 +29,30 @@ TabCurveSettings::TabCurveSettings(CurveBaseItem* item)
     m_sliderOffset->setTickInterval(1);
     m_sliderOffset->setValue(item->leftShift());
 
+    m_rBtnIsShow = new QRadioButton("Показать");
+    m_rBtnIsShow->setChecked(item->isShow());
+
     m_mainLayout = new QVBoxLayout;
     this->setLayout(m_mainLayout);
     m_mainLayout->addWidget(m_sliderColor);
     m_mainLayout->addWidget(m_sliderWidthLine);
     m_mainLayout->addWidget(m_cliderScale);
     m_mainLayout->addWidget(m_sliderOffset);
+    m_mainLayout->addWidget(m_rBtnIsShow);
+
+
+
     connect(m_sliderColor,&QSlider::valueChanged,this,&TabCurveSettings::changeColor);
     connect(m_cliderScale,&QSlider::valueChanged,this,&TabCurveSettings::changeScale);
     connect(m_sliderWidthLine,&QSlider::valueChanged,this,&TabCurveSettings::changeWidth);
     connect(m_sliderOffset,&QSlider::valueChanged,this,&TabCurveSettings::changeLeftShift);
+    connect(m_rBtnIsShow,&QRadioButton::toggled,this,&TabCurveSettings::changeShow);
 
     show();
+}
+void TabCurveSettings::changeShow(bool show){
+    m_item->setShow(show);
+    emit m_item->updateL();
 }
 void TabCurveSettings::changeLeftShift(int shift){
     m_item->setLeftShift(shift);

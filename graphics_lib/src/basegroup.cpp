@@ -2,6 +2,7 @@
 
 int BaseGroup::m_top = -10;
 int BaseGroup::m_bottom = 2000;
+
 BaseGroup::BaseGroup(){
     m_leftX = 0;
     m_rightX = 0;
@@ -10,6 +11,11 @@ BaseGroup::BaseGroup(){
     m_doublePixMap = new QImage(m_rightX - m_leftX,2000,QImage::Format_ARGB32);
     setZValue(0);
     connect(this,&BaseGroup::finished,this,&BaseGroup::sceneUpdate);
+    connect(&timer,&QTimer::timeout,this,&BaseGroup::updateTimer);
+}
+void BaseGroup::updateTimer(){
+    timer.stop();
+    start();
 }
 void BaseGroup::setRightPosition(int rightPosition){
     m_rightX = rightPosition;
@@ -50,8 +56,10 @@ void BaseGroup::run(){}
 void BaseGroup::updateP(QPointF leftUp,QPointF rightDown){
     if(leftUp.x() > m_rightX || rightDown.x() < m_leftX)
         return;
-    quit();
+    timer.stop();
+    wait();
     m_visibilitySquare->setTopLeft(leftUp);
     m_visibilitySquare->setBottomRight(rightDown);
     start();
+    //timer.start(2);
 }

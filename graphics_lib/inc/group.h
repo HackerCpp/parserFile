@@ -11,6 +11,7 @@ class Group : public BaseGroup{
     QImage *m_curentHeader,*m_doubleHeader;
     QVector<CurveBaseItem*> * m_curves;
     HeaderItem *m_headerItem;
+    int m_sizeVisibleItem;
     static int m_headerTopOffset;
     QPointF m_prevPoint;
     bool m_isMoveHeader;
@@ -27,7 +28,7 @@ public:
     Group(int leftX,int rightX);
 
 public slots:
-    void updateP(QPointF leftUp,QPointF rightDown)override;
+    //void updateP(QPointF leftUp,QPointF rightDown)override;
     void resize(int position);
     void updatePL();
 };

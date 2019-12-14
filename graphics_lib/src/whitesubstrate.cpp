@@ -11,6 +11,7 @@ WhiteSubstrate::WhiteSubstrate(int width){
 }
 void WhiteSubstrate::setSize(QRectF rect){
     wait();
+
     m_rightX = static_cast<int>(rect.width());
 
     QImage *img = new  QImage(m_rightX - m_leftX,2000,QImage::Format_ARGB32);
@@ -25,8 +26,9 @@ void WhiteSubstrate::setSize(QRectF rect){
     start();
 }
 void WhiteSubstrate::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*){
-    if(m_curentPixmap)
+    if(m_curentPixmap){
         painter->drawImage(QRect(m_leftX,m_visibilitySquare->y() - 500,m_curentPixmap->width(),m_curentPixmap->height()),*m_curentPixmap);
+    }
     else
         qDebug() << "null";
 }
