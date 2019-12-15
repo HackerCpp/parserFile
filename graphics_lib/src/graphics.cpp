@@ -7,12 +7,12 @@
 #include "ruler.h"
 #include "border.h"
 #include "QGraphicsScene"
+#include "track.h"
 
-
-Graphics::Graphics(QList<Curve*> *curves){  
+void Graphics::init(){
     m_groups = new QVector<Group*>;
     m_mainValues = new MainValuesContainer;
-    m_curves = curves;
+    m_curves = nullptr;
     m_isDrawTime = false;
     m_substrate = nullptr;
     m_grid = nullptr;
@@ -20,28 +20,42 @@ Graphics::Graphics(QList<Curve*> *curves){
     this->setupViewport(new QGLWidget(QGLFormat(QGL::DoubleBuffer)));
     //setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
     m_canvas = new Canvas();
-    QThread::msleep(400);
-    newGroup();
-    newGroup();
-    newGroup();
-    int i = 0;
-    foreach(auto curve,*m_curves){
-        i++;
-        //if(i < 30){
-            addCurve(curve,1);
-            //addCurve(curve,0);
-        //}
-    }
-    drawTime();
-    drawDepth();
-    changeScale(1000);
-    this->setScene(m_canvas);
+    setScene(m_canvas);
     connect(horizontalScrollBar(), &QScrollBar::valueChanged, this, &Graphics::scroll);
     connect(verticalScrollBar(), &QScrollBar::valueChanged, this, &Graphics::scroll);
     connect(m_canvas,&QGraphicsScene::sceneRectChanged,this,&Graphics::changeWidth);
     m_tabGenSett = new TabGeneralSettings;
     connect(m_tabGenSett,&TabGeneralSettings::changeScale,this,&Graphics::changeScale);
+}
+Graphics::Graphics(QList<Curve*> *curves){
+    init();
+    m_curves = curves;
+    newGroup();
+    foreach(auto curve,*m_curves){
+        addCurve(curve,0);
+    }
+    drawDepth();
+    changeScale(1000);
     changeWidth();
+}
+Graphics::Graphics(Board *board,QList<Curve*> *curves){
+    init();
+    m_curves = curves;
+    QList<Track*>* tracks = board->tracks();
+    foreach(Track *track,*tracks){
+        newGroup(track->width());
+    }
+    int y = - 20;
+    int height = 1000;
+    BaseGroup::setTopAndBottom(0,height + y);
+    setSceneRect(QRect(0,y,m_canvas->sceneRect().width(),height));
+    /*if(m_curves)
+        foreach(auto curve,*m_curves){
+            addCurve(curve,0);
+        }*/
+    //drawDepth();
+    //changeScale(1000);
+    //changeWidth();
 }
 void Graphics::rulerRightClick(){
     if(m_tabGenSett){
@@ -98,7 +112,45 @@ void Graphics::scroll(int value){
         return;
     emit scrollHasMoved(rect[0],rect[2]);
 }
-
+void Graphics::newGroup(int width){
+    if(width < 1)
+        return;
+    Group *group = nullptr;
+    Border *border = nullptr;
+    if(m_groups->isEmpty()){
+        group = new Group(100,width + 100);
+        border = new Border(width + 100,90);
+        m_ruler = new Ruler(static_cast<int>(m_canvas->width()));
+        connect(m_ruler,&Ruler::rightMouseClick,this,&Graphics::rulerRightClick);
+        connect(this,&Graphics::scrollHasMoved,dynamic_cast<BaseGroup*>(m_ruler),&BaseGroup::updateP);
+        m_canvas->addItem(m_ruler);
+        m_substrate = new WhiteSubstrate(static_cast<int>(m_canvas->width()));
+        connect(this,&Graphics::scrollHasMoved,m_substrate,&WhiteSubstrate::updateP);
+        m_canvas->addItem(m_substrate);
+        m_grid = new Grid(static_cast<int>(m_canvas->width()));
+        connect(this,&Graphics::scrollHasMoved,m_grid,&Grid::updateP);
+        m_canvas->addItem(m_grid);
+    }
+    else{
+        int x = m_groups->last()->getRightX() + 10;
+        group = new Group(x,x + width);
+        border = new Border(x + width,x);
+        connect(m_groups->last(),&BaseGroup::rightPositionChanged,dynamic_cast<BaseGroup*>(group),&BaseGroup::shift);
+    }
+    if(group){
+        m_groups->push_back(group);
+        m_canvas->addItem(group);
+        connect(this,&Graphics::scrollHasMoved,group,&Group::updateP);
+    }
+    if(border){
+        //m_groups->push_back(border);
+        m_canvas->addItem(border);
+        connect(this,&Graphics::scrollHasMoved,border,&Border::updateP);
+        connect(dynamic_cast<BaseGroup*>(group),&BaseGroup::rightPositionChanged,dynamic_cast<BaseGroup*>(border),&BaseGroup::shift);
+        connect(dynamic_cast<BaseGroup*>(border),&BaseGroup::leftPositionChanged,dynamic_cast<BaseGroup*>(group),&BaseGroup::setRightPosition);
+    }
+    changeWidth();
+}
 void Graphics::newGroup(){
     Group *group = nullptr;
     Border *border = nullptr;

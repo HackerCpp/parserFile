@@ -12,6 +12,7 @@ class Board{
 public:
     Board(QDomNode *xmlBoard);
     QString name();
+    QList<Track*> *tracks();
     ~Board();
 };
 

@@ -3,6 +3,7 @@
 #include <QString>
 #include "datablockgfm.h"
 #include <QList>
+#include "forms.h"
 
 
 
@@ -19,8 +20,10 @@ public:
     QList<AbstractBlockGFM*> *getBlocks();
     QList<DataBlockGFM*> *getDataBlocks();
     QList<Curve*> *getCurves(){return m_curves;}
+    Forms *getForms();
     GFM(QString path);
     void saveFile(QString fileName);
+    bool isReady();
     ~GFM();
 };
 

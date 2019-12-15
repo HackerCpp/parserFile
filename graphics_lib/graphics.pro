@@ -1,4 +1,4 @@
-QT += core gui widgets opengl
+QT += core gui widgets opengl xml
 
 TEMPLATE = lib
 #CONFIG += staticlib

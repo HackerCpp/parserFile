@@ -7,12 +7,19 @@
 Forms::Forms(QByteArray forms){
     m_formsByteArray = new QByteArray(forms);
     m_boards = new QList<Board*>;
+    m_isReady = false;
     start();
 }
 
-
+bool Forms::isReady(){
+    return m_isReady;
+}
 QString Forms::activeName(){
    return m_xmlForms.documentElement().attributes().namedItem("active_name").nodeValue();
+}
+
+QList<Board*>* Forms::boards(){
+    return m_boards;
 }
 
 void Forms::run(){
@@ -27,6 +34,7 @@ void Forms::run(){
     }
     //file.close();*/
     qDebug() << time.msecsTo( QTime::currentTime() );
+    m_isReady = true;
 }
 
 Forms::~Forms(){

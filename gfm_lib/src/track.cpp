@@ -2,19 +2,18 @@
 
 Track::Track(QDomNode *xmlTracks){
     m_xmlTracks = xmlTracks;
-    //qDebug() << m_xmlTracks->attributes().namedItem("name").nodeValue();
-    QDomNode track = m_xmlTracks->firstChild();
-    while (false == track.isNull()){
-        QString tag = track.nodeName();
+    m_items = new QList<ItemInfo*>;
+    QDomNode item = m_xmlTracks->firstChild();
+    while (false == item.isNull()){
+        QString tag = item.nodeName();
         if(tag == "begin" || tag == "width" || tag == "logarithm"){
 
         }
         else{
+            m_items->push_back(new ItemInfo(new QDomNode(item)));
         }
-        track = track.nextSibling();
+        item = item.nextSibling();
     }
-    left();
-    width();
 }
 
 int Track::left(){
@@ -24,7 +23,7 @@ int Track::left(){
            QString value = track.attributes().namedItem("value").nodeValue();
            QString unit = track.attributes().namedItem("unit").nodeValue();
            if(unit == "CM")
-               return value.replace(',','.').toInt() * 10;
+               return static_cast<int>(value.replace(',','.').toDouble() * 50);
            else{
                qDebug() << "Новые единицы измерения track.cpp begin" << unit;
                break;
@@ -42,7 +41,7 @@ int Track::width(){
             QString value = track.attributes().namedItem("value").nodeValue();
             QString unit = track.attributes().namedItem("unit").nodeValue();
             if(unit == "CM")
-                return value.replace(',','.').toInt() * 10;
+                return static_cast<int>(value.replace(',','.').toDouble() * 50);
             else{
                 qDebug() << "Новые единицы измерения track.cpp width" << unit;
                 break;

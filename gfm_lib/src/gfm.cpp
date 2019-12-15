@@ -76,7 +76,6 @@ void GFM::run(){
         m_listBlocksGFM->push_back(block);
         value.bodyBlock.clear();
     }
-    m_isReady = true;
     delete blocksList;
     byteArrayFile.clear();
     foreach(auto block,*m_listBlocksGFM){
@@ -90,10 +89,27 @@ void GFM::run(){
                }
            }
         }
+        else if(block->getName() == "[FORMS]"){
+           FormsBlockGFM * formsBlock = dynamic_cast<FormsBlockGFM *>(block);
+           if(formsBlock){
+               while(!formsBlock->isReady()){}
+           }
+        }
     }
     qDebug() << time.msecsTo( QTime::currentTime() );
+    m_isReady = true;
 }
-
+Forms *GFM::getForms(){
+    foreach(auto block,*m_listBlocksGFM){
+        if(block->getName() == "[FORMS]"){
+            FormsBlockGFM * formsBlock = dynamic_cast<FormsBlockGFM *>(block);
+            if(formsBlock)
+                return formsBlock->forms();
+            break;
+        }
+    }
+    return nullptr;
+}
 QList<AbstractBlockGFM*> *GFM::getBlocks(){
     return m_listBlocksGFM;
 }
@@ -108,12 +124,18 @@ QList<DataBlockGFM*> *GFM::getDataBlocks(){
     return dataBlocks;
 }
 
+
+
 GFM::GFM(QString path):m_path(path){
     m_isReady = false;
     m_listBlocksGFM = new QList<AbstractBlockGFM*>;
     m_curves = new QList<Curve*>;
     m_codec = QTextCodec::codecForMib(1015);
     start();
+}
+
+bool GFM::isReady(){
+    return m_isReady;
 }
 
 void GFM::saveFile(QString fileName){

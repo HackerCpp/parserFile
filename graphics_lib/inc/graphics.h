@@ -10,6 +10,7 @@
 #include "tabgeneralsettings.h"
 #include "mainvalue.h"
 #include "mainvaluescontainer.h"
+#include "board.h"
 
 class  Graphics : public QGraphicsView{
     Q_OBJECT
@@ -22,7 +23,7 @@ class  Graphics : public QGraphicsView{
     Ruler *m_ruler;
     Canvas *m_canvas;
     TabGeneralSettings *m_tabGenSett;
-
+    void init();
     void resize();
     void applyDrawingType();
     void mousePressEvent(QMouseEvent *event)override;
@@ -30,7 +31,9 @@ class  Graphics : public QGraphicsView{
     void mouseReleaseEvent(QMouseEvent *event)override;
 public:
     Graphics(QList<Curve*> *curves);
+    Graphics(Board *board,QList<Curve*> *curves);
     void newGroup();
+    void newGroup(int width);
     bool addCurve(Curve *curve,int indexTab);
     void drawDepth();
     void drawTime();

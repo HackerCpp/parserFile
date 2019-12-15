@@ -4,13 +4,11 @@
 #include <QString>
 #include <QDebug>
 #include <QDomNode>
+#include "iteminfo.h"
 
 class Track{
-    QString m_name,m_type;
-    bool m_isShowGrid;
-    int m_leftPosition;
-    int m_width;
     QDomNode *m_xmlTracks;
+    QList<ItemInfo*>* m_items;
 public:
     Track(QDomNode *xmlTracks);
     int left();

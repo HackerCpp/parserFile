@@ -1,5 +1,4 @@
-QT -= gui
-QT += xml
+QT += gui xml
 TEMPLATE = lib
 #CONFIG += staticlib
 CONFIG += dynamiclib
@@ -39,7 +38,7 @@ SOURCES += \
     src/datablockgfm.cpp \
     src/abstractblockgfm.cpp \
     src/gfm.cpp \
-    inc/iteminfo.cpp
+    src/iteminfo.cpp
 
 HEADERS += \
     inc/abstractblockgfm.h \

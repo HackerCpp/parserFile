@@ -9,7 +9,9 @@ Board::Board(QDomNode *xmlBoard){
        board = board.nextSibling();
     }
 }
-
+QList<Track*> *Board::tracks(){
+    return m_tracks;
+}
 QString Board::name(){
    return m_xmlBoard->attributes().namedItem("name").nodeValue();
 }

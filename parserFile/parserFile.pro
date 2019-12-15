@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets opengl
 
@@ -23,8 +23,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 CONFIG += c++11
-INCLUDEPATH+= ../gfm_lib/inc ../graphics_lib/inc
-LIBS += ../build/release/GFM.dll ../build/release/graphics.dll
+INCLUDEPATH+=\
+../gfm_lib/inc \
+../graphics_lib/inc
+
+LIBS += \
+../build/debug/GFM.dll \
+../build/debug/graphics.dll
+
 SOURCES += \
     src/tabs/abstracttab.cpp \
     #src/fileCreation/creategfm.cpp \

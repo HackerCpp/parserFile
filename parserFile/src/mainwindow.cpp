@@ -7,17 +7,19 @@
 
 MainWindow::MainWindow(QWidget *parent){
     this->setParent(parent);
+    setGeometry(200,200,1000,500);
     tabWid = new QTabWidget(this);
     menu = new Menu(this);
     QVBoxLayout *verticalLayout = new QVBoxLayout();
     QWidget *header = new QWidget(this);
     QVBoxLayout *verticalLayoutHeader = new QVBoxLayout();
-    header->setMinimumHeight(50);
+    header->setMinimumHeight(1);
     header->setLayout(verticalLayoutHeader);
     QHBoxLayout *blay = new QHBoxLayout();
     QVBoxLayout *forMenu = new QVBoxLayout();
+    //forMenu->addSpacing(20);
     forMenu->addWidget(menu);
-    forMenu->addStretch(1000);
+    forMenu->addStretch(10);
     blay->addLayout(forMenu);
     blay->addWidget(tabWid);
 

@@ -12,6 +12,8 @@ public:
     FormsBlockGFM();
     void parser(QByteArray *bodyBlock);
     virtual QByteArray getForSave();
+    Forms *forms();
+    bool isReady();
     ~FormsBlockGFM();
 };
 

@@ -9,8 +9,9 @@ TabGeneralSettings::TabGeneralSettings(){
     m_sliderScale->setTickInterval(1);
     m_mainLayout->addWidget(m_sliderScale);
     this->setLayout(m_mainLayout);
-    this->show();
+    //this->show();
     connect(m_sliderScale,&QSlider::valueChanged,this,&TabGeneralSettings::changeScale);
+    hide();
 }
 TabGeneralSettings::~TabGeneralSettings(){
     if(m_sliderScale){
