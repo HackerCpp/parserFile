@@ -5,16 +5,20 @@
 #include "board.h"
 #include <QDebug>
 #include <QThread>
+#include <QDomDocument>
 
-class Forms: public QThread{
-    QString m_activeName;
-    QList<Board*> *m_boards;
-    QByteArray m_formsByteArray;
-    void run();
+class Forms : public QThread{
+    QByteArray *m_formsByteArray;
+    QDomDocument m_xmlForms;
+    QList<Board*>* m_boards;
+    bool m_isReady;
+    void run() override;
 public:
-    Forms();
-    void parser(QByteArray *forms);
-    ~Forms();
+    Forms(QByteArray forms);
+    QString activeName();
+    QList<Board*>* boards();
+    bool isReady();
+    ~Forms()override;
 };
 
 #endif // FORMS_H

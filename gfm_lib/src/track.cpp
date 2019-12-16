@@ -1,25 +1,55 @@
 #include "track.h"
 
-Track::Track(){
+Track::Track(QDomNode *xmlTracks){
+    m_xmlTracks = xmlTracks;
+    m_items = new QList<ItemInfo*>;
+    QDomNode item = m_xmlTracks->firstChild();
+    while (false == item.isNull()){
+        QString tag = item.nodeName();
+        if(tag == "begin" || tag == "width" || tag == "logarithm"){
 
+        }
+        else{
+            m_items->push_back(new ItemInfo(new QDomNode(item)));
+        }
+        item = item.nextSibling();
+    }
 }
 
-void Track::parser(QByteArray *byteArray){
-    int indexBeginName = byteArray->indexOf("name=\"") + QByteArray("name=\"").size();
-    int indexEndName = byteArray->indexOf("\"",indexBeginName);
-    m_name = byteArray->mid(indexBeginName,indexEndName - indexBeginName);
-    int indexBeginGrid = byteArray->indexOf("show_grid=\"") + QByteArray("show_grid=\"").size();
-    int indexEndGrid = byteArray->indexOf("\"",indexBeginGrid);
-    m_isShowGrid = byteArray->mid(indexBeginGrid,indexEndGrid - indexBeginGrid).toInt();
-    int indexBeginType = byteArray->indexOf("type=\"") + QByteArray("type=\"").size();
-    int indexEndType = byteArray->indexOf("\"",indexBeginType);
-    m_type = byteArray->mid(indexBeginType,indexEndType - indexBeginType);
-    int indexBeginLeft = byteArray->indexOf("<begin value=\"") + QByteArray("<begin value=\"").size();
-    int indexEndLeft = byteArray->indexOf("\"",indexBeginLeft);
-    m_leftPosition = static_cast<int>(byteArray->mid(indexBeginLeft,indexEndLeft - indexBeginLeft).replace(',','.').toDouble() * 10);
-    int indexBeginWidth = byteArray->indexOf("<width value=\"") + QByteArray("<width value=\"").size();
-    int indexEndWidth = byteArray->indexOf("\"",indexBeginWidth);
-    m_width = static_cast<int>(byteArray->mid(indexBeginWidth,indexEndWidth - indexBeginWidth).replace(',','.').toDouble() * 10);
+int Track::left(){
+    QDomNode track = m_xmlTracks->firstChild();
+    while (false == track.isNull()){
+        if(track.nodeName() == "begin"){
+           QString value = track.attributes().namedItem("value").nodeValue();
+           QString unit = track.attributes().namedItem("unit").nodeValue();
+           if(unit == "CM")
+               return static_cast<int>(value.replace(',','.').toDouble() * 50);
+           else{
+               qDebug() << "Новые единицы измерения track.cpp begin" << unit;
+               break;
+           }
+        }
+        track = track.nextSibling();
+    }
+    return 0;
+}
+
+int Track::width(){
+    QDomNode track = m_xmlTracks->firstChild();
+    while (false == track.isNull()){
+        if(track.nodeName() == "width"){
+            QString value = track.attributes().namedItem("value").nodeValue();
+            QString unit = track.attributes().namedItem("unit").nodeValue();
+            if(unit == "CM")
+                return static_cast<int>(value.replace(',','.').toDouble() * 50);
+            else{
+                qDebug() << "Новые единицы измерения track.cpp width" << unit;
+                break;
+            }
+        }
+        track = track.nextSibling();
+    }
+    return 0;
 }
 
 Track::~Track(){

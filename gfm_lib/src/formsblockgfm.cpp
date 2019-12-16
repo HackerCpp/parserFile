@@ -96,15 +96,22 @@ bool gzipDecompress(QByteArray input, QByteArray &output){
 }
 
 FormsBlockGFM::FormsBlockGFM(){
+    m_forms = nullptr;
+}
+
+Forms *FormsBlockGFM::forms(){
+    return m_forms;
 }
 
 void FormsBlockGFM::parser(QByteArray *bodyBlock){
+    if(bodyBlock->isEmpty())
+        return;
       QByteArray out;
       if(!gzipDecompress(*bodyBlock,out)){
           qDebug() <<  "Не удалось расшифровать формы";
           return;
       }
-      m_forms = new Forms;
+
       int indexBeginVersion = out.indexOf("version=\"") + QByteArray("version=\"").size();
       int indexEndVersion = out.indexOf("\"",indexBeginVersion);
       m_version = out.mid(indexBeginVersion,indexEndVersion - indexBeginVersion);
@@ -114,8 +121,17 @@ void FormsBlockGFM::parser(QByteArray *bodyBlock){
       int indexBeginForms = out.indexOf("<forms");
       int indexEndForms = out.indexOf("</forms>") + QByteArray("</forms>").size();
       QByteArray formsByteArray = out.mid(indexBeginForms,indexEndForms - indexBeginForms);
-      m_forms->parser(&formsByteArray);
+      m_forms = new Forms(formsByteArray);
 }
+
+bool FormsBlockGFM::isReady(){
+    if(m_forms)
+        return m_forms->isReady();
+    else {
+        return true;
+    }
+}
+
 QByteArray FormsBlockGFM::getForSave(){
 
 }

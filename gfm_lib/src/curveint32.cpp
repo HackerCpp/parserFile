@@ -13,17 +13,23 @@ void CurveInt32::setData(const char * dataPointer,uint numberOfVectors){
 }
 void CurveInt32::run(){
     bool ok;
-    qreal f_resolutoin = m_desc->getParam("resolution").toDouble(&ok);
-    if(ok){
-        if(m_parameterMnemonics.indexOf("TIME(MSEC)") != -1){
+    if(m_parameterMnemonics.indexOf("TIME(MSEC)") != -1){
+        qreal f_resolutoin = m_desc->getParam("resolution").replace(',','.').toDouble(&ok);
+        if(ok){
             for(auto value = m_data->begin(); value < m_data->end();value++){
                 *value *= f_resolutoin;
             }
         }
-        else if(m_parameterMnemonics.indexOf("DEPTH(COUNTS)") != -1){
-            qreal f_length = m_desc->getCalib("length").toDouble(&ok);
+        else{
+           qDebug() << "resolution не переведён в число. int32 depth"<< m_parameterMnemonics <<"; resolution: "<< m_desc->getParam("resolution");
+        }
+     }
+     else if(m_parameterMnemonics.indexOf("DEPTH(COUNTS)") != -1){
+        qreal f_resolutoin = m_desc->getParam("resolution").replace(',','.').toDouble(&ok);
+        if(ok){
+            qreal f_length = m_desc->getCalib("length").replace(',','.').toDouble(&ok);
             if(ok){
-                qreal f_counts = m_desc->getCalib("length").toDouble(&ok);
+                qreal f_counts = m_desc->getCalib("length").replace(',','.').toDouble(&ok);
                 if(ok){
                     foreach(auto value,*m_data){
                         value *= static_cast<int>(f_length / f_counts * f_resolutoin);
@@ -37,10 +43,11 @@ void CurveInt32::run(){
                 qDebug() << "length не переведён в число.int32 depth"<< m_parameterMnemonics;
             }
         }
+        else{
+            qDebug() << "resolution не переведён в число. int32 depth"<< m_parameterMnemonics <<"; resolution: "<< m_desc->getParam("resolution");
+        }
     }
-    else{
-        qDebug() << "resolution не переведён в число. int32 depth"<< m_parameterMnemonics;
-    }
+
     foreach(auto value,*m_data){
         m_minimum = qMin(m_minimum,static_cast<qreal>(value));
         m_maximum = qMax(m_maximum,static_cast<qreal>(value));

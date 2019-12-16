@@ -13,7 +13,7 @@ void CurveUint32::setData(const char * dataPointer,uint numberOfVectors){
 void CurveUint32::run(){
     if(m_parameterMnemonics.indexOf("TIME(MSEC)") != -1){
         bool ok;
-        qreal f_resolutoin = m_desc->getParam("resolution").toDouble(&ok);
+        qreal f_resolutoin = m_desc->getParam("resolution").replace(',','.').toDouble(&ok);
         if(ok){
             for(auto value = m_data->begin(); value < m_data->end();value++){
                 *value *= f_resolutoin;

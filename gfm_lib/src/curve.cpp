@@ -1,14 +1,16 @@
 #include "inc/curve.h"
 #include <QDebug>
 
+using namespace std;
+
 Curve::Curve(){
     m_mainTime = nullptr;
     m_mainDepth = nullptr;
     m_desc = nullptr;
     m_positiveOffset = 0;
     m_desc = nullptr;
-    m_maximum = 0;
-    m_minimum = 0;
+    m_maximum = numeric_limits<qreal>::min();
+    m_minimum = numeric_limits<qreal>::max();;
 }
 qreal Curve::maximum(){
     return m_maximum;

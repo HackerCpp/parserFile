@@ -28,11 +28,7 @@ qreal CurveFloat32::data(uint index){
 qreal CurveFloat32::operator[](int index){
     return static_cast<qreal>(m_data->data()[index] - m_positiveOffset);
 }
-/*uint CurveFloat32::amountSaturation(uint index){
-    if(m_limit && index < static_cast<uint>(m_data->size()))
-        return static_cast<uint>(((m_data->data()[index] - m_positiveOffset) * m_scale)/m_limit);
-    return 0;
-}*/
+
 uint CurveFloat32::getSize(){
     return static_cast<uint>(m_data->size());
 }

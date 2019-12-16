@@ -4,13 +4,15 @@
 #include <QList>
 #include "track.h"
 #include <QDebug>
+#include <QDomNode>
 
 class Board{
-    QString m_name;
     QList<Track*> *m_tracks;
+    QDomNode *m_xmlBoard;
 public:
-    Board();
-    void parser(QByteArray *byteArray);
+    Board(QDomNode *xmlBoard);
+    QString name();
+    QList<Track*> *tracks();
     ~Board();
 };
 

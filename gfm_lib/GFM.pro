@@ -1,5 +1,4 @@
-QT -= gui
-
+QT += gui xml
 TEMPLATE = lib
 #CONFIG += staticlib
 CONFIG += dynamiclib
@@ -38,7 +37,8 @@ SOURCES += \
     src/unknownblockgfm.cpp \
     src/datablockgfm.cpp \
     src/abstractblockgfm.cpp \
-    src/gfm.cpp
+    src/gfm.cpp \
+    src/iteminfo.cpp
 
 HEADERS += \
     inc/abstractblockgfm.h \
@@ -60,7 +60,8 @@ HEADERS += \
     inc/shortcut.h \
     inc/toolinfoblockgfm.h \
     inc/track.h \
-    inc/unknownblockgfm.h
+    inc/unknownblockgfm.h \
+    inc/iteminfo.h
 
 # Default rules for deployment.
 unix {
