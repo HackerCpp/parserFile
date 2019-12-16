@@ -13,6 +13,7 @@ debug/curvebaseitem.o
 debug/group.o
 debug/canvas.o
 debug/graphics.o
+debug/mainvaluescontainer.o
 debug/moc_basegroup.o
 debug/moc_canvas.o
 debug/moc_curvebaseitem.o

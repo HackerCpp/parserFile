@@ -8,7 +8,6 @@ CurveBaseItem *CurveBaseItem::createCurveItem(Curve *curve){
         return new CurveLineItem(curve);
     else
         return nullptr;
-
 }
 uint CurveBaseItem::amountSaturation(uint index){
     return 0;
@@ -18,13 +17,16 @@ CurveBaseItem::CurveBaseItem(Curve *curve):
     m_isActive = false;
     m_positionInHeader = 0;
     m_pen = nullptr;
+    m_isShow = true;
     m_brush = nullptr;
     m_curentWidthLine = 2;
     m_mainValue = nullptr;
     m_scale = 1;
     m_leftShift = 0;
 }
-
+void CurveBaseItem::setShow(bool isShow){
+    m_isShow = isShow;
+}
 void CurveBaseItem::setScale(qreal scale){
     m_scale = scale;
 }
@@ -65,7 +67,7 @@ Curve *CurveBaseItem::getCurve(){
 bool CurveBaseItem::isCrosses(QPoint point,int y){
     return false;
 }
-void CurveBaseItem::paint(QPainter *painter,QPainter *painterHeader,qreal y){
+void CurveBaseItem::paint(QPainter *painter,QPainter *painterHeader,qreal yTop,qreal yBottom){
 
 }
 void CurveBaseItem::setActive(bool active){

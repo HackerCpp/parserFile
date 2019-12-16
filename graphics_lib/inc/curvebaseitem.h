@@ -11,6 +11,7 @@
 class CurveBaseItem:public QObject{
     Q_OBJECT
 protected:
+    bool m_isShow;
     int m_leftShift;
     qreal m_scale;
     int m_limit;
@@ -27,7 +28,7 @@ protected:
     virtual QRectF boundingRect() const;
 public:
     void setPositionInHeader(int pos);
-    virtual void paint(QPainter *painter,QPainter *painterHeader,qreal y);
+    virtual void paint(QPainter *painter,QPainter *painterHeader,qreal yTop,qreal yBottom);
     virtual bool isCrosses(QPoint point,int y);
     static CurveBaseItem *createCurveItem(Curve *curve);
     CurveBaseItem(Curve *curve);
@@ -48,6 +49,8 @@ public:
     void setMainValue(MainValue *mainValue);
     virtual uint amountSaturation(uint index);
     qreal scale(){return m_scale;}
+    void setShow(bool isShow);
+    bool isShow(){return m_isShow;}
 signals:
     void updateL();
 };

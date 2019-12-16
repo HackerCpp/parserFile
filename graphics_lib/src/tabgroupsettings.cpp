@@ -4,6 +4,7 @@ TabGroupSettings::TabGroupSettings(QWidget *parent) : QWidget(parent){
     m_curveSettings = new QList<TabCurveSettings*>;
     m_mainLayout = new QVBoxLayout;
     this->setLayout(m_mainLayout);
+    setWindowFlags(Qt::WindowStaysOnTopHint);
 }
 
 void TabGroupSettings::hideL(){

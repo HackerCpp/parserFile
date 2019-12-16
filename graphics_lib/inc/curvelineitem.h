@@ -9,7 +9,7 @@ class CurveLineItem : public CurveBaseItem{
 
 public:
     CurveLineItem(Curve *curve);
-    void paint(QPainter *painter,QPainter *painterHeader,qreal y) override;
+    void paint(QPainter *painter,QPainter *painterHeader,qreal yTop,qreal yBottom) override;
     bool isCrosses(QPoint point,int y) override;
     qreal operator[](int index);
     virtual uint amountSaturation(uint index)override;

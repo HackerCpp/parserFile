@@ -9,32 +9,37 @@
 #include "ruler.h"
 #include "tabgeneralsettings.h"
 #include "mainvalue.h"
+#include "mainvaluescontainer.h"
+#include "board.h"
 
 class  Graphics : public QGraphicsView{
     Q_OBJECT
     bool m_isDrawTime;
     QVector<Group*> *m_groups;
-    QList<MainValue*> *m_mainValues;
+    MainValuesContainer *m_mainValues;
     QList<Curve*> *m_curves;
-    qreal m_maximumTime, m_minimumDepth,m_maximumDepth;
     BaseGroup *m_substrate;
     BaseGroup *m_grid;
     Ruler *m_ruler;
     Canvas *m_canvas;
     TabGeneralSettings *m_tabGenSett;
-    MainValue *checkPointerInMainValues(Curve *time,Curve *depth);
-public:
-    Graphics(QList<Curve*> *curves);
-    void newGroup();
-    bool addCurve(Curve *curve,int indexTab);
-    void drawDepth();
-    void drawTime();
+    void init();
+    void resize();
     void applyDrawingType();
-    ~Graphics()override;
-protected:
     void mousePressEvent(QMouseEvent *event)override;
     void mouseMoveEvent(QMouseEvent *event)override;
     void mouseReleaseEvent(QMouseEvent *event)override;
+public:
+    Graphics(QList<Curve*> *curves);
+    Graphics(Board *board,QList<Curve*> *curves);
+    void newGroup();
+    void newGroup(int width);
+    bool addCurve(Curve *curve,int indexTab);
+    void drawDepth();
+    void drawTime();
+
+    ~Graphics()override;
+
 public slots:
     void scroll(int value);
     void changeWidth();

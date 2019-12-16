@@ -1,4 +1,4 @@
-QT += core gui widgets opengl
+QT += core gui widgets opengl xml
 
 TEMPLATE = lib
 #CONFIG += staticlib
@@ -34,7 +34,8 @@ SOURCES += \
     src/curvebaseitem.cpp \
     src/group.cpp \
     src/canvas.cpp \
-    src/graphics.cpp
+    src/graphics.cpp \
+    src/mainvaluescontainer.cpp
 
 HEADERS += \
     inc/border.h \
@@ -51,7 +52,8 @@ HEADERS += \
     inc/tabcurvesettings.h \
     inc/tabgeneralsettings.h \
     inc/tabgroupsettings.h \
-    inc/whitesubstrate.h
+    inc/whitesubstrate.h \
+    inc/mainvaluescontainer.h
 
 # Default rules for deployment.
 unix {

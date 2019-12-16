@@ -22,22 +22,22 @@ qreal MainValue::minimumDepth(){
     return m_mainDepth->minimum();
 }
 qreal MainValue::maximumTimeForScale(){
-    return maximumTime() * m_scaleForTime;
+    return maximumTime() * m_curentScale;
 }
 qreal MainValue::minimumTimeForScale(){
-    return minimumTime() * m_scaleForTime;
+    return minimumTime() * m_curentScale;
 }
 qreal MainValue::maximumDepthForScale(){
-    return maximumDepth() * m_scaleForDepth;
+    return maximumDepth() * m_curentScale;
 }
 qreal MainValue::minimumDepthForScale(){
-    return minimumDepth() * m_scaleForDepth;
+    return minimumDepth() * m_curentScale;
 }
 qreal MainValue::minimumForScale(){
-    return m_isMainTime?minimumTimeForScale():minimumDepthForScale();
+    return m_mainValue->minimum()*m_curentScale;
 }
 qreal MainValue::maximumForScale(){
-    return m_isMainTime?maximumTimeForScale():maximumDepthForScale();
+    return m_mainValue->maximum()*m_curentScale;
 }
 void MainValue::setMainTime(){
     m_isMainTime = true;
@@ -69,7 +69,7 @@ qreal MainValue::operator[](int index){
 }
 
 qreal MainValue::scale(){
-    return m_isMainTime?m_scaleForTime:m_scaleForDepth;
+    return m_curentScale;
 }
 
 

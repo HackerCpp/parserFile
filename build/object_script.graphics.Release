@@ -13,6 +13,7 @@ release/curvebaseitem.o
 release/group.o
 release/canvas.o
 release/graphics.o
+release/mainvaluescontainer.o
 release/moc_basegroup.o
 release/moc_canvas.o
 release/moc_curvebaseitem.o
