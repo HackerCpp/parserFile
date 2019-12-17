@@ -8,11 +8,13 @@
 #include "border.h"
 #include "QGraphicsScene"
 #include "track.h"
+#include "iteminfo.h"
 
 void Graphics::init(){
     m_groups = new QVector<Group*>;
     m_mainValues = new MainValuesContainer;
-    m_curves = nullptr;
+    //m_curves = nullptr;
+    m_hashCurves = nullptr;
     m_isDrawTime = false;
     m_substrate = nullptr;
     m_grid = nullptr;
@@ -27,35 +29,42 @@ void Graphics::init(){
     m_tabGenSett = new TabGeneralSettings;
     connect(m_tabGenSett,&TabGeneralSettings::changeScale,this,&Graphics::changeScale);
 }
-Graphics::Graphics(QList<Curve*> *curves){
+Graphics::Graphics(QHash<QString,Curve*> *curves){
     init();
-    m_curves = curves;
+    m_hashCurves = curves;
     newGroup();
-    foreach(auto curve,*m_curves){
+    if(m_hashCurves)
+    foreach(auto curve,m_hashCurves->values()){
         addCurve(curve,0);
     }
     drawDepth();
     changeScale(1000);
     changeWidth();
 }
-Graphics::Graphics(Board *board,QList<Curve*> *curves){
+Graphics::Graphics(Board *board,QHash<QString,Curve*> *curves){
     init();
-    m_curves = curves;
+    m_hashCurves = curves;
     QList<Track*>* tracks = board->tracks();
+    int i = 0;
     foreach(Track *track,*tracks){
         newGroup(track->width());
+        QList<ItemInfo *> *items = track->items();
+        foreach(ItemInfo *value, *items){
+          Curve *curve =  m_hashCurves->value(value->name());
+          if(curve){
+              addCurve(curve,i);
+          }
+        }
+        ++i;
     }
-    int y = - 20;
-    int height = 1000;
-    BaseGroup::setTopAndBottom(0,height + y);
-    setSceneRect(QRect(0,y,m_canvas->sceneRect().width(),height));
-    /*if(m_curves)
-        foreach(auto curve,*m_curves){
-            addCurve(curve,0);
-        }*/
-    //drawDepth();
-    //changeScale(1000);
-    //changeWidth();
+    //int y = - 20;
+    //int height = 1000;
+    //BaseGroup::setTopAndBottom(0,height + y);
+    //setSceneRect(QRect(0,y,m_canvas->sceneRect().width(),height));
+
+    drawTime();
+    changeScale(1000);
+    changeWidth();
 }
 void Graphics::rulerRightClick(){
     if(m_tabGenSett){

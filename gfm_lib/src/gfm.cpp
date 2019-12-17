@@ -84,7 +84,8 @@ void GFM::run(){
            if(dataBlock){
                foreach(auto curve,*dataBlock->getCurves()){
                    if(!curve->getShortCut().getName().isEmpty()){
-                       m_curves->push_back(curve);
+                       QString name = curve->getShortCut().getNameWithoutNumber() + ':' + curve->getMnemonic();
+                       m_curvesHash->insert(name,curve);
                    }
                }
            }
@@ -124,12 +125,10 @@ QList<DataBlockGFM*> *GFM::getDataBlocks(){
     return dataBlocks;
 }
 
-
-
 GFM::GFM(QString path):m_path(path){
     m_isReady = false;
     m_listBlocksGFM = new QList<AbstractBlockGFM*>;
-    m_curves = new QList<Curve*>;
+    m_curvesHash = new QHash<QString,Curve*>;
     m_codec = QTextCodec::codecForMib(1015);
     start();
 }

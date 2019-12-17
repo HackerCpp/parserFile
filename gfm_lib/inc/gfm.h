@@ -13,13 +13,13 @@ class GFM : public QThread{
     QList<AbstractBlockGFM*> *m_listBlocksGFM;
     bool m_isReady;
     QTextCodec *m_codec;
-    QList<Curve*> *m_curves;
+    QHash<QString,Curve*> *m_curvesHash;
 
     void run();
 public:
     QList<AbstractBlockGFM*> *getBlocks();
     QList<DataBlockGFM*> *getDataBlocks();
-    QList<Curve*> *getCurves(){return m_curves;}
+    QHash<QString,Curve*> *getCurves(){return m_curvesHash;}
     Forms *getForms();
     GFM(QString path);
     void saveFile(QString fileName);

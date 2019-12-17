@@ -15,6 +15,9 @@ Track::Track(QDomNode *xmlTracks){
         item = item.nextSibling();
     }
 }
+QList<ItemInfo*>* Track::items(){
+    return m_items;
+}
 
 int Track::left(){
     QDomNode track = m_xmlTracks->firstChild();

@@ -23,6 +23,7 @@ TabGFM::TabGFM(QString path,QWidget *parent) : AbstractTab(parent){
     foreach(Board *board,*boards){
         tabWidget->addTab(new Graphics(board,m_gfm->getCurves()),board->name());
     }
+    //tabWidget->addTab(new Graphics(m_gfm->getCurves()),"name");
     m_mainHLayout->addWidget(tabWidget);
     setLayout(m_mainHLayout);
 }

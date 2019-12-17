@@ -18,3 +18,4 @@ release/unknownblockgfm.o
 release/datablockgfm.o
 release/abstractblockgfm.o
 release/gfm.o
+release/iteminfo.o

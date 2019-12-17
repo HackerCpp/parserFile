@@ -14,7 +14,7 @@ ItemInfo::ItemInfo(QDomNode *xmlItemInfo){
 }
 
 QString ItemInfo::name(){
-    m_xmlItemInfo->attributes().namedItem("name").nodeValue();
+    return m_xmlItemInfo->attributes().namedItem("name").nodeValue();
 }
 
 int ItemInfo::widthLine(){

@@ -14,6 +14,7 @@ public:
     int left();
     int width();
     void parser(QByteArray *byteArray);
+    QList<ItemInfo*>* items();
     ~Track();
 };
 

@@ -17,7 +17,8 @@ class  Graphics : public QGraphicsView{
     bool m_isDrawTime;
     QVector<Group*> *m_groups;
     MainValuesContainer *m_mainValues;
-    QList<Curve*> *m_curves;
+    //QList<Curve*> *m_curves;
+    QHash<QString,Curve*> *m_hashCurves;
     BaseGroup *m_substrate;
     BaseGroup *m_grid;
     Ruler *m_ruler;
@@ -30,8 +31,8 @@ class  Graphics : public QGraphicsView{
     void mouseMoveEvent(QMouseEvent *event)override;
     void mouseReleaseEvent(QMouseEvent *event)override;
 public:
-    Graphics(QList<Curve*> *curves);
-    Graphics(Board *board,QList<Curve*> *curves);
+    Graphics(QHash<QString,Curve*> *curves);
+    Graphics(Board *board,QHash<QString,Curve*> *curves);
     void newGroup();
     void newGroup(int width);
     bool addCurve(Curve *curve,int indexTab);

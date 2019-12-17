@@ -18,3 +18,4 @@ debug/unknownblockgfm.o
 debug/datablockgfm.o
 debug/abstractblockgfm.o
 debug/gfm.o
+debug/iteminfo.o
