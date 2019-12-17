@@ -1,7 +1,7 @@
 #include "border.h"
 
 Border::Border(int position,int leftLimiter){
-    m_leftLimiter = leftLimiter + 12;
+    m_leftLimiter = leftLimiter;
     m_scale = 1;
     m_width = 10;
     m_isMove = false;

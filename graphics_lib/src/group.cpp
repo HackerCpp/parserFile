@@ -12,7 +12,7 @@ Group::Group(int leftX,int rightX){
      m_curves = new QVector<CurveBaseItem*>;
      m_leftX = leftX;
      m_rightX = rightX;
-     m_headerTopOffset = 200;
+     m_headerTopOffset = 20;
      m_curentPixmap = new QImage(m_rightX - m_leftX,2000,QImage::Format_ARGB32);
      m_doublePixMap = new QImage(m_rightX - m_leftX,2000,QImage::Format_ARGB32);
      m_curentHeader = new QImage(m_rightX - m_leftX,2000,QImage::Format_ARGB32);

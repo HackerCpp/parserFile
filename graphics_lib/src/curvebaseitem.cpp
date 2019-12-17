@@ -19,7 +19,7 @@ CurveBaseItem::CurveBaseItem(Curve *curve):
     m_pen = nullptr;
     m_isShow = true;
     m_brush = nullptr;
-    m_curentWidthLine = 2;
+    m_curentWidthLine = 1;
     m_mainValue = nullptr;
     m_scale = 1;
     m_leftShift = 0;

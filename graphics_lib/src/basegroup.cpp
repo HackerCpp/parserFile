@@ -1,7 +1,7 @@
 #include "basegroup.h"
 
-int BaseGroup::m_top = -10;
-int BaseGroup::m_bottom = 2000;
+//int BaseGroup::m_top = -10;
+//int BaseGroup::m_bottom = 2000;
 
 BaseGroup::BaseGroup(){
     m_leftX = 0;

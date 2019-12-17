@@ -35,7 +35,6 @@ void CurveLineItem::paint(QPainter *painter,QPainter *painterHeader,qreal yTop,q
         return;
     painter->setFont(QFont("Arial Black",8,50));
     if(m_mainValue->minimumForScale() > yTop  + 2000 || m_mainValue->maximumForScale() < yTop){
-
         return;
     }
     painter->setPen(*m_pen);
@@ -75,7 +74,7 @@ void CurveLineItem::paint(QPainter *painter,QPainter *painterHeader,qreal yTop,q
         }
         prevPoint = QPointF(operator[](i),m_mainValue->data(i) - yTop + 500);
         prevIndex = i;
-        if(m_mainValue->data(i) - yTop + 500 > yBottom || m_mainValue->data(i) < yTop-500){
+        if((m_mainValue->data(i) - yTop + 500) > yBottom + 500 || m_mainValue->data(i) < yTop-500){
             break;
         }
     }
@@ -92,7 +91,7 @@ void CurveLineItem::paint(QPainter *painter,QPainter *painterHeader,qreal yTop,q
     painterHeader->drawRect(QRect(10,m_positionInHeader *m_headerSliceHeight,width - 20,m_headerSliceHeight));
     //painterHeader->setPen(*m_pen);
     painterHeader->drawText(QRect(15,m_positionInHeader *m_headerSliceHeight,width,m_headerSliceHeight),Qt::AlignLeft|Qt::AlignVCenter,QString::number((*m_curve)[indexBegin]));
-    painterHeader->drawText(QRect(0,m_positionInHeader *m_headerSliceHeight,width - 15,m_headerSliceHeight),Qt::AlignRight|Qt::AlignVCenter,QString::number(i - indexBegin));
+    painterHeader->drawText(QRect(0,m_positionInHeader *m_headerSliceHeight,width - 15,m_headerSliceHeight),Qt::AlignRight|Qt::AlignVCenter,QString::number((m_mainValue->data(i) - yTop + 500)));
     painterHeader->drawText(QRect(0,m_positionInHeader *m_headerSliceHeight,width,m_headerSliceHeight),Qt::AlignHCenter|Qt::AlignVCenter,m_curve->getMnemonic());
     //painterHeader->drawLine(QPoint(0,m_positionInHeader *m_headerSliceHeight),QPoint(width,m_positionInHeader *m_headerSliceHeight));
 

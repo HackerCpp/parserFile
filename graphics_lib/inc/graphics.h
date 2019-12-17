@@ -11,11 +11,13 @@
 #include "mainvalue.h"
 #include "mainvaluescontainer.h"
 #include "board.h"
+#include "border.h"
 
 class  Graphics : public QGraphicsView{
     Q_OBJECT
     bool m_isDrawTime;
     QVector<Group*> *m_groups;
+    QVector<Border*> *m_borders;
     MainValuesContainer *m_mainValues;
     //QList<Curve*> *m_curves;
     QHash<QString,Curve*> *m_hashCurves;

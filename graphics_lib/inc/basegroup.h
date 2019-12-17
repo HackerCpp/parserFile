@@ -13,7 +13,7 @@
 class BaseGroup : public QThread, public QGraphicsItem{
     Q_OBJECT
 protected:
-    static int m_top, m_bottom;
+    int m_top, m_bottom;
     QRectF *m_visibilitySquare;
     int m_leftX, m_rightX;
     QImage *m_curentPixmap,*m_doublePixMap;
@@ -23,7 +23,7 @@ protected:
     virtual void run()override;
     virtual void swapPixMap();
 public:
-    static void setTopAndBottom(qreal top,qreal bottom);
+    void setTopAndBottom(qreal top,qreal bottom);
     BaseGroup();
     virtual QRectF boundingRect()const override;
     int getRightX();

@@ -1,13 +1,13 @@
 /****************************************************************************
 ** Resource object code
 **
-** Created by: The Resource Compiler for Qt version 5.13.1
+** Created by: The Resource Compiler for Qt version 5.12.2
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
 static const unsigned char qt_resource_data[] = {
-  // D:/MyQtProgram/parserGfm/parserFile/css/style.css
+  // D:/Project/ParserFile/parserFile/parserFile/css/style.css
   0x0,0x0,0x1,0xc2,
   0x51,
   0x57,0x69,0x64,0x67,0x65,0x74,0x20,0xd,0xa,0x7b,0xd,0xa,0x9,0x62,0x61,0x63,
@@ -65,7 +65,7 @@ static const unsigned char qt_resource_struct[] = {
 0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,
   // :/css/style.css
   0x0,0x0,0x0,0xc,0x0,0x0,0x0,0x0,0x0,0x1,0x0,0x0,0x0,0x0,
-0x0,0x0,0x1,0x6c,0xb4,0x67,0xb5,0xcf,
+0x0,0x0,0x1,0x6e,0xdb,0xf8,0x74,0x3e,
 
 };
 
@@ -86,6 +86,7 @@ namespace QT_NAMESPACE {
 #endif
 
 bool qRegisterResourceData(int, const unsigned char *, const unsigned char *, const unsigned char *);
+
 bool qUnregisterResourceData(int, const unsigned char *, const unsigned char *, const unsigned char *);
 
 #ifdef QT_NAMESPACE
@@ -95,18 +96,16 @@ bool qUnregisterResourceData(int, const unsigned char *, const unsigned char *, 
 int QT_RCC_MANGLE_NAMESPACE(qInitResources_res)();
 int QT_RCC_MANGLE_NAMESPACE(qInitResources_res)()
 {
-    int version = 3;
     QT_RCC_PREPEND_NAMESPACE(qRegisterResourceData)
-        (version, qt_resource_struct, qt_resource_name, qt_resource_data);
+        (0x2, qt_resource_struct, qt_resource_name, qt_resource_data);
     return 1;
 }
 
 int QT_RCC_MANGLE_NAMESPACE(qCleanupResources_res)();
 int QT_RCC_MANGLE_NAMESPACE(qCleanupResources_res)()
 {
-    int version = 3;
     QT_RCC_PREPEND_NAMESPACE(qUnregisterResourceData)
-       (version, qt_resource_struct, qt_resource_name, qt_resource_data);
+       (0x2, qt_resource_struct, qt_resource_name, qt_resource_data);
     return 1;
 }
 

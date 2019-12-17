@@ -62,7 +62,7 @@ bool MainWindow::eventFilter(QObject *o, QEvent *e){
     return false;
 }
 void MainWindow::applyStyle(){
-    QFile File(":/css/style.css");
+    QFile File("qrc:/css/style.css");
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());
     qApp->setStyleSheet(StyleSheet);

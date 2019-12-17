@@ -12,6 +12,7 @@
 
 void Graphics::init(){
     m_groups = new QVector<Group*>;
+    m_borders = new QVector<Border*>;
     m_mainValues = new MainValuesContainer;
     //m_curves = nullptr;
     m_hashCurves = nullptr;
@@ -76,7 +77,17 @@ void Graphics::rulerRightClick(){
 void Graphics::resize(){
     int y =  m_mainValues->minimum() - 20;
     int height = static_cast<int>(m_mainValues->maximum() - y) + 200;
-    BaseGroup::setTopAndBottom(0,height + y);
+    foreach(auto value,*m_groups){
+        value->setTopAndBottom(0,height + y);
+    }
+    foreach(auto value,*m_borders){
+        value->setTopAndBottom(0,height + y);
+    }
+
+    if(m_grid)
+        m_grid->setTopAndBottom(0,height + y);
+    if(m_ruler)
+        m_ruler->setTopAndBottom(0,height + y);
     setSceneRect(QRect(m_canvas->sceneRect().x(),y,m_canvas->sceneRect().width(),height));
 }
 void Graphics::changeScale(qreal scale){
@@ -104,9 +115,9 @@ void Graphics::applyDrawingType(){
 void Graphics::changeWidth(){
     resize();
     QRectF rect = m_canvas->sceneRect();
-    WhiteSubstrate * substr = dynamic_cast<WhiteSubstrate *>(m_substrate);
+    /*WhiteSubstrate * substr = dynamic_cast<WhiteSubstrate *>(m_substrate);
     if(substr)
-        substr->setSize(m_canvas->sceneRect());
+        substr->setSize(m_canvas->sceneRect());*/
     Grid * grid = dynamic_cast<Grid *>(m_grid);
     if(grid)
         grid->setSize(m_canvas->sceneRect());
@@ -133,9 +144,9 @@ void Graphics::newGroup(int width){
         connect(m_ruler,&Ruler::rightMouseClick,this,&Graphics::rulerRightClick);
         connect(this,&Graphics::scrollHasMoved,dynamic_cast<BaseGroup*>(m_ruler),&BaseGroup::updateP);
         m_canvas->addItem(m_ruler);
-        m_substrate = new WhiteSubstrate(static_cast<int>(m_canvas->width()));
-        connect(this,&Graphics::scrollHasMoved,m_substrate,&WhiteSubstrate::updateP);
-        m_canvas->addItem(m_substrate);
+        //m_substrate = new WhiteSubstrate(static_cast<int>(m_canvas->width()));
+        //connect(this,&Graphics::scrollHasMoved,m_substrate,&WhiteSubstrate::updateP);
+        //m_canvas->addItem(m_substrate);
         m_grid = new Grid(static_cast<int>(m_canvas->width()));
         connect(this,&Graphics::scrollHasMoved,m_grid,&Grid::updateP);
         m_canvas->addItem(m_grid);
@@ -148,6 +159,7 @@ void Graphics::newGroup(int width){
     }
     if(group){
         m_groups->push_back(group);
+        m_borders->push_back(border);
         m_canvas->addItem(group);
         connect(this,&Graphics::scrollHasMoved,group,&Group::updateP);
     }
