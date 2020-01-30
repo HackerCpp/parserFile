@@ -3,7 +3,11 @@
 MainValuesContainer::MainValuesContainer(){
     m_mainValues = new QList<MainValue*>;
 }
-
+void MainValuesContainer::findIndexBegin(int yTop){
+    foreach(auto mainValue,*m_mainValues){
+        mainValue->findIndexBegin(yTop);
+    }
+}
 MainValue *MainValuesContainer::addMainValue(Curve *mainTime,Curve *mainDepth){
     foreach(auto mainValue,*m_mainValues){
         if(mainValue->checkPoint(mainTime,mainDepth))

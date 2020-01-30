@@ -68,8 +68,13 @@ void Ruler::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
         scene()->update();
     }
 }
-void Ruler::updateP(QPointF leftUp,QPointF rightDown){
-    quit();
+void Ruler::updateP(QPointF leftUp,QPointF rightDown,bool forceARedraw){
+    if(forceARedraw){
+       wait();
+       start();
+       return;
+    }
+    wait();
     QGraphicsItem::prepareGeometryChange();
     m_visibilitySquare->setTopLeft(leftUp);
     int x = m_visibilitySquare->x()<m_leftX?m_leftX:m_visibilitySquare->x();

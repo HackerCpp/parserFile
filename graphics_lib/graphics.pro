@@ -20,6 +20,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/curvewaveitem.cpp \
     src/mainvalue.cpp \
     src/tabgroupsettings.cpp \
     src/tabcurvesettings.cpp \
@@ -43,6 +44,7 @@ HEADERS += \
     inc/canvas.h \
     inc/curvebaseitem.h \
     inc/curvelineItem.h \
+    inc/curvewaveitem.h \
     inc/graphics.h \
     inc/grid.h \
     inc/group.h \

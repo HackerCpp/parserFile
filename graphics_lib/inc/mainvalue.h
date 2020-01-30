@@ -8,6 +8,7 @@ class MainValue{
     Curve *m_mainValue;
     qreal m_scaleForTime, m_scaleForDepth,m_curentScale;
     bool m_isMainTime;
+    uint m_curentIndexBegin;
 
 public:
     MainValue(Curve *mainTime,Curve *mainDepth);
@@ -33,6 +34,8 @@ public:
     bool checkPoint(Curve *time,Curve *depth);
     qreal operator[](int index);
     qreal data(int index);
+    void findIndexBegin(int  yTop);
+    uint indexBegin(){return m_curentIndexBegin;}
 };
 
 #endif // MAINVALUE_H

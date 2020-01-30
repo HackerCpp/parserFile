@@ -52,21 +52,21 @@ TabCurveSettings::TabCurveSettings(CurveBaseItem* item)
 }
 void TabCurveSettings::changeShow(bool show){
     m_item->setShow(show);
-    emit m_item->updateL();
+    emit m_item->updateL(QPointF(),QPointF(),true);
 }
 void TabCurveSettings::changeLeftShift(int shift){
     m_item->setLeftShift(shift);
-    emit m_item->updateL();
+    emit m_item->updateL(QPointF(),QPointF(),true);
 }
 void TabCurveSettings::changeColor(int hsl){
     QColor color;
     color.setHsl(hsl,128,128,255);
     m_item->getPen()->setColor(color);
-    emit m_item->updateL();
+    emit m_item->updateL(QPointF(),QPointF(),true);
 }
 void TabCurveSettings::changeScale(int scale){
     m_item->setScale(static_cast<qreal>(scale)/100000);
-    emit m_item->updateL();
+    emit m_item->updateL(QPointF(),QPointF(),true);
 }
 void TabCurveSettings::changeWidth(int width){
     m_item->setWidthLine(width);

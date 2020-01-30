@@ -5,7 +5,22 @@ MainValue::MainValue(Curve *mainTime,Curve *mainDepth):
     m_isMainTime = false;
     m_mainValue = m_mainDepth;
     m_scaleForTime = m_scaleForDepth = m_curentScale = 1;
+    m_curentIndexBegin = size();
 }
+
+void MainValue::findIndexBegin(int yTop){
+    if(minimumForScale() > yTop  + 2000 || maximumForScale() < yTop - 1000){
+        m_curentIndexBegin = size();
+        return;
+    }
+    for(uint i = 0; i < size(); ++i){
+       if(data(i) > yTop - 1000 && data(i) < yTop + 2000){
+           m_curentIndexBegin = i;// > 2?i - 2 : 0;
+           return;
+       }
+    }
+}
+
 bool MainValue::checkPoint(Curve *time,Curve *depth){
     return (time == m_mainTime && depth == m_mainDepth);
 }

@@ -11,12 +11,8 @@ BaseGroup::BaseGroup(){
     m_doublePixMap = new QImage(m_rightX - m_leftX,2000,QImage::Format_ARGB32);
     setZValue(0);
     connect(this,&BaseGroup::finished,this,&BaseGroup::sceneUpdate);
-    connect(&timer,&QTimer::timeout,this,&BaseGroup::updateTimer);
 }
-void BaseGroup::updateTimer(){
-    timer.stop();
-    start();
-}
+
 void BaseGroup::setRightPosition(int rightPosition){
     m_rightX = rightPosition;
     emit rightPositionChanged(m_rightX);
@@ -46,20 +42,22 @@ void BaseGroup::swapPixMap(){
     m_curentPixmap = m_doublePixMap;
     m_doublePixMap = ptr;
     ptr = nullptr;
-    //scene()->update();
 }
 void BaseGroup::sceneUpdate(){
     scene()->update();
 }
 void BaseGroup::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*){}
 void BaseGroup::run(){}
-void BaseGroup::updateP(QPointF leftUp,QPointF rightDown){
+void BaseGroup::updateP(QPointF leftUp,QPointF rightDown,bool forceARedraw){
+    if(forceARedraw){
+       wait();
+       start();
+       return;
+    }
     if(leftUp.x() > m_rightX || rightDown.x() < m_leftX)
         return;
-    timer.stop();
     wait();
     m_visibilitySquare->setTopLeft(leftUp);
     m_visibilitySquare->setBottomRight(rightDown);
     start();
-    //timer.start(2);
 }

@@ -26,9 +26,10 @@ protected:
     QBrush *m_brush;
     int m_curentWidthLine;
     virtual QRectF boundingRect() const;
+    virtual void drawHeader(QPainter *painterHeader);
 public:
     void setPositionInHeader(int pos);
-    virtual void paint(QPainter *painter,QPainter *painterHeader,qreal yTop,qreal yBottom);
+    virtual void paint(QPainter *painter,QPainter *painterHeader,qreal yTop,qreal yBottom,bool *flag);
     virtual bool isCrosses(QPoint point,int y);
     static CurveBaseItem *createCurveItem(Curve *curve);
     CurveBaseItem(Curve *curve);
@@ -52,7 +53,7 @@ public:
     void setShow(bool isShow);
     bool isShow(){return m_isShow;}
 signals:
-    void updateL();
+    void updateL(QPointF leftUp,QPointF rightDown,bool forceARedraw);
 };
 
 #endif // CURVEBASEITEM_H

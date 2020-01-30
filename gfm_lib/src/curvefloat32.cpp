@@ -1,4 +1,4 @@
-#include "inc/curvefloat32.h"
+#include "curvefloat32.h"
 
 CurveFloat32::CurveFloat32() : m_data(nullptr){
     m_sizeOfType = 4;

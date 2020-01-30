@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Graphics_t {
-    QByteArrayData data[11];
-    char stringdata0[101];
+    QByteArrayData data[12];
+    char stringdata0[117];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,17 +37,19 @@ QT_MOC_LITERAL(1, 9, 14), // "scrollHasMoved"
 QT_MOC_LITERAL(2, 24, 0), // ""
 QT_MOC_LITERAL(3, 25, 6), // "leftUp"
 QT_MOC_LITERAL(4, 32, 9), // "rightDown"
-QT_MOC_LITERAL(5, 42, 6), // "scroll"
-QT_MOC_LITERAL(6, 49, 5), // "value"
-QT_MOC_LITERAL(7, 55, 11), // "changeWidth"
-QT_MOC_LITERAL(8, 67, 11), // "changeScale"
-QT_MOC_LITERAL(9, 79, 5), // "scale"
-QT_MOC_LITERAL(10, 85, 15) // "rulerRightClick"
+QT_MOC_LITERAL(5, 42, 15), // "forcedRedrawing"
+QT_MOC_LITERAL(6, 58, 6), // "scroll"
+QT_MOC_LITERAL(7, 65, 5), // "value"
+QT_MOC_LITERAL(8, 71, 11), // "changeWidth"
+QT_MOC_LITERAL(9, 83, 11), // "changeScale"
+QT_MOC_LITERAL(10, 95, 5), // "scale"
+QT_MOC_LITERAL(11, 101, 15) // "rulerRightClick"
 
     },
     "Graphics\0scrollHasMoved\0\0leftUp\0"
-    "rightDown\0scroll\0value\0changeWidth\0"
-    "changeScale\0scale\0rulerRightClick"
+    "rightDown\0forcedRedrawing\0scroll\0value\0"
+    "changeWidth\0changeScale\0scale\0"
+    "rulerRightClick"
 };
 #undef QT_MOC_LITERAL
 
@@ -65,21 +67,21 @@ static const uint qt_meta_data_Graphics[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    2,   39,    2, 0x06 /* Public */,
+       1,    3,   39,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       5,    1,   44,    2, 0x0a /* Public */,
-       7,    0,   47,    2, 0x0a /* Public */,
-       8,    1,   48,    2, 0x0a /* Public */,
-      10,    0,   51,    2, 0x0a /* Public */,
+       6,    1,   46,    2, 0x0a /* Public */,
+       8,    0,   49,    2, 0x0a /* Public */,
+       9,    1,   50,    2, 0x0a /* Public */,
+      11,    0,   53,    2, 0x0a /* Public */,
 
  // signals: parameters
-    QMetaType::Void, QMetaType::QPointF, QMetaType::QPointF,    3,    4,
+    QMetaType::Void, QMetaType::QPointF, QMetaType::QPointF, QMetaType::Bool,    3,    4,    5,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::Int,    6,
+    QMetaType::Void, QMetaType::Int,    7,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QReal,    9,
+    QMetaType::Void, QMetaType::QReal,   10,
     QMetaType::Void,
 
        0        // eod
@@ -91,7 +93,7 @@ void Graphics::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         auto *_t = static_cast<Graphics *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->scrollHasMoved((*reinterpret_cast< QPointF(*)>(_a[1])),(*reinterpret_cast< QPointF(*)>(_a[2]))); break;
+        case 0: _t->scrollHasMoved((*reinterpret_cast< QPointF(*)>(_a[1])),(*reinterpret_cast< QPointF(*)>(_a[2])),(*reinterpret_cast< bool(*)>(_a[3]))); break;
         case 1: _t->scroll((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 2: _t->changeWidth(); break;
         case 3: _t->changeScale((*reinterpret_cast< qreal(*)>(_a[1]))); break;
@@ -101,7 +103,7 @@ void Graphics::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (Graphics::*)(QPointF , QPointF );
+            using _t = void (Graphics::*)(QPointF , QPointF , bool );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Graphics::scrollHasMoved)) {
                 *result = 0;
                 return;
@@ -151,9 +153,9 @@ int Graphics::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void Graphics::scrollHasMoved(QPointF _t1, QPointF _t2)
+void Graphics::scrollHasMoved(QPointF _t1, QPointF _t2, bool _t3)
 {
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))) };
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t3))) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_WARNING_POP

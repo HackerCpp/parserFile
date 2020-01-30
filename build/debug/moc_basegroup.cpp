@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_BaseGroup_t {
     QByteArrayData data[14];
-    char stringdata0[167];
+    char stringdata0[168];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,20 +38,20 @@ QT_MOC_LITERAL(2, 30, 0), // ""
 QT_MOC_LITERAL(3, 31, 12), // "leftPosition"
 QT_MOC_LITERAL(4, 44, 20), // "rightPositionChanged"
 QT_MOC_LITERAL(5, 65, 13), // "rightPosition"
-QT_MOC_LITERAL(6, 79, 11), // "updateTimer"
-QT_MOC_LITERAL(7, 91, 7), // "updateP"
-QT_MOC_LITERAL(8, 99, 6), // "leftUp"
-QT_MOC_LITERAL(9, 106, 9), // "rightDown"
-QT_MOC_LITERAL(10, 116, 16), // "setRightPosition"
-QT_MOC_LITERAL(11, 133, 15), // "setLeftPosition"
-QT_MOC_LITERAL(12, 149, 11), // "sceneUpdate"
-QT_MOC_LITERAL(13, 161, 5) // "shift"
+QT_MOC_LITERAL(6, 79, 7), // "updateP"
+QT_MOC_LITERAL(7, 87, 6), // "leftUp"
+QT_MOC_LITERAL(8, 94, 9), // "rightDown"
+QT_MOC_LITERAL(9, 104, 12), // "forceARedraw"
+QT_MOC_LITERAL(10, 117, 16), // "setRightPosition"
+QT_MOC_LITERAL(11, 134, 15), // "setLeftPosition"
+QT_MOC_LITERAL(12, 150, 11), // "sceneUpdate"
+QT_MOC_LITERAL(13, 162, 5) // "shift"
 
     },
     "BaseGroup\0leftPositionChanged\0\0"
     "leftPosition\0rightPositionChanged\0"
-    "rightPosition\0updateTimer\0updateP\0"
-    "leftUp\0rightDown\0setRightPosition\0"
+    "rightPosition\0updateP\0leftUp\0rightDown\0"
+    "forceARedraw\0setRightPosition\0"
     "setLeftPosition\0sceneUpdate\0shift"
 };
 #undef QT_MOC_LITERAL
@@ -62,7 +62,7 @@ static const uint qt_meta_data_BaseGroup[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -70,24 +70,22 @@ static const uint qt_meta_data_BaseGroup[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   54,    2, 0x06 /* Public */,
-       4,    1,   57,    2, 0x06 /* Public */,
+       1,    1,   49,    2, 0x06 /* Public */,
+       4,    1,   52,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       6,    0,   60,    2, 0x0a /* Public */,
-       7,    2,   61,    2, 0x0a /* Public */,
-      10,    1,   66,    2, 0x0a /* Public */,
-      11,    1,   69,    2, 0x0a /* Public */,
-      12,    0,   72,    2, 0x0a /* Public */,
-      13,    1,   73,    2, 0x0a /* Public */,
+       6,    3,   55,    2, 0x0a /* Public */,
+      10,    1,   62,    2, 0x0a /* Public */,
+      11,    1,   65,    2, 0x0a /* Public */,
+      12,    0,   68,    2, 0x0a /* Public */,
+      13,    1,   69,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int,    3,
     QMetaType::Void, QMetaType::Int,    5,
 
  // slots: parameters
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::QPointF, QMetaType::QPointF,    8,    9,
+    QMetaType::Void, QMetaType::QPointF, QMetaType::QPointF, QMetaType::Bool,    7,    8,    9,
     QMetaType::Void, QMetaType::Int,    5,
     QMetaType::Void, QMetaType::Int,    3,
     QMetaType::Void,
@@ -104,12 +102,11 @@ void BaseGroup::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         switch (_id) {
         case 0: _t->leftPositionChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 1: _t->rightPositionChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 2: _t->updateTimer(); break;
-        case 3: _t->updateP((*reinterpret_cast< QPointF(*)>(_a[1])),(*reinterpret_cast< QPointF(*)>(_a[2]))); break;
-        case 4: _t->setRightPosition((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 5: _t->setLeftPosition((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 6: _t->sceneUpdate(); break;
-        case 7: _t->shift((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 2: _t->updateP((*reinterpret_cast< QPointF(*)>(_a[1])),(*reinterpret_cast< QPointF(*)>(_a[2])),(*reinterpret_cast< bool(*)>(_a[3]))); break;
+        case 3: _t->setRightPosition((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 4: _t->setLeftPosition((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 5: _t->sceneUpdate(); break;
+        case 6: _t->shift((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -162,13 +159,13 @@ int BaseGroup::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
+        if (_id < 7)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 8;
+        _id -= 7;
     }
     return _id;
 }

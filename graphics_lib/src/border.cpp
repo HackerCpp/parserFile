@@ -109,12 +109,17 @@ void Border::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
         m_prevPoint = event->scenePos();
     }
 }
-void Border::updateP(QPointF leftUp,QPointF rightDown){
+void Border::updateP(QPointF leftUp,QPointF rightDown,bool forceARedraw){
+    if(forceARedraw){
+       wait();
+       start();
+       return;
+    }
     wait();
     QGraphicsItem::prepareGeometryChange();
     m_visibilitySquare->setTopLeft(leftUp);
     m_visibilitySquare->setBottomRight(rightDown);
-    start(QThread::HighestPriority);
+    start();
 }
 
 void Border::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){

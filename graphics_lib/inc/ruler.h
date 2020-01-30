@@ -19,7 +19,7 @@ protected:
 public:
     Ruler(int width);
     void setScale(qreal scale);
-    void updateP(QPointF leftUp,QPointF rightDown)override;
+    void updateP(QPointF leftUp,QPointF rightDown,bool forceARedraw)override;
     void setSize(QRectF rect);
 signals:
     void rightMouseClick();

@@ -30,6 +30,8 @@ public:
     virtual void run();
     virtual qreal data(uint index);
     virtual uint getSize();
+    virtual uint sizeOfType(){return m_sizeOfType;}
+    virtual uint quantiytElements(){return m_size;}
     virtual QByteArray getDataByte();
     QByteArray getForSave();
     QString getMnemonic(){return m_parameterMnemonics;}
