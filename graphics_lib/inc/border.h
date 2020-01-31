@@ -20,7 +20,7 @@ protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event)override;
 public:
     Border(int position,int leftLimiter);
-    void updateP(QPointF leftUp,QPointF rightDown)override;
+    void updateP(QPointF leftUp,QPointF rightDown,bool forceARedraw)override;
 public slots:
     void shift(int leftPosition)override;
 };

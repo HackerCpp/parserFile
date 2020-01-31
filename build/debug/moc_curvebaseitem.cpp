@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_CurveBaseItem_t {
-    QByteArrayData data[3];
-    char stringdata0[23];
+    QByteArrayData data[6];
+    char stringdata0[53];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,10 +34,14 @@ static const qt_meta_stringdata_CurveBaseItem_t qt_meta_stringdata_CurveBaseItem
     {
 QT_MOC_LITERAL(0, 0, 13), // "CurveBaseItem"
 QT_MOC_LITERAL(1, 14, 7), // "updateL"
-QT_MOC_LITERAL(2, 22, 0) // ""
+QT_MOC_LITERAL(2, 22, 0), // ""
+QT_MOC_LITERAL(3, 23, 6), // "leftUp"
+QT_MOC_LITERAL(4, 30, 9), // "rightDown"
+QT_MOC_LITERAL(5, 40, 12) // "forceARedraw"
 
     },
-    "CurveBaseItem\0updateL\0"
+    "CurveBaseItem\0updateL\0\0leftUp\0rightDown\0"
+    "forceARedraw"
 };
 #undef QT_MOC_LITERAL
 
@@ -55,10 +59,10 @@ static const uint qt_meta_data_CurveBaseItem[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   19,    2, 0x06 /* Public */,
+       1,    3,   19,    2, 0x06 /* Public */,
 
  // signals: parameters
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::QPointF, QMetaType::QPointF, QMetaType::Bool,    3,    4,    5,
 
        0        // eod
 };
@@ -69,20 +73,19 @@ void CurveBaseItem::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         auto *_t = static_cast<CurveBaseItem *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->updateL(); break;
+        case 0: _t->updateL((*reinterpret_cast< QPointF(*)>(_a[1])),(*reinterpret_cast< QPointF(*)>(_a[2])),(*reinterpret_cast< bool(*)>(_a[3]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (CurveBaseItem::*)();
+            using _t = void (CurveBaseItem::*)(QPointF , QPointF , bool );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&CurveBaseItem::updateL)) {
                 *result = 0;
                 return;
             }
         }
     }
-    Q_UNUSED(_a);
 }
 
 QT_INIT_METAOBJECT const QMetaObject CurveBaseItem::staticMetaObject = { {
@@ -126,9 +129,10 @@ int CurveBaseItem::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void CurveBaseItem::updateL()
+void CurveBaseItem::updateL(QPointF _t1, QPointF _t2, bool _t3)
 {
-    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t3))) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

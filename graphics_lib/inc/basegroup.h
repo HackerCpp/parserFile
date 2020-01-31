@@ -28,8 +28,7 @@ public:
     virtual QRectF boundingRect()const override;
     int getRightX();
 public slots:
-    void updateTimer();
-    virtual void updateP(QPointF leftUp,QPointF rightDown);
+    virtual void updateP(QPointF leftUp,QPointF rightDown,bool forceARedraw);
     void setRightPosition(int rightPosition);
     void setLeftPosition(int leftPosition);
     void sceneUpdate();

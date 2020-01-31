@@ -1,13 +1,34 @@
 #include "curvebaseitem.h"
 #include "curvelineitem.h"
+#include "curvewaveitem.h"
 
 int CurveBaseItem::m_headerSliceHeight = 20;
 CurveBaseItem *CurveBaseItem::createCurveItem(Curve *curve){
     QString curveType = curve->desc()->getParam("draw_type");
     if(curveType.indexOf("LINE") != -1)
         return new CurveLineItem(curve);
+    else if(curveType.indexOf("ACOUSTIC") != -1)
+        return  new CurveWaveItem(curve);
     else
         return nullptr;
+}
+void CurveBaseItem::drawHeader(QPainter *painterHeader){
+    //*************Paint Header*******************
+    if(!painterHeader)
+        return;
+    int width = painterHeader->device()->width();
+    painterHeader->setFont(QFont("Arial Black",8,10));
+    painterHeader->setPen(*m_pen);
+    if(!m_isActive)
+       painterHeader->setBrush(QBrush(QColor(250,250,250,250)));
+    else
+       painterHeader->setBrush(QBrush(QColor(200,250,200,200)));
+    painterHeader->drawRect(QRect(10,m_positionInHeader *m_headerSliceHeight,width - 20,m_headerSliceHeight));
+    //painterHeader->setPen(*m_pen);
+    painterHeader->drawText(QRect(15,m_positionInHeader *m_headerSliceHeight,width,m_headerSliceHeight),Qt::AlignLeft|Qt::AlignVCenter,QString::number(m_mainValue->indexBegin()));
+    painterHeader->drawText(QRect(0,m_positionInHeader *m_headerSliceHeight,width - 15,m_headerSliceHeight),Qt::AlignRight|Qt::AlignVCenter,QString::number(1));
+    painterHeader->drawText(QRect(0,m_positionInHeader *m_headerSliceHeight,width,m_headerSliceHeight),Qt::AlignHCenter|Qt::AlignVCenter,m_curve->getMnemonic());
+    //painterHeader->drawLine(QPoint(0,m_positionInHeader *m_headerSliceHeight),QPoint(width,m_positionInHeader *m_headerSliceHeight));
 }
 uint CurveBaseItem::amountSaturation(uint index){
     return 0;
@@ -52,7 +73,7 @@ qreal CurveBaseItem::bottomDepth(){
 void CurveBaseItem::setWidthLine(int widthLine){
     m_curentWidthLine = widthLine;
     m_pen->setWidth(m_curentWidthLine);
-    emit updateL();
+    emit updateL(QPointF(),QPointF(),true);
 }
 void CurveBaseItem::setLimit(int limit){
     m_limit = limit;
@@ -67,7 +88,7 @@ Curve *CurveBaseItem::getCurve(){
 bool CurveBaseItem::isCrosses(QPoint point,int y){
     return false;
 }
-void CurveBaseItem::paint(QPainter *painter,QPainter *painterHeader,qreal yTop,qreal yBottom){
+void CurveBaseItem::paint(QPainter *painter,QPainter *painterHeader,qreal yTop,qreal yBottom,bool *flag){
 
 }
 void CurveBaseItem::setActive(bool active){

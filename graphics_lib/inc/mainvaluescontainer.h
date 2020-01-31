@@ -13,6 +13,7 @@ public:
     qreal maximum();
     qreal minimum();
     qreal scale();
+    void findIndexBegin(int yTop);
     ~MainValuesContainer();
 };
 

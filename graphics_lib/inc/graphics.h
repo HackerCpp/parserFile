@@ -16,6 +16,7 @@
 class  Graphics : public QGraphicsView{
     Q_OBJECT
     bool m_isDrawTime;
+    int headerTopOffset = 100;
     QVector<Group*> *m_groups;
     QVector<Border*> *m_borders;
     MainValuesContainer *m_mainValues;
@@ -49,7 +50,7 @@ public slots:
     void changeScale(qreal scale);
     void rulerRightClick();
 signals:
-    void scrollHasMoved(QPointF leftUp,QPointF rightDown);
+    void scrollHasMoved(QPointF leftUp,QPointF rightDown,bool forcedRedrawing);
 };
 
 #endif // GRAPHICS_H

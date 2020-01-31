@@ -59,11 +59,6 @@ Graphics::Graphics(Board *board,QHash<QString,Curve*> *curves){
         }
         ++i;
     }
-    //int y = - 20;
-    //int height = 1000;
-    //BaseGroup::setTopAndBottom(0,height + y);
-    //setSceneRect(QRect(0,y,m_canvas->sceneRect().width(),height));
-
     drawTime();
     changeScale(1000);
     changeWidth();
@@ -132,7 +127,13 @@ void Graphics::scroll(int value){
     QPolygonF rect = mapToScene(QRect(0,0,width(),height()));
     if(rect.isEmpty())
         return;
-    emit scrollHasMoved(rect[0],rect[2]);
+    m_mainValues->findIndexBegin(rect[0].y());
+    if(value){      
+        emit scrollHasMoved(rect[0],rect[2],false);
+    }
+    else{
+         emit scrollHasMoved(QPointF(),QPointF(),true);
+    }
 }
 void Graphics::newGroup(int width){
     if(width < 1)
@@ -140,7 +141,7 @@ void Graphics::newGroup(int width){
     Group *group = nullptr;
     Border *border = nullptr;
     if(m_groups->isEmpty()){
-        group = new Group(100,width + 100);
+        group = new Group(100,width + 100,&headerTopOffset);
         border = new Border(width + 100,90);
         m_ruler = new Ruler(static_cast<int>(m_canvas->width()));
         connect(m_ruler,&Ruler::rightMouseClick,this,&Graphics::rulerRightClick);
@@ -155,7 +156,7 @@ void Graphics::newGroup(int width){
     }
     else{
         int x = m_groups->last()->getRightX() + 10;
-        group = new Group(x,x + width);
+        group = new Group(x,x + width,&headerTopOffset);
         border = new Border(x + width,x);
         connect(m_groups->last(),&BaseGroup::rightPositionChanged,dynamic_cast<BaseGroup*>(group),&BaseGroup::shift);
     }
@@ -178,7 +179,7 @@ void Graphics::newGroup(){
     Group *group = nullptr;
     Border *border = nullptr;
     if(m_groups->isEmpty()){
-        group = new Group(100,490);
+        group = new Group(100,490,&headerTopOffset);
         border = new Border(490,90);
         m_ruler = new Ruler(static_cast<int>(m_canvas->width()));
         connect(m_ruler,&Ruler::rightMouseClick,this,&Graphics::rulerRightClick);
@@ -193,7 +194,7 @@ void Graphics::newGroup(){
     }
     else{
         int x = m_groups->last()->getRightX() + 10;
-        group = new Group(x,x + 390);
+        group = new Group(x,x + 390,&headerTopOffset);
         border = new Border(x + 390,x);
         connect(m_groups->last(),&BaseGroup::rightPositionChanged,dynamic_cast<BaseGroup*>(group),&BaseGroup::shift);
     }
