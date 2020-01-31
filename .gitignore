@@ -1,5 +1,5 @@
 $ cat .gitignore
 
 /build/*
-/!build/template
+!/build/template
 *.user
