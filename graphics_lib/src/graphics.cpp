@@ -11,6 +11,7 @@
 #include "iteminfo.h"
 
 void Graphics::init(){
+    this->setStyleSheet("QGraphicsView{background-color:white;}");
     m_groups = new QVector<Group*>;
     m_borders = new QVector<Border*>;
     m_mainValues = new MainValuesContainer;
@@ -89,6 +90,7 @@ void Graphics::resize(){
     if(m_ruler)
         m_ruler->setTopAndBottom(0,height + y);
     setSceneRect(QRect(m_canvas->sceneRect().x(),y,m_canvas->sceneRect().width(),height));
+    scroll(0);
 }
 void Graphics::changeScale(qreal scale){
     m_mainValues->setScale(scale/1000);

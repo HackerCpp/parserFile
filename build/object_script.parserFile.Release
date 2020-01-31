@@ -31,6 +31,7 @@ release/moc_menu.o
 release/moc_filehandler.o
 release/moc_abstracttab.o
 release/moc_tab38k.o
+release/moc_tabgfm.o
 release/moc_modelgfm.o
 release/moc_graphicsview.o
 release/moc_basecurveclass.o

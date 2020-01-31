@@ -32,7 +32,7 @@ void CurveInt32::run(){
                 qreal f_counts = m_desc->getCalib("length").replace(',','.').toDouble(&ok);
                 if(ok){
                     foreach(auto value,*m_data){
-                        value *= static_cast<int>(f_length / f_counts * f_resolutoin);
+                        value *= static_cast<int>((f_length / f_counts) * f_resolutoin);
                     }
                 }
                 else{

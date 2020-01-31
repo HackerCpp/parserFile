@@ -62,11 +62,21 @@ bool MainWindow::eventFilter(QObject *o, QEvent *e){
     return false;
 }
 void MainWindow::applyStyle(){
-    QFile File("qrc:/css/style.css");
-    File.open(QFile::ReadOnly);
-    QString StyleSheet = QLatin1String(File.readAll());
-    qApp->setStyleSheet(StyleSheet);
-
+    QFile file(":/css/style.css");
+    if(file.isOpen()){
+        qDebug() << "file style.css open";
+    }
+    if(!file.exists()){
+        qDebug() << "file " + file.fileName() + " style.css not found";
+    }
+    if(file.open(QFile::ReadOnly)){
+        QString StyleSheet = QLatin1String(file.readAll());
+        qApp->setStyleSheet(StyleSheet);
+    }
+    else {
+        qDebug() << "file style.css not open;";
+    }
+    file.close();
 }
 MainWindow::~MainWindow(){
     delete this->menu;

@@ -31,6 +31,7 @@ debug/moc_menu.o
 debug/moc_filehandler.o
 debug/moc_abstracttab.o
 debug/moc_tab38k.o
+debug/moc_tabgfm.o
 debug/moc_modelgfm.o
 debug/moc_graphicsview.o
 debug/moc_basecurveclass.o
