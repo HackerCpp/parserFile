@@ -10,7 +10,7 @@ Curve::Curve(){
     m_positiveOffset = 0;
     m_desc = nullptr;
     m_maximum = numeric_limits<qreal>::min();
-    m_minimum = numeric_limits<qreal>::max();;
+    m_minimum = numeric_limits<qreal>::max();
 }
 qreal Curve::maximum(){
     return m_maximum;

@@ -12,9 +12,8 @@ class CurveWaveItem : public CurveBaseItem{
 public:
     CurveWaveItem(Curve *curve);
     void paint(QPainter *painter,QPainter *painterHeader,qreal yTop,qreal yBottom,bool *flag) override;
-    bool isCrosses(QPoint point,int y) override;
     qreal operator[](int index);
-    virtual uint amountSaturation(uint index)override;
+    qreal data(int index);
     ~CurveWaveItem();
 };
 

@@ -16,20 +16,12 @@ qreal CurveLineItem::operator[](int index){
 }
 CurveLineItem::~CurveLineItem(){}
 
-bool CurveLineItem::isCrosses(QPoint point,int y){
-    QImage image(static_cast<int>(m_limit),3000,QImage::Format_ARGB32);
-    image.fill(QColor(0,0,0,0));
-    QPainter p(&image);
-    QPainter paintHeader;
-    bool pr = false;
-    paint(&p,nullptr,y,y+1500,&pr);
-    return image.pixel(QPoint(point.x(),point.y() + 1000));
-}
 uint CurveLineItem::amountSaturation(uint index){
     if(m_limit && index < static_cast<uint>(m_curve->getSize()))
         return static_cast<uint>(((*m_curve)[index] * m_scale  + m_leftShift)/m_limit);
     return 0;
 }
+
 void CurveLineItem::paint(QPainter *painter,QPainter *painterHeader,qreal yTop,qreal yBottom,bool *flag){
     //QTime time = QTime::currentTime();
     if(!m_mainValue)
@@ -47,7 +39,7 @@ void CurveLineItem::paint(QPainter *painter,QPainter *painterHeader,qreal yTop,q
     painter->setPen(*m_pen);
 
     QPointF prevPoint = QPointF(operator[](indexBegin),m_mainValue->data(indexBegin) - yTop + 1000);
-    int prevMain;
+    //int prevMain;
     int prevIndex = 0;
     painter->drawText(QPointF(prevPoint.x()+10,prevPoint.y()),QString::number(m_mainValue->operator[](indexBegin)));
     uint i;
@@ -55,7 +47,7 @@ void CurveLineItem::paint(QPainter *painter,QPainter *painterHeader,qreal yTop,q
     for(i = indexBegin + 1;i < m_mainValue->size(); ++i){
         if(*flag)
             return;
-        prevMain = static_cast<int>(m_mainValue->data(i) - yTop + 1000);
+        //prevMain = static_cast<int>(m_mainValue->data(i) - yTop + 1000);
         if(amountSaturation(i) > amountSaturation(prevIndex)){
             painter->drawLine(prevPoint,QPointF(m_limit,m_mainValue->data(i) - yTop + 1000));
             painter->drawLine(QPointF(0,m_mainValue->data(i) - yTop + 1000),QPointF(operator[](i),m_mainValue->data(i) - yTop + 1000));
