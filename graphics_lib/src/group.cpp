@@ -45,6 +45,7 @@ void Group::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*){
 }
 
 void Group::resize(int position){
+    m_del = true;
     wait();
     delete m_curentPixmap;
     delete m_doublePixMap;
@@ -58,26 +59,21 @@ void Group::resize(int position){
     foreach(auto value,*m_curves){
         value->setLimit(limit);
     }
-    start();
+    redraw();
 }
 
 void Group::updateP(QPointF leftUp,QPointF rightDown,bool forceARedraw){
     if(forceARedraw){
-       m_del = true;
-       wait();
-       start();
+       redraw();
        return;
     }
     if(leftUp.x() > m_rightX || rightDown.x() < m_leftX)
         return;
     /*if(m_topPositionPicture + 3000 > rightDown.y() + 400 & m_topPositionPicture < leftUp.y() - 400)
         return;*/
-    m_del = true;
-    wait();
     m_visibilitySquare->setTopLeft(leftUp);
     m_visibilitySquare->setBottomRight(rightDown);
-    start();
-
+    redraw();
 }
 
 void Group::mousePressEvent(QGraphicsSceneMouseEvent *event){
@@ -138,10 +134,9 @@ void Group::mousePressEvent(QGraphicsSceneMouseEvent *event){
             }
         }
     }
-    start();
+    redraw();
 }
 void Group::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
-    wait();
     if(m_isMoveHeader){
         *m_headerTopOffset += static_cast<int>(event->scenePos().y() - m_prevPoint.y());
         *m_headerTopOffset = *m_headerTopOffset < -(m_curves->size() *20) + 5?-(m_sizeVisibleItem *20) + 5:*m_headerTopOffset;

@@ -8,7 +8,7 @@
 
 
 class Group : public BaseGroup{
-    bool m_del;
+
     int k = 0;
     QMutex	m_mutex;
     int m_topPositionPicture;

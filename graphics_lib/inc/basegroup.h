@@ -13,6 +13,7 @@
 class BaseGroup : public QThread, public QGraphicsItem{
     Q_OBJECT
 protected:
+    bool m_del;
     int m_top, m_bottom;
     QRectF *m_visibilitySquare;
     int m_leftX, m_rightX;
@@ -22,6 +23,7 @@ protected:
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*) override;
     virtual void run()override;
     virtual void swapPixMap();
+    void redraw();
 public:
     void setTopAndBottom(qreal top,qreal bottom);
     BaseGroup();

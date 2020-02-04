@@ -19,6 +19,7 @@ void Grid::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*){
         qDebug() << "null";
 }
 void Grid::setSize(QRectF rect){
+    m_del = true;
     wait();
     m_rightX = static_cast<int>(rect.width());
     /*elete m_curentPixmap;

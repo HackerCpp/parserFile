@@ -70,19 +70,18 @@ void Ruler::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
 }
 void Ruler::updateP(QPointF leftUp,QPointF rightDown,bool forceARedraw){
     if(forceARedraw){
-       wait();
-       start();
+       redraw();
        return;
     }
-    wait();
     QGraphicsItem::prepareGeometryChange();
     m_visibilitySquare->setTopLeft(leftUp);
     int x = m_visibilitySquare->x()<m_leftX?m_leftX:m_visibilitySquare->x();
     m_visibilitySquare->setX(x);
     m_visibilitySquare->setBottomRight(rightDown);
-    start();
+    redraw();
 }
 void Ruler::setSize(QRectF rect){
+    m_del = true;
     wait();
     m_rightX = static_cast<int>(rect.width());
     start();

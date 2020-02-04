@@ -7,8 +7,14 @@
 
 enum DrawingMode {WAVE,MULTICOLOR,ONECOLOR};
 
+struct Multicolor{
+  QColor color;
+  qreal value;
+};
+
 class CurveWaveItem : public CurveBaseItem{
     DrawingMode m_drawingMode;
+    QList<Multicolor>*m_multicolor;
 public:
     CurveWaveItem(Curve *curve);
     void paint(QPainter *painter,QPainter *painterHeader,qreal yTop,qreal yBottom,bool *flag) override;
