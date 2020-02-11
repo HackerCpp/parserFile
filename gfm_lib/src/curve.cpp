@@ -11,6 +11,7 @@ Curve::Curve(){
     m_desc = nullptr;
     m_maximum = numeric_limits<qreal>::min();
     m_minimum = numeric_limits<qreal>::max();
+    //m_zipArray = nullptr;
 }
 qreal Curve::maximum(){
     return m_maximum;
@@ -98,3 +99,4 @@ QByteArray Curve::getDataByte(){
 
 Curve::~Curve(){
 }
+

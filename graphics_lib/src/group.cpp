@@ -14,8 +14,8 @@ Group::Group(int leftX,int rightX,int *headerTopOffset){
      m_leftX = leftX;
      m_rightX = rightX;
      m_headerTopOffset = headerTopOffset;
-     m_curentPixmap = new QImage(m_rightX - m_leftX,3000,QImage::Format_ARGB32);
-     m_doublePixMap = new QImage(m_rightX - m_leftX,3000,QImage::Format_ARGB32);
+     m_curentPixmap = new QImage(m_rightX - m_leftX,6000,QImage::Format_RGB32);
+     m_doublePixMap = new QImage(m_rightX - m_leftX,6000,QImage::Format_RGB32);
      m_curentHeader = new QImage(m_rightX - m_leftX,2000,QImage::Format_ARGB32);
      m_doubleHeader = new QImage(m_rightX - m_leftX,2000,QImage::Format_ARGB32);
 
@@ -51,8 +51,8 @@ void Group::resize(int position){
     delete m_doublePixMap;
     delete m_curentHeader;
     delete m_doubleHeader;
-    m_curentPixmap = new QImage(m_rightX - m_leftX,3000,QImage::Format_ARGB32);
-    m_doublePixMap = new QImage(m_rightX - m_leftX,3000,QImage::Format_ARGB32);
+    m_curentPixmap = new QImage(m_rightX - m_leftX,6000,QImage::QImage::Format_RGB32);
+    m_doublePixMap = new QImage(m_rightX - m_leftX,6000,QImage::QImage::Format_RGB32);
     m_curentHeader = new QImage(m_rightX - m_leftX,2000,QImage::Format_ARGB32);
     m_doubleHeader = new QImage(m_rightX - m_leftX,2000,QImage::Format_ARGB32);
     int limit = m_rightX - m_leftX;
@@ -174,8 +174,8 @@ void Group::run(){
     //QTime time = QTime::currentTime();
     QPainter painter(m_doublePixMap);
     QPainter painterHeader(m_doubleHeader);
-    m_doubleHeader->fill(QColor(0,0,0,0));
-    m_doublePixMap->fill(QColor(0,0,0,0));
+    m_doubleHeader->fill(0);
+    m_doublePixMap->fill(0xffffff);
     int i = 1;
     m_del = false;
     foreach (auto value, *m_curves){

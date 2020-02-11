@@ -45,7 +45,7 @@ void BaseGroup::setTopAndBottom(qreal top,qreal bottom){
 
 void BaseGroup::redraw(){
     if(!isRunning())
-        start();
+        start(QThread::InheritPriority);
     else
         m_del = true;
 }
@@ -60,7 +60,7 @@ void BaseGroup::swapPixMap(){
 void BaseGroup::sceneUpdate(){
     if(m_del){
         m_del = false;
-        start();
+        start(QThread::InheritPriority);
     }
     else
         scene()->update();

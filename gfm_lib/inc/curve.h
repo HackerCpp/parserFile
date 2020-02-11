@@ -11,7 +11,9 @@
 class Curve : public QThread{
     Curve *m_mainTime;
     Curve *m_mainDepth;
+
 protected:
+    //QByteArray * m_zipArray;
     qreal m_maximum,m_minimum;
     ShortCut m_shortCut;
     uint m_size;
@@ -46,6 +48,7 @@ public:
     virtual void setData(const char * dataPointer,uint numberOfVectors);
     qreal offset(){return m_positiveOffset;}
     virtual ~Curve();
+
 };
 
 #endif // CURVE_H

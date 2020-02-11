@@ -86,7 +86,7 @@ Curve *CurveBaseItem::getCurve(){
     return m_curve;
 }
 bool CurveBaseItem::isCrosses(QPoint point,int y){
-    QImage image(static_cast<int>(m_limit),3000,QImage::Format_ARGB32);
+    QImage image(static_cast<int>(m_limit),3000,QImage::Format_RGB32);
     image.fill(QColor(0,0,0,0));
     QPainter p(&image);
     QPainter paintHeader;

@@ -1,6 +1,7 @@
 #include "curvewaveitem.h"
 #include <QtMath>
 #include <QLinearGradient>
+#include <QTime>
 
 CurveWaveItem::CurveWaveItem(Curve *curve)
     :CurveBaseItem(curve){
@@ -51,6 +52,7 @@ QColor get_linear_color(qreal value, Multicolor multicol1,Multicolor multicol2){
 void CurveWaveItem::paint(QPainter *painter,QPainter *painterHeader,qreal yTop,qreal yBottom,bool *flag){
     if(!m_mainValue)
         return;
+    //QTime time = QTime::currentTime();
     if(painterHeader){
         int width = painterHeader->device()->width();
         painterHeader->setPen(QPen());
@@ -97,11 +99,14 @@ void CurveWaveItem::paint(QPainter *painter,QPainter *painterHeader,qreal yTop,q
     QColor color;
     painter->setPen(QPen(QColor(0,0,0,0),0));
     for(int j = 0; j < quantityElem;++j){
-        QLinearGradient linearGradient(0,0,0,3000);
+        if(*flag)
+        return;
+        QLinearGradient linearGradient(0,0,0,6000);
+        linearGradient.setInterpolationMode(QLinearGradient::ColorInterpolation);
         for(i = indexBegin;i < m_mainValue->size();++i){
             if(*flag)
-            return;
-            if(m_mainValue->data(i) > yTop + 2000 || m_mainValue->data(i) < yTop - 1000){
+                return;
+            if(m_mainValue->data(i) > yTop + 5000 || m_mainValue->data(i) < yTop - 1000){
                 break;
             }
             if(data(i *quantityElem + j) >= m_multicolor->last().value){
@@ -115,18 +120,20 @@ void CurveWaveItem::paint(QPainter *painter,QPainter *painterHeader,qreal yTop,q
                 prev_mul = *m_multicolor->begin();
                 for(auto value = m_multicolor->begin(); value < m_multicolor->end();++value) {
                     if(data(i *quantityElem + j) <= value->value){
-                        color = get_linear_color(data(i *quantityElem + j),prev_mul,*value);
+                        color = get_linear_color(data(i * quantityElem + j),prev_mul,*value);
                         break;
                     }
-                    Multicolor prev_mul = *value;
+                    prev_mul = *value;
                 }
             }
-            linearGradient.setColorAt(qreal((m_mainValue->data(i) - yTop + 1000)/3000),color);
+            linearGradient.setColorAt(qreal(qreal(m_mainValue->data(i) - qreal(yTop) + qreal(1000))/qreal(6000)),color);
+
         }
+
         QBrush brush(linearGradient);
         painter->setBrush(brush);
-        int prevStep = j*step;
-        painter->drawRect(prevStep,0,1,3000);
+        int prevStep = j * step;
+        painter->drawRect(prevStep,0,step + 1,6000);
     }
     int width = quantityElem * step;
     /*for(i = indexBegin;i < m_mainValue->size();++i){
@@ -163,6 +170,16 @@ void CurveWaveItem::paint(QPainter *painter,QPainter *painterHeader,qreal yTop,q
     }*/
     //Рисуем заголовок
     drawHeader(painterHeader);
+    //qDebug() << time.msecsTo( QTime::currentTime() );
+    painter->setPen(QPen(Qt::black,2));
+    for(i = indexBegin + 1;i < m_mainValue->size(); ++i){
+        if(*flag)
+            return;
+        painter->drawText(QPointF(50,m_mainValue->data(i) - yTop + 1000),QString::number(m_mainValue->operator[](i)));
+        if(m_mainValue->data(i) > yTop + 2000 || m_mainValue->data(i) < yTop - 1000){
+            break;
+        }
+    }
 }
 
 qreal CurveWaveItem::operator[](int index){

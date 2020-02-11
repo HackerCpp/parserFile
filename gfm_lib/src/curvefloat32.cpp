@@ -1,4 +1,5 @@
 #include "curvefloat32.h"
+#include <QTime>
 
 CurveFloat32::CurveFloat32() : m_data(nullptr){
     m_sizeOfType = 4;
@@ -16,7 +17,10 @@ void CurveFloat32::run(){
     m_minimum = static_cast<qreal>(*std::min_element(m_data->begin(),m_data->end()));
     m_maximum = static_cast<qreal>(*std::max_element(m_data->begin(),m_data->end()));
     m_positiveOffset = m_minimum < 0?m_minimum:0;
-
+    /*m_zipArray = new QByteArray();
+    QTime time = QTime::currentTime();
+    gzipCompress(QByteArray((const char *)m_data->data(),m_data->size() * 4),*m_zipArray,-1);
+    qDebug() << (m_data->size() * 4) << "::" << (m_data->size() * 4)/m_zipArray->size() << "Time: "<< time.msecsTo( QTime::currentTime() );*/
 }
 
 

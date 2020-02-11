@@ -9,12 +9,12 @@ MainValue::MainValue(Curve *mainTime,Curve *mainDepth):
 }
 
 void MainValue::findIndexBegin(int yTop){
-    if(minimumForScale() > yTop  + 2000 || maximumForScale() < yTop - 1000){
+    if(minimumForScale() > yTop  + 5000 || maximumForScale() < yTop - 1000){
         m_curentIndexBegin = size();
         return;
     }
     for(uint i = 0; i < size(); ++i){
-       if(data(i) > yTop - 1000 && data(i) < yTop + 2000){
+       if(data(i) > yTop - 1000 && data(i) < yTop + 5000){
            m_curentIndexBegin = i;// > 2?i - 2 : 0;
            return;
        }
