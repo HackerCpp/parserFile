@@ -133,7 +133,7 @@ bool FormsBlockGFM::isReady(){
 }
 
 QByteArray FormsBlockGFM::getForSave(){
-
+    return nullptr;
 }
 
 FormsBlockGFM::~FormsBlockGFM(){

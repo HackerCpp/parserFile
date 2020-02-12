@@ -16,10 +16,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 INCLUDEPATH += qtpython/include \
-               python38/include
+               C:/python38/include
 
-LIBS += "D:/Project/ParserFile/parserFile/forPython/qtpython/libs/libPythonQt-Qt5-Python38.a" \
-         D:/Project/ParserFile/parserFile/forPython/qtpython/libs/libPythonQt_QtAll-Qt5-Python38.a
+LIBS += release/libPythonQt-Qt5-Python38.a \
+        release/libPythonQt_QtAll-Qt5-Python38.a
 SOURCES += \
     main.cpp \
     mainwindows.cpp
