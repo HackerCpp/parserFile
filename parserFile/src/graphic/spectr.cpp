@@ -16,7 +16,7 @@ static QColor tableColor[36]= {QColor(255, 0, 0),QColor(139, 0, 0),QColor(255, 2
 Spectr::Spectr(ScaleFactor *scaleFactor,QVector<qreal>*mainValue,QVector<qreal>*dataLine,uint numOfPoints)
     :BaseCurveClass(scaleFactor),m_numOfPoints(numOfPoints),m_dataLine(dataLine),m_mainValue(mainValue){
 
-    m_min = LONG_LONG_MAX;m_max = LONG_LONG_MIN;
+    //m_min = LONG_LONG_MAX;m_max = LONG_LONG_MIN;
     foreach(auto value,*m_dataLine){
         m_min = m_min < value ? m_min : value;
         m_max = m_max < value ? value : m_max;
@@ -103,5 +103,5 @@ int Spectr::saturation(qreal value){
 }
 
 int Spectr::amountOfSaturation(qreal value){
-
+    return 0;
 }

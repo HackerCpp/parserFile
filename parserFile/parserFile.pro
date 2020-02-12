@@ -28,16 +28,16 @@ INCLUDEPATH+=\
 ../graphics_lib/inc
 
 LIBS += \
-../build/debug/GFM.dll \
-../build/debug/graphics.dll
+../build/release/GFM.lib \
+../build/release/graphics.lib
 
 SOURCES += \
     src/tabs/abstracttab.cpp \
     #src/fileCreation/creategfm.cpp \
-    src/graphic/wave.cpp \
-    src/graphic/basecurveclass.cpp \
+    #src/graphic/wave.cpp \
+    #src/graphic/basecurveclass.cpp \
     #src/graphic/grid.cpp \
-    src/graphic/spectr.cpp \
+    #src/graphic/spectr.cpp \
         src/main.cpp \
         src/mainwindow.cpp \
     src/filereader.cpp \
@@ -56,14 +56,14 @@ SOURCES += \
     src/tabs/tab38k.cpp \
     src/fileCreation/csv.cpp \
     src/tabs/tabgfm.cpp \
-    src/models/modelgfm.cpp \
-    src/graphic/curveline.cpp\
-    src/tabs/graphicsview.cpp
+    #src/models/modelgfm.cpp \
+    #src/graphic/curveline.cpp\
+    #src/tabs/graphicsview.cpp
 
 HEADERS += \
     #inc/fileCreation/creategfm.h \
-    inc/graphic/IndexColor.h \
-    inc/graphic/wave.h \
+    #inc/graphic/IndexColor.h \
+    #inc/graphic/wave.h \
         inc/mainwindow.h \
     inc/filereader.h \
     inc/parsers/parsertlm.h \
@@ -82,12 +82,12 @@ HEADERS += \
     inc/tabs/tab38k.h \
     inc/fileCreation/csv.h \
     inc/tabs/tabgfm.h \
-    inc/models/modelgfm.h \
-    inc/graphic/curveline.h \
-    inc/tabs/graphicsview.h \
-    inc/graphic/basecurveclass.h \
+    #inc/models/modelgfm.h \
+    #inc/graphic/curveline.h \
+    #inc/tabs/graphicsview.h \
+    #inc/graphic/basecurveclass.h \
     #inc/graphic/grid.h \
-    inc/graphic/spectr.h
+   # inc/graphic/spectr.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

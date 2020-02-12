@@ -15,11 +15,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-INCLUDEPATH += qtpython/include \
+INCLUDEPATH += ../PythonQT3.2/src \
+               ../PythonQT3.2/extensions/PythonQt_QtAll \
                C:/python38/include
 
-LIBS += release/libPythonQt-Qt5-Python38.a \
-        release/libPythonQt_QtAll-Qt5-Python38.a
+LIBS += ../PythonQT3.2/build/lib/PythonQt-Qt5-Python383.lib \
+        ../PythonQT3.2/build/lib/PythonQt_QtAll-Qt5-Python383.lib\
+        ../PythonQT3.2/build/lib/python38.lib
+
 SOURCES += \
     main.cpp \
     mainwindows.cpp

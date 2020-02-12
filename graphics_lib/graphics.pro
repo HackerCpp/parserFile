@@ -2,11 +2,11 @@ QT += core gui widgets opengl xml
 
 TEMPLATE = lib
 #CONFIG += staticlib
-CONFIG += dynamiclib
+#CONFIG += dynamiclib
 CONFIG += c++11
 INCLUDEPATH += inc/
 INCLUDEPATH+= ../gfm_lib/inc
-LIBS += ../build/debug/GFM.dll
+LIBS += ../build/release/GFM.lib
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings

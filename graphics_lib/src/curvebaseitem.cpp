@@ -110,5 +110,5 @@ bool CurveBaseItem::isActive(){
     return m_isActive;
 }
 QRectF CurveBaseItem::boundingRect() const{
-
+    return QRectF();
 }

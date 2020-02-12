@@ -1,5 +1,6 @@
 #include "formsblockgfm.h"
-#include <zlib.h>
+#include <QtZlib/zlib.h>
+
 #include <QFile>
 
 bool gzipCompress(QByteArray input, QByteArray &output, int level){

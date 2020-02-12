@@ -1,4 +1,4 @@
-#include "mainwindows.h"
+//#include "mainwindows.h"
 
 #include <QApplication>
 #include <PythonQt.h>
@@ -7,7 +7,7 @@
 
 int main(int argc, char *argv[]){
     QApplication a(argc, argv);
-    MainWindows w;
+    //MainWindows w;
 
     PythonQt::init(PythonQt::IgnoreSiteModule | PythonQt::RedirectStdOut);
     PythonQt_QtAll::init();
@@ -19,6 +19,6 @@ int main(int argc, char *argv[]){
     mainContext.evalFile(":example.py");
 
     console.show();
-    w.show();
+    //w.show();
     return a.exec();
 }
