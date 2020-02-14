@@ -48,7 +48,6 @@ public:
     virtual void setData(const char * dataPointer,uint numberOfVectors);
     qreal offset(){return m_positiveOffset;}
     virtual ~Curve();
-
 };
 
 #endif // CURVE_H

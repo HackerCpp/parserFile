@@ -44,7 +44,7 @@ void findBlocksByteFFFE(QByteArray byteArrayFile,QList<BlockByte> *blocksList,in
 }
 
 void GFM::run(){
-    QTime time = QTime::currentTime();
+    //QTime time = QTime::currentTime();
     QFile file(m_path);
     file.open(QIODevice::ReadOnly);
     QByteArray byteArrayFile = file.readAll();
@@ -85,7 +85,7 @@ void GFM::run(){
                foreach(auto curve,*dataBlock->getCurves()){
                    if(!curve->getShortCut().getName().isEmpty()){
                        QString name = curve->getShortCut().getNameWithoutNumber() + ':' + curve->getMnemonic();
-                       m_curvesHash->insert(name,curve);
+                       m_curvesMap->insert(name,curve);
                    }
                }
            }
@@ -93,19 +93,18 @@ void GFM::run(){
         else if(block->getName() == "[FORMS]"){
            FormsBlockGFM * formsBlock = dynamic_cast<FormsBlockGFM *>(block);
            if(formsBlock){
-               while(!formsBlock->isReady()){}
            }
         }
     }
-    qDebug() << time.msecsTo( QTime::currentTime() );
+    //qDebug() << time.msecsTo( QTime::currentTime() );
     m_isReady = true;
 }
-Forms *GFM::getForms(){
+QByteArray GFM::zipForms(){
     foreach(auto block,*m_listBlocksGFM){
         if(block->getName() == "[FORMS]"){
             FormsBlockGFM * formsBlock = dynamic_cast<FormsBlockGFM *>(block);
             if(formsBlock)
-                return formsBlock->forms();
+                return formsBlock->zipForms();
             break;
         }
     }
@@ -128,7 +127,7 @@ QList<DataBlockGFM*> *GFM::getDataBlocks(){
 GFM::GFM(QString path):m_path(path){
     m_isReady = false;
     m_listBlocksGFM = new QList<AbstractBlockGFM*>;
-    m_curvesHash = new QHash<QString,Curve*>;
+    m_curvesMap = new QMap<QString,Curve*>;
     m_codec = QTextCodec::codecForMib(1015);
     start();
 }
@@ -140,7 +139,7 @@ bool GFM::isReady(){
 void GFM::saveFile(QString fileName){
     QFile *fileGFM = new QFile(fileName);
     fileGFM->open(QIODevice::WriteOnly);// | QIODevice::Append);
-    QTextStream striamFFFE(fileGFM);
+    QTextStream streamFFFE(fileGFM);
     fileGFM->write(m_codec->fromUnicode("GFM"));
     fileGFM->write(m_codec->fromUnicode("\r\n").mid(2));
     foreach(AbstractBlockGFM *block,*m_listBlocksGFM){

@@ -20,10 +20,7 @@ class  Graphics : public QGraphicsView{
     QVector<Group*> *m_groups;
     QVector<Border*> *m_borders;
     MainValuesContainer *m_mainValues;
-    //QList<Curve*> *m_curves;
-    QHash<QString,Curve*> *m_hashCurves;
-    BaseGroup *m_substrate;
-    BaseGroup *m_grid;
+    QMap<QString,Curve*> *m_mapCurves;
     Ruler *m_ruler;
     Canvas *m_canvas;
     TabGeneralSettings *m_tabGenSett;
@@ -34,8 +31,8 @@ class  Graphics : public QGraphicsView{
     void mouseMoveEvent(QMouseEvent *event)override;
     void mouseReleaseEvent(QMouseEvent *event)override;
 public:
-    Graphics(QHash<QString,Curve*> *curves);
-    Graphics(Board *board,QHash<QString,Curve*> *curves);
+    Graphics(QMap<QString,Curve*> *curves);
+    Graphics(Board *board,QMap<QString,Curve*> *curves);
     void newGroup();
     void newGroup(int width);
     bool addCurve(Curve *curve,int indexTab);

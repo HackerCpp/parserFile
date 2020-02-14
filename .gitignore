@@ -3,3 +3,4 @@ $ cat .gitignore
 /build/*
 !/build/template
 *.user
+*.pro.user

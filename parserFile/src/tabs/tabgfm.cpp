@@ -1,12 +1,11 @@
 #include "inc/tabs/tabgfm.h"
 #include "inc/fileCreation/creategfm.h"
-#include <QStyle>
+
 #include <QDebug>
 #include <QDateTime>
 #include <QFileDialog>
-#include "forms.h"
-#include "board.h"
-#include "graphics.h"
+
+
 
 
 
@@ -22,25 +21,20 @@ TabGFM::TabGFM(QString path,QWidget *parent) : AbstractTab(parent){
     m_barHLayout->addWidget(m_comboBox);
     m_toolBar->setLayout(m_barHLayout);
     while(!m_gfm->isReady()){}
-    m_tabWidget = new QTabWidget();
-    Forms * forms = m_gfm->getForms();
-    m_boards = forms->boards();
-    foreach(Board *board,*m_boards){
-        m_tabWidget->addTab(new Graphics(board,m_gfm->getCurves()),board->name());
-    }
+    m_forms = new AbstractForms(m_gfm->zipForms(),m_gfm->curves());
     m_mainVerticalLayout->addWidget(m_toolBar);
-    m_mainVerticalLayout->addWidget(m_tabWidget);
+    m_mainVerticalLayout->addWidget(m_forms);
     setLayout(m_mainVerticalLayout);
     connect(m_comboBox,static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),this,&TabGFM::changeDrawType);
 }
 void TabGFM::changeDrawType(int index){
-    Graphics * graphics = dynamic_cast<Graphics *>(m_tabWidget->currentWidget());
+    /*Graphics * graphics = dynamic_cast<Graphics *>(m_tabWidget->currentWidget());
     if(graphics){
         if(index)
             graphics->drawDepth();
         else
             graphics->drawTime();
-    }
+    }*/
 }
 void TabGFM::saveGFM(){
     QDateTime date;
@@ -53,9 +47,5 @@ TabGFM::~TabGFM(){
     if(m_gfm){
         delete m_gfm;
         m_gfm = nullptr;
-    }
-    if(m_tabWidget){
-        delete m_tabWidget;
-        m_tabWidget = nullptr;
     }
 }

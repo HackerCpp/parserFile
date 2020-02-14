@@ -12,8 +12,8 @@
 #include "gfm.h"
 #include <QTabBar>
 #include <QTabWidget>
-#include <QThread>
 #include <QComboBox>
+#include "abstractforms.h"
 
 class TabGFM : public AbstractTab,public AbstractTabSaveFiles{
     Q_OBJECT
@@ -22,8 +22,7 @@ class TabGFM : public AbstractTab,public AbstractTabSaveFiles{
     QWidget *m_toolBar;
     QComboBox *m_comboBox;
     GFM *m_gfm;
-    QTabWidget * m_tabWidget;
-    QList<Board*>*m_boards;
+    AbstractForms *m_forms;
 public:
     explicit TabGFM(QString path,QWidget *parent = nullptr);
     void saveGFM();

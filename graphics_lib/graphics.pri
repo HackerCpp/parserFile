@@ -2,6 +2,8 @@ QT += core gui widgets opengl xml
 CONFIG += c++11
 INCLUDEPATH += $$PWD $$PWD/inc
 SOURCES += \
+    $$PWD/inc/abstractboard.cpp \
+    $$PWD/inc/abstractforms.cpp \
     $$PWD/src/curvewaveitem.cpp \
     $$PWD/src/mainvalue.cpp \
     $$PWD/src/tabgroupsettings.cpp \
@@ -11,7 +13,7 @@ SOURCES += \
     $$PWD/src/ruler.cpp \
     $$PWD/src/headeritem.cpp \
     $$PWD/src/grid.cpp \
-    $$PWD/src/whitesubstrate.cpp \
+    #$$PWD/src/whitesubstrate.cpp \
     $$PWD/src/basegroup.cpp \
     $$PWD/src/curvelineItem.cpp \
     $$PWD/src/curvebaseitem.cpp \
@@ -21,6 +23,8 @@ SOURCES += \
     $$PWD/src/mainvaluescontainer.cpp
 
 HEADERS += \
+    $$PWD/inc/abstractboard.h \
+    $$PWD/inc/abstractforms.h \
     $$PWD/inc/border.h \
     $$PWD/inc/basegroup.h \
     $$PWD/inc/canvas.h \
@@ -36,5 +40,5 @@ HEADERS += \
     $$PWD/inc/tabcurvesettings.h \
     $$PWD/inc/tabgeneralsettings.h \
     $$PWD/inc/tabgroupsettings.h \
-    $$PWD/inc/whitesubstrate.h \
+    #$$PWD/inc/whitesubstrate.h \
     $$PWD/inc/mainvaluescontainer.h
