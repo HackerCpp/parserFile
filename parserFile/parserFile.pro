@@ -27,10 +27,11 @@ INCLUDEPATH+=\
 ../gfm_lib/inc \
 ../graphics_lib/inc
 
-LIBS += \
-../build/release/GFM.lib \
-../build/release/graphics.lib
-
+#LIBS += \
+#../build/release/GFM.lib \
+#../build/release/graphics.lib
+include(../gfm_lib/GFM.pri)
+include(../graphics_lib/graphics.pri)
 SOURCES += \
     src/tabs/abstracttab.cpp \
     #src/fileCreation/creategfm.cpp \

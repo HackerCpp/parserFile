@@ -1,7 +1,7 @@
 QT += core gui widgets opengl xml
 
 TEMPLATE = lib
-#CONFIG += staticlib
+CONFIG += staticlib dynamiclib
 #CONFIG += dynamiclib
 CONFIG += c++11
 INCLUDEPATH += inc/
