@@ -36,9 +36,10 @@ qreal CurveFloat32::operator[](int index){
 uint CurveFloat32::getSize(){
     return static_cast<uint>(m_data->size());
 }
+
 QByteArray CurveFloat32::getDataByte(){
     if(m_data)
-        return QByteArray::fromRawData( reinterpret_cast<const char*>(m_data->constData()), static_cast<int>(m_sizeOfType) * m_data->size());
+        return QByteArray((const char*)m_data->data(),static_cast<int>(m_sizeOfType) * m_data->size());
     return QByteArray();
 }
 CurveFloat32::~CurveFloat32(){

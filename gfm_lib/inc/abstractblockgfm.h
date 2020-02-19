@@ -9,7 +9,9 @@
 
 
 class AbstractBlockGFM{
+    QByteArray *m_block;
 protected:
+
     QString m_name;
     QTextCodec *m_codec;
 

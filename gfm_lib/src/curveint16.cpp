@@ -30,7 +30,7 @@ uint CurveInt16::getSize(){
 }
 QByteArray CurveInt16::getDataByte(){
     if(m_data)
-        return QByteArray::fromRawData( reinterpret_cast<const char*>(m_data->constData()), static_cast<int>(m_sizeOfType) * m_data->size());
+        return QByteArray((const char*)m_data->data(),static_cast<int>(m_sizeOfType) * m_data->size());
     return QByteArray();
 }
 CurveInt16::~CurveInt16(){

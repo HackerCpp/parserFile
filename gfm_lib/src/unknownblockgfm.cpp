@@ -4,12 +4,12 @@ UnknownBlockGFM::UnknownBlockGFM(){
 
 }
 
-void UnknownBlockGFM::parser(QByteArray *bodyBlock){
+/*void UnknownBlockGFM::parser(QByteArray *bodyBlock){
 
 }
 QByteArray UnknownBlockGFM::getForSave(){
     return nullptr;
-}
+}*/
 UnknownBlockGFM::~UnknownBlockGFM(){
 
 }

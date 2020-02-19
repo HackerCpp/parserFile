@@ -4,12 +4,12 @@ ToolInfoBlockGFM::ToolInfoBlockGFM(){
 
 }
 
-void ToolInfoBlockGFM::parser(QByteArray *bodyBlock){
+/*void ToolInfoBlockGFM::parser(QByteArray *bodyBlock){
 
 }
 QByteArray ToolInfoBlockGFM::getForSave(){
     return nullptr;
-}
+}*/
 ToolInfoBlockGFM::~ToolInfoBlockGFM(){
 
 }

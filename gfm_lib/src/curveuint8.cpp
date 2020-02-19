@@ -32,7 +32,7 @@ uint CurveUint8::getSize(){
 
 QByteArray CurveUint8::getDataByte(){
     if(m_data)
-        return QByteArray::fromRawData( reinterpret_cast<const char*>(m_data->constData()), static_cast<int>(m_sizeOfType) * m_data->size());
+        return QByteArray((const char*)m_data->data(),static_cast<int>(m_sizeOfType) * m_data->size());
     return QByteArray();
 }
 

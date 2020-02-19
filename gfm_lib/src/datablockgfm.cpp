@@ -47,6 +47,7 @@ void DataBlockGFM::findShortCuts(QByteArray *header){
    }
 
 }
+
 void DataBlockGFM::findCurves(QByteArray *header){
     QString BeginLine = "] ";
     QString endLine = "\r\n";
@@ -82,6 +83,7 @@ void DataBlockGFM::findCurves(QByteArray *header){
     }
 
 }
+
 void DataBlockGFM::copyData(QByteArray *bodyBlock,int indexBeginData){
     foreach (auto curve,*m_curves){
         uint offset = curve->m_offset * m_numberOfVectors;
@@ -134,6 +136,7 @@ void DataBlockGFM::parser(QByteArray *bodyBlock){
         }
     }
 }
+
 QByteArray DataBlockGFM::getHeader(){
     QByteArray headerParameters;
     QString param = "<PARAMETERS LOG=\"" + m_nameRecord + "\">\r\n";
@@ -148,7 +151,9 @@ QByteArray DataBlockGFM::getHeader(){
     headerParameters.append(m_codec->fromUnicode(param).mid(2));
     return headerParameters;
 }
+
 QByteArray DataBlockGFM::getForSave(){
+
     QByteArray blockForWrite;
     int f_nameSize = m_name.size() * 2;
     blockForWrite.append(reinterpret_cast<char*>(&f_nameSize),2);       //Размер названия блока
@@ -159,6 +164,10 @@ QByteArray DataBlockGFM::getForSave(){
     foreach(auto value,*m_curves)
         f_data.append(value->getDataByte());
     int f_dataBlockSize = f_headerSize  + f_data.size() + 12;
+    if(f_dataBlockSize % 2){
+        ++f_dataBlockSize;
+        f_data.append('0');
+    }
     blockForWrite.append(reinterpret_cast<char*>(&f_dataBlockSize),4);   //Размер Дата Блока
     blockForWrite.append(reinterpret_cast<char*>(&f_headerSize),4);      //Размер заголовка
     blockForWrite.append(m_codec->fromUnicode("\r\n").mid(2));
@@ -168,9 +177,11 @@ QByteArray DataBlockGFM::getForSave(){
     blockForWrite.append(m_codec->fromUnicode("\r\n").mid(2));
     return blockForWrite;
 }
+
 QList<Curve*> *DataBlockGFM::getCurves(){
     return m_curves;
 }
+
 DataBlockGFM::~DataBlockGFM(){
     foreach(auto value,*m_curves)
         delete value;

@@ -13,7 +13,7 @@ class Curve : public QThread{
     Curve *m_mainDepth;
 
 protected:
-    //QByteArray * m_zipArray;
+    qreal m_resolution;
     qreal m_maximum,m_minimum;
     ShortCut m_shortCut;
     uint m_size;

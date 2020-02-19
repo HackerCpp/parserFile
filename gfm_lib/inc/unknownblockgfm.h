@@ -5,8 +5,8 @@
 class UnknownBlockGFM : public AbstractBlockGFM{
 public:
     UnknownBlockGFM();
-    void parser(QByteArray *bodyBlock);
-    virtual QByteArray getForSave();
+    //void parser(QByteArray *bodyBlock);
+    //virtual QByteArray getForSave();
     ~UnknownBlockGFM();
 };
 

@@ -10,8 +10,8 @@ class HeaderBlockGFM : public AbstractBlockGFM{
     QList <Subunit*> *m_blocks;
 public:
     HeaderBlockGFM();
-    void parser(QByteArray *bodyBlock);
-    virtual QByteArray getForSave();
+    /*void parser(QByteArray *bodyBlock);
+    virtual QByteArray getForSave();*/
     ~HeaderBlockGFM();
 };
 

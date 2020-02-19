@@ -4,7 +4,7 @@ HeaderBlockGFM::HeaderBlockGFM(){
     m_blocks = nullptr;
 }
 
-void HeaderBlockGFM::parser(QByteArray *bodyBlock){
+/*void HeaderBlockGFM::parser(QByteArray *bodyBlock){
     QString endName = "] ";
     QString endLine = "\r\n";
     m_blocks = new QList<Subunit*>;
@@ -35,10 +35,10 @@ void HeaderBlockGFM::parser(QByteArray *bodyBlock){
     }
     /*foreach(auto value,*m_blocks){
         qDebug() << value->m_name << " : " << value->m_data << endl;
-    }*/
+    }
 }
 QByteArray HeaderBlockGFM::getForSave(){
     return nullptr;
-}
+}*/
 HeaderBlockGFM::~HeaderBlockGFM(){
 }

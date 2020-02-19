@@ -110,6 +110,7 @@ QByteArray GFM::zipForms(){
     }
     return nullptr;
 }
+
 QList<AbstractBlockGFM*> *GFM::getBlocks(){
     return m_listBlocksGFM;
 }
@@ -139,7 +140,8 @@ bool GFM::isReady(){
 void GFM::saveFile(QString fileName){
     QFile *fileGFM = new QFile(fileName);
     fileGFM->open(QIODevice::WriteOnly);// | QIODevice::Append);
-    QTextStream streamFFFE(fileGFM);
+    //QTextStream streamFFFE(fileGFM);
+    //QDataStream dataStream(fileGFM);
     fileGFM->write(m_codec->fromUnicode("GFM"));
     fileGFM->write(m_codec->fromUnicode("\r\n").mid(2));
     foreach(AbstractBlockGFM *block,*m_listBlocksGFM){
@@ -149,6 +151,7 @@ void GFM::saveFile(QString fileName){
     delete fileGFM;
     fileGFM = nullptr;
 }
+
 GFM::~GFM(){
     foreach(auto value,*m_listBlocksGFM){
         if(value){

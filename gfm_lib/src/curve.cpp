@@ -4,6 +4,7 @@
 using namespace std;
 
 Curve::Curve(){
+    m_resolution = 1;
     m_mainTime = nullptr;
     m_mainDepth = nullptr;
     m_desc = nullptr;
@@ -11,7 +12,6 @@ Curve::Curve(){
     m_desc = nullptr;
     m_maximum = numeric_limits<qreal>::min();
     m_minimum = numeric_limits<qreal>::max();
-    //m_zipArray = nullptr;
 }
 qreal Curve::maximum(){
     return m_maximum;
@@ -93,8 +93,7 @@ QByteArray Curve::getForSave(){
 }
 
 QByteArray Curve::getDataByte(){
-    QByteArray b;
-    return b;
+    return QByteArray();
 }
 
 Curve::~Curve(){
