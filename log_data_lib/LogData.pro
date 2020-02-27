@@ -17,11 +17,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    include/interfacecurve.cpp \
+    include/ablock.cpp \
+    include/acurve.cpp \
+    include/alogdata.cpp \
+    include/datablock.cpp \
+    include/iblock.cpp \
+    include/icurve.cpp \
+    include/ilogdata.cpp \
     src/logdata.cpp
 
 HEADERS += \
-    include/interfacecurve.h \
+    include/ablock.h \
+    include/acurve.h \
+    include/alogdata.h \
+    include/datablock.h \
+    include/iblock.h \
+    include/icurve.h \
+    include/ilogdata.h \
     include/logdata.h
 
 # Default rules for deployment.
