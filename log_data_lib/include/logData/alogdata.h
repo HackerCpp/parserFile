@@ -6,13 +6,16 @@
 #include "iblock.h"
 
 class ALogData : public ILogData{
-    QList<IBlock*> *m_blocks;
+
 public:
     ALogData();
     virtual ~ALogData();
 
     virtual bool load();
     virtual bool save();
+
+    virtual bool setLoader(ILoaderLogData *loader);
+
 };
 
 #endif // ALOGDATA_H

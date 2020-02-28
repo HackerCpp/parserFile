@@ -25,9 +25,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 INCLUDEPATH+=\
 ../gfm_lib/inc \
-../graphics_lib/inc
+../graphics_lib/inc \
+../log_data_lib/include/logData \
+../log_data_lib/include/externalComponents \
+../log_data_lib/include/blocks \
+../log_data_loader/include
 
-#LIBS += \
+
+LIBS += \
+../build/release/LogData.lib \
+../build/release/LogDataLoader.lib \
 #../build/release/GFM.lib \
 #../build/release/graphics.lib
 
