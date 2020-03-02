@@ -2,10 +2,14 @@
 #define IINTERPRETERLOGDATA_H
 
 
-class iinterpreterLogData
-{
+class IInterpreterLogData{
+
 public:
-    iinterpreterLogData();
+    IInterpreterLogData();
+    virtual ~IInterpreterLogData();
+
+    virtual bool openConsole();
+    virtual bool openScript();
 };
 
 #endif // IINTERPRETERLOGDATA_H

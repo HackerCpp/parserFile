@@ -5,22 +5,21 @@
 #include <QDateTime>
 #include <QFileDialog>
 #include "gfmloader.h"
-
-
-
-
-
+#include "interpreterpython.h"
 
 
 TabGFM::TabGFM(QString path,QWidget *parent) : AbstractTab(parent){
     m_logData = ILogData::createLogData();
-
-    ILoaderLogData * gfmLoader = new GFMLoader();
+    ILoaderLogData * gfmLoader = new GFMLoader(path);
     m_logData->setLoader(gfmLoader);
     m_logData->load();
     if(!m_logData->isReady()){
-        //Подключаем стгнал, ждём пока данные загрузятся
+        //Подключаем сигнал, ждём пока данные загрузятся
     }
+    IInterpreterLogData *interpreter = new InterpreterPython();
+    m_logData->setInterpreter(interpreter);
+    m_logData->openInterpreter();
+
 
 
 

@@ -5,13 +5,18 @@ CONFIG += staticlib
 #CONFIG += dynamiclib
 
 CONFIG += c++17
-
 INCLUDEPATH += include \
 ../log_data_lib/include/externalComponents\
-../log_data_lib/include/blocks
+../log_data_lib/include/curves
 
 LIBS += \
-../build/release/LogData.lib
+../build/release/LogData.lib \
+
+SOURCES += \
+    src/interpreterpython.cpp
+
+HEADERS += \
+    include/interpreterpython.h
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -24,14 +29,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += \
-    src/gfmloader.cpp
-
-HEADERS += \
-    include/gfmloader.h
 
 # Default rules for deployment.
 unix {
     target.path = /usr/lib
 }
 !isEmpty(target.path): INSTALLS += target
+

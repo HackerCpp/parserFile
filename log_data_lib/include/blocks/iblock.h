@@ -1,6 +1,8 @@
 #ifndef IBLOCK_H
 #define IBLOCK_H
+
 #include <stdint.h>
+#include <QString>
 
 
 
@@ -13,6 +15,7 @@ public:
     virtual ~IBlock();
 
     virtual bool setName(const TypeBlock &typeBlock);
+    virtual bool setName(const QString &name);
     virtual TypeBlock name();
     virtual bool parser(const char *body,uint32_t size);
 

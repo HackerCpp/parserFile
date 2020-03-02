@@ -4,6 +4,7 @@
 
 DataBlock::DataBlock(){
     m_curves = new QList<ICurve>;
+    m_type = DATA_BLOCK;
 }
 
 DataBlock::~DataBlock(){

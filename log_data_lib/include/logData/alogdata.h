@@ -13,8 +13,10 @@ public:
 
     virtual bool load();
     virtual bool save();
+    virtual bool openInterpreter();
 
     virtual bool setLoader(ILoaderLogData *loader);
+    virtual bool setInterpreter(IInterpreterLogData *interpreter);
 
 };
 

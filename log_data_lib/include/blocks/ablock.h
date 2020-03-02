@@ -3,13 +3,17 @@
 
 #include "iblock.h"
 
+
 class ABlock : public IBlock{
+protected:
+    TypeBlock m_type;
 public:
     ABlock();
     virtual ~ABlock();
 
-    virtual bool setName(const TypeBlock &typeBlock);
-    virtual TypeBlock name();
+    bool setName(const TypeBlock &type);
+    bool setName(const QString &name);
+    TypeBlock name();
     virtual bool parser(const char *body,uint32_t size);
 };
 

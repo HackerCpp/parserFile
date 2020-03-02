@@ -5,8 +5,10 @@
 #include "aloaderlogdata.h"
 
 
+
 class LogData : public ALogData{
     ILoaderLogData *m_loader;
+    IInterpreterLogData *m_interpreter;
     QList<IBlock> *m_blocks;
 
 public:
@@ -15,8 +17,10 @@ public:
 
     bool load()override;
     bool save()override;
+    bool openInterpreter()override;
 
     bool setLoader(ILoaderLogData *loader)override;
+    bool setInterpreter(IInterpreterLogData *interpreter)override;
 };
 
 #endif // LOGDATA_H

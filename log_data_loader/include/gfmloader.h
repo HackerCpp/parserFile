@@ -2,6 +2,7 @@
 #define GFMLOADER_H
 
 #include <aloaderlogdata.h>
+#include <QString>
 
 class GFMLoader : public ALoaderLogData{
     QString m_path;

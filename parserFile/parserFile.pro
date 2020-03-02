@@ -29,17 +29,21 @@ INCLUDEPATH+=\
 ../log_data_lib/include/logData \
 ../log_data_lib/include/externalComponents \
 ../log_data_lib/include/blocks \
-../log_data_loader/include
+../log_data_lib/include/curves \
+../log_data_loader/include \
+../log_data_interpreter/include
 
 
 LIBS += \
 ../build/release/LogData.lib \
-../build/release/LogDataLoader.lib \
+../build/release/LogDataInterpreter.lib \
+../build/release/LogDataLoader.lib
 #../build/release/GFM.lib \
 #../build/release/graphics.lib
 
 include(../gfm_lib/GFM.pri)
 include(../graphics_lib/graphics.pri)
+
 SOURCES += \
     src/tabs/abstracttab.cpp \
     #src/fileCreation/creategfm.cpp \

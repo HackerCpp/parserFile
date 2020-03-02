@@ -6,16 +6,16 @@
 class ALoaderLogData :public ILoaderLogData{
 protected:
     QList<IBlock> *m_blocks;
-
+public:
     ALoaderLogData();
-    ~ALoaderLogData();
+    virtual ~ALoaderLogData();
 
 
     virtual bool start();
     virtual bool stop();
     virtual bool isReady();
 
-    bool setBlocks(QList<IBlock> *blocks)override;
+     virtual bool setBlocks(QList<IBlock> *blocks);
 };
 
 #endif // ALOADERLOGDATA_H

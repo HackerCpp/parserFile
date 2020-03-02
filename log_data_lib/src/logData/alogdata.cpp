@@ -18,6 +18,15 @@ bool ALogData::save(){
     return false;
 }
 
+bool ALogData::openInterpreter(){
+    return false;
+}
+
+
+bool ALogData::setInterpreter(IInterpreterLogData *interpreter){
+    return false;
+}
+
 bool ALogData::setLoader(ILoaderLogData *loader){
     return false;
 }
