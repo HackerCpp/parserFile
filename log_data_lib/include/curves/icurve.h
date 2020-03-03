@@ -2,7 +2,7 @@
 #define INTERFACECURVE_H
 #include <QtCore>
 
-//template<typename T>
+
 class ICurve{
 public:
     ICurve();
@@ -11,7 +11,7 @@ public:
     virtual qreal data(uint index);
     virtual uint setData(qreal data);
     virtual uint setData(qreal data,uint index);
-    virtual uint setData(const qreal &dataPtr,uint size);
+    virtual uint setData(const char *dataPtr,uint numberOfVectors);
 
     virtual ICurve *time();
     virtual ICurve *depth();

@@ -5,17 +5,16 @@
 
 class ALoaderLogData :public ILoaderLogData{
 protected:
-    QList<IBlock> *m_blocks;
+    QList<IBlock*> *m_blocks;
 public:
     ALoaderLogData();
     virtual ~ALoaderLogData();
 
 
-    virtual bool start();
-    virtual bool stop();
+    virtual bool download();
     virtual bool isReady();
 
-     virtual bool setBlocks(QList<IBlock> *blocks);
+     virtual bool setBlocks(QList<IBlock*> *blocks);
 };
 
 #endif // ALOADERLOGDATA_H

@@ -10,11 +10,10 @@ public:
     ILoaderLogData();
     virtual ~ILoaderLogData();
 
-    virtual bool start();
-    virtual bool stop();
+    virtual bool download();
     virtual bool isReady();
 
-    virtual bool setBlocks(QList<IBlock> *blocks);
+    virtual bool setBlocks(QList<IBlock*> *blocks);
 };
 
 #endif // ILOADLOGDATA_H

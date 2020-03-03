@@ -41,8 +41,8 @@ LIBS += \
 #../build/release/GFM.lib \
 #../build/release/graphics.lib
 
-include(../gfm_lib/GFM.pri)
-include(../graphics_lib/graphics.pri)
+#include(../gfm_lib/GFM.pri)
+#include(../graphics_lib/graphics.pri)
 
 SOURCES += \
     src/tabs/abstracttab.cpp \
@@ -51,7 +51,6 @@ SOURCES += \
     src/mainwindow.cpp \
     src/filereader.cpp \
     src/parsers/parsertlm.cpp \
-    src/parsers/parsergfm.cpp \
     src/parsers/findblocks.cpp \
     src/models/modeltlm.cpp \
     src/reedsolomoncoding.cpp \
@@ -73,7 +72,6 @@ HEADERS += \
      inc/mainwindow.h \
     inc/filereader.h \
     inc/parsers/parsertlm.h \
-    inc/parsers/parsergfm.h \
     inc/parsers/findblocks.h \
     inc/models/modeltlm.h \
     inc/reedsolomoncoding.h \

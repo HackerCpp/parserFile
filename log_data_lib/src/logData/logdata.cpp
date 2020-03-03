@@ -3,7 +3,7 @@
 LogData::LogData(){
     m_loader = nullptr;
     m_interpreter = nullptr;
-    m_blocks = new QList<IBlock>;
+    m_blocks = new QList<IBlock*>;
 }
 
 LogData::~LogData(){
@@ -18,7 +18,7 @@ LogData::~LogData(){
 bool LogData::load(){
     if(!m_loader)
         return false;
-    m_loader->start();
+    m_loader->download();
     return true;
 }
 
@@ -26,12 +26,14 @@ bool LogData::save(){
     return true;
 
 }
+
 bool LogData::openInterpreter(){
     if(!m_interpreter)
         return false;
     m_interpreter->openConsole();
     return true;
 }
+
 bool LogData::setLoader(ILoaderLogData *loader){
     if(m_loader)
         delete m_loader;

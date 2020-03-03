@@ -10,21 +10,17 @@ ALoaderLogData::~ALoaderLogData(){
 }
 
 
-bool ALoaderLogData::start(){
+bool ALoaderLogData::download(){
     return false;
 }
 
-bool ALoaderLogData::stop(){
-    return false;
-
-}
 
 bool ALoaderLogData::isReady(){
     return true;
 
 }
 
-bool ALoaderLogData::setBlocks(QList<IBlock> *blocks){
+bool ALoaderLogData::setBlocks(QList<IBlock*> *blocks){
     m_blocks = blocks;
     return false;
 }

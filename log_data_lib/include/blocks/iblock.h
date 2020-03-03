@@ -14,8 +14,6 @@ public:
     IBlock();
     virtual ~IBlock();
 
-    virtual bool setName(const TypeBlock &typeBlock);
-    virtual bool setName(const QString &name);
     virtual TypeBlock name();
     virtual bool parser(const char *body,uint32_t size);
 
