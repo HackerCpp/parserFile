@@ -8,19 +8,16 @@ ILoaderLogData::~ILoaderLogData(){
 
 }
 
-bool ILoaderLogData::start(){
+bool ILoaderLogData::download(){
     return false;
 }
 
-bool ILoaderLogData::stop(){
-    return true;
-}
 
 bool ILoaderLogData::isReady(){
     return true;
 }
 
-bool ILoaderLogData::setBlocks(QList<IBlock> *blocks){
+bool ILoaderLogData::setBlocks(QList<IBlock*> *blocks){
     return false;
 }
 

@@ -23,32 +23,49 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/blocks/unknownblock.cpp \
+    src/blocks/formsblock.cpp \
+    src/blocks/headerblock.cpp \
+    src/blocks/toolinfoblock.cpp \
+    src/blocks/datablock.cpp \
+    src/blocks/iblock.cpp \
+    src/blocks/shortcut.cpp\
+\
+    src/curves/curve.cpp \
     src/externalComponents/ainterpreterlogdata.cpp \
     src/externalComponents/iinterpreterlogdata.cpp \
     src/blocks/ablock.cpp \
     src/curves/acurve.cpp \
     src/externalComponents/aloaderlogdata.cpp \
     src/logData/alogdata.cpp \
-    src/blocks/datablock.cpp \
-    src/blocks/iblock.cpp \
     src/curves/icurve.cpp \
     src/externalComponents/iloaderlogdata.cpp \
     src/logData/ilogdata.cpp \
-    src/logData/logdata.cpp
+    src/logData/logdata.cpp \
+    src/curves/desc.cpp
+
 
 HEADERS += \
     include/blocks/ablock.h \
+    include/blocks/formsblock.h \
+    include/blocks/headerblock.h \
+    include/blocks/toolinfoblock.h \
+    include/blocks/datablock.h \
+    include/blocks/iblock.h \
+    include/blocks/shortcut.h \
+\
+    include/blocks/unknownblock.h \
     include/curves/acurve.h \
     include/externalComponents/ainterpreterlogdata.h \
     include/externalComponents/aloaderlogdata.h \
     include/externalComponents/iinterpreterlogdata.h \
     include/logData/alogdata.h \
-    include/blocks/datablock.h \
-    include/blocks/iblock.h \
     include/curves/icurve.h \
     include/externalComponents/iloaderlogdata.h \
     include/logData/ilogdata.h \
-    include/logData/logdata.h
+    include/logData/logdata.h \
+    include/curves/curve.h\
+    include/curves/desc.h
 
 # Default rules for deployment.
 unix {

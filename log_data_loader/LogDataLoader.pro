@@ -1,14 +1,15 @@
 QT -= gui
 
 TEMPLATE = lib
-CONFIG += staticlib
-#CONFIG += dynamiclib
+#CONFIG += staticlib
+CONFIG += dynamiclib
 
 CONFIG += c++17
 
 INCLUDEPATH += include \
 ../log_data_lib/include/externalComponents\
-../log_data_lib/include/blocks
+../log_data_lib/include/blocks \
+../log_data_lib/include/curves
 
 LIBS += \
 ../build/release/LogData.lib

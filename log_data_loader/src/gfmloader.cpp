@@ -2,6 +2,47 @@
 #include <QDebug>
 #include <QFile>
 #include <QIODevice>
+#include <shortcut.h>
+
+
+
+
+struct BlockByte{
+    int sizeNameBlock;
+    QString nameBlock;
+    uint sizeBodyBlock;
+    QByteArray bodyBlock;
+};
+
+void findBlocksByteFFFE(QByteArray byteArrayFile,QList<BlockByte> *blocksList,int position){
+    int indexBeginBlock = byteArrayFile.indexOf("[",position);
+    int indexEndBlock = byteArrayFile.indexOf("]",position) + 1;
+    if(indexBeginBlock == -1 || indexEndBlock == -1)
+        return;
+    int sizeNameBlock = *byteArrayFile.mid(indexBeginBlock - 2,2).data();
+    if(sizeNameBlock != (indexEndBlock - indexBeginBlock + 1))
+        findBlocksByteFFFE(byteArrayFile,blocksList,indexEndBlock+1);
+    else{
+        BlockByte block;
+        uint sizeDataBlock = *reinterpret_cast<uint*>(byteArrayFile.mid(indexEndBlock + 1, 4).data());
+        block.sizeNameBlock = sizeNameBlock;
+        block.nameBlock = byteArrayFile.mid(indexBeginBlock,sizeNameBlock).toHex();
+        block.nameBlock = QByteArray::fromHex(block.nameBlock.remove("00").toLocal8Bit());
+        block.sizeBodyBlock = sizeDataBlock;
+        if(sizeDataBlock > INT_MAX/2){
+            block.bodyBlock = byteArrayFile.mid(indexEndBlock+9);
+            blocksList->push_back(block);
+            return;
+        }
+        else{
+            block.bodyBlock = byteArrayFile.mid(indexEndBlock + 9,static_cast<int>(sizeDataBlock - 8));
+        }
+        blocksList->push_back(block);
+        findBlocksByteFFFE(byteArrayFile,blocksList,indexEndBlock + 9 + static_cast<int>(sizeDataBlock - 8));
+    }
+}
+/******************************************************************************************************/
+
 
 GFMLoader::GFMLoader(QString path){
     m_path = path;
@@ -11,20 +52,256 @@ GFMLoader::~GFMLoader(){
 
 }
 
-bool GFMLoader::start(){
-    QFile file(m_path);
-    file.open(QIODevice::ReadOnly);
-    QByteArray byteArrayFile = file.readAll();
-    file.close();
-
+bool GFMLoader::download(){
+    start();
     return true;
-}
-
-bool GFMLoader::stop(){
-    return true;
-
 }
 
 bool GFMLoader::isReady(){
     return true;
 }
+
+void GFMLoader::run(){
+    qDebug() << "begin load gfm";
+    QFile file(m_path);
+    file.open(QIODevice::ReadOnly);
+    QByteArray byteArrayFile = file.readAll();
+    file.close();
+    QString bom = byteArrayFile.mid(0,2).toHex();
+    QList<BlockByte> *blocksList = new QList<BlockByte>;
+    if(bom == "fffe"){
+        m_codec = QTextCodec::codecForMib(1015);
+        findBlocksByteFFFE(byteArrayFile,blocksList,0);
+    }
+    if(blocksList->isEmpty())
+        return;
+    foreach(BlockByte value,*blocksList){
+        IBlock *block = nullptr;
+        QString name = value.nameBlock;
+        if(name == "[HEADER]")
+            block = new HeaderBlock;
+        else if(name == "[TOOL_INFO]")
+            block = new ToolInfoBlock;
+        else if(name == "[FORMS]")
+            block = new FormsBlock;
+        else if(name == "[DATA_BLOCK]")
+            block = new DataBlock;
+        else
+            block = new UnknownBlock;
+        if(block == nullptr)
+            continue;
+        parser(value.bodyBlock,block);
+        m_blocks->push_back(block);
+        value.bodyBlock.clear();
+    }
+    delete blocksList;
+    byteArrayFile.clear();
+    qDebug() << "end load gfm";
+}
+
+
+
+
+void GFMLoader::parser(const QByteArray &bodyBlock,IBlock *block){
+    ABlock *f_block = dynamic_cast<ABlock *>(block);
+    if(!f_block){
+        qDebug() << "Не удалось перевести интерфейс блока в абстрактный";
+    }
+    if(f_block->name() == IBlock::DATA_BLOCK){
+        parserDataBlock(bodyBlock,block);
+    }
+    else
+        parserUnknownBlock(bodyBlock,block);
+}
+
+void GFMLoader::parserDataBlock(const QByteArray &bodyBlock,IBlock *block){
+    DataBlock * dataBlock = dynamic_cast<DataBlock *>(block);
+    if(!dataBlock){
+        qDebug() <<  "не удалось преобразовать IBlock в DataBlock. Парсер дата блока";
+    }
+    QByteArray endHeader = "</PARAMETERS>",beginHeader = "<PARAMETERS",
+            beginPlugin = "<PLUGINS>", endPlugins = "</PLUGINS>";
+    int beginHeaderIndex = bodyBlock.indexOf(m_codec->fromUnicode(beginHeader).mid(4));
+    int endHeaderIndex = bodyBlock.indexOf(m_codec->fromUnicode(endHeader).mid(4));
+    QByteArray header = bodyBlock.mid(beginHeaderIndex - 2,endHeaderIndex - beginHeaderIndex + endHeader.size() * 2);
+    int beginPluginsIndex = bodyBlock.indexOf(m_codec->fromUnicode(beginPlugin).mid(4),endHeaderIndex + endHeader.size() * 2);
+    int endPluginsIndex = bodyBlock.indexOf(m_codec->fromUnicode(endPlugins).mid(4), endHeaderIndex + endHeader.size() * 2);
+    int indexBeginData = 0;
+    uint numberOfVectors = 0;
+    if(beginPluginsIndex == -1){
+        indexBeginData = endHeaderIndex+endHeader.size() * 2 + 6;
+        numberOfVectors = *reinterpret_cast<uint*>(bodyBlock.mid(endHeaderIndex+endHeader.size() * 2 + 2,4).data());
+    }
+    else{
+        indexBeginData = endPluginsIndex + endPlugins.size()*2+6;
+        QString plugins = m_codec->toUnicode(bodyBlock.mid(beginPluginsIndex - 2,endPluginsIndex - beginPluginsIndex + endPlugins.size() * 2));
+        dataBlock->setPlugins(plugins);
+        numberOfVectors = *reinterpret_cast<uint*>(bodyBlock.mid(endPluginsIndex+endPlugins.size() * 2 + 2,4).data());
+    }
+    dataBlock->setNumberOfVectors(numberOfVectors);
+    QByteArray nameStartMark = "NAME=\"",moduleMnemEndMarc = "\"/>";
+    int indexBeginName = header.indexOf(m_codec->fromUnicode(nameStartMark).mid(4)) + nameStartMark.size() * 2 + 2;
+    int indexEndName = header.indexOf(".",indexBeginName);
+    QString nameRecord = m_codec->toUnicode(header.mid(indexBeginName - 4,indexEndName - indexBeginName + 4));
+    dataBlock->setNameRecord(nameRecord);
+    int indexEndmoduleMnem = header.indexOf(m_codec->fromUnicode(moduleMnemEndMarc).mid(4),indexEndName);
+    QString moduleMnemonics = m_codec->toUnicode(header.mid(indexEndName+2,indexEndmoduleMnem - indexEndName - 4));
+    dataBlock->setModuleMnemonic(moduleMnemonics);
+    findShortCuts(&header,dataBlock);
+    findCurves(&header,dataBlock);
+    copyData(bodyBlock,indexBeginData,dataBlock);
+    /*
+
+    foreach(auto curve,*m_curves){
+        if(curve->desc()->getParam("draw_type") == "TIME"){
+            m_mainTime = curve;
+        }
+        else if(curve->desc()->getParam("draw_type") == "DEPTH"){
+            m_mainDepth = curve;
+        }
+    }
+    foreach(auto curve,*m_curves){
+        if(m_mainTime){
+            curve->setMainTime(m_mainTime);
+        }
+        if(m_mainDepth){
+            curve->setMainDepth(m_mainDepth);
+        }
+    }*/
+}
+
+void GFMLoader::parserUnknownBlock(const QByteArray &bodyBlock,IBlock *block){
+
+}
+
+
+
+
+void GFMLoader::findShortCuts(QByteArray *header,DataBlock *dataBlock){
+   QByteArray f_header = m_codec->toUnicode(*header).toLocal8Bit();
+   QByteArray f_refBegin = "<SHORTCUT REF=\"{";
+   QByteArray f_refEnd = "}";
+   QByteArray f_nameBegin = "NAME=\"";
+   QByteArray f_nameEnd = "\"/>";
+   for(int pos = 0; pos < f_header.size();){
+       ShortCut f_shortCut;
+       int indexBeginRef = f_header.indexOf(f_refBegin,pos) + f_refBegin.size();
+       if(indexBeginRef - f_refBegin.size() == -1)
+           return;
+       int indexEndRef   = f_header.indexOf(f_refEnd,indexBeginRef);
+       if(indexEndRef == -1)
+           return;
+       f_shortCut.setRef(f_header.mid(indexBeginRef,indexEndRef - indexBeginRef));
+       int indexBeginName = f_header.indexOf(f_nameBegin,indexEndRef) + f_nameBegin.size();
+       if(indexBeginName - f_nameBegin.size() == -1)
+           return;
+       int indexEndName = f_header.indexOf(f_nameEnd,indexBeginName);
+       if(indexEndName == -1)
+           return;
+       f_shortCut.setName(f_header.mid(indexBeginName,indexEndName - indexBeginName));
+       pos = indexEndName;
+       dataBlock->addShortCut(f_shortCut);
+   }
+
+}
+
+void GFMLoader::findCurves(QByteArray *header,DataBlock * dataBlock){
+    QString BeginLine = "] ";
+    QString endLine = "\r\n";
+    QList<ICurve*> *curves = new QList<ICurve*>;
+    QByteArray f_header = m_codec->toUnicode(*header).toLocal8Bit();
+    QList<QByteArray> f_blockLines;
+
+    for(int i = 0; i < f_header.size();){
+        int indexEndLine = f_header.indexOf(endLine,i);
+        if(indexEndLine == -1){
+            break;
+        }
+        QByteArray f_line = f_header.mid(i,indexEndLine - i);
+        if(f_line.indexOf("[") == 0)
+            f_blockLines.push_back(f_line);
+        i += f_line.size() + 2;
+    }
+
+    foreach(QByteArray value,f_blockLines){
+        if(value.indexOf("UINT8") != -1)
+            curves->push_back(new Curve<uint8_t>());
+        else if(value.indexOf("INT8") != -1)
+            curves->push_back(new Curve<int8_t>);
+        else if(value.indexOf("UINT32") != -1)
+            curves->push_back(new Curve<uint32_t>);
+        else if(value.indexOf("INT32") != -1)
+            curves->push_back(new Curve<int32_t>);
+        else if(value.indexOf("UINT16") != -1)
+            curves->push_back(new Curve<uint16_t>);
+        else if(value.indexOf("INT16") != -1)
+            curves->push_back(new Curve<int16_t>);
+        else if(value.indexOf("FLOAT32") != -1)
+            curves->push_back(new Curve<float_t>);
+        findCurveInfo(value,dataBlock,dynamic_cast<ICurve *>(curves->last()));
+    }
+
+    dataBlock->setCurves(*curves);
+}
+
+void GFMLoader::findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *curve){
+    ACurve *curveAbstract =  dynamic_cast<ACurve *>(curve);
+    int indexEndOffset = curveLine.indexOf("]",1) - 1;
+    uint offset = curveLine.mid(1,indexEndOffset).toUInt();
+    curveAbstract->setOffset(offset);
+
+    int indexEndsize = curveLine.indexOf("]",indexEndOffset+2) - 3;
+    uint size = curveLine.mid(indexEndOffset+3,indexEndsize - indexEndOffset).toUInt();
+    curveAbstract->setSize(size);
+
+    int indexShortCutBegin = curveLine.indexOf("{",indexEndsize);
+    int indexShortCutEnd = curveLine.indexOf("}",indexShortCutBegin);
+    QString f_shortCut = curveLine.mid(indexShortCutBegin + 1,indexShortCutEnd - indexShortCutBegin - 1);
+    QList<ShortCut> shortCuts = *dataBlock->shortCuts();
+    ShortCut shortCut;
+    foreach(auto value,shortCuts){
+        if (f_shortCut == value.getRef()){
+            shortCut.setRef(value.getRef());
+            shortCut.setName(value.getName());
+        }
+    }
+    curveAbstract->setShortCut(shortCut);
+
+    int indexBeginParamMnemon = curveLine.indexOf(":",indexShortCutEnd);
+    int indexEndParamMnemon =   curveLine.indexOf(" ",indexBeginParamMnemon + 5);
+    QString mnemonics = curveLine.mid(indexBeginParamMnemon+1,indexEndParamMnemon - indexBeginParamMnemon - 1);
+    curveAbstract->setMnemonic(mnemonics);
+
+    int indexBeginType = curveLine.indexOf(":",indexEndParamMnemon);
+    int indexEndType = curveLine.indexOf(" ",indexBeginType + 4);
+    QString dataType = curveLine.mid(indexBeginType + 2,indexEndType - indexBeginType - 2);
+    curveAbstract->setDataType(dataType);
+
+    int indexEndRecordPoint = indexEndType;
+    if(!shortCut.getRef().isEmpty()){
+        int indexBeginRecordPoint = curveLine.indexOf(":",indexEndType);
+        indexEndRecordPoint = curveLine.indexOf(" ",indexBeginRecordPoint + 3);
+        QString recordPoint = curveLine.mid(indexBeginRecordPoint + 2,indexEndRecordPoint - indexBeginRecordPoint - 2);
+        curveAbstract->setRecordPoint(recordPoint);
+    }
+    Desc *desc = new Desc(curveLine.mid(indexEndRecordPoint));
+    curveAbstract->setDesc(desc);
+}
+
+void GFMLoader::copyData(QByteArray bodyBlock,int indexBeginData,DataBlock *dataBlock){
+    qDebug() << "copyData";
+    uint numberOfVectors = dataBlock->numberOfVectors();
+    QList<ICurve*> *curves = dataBlock->curves();
+    if(!curves){
+        qDebug() << "дата блок вернул нулевой указатель на кривые";
+        return;
+    }
+    foreach (auto curve,*curves){
+        ACurve * f_curve = dynamic_cast<ACurve *>(curve);
+        if(!f_curve)
+            continue;
+        uint offset = f_curve->offset() * numberOfVectors;
+        curve->setData(bodyBlock.data() + indexBeginData + offset,numberOfVectors);
+    }
+}
+

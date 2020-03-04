@@ -9,7 +9,7 @@
 class LogData : public ALogData{
     ILoaderLogData *m_loader;
     IInterpreterLogData *m_interpreter;
-    QList<IBlock> *m_blocks;
+    QList<IBlock*> *m_blocks;
 
 public:
     LogData();
