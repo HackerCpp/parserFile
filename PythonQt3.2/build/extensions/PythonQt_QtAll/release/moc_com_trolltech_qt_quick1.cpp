@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'com_trolltech_qt_quick1.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.13.1)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.14.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -13,7 +13,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'com_trolltech_qt_quick1.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.13.1. It"
+#error "This file was generated using the moc from 5.14.0. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -90,7 +90,7 @@ void PythonQtWrapper_QSGRootNode::qt_static_metacall(QObject *_o, QMetaObject::C
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSGRootNode::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSGRootNode.data,
     qt_meta_data_PythonQtWrapper_QSGRootNode,
     qt_static_metacall,
@@ -560,7 +560,7 @@ void PythonQtWrapper_QSGTexture::qt_static_metacall(QObject *_o, QMetaObject::Ca
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSGTexture::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSGTexture.data,
     qt_meta_data_PythonQtWrapper_QSGTexture,
     qt_static_metacall,
@@ -676,7 +676,7 @@ void PythonQtWrapper_QSGTextureMaterial::qt_static_metacall(QObject *_o, QMetaOb
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSGTextureMaterial::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSGTextureMaterial.data,
     qt_meta_data_PythonQtWrapper_QSGTextureMaterial,
     qt_static_metacall,
@@ -816,7 +816,7 @@ void PythonQtWrapper_QSGTextureProvider::qt_static_metacall(QObject *_o, QMetaOb
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSGTextureProvider::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSGTextureProvider.data,
     qt_meta_data_PythonQtWrapper_QSGTextureProvider,
     qt_static_metacall,
@@ -946,7 +946,7 @@ void PythonQtWrapper_QSGTransformNode::qt_static_metacall(QObject *_o, QMetaObje
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSGTransformNode::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSGTransformNode.data,
     qt_meta_data_PythonQtWrapper_QSGTransformNode,
     qt_static_metacall,

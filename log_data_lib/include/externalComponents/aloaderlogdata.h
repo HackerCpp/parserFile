@@ -3,6 +3,7 @@
 
 #include "iloaderlogdata.h"
 
+
 class ALoaderLogData :public ILoaderLogData{
 protected:
     QList<IBlock*> *m_blocks;

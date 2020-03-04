@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'com_trolltech_qt_qml0.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.13.1)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.14.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -14,7 +14,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'com_trolltech_qt_qml0.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.13.1. It"
+#error "This file was generated using the moc from 5.14.0. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -257,7 +257,7 @@ void PythonQtWrapper_QJSEngine::qt_static_metacall(QObject *_o, QMetaObject::Cal
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QJSEngine::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QJSEngine.data,
     qt_meta_data_PythonQtWrapper_QJSEngine,
     qt_static_metacall,
@@ -719,7 +719,7 @@ void PythonQtWrapper_QJSValue::qt_static_metacall(QObject *_o, QMetaObject::Call
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QJSValue::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QJSValue.data,
     qt_meta_data_PythonQtWrapper_QJSValue,
     qt_static_metacall,
@@ -854,7 +854,7 @@ void PythonQtWrapper_QQmlAbstractUrlInterceptor::qt_static_metacall(QObject *_o,
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QQmlAbstractUrlInterceptor::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QQmlAbstractUrlInterceptor.data,
     qt_meta_data_PythonQtWrapper_QQmlAbstractUrlInterceptor,
     qt_static_metacall,
@@ -1007,7 +1007,7 @@ void PythonQtWrapper_QQmlApplicationEngine::qt_static_metacall(QObject *_o, QMet
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QQmlApplicationEngine::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QQmlApplicationEngine.data,
     qt_meta_data_PythonQtWrapper_QQmlApplicationEngine,
     qt_static_metacall,
@@ -1524,7 +1524,7 @@ void PythonQtWrapper_QQmlComponent::qt_static_metacall(QObject *_o, QMetaObject:
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QQmlComponent::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QQmlComponent.data,
     qt_meta_data_PythonQtWrapper_QQmlComponent,
     qt_static_metacall,
@@ -1827,7 +1827,7 @@ void PythonQtWrapper_QQmlContext::qt_static_metacall(QObject *_o, QMetaObject::C
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QQmlContext::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QQmlContext.data,
     qt_meta_data_PythonQtWrapper_QQmlContext,
     qt_static_metacall,
@@ -1976,7 +1976,7 @@ void PythonQtWrapper_QQmlDebuggingEnabler::qt_static_metacall(QObject *_o, QMeta
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QQmlDebuggingEnabler::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QQmlDebuggingEnabler.data,
     qt_meta_data_PythonQtWrapper_QQmlDebuggingEnabler,
     qt_static_metacall,
@@ -2475,7 +2475,7 @@ void PythonQtWrapper_QQmlEngine::qt_static_metacall(QObject *_o, QMetaObject::Ca
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QQmlEngine::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QQmlEngine.data,
     qt_meta_data_PythonQtWrapper_QQmlEngine,
     qt_static_metacall,
@@ -2653,7 +2653,7 @@ void PythonQtWrapper_QQmlError::qt_static_metacall(QObject *_o, QMetaObject::Cal
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QQmlError::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QQmlError.data,
     qt_meta_data_PythonQtWrapper_QQmlError,
     qt_static_metacall,
@@ -3058,7 +3058,7 @@ void PythonQtWrapper_QQmlExpression::qt_static_metacall(QObject *_o, QMetaObject
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QQmlExpression::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QQmlExpression.data,
     qt_meta_data_PythonQtWrapper_QQmlExpression,
     qt_static_metacall,
@@ -3195,7 +3195,7 @@ void PythonQtWrapper_QQmlExtensionInterface::qt_static_metacall(QObject *_o, QMe
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QQmlExtensionInterface::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QQmlExtensionInterface.data,
     qt_meta_data_PythonQtWrapper_QQmlExtensionInterface,
     qt_static_metacall,
@@ -3382,7 +3382,7 @@ void PythonQtWrapper_QQmlExtensionPlugin::qt_static_metacall(QObject *_o, QMetaO
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QQmlExtensionPlugin::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QQmlExtensionPlugin.data,
     qt_meta_data_PythonQtWrapper_QQmlExtensionPlugin,
     qt_static_metacall,
@@ -3667,7 +3667,7 @@ void PythonQtWrapper_QQmlFile::qt_static_metacall(QObject *_o, QMetaObject::Call
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QQmlFile::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QQmlFile.data,
     qt_meta_data_PythonQtWrapper_QQmlFile,
     qt_static_metacall,
@@ -3858,7 +3858,7 @@ void PythonQtWrapper_QQmlFileSelector::qt_static_metacall(QObject *_o, QMetaObje
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QQmlFileSelector::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QQmlFileSelector.data,
     qt_meta_data_PythonQtWrapper_QQmlFileSelector,
     qt_static_metacall,
@@ -3991,7 +3991,7 @@ void PythonQtWrapper_QQmlIncubationController::qt_static_metacall(QObject *_o, Q
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QQmlIncubationController::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QQmlIncubationController.data,
     qt_meta_data_PythonQtWrapper_QQmlIncubationController,
     qt_static_metacall,
@@ -4203,7 +4203,7 @@ void PythonQtWrapper_QQmlIncubator::qt_static_metacall(QObject *_o, QMetaObject:
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QQmlIncubator::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QQmlIncubator.data,
     qt_meta_data_PythonQtWrapper_QQmlIncubator,
     qt_static_metacall,
@@ -4400,7 +4400,7 @@ void PythonQtWrapper_QQmlInfo::qt_static_metacall(QObject *_o, QMetaObject::Call
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QQmlInfo::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QQmlInfo.data,
     qt_meta_data_PythonQtWrapper_QQmlInfo,
     qt_static_metacall,
@@ -4624,7 +4624,7 @@ void PythonQtWrapper_QQmlListReference::qt_static_metacall(QObject *_o, QMetaObj
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QQmlListReference::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QQmlListReference.data,
     qt_meta_data_PythonQtWrapper_QQmlListReference,
     qt_static_metacall,
@@ -4742,7 +4742,7 @@ void PythonQtWrapper_QQmlNetworkAccessManagerFactory::qt_static_metacall(QObject
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QQmlNetworkAccessManagerFactory::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QQmlNetworkAccessManagerFactory.data,
     qt_meta_data_PythonQtWrapper_QQmlNetworkAccessManagerFactory,
     qt_static_metacall,
@@ -4863,7 +4863,7 @@ void PythonQtWrapper_QQmlParserStatus::qt_static_metacall(QObject *_o, QMetaObje
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QQmlParserStatus::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QQmlParserStatus.data,
     qt_meta_data_PythonQtWrapper_QQmlParserStatus,
     qt_static_metacall,
@@ -5252,7 +5252,7 @@ void PythonQtWrapper_QQmlProperty::qt_static_metacall(QObject *_o, QMetaObject::
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QQmlProperty::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QQmlProperty.data,
     qt_meta_data_PythonQtWrapper_QQmlProperty,
     qt_static_metacall,
@@ -5507,7 +5507,7 @@ void PythonQtWrapper_QQmlPropertyMap::qt_static_metacall(QObject *_o, QMetaObjec
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QQmlPropertyMap::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QQmlPropertyMap.data,
     qt_meta_data_PythonQtWrapper_QQmlPropertyMap,
     qt_static_metacall,
@@ -5623,7 +5623,7 @@ void PythonQtWrapper_QQmlPropertyValueSource::qt_static_metacall(QObject *_o, QM
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QQmlPropertyValueSource::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QQmlPropertyValueSource.data,
     qt_meta_data_PythonQtWrapper_QQmlPropertyValueSource,
     qt_static_metacall,
@@ -5816,7 +5816,7 @@ void PythonQtWrapper_QQmlScriptString::qt_static_metacall(QObject *_o, QMetaObje
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QQmlScriptString::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QQmlScriptString.data,
     qt_meta_data_PythonQtWrapper_QQmlScriptString,
     qt_static_metacall,
@@ -5932,7 +5932,7 @@ void PythonQtWrapper_QQmlTypesExtensionInterface::qt_static_metacall(QObject *_o
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QQmlTypesExtensionInterface::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QQmlTypesExtensionInterface.data,
     qt_meta_data_PythonQtWrapper_QQmlTypesExtensionInterface,
     qt_static_metacall,

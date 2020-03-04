@@ -289,7 +289,6 @@ void GFMLoader::findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *
 }
 
 void GFMLoader::copyData(QByteArray bodyBlock,int indexBeginData,DataBlock *dataBlock){
-    qDebug() << "copyData";
     uint numberOfVectors = dataBlock->numberOfVectors();
     QList<ICurve*> *curves = dataBlock->curves();
     if(!curves){

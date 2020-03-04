@@ -1,35 +1,19 @@
-QT       -=  gui
-
+CONFIG+=qt
 TEMPLATE = lib
-
-#CONFIG += staticlib
-CONFIG += dynamiclib
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+DEFINES += INTERPRETER_LIBRARY
 CONFIG += c++11
-DEFINES += QT_DEPRECATED_WARNINGS
-
 
 INCLUDEPATH += include \
 ../log_data_lib/include/externalComponents\
-../log_data_lib/include/curves
-
-INCLUDEPATH += ../PythonQT3.2/src \
-               ../PythonQT3.2/extensions/PythonQt_QtAll \
-               C:/python38/include
+../log_data_lib/include/curves \
+../PythonQT3.2/src \
+../PythonQT3.2/extensions/PythonQt_QtAll \
+C:/python38/include
 
 LIBS += ../PythonQT3.2/build/lib/PythonQt-Qt5-Python383.lib \
         ../PythonQT3.2/build/lib/PythonQt_QtAll-Qt5-Python383.lib\
-        ../PythonQT3.2/build/lib/python38.lib\
+        ../PythonQT3.2/build/lib/python38.lib \
 ../build/release/LogData.lib
-
-
-SOURCES += \
-    src/interpreterpython.cpp
-
-HEADERS += \
-    include/interpreterpython.h
-
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -41,8 +25,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+SOURCES += \
+    src/interpreterPython.cpp
 
-# Default rules for deployment.
+HEADERS += \
+    include/interpreter_global.h \
+    include/interpreterPython.h
+
 # Default rules for deployment.
 unix {
     target.path = /usr/lib

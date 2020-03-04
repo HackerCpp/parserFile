@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'com_trolltech_qt_multimedia0.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.13.1)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.14.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -13,7 +13,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'com_trolltech_qt_multimedia0.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.13.1. It"
+#error "This file was generated using the moc from 5.14.0. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -337,7 +337,7 @@ void PythonQtWrapper_QAbstractAudioDeviceInfo::qt_static_metacall(QObject *_o, Q
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAbstractAudioDeviceInfo::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAbstractAudioDeviceInfo.data,
     qt_meta_data_PythonQtWrapper_QAbstractAudioDeviceInfo,
     qt_static_metacall,
@@ -944,7 +944,7 @@ void PythonQtWrapper_QAbstractAudioInput::qt_static_metacall(QObject *_o, QMetaO
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAbstractAudioInput::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAbstractAudioInput.data,
     qt_meta_data_PythonQtWrapper_QAbstractAudioInput,
     qt_static_metacall,
@@ -1598,7 +1598,7 @@ void PythonQtWrapper_QAbstractAudioOutput::qt_static_metacall(QObject *_o, QMeta
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAbstractAudioOutput::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAbstractAudioOutput.data,
     qt_meta_data_PythonQtWrapper_QAbstractAudioOutput,
     qt_static_metacall,
@@ -1826,7 +1826,7 @@ void PythonQtWrapper_QAbstractVideoBuffer::qt_static_metacall(QObject *_o, QMeta
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAbstractVideoBuffer::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAbstractVideoBuffer.data,
     qt_meta_data_PythonQtWrapper_QAbstractVideoBuffer,
     qt_static_metacall,
@@ -2242,7 +2242,7 @@ void PythonQtWrapper_QAbstractVideoSurface::qt_static_metacall(QObject *_o, QMet
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAbstractVideoSurface::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAbstractVideoSurface.data,
     qt_meta_data_PythonQtWrapper_QAbstractVideoSurface,
     qt_static_metacall,
@@ -2385,7 +2385,7 @@ void PythonQtWrapper_QAudio::qt_static_metacall(QObject *_o, QMetaObject::Call _
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAudio::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAudio.data,
     qt_meta_data_PythonQtWrapper_QAudio,
     qt_static_metacall,
@@ -2607,7 +2607,7 @@ void PythonQtWrapper_QAudioBuffer::qt_static_metacall(QObject *_o, QMetaObject::
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAudioBuffer::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAudioBuffer.data,
     qt_meta_data_PythonQtWrapper_QAudioBuffer,
     qt_static_metacall,
@@ -2937,7 +2937,7 @@ void PythonQtWrapper_QAudioDecoder::qt_static_metacall(QObject *_o, QMetaObject:
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAudioDecoder::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAudioDecoder.data,
     qt_meta_data_PythonQtWrapper_QAudioDecoder,
     qt_static_metacall,
@@ -3387,7 +3387,7 @@ void PythonQtWrapper_QAudioDecoderControl::qt_static_metacall(QObject *_o, QMeta
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAudioDecoderControl::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAudioDecoderControl.data,
     qt_meta_data_PythonQtWrapper_QAudioDecoderControl,
     qt_static_metacall,
@@ -3661,7 +3661,7 @@ void PythonQtWrapper_QAudioDeviceInfo::qt_static_metacall(QObject *_o, QMetaObje
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAudioDeviceInfo::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAudioDeviceInfo.data,
     qt_meta_data_PythonQtWrapper_QAudioDeviceInfo,
     qt_static_metacall,
@@ -3933,7 +3933,7 @@ void PythonQtWrapper_QAudioEncoderSettings::qt_static_metacall(QObject *_o, QMet
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAudioEncoderSettings::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAudioEncoderSettings.data,
     qt_meta_data_PythonQtWrapper_QAudioEncoderSettings,
     qt_static_metacall,
@@ -4221,7 +4221,7 @@ void PythonQtWrapper_QAudioEncoderSettingsControl::qt_static_metacall(QObject *_
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAudioEncoderSettingsControl::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAudioEncoderSettingsControl.data,
     qt_meta_data_PythonQtWrapper_QAudioEncoderSettingsControl,
     qt_static_metacall,
@@ -4528,7 +4528,7 @@ void PythonQtWrapper_QAudioFormat::qt_static_metacall(QObject *_o, QMetaObject::
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAudioFormat::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAudioFormat.data,
     qt_meta_data_PythonQtWrapper_QAudioFormat,
     qt_static_metacall,
@@ -4940,7 +4940,7 @@ void PythonQtWrapper_QAudioInput::qt_static_metacall(QObject *_o, QMetaObject::C
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAudioInput::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAudioInput.data,
     qt_meta_data_PythonQtWrapper_QAudioInput,
     qt_static_metacall,
@@ -5175,7 +5175,7 @@ void PythonQtWrapper_QAudioInputSelectorControl::qt_static_metacall(QObject *_o,
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAudioInputSelectorControl::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAudioInputSelectorControl.data,
     qt_meta_data_PythonQtWrapper_QAudioInputSelectorControl,
     qt_static_metacall,
@@ -5613,7 +5613,7 @@ void PythonQtWrapper_QAudioOutput::qt_static_metacall(QObject *_o, QMetaObject::
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAudioOutput::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAudioOutput.data,
     qt_meta_data_PythonQtWrapper_QAudioOutput,
     qt_static_metacall,
@@ -5848,7 +5848,7 @@ void PythonQtWrapper_QAudioOutputSelectorControl::qt_static_metacall(QObject *_o
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAudioOutputSelectorControl::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAudioOutputSelectorControl.data,
     qt_meta_data_PythonQtWrapper_QAudioOutputSelectorControl,
     qt_static_metacall,
@@ -6010,7 +6010,7 @@ void PythonQtWrapper_QAudioProbe::qt_static_metacall(QObject *_o, QMetaObject::C
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAudioProbe::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAudioProbe.data,
     qt_meta_data_PythonQtWrapper_QAudioProbe,
     qt_static_metacall,
@@ -6181,7 +6181,7 @@ void PythonQtWrapper_QAudioRecorder::qt_static_metacall(QObject *_o, QMetaObject
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAudioRecorder::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAudioRecorder.data,
     qt_meta_data_PythonQtWrapper_QAudioRecorder,
     qt_static_metacall,
@@ -6381,7 +6381,7 @@ void PythonQtWrapper_QAudioRoleControl::qt_static_metacall(QObject *_o, QMetaObj
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAudioRoleControl::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAudioRoleControl.data,
     qt_meta_data_PythonQtWrapper_QAudioRoleControl,
     qt_static_metacall,
@@ -6571,7 +6571,7 @@ void PythonQtWrapper_QAudioSystemFactoryInterface::qt_static_metacall(QObject *_
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAudioSystemFactoryInterface::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAudioSystemFactoryInterface.data,
     qt_meta_data_PythonQtWrapper_QAudioSystemFactoryInterface,
     qt_static_metacall,
@@ -6808,7 +6808,7 @@ void PythonQtWrapper_QAudioSystemPlugin::qt_static_metacall(QObject *_o, QMetaOb
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAudioSystemPlugin::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAudioSystemPlugin.data,
     qt_meta_data_PythonQtWrapper_QAudioSystemPlugin,
     qt_static_metacall,
@@ -7363,7 +7363,7 @@ void PythonQtWrapper_QCamera::qt_static_metacall(QObject *_o, QMetaObject::Call 
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QCamera::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QCamera.data,
     qt_meta_data_PythonQtWrapper_QCamera,
     qt_static_metacall,
@@ -7566,7 +7566,7 @@ void PythonQtWrapper_QCameraCaptureBufferFormatControl::qt_static_metacall(QObje
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QCameraCaptureBufferFormatControl::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QCameraCaptureBufferFormatControl.data,
     qt_meta_data_PythonQtWrapper_QCameraCaptureBufferFormatControl,
     qt_static_metacall,
@@ -7772,7 +7772,7 @@ void PythonQtWrapper_QCameraCaptureDestinationControl::qt_static_metacall(QObjec
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QCameraCaptureDestinationControl::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QCameraCaptureDestinationControl.data,
     qt_meta_data_PythonQtWrapper_QCameraCaptureDestinationControl,
     qt_static_metacall,
@@ -8107,7 +8107,7 @@ void PythonQtWrapper_QCameraControl::qt_static_metacall(QObject *_o, QMetaObject
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QCameraControl::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QCameraControl.data,
     qt_meta_data_PythonQtWrapper_QCameraControl,
     qt_static_metacall,
@@ -8504,7 +8504,7 @@ void PythonQtWrapper_QCameraExposure::qt_static_metacall(QObject *_o, QMetaObjec
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QCameraExposure::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QCameraExposure.data,
     qt_meta_data_PythonQtWrapper_QCameraExposure,
     qt_static_metacall,
@@ -8777,7 +8777,7 @@ void PythonQtWrapper_QCameraExposureControl::qt_static_metacall(QObject *_o, QMe
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QCameraExposureControl::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QCameraExposureControl.data,
     qt_meta_data_PythonQtWrapper_QCameraExposureControl,
     qt_static_metacall,
@@ -9061,7 +9061,7 @@ void PythonQtWrapper_QCameraFeedbackControl::qt_static_metacall(QObject *_o, QMe
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QCameraFeedbackControl::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QCameraFeedbackControl.data,
     qt_meta_data_PythonQtWrapper_QCameraFeedbackControl,
     qt_static_metacall,
@@ -9290,7 +9290,7 @@ void PythonQtWrapper_QCameraFlashControl::qt_static_metacall(QObject *_o, QMetaO
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QCameraFlashControl::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QCameraFlashControl.data,
     qt_meta_data_PythonQtWrapper_QCameraFlashControl,
     qt_static_metacall,

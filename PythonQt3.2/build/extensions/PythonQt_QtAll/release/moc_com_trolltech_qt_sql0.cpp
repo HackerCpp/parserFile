@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'com_trolltech_qt_sql0.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.13.1)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.14.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -13,7 +13,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'com_trolltech_qt_sql0.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.13.1. It"
+#error "This file was generated using the moc from 5.14.0. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -116,7 +116,7 @@ void PythonQtWrapper_QSql::qt_static_metacall(QObject *_o, QMetaObject::Call _c,
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSql::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSql.data,
     qt_meta_data_PythonQtWrapper_QSql,
     qt_static_metacall,
@@ -519,7 +519,7 @@ void PythonQtWrapper_QSqlDatabase::qt_static_metacall(QObject *_o, QMetaObject::
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSqlDatabase::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSqlDatabase.data,
     qt_meta_data_PythonQtWrapper_QSqlDatabase,
     qt_static_metacall,
@@ -1545,7 +1545,7 @@ void PythonQtWrapper_QSqlDriver::qt_static_metacall(QObject *_o, QMetaObject::Ca
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSqlDriver::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSqlDriver.data,
     qt_meta_data_PythonQtWrapper_QSqlDriver,
     qt_static_metacall,
@@ -1662,7 +1662,7 @@ void PythonQtWrapper_QSqlDriverCreatorBase::qt_static_metacall(QObject *_o, QMet
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSqlDriverCreatorBase::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSqlDriverCreatorBase.data,
     qt_meta_data_PythonQtWrapper_QSqlDriverCreatorBase,
     qt_static_metacall,
@@ -1882,7 +1882,7 @@ void PythonQtWrapper_QSqlError::qt_static_metacall(QObject *_o, QMetaObject::Cal
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSqlError::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSqlError.data,
     qt_meta_data_PythonQtWrapper_QSqlError,
     qt_static_metacall,
@@ -2170,7 +2170,7 @@ void PythonQtWrapper_QSqlField::qt_static_metacall(QObject *_o, QMetaObject::Cal
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSqlField::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSqlField.data,
     qt_meta_data_PythonQtWrapper_QSqlField,
     qt_static_metacall,
@@ -2328,7 +2328,7 @@ void PythonQtWrapper_QSqlIndex::qt_static_metacall(QObject *_o, QMetaObject::Cal
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSqlIndex::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSqlIndex.data,
     qt_meta_data_PythonQtWrapper_QSqlIndex,
     qt_static_metacall,
@@ -2704,7 +2704,7 @@ void PythonQtWrapper_QSqlQuery::qt_static_metacall(QObject *_o, QMetaObject::Cal
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSqlQuery::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSqlQuery.data,
     qt_meta_data_PythonQtWrapper_QSqlQuery,
     qt_static_metacall,
@@ -3330,7 +3330,7 @@ void PythonQtWrapper_QSqlQueryModel::qt_static_metacall(QObject *_o, QMetaObject
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSqlQueryModel::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSqlQueryModel.data,
     qt_meta_data_PythonQtWrapper_QSqlQueryModel,
     qt_static_metacall,
@@ -3579,7 +3579,7 @@ void PythonQtWrapper_QSqlRecord::qt_static_metacall(QObject *_o, QMetaObject::Ca
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSqlRecord::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSqlRecord.data,
     qt_meta_data_PythonQtWrapper_QSqlRecord,
     qt_static_metacall,
@@ -3718,7 +3718,7 @@ void PythonQtWrapper_QSqlRelation::qt_static_metacall(QObject *_o, QMetaObject::
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSqlRelation::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSqlRelation.data,
     qt_meta_data_PythonQtWrapper_QSqlRelation,
     qt_static_metacall,
@@ -4112,7 +4112,7 @@ void PythonQtWrapper_QSqlRelationalTableModel::qt_static_metacall(QObject *_o, Q
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSqlRelationalTableModel::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSqlRelationalTableModel.data,
     qt_meta_data_PythonQtWrapper_QSqlRelationalTableModel,
     qt_static_metacall,
@@ -4651,7 +4651,7 @@ void PythonQtWrapper_QSqlResult::qt_static_metacall(QObject *_o, QMetaObject::Ca
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSqlResult::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSqlResult.data,
     qt_meta_data_PythonQtWrapper_QSqlResult,
     qt_static_metacall,
@@ -5498,7 +5498,7 @@ void PythonQtWrapper_QSqlTableModel::qt_static_metacall(QObject *_o, QMetaObject
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSqlTableModel::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSqlTableModel.data,
     qt_meta_data_PythonQtWrapper_QSqlTableModel,
     qt_static_metacall,

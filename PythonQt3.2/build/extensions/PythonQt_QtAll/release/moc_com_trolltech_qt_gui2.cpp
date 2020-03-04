@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'com_trolltech_qt_gui2.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.13.1)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.14.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -15,7 +15,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'com_trolltech_qt_gui2.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.13.1. It"
+#error "This file was generated using the moc from 5.14.0. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -388,7 +388,7 @@ void PythonQtWrapper_QFontDatabase::qt_static_metacall(QObject *_o, QMetaObject:
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QFontDatabase::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QFontDatabase.data,
     qt_meta_data_PythonQtWrapper_QFontDatabase,
     qt_static_metacall,
@@ -757,7 +757,7 @@ void PythonQtWrapper_QFontDialog::qt_static_metacall(QObject *_o, QMetaObject::C
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QFontDialog::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QFontDialog.data,
     qt_meta_data_PythonQtWrapper_QFontDialog,
     qt_static_metacall,
@@ -959,7 +959,7 @@ void PythonQtWrapper_QFontInfo::qt_static_metacall(QObject *_o, QMetaObject::Cal
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QFontInfo::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QFontInfo.data,
     qt_meta_data_PythonQtWrapper_QFontInfo,
     qt_static_metacall,
@@ -1275,7 +1275,7 @@ void PythonQtWrapper_QFontMetrics::qt_static_metacall(QObject *_o, QMetaObject::
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QFontMetrics::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QFontMetrics.data,
     qt_meta_data_PythonQtWrapper_QFontMetrics,
     qt_static_metacall,
@@ -1560,7 +1560,7 @@ void PythonQtWrapper_QFontMetricsF::qt_static_metacall(QObject *_o, QMetaObject:
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QFontMetricsF::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QFontMetricsF.data,
     qt_meta_data_PythonQtWrapper_QFontMetricsF,
     qt_static_metacall,
@@ -2272,7 +2272,7 @@ void PythonQtWrapper_QFormLayout::qt_static_metacall(QObject *_o, QMetaObject::C
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QFormLayout::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QFormLayout.data,
     qt_meta_data_PythonQtWrapper_QFormLayout,
     qt_static_metacall,
@@ -2660,7 +2660,7 @@ void PythonQtWrapper_QFrame::qt_static_metacall(QObject *_o, QMetaObject::Call _
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QFrame::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QFrame.data,
     qt_meta_data_PythonQtWrapper_QFrame,
     qt_static_metacall,
@@ -2907,7 +2907,7 @@ void PythonQtWrapper_QGesture::qt_static_metacall(QObject *_o, QMetaObject::Call
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QGesture::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QGesture.data,
     qt_meta_data_PythonQtWrapper_QGesture,
     qt_static_metacall,
@@ -3175,7 +3175,7 @@ void PythonQtWrapper_QGestureEvent::qt_static_metacall(QObject *_o, QMetaObject:
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QGestureEvent::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QGestureEvent.data,
     qt_meta_data_PythonQtWrapper_QGestureEvent,
     qt_static_metacall,
@@ -3406,7 +3406,7 @@ void PythonQtWrapper_QGestureRecognizer::qt_static_metacall(QObject *_o, QMetaOb
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QGestureRecognizer::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QGestureRecognizer.data,
     qt_meta_data_PythonQtWrapper_QGestureRecognizer,
     qt_static_metacall,
@@ -3706,7 +3706,7 @@ void PythonQtWrapper_QGlyphRun::qt_static_metacall(QObject *_o, QMetaObject::Cal
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QGlyphRun::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QGlyphRun.data,
     qt_meta_data_PythonQtWrapper_QGlyphRun,
     qt_static_metacall,
@@ -3910,7 +3910,7 @@ void PythonQtWrapper_QGradient::qt_static_metacall(QObject *_o, QMetaObject::Cal
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QGradient::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QGradient.data,
     qt_meta_data_PythonQtWrapper_QGradient,
     qt_static_metacall,
@@ -4080,7 +4080,7 @@ void PythonQtWrapper_QGraphicsAnchor::qt_static_metacall(QObject *_o, QMetaObjec
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QGraphicsAnchor::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QGraphicsAnchor.data,
     qt_meta_data_PythonQtWrapper_QGraphicsAnchor,
     qt_static_metacall,
@@ -4293,7 +4293,7 @@ void PythonQtWrapper_QGraphicsAnchorLayout::qt_static_metacall(QObject *_o, QMet
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QGraphicsAnchorLayout::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QGraphicsAnchorLayout.data,
     qt_meta_data_PythonQtWrapper_QGraphicsAnchorLayout,
     qt_static_metacall,
@@ -4485,7 +4485,7 @@ void PythonQtWrapper_QGraphicsBlurEffect::qt_static_metacall(QObject *_o, QMetaO
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QGraphicsBlurEffect::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QGraphicsBlurEffect.data,
     qt_meta_data_PythonQtWrapper_QGraphicsBlurEffect,
     qt_static_metacall,
@@ -4644,7 +4644,7 @@ void PythonQtWrapper_QGraphicsColorizeEffect::qt_static_metacall(QObject *_o, QM
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QGraphicsColorizeEffect::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QGraphicsColorizeEffect.data,
     qt_meta_data_PythonQtWrapper_QGraphicsColorizeEffect,
     qt_static_metacall,
@@ -4854,7 +4854,7 @@ void PythonQtWrapper_QGraphicsDropShadowEffect::qt_static_metacall(QObject *_o, 
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QGraphicsDropShadowEffect::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QGraphicsDropShadowEffect.data,
     qt_meta_data_PythonQtWrapper_QGraphicsDropShadowEffect,
     qt_static_metacall,
@@ -5221,7 +5221,7 @@ void PythonQtWrapper_QGraphicsEffect::qt_static_metacall(QObject *_o, QMetaObjec
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QGraphicsEffect::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QGraphicsEffect.data,
     qt_meta_data_PythonQtWrapper_QGraphicsEffect,
     qt_static_metacall,
@@ -5493,7 +5493,7 @@ void PythonQtWrapper_QGraphicsEllipseItem::qt_static_metacall(QObject *_o, QMeta
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QGraphicsEllipseItem::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QGraphicsEllipseItem.data,
     qt_meta_data_PythonQtWrapper_QGraphicsEllipseItem,
     qt_static_metacall,
@@ -5855,7 +5855,7 @@ void PythonQtWrapper_QGraphicsGridLayout::qt_static_metacall(QObject *_o, QMetaO
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QGraphicsGridLayout::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QGraphicsGridLayout.data,
     qt_meta_data_PythonQtWrapper_QGraphicsGridLayout,
     qt_static_metacall,
@@ -9385,7 +9385,7 @@ void PythonQtWrapper_QGraphicsItem::qt_static_metacall(QObject *_o, QMetaObject:
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QGraphicsItem::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QGraphicsItem.data,
     qt_meta_data_PythonQtWrapper_QGraphicsItem,
     qt_static_metacall,
@@ -9861,7 +9861,7 @@ void PythonQtWrapper_QGraphicsItemAnimation::qt_static_metacall(QObject *_o, QMe
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QGraphicsItemAnimation::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QGraphicsItemAnimation.data,
     qt_meta_data_PythonQtWrapper_QGraphicsItemAnimation,
     qt_static_metacall,
@@ -10061,7 +10061,7 @@ void PythonQtWrapper_QGraphicsItemGroup::qt_static_metacall(QObject *_o, QMetaOb
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QGraphicsItemGroup::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QGraphicsItemGroup.data,
     qt_meta_data_PythonQtWrapper_QGraphicsItemGroup,
     qt_static_metacall,
@@ -10271,7 +10271,7 @@ void PythonQtWrapper_QGraphicsLayout::qt_static_metacall(QObject *_o, QMetaObjec
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QGraphicsLayout::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QGraphicsLayout.data,
     qt_meta_data_PythonQtWrapper_QGraphicsLayout,
     qt_static_metacall,
@@ -10635,7 +10635,7 @@ void PythonQtWrapper_QGraphicsLayoutItem::qt_static_metacall(QObject *_o, QMetaO
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QGraphicsLayoutItem::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QGraphicsLayoutItem.data,
     qt_meta_data_PythonQtWrapper_QGraphicsLayoutItem,
     qt_static_metacall,
@@ -10899,7 +10899,7 @@ void PythonQtWrapper_QGraphicsLineItem::qt_static_metacall(QObject *_o, QMetaObj
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QGraphicsLineItem::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QGraphicsLineItem.data,
     qt_meta_data_PythonQtWrapper_QGraphicsLineItem,
     qt_static_metacall,
@@ -11152,7 +11152,7 @@ void PythonQtWrapper_QGraphicsLinearLayout::qt_static_metacall(QObject *_o, QMet
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QGraphicsLinearLayout::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QGraphicsLinearLayout.data,
     qt_meta_data_PythonQtWrapper_QGraphicsLinearLayout,
     qt_static_metacall,
@@ -11351,7 +11351,7 @@ void PythonQtWrapper_QGraphicsObject::qt_static_metacall(QObject *_o, QMetaObjec
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QGraphicsObject::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QGraphicsObject.data,
     qt_meta_data_PythonQtWrapper_QGraphicsObject,
     qt_static_metacall,
@@ -11510,7 +11510,7 @@ void PythonQtWrapper_QGraphicsOpacityEffect::qt_static_metacall(QObject *_o, QMe
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QGraphicsOpacityEffect::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QGraphicsOpacityEffect.data,
     qt_meta_data_PythonQtWrapper_QGraphicsOpacityEffect,
     qt_static_metacall,
@@ -11740,7 +11740,7 @@ void PythonQtWrapper_QGraphicsPathItem::qt_static_metacall(QObject *_o, QMetaObj
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QGraphicsPathItem::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QGraphicsPathItem.data,
     qt_meta_data_PythonQtWrapper_QGraphicsPathItem,
     qt_static_metacall,
