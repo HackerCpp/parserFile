@@ -31,13 +31,19 @@ INCLUDEPATH+=\
 ../log_data_lib/include/blocks \
 ../log_data_lib/include/curves \
 ../log_data_loader/include \
-../log_data_interpreter/include
+../log_data_interpreter/include \
+../PythonQT3.2/src \
+../PythonQT3.2/extensions/PythonQt_QtAll \
+C:/python38/include
 
 
 LIBS += \
 ../build/release/LogData.lib \
 ../build/release/LogDataInterpreter.lib \
-../build/release/LogDataLoader.lib
+../build/release/LogDataLoader.lib \
+../PythonQT3.2/build/lib/PythonQt-Qt5-Python383.lib \
+../PythonQT3.2/build/lib/PythonQt_QtAll-Qt5-Python383.lib\
+../PythonQT3.2/build/lib/python38.lib \
 #../build/release/GFM.lib \
 #../build/release/graphics.lib
 

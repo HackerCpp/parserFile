@@ -3,8 +3,6 @@
 
 #include "iblock.h"
 
-
-
 class ABlock : public IBlock{
 protected:
     TypeBlock m_type;

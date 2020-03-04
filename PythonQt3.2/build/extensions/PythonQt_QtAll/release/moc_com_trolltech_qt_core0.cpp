@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'com_trolltech_qt_core0.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.13.1)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.14.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -14,7 +14,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'com_trolltech_qt_core0.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.13.1. It"
+#error "This file was generated using the moc from 5.14.0. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -352,7 +352,7 @@ void PythonQtWrapper_QAbstractAnimation::qt_static_metacall(QObject *_o, QMetaOb
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAbstractAnimation::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAbstractAnimation.data,
     qt_meta_data_PythonQtWrapper_QAbstractAnimation,
     qt_static_metacall,
@@ -2063,7 +2063,7 @@ void PythonQtWrapper_QAbstractItemModel::qt_static_metacall(QObject *_o, QMetaOb
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAbstractItemModel::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAbstractItemModel.data,
     qt_meta_data_PythonQtWrapper_QAbstractItemModel,
     qt_static_metacall,
@@ -2267,7 +2267,7 @@ void PythonQtWrapper_QAbstractListModel::qt_static_metacall(QObject *_o, QMetaOb
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAbstractListModel::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAbstractListModel.data,
     qt_meta_data_PythonQtWrapper_QAbstractListModel,
     qt_static_metacall,
@@ -2494,7 +2494,7 @@ void PythonQtWrapper_QAbstractState::qt_static_metacall(QObject *_o, QMetaObject
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAbstractState::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAbstractState.data,
     qt_meta_data_PythonQtWrapper_QAbstractState,
     qt_static_metacall,
@@ -2838,7 +2838,7 @@ void PythonQtWrapper_QAbstractTransition::qt_static_metacall(QObject *_o, QMetaO
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAbstractTransition::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAbstractTransition.data,
     qt_meta_data_PythonQtWrapper_QAbstractTransition,
     qt_static_metacall,
@@ -3078,7 +3078,7 @@ void PythonQtWrapper_QAnimationGroup::qt_static_metacall(QObject *_o, QMetaObjec
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAnimationGroup::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAnimationGroup.data,
     qt_meta_data_PythonQtWrapper_QAnimationGroup,
     qt_static_metacall,
@@ -3191,7 +3191,7 @@ void PythonQtWrapper_QApplicationStateChangeEvent::qt_static_metacall(QObject *_
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QApplicationStateChangeEvent::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QApplicationStateChangeEvent.data,
     qt_meta_data_PythonQtWrapper_QApplicationStateChangeEvent,
     qt_static_metacall,
@@ -3313,7 +3313,7 @@ void PythonQtWrapper_QBasicMutex::qt_static_metacall(QObject *_o, QMetaObject::C
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QBasicMutex::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QBasicMutex.data,
     qt_meta_data_PythonQtWrapper_QBasicMutex,
     qt_static_metacall,
@@ -3448,7 +3448,7 @@ void PythonQtWrapper_QBasicTimer::qt_static_metacall(QObject *_o, QMetaObject::C
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QBasicTimer::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QBasicTimer.data,
     qt_meta_data_PythonQtWrapper_QBasicTimer,
     qt_static_metacall,
@@ -3771,7 +3771,7 @@ void PythonQtWrapper_QBuffer::qt_static_metacall(QObject *_o, QMetaObject::Call 
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QBuffer::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QBuffer.data,
     qt_meta_data_PythonQtWrapper_QBuffer,
     qt_static_metacall,
@@ -3923,7 +3923,7 @@ void PythonQtWrapper_QByteArrayMatcher::qt_static_metacall(QObject *_o, QMetaObj
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QByteArrayMatcher::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QByteArrayMatcher.data,
     qt_meta_data_PythonQtWrapper_QByteArrayMatcher,
     qt_static_metacall,
@@ -4049,7 +4049,7 @@ void PythonQtWrapper_QChildEvent::qt_static_metacall(QObject *_o, QMetaObject::C
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QChildEvent::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QChildEvent.data,
     qt_meta_data_PythonQtWrapper_QChildEvent,
     qt_static_metacall,
@@ -4251,7 +4251,7 @@ void PythonQtWrapper_QCollator::qt_static_metacall(QObject *_o, QMetaObject::Cal
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QCollator::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QCollator.data,
     qt_meta_data_PythonQtWrapper_QCollator,
     qt_static_metacall,
@@ -4381,7 +4381,7 @@ void PythonQtWrapper_QCollatorSortKey::qt_static_metacall(QObject *_o, QMetaObje
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QCollatorSortKey::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QCollatorSortKey.data,
     qt_meta_data_PythonQtWrapper_QCollatorSortKey,
     qt_static_metacall,
@@ -4583,7 +4583,7 @@ void PythonQtWrapper_QCommandLineOption::qt_static_metacall(QObject *_o, QMetaOb
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QCommandLineOption::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QCommandLineOption.data,
     qt_meta_data_PythonQtWrapper_QCommandLineOption,
     qt_static_metacall,
@@ -4895,7 +4895,7 @@ void PythonQtWrapper_QCommandLineParser::qt_static_metacall(QObject *_o, QMetaOb
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QCommandLineParser::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QCommandLineParser.data,
     qt_meta_data_PythonQtWrapper_QCommandLineParser,
     qt_static_metacall,
@@ -5344,7 +5344,7 @@ void PythonQtWrapper_QCoreApplication::qt_static_metacall(QObject *_o, QMetaObje
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QCoreApplication::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QCoreApplication.data,
     qt_meta_data_PythonQtWrapper_QCoreApplication,
     qt_static_metacall,
@@ -5519,7 +5519,7 @@ void PythonQtWrapper_QCryptographicHash::qt_static_metacall(QObject *_o, QMetaOb
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QCryptographicHash::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QCryptographicHash.data,
     qt_meta_data_PythonQtWrapper_QCryptographicHash,
     qt_static_metacall,
@@ -5989,7 +5989,7 @@ void PythonQtWrapper_QDataStream::qt_static_metacall(QObject *_o, QMetaObject::C
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QDataStream::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QDataStream.data,
     qt_meta_data_PythonQtWrapper_QDataStream,
     qt_static_metacall,
@@ -6098,7 +6098,7 @@ void PythonQtWrapper_QDeferredDeleteEvent::qt_static_metacall(QObject *_o, QMeta
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QDeferredDeleteEvent::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QDeferredDeleteEvent.data,
     qt_meta_data_PythonQtWrapper_QDeferredDeleteEvent,
     qt_static_metacall,
@@ -6726,7 +6726,7 @@ void PythonQtWrapper_QDir::qt_static_metacall(QObject *_o, QMetaObject::Call _c,
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QDir::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QDir.data,
     qt_meta_data_PythonQtWrapper_QDir,
     qt_static_metacall,
@@ -6924,7 +6924,7 @@ void PythonQtWrapper_QDirIterator::qt_static_metacall(QObject *_o, QMetaObject::
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QDirIterator::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QDirIterator.data,
     qt_meta_data_PythonQtWrapper_QDirIterator,
     qt_static_metacall,
@@ -7035,7 +7035,7 @@ void PythonQtWrapper_QDynamicPropertyChangeEvent::qt_static_metacall(QObject *_o
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QDynamicPropertyChangeEvent::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QDynamicPropertyChangeEvent.data,
     qt_meta_data_PythonQtWrapper_QDynamicPropertyChangeEvent,
     qt_static_metacall,
@@ -7074,8 +7074,8 @@ int PythonQtWrapper_QDynamicPropertyChangeEvent::qt_metacall(QMetaObject::Call _
     return _id;
 }
 struct qt_meta_stringdata_PythonQtWrapper_QEasingCurve_t {
-    QByteArrayData data[90];
-    char stringdata0[900];
+    QByteArrayData data[91];
+    char stringdata0[913];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -7090,103 +7090,104 @@ QT_MOC_LITERAL(2, 46, 13), // "QEasingCurve*"
 QT_MOC_LITERAL(3, 60, 0), // ""
 QT_MOC_LITERAL(4, 61, 18), // "QEasingCurve::Type"
 QT_MOC_LITERAL(5, 80, 4), // "type"
-QT_MOC_LITERAL(6, 85, 5), // "other"
-QT_MOC_LITERAL(7, 91, 19), // "delete_QEasingCurve"
-QT_MOC_LITERAL(8, 111, 3), // "obj"
-QT_MOC_LITERAL(9, 115, 21), // "addCubicBezierSegment"
-QT_MOC_LITERAL(10, 137, 16), // "theWrappedObject"
-QT_MOC_LITERAL(11, 154, 2), // "c1"
-QT_MOC_LITERAL(12, 157, 2), // "c2"
-QT_MOC_LITERAL(13, 160, 8), // "endPoint"
-QT_MOC_LITERAL(14, 169, 13), // "addTCBSegment"
-QT_MOC_LITERAL(15, 183, 9), // "nextPoint"
-QT_MOC_LITERAL(16, 193, 1), // "t"
-QT_MOC_LITERAL(17, 195, 1), // "c"
-QT_MOC_LITERAL(18, 197, 1), // "b"
-QT_MOC_LITERAL(19, 199, 9), // "amplitude"
-QT_MOC_LITERAL(20, 209, 6), // "__ne__"
-QT_MOC_LITERAL(21, 216, 7), // "writeTo"
-QT_MOC_LITERAL(22, 224, 12), // "QDataStream&"
-QT_MOC_LITERAL(23, 237, 6), // "arg__1"
-QT_MOC_LITERAL(24, 244, 15), // "operator_assign"
-QT_MOC_LITERAL(25, 260, 6), // "__eq__"
-QT_MOC_LITERAL(26, 267, 8), // "readFrom"
-QT_MOC_LITERAL(27, 276, 9), // "overshoot"
-QT_MOC_LITERAL(28, 286, 6), // "period"
-QT_MOC_LITERAL(29, 293, 12), // "setAmplitude"
-QT_MOC_LITERAL(30, 306, 12), // "setOvershoot"
-QT_MOC_LITERAL(31, 319, 9), // "setPeriod"
-QT_MOC_LITERAL(32, 329, 7), // "setType"
-QT_MOC_LITERAL(33, 337, 4), // "swap"
-QT_MOC_LITERAL(34, 342, 13), // "QEasingCurve&"
-QT_MOC_LITERAL(35, 356, 13), // "toCubicSpline"
-QT_MOC_LITERAL(36, 370, 16), // "QVector<QPointF>"
-QT_MOC_LITERAL(37, 387, 16), // "valueForProgress"
-QT_MOC_LITERAL(38, 404, 8), // "progress"
-QT_MOC_LITERAL(39, 413, 11), // "py_toString"
-QT_MOC_LITERAL(40, 425, 4), // "Type"
-QT_MOC_LITERAL(41, 430, 6), // "Linear"
-QT_MOC_LITERAL(42, 437, 6), // "InQuad"
-QT_MOC_LITERAL(43, 444, 7), // "OutQuad"
-QT_MOC_LITERAL(44, 452, 9), // "InOutQuad"
-QT_MOC_LITERAL(45, 462, 9), // "OutInQuad"
-QT_MOC_LITERAL(46, 472, 7), // "InCubic"
-QT_MOC_LITERAL(47, 480, 8), // "OutCubic"
-QT_MOC_LITERAL(48, 489, 10), // "InOutCubic"
-QT_MOC_LITERAL(49, 500, 10), // "OutInCubic"
-QT_MOC_LITERAL(50, 511, 7), // "InQuart"
-QT_MOC_LITERAL(51, 519, 8), // "OutQuart"
-QT_MOC_LITERAL(52, 528, 10), // "InOutQuart"
-QT_MOC_LITERAL(53, 539, 10), // "OutInQuart"
-QT_MOC_LITERAL(54, 550, 7), // "InQuint"
-QT_MOC_LITERAL(55, 558, 8), // "OutQuint"
-QT_MOC_LITERAL(56, 567, 10), // "InOutQuint"
-QT_MOC_LITERAL(57, 578, 10), // "OutInQuint"
-QT_MOC_LITERAL(58, 589, 6), // "InSine"
-QT_MOC_LITERAL(59, 596, 7), // "OutSine"
-QT_MOC_LITERAL(60, 604, 9), // "InOutSine"
-QT_MOC_LITERAL(61, 614, 9), // "OutInSine"
-QT_MOC_LITERAL(62, 624, 6), // "InExpo"
-QT_MOC_LITERAL(63, 631, 7), // "OutExpo"
-QT_MOC_LITERAL(64, 639, 9), // "InOutExpo"
-QT_MOC_LITERAL(65, 649, 9), // "OutInExpo"
-QT_MOC_LITERAL(66, 659, 6), // "InCirc"
-QT_MOC_LITERAL(67, 666, 7), // "OutCirc"
-QT_MOC_LITERAL(68, 674, 9), // "InOutCirc"
-QT_MOC_LITERAL(69, 684, 9), // "OutInCirc"
-QT_MOC_LITERAL(70, 694, 9), // "InElastic"
-QT_MOC_LITERAL(71, 704, 10), // "OutElastic"
-QT_MOC_LITERAL(72, 715, 12), // "InOutElastic"
-QT_MOC_LITERAL(73, 728, 12), // "OutInElastic"
-QT_MOC_LITERAL(74, 741, 6), // "InBack"
-QT_MOC_LITERAL(75, 748, 7), // "OutBack"
-QT_MOC_LITERAL(76, 756, 9), // "InOutBack"
-QT_MOC_LITERAL(77, 766, 9), // "OutInBack"
-QT_MOC_LITERAL(78, 776, 8), // "InBounce"
-QT_MOC_LITERAL(79, 785, 9), // "OutBounce"
-QT_MOC_LITERAL(80, 795, 11), // "InOutBounce"
-QT_MOC_LITERAL(81, 807, 11), // "OutInBounce"
-QT_MOC_LITERAL(82, 819, 7), // "InCurve"
-QT_MOC_LITERAL(83, 827, 8), // "OutCurve"
-QT_MOC_LITERAL(84, 836, 9), // "SineCurve"
-QT_MOC_LITERAL(85, 846, 11), // "CosineCurve"
-QT_MOC_LITERAL(86, 858, 12), // "BezierSpline"
-QT_MOC_LITERAL(87, 871, 9), // "TCBSpline"
-QT_MOC_LITERAL(88, 881, 6), // "Custom"
-QT_MOC_LITERAL(89, 888, 11) // "NCurveTypes"
+QT_MOC_LITERAL(6, 85, 12), // "QEasingCurve"
+QT_MOC_LITERAL(7, 98, 5), // "other"
+QT_MOC_LITERAL(8, 104, 19), // "delete_QEasingCurve"
+QT_MOC_LITERAL(9, 124, 3), // "obj"
+QT_MOC_LITERAL(10, 128, 21), // "addCubicBezierSegment"
+QT_MOC_LITERAL(11, 150, 16), // "theWrappedObject"
+QT_MOC_LITERAL(12, 167, 2), // "c1"
+QT_MOC_LITERAL(13, 170, 2), // "c2"
+QT_MOC_LITERAL(14, 173, 8), // "endPoint"
+QT_MOC_LITERAL(15, 182, 13), // "addTCBSegment"
+QT_MOC_LITERAL(16, 196, 9), // "nextPoint"
+QT_MOC_LITERAL(17, 206, 1), // "t"
+QT_MOC_LITERAL(18, 208, 1), // "c"
+QT_MOC_LITERAL(19, 210, 1), // "b"
+QT_MOC_LITERAL(20, 212, 9), // "amplitude"
+QT_MOC_LITERAL(21, 222, 6), // "__ne__"
+QT_MOC_LITERAL(22, 229, 7), // "writeTo"
+QT_MOC_LITERAL(23, 237, 12), // "QDataStream&"
+QT_MOC_LITERAL(24, 250, 6), // "arg__1"
+QT_MOC_LITERAL(25, 257, 15), // "operator_assign"
+QT_MOC_LITERAL(26, 273, 6), // "__eq__"
+QT_MOC_LITERAL(27, 280, 8), // "readFrom"
+QT_MOC_LITERAL(28, 289, 9), // "overshoot"
+QT_MOC_LITERAL(29, 299, 6), // "period"
+QT_MOC_LITERAL(30, 306, 12), // "setAmplitude"
+QT_MOC_LITERAL(31, 319, 12), // "setOvershoot"
+QT_MOC_LITERAL(32, 332, 9), // "setPeriod"
+QT_MOC_LITERAL(33, 342, 7), // "setType"
+QT_MOC_LITERAL(34, 350, 4), // "swap"
+QT_MOC_LITERAL(35, 355, 13), // "QEasingCurve&"
+QT_MOC_LITERAL(36, 369, 13), // "toCubicSpline"
+QT_MOC_LITERAL(37, 383, 16), // "QVector<QPointF>"
+QT_MOC_LITERAL(38, 400, 16), // "valueForProgress"
+QT_MOC_LITERAL(39, 417, 8), // "progress"
+QT_MOC_LITERAL(40, 426, 11), // "py_toString"
+QT_MOC_LITERAL(41, 438, 4), // "Type"
+QT_MOC_LITERAL(42, 443, 6), // "Linear"
+QT_MOC_LITERAL(43, 450, 6), // "InQuad"
+QT_MOC_LITERAL(44, 457, 7), // "OutQuad"
+QT_MOC_LITERAL(45, 465, 9), // "InOutQuad"
+QT_MOC_LITERAL(46, 475, 9), // "OutInQuad"
+QT_MOC_LITERAL(47, 485, 7), // "InCubic"
+QT_MOC_LITERAL(48, 493, 8), // "OutCubic"
+QT_MOC_LITERAL(49, 502, 10), // "InOutCubic"
+QT_MOC_LITERAL(50, 513, 10), // "OutInCubic"
+QT_MOC_LITERAL(51, 524, 7), // "InQuart"
+QT_MOC_LITERAL(52, 532, 8), // "OutQuart"
+QT_MOC_LITERAL(53, 541, 10), // "InOutQuart"
+QT_MOC_LITERAL(54, 552, 10), // "OutInQuart"
+QT_MOC_LITERAL(55, 563, 7), // "InQuint"
+QT_MOC_LITERAL(56, 571, 8), // "OutQuint"
+QT_MOC_LITERAL(57, 580, 10), // "InOutQuint"
+QT_MOC_LITERAL(58, 591, 10), // "OutInQuint"
+QT_MOC_LITERAL(59, 602, 6), // "InSine"
+QT_MOC_LITERAL(60, 609, 7), // "OutSine"
+QT_MOC_LITERAL(61, 617, 9), // "InOutSine"
+QT_MOC_LITERAL(62, 627, 9), // "OutInSine"
+QT_MOC_LITERAL(63, 637, 6), // "InExpo"
+QT_MOC_LITERAL(64, 644, 7), // "OutExpo"
+QT_MOC_LITERAL(65, 652, 9), // "InOutExpo"
+QT_MOC_LITERAL(66, 662, 9), // "OutInExpo"
+QT_MOC_LITERAL(67, 672, 6), // "InCirc"
+QT_MOC_LITERAL(68, 679, 7), // "OutCirc"
+QT_MOC_LITERAL(69, 687, 9), // "InOutCirc"
+QT_MOC_LITERAL(70, 697, 9), // "OutInCirc"
+QT_MOC_LITERAL(71, 707, 9), // "InElastic"
+QT_MOC_LITERAL(72, 717, 10), // "OutElastic"
+QT_MOC_LITERAL(73, 728, 12), // "InOutElastic"
+QT_MOC_LITERAL(74, 741, 12), // "OutInElastic"
+QT_MOC_LITERAL(75, 754, 6), // "InBack"
+QT_MOC_LITERAL(76, 761, 7), // "OutBack"
+QT_MOC_LITERAL(77, 769, 9), // "InOutBack"
+QT_MOC_LITERAL(78, 779, 9), // "OutInBack"
+QT_MOC_LITERAL(79, 789, 8), // "InBounce"
+QT_MOC_LITERAL(80, 798, 9), // "OutBounce"
+QT_MOC_LITERAL(81, 808, 11), // "InOutBounce"
+QT_MOC_LITERAL(82, 820, 11), // "OutInBounce"
+QT_MOC_LITERAL(83, 832, 7), // "InCurve"
+QT_MOC_LITERAL(84, 840, 8), // "OutCurve"
+QT_MOC_LITERAL(85, 849, 9), // "SineCurve"
+QT_MOC_LITERAL(86, 859, 11), // "CosineCurve"
+QT_MOC_LITERAL(87, 871, 12), // "BezierSpline"
+QT_MOC_LITERAL(88, 884, 9), // "TCBSpline"
+QT_MOC_LITERAL(89, 894, 6), // "Custom"
+QT_MOC_LITERAL(90, 901, 11) // "NCurveTypes"
 
     },
     "PythonQtWrapper_QEasingCurve\0"
     "new_QEasingCurve\0QEasingCurve*\0\0"
-    "QEasingCurve::Type\0type\0other\0"
-    "delete_QEasingCurve\0obj\0addCubicBezierSegment\0"
-    "theWrappedObject\0c1\0c2\0endPoint\0"
-    "addTCBSegment\0nextPoint\0t\0c\0b\0amplitude\0"
-    "__ne__\0writeTo\0QDataStream&\0arg__1\0"
-    "operator_assign\0__eq__\0readFrom\0"
-    "overshoot\0period\0setAmplitude\0"
-    "setOvershoot\0setPeriod\0setType\0swap\0"
-    "QEasingCurve&\0toCubicSpline\0"
+    "QEasingCurve::Type\0type\0QEasingCurve\0"
+    "other\0delete_QEasingCurve\0obj\0"
+    "addCubicBezierSegment\0theWrappedObject\0"
+    "c1\0c2\0endPoint\0addTCBSegment\0nextPoint\0"
+    "t\0c\0b\0amplitude\0__ne__\0writeTo\0"
+    "QDataStream&\0arg__1\0operator_assign\0"
+    "__eq__\0readFrom\0overshoot\0period\0"
+    "setAmplitude\0setOvershoot\0setPeriod\0"
+    "setType\0swap\0QEasingCurve&\0toCubicSpline\0"
     "QVector<QPointF>\0valueForProgress\0"
     "progress\0py_toString\0Type\0Linear\0"
     "InQuad\0OutQuad\0InOutQuad\0OutInQuad\0"
@@ -7222,105 +7223,105 @@ static const uint qt_meta_data_PythonQtWrapper_QEasingCurve[] = {
        1,    1,  129,    3, 0x0a /* Public */,
        1,    0,  132,    3, 0x2a /* Public | MethodCloned */,
        1,    1,  133,    3, 0x0a /* Public */,
-       7,    1,  136,    3, 0x0a /* Public */,
-       9,    4,  139,    3, 0x0a /* Public */,
-      14,    5,  148,    3, 0x0a /* Public */,
-      19,    1,  159,    3, 0x0a /* Public */,
-      20,    2,  162,    3, 0x0a /* Public */,
-      21,    2,  167,    3, 0x0a /* Public */,
-      24,    2,  172,    3, 0x0a /* Public */,
-      25,    2,  177,    3, 0x0a /* Public */,
-      26,    2,  182,    3, 0x0a /* Public */,
-      27,    1,  187,    3, 0x0a /* Public */,
-      28,    1,  190,    3, 0x0a /* Public */,
-      29,    2,  193,    3, 0x0a /* Public */,
-      30,    2,  198,    3, 0x0a /* Public */,
-      31,    2,  203,    3, 0x0a /* Public */,
-      32,    2,  208,    3, 0x0a /* Public */,
-      33,    2,  213,    3, 0x0a /* Public */,
-      35,    1,  218,    3, 0x0a /* Public */,
+       8,    1,  136,    3, 0x0a /* Public */,
+      10,    4,  139,    3, 0x0a /* Public */,
+      15,    5,  148,    3, 0x0a /* Public */,
+      20,    1,  159,    3, 0x0a /* Public */,
+      21,    2,  162,    3, 0x0a /* Public */,
+      22,    2,  167,    3, 0x0a /* Public */,
+      25,    2,  172,    3, 0x0a /* Public */,
+      26,    2,  177,    3, 0x0a /* Public */,
+      27,    2,  182,    3, 0x0a /* Public */,
+      28,    1,  187,    3, 0x0a /* Public */,
+      29,    1,  190,    3, 0x0a /* Public */,
+      30,    2,  193,    3, 0x0a /* Public */,
+      31,    2,  198,    3, 0x0a /* Public */,
+      32,    2,  203,    3, 0x0a /* Public */,
+      33,    2,  208,    3, 0x0a /* Public */,
+      34,    2,  213,    3, 0x0a /* Public */,
+      36,    1,  218,    3, 0x0a /* Public */,
        5,    1,  221,    3, 0x0a /* Public */,
-      37,    2,  224,    3, 0x0a /* Public */,
-      39,    1,  229,    3, 0x0a /* Public */,
+      38,    2,  224,    3, 0x0a /* Public */,
+      40,    1,  229,    3, 0x0a /* Public */,
 
  // slots: parameters
     0x80000000 | 2, 0x80000000 | 4,    5,
     0x80000000 | 2,
-    0x80000000 | 2, QMetaType::QEasingCurve,    6,
-    QMetaType::Void, 0x80000000 | 2,    8,
-    QMetaType::Void, 0x80000000 | 2, QMetaType::QPointF, QMetaType::QPointF, QMetaType::QPointF,   10,   11,   12,   13,
-    QMetaType::Void, 0x80000000 | 2, QMetaType::QPointF, QMetaType::QReal, QMetaType::QReal, QMetaType::QReal,   10,   15,   16,   17,   18,
-    QMetaType::QReal, 0x80000000 | 2,   10,
-    QMetaType::Bool, 0x80000000 | 2, QMetaType::QEasingCurve,   10,    6,
-    QMetaType::Void, 0x80000000 | 2, 0x80000000 | 22,   10,   23,
-    0x80000000 | 2, 0x80000000 | 2, QMetaType::QEasingCurve,   10,    6,
-    QMetaType::Bool, 0x80000000 | 2, QMetaType::QEasingCurve,   10,    6,
-    QMetaType::Void, 0x80000000 | 2, 0x80000000 | 22,   10,   23,
-    QMetaType::QReal, 0x80000000 | 2,   10,
-    QMetaType::QReal, 0x80000000 | 2,   10,
-    QMetaType::Void, 0x80000000 | 2, QMetaType::QReal,   10,   19,
-    QMetaType::Void, 0x80000000 | 2, QMetaType::QReal,   10,   27,
-    QMetaType::Void, 0x80000000 | 2, QMetaType::QReal,   10,   28,
-    QMetaType::Void, 0x80000000 | 2, 0x80000000 | 4,   10,    5,
-    QMetaType::Void, 0x80000000 | 2, 0x80000000 | 34,   10,    6,
-    0x80000000 | 36, 0x80000000 | 2,   10,
-    0x80000000 | 4, 0x80000000 | 2,   10,
-    QMetaType::QReal, 0x80000000 | 2, QMetaType::QReal,   10,   38,
+    0x80000000 | 2, 0x80000000 | 6,    7,
+    QMetaType::Void, 0x80000000 | 2,    9,
+    QMetaType::Void, 0x80000000 | 2, QMetaType::QPointF, QMetaType::QPointF, QMetaType::QPointF,   11,   12,   13,   14,
+    QMetaType::Void, 0x80000000 | 2, QMetaType::QPointF, QMetaType::QReal, QMetaType::QReal, QMetaType::QReal,   11,   16,   17,   18,   19,
+    QMetaType::QReal, 0x80000000 | 2,   11,
+    QMetaType::Bool, 0x80000000 | 2, 0x80000000 | 6,   11,    7,
+    QMetaType::Void, 0x80000000 | 2, 0x80000000 | 23,   11,   24,
+    0x80000000 | 2, 0x80000000 | 2, 0x80000000 | 6,   11,    7,
+    QMetaType::Bool, 0x80000000 | 2, 0x80000000 | 6,   11,    7,
+    QMetaType::Void, 0x80000000 | 2, 0x80000000 | 23,   11,   24,
+    QMetaType::QReal, 0x80000000 | 2,   11,
+    QMetaType::QReal, 0x80000000 | 2,   11,
+    QMetaType::Void, 0x80000000 | 2, QMetaType::QReal,   11,   20,
+    QMetaType::Void, 0x80000000 | 2, QMetaType::QReal,   11,   28,
+    QMetaType::Void, 0x80000000 | 2, QMetaType::QReal,   11,   29,
+    QMetaType::Void, 0x80000000 | 2, 0x80000000 | 4,   11,    5,
+    QMetaType::Void, 0x80000000 | 2, 0x80000000 | 35,   11,    7,
+    0x80000000 | 37, 0x80000000 | 2,   11,
+    0x80000000 | 4, 0x80000000 | 2,   11,
+    QMetaType::QReal, 0x80000000 | 2, QMetaType::QReal,   11,   39,
     QMetaType::QString, 0x80000000 | 2,    3,
 
  // enums: name, alias, flags, count, data
-      40,   40, 0x0,   49,  237,
+      41,   41, 0x0,   49,  237,
 
  // enum data: key, value
-      41, uint(PythonQtWrapper_QEasingCurve::Linear),
-      42, uint(PythonQtWrapper_QEasingCurve::InQuad),
-      43, uint(PythonQtWrapper_QEasingCurve::OutQuad),
-      44, uint(PythonQtWrapper_QEasingCurve::InOutQuad),
-      45, uint(PythonQtWrapper_QEasingCurve::OutInQuad),
-      46, uint(PythonQtWrapper_QEasingCurve::InCubic),
-      47, uint(PythonQtWrapper_QEasingCurve::OutCubic),
-      48, uint(PythonQtWrapper_QEasingCurve::InOutCubic),
-      49, uint(PythonQtWrapper_QEasingCurve::OutInCubic),
-      50, uint(PythonQtWrapper_QEasingCurve::InQuart),
-      51, uint(PythonQtWrapper_QEasingCurve::OutQuart),
-      52, uint(PythonQtWrapper_QEasingCurve::InOutQuart),
-      53, uint(PythonQtWrapper_QEasingCurve::OutInQuart),
-      54, uint(PythonQtWrapper_QEasingCurve::InQuint),
-      55, uint(PythonQtWrapper_QEasingCurve::OutQuint),
-      56, uint(PythonQtWrapper_QEasingCurve::InOutQuint),
-      57, uint(PythonQtWrapper_QEasingCurve::OutInQuint),
-      58, uint(PythonQtWrapper_QEasingCurve::InSine),
-      59, uint(PythonQtWrapper_QEasingCurve::OutSine),
-      60, uint(PythonQtWrapper_QEasingCurve::InOutSine),
-      61, uint(PythonQtWrapper_QEasingCurve::OutInSine),
-      62, uint(PythonQtWrapper_QEasingCurve::InExpo),
-      63, uint(PythonQtWrapper_QEasingCurve::OutExpo),
-      64, uint(PythonQtWrapper_QEasingCurve::InOutExpo),
-      65, uint(PythonQtWrapper_QEasingCurve::OutInExpo),
-      66, uint(PythonQtWrapper_QEasingCurve::InCirc),
-      67, uint(PythonQtWrapper_QEasingCurve::OutCirc),
-      68, uint(PythonQtWrapper_QEasingCurve::InOutCirc),
-      69, uint(PythonQtWrapper_QEasingCurve::OutInCirc),
-      70, uint(PythonQtWrapper_QEasingCurve::InElastic),
-      71, uint(PythonQtWrapper_QEasingCurve::OutElastic),
-      72, uint(PythonQtWrapper_QEasingCurve::InOutElastic),
-      73, uint(PythonQtWrapper_QEasingCurve::OutInElastic),
-      74, uint(PythonQtWrapper_QEasingCurve::InBack),
-      75, uint(PythonQtWrapper_QEasingCurve::OutBack),
-      76, uint(PythonQtWrapper_QEasingCurve::InOutBack),
-      77, uint(PythonQtWrapper_QEasingCurve::OutInBack),
-      78, uint(PythonQtWrapper_QEasingCurve::InBounce),
-      79, uint(PythonQtWrapper_QEasingCurve::OutBounce),
-      80, uint(PythonQtWrapper_QEasingCurve::InOutBounce),
-      81, uint(PythonQtWrapper_QEasingCurve::OutInBounce),
-      82, uint(PythonQtWrapper_QEasingCurve::InCurve),
-      83, uint(PythonQtWrapper_QEasingCurve::OutCurve),
-      84, uint(PythonQtWrapper_QEasingCurve::SineCurve),
-      85, uint(PythonQtWrapper_QEasingCurve::CosineCurve),
-      86, uint(PythonQtWrapper_QEasingCurve::BezierSpline),
-      87, uint(PythonQtWrapper_QEasingCurve::TCBSpline),
-      88, uint(PythonQtWrapper_QEasingCurve::Custom),
-      89, uint(PythonQtWrapper_QEasingCurve::NCurveTypes),
+      42, uint(PythonQtWrapper_QEasingCurve::Linear),
+      43, uint(PythonQtWrapper_QEasingCurve::InQuad),
+      44, uint(PythonQtWrapper_QEasingCurve::OutQuad),
+      45, uint(PythonQtWrapper_QEasingCurve::InOutQuad),
+      46, uint(PythonQtWrapper_QEasingCurve::OutInQuad),
+      47, uint(PythonQtWrapper_QEasingCurve::InCubic),
+      48, uint(PythonQtWrapper_QEasingCurve::OutCubic),
+      49, uint(PythonQtWrapper_QEasingCurve::InOutCubic),
+      50, uint(PythonQtWrapper_QEasingCurve::OutInCubic),
+      51, uint(PythonQtWrapper_QEasingCurve::InQuart),
+      52, uint(PythonQtWrapper_QEasingCurve::OutQuart),
+      53, uint(PythonQtWrapper_QEasingCurve::InOutQuart),
+      54, uint(PythonQtWrapper_QEasingCurve::OutInQuart),
+      55, uint(PythonQtWrapper_QEasingCurve::InQuint),
+      56, uint(PythonQtWrapper_QEasingCurve::OutQuint),
+      57, uint(PythonQtWrapper_QEasingCurve::InOutQuint),
+      58, uint(PythonQtWrapper_QEasingCurve::OutInQuint),
+      59, uint(PythonQtWrapper_QEasingCurve::InSine),
+      60, uint(PythonQtWrapper_QEasingCurve::OutSine),
+      61, uint(PythonQtWrapper_QEasingCurve::InOutSine),
+      62, uint(PythonQtWrapper_QEasingCurve::OutInSine),
+      63, uint(PythonQtWrapper_QEasingCurve::InExpo),
+      64, uint(PythonQtWrapper_QEasingCurve::OutExpo),
+      65, uint(PythonQtWrapper_QEasingCurve::InOutExpo),
+      66, uint(PythonQtWrapper_QEasingCurve::OutInExpo),
+      67, uint(PythonQtWrapper_QEasingCurve::InCirc),
+      68, uint(PythonQtWrapper_QEasingCurve::OutCirc),
+      69, uint(PythonQtWrapper_QEasingCurve::InOutCirc),
+      70, uint(PythonQtWrapper_QEasingCurve::OutInCirc),
+      71, uint(PythonQtWrapper_QEasingCurve::InElastic),
+      72, uint(PythonQtWrapper_QEasingCurve::OutElastic),
+      73, uint(PythonQtWrapper_QEasingCurve::InOutElastic),
+      74, uint(PythonQtWrapper_QEasingCurve::OutInElastic),
+      75, uint(PythonQtWrapper_QEasingCurve::InBack),
+      76, uint(PythonQtWrapper_QEasingCurve::OutBack),
+      77, uint(PythonQtWrapper_QEasingCurve::InOutBack),
+      78, uint(PythonQtWrapper_QEasingCurve::OutInBack),
+      79, uint(PythonQtWrapper_QEasingCurve::InBounce),
+      80, uint(PythonQtWrapper_QEasingCurve::OutBounce),
+      81, uint(PythonQtWrapper_QEasingCurve::InOutBounce),
+      82, uint(PythonQtWrapper_QEasingCurve::OutInBounce),
+      83, uint(PythonQtWrapper_QEasingCurve::InCurve),
+      84, uint(PythonQtWrapper_QEasingCurve::OutCurve),
+      85, uint(PythonQtWrapper_QEasingCurve::SineCurve),
+      86, uint(PythonQtWrapper_QEasingCurve::CosineCurve),
+      87, uint(PythonQtWrapper_QEasingCurve::BezierSpline),
+      88, uint(PythonQtWrapper_QEasingCurve::TCBSpline),
+      89, uint(PythonQtWrapper_QEasingCurve::Custom),
+      90, uint(PythonQtWrapper_QEasingCurve::NCurveTypes),
 
        0        // eod
 };
@@ -7373,7 +7374,7 @@ void PythonQtWrapper_QEasingCurve::qt_static_metacall(QObject *_o, QMetaObject::
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QEasingCurve::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QEasingCurve.data,
     qt_meta_data_PythonQtWrapper_QEasingCurve,
     qt_static_metacall,
@@ -7574,7 +7575,7 @@ void PythonQtWrapper_QElapsedTimer::qt_static_metacall(QObject *_o, QMetaObject:
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QElapsedTimer::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QElapsedTimer.data,
     qt_meta_data_PythonQtWrapper_QElapsedTimer,
     qt_static_metacall,
@@ -8153,7 +8154,7 @@ void PythonQtWrapper_QEvent::qt_static_metacall(QObject *_o, QMetaObject::Call _
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QEvent::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QEvent.data,
     qt_meta_data_PythonQtWrapper_QEvent,
     qt_static_metacall,
@@ -8426,7 +8427,7 @@ void PythonQtWrapper_QEventLoop::qt_static_metacall(QObject *_o, QMetaObject::Ca
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QEventLoop::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QEventLoop.data,
     qt_meta_data_PythonQtWrapper_QEventLoop,
     qt_static_metacall,
@@ -8660,7 +8661,7 @@ void PythonQtWrapper_QEventTransition::qt_static_metacall(QObject *_o, QMetaObje
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QEventTransition::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QEventTransition.data,
     qt_meta_data_PythonQtWrapper_QEventTransition,
     qt_static_metacall,
@@ -8774,7 +8775,7 @@ void PythonQtWrapper_QFactoryInterface::qt_static_metacall(QObject *_o, QMetaObj
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QFactoryInterface::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QFactoryInterface.data,
     qt_meta_data_PythonQtWrapper_QFactoryInterface,
     qt_static_metacall,
@@ -9166,7 +9167,7 @@ void PythonQtWrapper_QFile::qt_static_metacall(QObject *_o, QMetaObject::Call _c
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QFile::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QFile.data,
     qt_meta_data_PythonQtWrapper_QFile,
     qt_static_metacall,

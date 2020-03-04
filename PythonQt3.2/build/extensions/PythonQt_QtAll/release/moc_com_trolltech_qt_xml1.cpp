@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'com_trolltech_qt_xml1.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.13.1)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.14.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -15,7 +15,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'com_trolltech_qt_xml1.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.13.1. It"
+#error "This file was generated using the moc from 5.14.0. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -148,7 +148,7 @@ void PythonQtWrapper_QXmlStreamAttribute::qt_static_metacall(QObject *_o, QMetaO
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QXmlStreamAttribute::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QXmlStreamAttribute.data,
     qt_meta_data_PythonQtWrapper_QXmlStreamAttribute,
     qt_static_metacall,
@@ -536,7 +536,7 @@ void PythonQtWrapper_QXmlStreamAttributes::qt_static_metacall(QObject *_o, QMeta
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QXmlStreamAttributes::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QXmlStreamAttributes.data,
     qt_meta_data_PythonQtWrapper_QXmlStreamAttributes,
     qt_static_metacall,
@@ -687,7 +687,7 @@ void PythonQtWrapper_QXmlStreamEntityDeclaration::qt_static_metacall(QObject *_o
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QXmlStreamEntityDeclaration::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QXmlStreamEntityDeclaration.data,
     qt_meta_data_PythonQtWrapper_QXmlStreamEntityDeclaration,
     qt_static_metacall,
@@ -826,7 +826,7 @@ void PythonQtWrapper_QXmlStreamNamespaceDeclaration::qt_static_metacall(QObject 
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QXmlStreamNamespaceDeclaration::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QXmlStreamNamespaceDeclaration.data,
     qt_meta_data_PythonQtWrapper_QXmlStreamNamespaceDeclaration,
     qt_static_metacall,
@@ -966,7 +966,7 @@ void PythonQtWrapper_QXmlStreamNotationDeclaration::qt_static_metacall(QObject *
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QXmlStreamNotationDeclaration::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QXmlStreamNotationDeclaration.data,
     qt_meta_data_PythonQtWrapper_QXmlStreamNotationDeclaration,
     qt_static_metacall,
@@ -1469,7 +1469,7 @@ void PythonQtWrapper_QXmlStreamReader::qt_static_metacall(QObject *_o, QMetaObje
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QXmlStreamReader::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QXmlStreamReader.data,
     qt_meta_data_PythonQtWrapper_QXmlStreamReader,
     qt_static_metacall,
@@ -1781,7 +1781,7 @@ void PythonQtWrapper_QXmlStreamWriter::qt_static_metacall(QObject *_o, QMetaObje
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QXmlStreamWriter::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QXmlStreamWriter.data,
     qt_meta_data_PythonQtWrapper_QXmlStreamWriter,
     qt_static_metacall,

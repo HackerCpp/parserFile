@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'com_trolltech_qt_network0.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.13.1)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.14.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -14,7 +14,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'com_trolltech_qt_network0.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.13.1. It"
+#error "This file was generated using the moc from 5.14.0. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -293,7 +293,7 @@ void PythonQtWrapper_QAbstractNetworkCache::qt_static_metacall(QObject *_o, QMet
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAbstractNetworkCache::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAbstractNetworkCache.data,
     qt_meta_data_PythonQtWrapper_QAbstractNetworkCache,
     qt_static_metacall,
@@ -1297,7 +1297,7 @@ void PythonQtWrapper_QAbstractSocket::qt_static_metacall(QObject *_o, QMetaObjec
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAbstractSocket::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAbstractSocket.data,
     qt_meta_data_PythonQtWrapper_QAbstractSocket,
     qt_static_metacall,
@@ -1473,7 +1473,7 @@ void PythonQtWrapper_QAuthenticator::qt_static_metacall(QObject *_o, QMetaObject
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QAuthenticator::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QAuthenticator.data,
     qt_meta_data_PythonQtWrapper_QAuthenticator,
     qt_static_metacall,
@@ -1610,7 +1610,7 @@ void PythonQtWrapper_QDnsDomainNameRecord::qt_static_metacall(QObject *_o, QMeta
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QDnsDomainNameRecord::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QDnsDomainNameRecord.data,
     qt_meta_data_PythonQtWrapper_QDnsDomainNameRecord,
     qt_static_metacall,
@@ -1749,7 +1749,7 @@ void PythonQtWrapper_QDnsHostAddressRecord::qt_static_metacall(QObject *_o, QMet
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QDnsHostAddressRecord::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QDnsHostAddressRecord.data,
     qt_meta_data_PythonQtWrapper_QDnsHostAddressRecord,
     qt_static_metacall,
@@ -2092,7 +2092,7 @@ void PythonQtWrapper_QDnsLookup::qt_static_metacall(QObject *_o, QMetaObject::Ca
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QDnsLookup::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QDnsLookup.data,
     qt_meta_data_PythonQtWrapper_QDnsLookup,
     qt_static_metacall,
@@ -2236,7 +2236,7 @@ void PythonQtWrapper_QDnsMailExchangeRecord::qt_static_metacall(QObject *_o, QMe
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QDnsMailExchangeRecord::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QDnsMailExchangeRecord.data,
     qt_meta_data_PythonQtWrapper_QDnsMailExchangeRecord,
     qt_static_metacall,
@@ -2389,7 +2389,7 @@ void PythonQtWrapper_QDnsServiceRecord::qt_static_metacall(QObject *_o, QMetaObj
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QDnsServiceRecord::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QDnsServiceRecord.data,
     qt_meta_data_PythonQtWrapper_QDnsServiceRecord,
     qt_static_metacall,
@@ -2525,7 +2525,7 @@ void PythonQtWrapper_QDnsTextRecord::qt_static_metacall(QObject *_o, QMetaObject
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QDnsTextRecord::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QDnsTextRecord.data,
     qt_meta_data_PythonQtWrapper_QDnsTextRecord,
     qt_static_metacall,
@@ -2826,7 +2826,7 @@ void PythonQtWrapper_QHostAddress::qt_static_metacall(QObject *_o, QMetaObject::
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QHostAddress::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QHostAddress.data,
     qt_meta_data_PythonQtWrapper_QHostAddress,
     qt_static_metacall,
@@ -3049,7 +3049,7 @@ void PythonQtWrapper_QHostInfo::qt_static_metacall(QObject *_o, QMetaObject::Cal
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QHostInfo::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QHostInfo.data,
     qt_meta_data_PythonQtWrapper_QHostInfo,
     qt_static_metacall,
@@ -3244,7 +3244,7 @@ void PythonQtWrapper_QHttpMultiPart::qt_static_metacall(QObject *_o, QMetaObject
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QHttpMultiPart::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QHttpMultiPart.data,
     qt_meta_data_PythonQtWrapper_QHttpMultiPart,
     qt_static_metacall,
@@ -3414,7 +3414,7 @@ void PythonQtWrapper_QHttpPart::qt_static_metacall(QObject *_o, QMetaObject::Cal
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QHttpPart::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QHttpPart.data,
     qt_meta_data_PythonQtWrapper_QHttpPart,
     qt_static_metacall,
@@ -3523,7 +3523,7 @@ void PythonQtWrapper_QIPv6Address::qt_static_metacall(QObject *_o, QMetaObject::
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QIPv6Address::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QIPv6Address.data,
     qt_meta_data_PythonQtWrapper_QIPv6Address,
     qt_static_metacall,
@@ -3932,7 +3932,7 @@ void PythonQtWrapper_QLocalServer::qt_static_metacall(QObject *_o, QMetaObject::
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QLocalServer::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QLocalServer.data,
     qt_meta_data_PythonQtWrapper_QLocalServer,
     qt_static_metacall,
@@ -4491,7 +4491,7 @@ void PythonQtWrapper_QLocalSocket::qt_static_metacall(QObject *_o, QMetaObject::
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QLocalSocket::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QLocalSocket.data,
     qt_meta_data_PythonQtWrapper_QLocalSocket,
     qt_static_metacall,
@@ -5139,7 +5139,7 @@ void PythonQtWrapper_QNetworkAccessManager::qt_static_metacall(QObject *_o, QMet
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QNetworkAccessManager::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QNetworkAccessManager.data,
     qt_meta_data_PythonQtWrapper_QNetworkAccessManager,
     qt_static_metacall,
@@ -5335,7 +5335,7 @@ void PythonQtWrapper_QNetworkAddressEntry::qt_static_metacall(QObject *_o, QMeta
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QNetworkAddressEntry::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QNetworkAddressEntry.data,
     qt_meta_data_PythonQtWrapper_QNetworkAddressEntry,
     qt_static_metacall,
@@ -5544,7 +5544,7 @@ void PythonQtWrapper_QNetworkCacheMetaData::qt_static_metacall(QObject *_o, QMet
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QNetworkCacheMetaData::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QNetworkCacheMetaData.data,
     qt_meta_data_PythonQtWrapper_QNetworkCacheMetaData,
     qt_static_metacall,
@@ -5853,7 +5853,7 @@ void PythonQtWrapper_QNetworkConfiguration::qt_static_metacall(QObject *_o, QMet
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QNetworkConfiguration::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QNetworkConfiguration.data,
     qt_meta_data_PythonQtWrapper_QNetworkConfiguration,
     qt_static_metacall,
@@ -6092,7 +6092,7 @@ void PythonQtWrapper_QNetworkConfigurationManager::qt_static_metacall(QObject *_
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QNetworkConfigurationManager::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QNetworkConfigurationManager.data,
     qt_meta_data_PythonQtWrapper_QNetworkConfigurationManager,
     qt_static_metacall,
@@ -6382,7 +6382,7 @@ void PythonQtWrapper_QNetworkCookie::qt_static_metacall(QObject *_o, QMetaObject
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QNetworkCookie::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QNetworkCookie.data,
     qt_meta_data_PythonQtWrapper_QNetworkCookie,
     qt_static_metacall,
@@ -6704,7 +6704,7 @@ void PythonQtWrapper_QNetworkCookieJar::qt_static_metacall(QObject *_o, QMetaObj
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QNetworkCookieJar::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QNetworkCookieJar.data,
     qt_meta_data_PythonQtWrapper_QNetworkCookieJar,
     qt_static_metacall,
@@ -7017,7 +7017,7 @@ void PythonQtWrapper_QNetworkDiskCache::qt_static_metacall(QObject *_o, QMetaObj
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QNetworkDiskCache::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QNetworkDiskCache.data,
     qt_meta_data_PythonQtWrapper_QNetworkDiskCache,
     qt_static_metacall,
@@ -7246,7 +7246,7 @@ void PythonQtWrapper_QNetworkInterface::qt_static_metacall(QObject *_o, QMetaObj
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QNetworkInterface::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QNetworkInterface.data,
     qt_meta_data_PythonQtWrapper_QNetworkInterface,
     qt_static_metacall,
@@ -7592,7 +7592,7 @@ void PythonQtWrapper_QNetworkProxy::qt_static_metacall(QObject *_o, QMetaObject:
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QNetworkProxy::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QNetworkProxy.data,
     qt_meta_data_PythonQtWrapper_QNetworkProxy,
     qt_static_metacall,
@@ -7747,7 +7747,7 @@ void PythonQtWrapper_QNetworkProxyFactory::qt_static_metacall(QObject *_o, QMeta
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QNetworkProxyFactory::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QNetworkProxyFactory.data,
     qt_meta_data_PythonQtWrapper_QNetworkProxyFactory,
     qt_static_metacall,
@@ -8097,7 +8097,7 @@ void PythonQtWrapper_QNetworkProxyQuery::qt_static_metacall(QObject *_o, QMetaOb
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QNetworkProxyQuery::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QNetworkProxyQuery.data,
     qt_meta_data_PythonQtWrapper_QNetworkProxyQuery,
     qt_static_metacall,
@@ -8674,7 +8674,7 @@ void PythonQtWrapper_QNetworkReply::qt_static_metacall(QObject *_o, QMetaObject:
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QNetworkReply::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QNetworkReply.data,
     qt_meta_data_PythonQtWrapper_QNetworkReply,
     qt_static_metacall,
@@ -9050,7 +9050,7 @@ void PythonQtWrapper_QNetworkRequest::qt_static_metacall(QObject *_o, QMetaObjec
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QNetworkRequest::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QNetworkRequest.data,
     qt_meta_data_PythonQtWrapper_QNetworkRequest,
     qt_static_metacall,

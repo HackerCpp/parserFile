@@ -26,7 +26,6 @@ template<typename T> uint Curve<T>::setData(const char *dataPtr,uint numberOfVec
     m_minimum = static_cast<qreal>(*std::min_element(m_data->begin(),m_data->end()));
     m_maximum = static_cast<qreal>(*std::max_element(m_data->begin(),m_data->end()));
     m_positiveOffset = m_minimum < 0?m_minimum:0;
-    qDebug() << m_minimum << " " << m_maximum << " " << m_positiveOffset;
     return dataSizeInBytes;
 }
 

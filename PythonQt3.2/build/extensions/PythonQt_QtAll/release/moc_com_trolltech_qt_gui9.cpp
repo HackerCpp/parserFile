@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'com_trolltech_qt_gui9.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.13.1)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.14.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -13,7 +13,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'com_trolltech_qt_gui9.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.13.1. It"
+#error "This file was generated using the moc from 5.14.0. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -92,7 +92,7 @@ void PythonQtWrapper_QStyleOptionFrameV3::qt_static_metacall(QObject *_o, QMetaO
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyleOptionFrameV3::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyleOptionFrameV3.data,
     qt_meta_data_PythonQtWrapper_QStyleOptionFrameV3,
     qt_static_metacall,
@@ -264,7 +264,7 @@ void PythonQtWrapper_QStyleOptionGraphicsItem::qt_static_metacall(QObject *_o, Q
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyleOptionGraphicsItem::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyleOptionGraphicsItem.data,
     qt_meta_data_PythonQtWrapper_QStyleOptionGraphicsItem,
     qt_static_metacall,
@@ -464,7 +464,7 @@ void PythonQtWrapper_QStyleOptionGroupBox::qt_static_metacall(QObject *_o, QMeta
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyleOptionGroupBox::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyleOptionGroupBox.data,
     qt_meta_data_PythonQtWrapper_QStyleOptionGroupBox,
     qt_static_metacall,
@@ -730,7 +730,7 @@ void PythonQtWrapper_QStyleOptionHeader::qt_static_metacall(QObject *_o, QMetaOb
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyleOptionHeader::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyleOptionHeader.data,
     qt_meta_data_PythonQtWrapper_QStyleOptionHeader,
     qt_static_metacall,
@@ -1006,7 +1006,7 @@ void PythonQtWrapper_QStyleOptionMenuItem::qt_static_metacall(QObject *_o, QMeta
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyleOptionMenuItem::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyleOptionMenuItem.data,
     qt_meta_data_PythonQtWrapper_QStyleOptionMenuItem,
     qt_static_metacall,
@@ -1241,7 +1241,7 @@ void PythonQtWrapper_QStyleOptionProgressBar::qt_static_metacall(QObject *_o, QM
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyleOptionProgressBar::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyleOptionProgressBar.data,
     qt_meta_data_PythonQtWrapper_QStyleOptionProgressBar,
     qt_static_metacall,
@@ -1351,7 +1351,7 @@ void PythonQtWrapper_QStyleOptionProgressBarV2::qt_static_metacall(QObject *_o, 
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyleOptionProgressBarV2::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyleOptionProgressBarV2.data,
     qt_meta_data_PythonQtWrapper_QStyleOptionProgressBarV2,
     qt_static_metacall,
@@ -1505,7 +1505,7 @@ void PythonQtWrapper_QStyleOptionRubberBand::qt_static_metacall(QObject *_o, QMe
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyleOptionRubberBand::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyleOptionRubberBand.data,
     qt_meta_data_PythonQtWrapper_QStyleOptionRubberBand,
     qt_static_metacall,
@@ -1647,7 +1647,7 @@ void PythonQtWrapper_QStyleOptionSizeGrip::qt_static_metacall(QObject *_o, QMeta
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyleOptionSizeGrip::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyleOptionSizeGrip.data,
     qt_meta_data_PythonQtWrapper_QStyleOptionSizeGrip,
     qt_static_metacall,
@@ -1916,7 +1916,7 @@ void PythonQtWrapper_QStyleOptionSlider::qt_static_metacall(QObject *_o, QMetaOb
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyleOptionSlider::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyleOptionSlider.data,
     qt_meta_data_PythonQtWrapper_QStyleOptionSlider,
     qt_static_metacall,
@@ -2083,7 +2083,7 @@ void PythonQtWrapper_QStyleOptionSpinBox::qt_static_metacall(QObject *_o, QMetaO
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyleOptionSpinBox::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyleOptionSpinBox.data,
     qt_meta_data_PythonQtWrapper_QStyleOptionSpinBox,
     qt_static_metacall,
@@ -2404,7 +2404,7 @@ void PythonQtWrapper_QStyleOptionTab::qt_static_metacall(QObject *_o, QMetaObjec
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyleOptionTab::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyleOptionTab.data,
     qt_meta_data_PythonQtWrapper_QStyleOptionTab,
     qt_static_metacall,
@@ -2581,7 +2581,7 @@ void PythonQtWrapper_QStyleOptionTabBarBase::qt_static_metacall(QObject *_o, QMe
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyleOptionTabBarBase::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyleOptionTabBarBase.data,
     qt_meta_data_PythonQtWrapper_QStyleOptionTabBarBase,
     qt_static_metacall,
@@ -2691,7 +2691,7 @@ void PythonQtWrapper_QStyleOptionTabBarBaseV2::qt_static_metacall(QObject *_o, Q
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyleOptionTabBarBaseV2::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyleOptionTabBarBaseV2.data,
     qt_meta_data_PythonQtWrapper_QStyleOptionTabBarBaseV2,
     qt_static_metacall,
@@ -2800,7 +2800,7 @@ void PythonQtWrapper_QStyleOptionTabV2::qt_static_metacall(QObject *_o, QMetaObj
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyleOptionTabV2::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyleOptionTabV2.data,
     qt_meta_data_PythonQtWrapper_QStyleOptionTabV2,
     qt_static_metacall,
@@ -2909,7 +2909,7 @@ void PythonQtWrapper_QStyleOptionTabV3::qt_static_metacall(QObject *_o, QMetaObj
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyleOptionTabV3::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyleOptionTabV3.data,
     qt_meta_data_PythonQtWrapper_QStyleOptionTabV3,
     qt_static_metacall,
@@ -3134,7 +3134,7 @@ void PythonQtWrapper_QStyleOptionTabWidgetFrame::qt_static_metacall(QObject *_o,
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyleOptionTabWidgetFrame::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyleOptionTabWidgetFrame.data,
     qt_meta_data_PythonQtWrapper_QStyleOptionTabWidgetFrame,
     qt_static_metacall,
@@ -3245,7 +3245,7 @@ void PythonQtWrapper_QStyleOptionTabWidgetFrameV2::qt_static_metacall(QObject *_
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyleOptionTabWidgetFrameV2::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyleOptionTabWidgetFrameV2.data,
     qt_meta_data_PythonQtWrapper_QStyleOptionTabWidgetFrameV2,
     qt_static_metacall,
@@ -3420,7 +3420,7 @@ void PythonQtWrapper_QStyleOptionTitleBar::qt_static_metacall(QObject *_o, QMeta
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyleOptionTitleBar::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyleOptionTitleBar.data,
     qt_meta_data_PythonQtWrapper_QStyleOptionTitleBar,
     qt_static_metacall,
@@ -3646,7 +3646,7 @@ void PythonQtWrapper_QStyleOptionToolBar::qt_static_metacall(QObject *_o, QMetaO
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyleOptionToolBar::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyleOptionToolBar.data,
     qt_meta_data_PythonQtWrapper_QStyleOptionToolBar,
     qt_static_metacall,
@@ -3846,7 +3846,7 @@ void PythonQtWrapper_QStyleOptionToolBox::qt_static_metacall(QObject *_o, QMetaO
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyleOptionToolBox::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyleOptionToolBox.data,
     qt_meta_data_PythonQtWrapper_QStyleOptionToolBox,
     qt_static_metacall,
@@ -3956,7 +3956,7 @@ void PythonQtWrapper_QStyleOptionToolBoxV2::qt_static_metacall(QObject *_o, QMet
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyleOptionToolBoxV2::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyleOptionToolBoxV2.data,
     qt_meta_data_PythonQtWrapper_QStyleOptionToolBoxV2,
     qt_static_metacall,
@@ -4204,7 +4204,7 @@ void PythonQtWrapper_QStyleOptionToolButton::qt_static_metacall(QObject *_o, QMe
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyleOptionToolButton::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyleOptionToolButton.data,
     qt_meta_data_PythonQtWrapper_QStyleOptionToolButton,
     qt_static_metacall,
@@ -4570,7 +4570,7 @@ void PythonQtWrapper_QStyleOptionViewItem::qt_static_metacall(QObject *_o, QMeta
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyleOptionViewItem::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyleOptionViewItem.data,
     qt_meta_data_PythonQtWrapper_QStyleOptionViewItem,
     qt_static_metacall,
@@ -4680,7 +4680,7 @@ void PythonQtWrapper_QStyleOptionViewItemV2::qt_static_metacall(QObject *_o, QMe
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyleOptionViewItemV2::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyleOptionViewItemV2.data,
     qt_meta_data_PythonQtWrapper_QStyleOptionViewItemV2,
     qt_static_metacall,
@@ -4790,7 +4790,7 @@ void PythonQtWrapper_QStyleOptionViewItemV3::qt_static_metacall(QObject *_o, QMe
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyleOptionViewItemV3::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyleOptionViewItemV3.data,
     qt_meta_data_PythonQtWrapper_QStyleOptionViewItemV3,
     qt_static_metacall,
@@ -4900,7 +4900,7 @@ void PythonQtWrapper_QStyleOptionViewItemV4::qt_static_metacall(QObject *_o, QMe
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyleOptionViewItemV4::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyleOptionViewItemV4.data,
     qt_meta_data_PythonQtWrapper_QStyleOptionViewItemV4,
     qt_static_metacall,
@@ -5111,7 +5111,7 @@ void PythonQtWrapper_QStylePainter::qt_static_metacall(QObject *_o, QMetaObject:
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStylePainter::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStylePainter.data,
     qt_meta_data_PythonQtWrapper_QStylePainter,
     qt_static_metacall,
@@ -5257,7 +5257,7 @@ void PythonQtWrapper_QStylePlugin::qt_static_metacall(QObject *_o, QMetaObject::
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStylePlugin::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStylePlugin.data,
     qt_meta_data_PythonQtWrapper_QStylePlugin,
     qt_static_metacall,
@@ -5580,7 +5580,7 @@ void PythonQtWrapper_QStyledItemDelegate::qt_static_metacall(QObject *_o, QMetaO
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QStyledItemDelegate::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QStyledItemDelegate.data,
     qt_meta_data_PythonQtWrapper_QStyledItemDelegate,
     qt_static_metacall,

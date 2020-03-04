@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'PythonQtTests.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.13.1)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.14.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -15,7 +15,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'PythonQtTests.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.13.1. It"
+#error "This file was generated using the moc from 5.14.0. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -119,7 +119,7 @@ void PythonQtTestApi::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtTestApi::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtTestApi.data,
     qt_meta_data_PythonQtTestApi,
     qt_static_metacall,
@@ -213,7 +213,7 @@ void ClassD::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
 }
 
 QT_INIT_METAOBJECT const QMetaObject ClassD::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_ClassD.data,
     qt_meta_data_ClassD,
     qt_static_metacall,
@@ -319,7 +319,7 @@ void ClassAWrapper::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
 }
 
 QT_INIT_METAOBJECT const QMetaObject ClassAWrapper::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_ClassAWrapper.data,
     qt_meta_data_ClassAWrapper,
     qt_static_metacall,
@@ -421,7 +421,7 @@ void ClassBWrapper::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
 }
 
 QT_INIT_METAOBJECT const QMetaObject ClassBWrapper::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_ClassBWrapper.data,
     qt_meta_data_ClassBWrapper,
     qt_static_metacall,
@@ -523,7 +523,7 @@ void ClassCWrapper::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
 }
 
 QT_INIT_METAOBJECT const QMetaObject ClassCWrapper::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_ClassCWrapper.data,
     qt_meta_data_ClassCWrapper,
     qt_static_metacall,
@@ -618,7 +618,7 @@ void ClassDWrapper::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
 }
 
 QT_INIT_METAOBJECT const QMetaObject ClassDWrapper::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_ClassDWrapper.data,
     qt_meta_data_ClassDWrapper,
     qt_static_metacall,
@@ -720,7 +720,7 @@ void PythonQtTestApiHelper::qt_static_metacall(QObject *_o, QMetaObject::Call _c
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtTestApiHelper::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtTestApiHelper.data,
     qt_meta_data_PythonQtTestApiHelper,
     qt_static_metacall,
@@ -822,7 +822,7 @@ void PQCppObjectWrapper::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
 }
 
 QT_INIT_METAOBJECT const QMetaObject PQCppObjectWrapper::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PQCppObjectWrapper.data,
     qt_meta_data_PQCppObjectWrapper,
     qt_static_metacall,
@@ -919,7 +919,7 @@ void PQCppObjectDecorator::qt_static_metacall(QObject *_o, QMetaObject::Call _c,
 }
 
 QT_INIT_METAOBJECT const QMetaObject PQCppObjectDecorator::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PQCppObjectDecorator.data,
     qt_meta_data_PQCppObjectDecorator,
     qt_static_metacall,
@@ -1034,7 +1034,7 @@ void PQCppObjectNoWrapDecorator::qt_static_metacall(QObject *_o, QMetaObject::Ca
 }
 
 QT_INIT_METAOBJECT const QMetaObject PQCppObjectNoWrapDecorator::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PQCppObjectNoWrapDecorator.data,
     qt_meta_data_PQCppObjectNoWrapDecorator,
     qt_static_metacall,
@@ -1169,7 +1169,7 @@ void PQCppObject2Decorator::qt_static_metacall(QObject *_o, QMetaObject::Call _c
 }
 
 QT_INIT_METAOBJECT const QMetaObject PQCppObject2Decorator::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PQCppObject2Decorator.data,
     qt_meta_data_PQCppObject2Decorator,
     qt_static_metacall,
@@ -1330,7 +1330,7 @@ void PythonQtTestSlotCalling::qt_static_metacall(QObject *_o, QMetaObject::Call 
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtTestSlotCalling::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtTestSlotCalling.data,
     qt_meta_data_PythonQtTestSlotCalling,
     qt_static_metacall,
@@ -1997,7 +1997,7 @@ void PythonQtTestSlotCallingHelper::qt_static_metacall(QObject *_o, QMetaObject:
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtTestSlotCallingHelper::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtTestSlotCallingHelper.data,
     qt_meta_data_PythonQtTestSlotCallingHelper,
     qt_static_metacall,
@@ -2117,7 +2117,7 @@ void PythonQtTestSignalHandler::qt_static_metacall(QObject *_o, QMetaObject::Cal
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtTestSignalHandler::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtTestSignalHandler.data,
     qt_meta_data_PythonQtTestSignalHandler,
     qt_static_metacall,
@@ -2369,7 +2369,7 @@ void PythonQtTestSignalHandlerHelper::qt_static_metacall(QObject *_o, QMetaObjec
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtTestSignalHandlerHelper::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtTestSignalHandlerHelper.data,
     qt_meta_data_PythonQtTestSignalHandlerHelper,
     qt_static_metacall,

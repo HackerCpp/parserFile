@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'com_trolltech_qt_multimedia3.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.13.1)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.14.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -13,7 +13,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'com_trolltech_qt_multimedia3.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.13.1. It"
+#error "This file was generated using the moc from 5.14.0. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -157,7 +157,7 @@ void PythonQtWrapper_QVideoRendererControl::qt_static_metacall(QObject *_o, QMet
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QVideoRendererControl::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QVideoRendererControl.data,
     qt_meta_data_PythonQtWrapper_QVideoRendererControl,
     qt_static_metacall,
@@ -519,7 +519,7 @@ void PythonQtWrapper_QVideoSurfaceFormat::qt_static_metacall(QObject *_o, QMetaO
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QVideoSurfaceFormat::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QVideoSurfaceFormat.data,
     qt_meta_data_PythonQtWrapper_QVideoSurfaceFormat,
     qt_static_metacall,
@@ -830,7 +830,7 @@ void PythonQtWrapper_QVideoWidget::qt_static_metacall(QObject *_o, QMetaObject::
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QVideoWidget::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QVideoWidget.data,
     qt_meta_data_PythonQtWrapper_QVideoWidget,
     qt_static_metacall,
@@ -1265,7 +1265,7 @@ void PythonQtWrapper_QVideoWidgetControl::qt_static_metacall(QObject *_o, QMetaO
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QVideoWidgetControl::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QVideoWidgetControl.data,
     qt_meta_data_PythonQtWrapper_QVideoWidgetControl,
     qt_static_metacall,
@@ -1819,7 +1819,7 @@ void PythonQtWrapper_QVideoWindowControl::qt_static_metacall(QObject *_o, QMetaO
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QVideoWindowControl::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QVideoWindowControl.data,
     qt_meta_data_PythonQtWrapper_QVideoWindowControl,
     qt_static_metacall,

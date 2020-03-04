@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'com_trolltech_qt_network1.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.13.1)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.14.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -15,7 +15,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'com_trolltech_qt_network1.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.13.1. It"
+#error "This file was generated using the moc from 5.14.0. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -400,7 +400,7 @@ void PythonQtWrapper_QNetworkSession::qt_static_metacall(QObject *_o, QMetaObjec
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QNetworkSession::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QNetworkSession.data,
     qt_meta_data_PythonQtWrapper_QNetworkSession,
     qt_static_metacall,
@@ -583,7 +583,7 @@ void PythonQtWrapper_QSsl::qt_static_metacall(QObject *_o, QMetaObject::Call _c,
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSsl::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSsl.data,
     qt_meta_data_PythonQtWrapper_QSsl,
     qt_static_metacall,
@@ -1067,7 +1067,7 @@ void PythonQtWrapper_QSslCertificate::qt_static_metacall(QObject *_o, QMetaObjec
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSslCertificate::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSslCertificate.data,
     qt_meta_data_PythonQtWrapper_QSslCertificate,
     qt_static_metacall,
@@ -1216,7 +1216,7 @@ void PythonQtWrapper_QSslCertificateExtension::qt_static_metacall(QObject *_o, Q
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSslCertificateExtension::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSslCertificateExtension.data,
     qt_meta_data_PythonQtWrapper_QSslCertificateExtension,
     qt_static_metacall,
@@ -1415,7 +1415,7 @@ void PythonQtWrapper_QSslCipher::qt_static_metacall(QObject *_o, QMetaObject::Ca
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSslCipher::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSslCipher.data,
     qt_meta_data_PythonQtWrapper_QSslCipher,
     qt_static_metacall,
@@ -1857,7 +1857,7 @@ void PythonQtWrapper_QSslConfiguration::qt_static_metacall(QObject *_o, QMetaObj
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSslConfiguration::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSslConfiguration.data,
     qt_meta_data_PythonQtWrapper_QSslConfiguration,
     qt_static_metacall,
@@ -2020,7 +2020,7 @@ void PythonQtWrapper_QSslEllipticCurve::qt_static_metacall(QObject *_o, QMetaObj
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSslEllipticCurve::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSslEllipticCurve.data,
     qt_meta_data_PythonQtWrapper_QSslEllipticCurve,
     qt_static_metacall,
@@ -2269,7 +2269,7 @@ void PythonQtWrapper_QSslError::qt_static_metacall(QObject *_o, QMetaObject::Cal
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSslError::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSslError.data,
     qt_meta_data_PythonQtWrapper_QSslError,
     qt_static_metacall,
@@ -2544,7 +2544,7 @@ void PythonQtWrapper_QSslKey::qt_static_metacall(QObject *_o, QMetaObject::Call 
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSslKey::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSslKey.data,
     qt_meta_data_PythonQtWrapper_QSslKey,
     qt_static_metacall,
@@ -2788,7 +2788,7 @@ void PythonQtWrapper_QSslPreSharedKeyAuthenticator::qt_static_metacall(QObject *
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSslPreSharedKeyAuthenticator::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSslPreSharedKeyAuthenticator.data,
     qt_meta_data_PythonQtWrapper_QSslPreSharedKeyAuthenticator,
     qt_static_metacall,
@@ -3975,7 +3975,7 @@ void PythonQtWrapper_QSslSocket::qt_static_metacall(QObject *_o, QMetaObject::Ca
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QSslSocket::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QSslSocket.data,
     qt_meta_data_PythonQtWrapper_QSslSocket,
     qt_static_metacall,
@@ -4387,7 +4387,7 @@ void PythonQtWrapper_QTcpServer::qt_static_metacall(QObject *_o, QMetaObject::Ca
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QTcpServer::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QTcpServer.data,
     qt_meta_data_PythonQtWrapper_QTcpServer,
     qt_static_metacall,
@@ -4505,7 +4505,7 @@ void PythonQtWrapper_QTcpSocket::qt_static_metacall(QObject *_o, QMetaObject::Ca
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QTcpSocket::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QTcpSocket.data,
     qt_meta_data_PythonQtWrapper_QTcpSocket,
     qt_static_metacall,
@@ -4788,7 +4788,7 @@ void PythonQtWrapper_QUdpSocket::qt_static_metacall(QObject *_o, QMetaObject::Ca
 }
 
 QT_INIT_METAOBJECT const QMetaObject PythonQtWrapper_QUdpSocket::staticMetaObject = { {
-    &QObject::staticMetaObject,
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_PythonQtWrapper_QUdpSocket.data,
     qt_meta_data_PythonQtWrapper_QUdpSocket,
     qt_static_metacall,
