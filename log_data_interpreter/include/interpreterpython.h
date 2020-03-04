@@ -2,7 +2,7 @@
 #define INTERPRETERPYTHON_H
 
 #include "ainterpreterlogdata.h"
-
+//#include "PythonQt.h"
 class InterpreterPython : public AinterpreterLogData{
 public:
     InterpreterPython();

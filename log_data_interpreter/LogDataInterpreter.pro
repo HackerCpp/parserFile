@@ -1,16 +1,28 @@
-QT -= gui
+QT       -=  gui
 
 TEMPLATE = lib
-CONFIG += staticlib
-#CONFIG += dynamiclib
 
-CONFIG += c++17
+#CONFIG += staticlib
+CONFIG += dynamiclib
+
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+CONFIG += c++11
+DEFINES += QT_DEPRECATED_WARNINGS
+
+
 INCLUDEPATH += include \
 ../log_data_lib/include/externalComponents\
 ../log_data_lib/include/curves
 
-LIBS += \
-../build/release/LogData.lib \
+INCLUDEPATH += ../PythonQT3.2/src \
+               ../PythonQT3.2/extensions/PythonQt_QtAll \
+               C:/python38/include
+
+LIBS += ../PythonQT3.2/build/lib/PythonQt-Qt5-Python383.lib \
+        ../PythonQT3.2/build/lib/PythonQt_QtAll-Qt5-Python383.lib\
+        ../PythonQT3.2/build/lib/python38.lib\
+../build/release/LogData.lib
+
 
 SOURCES += \
     src/interpreterpython.cpp
@@ -31,8 +43,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 # Default rules for deployment.
+# Default rules for deployment.
 unix {
     target.path = /usr/lib
 }
 !isEmpty(target.path): INSTALLS += target
-
