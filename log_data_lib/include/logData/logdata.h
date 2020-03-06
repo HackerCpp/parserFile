@@ -26,9 +26,6 @@ public:
     virtual QMap<QString,ICurve*> *curves()override;
     virtual QList<IBlock*> *blocks()override;
 
-/*signals:
-    void ready()override;*/
-
 public slots:
     void findCurvesMap()override;
 

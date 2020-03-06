@@ -22,18 +22,18 @@ void ATrack::setType(Type type){
     m_type = type;
 }
 
-void ATrack::setLogarothm(int log_base,int dec_count, int dec_start,int dec_end){
+void ATrack::setLogarithm(float log_base,float dec_count, float dec_start,float dec_end){
     m_logarithm.logarithmBase = log_base;
     m_logarithm.decadeCount = dec_count;
     m_logarithm.decadeStart = dec_start;
     m_logarithm.decadeEnd = dec_end;
 }
 
-void ATrack::setBegin(int begin){
+void ATrack::setBegin(float begin,QString unit){
     m_begin = begin;
 }
 
-void ATrack::setWidth(int width){
+void ATrack::setWidth(float width,QString unit){
     m_width = width;
 }
 

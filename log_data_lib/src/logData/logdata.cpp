@@ -20,6 +20,7 @@ LogData::~LogData(){
 }
 
 bool LogData::load(){
+    m_isReady = false;
     if(!m_loader)
         return false;
     m_loader->download();
@@ -70,7 +71,7 @@ QList<IBlock*> *LogData::blocks(){
 void LogData::findCurvesMap(){
     foreach(auto block,*m_blocks){
         if(block->name() == IBlock::DATA_BLOCK){
-           DataBlock * dataBlock = dynamic_cast<DataBlock *>(block);
+           DataBlock *dataBlock = dynamic_cast<DataBlock*>(block);
            if(dataBlock){
                QList<ICurve*> *curves = dataBlock->curves();
                if(!curves){

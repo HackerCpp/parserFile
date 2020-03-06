@@ -31,6 +31,7 @@ public:
     ~TabGFM();
 public slots:
     void changeDrawType(int index);
+    void dataReady();
 };
 
 #endif // TABGFM_H

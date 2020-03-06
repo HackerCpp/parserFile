@@ -13,11 +13,11 @@ TabGFM::TabGFM(QString path,QWidget *parent) : AbstractTab(parent){
     m_logData->setLoader(gfmLoader);
     m_logData->load();
     if(!m_logData->isReady()){
-        //Подключаем сигнал, ждём пока данные загрузятся
+        connect(m_logData,&ILogData::ready,this,&TabGFM::dataReady);
     }
-    IInterpreterLogData *interpreter = new InterpreterPython();
-    m_logData->setInterpreter(interpreter);
-    m_logData->openInterpreter();
+    //IInterpreterLogData *interpreter = new InterpreterPython();
+    //m_logData->setInterpreter(interpreter);
+    //m_logData->openInterpreter();
 
 
 
@@ -46,6 +46,12 @@ void TabGFM::changeDrawType(int index){
         else
             graphics->drawTime();
     }*/
+}
+
+void TabGFM::dataReady(){
+    IInterpreterLogData *interpreter = new InterpreterPython();
+    m_logData->setInterpreter(interpreter);
+    m_logData->openInterpreter();
 }
 void TabGFM::saveGFM(){
     QDateTime date;

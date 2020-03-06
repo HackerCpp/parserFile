@@ -270,33 +270,56 @@ void GFMLoader::parserDataBlock(const QByteArray &bodyBlock,IBlock *block){
     }
 }
 
-void findItems(QXmlStreamReader *xmlReader,ATrack *track){
+void findSettingsForItem(QXmlStreamReader *xmlReader,QString name){
+    while(!xmlReader->atEnd() && !xmlReader->hasError()){
+        QXmlStreamReader::TokenType token = xmlReader->readNext();
+        QXmlStreamAttributes attributes = xmlReader->attributes();
+        if(xmlReader->name() == name && token == QXmlStreamReader::EndElement){
+            return;
+        }
+    }
+}
 
+void findItems(QXmlStreamReader *xmlReader,ATrack *track){
+    while(!xmlReader->atEnd() && !xmlReader->hasError()){
+        QXmlStreamReader::TokenType token = xmlReader->readNext();
+        QXmlStreamAttributes attributes = xmlReader->attributes();
+        if(xmlReader->name() == "track" && token == QXmlStreamReader::EndElement){
+            qDebug() << "Конец поиска кривых" << "Трек : " << track->name();
+            return;
+        }
+        else if((xmlReader->name() == "line" || xmlReader->name() == "mark" || xmlReader->name() == "acu") && token == QXmlStreamReader::StartElement){
+            findSettingsForItem(xmlReader,xmlReader->name().toString());
+        }
+        else{
+            //qDebug() << xmlReader->name();
+        }
+    }
 }
 
 void findTrack(QXmlStreamReader *xmlReader,IBoard *board,ATrack *track){
     while(!xmlReader->atEnd() && !xmlReader->hasError()){
         QXmlStreamReader::TokenType token = xmlReader->readNext();
         QXmlStreamAttributes attributes = xmlReader->attributes();
-        if(xmlReader->name() == "track" && token == QXmlStreamReader::EndElement){
-             board->setTrack(track);
-             qDebug() << "вставлен трек в борд*************************************";
-             break;
-        }
-        else if(xmlReader->name() == "begin" && token == QXmlStreamReader::StartElement){
-            track->setWidth(attributes.value("value").toFloat());
-            qDebug() << xmlReader->name();
-
+        if(xmlReader->name() == "begin" && token == QXmlStreamReader::StartElement){
+            track->setBegin(attributes.value("value").toFloat(),attributes.value("unit").toString());
         }
         else if(xmlReader->name() == "width" && token == QXmlStreamReader::StartElement){
-            qDebug() << xmlReader->name();
+            track->setWidth(attributes.value("value").toFloat(),attributes.value("unit").toString());
 
         }
         else if(xmlReader->name() == "logarithm" && token == QXmlStreamReader::StartElement){
-            qDebug() << xmlReader->name();
+            float log_base = attributes.value("logarithm_base").toFloat();
+            float dec_count = attributes.value("decades_count").toFloat();
+            float dec_start = attributes.value("decade_start").toFloat();
+            float dec_end = attributes.value("decade_end").toFloat();
+            track->setLogarithm(log_base,dec_count,dec_start,dec_end);
         }
         else if(xmlReader->name() == "logarithm" && token == QXmlStreamReader::EndElement){
+            qDebug() << "Начало поиска кривых" << "Трек : " << track->name();
             findItems(xmlReader,track);
+            board->setTrack(track);
+            qDebug() << "Вставлен трек в борд ********************************";
             return;
         }
     }
@@ -320,6 +343,7 @@ void findBoard(QXmlStreamReader *xmlReader,IBoard *board,FormsBlock *formsBlock)
         }
     }
 }
+
 void GFMLoader::parserFormsBlock(const QByteArray &bodyBlock,IBlock *block){
     QTime time = QTime::currentTime();
     FormsBlock * formsBlock = dynamic_cast<FormsBlock *>(block);
