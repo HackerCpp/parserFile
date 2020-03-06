@@ -4,9 +4,14 @@
 #include "interpreter_global.h"
 #include "ainterpreterlogdata.h"
 #include "PythonQt.h"
-
+#include <QApplication>
+#include<PythonQt_QtAll.h>
+#include "gui/PythonQtScriptingConsole.h"
 class INTERPRETER_EXPORT InterpreterPython : public AinterpreterLogData{
+     PythonQtObjectPtr  m_mainContext;
+    PythonQtScriptingConsole *m_console;
 public:
+    QMap<QString,QString> exp;
     InterpreterPython();
     ~InterpreterPython()override;
 
