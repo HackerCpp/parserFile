@@ -3,12 +3,17 @@ TEMPLATE = lib
 DEFINES += INTERPRETER_LIBRARY
 CONFIG += c++11
 
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
 INCLUDEPATH += include \
 ../log_data_lib/include/externalComponents\
 ../log_data_lib/include/curves \
 ../PythonQT3.2/src \
 ../PythonQT3.2/extensions/PythonQt_QtAll \
 C:/python38/include
+
+
+RESOURCES += LogDataInterpreter.qrc
 
 LIBS += ../PythonQT3.2/build/lib/PythonQt-Qt5-Python383.lib \
         ../PythonQT3.2/build/lib/PythonQt_QtAll-Qt5-Python383.lib\
@@ -19,16 +24,17 @@ LIBS += ../PythonQT3.2/build/lib/PythonQt-Qt5-Python383.lib \
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
-
 # You can also make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/Wrapper.cpp \
     src/interpreterPython.cpp
 
 HEADERS += \
+    include/Wrapper_python.h \
     include/interpreter_global.h \
     include/interpreterPython.h
 
