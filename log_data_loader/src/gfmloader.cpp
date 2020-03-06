@@ -284,6 +284,7 @@ void findTrack(QXmlStreamReader *xmlReader,IBoard *board,ATrack *track){
              break;
         }
         else if(xmlReader->name() == "begin" && token == QXmlStreamReader::StartElement){
+            track->setWidth(attributes.value("value").toFloat());
             qDebug() << xmlReader->name();
 
         }

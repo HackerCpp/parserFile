@@ -27,8 +27,8 @@ public:
     void setType(QString type);
     void setType(Type type);
     void setLogarothm(int log_base,int dec_count, int dec_start,int dec_end);
-    void setBegin(int begin);
-    void setWidth(int width);
+    void setBegin(float begin,QString unit);
+    void setWidth(float width);
 
     bool isGreed(){return m_IsGreed;}
     Type type(){return m_type;}
