@@ -2,7 +2,7 @@
 #define AINTERPRETERLOGDATA_H
 
 #include <QMap>
-#include "icurve.h"
+
 #include "iinterpreterlogdata.h"
 
 class AinterpreterLogData : public IInterpreterLogData{
@@ -11,10 +11,12 @@ protected:
 
 public:
     AinterpreterLogData();
-    virtual ~AinterpreterLogData();
+    virtual ~AinterpreterLogData()override;
 
-    virtual bool openConsole();
-    virtual bool openScript();
+    virtual bool openConsole()override;
+    virtual bool openScript()override;
+
+    virtual bool setCurves(QMap<QString,ICurve*> *curves)override;
 };
 
 #endif // AINTERPRETERLOGDATA_H

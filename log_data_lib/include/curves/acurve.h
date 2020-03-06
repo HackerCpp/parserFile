@@ -3,9 +3,10 @@
 
 #include "icurve.h"
 #include "shortcut.h"
-#include "desc.h"
+
 
 class ACurve : public ICurve{
+    ICurve *m_time,*m_depth,*m_userValue;
 protected:
     Desc *m_desc;
     ShortCut m_shortCut;
@@ -22,11 +23,27 @@ protected:
 
 public:
     ACurve();
-    virtual ~ACurve();
+    virtual ~ACurve()override;
 
-    virtual uint setData(qreal data);
-    virtual uint setData(qreal data,uint index);
-    virtual uint setData(const char *dataPtr,uint numberOfVectors);
+    virtual uint setData(qreal data)override;
+    virtual uint setData(qreal data,uint index)override;
+    virtual uint setData(const char *dataPtr,uint numberOfVectors)override;
+
+
+    virtual ICurve *time()override;
+    virtual ICurve *depth()override;
+    virtual ICurve *userBaseValue()override;
+
+    virtual bool setTime(ICurve *time)override;
+    virtual bool setDepth(ICurve *depth)override;
+    virtual bool setUserBaseValue(ICurve *userBaseValue)override;
+
+    virtual qreal maximum()override;
+    virtual qreal minimum()override;
+
+    virtual Desc *desc()override;
+    virtual ShortCut shortCut()override;
+    virtual QString mnemonic()override;
 
     virtual void setShortCut(ShortCut shortCut);
     virtual void setOffset(uint offset);
@@ -37,6 +54,9 @@ public:
     virtual void setDesc(Desc *desc);
 
     virtual uint offset();
+
+
+
 
 };
 

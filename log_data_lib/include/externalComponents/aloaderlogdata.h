@@ -5,7 +5,9 @@
 
 
 class ALoaderLogData :public ILoaderLogData{
+
 protected:
+    bool m_isReady;
     QList<IBlock*> *m_blocks;
 public:
     ALoaderLogData();

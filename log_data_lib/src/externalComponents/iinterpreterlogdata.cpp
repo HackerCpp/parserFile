@@ -15,3 +15,7 @@ bool IInterpreterLogData::openConsole(){
 bool IInterpreterLogData::openScript(){
      return false;
 }
+
+bool IInterpreterLogData::setCurves(QMap<QString,ICurve*> *curves){
+    return false;
+}

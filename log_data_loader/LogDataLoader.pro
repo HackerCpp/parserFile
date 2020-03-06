@@ -1,7 +1,8 @@
 QT -= gui
 
 TEMPLATE = lib
-CONFIG += staticlib
+DEFINES += LOADER_LIBRARY
+#CONFIG += staticlib
 #CONFIG += dynamiclib
 
 CONFIG += c++17
@@ -29,7 +30,8 @@ SOURCES += \
     src/gfmloader.cpp
 
 HEADERS += \
-    include/gfmloader.h
+    include/gfmloader.h \
+    include/loader_global.h
 
 # Default rules for deployment.
 unix {

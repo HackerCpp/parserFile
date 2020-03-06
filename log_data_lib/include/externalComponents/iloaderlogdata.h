@@ -3,9 +3,10 @@
 
 #include "iblock.h"
 #include <QList>
+#include <QObject>
 
-class ILoaderLogData{
-
+class ILoaderLogData : public QObject{
+    Q_OBJECT
 public:
     ILoaderLogData();
     virtual ~ILoaderLogData();
@@ -14,6 +15,9 @@ public:
     virtual bool isReady();
 
     virtual bool setBlocks(QList<IBlock*> *blocks);
+
+signals:
+    void ready();
 };
 
 #endif // ILOADLOGDATA_H

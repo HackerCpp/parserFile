@@ -2,7 +2,6 @@
 #define CURVE_H
 
 #include "acurve.h"
-#include "desc.h"
 
 template<typename T>
 class Curve : public ACurve{

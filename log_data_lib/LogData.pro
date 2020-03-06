@@ -24,6 +24,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/blocks/atrack.cpp \
+    src/blocks/track.cpp \
+    src/blocks/aboard.cpp \
+    src/blocks/iboard.cpp \
+    src/blocks/board.cpp \
     src/blocks/unknownblock.cpp \
     src/blocks/formsblock.cpp \
     src/blocks/headerblock.cpp \
@@ -48,14 +53,19 @@ SOURCES += \
 
 HEADERS += \
     include/blocks/ablock.h \
+    include/blocks/aboard.h \
+    include/blocks/atrack.h \
     include/blocks/formsblock.h \
     include/blocks/headerblock.h \
+    include/blocks/iboard.h \
     include/blocks/toolinfoblock.h \
     include/blocks/datablock.h \
     include/blocks/iblock.h \
     include/blocks/shortcut.h \
 \
     include/blocks/unknownblock.h \
+    include/blocks/board.h \
+    include/blocks/track.h \
     include/curves/acurve.h \
     include/externalComponents/ainterpreterlogdata.h \
     include/externalComponents/aloaderlogdata.h \

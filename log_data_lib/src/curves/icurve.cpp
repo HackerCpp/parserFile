@@ -38,18 +38,17 @@ ICurve *ICurve::userBaseValue(){
     return nullptr;
 }
 
-bool ICurve::setTime(const ICurve &time){
+bool ICurve::setTime(ICurve *time){
     return false;
 }
 
-bool ICurve::setDepth(const ICurve &depth){
+bool ICurve::setDepth(ICurve *depth){
     return false;
 }
 
-bool ICurve::setUserBaseValue(const ICurve &userBaseValue){
+bool ICurve::setUserBaseValue(ICurve *userBaseValue){
     return false;
 }
-
 
 qreal ICurve::maximum(){
     return 0;
@@ -57,6 +56,18 @@ qreal ICurve::maximum(){
 
 qreal ICurve::minimum(){
     return 0;
+}
+
+Desc *ICurve::desc(){
+   return nullptr;
+}
+
+ShortCut ICurve::shortCut(){
+    return ShortCut();
+}
+
+QString ICurve::mnemonic(){
+    return nullptr;
 }
 
 

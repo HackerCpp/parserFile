@@ -2,6 +2,8 @@
 #define INTERFACECURVE_H
 #include <QtCore>
 
+#include "desc.h"
+#include "shortcut.h"
 
 class ICurve{
 public:
@@ -16,12 +18,17 @@ public:
     virtual ICurve *time();
     virtual ICurve *depth();
     virtual ICurve *userBaseValue();
-    virtual bool setTime(const ICurve &time);
-    virtual bool setDepth(const ICurve &depth);
-    virtual bool setUserBaseValue(const ICurve &userBaseValue);
+
+    virtual bool setTime(ICurve *time);
+    virtual bool setDepth(ICurve *depth);
+    virtual bool setUserBaseValue(ICurve *userBaseValue);
 
     virtual qreal maximum();
     virtual qreal minimum();
+
+    virtual Desc *desc();
+    virtual ShortCut shortCut();
+    virtual QString mnemonic();
 };
 
 #endif // INTERFACECURVE_H

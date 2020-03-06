@@ -2,7 +2,7 @@
 #include <QDebug>
 
 ACurve::ACurve(){
-
+    m_time = m_depth = m_userValue = nullptr;
 }
 
 ACurve::~ACurve(){
@@ -21,6 +21,56 @@ uint ACurve::setData(const char *dataPtr,uint numberOfVectors){
     qDebug() << "setData ACurve";
     return 0;
 }
+
+
+
+ICurve *ACurve::time(){
+   return m_time;
+}
+
+ICurve *ACurve::depth(){
+    return m_depth;
+}
+
+ICurve *ACurve::userBaseValue(){
+    return m_userValue;
+}
+
+bool ACurve::setTime(ICurve *time){
+    m_time = time;
+    return true;
+}
+
+bool ACurve::setDepth(ICurve *depth){
+    m_depth = depth;
+    return true;
+}
+
+bool ACurve::setUserBaseValue(ICurve *userBaseValue){
+    m_userValue = userBaseValue;
+    return true;
+}
+
+qreal ACurve::maximum(){
+    return m_maximum;
+}
+
+qreal ACurve::minimum(){
+    return m_minimum;
+}
+
+Desc *ACurve::desc(){
+    return m_desc;
+}
+
+ShortCut ACurve::shortCut(){
+    return m_shortCut;
+}
+
+QString ACurve::mnemonic(){
+    return m_mnemonic;
+}
+
 
 void ACurve::setShortCut(ShortCut shortCut){
     m_shortCut.setName(shortCut.getName());
@@ -54,5 +104,8 @@ void ACurve::setDesc(Desc *desc){
 uint ACurve::offset(){
     return m_offset;
 }
+
+
+
 
 
