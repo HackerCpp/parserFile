@@ -20,8 +20,15 @@ public:
     virtual bool setLoader(ILoaderLogData *loader);
     virtual bool setInterpreter(IInterpreterLogData *interpreter);
 
+    virtual QMap<QString,ICurve*> *curves();
+    virtual QList<IBlock*> *blocks();
+
 signals:
     virtual void ready();
+
+public slots:
+    virtual void findCurvesMap();
+
 public:
     static ILogData *createLogData();
 };

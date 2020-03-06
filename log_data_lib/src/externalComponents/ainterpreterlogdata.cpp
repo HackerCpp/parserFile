@@ -15,3 +15,8 @@ bool AinterpreterLogData::openConsole(){
 bool AinterpreterLogData::openScript(){
     return false;
 }
+
+bool AinterpreterLogData::setCurves(QMap<QString,ICurve*> *curves){
+    m_curves = curves;
+    return true;
+}

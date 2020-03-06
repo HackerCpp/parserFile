@@ -1,6 +1,7 @@
 #ifndef GFMLOADER_H
 #define GFMLOADER_H
 
+#include "loader_global.h"
 #include <aloaderlogdata.h>
 #include <QString>
 #include <QThread>
@@ -12,19 +13,23 @@
 #include "unknownblock.h"
 #include "curve.h"
 
-class GFMLoader : public ALoaderLogData, public QThread{
+class LOADER_EXPORT GFMLoader : public ALoaderLogData, public QThread{
     QString m_path;
     QTextCodec *m_codec;
+
+    bool gzipCompress(QByteArray input, QByteArray &output, int level);
+    bool gzipDecompress(QByteArray input, QByteArray &output);
+
 public:
     GFMLoader(QString path);
     ~GFMLoader();
 
     bool download()override;
-    bool isReady()override;
     void run()override;
 
     void parser(const QByteArray &bodyBlock,IBlock *block);
     void parserDataBlock(const QByteArray &bodyBlock,IBlock *block);
+    void parserFormsBlock(const QByteArray &bodyBlock,IBlock *block);
     void parserUnknownBlock(const QByteArray &bodyBlock,IBlock *block);
 
     void findShortCuts(QByteArray *header,DataBlock *dataBlock);

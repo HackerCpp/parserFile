@@ -3,7 +3,104 @@
 #include <QFile>
 #include <QIODevice>
 #include <shortcut.h>
+#include <QtZlib/zlib.h>
+#include <QXmlStreamReader>
+#include "board.h"
+#include "track.h"
 
+bool GFMLoader::gzipCompress(QByteArray input, QByteArray &output, int level){
+    output.clear();
+    if(input.length()){
+        int flush = 0;
+        z_stream strm;
+        strm.zalloc = Z_NULL;
+        strm.zfree = Z_NULL;
+        strm.opaque = Z_NULL;
+        strm.avail_in = 0;
+        strm.next_in = Z_NULL;
+        int ret = deflateInit2(&strm, qMax(-1, qMin(9, level)), Z_DEFLATED, 31, 8, Z_DEFAULT_STRATEGY);
+        if (ret != Z_OK)
+            return(false);
+        output.clear();
+        char *input_data = input.data();
+        int input_data_left = input.length();
+        do {
+            int chunk_size = qMin(32768, input_data_left);
+            strm.next_in = (unsigned char*)input_data;
+            strm.avail_in = chunk_size;
+            input_data += chunk_size;
+            input_data_left -= chunk_size;
+            flush = (input_data_left <= 0 ? Z_FINISH : Z_NO_FLUSH);
+            do {
+                char out[32768];
+                strm.next_out = (unsigned char*)out;
+                strm.avail_out = 32768;
+                ret = deflate(&strm, flush);
+                if(ret == Z_STREAM_ERROR){
+                    deflateEnd(&strm);
+                    return(false);
+                }
+                int have = (32768 - strm.avail_out);
+                if(have > 0)
+                    output.append((char*)out, have);
+            } while (strm.avail_out == 0);
+        } while (flush != Z_FINISH);
+        (void)deflateEnd(&strm);
+        return(ret == Z_STREAM_END);
+    }
+    else
+        return(true);
+}
+
+bool GFMLoader::gzipDecompress(QByteArray input, QByteArray &output){
+    output.clear();
+    if(input.length() > 0){
+        z_stream strm;
+        strm.zalloc = Z_NULL;
+        strm.zfree = Z_NULL;
+        strm.opaque = Z_NULL;
+        strm.avail_in = 0;
+        strm.next_in = Z_NULL;
+        int ret = inflateInit2(&strm, 31);
+
+        if (ret != Z_OK)
+            return(false);
+        char *input_data = input.data();
+        int input_data_left = input.length();
+        do {
+            int chunk_size = qMin(32768, input_data_left);
+            if(chunk_size <= 0)
+                break;
+            strm.next_in = (unsigned char*)input_data;
+            strm.avail_in = chunk_size;
+            input_data += chunk_size;
+            input_data_left -= chunk_size;
+            do {
+                char out[32768];
+                strm.next_out = (unsigned char*)out;
+                strm.avail_out = 32768;
+                ret = inflate(&strm, Z_NO_FLUSH);
+
+                switch (ret) {
+                case Z_NEED_DICT:
+                    ret = Z_DATA_ERROR;
+                case Z_DATA_ERROR:
+                case Z_MEM_ERROR:
+                case Z_STREAM_ERROR:
+                    inflateEnd(&strm);
+                    return(false);
+                }
+                int have = (32768 - strm.avail_out);
+                if(have > 0)
+                    output.append((char*)out, have);
+            } while (strm.avail_out == 0);
+        } while (ret != Z_STREAM_END);
+        inflateEnd(&strm);
+        return (ret == Z_STREAM_END);
+    }
+    else
+        return(true);
+}
 
 
 
@@ -42,7 +139,7 @@ void findBlocksByteFFFE(QByteArray byteArrayFile,QList<BlockByte> *blocksList,in
     }
 }
 /******************************************************************************************************/
-
+/****************** Public *************************************/
 
 GFMLoader::GFMLoader(QString path){
     m_path = path;
@@ -57,11 +154,9 @@ bool GFMLoader::download(){
     return true;
 }
 
-bool GFMLoader::isReady(){
-    return true;
-}
-
 void GFMLoader::run(){
+    m_isReady = false;
+    QTime time = QTime::currentTime();
     qDebug() << "begin load gfm";
     QFile file(m_path);
     file.open(QIODevice::ReadOnly);
@@ -96,7 +191,9 @@ void GFMLoader::run(){
     }
     delete blocksList;
     byteArrayFile.clear();
-    qDebug() << "end load gfm";
+    qDebug() << "end load gfm : " << time.msecsTo( QTime::currentTime() ) << "mS";
+    m_isReady = true;
+    emit ready();
 }
 
 
@@ -107,9 +204,10 @@ void GFMLoader::parser(const QByteArray &bodyBlock,IBlock *block){
     if(!f_block){
         qDebug() << "Не удалось перевести интерфейс блока в абстрактный";
     }
-    if(f_block->name() == IBlock::DATA_BLOCK){
+    if(f_block->name() == IBlock::DATA_BLOCK)
         parserDataBlock(bodyBlock,block);
-    }
+    else if(f_block->name() == IBlock::FORMS_BLOCK)
+        parserFormsBlock(bodyBlock,block);
     else
         parserUnknownBlock(bodyBlock,block);
 }
@@ -150,24 +248,105 @@ void GFMLoader::parserDataBlock(const QByteArray &bodyBlock,IBlock *block){
     findShortCuts(&header,dataBlock);
     findCurves(&header,dataBlock);
     copyData(bodyBlock,indexBeginData,dataBlock);
-    /*
+    QList<ICurve*> *f_curves = dataBlock->curves();
+    ICurve *f_mainTime = nullptr;
+    ICurve *f_mainDepth = nullptr;
+    foreach(auto curve,*f_curves){
 
-    foreach(auto curve,*m_curves){
         if(curve->desc()->getParam("draw_type") == "TIME"){
-            m_mainTime = curve;
+            f_mainTime = curve;
         }
         else if(curve->desc()->getParam("draw_type") == "DEPTH"){
-            m_mainDepth = curve;
+            f_mainDepth = curve;
         }
     }
-    foreach(auto curve,*m_curves){
-        if(m_mainTime){
-            curve->setMainTime(m_mainTime);
+    foreach(auto curve,*f_curves){
+        if(f_mainTime){
+            curve->setTime(f_mainTime);
         }
-        if(m_mainDepth){
-            curve->setMainDepth(m_mainDepth);
+        if(f_mainDepth){
+            curve->setDepth(f_mainDepth);
         }
-    }*/
+    }
+}
+
+void findItems(QXmlStreamReader *xmlReader,ATrack *track){
+
+}
+
+void findTrack(QXmlStreamReader *xmlReader,IBoard *board,ATrack *track){
+    while(!xmlReader->atEnd() && !xmlReader->hasError()){
+        QXmlStreamReader::TokenType token = xmlReader->readNext();
+        QXmlStreamAttributes attributes = xmlReader->attributes();
+        if(xmlReader->name() == "track" && token == QXmlStreamReader::EndElement){
+             board->setTrack(track);
+             qDebug() << "вставлен трек в борд*************************************";
+             break;
+        }
+        else if(xmlReader->name() == "begin" && token == QXmlStreamReader::StartElement){
+            qDebug() << xmlReader->name();
+
+        }
+        else if(xmlReader->name() == "width" && token == QXmlStreamReader::StartElement){
+            qDebug() << xmlReader->name();
+
+        }
+        else if(xmlReader->name() == "logarithm" && token == QXmlStreamReader::StartElement){
+            qDebug() << xmlReader->name();
+        }
+        else if(xmlReader->name() == "logarithm" && token == QXmlStreamReader::EndElement){
+            findItems(xmlReader,track);
+            return;
+        }
+    }
+}
+
+void findBoard(QXmlStreamReader *xmlReader,IBoard *board,FormsBlock *formsBlock){
+    while(!xmlReader->atEnd() && !xmlReader->hasError()){
+        QXmlStreamReader::TokenType token = xmlReader->readNext();
+        QXmlStreamAttributes attributes = xmlReader->attributes();
+        if(xmlReader->name() == "board" && token == QXmlStreamReader::EndElement){
+             formsBlock->addBoard(board);
+             qDebug() << "вставлен борд";
+             break;
+        }
+        else if(xmlReader->name() == "track" && token == QXmlStreamReader::StartElement){
+            ATrack *f_track = new Track();
+            f_track->setName(attributes.value("name").toString());
+            f_track->setIsGreed(attributes.value("show_grid").toInt());
+            f_track->setType(attributes.value("type").toString());
+            findTrack(xmlReader,board,f_track);
+        }
+    }
+}
+void GFMLoader::parserFormsBlock(const QByteArray &bodyBlock,IBlock *block){
+    QTime time = QTime::currentTime();
+    FormsBlock * formsBlock = dynamic_cast<FormsBlock *>(block);
+    if(!formsBlock){
+        qDebug() <<  "не удалось преобразовать IBlock в FormsBlock. Парсер дата блока";
+    }
+    QByteArray xml;
+    gzipDecompress(bodyBlock,xml);
+    QXmlStreamReader xmlReader(xml);
+    IBoard *f_board = nullptr;
+    ATrack *f_track = nullptr;
+    while(!xmlReader.atEnd() && !xmlReader.hasError()){
+        QXmlStreamReader::TokenType token = xmlReader.readNext();
+        QXmlStreamAttributes attributes = xmlReader.attributes();
+        if(xmlReader.name() == "board" && token == QXmlStreamReader::StartElement){
+            f_board = new Board();
+            f_board->setName(attributes.value("name").toString());
+            findBoard(&xmlReader,f_board,formsBlock);
+        }
+    }
+
+    /*QFile file("f.txt");
+    file.open(QIODevice::WriteOnly);
+    QByteArray output;
+    gzipDecompress(bodyBlock,output);
+    file.write(output);
+    file.close();*/
+    qDebug() << "end load forms : " << time.msecsTo( QTime::currentTime() ) << "mS";
 }
 
 void GFMLoader::parserUnknownBlock(const QByteArray &bodyBlock,IBlock *block){

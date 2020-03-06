@@ -2,6 +2,7 @@
 
 ALoaderLogData::ALoaderLogData(){
     m_blocks = nullptr;
+    m_isReady = false;
 }
 
 
@@ -16,7 +17,7 @@ bool ALoaderLogData::download(){
 
 
 bool ALoaderLogData::isReady(){
-    return true;
+    return m_isReady;
 
 }
 
