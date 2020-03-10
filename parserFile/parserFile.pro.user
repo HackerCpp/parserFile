@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<<<<<<< HEAD
-<!-- Written by QtCreator 4.11.0, 2020-03-06T10:30:36. -->
-=======
-<<<<<<< HEAD
-<!-- Written by QtCreator 4.10.0, 2020-03-06T08:55:31. -->
-=======
-<!-- Written by QtCreator 4.11.0, 2020-03-05T17:57:54. -->
->>>>>>> 2eeb9804f745a3052aa0c61d25b8bdffae2caa1d
->>>>>>> remotes/origin/master
+<!-- Written by QtCreator 4.10.0, 2020-03-10T11:07:22. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>

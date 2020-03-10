@@ -22,26 +22,22 @@ InterpreterPython::~InterpreterPython(){
 
 bool InterpreterPython::openConsole(){
 
-/*
-    exp.insert("aaa","bbbb");
-    exp.insert("aaaa","bbbb");
-    exp.insert("aa","bbbb");
-    foreach (QString key, exp.keys())
+    qDebug()<< "******************************************";
+   qDebug() << m_curves->size();
+    int i=0;
+    foreach (QString key, m_curves->keys())
 
     {
-
-      QString value=exp.value(key);
-
+       QString m = "A"+QString::number(i);
+      ICurve* value=m_curves->value(key);
+      m_mainContext.addObject(m, value);
       qDebug() << key << ":" << value;
+        i++;
 
     }
-    */
-//    if(!m_curves)
-//    {
-    //    qDebug()<<"невозможно открыть интерпретатор, кривые не найдены";
-//        return false;
- //   }
-  //  qDebug() << m_curves->size();
+
+
+
     m_console->show();
 
 

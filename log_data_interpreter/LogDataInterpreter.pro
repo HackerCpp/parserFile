@@ -8,6 +8,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 INCLUDEPATH += include \
 ../log_data_lib/include/externalComponents\
 ../log_data_lib/include/curves \
+../log_data_lib/include/blocks \
 ../PythonQT3.2/src \
 ../PythonQT3.2/extensions/PythonQt_QtAll \
 C:/python38/include
@@ -30,7 +31,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    src/Wrapper.cpp \
+    src/Wrapper._python.cpp \
     src/interpreterPython.cpp
 
 HEADERS += \

@@ -8,6 +8,12 @@
 #include <QApplication>
 #include<PythonQt_QtAll.h>
 #include "gui/PythonQtScriptingConsole.h"
+#include <QMap>
+//class Wrapper_python : public AinterpreterLogData
+//{
+//public:
+//    ICurve* *curve(QString key);
+//};
 
 class INTERPRETER_EXPORT WrapperIcurvePython :public QObject{
 Q_OBJECT
@@ -20,11 +26,15 @@ public Q_SLOTS:
      ICurve *time(ICurve* o){return o->time();}
      ICurve *depth(ICurve* o){return o->depth();}
      ICurve *userBaseValue(ICurve* o){return o->userBaseValue();}
-     bool setTime(ICurve* o, const ICurve &time){return o->setTime(time);}
-     bool setDepth(ICurve* o, const ICurve &depth){return o->setDepth(depth);}
-     bool setUserBaseValue(ICurve* o, const ICurve &userBaseValue){return  o->setUserBaseValue(userBaseValue);}
+     bool setTime(ICurve* o,  ICurve *time){return o->setTime(time);}
+     bool setDepth(ICurve* o, ICurve *depth){return o->setDepth(depth);}
+     bool setUserBaseValue(ICurve* o,ICurve *userBaseValue){return  o->setUserBaseValue(userBaseValue);}
      qreal maximum(ICurve* o){return o->maximum();}
      qreal minimum(ICurve* o) {return o->minimum();}
+     Desc *desc(ICurve* o){return o->desc();}
+     QString mnemonic(ICurve* o){return o->mnemonic();}
+    // QMap<QString,ICurve*> *m_curves_p;
+
 
 };
 

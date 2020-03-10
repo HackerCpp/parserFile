@@ -5,7 +5,7 @@
 #include "desc.h"
 #include "shortcut.h"
 
-class ICurve{
+class ICurve : public QObject{
 public:
     ICurve();
     virtual ~ICurve();

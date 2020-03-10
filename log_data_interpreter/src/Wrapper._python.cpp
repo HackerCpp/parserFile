@@ -7,4 +7,10 @@
 #include <PythonQt_QtAll.h>
 #include "gui/PythonQtScriptingConsole.h"
 //#include "wrapper_curve.h"
+/*
+ICurve* Wrapper_python ::*curve(QString key){
+
+
+}
+*/
 
