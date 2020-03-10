@@ -6,6 +6,7 @@
 #include "shortcut.h"
 
 class ICurve : public QObject{
+    Q_OBJECT
 public:
     ICurve();
     virtual ~ICurve();

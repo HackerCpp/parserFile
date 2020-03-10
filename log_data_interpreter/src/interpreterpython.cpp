@@ -8,9 +8,10 @@
 #include "Wrapper_python.h"
 
 InterpreterPython::InterpreterPython(){
-    PythonQt::init(PythonQt::IgnoreSiteModule | PythonQt::RedirectStdOut);
+    PythonQt::init(PythonQt::IgnoreSiteModule | PythonQt::RedirectStdOut,"LogData");
     PythonQt_QtAll::init();
-    PythonQt::self()->registerCPPClass("ICurve","","example",PythonQtCreateObject<WrapperIcurvePython>);
+    PythonQt::self()->registerCPPClass("ICurve","","Curves",PythonQtCreateObject<WrapperIcurvePython>);
+    //from LogData.Curves import*
     m_mainContext = PythonQt::self()->getMainModule();
     m_console = new PythonQtScriptingConsole(NULL, m_mainContext);
 
