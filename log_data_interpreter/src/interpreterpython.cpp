@@ -29,7 +29,16 @@ bool InterpreterPython::openConsole(){
     foreach (QString key, m_curves->keys())
 
     {
-       QString m = "A"+QString::number(i);
+       QString m = key;
+
+       m=m.remove(":");
+       m=m.remove(")");
+       m=m.remove("(");
+       m="A_"+m;
+       m=m.remove("_");
+       m=m.remove("-");
+       m=m.remove(".");
+
       ICurve* value=m_curves->value(key);
       m_mainContext.addObject(m, value);
       qDebug() << key << ":" << value;

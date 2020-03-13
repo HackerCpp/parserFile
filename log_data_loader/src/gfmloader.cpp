@@ -293,6 +293,7 @@ void findItems(QXmlStreamReader *xmlReader,ATrack *track){
         }
         else{
             //qDebug() << xmlReader->name();
+
         }
     }
 }
@@ -345,7 +346,7 @@ void findBoard(QXmlStreamReader *xmlReader,IBoard *board,FormsBlock *formsBlock)
 }
 
 void GFMLoader::parserFormsBlock(const QByteArray &bodyBlock,IBlock *block){
-    QTime time = QTime::currentTime();
+  /*  QTime time = QTime::currentTime();
     FormsBlock * formsBlock = dynamic_cast<FormsBlock *>(block);
     if(!formsBlock){
         qDebug() <<  "не удалось преобразовать IBlock в FormsBlock. Парсер дата блока";
@@ -364,14 +365,14 @@ void GFMLoader::parserFormsBlock(const QByteArray &bodyBlock,IBlock *block){
             findBoard(&xmlReader,f_board,formsBlock);
         }
     }
-
-    /*QFile file("f.txt");
+*/
+    QFile file("f.txt");
     file.open(QIODevice::WriteOnly);
     QByteArray output;
     gzipDecompress(bodyBlock,output);
     file.write(output);
-    file.close();*/
-    qDebug() << "end load forms : " << time.msecsTo( QTime::currentTime() ) << "mS";
+    file.close();
+ //   qDebug() << "end load forms : " << time.msecsTo( QTime::currentTime() ) << "mS";
 }
 
 void GFMLoader::parserUnknownBlock(const QByteArray &bodyBlock,IBlock *block){

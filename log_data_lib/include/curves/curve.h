@@ -14,8 +14,28 @@ public:
      }
     ~Curve()override{}
 
+     qreal data(uint index)override;
      uint setData(const char *dataPtr,uint numberOfVectors)override;
+     uint setData(qreal data,uint index)override;
 };
+
+template<typename T> qreal Curve<T>::data(uint index){
+    if(index>m_data->size())
+    {
+        qDebug()<<"Индекс вышел за пределы массива, вернули 0";
+        return 0;
+    }
+    return m_data->data()[index];
+}
+template<typename T> uint Curve<T>::setData(qreal data,uint index){
+    if(index>m_data->size())
+    {
+        qDebug()<<"Индекс вышел за пределы массива, вернули 0";
+        return 0;
+    }
+    m_data->data()[index] = data;
+    return m_size;
+}
 
 template<typename T> uint Curve<T>::setData(const char *dataPtr,uint numberOfVectors){
     uint dataSize = numberOfVectors * (m_size/m_sizeOfType);
@@ -27,5 +47,7 @@ template<typename T> uint Curve<T>::setData(const char *dataPtr,uint numberOfVec
     m_positiveOffset = m_minimum < 0?m_minimum:0;
     return dataSizeInBytes;
 }
+
+
 
 #endif // CURVE_H

@@ -25,6 +25,7 @@ public:
     ACurve();
     virtual ~ACurve()override;
 
+    virtual qreal data(uint index)override{return 0;}
     virtual uint setData(qreal data)override;
     virtual uint setData(qreal data,uint index)override;
     virtual uint setData(const char *dataPtr,uint numberOfVectors)override;
