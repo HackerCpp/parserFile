@@ -7,6 +7,7 @@
 #include <QXmlStreamReader>
 #include "board.h"
 #include "track.h"
+#include "items.h"
 
 bool GFMLoader::gzipCompress(QByteArray input, QByteArray &output, int level){
     output.clear();
@@ -194,6 +195,7 @@ void GFMLoader::run(){
     qDebug() << "end load gfm : " << time.msecsTo( QTime::currentTime() ) << "mS";
     m_isReady = true;
     emit ready();
+   // saveForm();
 }
 
 
@@ -280,33 +282,99 @@ void findSettingsForItem(QXmlStreamReader *xmlReader,QString name){
     }
 }
 
-void findItems(QXmlStreamReader *xmlReader,ATrack *track){
+void findItems(QXmlStreamReader *xmlReader,ATrack *track,AItems *items){
     while(!xmlReader->atEnd() && !xmlReader->hasError()){
         QXmlStreamReader::TokenType token = xmlReader->readNext();
         QXmlStreamAttributes attributes = xmlReader->attributes();
         if(xmlReader->name() == "track" && token == QXmlStreamReader::EndElement){
-            qDebug() << "Конец поиска кривых" << "Трек : " << track->name();
+            qDebug() << "Конец поиска кривых" << "Трек : ";
             return;
         }
-        else if((xmlReader->name() == "line" || xmlReader->name() == "mark" || xmlReader->name() == "acu") && token == QXmlStreamReader::StartElement){
-            findSettingsForItem(xmlReader,xmlReader->name().toString());
-        }
-        else{
-            //qDebug() << xmlReader->name();
+
+        else if(xmlReader->name() == "paint_mode" && token == QXmlStreamReader::StartElement){
+            items->SetPeintMode(attributes.value("mode").toString());
 
         }
+        else if(xmlReader->name() == "style" && token == QXmlStreamReader::StartElement){
+            if(items->getTrueAcu())
+            {
+                items->SetShowMode(attributes.value("show_mode").toFloat());
+            }
+            else
+            {
+
+                items->SetStyle(attributes.value("color").toString(),attributes.value("dashes").toFloat());
+            }
+        }
+        else if(xmlReader->name() == "transparent" && token == QXmlStreamReader::StartElement){
+            items->SetTransparentColor(attributes.value("color").toString());
+
+        }
+        else if(xmlReader->name() == "multi_color" && token == QXmlStreamReader::StartElement){
+            items->SetMultiColorCount(attributes.value("level_count").toInt());
+
+        }
+        else if(xmlReader->name() == "level" && token == QXmlStreamReader::StartElement){
+            items->SetColorMultiColor(attributes.value("bound").toFloat(),attributes.value("color").toString());
+
+        }
+        else if(xmlReader->name() == "brush_color" && token == QXmlStreamReader::StartElement){
+            items->SetBruchColor(attributes.value("color").toString());
+
+        }
+        else if(xmlReader->name() == "width" && token == QXmlStreamReader::StartElement){
+            items->SetWidth(attributes.value("value").toString(),attributes.value("unit").toString());
+
+        }
+        else if(xmlReader->name() == "begin" && token == QXmlStreamReader::StartElement){
+            items->SetBegin(attributes.value("set_begin_value").toFloat(),attributes.value("begin_value").toFloat());
+
+        }
+        else if(xmlReader->name() == "zero_offset" && token == QXmlStreamReader::StartElement){
+            items->SetZeroOfset(attributes.value("value").toString(),attributes.value("unit").toString());
+
+        }
+        else if(xmlReader->name() == "end" && token == QXmlStreamReader::StartElement){
+            items->SetEnd(attributes.value("set_end_value").toFloat(),attributes.value("end_value").toFloat());
+
+        }
+        else if(xmlReader->name() == "value_scale" && token == QXmlStreamReader::StartElement){
+            items->SetValueScale(attributes.value("value").toString(),attributes.value("unit").toString());
+
+        }
+        else if(xmlReader->name() == "step_scale" && token == QXmlStreamReader::StartElement){
+            items->SetEndAcu(attributes.value("value").toString(),attributes.value("unit").toString());
+
+        }
+        else if(xmlReader->name() == "multi_scale" && token == QXmlStreamReader::StartElement){
+            items->SetMultiScale(attributes.value("is_multi_scale").toFloat(),attributes.value("gleam_count").toFloat(),attributes.value("gleam_scale").toFloat());
+            qDebug() << attributes.value("gleam_scale").toString()<<"eeeeeeee";
+        }
+        else if((xmlReader->name() == "line" || xmlReader->name() == "mark" || xmlReader->name() == "acu") && token == QXmlStreamReader::EndElement){
+
+        track->setItems(items);
+        qDebug() << "Вставлен КРИВАЯ в трек !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+        return;
+        }
+
+
     }
 }
 
-void findTrack(QXmlStreamReader *xmlReader,IBoard *board,ATrack *track){
+void findTrack(QXmlStreamReader *xmlReader,ABoard *board,ATrack *track){
+
     while(!xmlReader->atEnd() && !xmlReader->hasError()){
         QXmlStreamReader::TokenType token = xmlReader->readNext();
         QXmlStreamAttributes attributes = xmlReader->attributes();
+
         if(xmlReader->name() == "begin" && token == QXmlStreamReader::StartElement){
-            track->setBegin(attributes.value("value").toFloat(),attributes.value("unit").toString());
+
+            track->setBegin(attributes.value("value").toString(),attributes.value("unit").toString());
+
         }
         else if(xmlReader->name() == "width" && token == QXmlStreamReader::StartElement){
-            track->setWidth(attributes.value("value").toFloat(),attributes.value("unit").toString());
+            track->setWidth(attributes.value("value").toString(),attributes.value("unit").toString());
+            track->setWidthString(attributes.value("value").toString());
 
         }
         else if(xmlReader->name() == "logarithm" && token == QXmlStreamReader::StartElement){
@@ -316,17 +384,54 @@ void findTrack(QXmlStreamReader *xmlReader,IBoard *board,ATrack *track){
             float dec_end = attributes.value("decade_end").toFloat();
             track->setLogarithm(log_base,dec_count,dec_start,dec_end);
         }
-        else if(xmlReader->name() == "logarithm" && token == QXmlStreamReader::EndElement){
-            qDebug() << "Начало поиска кривых" << "Трек : " << track->name();
-            findItems(xmlReader,track);
+        else if((xmlReader->name() == "line") && token == QXmlStreamReader::StartElement){
+            qDebug() << "Начало поиска кривых" << "Трек : " << track->getName();
+            AItems *f_items = new AItems();
+            f_items->SetTrueLine(true);
+            f_items->SetTrueAcu(false);
+            f_items->SetTrueMark(false);
+            f_items->Setline(attributes.value("name").toString(), attributes.value("visible").toString());
+            findItems(xmlReader,track,f_items);
+        }
+        else if((xmlReader->name() == "mark") && token == QXmlStreamReader::StartElement){
+            qDebug() << "Начало поиска кривых" << "Трек : " << track->getName();
+            AItems *f_items = new AItems();
+            f_items->SetTrueLine(false);
+            f_items->SetTrueAcu(false);
+            f_items->SetTrueMark(true);
+            f_items->Setline(attributes.value("name").toString(), attributes.value("visible").toString());
+            findItems(xmlReader,track,f_items);
+        }
+        else if((xmlReader->name() == "acu") && token == QXmlStreamReader::StartElement){
+            qDebug() << "Начало поиска кривых" << "Трек : " << track->getName();
+            AItems *f_items = new AItems();
+            f_items->SetTrueLine(false);
+            f_items->SetTrueAcu(true);
+            f_items->SetTrueMark(false);
+            f_items->Setline(attributes.value("name").toString(), attributes.value("visible").toString());
+            findItems(xmlReader,track,f_items);
+        }
+        else if(xmlReader->name() == "track" && token == QXmlStreamReader::EndElement){
+
+
             board->setTrack(track);
             qDebug() << "Вставлен трек в борд ********************************";
+            float i = track->getItems().size();
+            QList<AItems*> d = track->getItems();
+            if(d.size()!=0)
+            {
+            AItems *s = d[0];
+            qDebug() << "JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ"<<i <<s->getLineName();
+            }
+
             return;
+
         }
     }
+
 }
 
-void findBoard(QXmlStreamReader *xmlReader,IBoard *board,FormsBlock *formsBlock){
+void findBoard(QXmlStreamReader *xmlReader,ABoard *board,FormsBlock *formsBlock){
     while(!xmlReader->atEnd() && !xmlReader->hasError()){
         QXmlStreamReader::TokenType token = xmlReader->readNext();
         QXmlStreamAttributes attributes = xmlReader->attributes();
@@ -346,7 +451,7 @@ void findBoard(QXmlStreamReader *xmlReader,IBoard *board,FormsBlock *formsBlock)
 }
 
 void GFMLoader::parserFormsBlock(const QByteArray &bodyBlock,IBlock *block){
-  /*  QTime time = QTime::currentTime();
+    QTime time = QTime::currentTime();
     FormsBlock * formsBlock = dynamic_cast<FormsBlock *>(block);
     if(!formsBlock){
         qDebug() <<  "не удалось преобразовать IBlock в FormsBlock. Парсер дата блока";
@@ -354,32 +459,216 @@ void GFMLoader::parserFormsBlock(const QByteArray &bodyBlock,IBlock *block){
     QByteArray xml;
     gzipDecompress(bodyBlock,xml);
     QXmlStreamReader xmlReader(xml);
-    IBoard *f_board = nullptr;
+    ABoard *f_board = nullptr;
     ATrack *f_track = nullptr;
     while(!xmlReader.atEnd() && !xmlReader.hasError()){
         QXmlStreamReader::TokenType token = xmlReader.readNext();
         QXmlStreamAttributes attributes = xmlReader.attributes();
-        if(xmlReader.name() == "board" && token == QXmlStreamReader::StartElement){
+        if(xmlReader.name() == "forms" && token == QXmlStreamReader::StartElement){
+            formsBlock->setActiveName(attributes.value("active_name").toString());
+
+        }
+        else if(xmlReader.name() == "board" && token == QXmlStreamReader::StartElement){
             f_board = new Board();
             f_board->setName(attributes.value("name").toString());
             findBoard(&xmlReader,f_board,formsBlock);
+            //float z = f_board->getTrack().size();
+            //qDebug() << z<<"sizzzzzzzzzzzzzzzzzzzzzzzzzzzzze";
+
         }
     }
-*/
+    saveForm(formsBlock);
+/*
     QFile file("f.txt");
     file.open(QIODevice::WriteOnly);
     QByteArray output;
     gzipDecompress(bodyBlock,output);
     file.write(output);
     file.close();
- //   qDebug() << "end load forms : " << time.msecsTo( QTime::currentTime() ) << "mS";
+    */
+    qDebug() << "end load forms : " << time.msecsTo( QTime::currentTime() ) << "mS";
+
 }
 
 void GFMLoader::parserUnknownBlock(const QByteArray &bodyBlock,IBlock *block){
 
 }
 
+void GFMLoader::saveForm(FormsBlock * formsBlock)
+{
+    QTime time = QTime::currentTime();
+    QFile file("qqqqqq.txt");
+       file.open(QIODevice::WriteOnly); /* Создаем объект, с помощью которого осуществляется запись в файл */
+       QXmlStreamWriter xmlWriter(&file);
 
+       xmlWriter.setAutoFormatting(true);  // Устанавливаем автоформатирование текста
+       xmlWriter.writeStartDocument();     // Запускаем запись в документ
+
+       xmlWriter.writeStartElement("forms");   // Запиываем первый элемент с его именем
+       xmlWriter.writeAttribute("active_name", formsBlock->getActiveName());//teg forms
+       for(int i=0;i<formsBlock->getBoard().size();i++)
+       {
+           ABoard * d = formsBlock->getBoard()[i];
+           xmlWriter.writeStartElement("board");
+           xmlWriter.writeAttribute("name", d->getName());
+           for(int j =0;j<d->getTrack().size();j++)
+           {
+               QString str;
+               ATrack * f = d->getTrack()[j];
+               xmlWriter.writeStartElement("track");
+               xmlWriter.writeAttribute("name", f->getName());
+               xmlWriter.writeAttribute("show_grid", QString::number(f->getIsGreed()));
+               xmlWriter.writeAttribute("type", f->getType());
+
+
+               xmlWriter.writeStartElement("begin");
+               xmlWriter.writeAttribute("value", str.setNum(f->getBegin()));
+               xmlWriter.writeAttribute("unit", "MM");
+               xmlWriter.writeEndElement();//close begin
+
+
+               xmlWriter.writeStartElement("width");
+               xmlWriter.writeAttribute("value", str.setNum(f->getWidth()));
+               xmlWriter.writeAttribute("unit", "MM");
+               xmlWriter.writeEndElement();//close width
+
+
+               xmlWriter.writeStartElement("logarithm");
+               xmlWriter.writeAttribute("logarithm_base", str.setNum(f->getLogarithmBase()));
+               xmlWriter.writeAttribute("decades_count", str.setNum(f->getDecadeCount()));
+               xmlWriter.writeAttribute("decade_start", str.setNum(f->getDecadeStart()));
+               xmlWriter.writeAttribute("decade_end", str.setNum(f->getDecadeEnd()));
+               xmlWriter.writeEndElement(); //close logarithm
+               for(int k=0;k<f->getItems().size();k++)
+               {
+                   AItems* items = f->getItems()[k];
+                   if(items->getTrueAcu())
+                   {
+                       xmlWriter.writeStartElement("acu");
+                   }
+                   if(items->getTrueMark())
+                   {
+                       xmlWriter.writeStartElement("mark");
+                   }
+                   if(items->getTrueLine())
+                   {
+                       xmlWriter.writeStartElement("line");
+                   }
+                   xmlWriter.writeAttribute("name", items->getLineName());
+                   xmlWriter.writeAttribute("visible", items->getVisible());
+
+                   if(items->getTrueLine())
+                   {
+                       xmlWriter.writeStartElement("paint_mode");
+                       xmlWriter.writeAttribute("mode", items->getPeintMode());
+                       xmlWriter.writeEndElement();//close paint mode
+                   }
+
+                   xmlWriter.writeStartElement("style");
+                   if(items->getTrueAcu())
+                   {
+                       xmlWriter.writeAttribute("show_mode", str.setNum(items->getShowMode()));
+                       xmlWriter.writeStartElement("transparent");
+                       xmlWriter.writeAttribute("color", items->getTransparentColor());
+                       xmlWriter.writeEndElement();//close transparent
+
+
+
+                       xmlWriter.writeStartElement("multi_color");
+                       xmlWriter.writeAttribute("level_count",str.setNum(items->getMultiColorCount()));
+
+                       for(int a =0; a < items->getMultiColorCount();a++)
+                       {
+                           xmlWriter.writeStartElement("level");
+                           xmlWriter.writeAttribute("bound",str.setNum(items->getBoundMultiColor(a)));
+                           xmlWriter.writeAttribute("color",items->getColorMultiColor(a));
+                           xmlWriter.writeEndElement();//close level
+                       }
+
+
+                       xmlWriter.writeEndElement();//close multi_color
+
+                       xmlWriter.writeStartElement("bruch_color");
+                       xmlWriter.writeAttribute("color",items->getBrushColor());
+                       xmlWriter.writeEndElement();//close bruch_color
+
+                   }
+                   else
+                   {
+                        xmlWriter.writeAttribute("color", items->getStyleColor());
+                        xmlWriter.writeAttribute("dashes", str.setNum(items->getStyleDatashes()));
+
+
+                        xmlWriter.writeStartElement("width");
+                        xmlWriter.writeAttribute("value", str.setNum(items->getWidthValue()));
+                        xmlWriter.writeAttribute("unit", items->getValueScaleUnit());
+                        xmlWriter.writeEndElement();//close width
+                   }
+                   xmlWriter.writeEndElement();//close style
+
+
+                   if(items->getTrueLine() || items->getTrueAcu())
+                   {
+                       xmlWriter.writeStartElement("begin");
+                       xmlWriter.writeAttribute("set_begin_value", str.setNum(items->getSetBeginValue()));
+                       xmlWriter.writeAttribute("begin_value", str.setNum(items->getBeginValue()));
+
+
+                       xmlWriter.writeStartElement("zero_offset");
+                       xmlWriter.writeAttribute("value", str.setNum(items->getZeroValue()));
+                       xmlWriter.writeAttribute("unit", "MM");
+                       xmlWriter.writeEndElement();//close zero_offset
+                       xmlWriter.writeEndElement();//close begin
+
+                       xmlWriter.writeStartElement("end");
+                       xmlWriter.writeAttribute("set_end_value", str.setNum(items->getEndSetEndValue()));
+                       xmlWriter.writeAttribute("end_value", str.setNum(items->getEndValue()));
+
+                   }
+
+                   if(items->getTrueLine())
+                   {
+                        xmlWriter.writeStartElement("value_scale");
+                        xmlWriter.writeAttribute("value", str.setNum(items->getValueScaleValue()));
+                        xmlWriter.writeAttribute("unit", "MM");
+                        xmlWriter.writeEndElement();//close value_scale
+                   }
+                   if(items->getTrueAcu())
+                   {
+                        xmlWriter.writeStartElement("step_scale");
+                        xmlWriter.writeAttribute("value", str.setNum(items->getEndAcu()));
+                        xmlWriter.writeAttribute("unit", "MM");
+                        xmlWriter.writeEndElement();//close value_scale
+                   }
+                   if(items->getTrueLine() || items->getTrueAcu())
+                   {
+                      xmlWriter.writeEndElement();//close end
+                   }
+
+
+                   if(items->getTrueLine())
+                   {
+                       xmlWriter.writeStartElement("multi_scale");
+                       xmlWriter.writeAttribute("is_multi_scale", str.setNum(items->getMultiScaleIs()));
+                       xmlWriter.writeAttribute("gleam_count", str.setNum(items->getMultiScaleGleamCount()));
+                       xmlWriter.writeAttribute("gleam_scale", str.setNum(items->getMultiScaleGleamScale()));
+                       xmlWriter.writeEndElement();//close value_scale
+                   }
+
+                   xmlWriter.writeEndElement();//close line
+               }
+
+
+               xmlWriter.writeEndElement();//close track
+
+           }
+           xmlWriter.writeEndElement();//close board
+       }
+        xmlWriter.writeEndElement();//close forms
+       xmlWriter.writeEndDocument();
+       file.close();   // Закрываем файл
+       qDebug() << "end save " << time.msecsTo( QTime::currentTime() ) << "mS";
+}
 
 
 void GFMLoader::findShortCuts(QByteArray *header,DataBlock *dataBlock){

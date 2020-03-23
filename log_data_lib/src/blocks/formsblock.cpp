@@ -2,7 +2,7 @@
 
 FormsBlock::FormsBlock(){
     m_type = FORMS_BLOCK;
-    m_boards = new QList<IBoard*>;
+    m_boards = new QList<ABoard*>;
 }
 
 
@@ -14,10 +14,13 @@ void FormsBlock::setActiveName(QString activeName){
     m_activeName = activeName;
 }
 
-void FormsBlock::addBoard(IBoard* block){
+void FormsBlock::addBoard(ABoard* block){
     m_boards->push_back(block);
 }
-
-QString FormsBlock::activeName(){
+QList<ABoard*> FormsBlock::getBoard()
+{
+    return *m_boards;
+}
+QString FormsBlock::getActiveName(){
     return m_activeName;
 }

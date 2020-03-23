@@ -2,20 +2,21 @@
 #define FORMSBLOCK_H
 
 #include "ablock.h"
-#include "iboard.h"
+#include "aboard.h"
 #include <QList>
 
 class FormsBlock : public ABlock{
-    QList<IBoard*> *m_boards;
+    QList<ABoard*> *m_boards;
     QString m_activeName;
 public:
     FormsBlock();
     ~FormsBlock();
 
     void setActiveName(QString activeName);
-    void addBoard(IBoard* block);
+    void addBoard(ABoard* block);
+    QList<ABoard*> getBoard();
+    QString getActiveName();
 
-    QString activeName();
 };
 
 #endif // FORMSBLOCK_H

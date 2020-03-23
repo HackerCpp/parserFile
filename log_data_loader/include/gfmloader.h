@@ -12,6 +12,7 @@
 #include "datablock.h"
 #include "unknownblock.h"
 #include "curve.h"
+#include "aboard.h"
 
 class LOADER_EXPORT GFMLoader : public ALoaderLogData, public QThread{
     QString m_path;
@@ -31,7 +32,7 @@ public:
     void parserDataBlock(const QByteArray &bodyBlock,IBlock *block);
     void parserFormsBlock(const QByteArray &bodyBlock,IBlock *block);
     void parserUnknownBlock(const QByteArray &bodyBlock,IBlock *block);
-
+    void saveForm(FormsBlock * formsBlock);
     void findShortCuts(QByteArray *header,DataBlock *dataBlock);
     void findCurves(QByteArray *header,DataBlock * dataBlock);
     void findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *curve);

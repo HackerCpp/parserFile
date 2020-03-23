@@ -1,8 +1,8 @@
 QT -= gui
 
 TEMPLATE = lib
-CONFIG += staticlib
-#CONFIG += dynamiclib
+#CONFIG += staticlib
+CONFIG += dynamiclib
 
 
 CONFIG += c++17
@@ -24,7 +24,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/blocks/aitems.cpp \
     src/blocks/atrack.cpp \
+    src/blocks/items.cpp \
     src/blocks/track.cpp \
     src/blocks/aboard.cpp \
     src/blocks/iboard.cpp \
@@ -54,10 +56,12 @@ SOURCES += \
 HEADERS += \
     include/blocks/ablock.h \
     include/blocks/aboard.h \
+    include/blocks/aitems.h \
     include/blocks/atrack.h \
     include/blocks/formsblock.h \
     include/blocks/headerblock.h \
     include/blocks/iboard.h \
+    include/blocks/items.h \
     include/blocks/toolinfoblock.h \
     include/blocks/datablock.h \
     include/blocks/iblock.h \
