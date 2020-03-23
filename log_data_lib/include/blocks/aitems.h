@@ -46,13 +46,6 @@ class AItems{
     QList<QString> colorMultiColor;
     QList<float> boundMultiColor;
 
-
-
-
-
-
-
-
 public:
     AItems();
     ~AItems(){}

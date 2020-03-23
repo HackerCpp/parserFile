@@ -3,10 +3,10 @@
 
 #include <QString>
 #include <QList>
-#include <aitems.h>
+#include <aitem.h>
 class ATrack{
 
-    QList <AItems*> *m_items;
+    QList <AItem*> *m_items;
 
 
 
@@ -38,7 +38,7 @@ public:
     void setWidth(QString width,QString unit);
     void setWidthString(QString valueString);
     QString getWidthString(){return m_widthString;}
-    void setItems(AItems *items);
+    void setItem(AItem *item);
     int getIsGreed(){return m_IsGreed;}
     QString getName(){return m_name;}
     QString getType();

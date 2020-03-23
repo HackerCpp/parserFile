@@ -24,6 +24,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/blocks/astyleitem.cpp \
+    src/blocks/aitem.cpp \
     src/blocks/aitems.cpp \
     src/blocks/atrack.cpp \
     src/blocks/items.cpp \
@@ -56,7 +58,9 @@ SOURCES += \
 HEADERS += \
     include/blocks/ablock.h \
     include/blocks/aboard.h \
+    include/blocks/aitem.h \
     include/blocks/aitems.h \
+    include/blocks/astyleitem.h \
     include/blocks/atrack.h \
     include/blocks/formsblock.h \
     include/blocks/headerblock.h \
