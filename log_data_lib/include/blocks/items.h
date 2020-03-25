@@ -1,12 +1,12 @@
 #ifndef ITEMS_H
 #define ITEMS_H
-#include "aitems.h"
+#include "aitem.h"
 
-class Items : public AItems
+class Item : public AItem
 {
 public:
-    Items();
-    ~Items();
+    Item();
+    ~Item();
 };
 
 #endif // ITEMS_H

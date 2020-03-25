@@ -1,8 +1,9 @@
 #include "atrack.h"
 #include <QDebug>
+
 ATrack::ATrack()
 {
-    m_items = new QList<AItems*>;
+    m_items = new QList<AItem*>;
 }
 
 void ATrack::setIsGreed(bool isGreed){
@@ -13,66 +14,79 @@ void ATrack::setName(QString name){
     m_name = name;
 }
 
-void ATrack::setType(QString type){
-    if(type == "LINEAR")
-        m_type = LINEAR;
-}
-void ATrack :: setWidthString(QString valueString)
-{
-    m_widthString = valueString.replace(",",".");
-}
-void ATrack::setType(Type type){
-    m_type = type;
+void ATrack::setType(Types type){
+
+        m_type = type;
 }
 
-QString ATrack ::getType()
-{
-    if(m_type==LINEAR)
-        return "LINEAR";
-}
-
-void ATrack::setLogarithm(float log_base,float dec_count, float dec_start,float dec_end){
+void ATrack::setLogarithm(qreal log_base,qreal dec_count, qreal dec_start,qreal dec_end){
     m_logarithm.logarithmBase = log_base;
     m_logarithm.decadeCount = dec_count;
     m_logarithm.decadeStart = dec_start;
     m_logarithm.decadeEnd = dec_end;
 }
-void ATrack::setItems(AItems *items)
+void ATrack::setItem(AItem *items)
 {
     if(m_items)
         m_items->push_back(items);
     else
         qDebug() << "не удалось вставить кривые, нулевой указатель";
 }
-void ATrack::setBegin(QString begin,QString unit){
-    begin = begin.replace(",",".");
-    if(unit == "CM")
-    {
-        m_begin = begin.toFloat()*10;
-    }
-    else
-    {
-        m_begin = begin.toFloat();
-    }
+void ATrack::setBegin(qreal begin){
+
+        m_begin = begin;
+}
+
+
+
+
+void ATrack::setWidth(qreal width){
+
+    m_width = width;
 
 }
 
 
-QList<AItems*> ATrack:: getItems()
+Types ATrack :: Type()
+{
+        return m_type;
+}
+
+QList<AItem*> ATrack:: Items()
 {
     return *m_items;
 }
-
-void ATrack::setWidth(QString width,QString unit){
-
-    width = width.replace(",",".");
-    if(unit == "CM")
-    {
-        m_width = width.toFloat()*10;
-    }
-    else
-    {
-        m_width = width.toFloat();
-    }
+bool ATrack::IsGreed()
+{
+    return m_IsGreed;
+}
+QString ATrack::Name()
+{
+    return m_name;
 }
 
+qreal ATrack::Begin()
+{
+    return m_begin;
+}
+qreal ATrack::Width()
+{
+    return m_width;
+}
+
+qreal ATrack::LogarithmBase()
+{
+    return m_logarithm.logarithmBase;
+}
+qreal ATrack::DecadeCount()
+{
+    return m_logarithm.decadeCount;
+}
+qreal ATrack::DecadeStart()
+{
+    return m_logarithm.decadeStart;
+}
+qreal ATrack::DecadeEnd()
+{
+    return m_logarithm.decadeEnd;
+}
