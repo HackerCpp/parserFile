@@ -5,6 +5,13 @@ DEFINES += SAVER_LIBRARY
 
 CONFIG += c++11
 
+INCLUDEPATH += inc \
+../log_data_lib/include/externalComponents \
+../log_data_lib/include/blocks \
+../log_data_lib/include/curves
+
+LIBS += \
+../build/release/LogData.lib
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the

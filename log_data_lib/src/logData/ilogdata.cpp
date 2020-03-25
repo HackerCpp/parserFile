@@ -30,6 +30,10 @@ bool ILogData::setLoader(ILoaderLogData *loader){
     return false;
 }
 
+bool ILogData::setSaver(ISaverLogData *saver){
+    return false;
+}
+
 bool ILogData::setInterpreter(IInterpreterLogData *interpreter){
     return false;
 }

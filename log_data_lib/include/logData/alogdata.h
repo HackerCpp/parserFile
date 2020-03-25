@@ -19,6 +19,7 @@ public:
     virtual bool isReady()override;
 
     virtual bool setLoader(ILoaderLogData *loader)override;
+    virtual bool setSaver(ISaverLogData *saver)override;
     virtual bool setInterpreter(IInterpreterLogData *interpreter)override;
 
     virtual QMap<QString,ICurve*> *curves()override;

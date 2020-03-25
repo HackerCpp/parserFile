@@ -42,6 +42,10 @@ bool ALogData::setLoader(ILoaderLogData *loader){
     return false;
 }
 
+bool ALogData::setSaver(ISaverLogData *saver){
+    return false;
+}
+
 void ALogData::findCurvesMap(){
 
 }

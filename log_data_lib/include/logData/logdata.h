@@ -8,6 +8,7 @@
 
 class LogData : public ALogData{
     ILoaderLogData *m_loader;
+    ISaverLogData *m_saver;
     IInterpreterLogData *m_interpreter;
     QList<IBlock*> *m_blocks;
     QMap<QString,ICurve*> *m_curvesMap;
@@ -21,6 +22,7 @@ public:
     bool openInterpreter()override;
 
     bool setLoader(ILoaderLogData *loader)override;
+    bool setSaver(ISaverLogData *saver)override;
     bool setInterpreter(IInterpreterLogData *interpreter)override;
 
     virtual QMap<QString,ICurve*> *curves()override;

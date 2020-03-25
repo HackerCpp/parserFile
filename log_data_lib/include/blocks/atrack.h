@@ -34,23 +34,6 @@ public:
     void setBegin(qreal begin);
     void setWidth(qreal width);
     void setItem(AItem *item);
-<<<<<<< HEAD
-    int getIsGreed(){return m_IsGreed;}
-    QString getName(){return m_name;}
-    QString getType();
-    float getBegin(){return m_begin;}
-    float getWidth(){return m_width;}
-    float getLogarithm();
-    float getLogarithmBase(){return m_logarithm.logarithmBase;}
-    float getDecadeCount(){return m_logarithm.decadeCount;}
-    float getDecadeStart(){return m_logarithm.decadeStart;}
-    float getDecadeEnd(){return m_logarithm.decadeEnd;}
-
-    Type type(){return m_type;}
-
-    QList <AItem*> getItems();
-=======
-
 
     bool IsGreed();
     QString Name();
@@ -63,7 +46,6 @@ public:
     qreal DecadeStart();
     qreal DecadeEnd();
     QList <AItem*> Items();
->>>>>>> b501db74b2187d2cd07b61e4d974a67aebca7876
 
 };
 

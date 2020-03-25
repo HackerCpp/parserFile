@@ -24,6 +24,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/externalComponents/asaverlogdata.cpp \
+    src/externalComponents/isaverlogdata.cpp \
     src/blocks/AcuItem.cpp \
     src/blocks/LineItem.cpp \
     src/blocks/astyleitem.cpp \
@@ -81,7 +83,9 @@ HEADERS += \
     include/curves/acurve.h \
     include/externalComponents/ainterpreterlogdata.h \
     include/externalComponents/aloaderlogdata.h \
+    include/externalComponents/asaverlogdata.h \
     include/externalComponents/iinterpreterlogdata.h \
+    include/externalComponents/isaverlogdata.h \
     include/logData/alogdata.h \
     include/curves/icurve.h \
     include/externalComponents/iloaderlogdata.h \

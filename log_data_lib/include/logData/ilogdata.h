@@ -4,6 +4,7 @@
 #include <QObject>
 #include "iloaderlogdata.h"
 #include "iinterpreterlogdata.h"
+#include "isaverlogdata.h"
 
 class ILogData : public QObject{
     Q_OBJECT
@@ -18,6 +19,7 @@ public:
     virtual bool isReady();
 
     virtual bool setLoader(ILoaderLogData *loader);
+    virtual bool setSaver(ISaverLogData *saver);
     virtual bool setInterpreter(IInterpreterLogData *interpreter);
 
     virtual QMap<QString,ICurve*> *curves();

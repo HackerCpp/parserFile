@@ -4,6 +4,8 @@
 #include <QDateTime>
 #include <QFileDialog>
 #include "gfmloader.h"
+#include "gfmsaver.h"
+
 #include "interpreterpython.h"
 
 
@@ -52,7 +54,11 @@ void TabGFM::dataReady(){
     IInterpreterLogData *interpreter = new InterpreterPython();
     m_logData->setInterpreter(interpreter);
     m_logData->openInterpreter();
+    ISaverLogData * gfmSaver = new GFMSaver();
+    m_logData->setSaver(gfmSaver);
+    m_logData->save();
 }
+
 void TabGFM::saveGFM(){
     QDateTime date;
     QString stringDate = date.currentDateTime().toString("dd_MM_yyyy_hh_mm");

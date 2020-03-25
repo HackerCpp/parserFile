@@ -3,6 +3,7 @@
 
 LogData::LogData(){
     m_loader = nullptr;
+    m_saver = nullptr;
     m_interpreter = nullptr;
     m_blocks = new QList<IBlock*>;
     m_curvesMap = new QMap<QString,ICurve*>;
@@ -12,6 +13,10 @@ LogData::~LogData(){
     if(m_loader){
         delete m_loader;
         m_loader = nullptr;
+    }
+    if(m_saver){
+        delete m_saver;
+        m_saver = nullptr;
     }
     if(m_blocks){
         delete m_blocks;
@@ -49,6 +54,14 @@ bool LogData::setLoader(ILoaderLogData *loader){
         delete m_loader;
     m_loader = loader;
     m_loader->setBlocks(m_blocks);
+    return true;
+}
+
+bool LogData::setSaver(ISaverLogData *saver){
+    if(m_saver)
+        delete m_saver;
+    m_saver = saver;
+    m_saver->setBlocks(m_blocks);
     return true;
 }
 
