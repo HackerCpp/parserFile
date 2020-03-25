@@ -14,7 +14,6 @@ void Graphics::init(){
     m_groups = new QVector<Group*>;
     m_borders = new QVector<Border*>;
     m_mainValues = new MainValuesContainer;
-    //m_curves = nullptr;
     m_mapCurves = nullptr;
     m_isDrawTime = false;
     m_ruler = nullptr;

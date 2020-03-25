@@ -13,8 +13,6 @@ public:
     qreal operator[](int index);
     virtual uint amountSaturation(uint index)override;
     virtual ~CurveLineItem()override;
-
-
 };
 
 #endif // CURVELINE_H

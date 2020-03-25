@@ -16,7 +16,7 @@
 class  Graphics : public QGraphicsView{
     Q_OBJECT
     bool m_isDrawTime;
-    int headerTopOffset = 100;
+    int headerTopOffset;
     QVector<Group*> *m_groups;
     QVector<Border*> *m_borders;
     MainValuesContainer *m_mainValues;

@@ -52,7 +52,7 @@ public:
 
     Type type(){return m_type;}
 
-    QList <AItems*> getItems();
+    QList <AItem*> getItems();
 
 };
 
