@@ -1,10 +1,10 @@
 #include "items.h"
 
-Items::Items()
+Item::Item()
 {
 
 }
 
-Items::~Items(){
+Item::~Item(){
 
 }

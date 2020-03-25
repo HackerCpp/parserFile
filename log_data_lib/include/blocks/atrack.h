@@ -4,24 +4,22 @@
 #include <QString>
 #include <QList>
 #include <aitem.h>
+
+enum Types{LINEAR};
+
 class ATrack{
 
     QList <AItem*> *m_items;
-
-
-
-    enum Type{LINEAR};
-
-    Type m_type;
+    Types m_type;
     QString m_name;
-    QString m_widthString;
+
     bool m_IsGreed;
-    float m_begin,m_width;
+    qreal m_begin,m_width;
     struct Logarithm{
-        float logarithmBase;
-        float decadeCount;
-        float decadeStart;
-        float decadeEnd;
+        qreal logarithmBase;
+        qreal decadeCount;
+        qreal decadeStart;
+        qreal decadeEnd;
     }m_logarithm;
 
 public:
@@ -31,14 +29,12 @@ public:
 
     void setIsGreed(bool isGreed);
     void setName(QString name);
-    void setType(QString type);
-    void setType(Type type);
-    void setLogarithm(float log_base,float dec_count, float dec_start,float dec_end);
-    void setBegin(QString begin,QString unit);
-    void setWidth(QString width,QString unit);
-    void setWidthString(QString valueString);
-    QString getWidthString(){return m_widthString;}
+    void setType(Types type);
+    void setLogarithm(qreal log_base,qreal dec_count, qreal dec_start,qreal dec_end);
+    void setBegin(qreal begin);
+    void setWidth(qreal width);
     void setItem(AItem *item);
+<<<<<<< HEAD
     int getIsGreed(){return m_IsGreed;}
     QString getName(){return m_name;}
     QString getType();
@@ -53,6 +49,21 @@ public:
     Type type(){return m_type;}
 
     QList <AItem*> getItems();
+=======
+
+
+    bool IsGreed();
+    QString Name();
+    Types Type();
+    qreal Begin();
+    qreal Width();
+    qreal Logarithm();
+    qreal LogarithmBase();
+    qreal DecadeCount();
+    qreal DecadeStart();
+    qreal DecadeEnd();
+    QList <AItem*> Items();
+>>>>>>> b501db74b2187d2cd07b61e4d974a67aebca7876
 
 };
 

@@ -24,11 +24,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/blocks/AcuItem.cpp \
+    src/blocks/LineItem.cpp \
     src/blocks/astyleitem.cpp \
     src/blocks/aitem.cpp \
-    src/blocks/aitems.cpp \
     src/blocks/atrack.cpp \
     src/blocks/items.cpp \
+    src/blocks/markItem.cpp \
     src/blocks/track.cpp \
     src/blocks/aboard.cpp \
     src/blocks/iboard.cpp \
@@ -56,16 +58,18 @@ SOURCES += \
 
 
 HEADERS += \
+    include/blocks/AcuItem.h \
+    include/blocks/LineItem.h \
     include/blocks/ablock.h \
     include/blocks/aboard.h \
     include/blocks/aitem.h \
-    include/blocks/aitems.h \
     include/blocks/astyleitem.h \
     include/blocks/atrack.h \
     include/blocks/formsblock.h \
     include/blocks/headerblock.h \
     include/blocks/iboard.h \
     include/blocks/items.h \
+    include/blocks/markItem.h \
     include/blocks/toolinfoblock.h \
     include/blocks/datablock.h \
     include/blocks/iblock.h \

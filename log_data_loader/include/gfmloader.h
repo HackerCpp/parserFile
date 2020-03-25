@@ -32,7 +32,6 @@ public:
     void parserDataBlock(const QByteArray &bodyBlock,IBlock *block);
     void parserFormsBlock(const QByteArray &bodyBlock,IBlock *block);
     void parserUnknownBlock(const QByteArray &bodyBlock,IBlock *block);
-    void saveForm(FormsBlock * formsBlock);
     void findShortCuts(QByteArray *header,DataBlock *dataBlock);
     void findCurves(QByteArray *header,DataBlock * dataBlock);
     void findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *curve);

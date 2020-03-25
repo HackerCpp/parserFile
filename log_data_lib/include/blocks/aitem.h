@@ -3,13 +3,19 @@
 #include <QVariant>
 #include "astyleitem.h"
 
-enum PaintMode{CURVE_MODE,NUMBERS_MODE};
-enum TypeItem{LINE,ACU};
-struct MulticolorItem{
-    qreal bound;
-    QString value;
-};
-class AItem{ 
+
+
+
+
+
+//enum PaintMode{CURVE_MODE,NUMBERS_MODE};
+enum TypeItem{LINE,ACU,MARK};
+
+
+class AItem {
+    TypeItem m_type;
+    QString m_name;
+    QString m_visible;
     struct Begin{
         bool is_beginValue;
         qreal beginValue;
@@ -31,6 +37,9 @@ public:
     AItem();
     virtual ~AItem();
 
+    virtual QString name();
+    virtual QString visible();
+
     virtual bool isBeginValue();
     virtual qreal beginValue();
     virtual qreal zeroOffset();
@@ -40,54 +49,25 @@ public:
     virtual qreal scale();
 
     virtual bool isMultiScale();
-    virtual unsigned int glemCount();
+    virtual qreal glemCount();
     virtual qreal glemScale();
 
-    virtual void color();
-    virtual void widthLine();
+
+    virtual TypeItem Type();
 
 
-
-    virtual void setBegin(bool isBegin,qreal begin,qreal zeroOffset);
+    virtual void setBegin(bool isBegin, qreal begin, qreal zeroOffset);
     virtual void setEnd(bool isEnd,qreal end,qreal scale);
     virtual void setMultiScale(bool isMultiScale,qreal gleamCount,qreal gleamScale);
+    virtual void setName(QString name, QString visible);
+    virtual void setTypeItem(TypeItem type);
 
 
 };
 
 
-class LineItem : public AItem{
-    QString m_color;
-    unsigned int m_widthLine;
-    bool m_isDashes;
 
-    PaintMode m_paintMode;
-public:
 
-    LineItem();
-    ~LineItem();
-};
 
-class AcuItem : public AItem{
-    QString m_brushColor;
-    QString m_transparentColor;
-    QList<MulticolorItem> *m_multicolor;
 
-    unsigned int  m_showMode;
-public:
-
-    AcuItem();
-    ~AcuItem();
-};
-
-class MarkItem : public AItem{
-    QString m_color;
-    unsigned int m_widthLine;
-    bool m_isDashes;
-
-public:
-
-    MarkItem();
-    ~MarkItem();
-};
 #endif // AITEM_H
