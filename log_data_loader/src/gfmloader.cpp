@@ -432,7 +432,7 @@ void findItemAcu(QXmlStreamReader *xmlReader,ATrack *track,AcuItem *acuItem){
 
         }
         else if(xmlReader->name() == "level" && token == QXmlStreamReader::StartElement){
-            MulticolorItem *f;
+            MulticolorItem *f = new MulticolorItem;
             f->bound = attributes.value("bound").toDouble();
             f->value = attributes.value("color").toString();
             acuItem->setMulticolor(f);
