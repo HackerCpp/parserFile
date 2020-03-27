@@ -8,13 +8,14 @@
 
 class VerticalBoard : public AGraphicBoard
 {
+    Q_OBJECT
     IBoard *m_board;
     bool m_isDrawTime;
     int headerTopOffset;
     QGraphicsScene *m_canvas;
 
 public:
-    VerticalBoard(IBoard *board,QMap<QString,ICurve*> *curves);
+    VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves);
     VerticalBoard(QMap<QString,ICurve*> *curves);
     VerticalBoard();
     ~VerticalBoard()override;
@@ -24,9 +25,12 @@ public:
 private:
     void init();
 
-    void mousePressEvent(QMouseEvent *event)override;
-    void mouseMoveEvent(QMouseEvent *event)override;
-    void mouseReleaseEvent(QMouseEvent *event)override;
+public slots:
+    void scrollChanged();
+
+signals:
+    void changingTheVisibilityZone(QRect visibleArea);
+
 };
 
 #endif // VERTICALBOARD_H

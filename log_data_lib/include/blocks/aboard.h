@@ -17,8 +17,8 @@ public:
     virtual void setName(QString name)override;
     virtual void setTrack(ATrack *track)override;
 
-    virtual QString getName();
-    virtual QList<ATrack*> getTrack();
+    virtual QString name()override;
+    virtual QList<ATrack*> *tracks()override;
 
 };
 

@@ -14,6 +14,7 @@
 #include <QTabWidget>
 #include <QComboBox>
 #include "ilogdata.h"
+#include "graphiceditor.h"
 
 class TabGFM : public AbstractTab,public AbstractTabSaveFiles{
     Q_OBJECT
@@ -21,6 +22,7 @@ class TabGFM : public AbstractTab,public AbstractTabSaveFiles{
     QVBoxLayout *m_mainVerticalLayout;
     QWidget *m_toolBar;
     QComboBox *m_comboBox;
+    GraphicEditor *m_graphicEditor;
     //GFM *m_gfm;
     ILogData *m_logData;
 public:

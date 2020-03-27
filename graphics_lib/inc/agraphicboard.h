@@ -3,18 +3,21 @@
 #include <QGraphicsView>
 #include "agraphictrack.h"
 
-
-
 class AGraphicBoard : public QGraphicsView
 {
     Q_OBJECT
+    int m_minimumSize;
+protected:
 
 public:
     AGraphicBoard();
-    ~AGraphicBoard(){}
+    ~AGraphicBoard()override{}
 
-    virtual void newTrack();
-    bool addCurve(ICurve *curve,int indexTab);
+    virtual void newTrack(){}
+private:
+    virtual void mousePressEvent(QMouseEvent *event)override;
+    virtual void mouseMoveEvent(QMouseEvent *event)override;
+    virtual void mouseReleaseEvent(QMouseEvent *event)override;
 };
 
 #endif // AGRAPHICBOARD_H

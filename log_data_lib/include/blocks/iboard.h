@@ -11,7 +11,7 @@ public:
 
     virtual void setName(QString name){}
     virtual void setTrack(ATrack *track){}
-   // virtual QList<ATrack*> getTrack();
+    virtual QList<ATrack*> *tracks(){return nullptr;}
     virtual QString name(){return QString();}
 };
 

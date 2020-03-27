@@ -14,7 +14,7 @@ public:
 
     void setActiveName(QString activeName);
     void addBoard(ABoard* block);
-    QList<ABoard*> getBoard();
+    QList<ABoard*> *boards();
     QString getActiveName();
 
 };

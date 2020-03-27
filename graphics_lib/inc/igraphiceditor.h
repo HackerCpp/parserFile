@@ -7,7 +7,7 @@ class IGraphicEditor
 {
 public:
     IGraphicEditor(){}
-    virtual ~IGraphicEditor();
+    virtual ~IGraphicEditor(){}
 };
 
 class AGraphicEditor : public IGraphicEditor
@@ -17,7 +17,7 @@ protected:
     FormsBlock *m_forms;
 public:
     AGraphicEditor(QMap<QString,ICurve*> *curves,FormsBlock *forms);
-    virtual ~AGraphicEditor();
+    virtual ~AGraphicEditor()override;
 };
 
 #endif // IGRAPHICEDITOR_H

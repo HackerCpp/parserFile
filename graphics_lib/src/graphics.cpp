@@ -1,7 +1,6 @@
 #include "graphics.h"
 #include "curve.h"
 #include "curvelineitem.h"
-#include "whitesubstrate.h"
 #include "grid.h"
 #include <QScrollBar>
 #include "ruler.h"

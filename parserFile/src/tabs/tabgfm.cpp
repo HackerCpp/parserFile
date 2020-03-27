@@ -5,7 +5,7 @@
 #include <QFileDialog>
 #include "gfmloader.h"
 #include "gfmsaver.h"
-
+#include "graphiceditor.h"
 #include "interpreterpython.h"
 
 
@@ -24,9 +24,9 @@ TabGFM::TabGFM(QString path,QWidget *parent) : AbstractTab(parent){
 
 
 
-    /*m_barHLayout = new QHBoxLayout();
+    m_barHLayout = new QHBoxLayout();
     m_mainVerticalLayout = new QVBoxLayout();
-    //m_gfm = new GFM(path);
+    m_graphicEditor = nullptr;
     m_toolBar = new QWidget();
     m_comboBox = new QComboBox();
     m_comboBox->insertItem(0,"Время");
@@ -36,9 +36,9 @@ TabGFM::TabGFM(QString path,QWidget *parent) : AbstractTab(parent){
     //while(!m_gfm->isReady()){}
     //m_forms = new AbstractForms(m_gfm->zipForms(),m_gfm->curves());
     m_mainVerticalLayout->addWidget(m_toolBar);
-    m_mainVerticalLayout->addWidget(m_forms);
+
     setLayout(m_mainVerticalLayout);
-    connect(m_comboBox,static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),this,&TabGFM::changeDrawType);*/
+    connect(m_comboBox,static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),this,&TabGFM::changeDrawType);
 }
 void TabGFM::changeDrawType(int index){
     /*Graphics * graphics = dynamic_cast<Graphics *>(m_tabWidget->currentWidget());
@@ -52,6 +52,21 @@ void TabGFM::changeDrawType(int index){
 
 void TabGFM::dataReady(){
     IInterpreterLogData *interpreter = new InterpreterPython();
+    FormsBlock *forms = nullptr;
+    QList<IBlock*> *blocks = m_logData->blocks();
+    foreach(auto block,*blocks){
+        if(block->name() == IBlock::FORMS_BLOCK){
+            forms = dynamic_cast<FormsBlock*>(block);
+            if(!forms){
+                qDebug() << "Forms найдены, но динамически не переводятся";
+            }
+            qDebug() << "Найден forms block не нулевой";
+            break;
+        }
+
+    }
+    m_graphicEditor = new GraphicEditor(m_logData->curves(),forms);
+    m_mainVerticalLayout->addWidget(m_graphicEditor);
     m_logData->setInterpreter(interpreter);
     m_logData->openInterpreter();
     ISaverLogData * gfmSaver = new GFMSaver();

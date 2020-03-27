@@ -50,7 +50,7 @@ LIBS += \
 #../build/release/graphics.lib
 
 #include(../gfm_lib/GFM.pri)
-#include(../graphics_lib/graphics.pri)
+include(../graphics_lib/graphics.pri)
 
 SOURCES += \
     src/tabs/abstracttab.cpp \

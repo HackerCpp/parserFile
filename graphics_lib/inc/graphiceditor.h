@@ -3,16 +3,14 @@
 
 #include <QTabWidget>
 #include "igraphiceditor.h"
+#include <QWidget>
 
-class GraphicEditor : public QTabWidget, AGraphicEditor
-{
+class GraphicEditor : public QTabWidget, AGraphicEditor{
     Q_OBJECT
 
 public:
     GraphicEditor(QMap<QString,ICurve*> *curves,FormsBlock *forms,QWidget *parent = nullptr);
-    ~GraphicEditor();
-signals:
-
+    virtual ~GraphicEditor();
 };
 
 #endif // GRAPHICEDITOR_H

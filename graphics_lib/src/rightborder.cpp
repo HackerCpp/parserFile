@@ -1,10 +1,11 @@
 #include "rightborder.h"
 
 RightBorder::RightBorder()
-    :QImage(10,2000,QImage::Format_ARGB32){
+    :Border(10,2000,QImage::Format_ARGB32){
     int width = this->width();
     m_collapseTab = new QImage(width,width,QImage::Format_ARGB32);
     m_expandTab = new QImage(width,width,QImage::Format_ARGB32);
+    m_curentTab = m_collapseTab;
 
     QPainter p(m_collapseTab);
     m_collapseTab->fill(QColor(255,255,255,255));
@@ -23,12 +24,36 @@ RightBorder::RightBorder()
 
     fill(QColor(240,240,240,0));
     QPainter painter(this);
-    p.setPen(QPen(QColor(0,0,0,0),1));
-        //p.setBrush(QColor(0,255,0,150));
-    p.setBrush(QColor(0,0,0,150));
-    p.drawRect(0,0,this->width(),this->height());
+    painter.setPen(QPen(QColor(0,0,0,0),1));
+    //painter.setBrush(QColor(0,255,0,150));
+    painter.setBrush(QColor(0,0,0,150));
+    painter.drawRect(0,0,this->width(),this->height());
+    painter.drawImage(QRectF(0,0,m_curentTab->width(),m_curentTab->height()),*m_curentTab);
 }
 
 RightBorder::~RightBorder(){
 
 }
+
+void RightBorder::click(bool isClick){
+    fill(QColor(240,240,240,0));
+    QPainter painter(this);
+    painter.setPen(QPen(QColor(0,0,0,0),1));
+    if(isClick)
+        painter.setBrush(QColor(0,255,0,150));
+    else
+        painter.setBrush(QColor(0,0,0,150));
+    painter.drawRect(0,0,this->width(),this->height());
+    painter.drawImage(QRectF(0,0,m_curentTab->width(),m_curentTab->height()),*m_curentTab);
+}
+
+void RightBorder::setopen(bool isOpen){
+    if(isOpen){
+       m_curentTab = m_collapseTab;
+    }
+    else{
+       m_curentTab = m_expandTab;
+    }
+    click(false);
+}
+

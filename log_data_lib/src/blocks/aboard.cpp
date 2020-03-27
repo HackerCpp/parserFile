@@ -19,10 +19,10 @@ void ABoard::setTrack(ATrack *track){
     else
         qDebug() << "не удалось вставить трэк, нулевой указатель";
 }
-QList<ATrack*> ABoard ::getTrack(){
-    return *m_tracks;
+QList<ATrack*> *ABoard::tracks(){
+    return m_tracks;
 }
-QString ABoard::getName()
+QString ABoard::name()
 {
     return m_name;
 }

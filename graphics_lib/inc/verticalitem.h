@@ -5,7 +5,7 @@
 class VerticalItem : public AGraphicItem
 {
 public:
-    VerticalItem();
+    VerticalItem(AItem *itemInfo,ICurve *curve);
     ~VerticalItem();
 };
 

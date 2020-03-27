@@ -14,7 +14,7 @@ InterpreterPython::InterpreterPython(){
     //from LogData.Curves import*
     m_mainContext = PythonQt::self()->getMainModule();
     m_console = new PythonQtScriptingConsole(NULL, m_mainContext);
-
+    m_console->setStyleSheet("PythonQtScriptingConsole{background-color:black;color:white;font-size: 24px;}");
 }
 
 InterpreterPython::~InterpreterPython(){
@@ -22,9 +22,6 @@ InterpreterPython::~InterpreterPython(){
 }
 
 bool InterpreterPython::openConsole(){
-
-    qDebug()<< "******************************************";
-   qDebug() << m_curves->size();
     int i=0;
     foreach (QString key, m_curves->keys())
 
@@ -41,8 +38,7 @@ bool InterpreterPython::openConsole(){
 
       ICurve* value=m_curves->value(key);
       m_mainContext.addObject(m, value);
-      qDebug() << key << ":" << value;
-        i++;
+      i++;
 
     }
 
