@@ -1,8 +1,19 @@
 #include "agraphictrack.h"
 #include <QGraphicsSceneMouseEvent>
+#include <QGraphicsScene>
 
-unsigned int AGraphicTrack::pictureHeight = 6000;
-unsigned int AGraphicTrack::offsetUp = 1000;
+
+
+void AGraphicTrack::swapPixMap(){
+    QImage *ptr = m_curentPixmap;
+    m_curentPixmap = m_doublePixMap;
+    m_doublePixMap = ptr;
+    /*ptr = m_curentHeader;
+    m_curentHeader = m_doubleHeader;
+    m_doubleHeader = ptr;*/
+    ptr = nullptr;
+    toSetTheLocationOfTheImageAfterDrawing();
+}
 
 void AGraphicTrack::init(){
      m_items = new QList<AGraphicItem>;
@@ -12,14 +23,11 @@ void AGraphicTrack::init(){
      m_isOpen = true;
      m_positionOfTheBorder = 0;
      m_boundingRect = QRectF(0,0,2000,2000);
+     connect(this,&AGraphicTrack::finished,this,&AGraphicTrack::sceneUpdate);
 }
 
-AGraphicTrack::AGraphicTrack(){
-    init();
-}
-
-AGraphicTrack::AGraphicTrack(ATrack *track,QMap<QString,ICurve*> *curves)
-    : m_track(track){
+AGraphicTrack::AGraphicTrack(ATrack *track,QMap<QString,ICurve*> *curves,BoardForTrack *board)
+    : m_board(board), m_track(track){
     init();
 }
 
@@ -32,18 +40,21 @@ void AGraphicTrack::mousePressEvent(QGraphicsSceneMouseEvent *event){
     if(is_openCloseClick(m_prevPoint)){
         openCloseClickHandler(m_prevPoint);
         m_isOpenCloseClick = true;
+        return;
     }
-    else if(is_borderClick(m_prevPoint)){
-        borderClickHandler(m_prevPoint);
-        m_isBorderClick = true;
-    }
-    else if(is_headerClick(m_prevPoint)){
-        headerClickHandler(m_prevPoint);
-        m_isHeaderClick = true;
-    }
-    else if(is_CurvesClick(m_prevPoint)){
-        curvesClickHandler(m_prevPoint);
-        m_isCurvesClick = true;
+    if(m_isOpen){
+        if(is_borderClick(m_prevPoint)){
+            borderClickHandler(m_prevPoint);
+            m_isBorderClick = true;
+        }
+        else if(is_headerClick(m_prevPoint)){
+            headerClickHandler(m_prevPoint);
+            m_isHeaderClick = true;
+        }
+        else if(is_CurvesClick(m_prevPoint)){
+            curvesClickHandler(m_prevPoint);
+            m_isCurvesClick = true;
+        }
     }
 }
 
@@ -75,3 +86,11 @@ void AGraphicTrack::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     m_isBorderClick = m_isCurvesClick = m_isHeaderClick = m_isOpenCloseClick = false;
 }
 
+void AGraphicTrack::sceneUpdate(){
+    if(m_needToRedraw){
+        m_needToRedraw = false;
+        start(QThread::InheritPriority);
+    }
+    else
+        scene()->update();
+}

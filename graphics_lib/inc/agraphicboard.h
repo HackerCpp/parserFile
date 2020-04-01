@@ -2,8 +2,9 @@
 #define AGRAPHICBOARD_H
 #include <QGraphicsView>
 #include "agraphictrack.h"
+#include "boardfortrack.h"
 
-class AGraphicBoard : public QGraphicsView
+class AGraphicBoard : public QGraphicsView,public BoardForTrack
 {
     Q_OBJECT
     int m_minimumSize;

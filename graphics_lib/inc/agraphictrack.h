@@ -7,27 +7,37 @@
 #include "agraphicitem.h"
 #include "objectoftheboard.h"
 #include "rightborder.h"
+#include "boardfortrack.h"
+
 
 
 class AGraphicTrack :  public ObjectOfTheBoard
 {
     Q_OBJECT
+
+
+public:
+    AGraphicTrack(ATrack *track,QMap<QString,ICurve*> *curves,BoardForTrack *board);
+    ~AGraphicTrack()override;
 protected:
+    BoardForTrack *m_board;
+    int m_topPositionPicture;
     QRectF m_boundingRect;
     Border *m_border;
     int m_positionOfTheBorder;
     QList<AGraphicItem> *m_items;
-    static unsigned int pictureHeight,offsetUp;
+
     ATrack *m_track;
-    QImage *m_curentPixmap,*m_doublePixMap;
+
     bool m_isBorderClick,m_isCurvesClick,m_isHeaderClick,m_isOpenCloseClick,m_isOpen;
     QPointF m_prevPoint;
 
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*) override{}
     virtual void run()override{}
     virtual QRectF boundingRect()const override{return m_boundingRect;}
-    virtual void swapPixMap(){}
-    void redraw(){}
+    virtual void swapPixMap();
+    virtual void toSetTheLocationOfTheImageAfterDrawing(){}
+
     void init();
 
     virtual bool is_openCloseClick(QPointF point){return false;}
@@ -53,14 +63,12 @@ protected:
     virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event)override;
 
 
-public:
-    AGraphicTrack();
-    AGraphicTrack(ATrack *track,QMap<QString,ICurve*> *curves);
-    ~AGraphicTrack()override;
+
 signals:
     virtual void changedPositionBorder(int position);
 public slots:
     virtual void changeBegin(int newBegin){}
+    void sceneUpdate();
 
 };
 

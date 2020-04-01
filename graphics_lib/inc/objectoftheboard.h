@@ -8,10 +8,13 @@ class ObjectOfTheBoard : public QThread,public QGraphicsItem
 {
     Q_OBJECT
 protected:
-    static qreal m_pixelPerMm;
+
     QRect m_visibilitySquare;
+    bool m_needToRedraw;
+    QImage *m_curentPixmap,*m_doublePixMap;
 
     virtual QRectF boundingRect()const{return m_visibilitySquare;}
+    void redraw();
 public:
     ObjectOfTheBoard();
     ~ObjectOfTheBoard(){}

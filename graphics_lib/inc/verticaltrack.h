@@ -5,13 +5,13 @@
 
 class VerticalTrack : public AGraphicTrack
 {
-    static int m_bottomY , m_topY;
     int m_curentWidth;
 public:
-    VerticalTrack(ATrack *track,QMap<QString,ICurve*> *curves);
+    VerticalTrack(ATrack *track,QMap<QString,ICurve*> *curves,BoardForTrack *board);
     ~VerticalTrack()override;
 private:
     void init();
+    void resizePictures();
 
     virtual bool is_openCloseClick(QPointF point) override;
     virtual bool is_borderClick(QPointF point)override;
@@ -33,6 +33,8 @@ private:
 
 protected:
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*)override;
+    virtual void toSetTheLocationOfTheImageAfterDrawing()override;
+    virtual void run() override;
 public slots:
     virtual void changeBegin(int newBegin)override;
 

@@ -24,6 +24,7 @@ public:
     bool addCurve(ICurve *curve,int indexTab);
 private:
     void init();
+    virtual void resizeEvent(QResizeEvent *event)override;
 
 public slots:
     void scrollChanged();

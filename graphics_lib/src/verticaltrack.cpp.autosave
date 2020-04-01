@@ -19,8 +19,8 @@ VerticalTrack::VerticalTrack(ATrack *track,QMap<QString,ICurve*> *curves,BoardFo
     m_curentPixmap = new QImage(f_pictureWidth,f_pictureHeight,QImage::Format_RGB32);
     m_doublePixMap = new QImage(f_pictureWidth,f_pictureHeight,QImage::Format_RGB32);
     m_boundingRect = QRectF(m_track->Begin() * f_pixelPerMm,f_topY,m_track->Width() * f_pixelPerMm,f_lengthY);
-    /*QList <AItem*> itemInfo = track->Items();
-    //m_items->push_back(AGraphicItem::createItem(itemInfo.last(),curves->take(itemInfo.last().name())));*/
+    QList <AItem*> itemInfo = track->Items();
+    m_items->push_back(AGraphicItem::createItem(itemInfo.last(),curves->take(itemInfo.last().name())));*/
 }
 
 VerticalTrack::~VerticalTrack(){
