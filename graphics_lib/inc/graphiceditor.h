@@ -11,6 +11,10 @@ class GraphicEditor : public QTabWidget, AGraphicEditor{
 public:
     GraphicEditor(QMap<QString,ICurve*> *curves,FormsBlock *forms,QWidget *parent = nullptr);
     virtual ~GraphicEditor();
+
+    void setDrawTime();
+    void setDrawDepth();
+
 };
 
 #endif // GRAPHICEDITOR_H

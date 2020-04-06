@@ -4,10 +4,10 @@
 
 #include "atrack.h"
 #include <QDebug>
-#include "agraphicitem.h"
 #include "objectoftheboard.h"
 #include "rightborder.h"
 #include "boardfortrack.h"
+#include "itimscreater.h"
 
 
 
@@ -15,17 +15,21 @@ class AGraphicTrack :  public ObjectOfTheBoard
 {
     Q_OBJECT
 
-
 public:
     AGraphicTrack(ATrack *track,QMap<QString,ICurve*> *curves,BoardForTrack *board);
     ~AGraphicTrack()override;
+
+    virtual void resize()override{}
+
+    qreal topValue();
+    qreal bottomValue();
 protected:
     BoardForTrack *m_board;
     int m_topPositionPicture;
     QRectF m_boundingRect;
     Border *m_border;
     int m_positionOfTheBorder;
-    QList<AGraphicItem> *m_items;
+    QList<AGraphicItem*> *m_items;
 
     ATrack *m_track;
 

@@ -97,14 +97,15 @@ void LogData::findCurvesMap(){
                    if(!curve){
                        qDebug() << "Нулевая кривая в блоке";
                    }
-                   if(!curve->shortCut().getName().isEmpty()){
-                       QString name = curve->shortCut().getNameWithoutNumber() + ':' + curve->mnemonic();
+                   if(!curve->shortCut().Name().isEmpty()){
+                       QString name = curve->shortCut().NameWithoutNumber() + ':' + curve->mnemonic();
                        m_curvesMap->insert(name,curve);
                    }
                }
            }
         }
     }
+
     m_isReady = true;
     emit ready();
 }

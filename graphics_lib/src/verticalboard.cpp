@@ -30,6 +30,7 @@ VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves)
 
     connect(horizontalScrollBar(), &QScrollBar::valueChanged, this, &VerticalBoard::scrollChanged);
     connect(verticalScrollBar(), &QScrollBar::valueChanged, this, &VerticalBoard::scrollChanged);
+    resize();
 }
 
 VerticalBoard::VerticalBoard(QMap<QString,ICurve*> *curves){
@@ -44,6 +45,7 @@ VerticalBoard::~VerticalBoard(){
 
 }
 
+
 void VerticalBoard::newTrack(){
 
 }
@@ -54,11 +56,11 @@ void VerticalBoard::init(){
 }
 
 void VerticalBoard::resizeEvent(QResizeEvent *event){
+    resize();
     scrollChanged();
 }
 
 void inline VerticalBoard::scrollChanged(){
-
     QPolygonF f_rect = mapToScene(QRect(x(),y(),width(),height()));
     if(f_rect.isEmpty()){
         qDebug() << "нулевой размер у борда, сигнал трэкам не может быть отправлен" << m_board->name();

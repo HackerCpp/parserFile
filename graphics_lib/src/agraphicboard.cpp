@@ -4,7 +4,39 @@
 AGraphicBoard::AGraphicBoard()
 {
     m_minimumSize = 2000;
-    setSceneRect(QRect(0,-10,m_minimumSize,m_minimumSize));
+    //setSceneRect(QRect(0,-10,m_minimumSize,m_minimumSize));
+    //resize();
+}
+
+void AGraphicBoard::resize(){
+    QList<QGraphicsItem *> m_items = this->items();
+    int f_width = 0;
+    qreal f_topPosition = 999999999999999999;
+    qreal f_bottomPosition = -999999999999999999;
+    foreach(auto item, m_items){
+        int rightPosition = item->boundingRect().x() + item->boundingRect().width();
+        AGraphicTrack *f_track = dynamic_cast<AGraphicTrack *>(item);
+        if(f_track){
+            f_topPosition = f_topPosition < f_track->topValue() ? f_topPosition : f_track->topValue();
+            f_bottomPosition = f_bottomPosition > f_track->bottomValue() ? f_bottomPosition : f_track->bottomValue();
+        }
+        f_width = (f_width > rightPosition ? f_width : rightPosition);
+    }
+    m_top = f_topPosition - (20 * m_pixelPerMm);
+    m_length = f_bottomPosition - m_top + (20 * m_pixelPerMm);
+    if(m_length < 1000)
+        m_length = 1000;
+    setSceneRect(QRect(0,m_top,f_width,m_length));
+    foreach(auto item, m_items){
+        int rightPosition = item->boundingRect().x() + item->boundingRect().width();
+        AGraphicTrack *f_track = dynamic_cast<AGraphicTrack *>(item);
+        if(f_track){
+            f_track->resize();
+        }
+        else{
+            qDebug() << "не удалось преобразовать QGraphicItem in AGraphicTrack;";
+        }
+    }
 }
 
 void AGraphicBoard::mousePressEvent(QMouseEvent *event){

@@ -68,3 +68,7 @@ QList<ICurve*> *DataBlock::curves(){
 QList<ShortCut> *DataBlock::shortCuts(){
     return m_shortCuts;
 }
+QString DataBlock:: nameRecord()
+{
+    return m_nameRecord;
+}

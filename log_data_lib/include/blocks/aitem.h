@@ -2,20 +2,22 @@
 #define AITEM_H
 #include <QVariant>
 #include "astyleitem.h"
-
-
-
-
-
+#include <QDebug>
 
 //enum PaintMode{CURVE_MODE,NUMBERS_MODE};
 enum TypeItem{LINE,ACU,MARK};
 
 
-class AItem {
+class AItem{
+public:
+    enum VisibleView{VIEW_NUM,BOARD_GRAPH_VIEW,BOARD_LEGEND_VIEW,
+                    BOARD_WAVE_VIEW,DIGITAL_DATA_VIEW,DIGITAL_LEGEND_VIEW,
+                    BOARD_TOOL_TIP_VIEW,MAXIMIM};
+
+protected:
     TypeItem m_type;
     QString m_name;
-    QString m_visible;
+
     struct Begin{
         bool is_beginValue;
         qreal beginValue;
@@ -33,34 +35,37 @@ class AItem {
         qreal gleamCount;
         qreal gleamScale;
     }m_multiScale;
+
+    uint8_t m_visible[VisibleView::MAXIMIM];
 public:
     AItem();
     virtual ~AItem();
 
-    virtual QString name();
+    virtual QString name(){return m_name;}
     virtual QString visible();
+    virtual bool visible(VisibleView what){return m_visible[what];}
 
-    virtual bool isBeginValue();
-    virtual qreal beginValue();
-    virtual qreal zeroOffset();
+    virtual bool isBeginValue(){return m_begin.is_beginValue;}
+    virtual qreal beginValue(){return m_begin.beginValue;}
+    virtual qreal zeroOffset(){return m_begin.zeroOffset;}
 
-    virtual bool isEndValue();
-    virtual qreal endValue();
-    virtual qreal scale();
+    virtual bool isEndValue(){return m_end.is_endValue;}
+    virtual qreal endValue(){return m_end.endValue;}
+    virtual qreal scale(){return m_end.scale;}
 
-    virtual bool isMultiScale();
-    virtual qreal glemCount();
-    virtual qreal glemScale();
+    virtual bool isMultiScale(){return m_multiScale.is_multiscale;}
+    virtual qreal glemCount(){return m_multiScale.gleamCount;}
+    virtual qreal glemScale(){return m_multiScale.gleamScale;}
 
 
-    virtual TypeItem Type();
+    virtual TypeItem Type(){return m_type;}
 
 
     virtual void setBegin(bool isBegin, qreal begin, qreal zeroOffset);
     virtual void setEnd(bool isEnd,qreal end,qreal scale);
     virtual void setMultiScale(bool isMultiScale,qreal gleamCount,qreal gleamScale);
     virtual void setName(QString name, QString visible);
-    virtual void setTypeItem(TypeItem type);
+    virtual void setTypeItem(TypeItem type){m_type = type;}
 
 
 };

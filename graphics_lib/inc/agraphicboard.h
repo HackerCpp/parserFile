@@ -15,6 +15,10 @@ public:
     ~AGraphicBoard()override{}
 
     virtual void newTrack(){}
+
+    virtual void resize()override;
+    virtual void setDrawTime()override{m_isDrawTime = true; resize();}
+    virtual void setDrawDepth()override{m_isDrawTime = false; resize();}
 private:
     virtual void mousePressEvent(QMouseEvent *event)override;
     virtual void mouseMoveEvent(QMouseEvent *event)override;

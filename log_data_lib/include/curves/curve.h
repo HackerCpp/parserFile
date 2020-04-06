@@ -15,8 +15,11 @@ public:
     ~Curve()override{}
 
      qreal data(uint index)override;
+     QByteArray data() override;
      uint setData(const char *dataPtr,uint numberOfVectors)override;
      uint setData(qreal data,uint index)override;
+
+     uint size()override;
 };
 
 template<typename T> qreal Curve<T>::data(uint index){
@@ -27,6 +30,14 @@ template<typename T> qreal Curve<T>::data(uint index){
     }
     return m_data->data()[index];
 }
+
+template<typename T> QByteArray Curve<T>::data(){
+    if(m_data)
+        return QByteArray((const char*)m_data->data(),static_cast<int>(m_sizeOfType)*m_data->size());
+    return QByteArray();
+}
+
+
 template<typename T> uint Curve<T>::setData(qreal data,uint index){
     if(index>m_data->size())
     {
@@ -48,6 +59,10 @@ template<typename T> uint Curve<T>::setData(const char *dataPtr,uint numberOfVec
     return dataSizeInBytes;
 }
 
-
+template<typename T> uint Curve<T>::size(){
+    if(m_data)
+        return m_data->size();
+    return 0;
+}
 
 #endif // CURVE_H

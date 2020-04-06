@@ -18,3 +18,25 @@ GraphicEditor::GraphicEditor(QMap<QString,ICurve*> *curves,FormsBlock *forms,QWi
 GraphicEditor::~GraphicEditor(){
 
 }
+
+void GraphicEditor::setDrawTime(){
+    for(int i = 0; i < count();++i){
+        AGraphicBoard * editor = dynamic_cast<AGraphicBoard *>(widget(i));
+        if(editor)
+            editor->setDrawTime();
+        else{
+            qDebug() << "Не удалось установить отрисовкупо времени ";
+        }
+    }
+}
+
+void GraphicEditor::setDrawDepth(){
+    for(int i = 0; i < count();++i){
+        AGraphicBoard * editor = dynamic_cast<AGraphicBoard *>(widget(i));
+        if(editor)
+            editor->setDrawDepth();
+        else{
+            qDebug() << "Не удалось установить отрисовку по глубине ";
+        }
+    }
+}

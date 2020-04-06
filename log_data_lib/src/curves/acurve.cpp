@@ -51,6 +51,16 @@ bool ACurve::setUserBaseValue(ICurve *userBaseValue){
     return true;
 }
 
+QString ACurve :: dataType()
+{
+    return m_dataType;
+}
+
+uint ACurve::size()
+{
+    return m_size;
+}
+
 qreal ACurve::maximum(){
     return m_maximum;
 }
@@ -67,14 +77,15 @@ ShortCut ACurve::shortCut(){
     return m_shortCut;
 }
 
+
 QString ACurve::mnemonic(){
     return m_mnemonic;
 }
 
 
 void ACurve::setShortCut(ShortCut shortCut){
-    m_shortCut.setName(shortCut.getName());
-    m_shortCut.setRef(shortCut.getRef());
+    m_shortCut.setName(shortCut.Name());
+    m_shortCut.setRef(shortCut.Ref());
 }
 
 void ACurve::setOffset(uint offset){
@@ -100,6 +111,11 @@ void ACurve::setRecordPoint(QString recordPoint){
 void ACurve::setDesc(Desc *desc){
     m_desc = desc;
 }
+QString ACurve::recordPoint()
+{
+    return m_recordPoint;
+}
+
 
 uint ACurve::offset(){
     return m_offset;

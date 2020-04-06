@@ -18,6 +18,7 @@ protected:
 public:
     ObjectOfTheBoard();
     ~ObjectOfTheBoard(){}
+    virtual void resize(){}
 public slots:
     void changingTheVisibilityZone(QRect newVisibilityZone);
 };

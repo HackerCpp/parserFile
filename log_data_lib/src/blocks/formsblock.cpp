@@ -17,9 +17,10 @@ void FormsBlock::setActiveName(QString activeName){
 void FormsBlock::addBoard(ABoard* block){
     m_boards->push_back(block);
 }
-QList<ABoard*> *FormsBlock::boards(){
+QList<ABoard*> *FormsBlock::boards()
+{
     return m_boards;
 }
-QString FormsBlock::getActiveName(){
+QString FormsBlock::activeName(){
     return m_activeName;
 }

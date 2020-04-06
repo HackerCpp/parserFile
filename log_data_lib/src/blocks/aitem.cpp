@@ -1,99 +1,55 @@
 #include "aitem.h"
 
-AItem::AItem()
-{
+AItem::AItem(){
 
 }
-AItem::~AItem()
-{
+AItem::~AItem(){
 
 }
-bool AItem :: isBeginValue()
-{
-    return m_begin.is_beginValue;
-}
-qreal AItem :: zeroOffset()
-{
-    return m_begin.zeroOffset;
+
+QString AItem::visible(){
+    QString f_visible;
+    for(int i = 0 ; i < VisibleView::MAXIMIM; ++i){
+        f_visible.append(QString::number(m_visible[i]));
+        if(i != VisibleView::MAXIMIM - 1)
+            f_visible.append(":");
+    }
+    f_visible.resize(f_visible.size() - 1);
+    return f_visible;
 }
 
-qreal AItem :: beginValue()
-{
-    return m_begin.beginValue;
-}
-bool AItem :: isEndValue()
-{
-    return m_end.is_endValue;
-}
-qreal AItem :: endValue()
-{
-    return m_end.is_endValue;
-}
-qreal AItem :: scale()
-{
-    return m_end.scale;
-}
-QString AItem :: name()
-{
-    return m_name;
-}
-QString AItem :: visible()
-{
-    return m_visible;
-}
-
-bool AItem :: isMultiScale()
-{
-    return m_multiScale.is_multiscale;
-}
-qreal AItem :: glemCount()
-{
-    return m_multiScale.gleamCount;
-}
-
-TypeItem AItem :: Type()
-{
-    return m_type;
-}
-
-
-qreal AItem :: glemScale()
-{
-   return m_multiScale.gleamScale;
-}
-
-
-void AItem :: setBegin(bool isBegin,qreal begin,qreal zeroOffset)
-{
+void AItem::setBegin(bool isBegin,qreal begin,qreal zeroOffset){
     m_begin.is_beginValue = isBegin;
     m_begin.beginValue = begin;
     m_begin.zeroOffset = zeroOffset;
 }
-void AItem :: setEnd(bool isEnd,qreal end,qreal scale)
-{
+
+void AItem::setEnd(bool isEnd,qreal end,qreal scale){
     m_end.is_endValue = isEnd;
     m_end.endValue = end;
     m_end.scale = scale;
 }
-void AItem :: setMultiScale(bool isMultiScale,qreal gleamCount,qreal gleamScale)
-{
+
+void AItem::setMultiScale(bool isMultiScale,qreal gleamCount,qreal gleamScale){
     m_multiScale.is_multiscale = isMultiScale;
     m_multiScale.gleamCount = gleamCount;
     m_multiScale.gleamScale = gleamScale;
 }
 
-void AItem :: setName(QString name, QString visible)
-{
+void AItem::setName(QString name, QString visible){
     m_name = name;
-    m_visible = visible;
+    visible = visible.remove(":");
+    m_visible[VisibleView::VIEW_NUM] = QString(visible[0]).toInt();
+    if(m_visible[VisibleView::VIEW_NUM] != visible.size() - 1 ||
+       m_visible[VisibleView::VIEW_NUM] != VisibleView::MAXIMIM - 1){
+        qDebug() << "Информация о видимости item не корректная, флагов меньше  или больше чем в описании";
+        qDebug() << m_visible[VisibleView::VIEW_NUM] << visible.size() - 1;
+        return;
+    }
+
+    for(int i = 1 ; i < VisibleView::MAXIMIM; ++i){
+        m_visible[i] = QString(visible[i]).toInt();
+    }
 }
-void AItem ::setTypeItem(TypeItem type)
-{
-    m_type = type;
-}
-
-
-
-
 
 

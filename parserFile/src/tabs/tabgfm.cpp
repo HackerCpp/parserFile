@@ -31,7 +31,9 @@ TabGFM::TabGFM(QString path,QWidget *parent) : AbstractTab(parent){
     m_comboBox = new QComboBox();
     m_comboBox->insertItem(0,"Время");
     m_comboBox->insertItem(1,"Глубина");
+    m_comboBox->setMaximumSize(100,40);
     m_barHLayout->addWidget(m_comboBox);
+    m_barHLayout->addStretch(100);
     m_toolBar->setLayout(m_barHLayout);
     //while(!m_gfm->isReady()){}
     //m_forms = new AbstractForms(m_gfm->zipForms(),m_gfm->curves());
@@ -41,17 +43,16 @@ TabGFM::TabGFM(QString path,QWidget *parent) : AbstractTab(parent){
     connect(m_comboBox,static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),this,&TabGFM::changeDrawType);
 }
 void TabGFM::changeDrawType(int index){
-    /*Graphics * graphics = dynamic_cast<Graphics *>(m_tabWidget->currentWidget());
-    if(graphics){
-        if(index)
-            graphics->drawDepth();
-        else
-            graphics->drawTime();
-    }*/
+    if(!m_graphicEditor)
+        return;
+    if(index)
+        m_graphicEditor->setDrawDepth();
+    else
+        m_graphicEditor->setDrawTime();
 }
 
 void TabGFM::dataReady(){
-    IInterpreterLogData *interpreter = new InterpreterPython();
+    //IInterpreterLogData *interpreter = new InterpreterPython();
     FormsBlock *forms = nullptr;
     QList<IBlock*> *blocks = m_logData->blocks();
     foreach(auto block,*blocks){
@@ -60,15 +61,15 @@ void TabGFM::dataReady(){
             if(!forms){
                 qDebug() << "Forms найдены, но динамически не переводятся";
             }
-            qDebug() << "Найден forms block не нулевой";
             break;
         }
 
     }
     m_graphicEditor = new GraphicEditor(m_logData->curves(),forms);
     m_mainVerticalLayout->addWidget(m_graphicEditor);
-    m_logData->setInterpreter(interpreter);
-    m_logData->openInterpreter();
+    m_comboBox->currentIndexChanged(m_comboBox->currentIndex());
+    //m_logData->setInterpreter(interpreter);
+    //m_logData->openInterpreter();
     ISaverLogData * gfmSaver = new GFMSaver();
     m_logData->setSaver(gfmSaver);
     m_logData->save();

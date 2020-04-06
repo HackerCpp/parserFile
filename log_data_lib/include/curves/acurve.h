@@ -26,6 +26,7 @@ public:
     virtual ~ACurve()override;
 
     virtual qreal data(uint index)override{return 0;}
+    virtual QByteArray data()override{return 0;}
     virtual uint setData(qreal data)override;
     virtual uint setData(qreal data,uint index)override;
     virtual uint setData(const char *dataPtr,uint numberOfVectors)override;
@@ -38,9 +39,13 @@ public:
     virtual bool setTime(ICurve *time)override;
     virtual bool setDepth(ICurve *depth)override;
     virtual bool setUserBaseValue(ICurve *userBaseValue)override;
+    virtual QString recordPoint();
 
+    virtual uint size()override;
     virtual qreal maximum()override;
     virtual qreal minimum()override;
+
+
 
     virtual Desc *desc()override;
     virtual ShortCut shortCut()override;
@@ -53,6 +58,8 @@ public:
     virtual void setDataType(QString dataType);
     virtual void setRecordPoint(QString recordPoint);
     virtual void setDesc(Desc *desc);
+
+    virtual QString dataType();
 
     virtual uint offset();
 

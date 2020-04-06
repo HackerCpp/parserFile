@@ -9,9 +9,13 @@ class VerticalTrack : public AGraphicTrack
 public:
     VerticalTrack(ATrack *track,QMap<QString,ICurve*> *curves,BoardForTrack *board);
     ~VerticalTrack()override;
+
+    void resize()override;
+
 private:
     void init();
     void resizePictures();
+    void drawGrid(qreal step_mm,QPainter *per,QPen pen);
 
     virtual bool is_openCloseClick(QPointF point) override;
     virtual bool is_borderClick(QPointF point)override;

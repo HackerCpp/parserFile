@@ -16,7 +16,7 @@ void AGraphicTrack::swapPixMap(){
 }
 
 void AGraphicTrack::init(){
-     m_items = new QList<AGraphicItem>;
+     m_items = new QList<AGraphicItem*>;
      m_visibilitySquare.setRect(0,0,2000,2000);
      m_border = nullptr;
      m_isBorderClick = m_isCurvesClick = m_isHeaderClick = m_isOpenCloseClick = false;
@@ -33,6 +33,28 @@ AGraphicTrack::AGraphicTrack(ATrack *track,QMap<QString,ICurve*> *curves,BoardFo
 
 AGraphicTrack::~AGraphicTrack(){
 
+}
+
+qreal AGraphicTrack::topValue(){
+    if(!m_items){
+        return 0;
+    }
+    qreal f_minimum = 0xffffffffffffffff;
+    foreach(auto value,*m_items){
+        f_minimum = f_minimum < value->topValue() ? f_minimum : value->topValue();
+    }
+    return f_minimum;
+}
+
+qreal AGraphicTrack::bottomValue(){
+    if(!m_items){
+        return 0;
+    }
+    qreal f_maximum = -999999999999999999;
+    foreach(auto value,*m_items){
+        f_maximum = f_maximum > value->bottomValue() ? f_maximum : value->bottomValue();
+    }
+    return f_maximum;
 }
 
 void AGraphicTrack::mousePressEvent(QGraphicsSceneMouseEvent *event){
@@ -75,15 +97,18 @@ void AGraphicTrack::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
 void AGraphicTrack::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     QPointF f_curentPoint = event->scenePos();
     if(m_isBorderClick){
+        m_isBorderClick = m_isOpenCloseClick = false;
         borderReleaseHandler(f_curentPoint);
     }
     else if(m_isHeaderClick){
+        m_isHeaderClick = false;
         headerReleaseHandler(f_curentPoint);
     }
     else if(m_isCurvesClick){
+        m_isCurvesClick = false;
         curvesReleaseHandler(f_curentPoint);
     }
-    m_isBorderClick = m_isCurvesClick = m_isHeaderClick = m_isOpenCloseClick = false;
+    //m_isBorderClick = m_isCurvesClick = m_isHeaderClick = m_isOpenCloseClick = false;
 }
 
 void AGraphicTrack::sceneUpdate(){

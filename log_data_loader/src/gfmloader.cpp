@@ -668,9 +668,9 @@ void GFMLoader::findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *
     QList<ShortCut> shortCuts = *dataBlock->shortCuts();
     ShortCut shortCut;
     foreach(auto value,shortCuts){
-        if (f_shortCut == value.getRef()){
-            shortCut.setRef(value.getRef());
-            shortCut.setName(value.getName());
+        if (f_shortCut == value.Ref()){
+            shortCut.setRef(value.Ref());
+            shortCut.setName(value.Name());
         }
     }
     curveAbstract->setShortCut(shortCut);
@@ -686,7 +686,7 @@ void GFMLoader::findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *
     curveAbstract->setDataType(dataType);
 
     int indexEndRecordPoint = indexEndType;
-    if(!shortCut.getRef().isEmpty()){
+    if(!shortCut.Ref().isEmpty()){
         int indexBeginRecordPoint = curveLine.indexOf(":",indexEndType);
         indexEndRecordPoint = curveLine.indexOf(" ",indexBeginRecordPoint + 3);
         QString recordPoint = curveLine.mid(indexBeginRecordPoint + 2,indexEndRecordPoint - indexBeginRecordPoint - 2);

@@ -10,9 +10,9 @@ public:
     ShortCut();
     void setRef(QString ref);
     void setName(QString name);
-    QString getRef();
-    QString getName();
-    QString getNameWithoutNumber();
+    QString Ref();
+    QString Name();
+    QString NameWithoutNumber();
 };
 
 #endif // SHORTCUT_H

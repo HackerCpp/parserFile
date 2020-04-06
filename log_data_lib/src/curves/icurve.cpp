@@ -11,7 +11,9 @@ ICurve::~ICurve(){
 qreal ICurve::data(uint index){
     return 0;
 }
-
+QByteArray ICurve::data(){
+    return QByteArray();
+}
 uint ICurve::setData(qreal data){
     return 0;
 }
@@ -50,6 +52,9 @@ bool ICurve::setUserBaseValue(ICurve *userBaseValue){
     return false;
 }
 
+uint ICurve::size(){
+    return 0;
+}
 qreal ICurve::maximum(){
     return 0;
 }

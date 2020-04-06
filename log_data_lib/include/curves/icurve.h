@@ -12,6 +12,7 @@ public:
     virtual ~ICurve();
 
     virtual qreal data(uint index);
+    virtual QByteArray data();
     virtual uint setData(qreal data);
     virtual uint setData(qreal data,uint index);
     virtual uint setData(const char *dataPtr,uint numberOfVectors);
@@ -24,9 +25,9 @@ public:
     virtual bool setDepth(ICurve *depth);
     virtual bool setUserBaseValue(ICurve *userBaseValue);
 
+    virtual uint size();
     virtual qreal maximum();
     virtual qreal minimum();
-
     virtual Desc *desc();
     virtual ShortCut shortCut();
     virtual QString mnemonic();

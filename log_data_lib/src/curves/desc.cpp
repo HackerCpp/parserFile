@@ -47,7 +47,7 @@ QByteArray Desc::getForSave(){
     QByteArray f_byteArray;
     QString f_string = "<desc";
     for(auto i = m_parameters->begin(); i != m_parameters->end();i++) {
-        QString f_str = " %1=\"%2\"";
+        QString f_str = " %2=\"%1\"";
         f_str = f_str.arg(*dynamic_cast<const QString*>(&i.key())).arg(i.value());
         f_string.append(f_str);
     }

@@ -31,6 +31,7 @@ public:
     uint numberOfVectors();
     QList<ICurve*> *curves();
     QList<ShortCut> *shortCuts();
+    QString nameRecord();
 
 
 };
