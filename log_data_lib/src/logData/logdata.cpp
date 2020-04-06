@@ -38,8 +38,15 @@ bool LogData::load(){
 }
 
 bool LogData::save(){
+    if(m_saver){
+        qDebug() << "saver";
+        m_saver->save();
+    }
+    else{
+        qDebug() << "Не найден сохранятель для лог даты";
+        return false;
+    }
     return true;
-
 }
 
 bool LogData::openInterpreter(){

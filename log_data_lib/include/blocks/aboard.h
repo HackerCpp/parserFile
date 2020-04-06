@@ -8,7 +8,7 @@
 
 class ABoard : public IBoard{
     QString m_name;
-    QList<ATrack*>*m_tracks;
+    QList<ATrack*> *m_tracks;
 
 public:
     ABoard();

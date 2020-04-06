@@ -13,7 +13,7 @@ class ATrack{
     Types m_type;
     QString m_name;
 
-    bool m_IsGreed;
+    bool m_isGreed;
     qreal m_begin,m_width;
     struct Logarithm{
         qreal logarithmBase;
@@ -27,25 +27,24 @@ public:
     ~ATrack(){}
 
 
-    void setIsGreed(bool isGreed);
-    void setName(QString name);
-    void setType(Types type);
+    void setIsGreed(bool isGreed){m_isGreed = isGreed;}
+    void setName(QString name){m_name = name;}
+    void setType(Types type){m_type = type;}
     void setLogarithm(qreal log_base,qreal dec_count, qreal dec_start,qreal dec_end);
-    void setBegin(qreal begin);
-    void setWidth(qreal width);
+    void setBegin(qreal begin){m_begin = begin;}
+    void setWidth(qreal width){m_width = width;}
     void setItem(AItem *item);
 
-    bool IsGreed();
-    QString Name();
-    Types Type();
-    qreal Begin();
-    qreal Width();
-    qreal Logarithm();
+    bool IsGreed(){return m_isGreed;}
+    QString Name(){return m_name;}
+    Types Type(){return m_type;}
+    qreal Begin(){return m_begin;}
+    qreal Width(){return m_width;}
     qreal LogarithmBase();
     qreal DecadeCount();
     qreal DecadeStart();
     qreal DecadeEnd();
-    QList <AItem*> Items();
+    QList<AItem*> *Items(){return m_items;}
 
 };
 

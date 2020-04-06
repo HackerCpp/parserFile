@@ -9,7 +9,6 @@
 
 class IBlock{
 
-QString m_name;
 public:
     enum TypeBlock {NO_BLOCK,DATA_BLOCK, FORMS_BLOCK,
                     TOOLINFO_BLOCK, HEADER_BLOCK};
@@ -19,10 +18,6 @@ public:
 
     virtual TypeBlock name();
     virtual bool parser(const char *body,uint32_t size);
-    virtual void setName(QString name);
-    virtual QString names();
-
-
 };
 
 #endif // IBLOCK_H

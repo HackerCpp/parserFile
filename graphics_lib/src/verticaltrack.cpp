@@ -19,13 +19,13 @@ VerticalTrack::VerticalTrack(ATrack *track,QMap<QString,ICurve*> *curves,BoardFo
     m_curentPixmap = new QImage(f_pictureWidth,f_pictureHeight,QImage::Format_RGB444);
     m_doublePixMap = new QImage(f_pictureWidth,f_pictureHeight,QImage::Format_RGB444);
     m_boundingRect = QRectF(m_track->Begin() * f_pixelPerMm,f_topY,m_track->Width() * f_pixelPerMm,f_lengthY);
-    QList <AItem*> itemInfo = track->Items();
-    int c = 0,y = 0;
-    foreach(auto item,itemInfo){
+    QList <AItem*> *itemInfo = track->Items();
+    int f_count = 0,y = 0;
+    foreach(auto item,*itemInfo){
         QString name = item->name();
         ICurve *curve = curves->value(name);
         if(!curve){
-            ++c;
+            ++f_count;
             //qDebug() << "Curve null" << name;
         }
         else{
@@ -33,8 +33,8 @@ VerticalTrack::VerticalTrack(ATrack *track,QMap<QString,ICurve*> *curves,BoardFo
             m_items->push_back(ItimsCreater::createItem(item,curve,m_board,ItimsCreater::VERTICAL));
         }
     }
-    if(c){
-        qDebug() << "Кривые не все вставлены в трек, некоторые не найдены" << c << y;
+    if(f_count){
+        qDebug() << "Кривые не все вставлены в трек, некоторые не найдены" << f_count << y;
     }
 }
 
@@ -218,6 +218,7 @@ void VerticalTrack::run(){
     QPainter painter(m_doublePixMap);
     //QPainter painterHeader(m_doubleHeader);
     //m_doubleHeader->fill(0);
+    int f_height = m_doublePixMap->height();
     m_doublePixMap->fill(0xffffff);
     painter.setPen(QPen(QColor(0,0,0,200),1,Qt::DashLine));//Qt::DotLine  Qt::DashLine Qt::DashDotDotLine
     qreal f_pixelPerMm = m_board->pixelPerMm();
@@ -226,7 +227,7 @@ void VerticalTrack::run(){
         drawGrid(20 * f_pixelPerMm,&painter,QPen(QColor(0,0,0,200),1));
     }
     else{
-
+        painter.drawLine(QPoint(0,0),QPoint(0,f_height));
     }
     int position = 0;
     foreach(auto item,*m_items){

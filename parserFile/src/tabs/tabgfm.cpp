@@ -20,10 +20,6 @@ TabGFM::TabGFM(QString path,QWidget *parent) : AbstractTab(parent){
     //IInterpreterLogData *interpreter = new InterpreterPython();
     //m_logData->setInterpreter(interpreter);
     //m_logData->openInterpreter();
-
-
-
-
     m_barHLayout = new QHBoxLayout();
     m_mainVerticalLayout = new QVBoxLayout();
     m_graphicEditor = nullptr;

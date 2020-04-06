@@ -11,6 +11,8 @@
 #include "LineItem.h"
 #include "markItem.h"
 #include "AcuItem.h"
+#include "headerblock.h"
+
 
 bool GFMLoader::gzipCompress(QByteArray input, QByteArray &output, int level){
     output.clear();
@@ -147,6 +149,7 @@ void findBlocksByteFFFE(QByteArray byteArrayFile,QList<BlockByte> *blocksList,in
 
 GFMLoader::GFMLoader(QString path){
     m_path = path;
+    m_codec = QTextCodec::codecForMib(1015);
 }
 
 GFMLoader::~GFMLoader(){
@@ -178,31 +181,26 @@ void GFMLoader::run(){
         IBlock *block = nullptr;
         QString name = value.nameBlock;
         if(name == "[HEADER]")
-            block = new HeaderBlock;
+            block = new HearedBlock;
         else if(name == "[TOOL_INFO]")
             block = new ToolInfoBlock;
         else if(name == "[FORMS]")
             block = new FormsBlock;
         else if(name == "[DATA_BLOCK]")
             block = new DataBlock;
-        else
-            block = new UnknownBlock;
         if(block == nullptr)
             continue;
         parser(value.bodyBlock,block);
         m_blocks->push_back(block);
         value.bodyBlock.clear();
     }
+
     delete blocksList;
     byteArrayFile.clear();
     qDebug() << "end load gfm : " << time.msecsTo( QTime::currentTime() ) << "mS";
     m_isReady = true;
     emit ready();
-   // saveForm();
 }
-
-
-
 
 void GFMLoader::parser(const QByteArray &bodyBlock,IBlock *block){
     ABlock *f_block = dynamic_cast<ABlock *>(block);
@@ -213,8 +211,39 @@ void GFMLoader::parser(const QByteArray &bodyBlock,IBlock *block){
         parserDataBlock(bodyBlock,block);
     else if(f_block->name() == IBlock::FORMS_BLOCK)
         parserFormsBlock(bodyBlock,block);
+    else if(f_block->name() == IBlock::HEADER_BLOCK)
+        parserHeaderBlock(bodyBlock,block);
     else
         parserUnknownBlock(bodyBlock,block);
+}
+
+void GFMLoader::parserHeaderBlock(const QByteArray &bodyBlock,IBlock *block){
+    HearedBlock * hearedBlock = dynamic_cast<HearedBlock*>(block);
+    QString endName = "]";
+    QString beginName = "[";
+    QString endLine = "\r\n";
+    QString body = " ";
+    QString nameHeader;
+    QString bodyHeader;
+    body += m_codec->toUnicode(bodyBlock);
+
+    while(body.size() != 0){
+        int IndexEndName = body.indexOf(endName);
+        int IndexBeginName = body.indexOf(beginName);
+        if(IndexBeginName == -1){
+          return;
+        }
+        HearedInfo f_info;
+        nameHeader = body.mid(IndexBeginName,IndexEndName-IndexBeginName+1);
+        f_info.name = nameHeader;
+        body = body.mid(IndexEndName+1, body.size() - IndexEndName);
+        IndexBeginName = body.indexOf(beginName);
+        int IndexLineOff = body.indexOf(endLine);
+        bodyHeader = body.mid(0,IndexBeginName);
+        f_info.body = bodyHeader;
+        body = body.mid(IndexLineOff+2, body.size() - IndexLineOff);
+        hearedBlock->setHeaderInfo(f_info);
+    }
 }
 
 void GFMLoader::parserDataBlock(const QByteArray &bodyBlock,IBlock *block){
@@ -257,7 +286,6 @@ void GFMLoader::parserDataBlock(const QByteArray &bodyBlock,IBlock *block){
     ICurve *f_mainTime = nullptr;
     ICurve *f_mainDepth = nullptr;
     foreach(auto curve,*f_curves){
-
         if(curve->desc()->getParam("draw_type") == "TIME"){
             f_mainTime = curve;
         }
@@ -319,6 +347,7 @@ void findItemLine(QXmlStreamReader *xmlReader,ATrack *track,LineItem *lineItem){
         bool f = true;
         double r = 0;
         if(xmlReader->name() == "track" && token == QXmlStreamReader::EndElement){
+            qDebug() << "Конец поиска кривых" << "Трек : ";
             return;
         }
         else if(xmlReader->name() == "paint_mode" && token == QXmlStreamReader::StartElement){
@@ -364,6 +393,8 @@ void findItemLine(QXmlStreamReader *xmlReader,ATrack *track,LineItem *lineItem){
 
         AItem * item = dynamic_cast<AItem *>(lineItem);
         track->setItem(item);
+
+
         return;
         }
 
@@ -376,6 +407,7 @@ void findItemMark(QXmlStreamReader *xmlReader,ATrack *track,markItem *MarkItem){
         QXmlStreamReader::TokenType token = xmlReader->readNext();
         QXmlStreamAttributes attributes = xmlReader->attributes();
         if(xmlReader->name() == "track" && token == QXmlStreamReader::EndElement){
+
             return;
         }
         else if(xmlReader->name() == "style" && token == QXmlStreamReader::StartElement){
@@ -396,7 +428,7 @@ void findItemMark(QXmlStreamReader *xmlReader,ATrack *track,markItem *MarkItem){
 
         AItem * item = dynamic_cast<AItem *>(MarkItem);
         track->setItem(item);
-        return;
+
         }
     }
 }
@@ -411,6 +443,7 @@ void findItemAcu(QXmlStreamReader *xmlReader,ATrack *track,AcuItem *acuItem){
         bool f = true;
         double r = 0;
         if(xmlReader->name() == "track" && token == QXmlStreamReader::EndElement){
+
             return;
         }
         else if(xmlReader->name() == "style" && token == QXmlStreamReader::StartElement){
@@ -461,6 +494,7 @@ void findItemAcu(QXmlStreamReader *xmlReader,ATrack *track,AcuItem *acuItem){
 
             AItem * item = dynamic_cast<AItem *>(acuItem);
             track->setItem(item);
+
             return;
         }
 
@@ -475,9 +509,13 @@ void findTrack(QXmlStreamReader *xmlReader,ABoard *board,ATrack *track){
         QXmlStreamAttributes attributes = xmlReader->attributes();
 
         if(xmlReader->name() == "begin" && token == QXmlStreamReader::StartElement){
+
+
             track->setBegin(convertUnitOfGFM(attributes.value("value").toString(),attributes.value("unit").toString()));
+
         }
         else if(xmlReader->name() == "width" && token == QXmlStreamReader::StartElement){
+
             track->setWidth(convertUnitOfGFM(attributes.value("value").toString(),attributes.value("unit").toString()));
         }
         else if(xmlReader->name() == "logarithm" && token == QXmlStreamReader::StartElement){
@@ -488,25 +526,31 @@ void findTrack(QXmlStreamReader *xmlReader,ABoard *board,ATrack *track){
             track->setLogarithm(log_base,dec_count,dec_start,dec_end);
         }
         else if((xmlReader->name() == "line") && token == QXmlStreamReader::StartElement){
+
             LineItem *f_item = new LineItem();
             f_item->setTypeItem(LINE);
             f_item->setName(attributes.value("name").toString(),attributes.value("visible").toString());
             findItemLine(xmlReader,track,f_item);
         }
         else if((xmlReader->name() == "mark") && token == QXmlStreamReader::StartElement){
+
             markItem *f_item = new markItem();
             f_item->setTypeItem(MARK);
             f_item->setName(attributes.value("name").toString(),attributes.value("visible").toString());
             findItemMark(xmlReader,track,f_item);
         }
         else if((xmlReader->name() == "acu") && token == QXmlStreamReader::StartElement){
+
             AcuItem *f_item = new AcuItem();
             f_item->setTypeItem(ACU);
             f_item->setName(attributes.value("name").toString(),attributes.value("visible").toString());
             findItemAcu(xmlReader,track,f_item);
         }
         else if(xmlReader->name() == "track" && token == QXmlStreamReader::EndElement){
+
+
             board->setTrack(track);
+
             return;
 
         }
@@ -565,23 +609,21 @@ void GFMLoader::parserFormsBlock(const QByteArray &bodyBlock,IBlock *block){
             f_board = new Board();
             f_board->setName(attributes.value("name").toString());
             findBoard(&xmlReader,f_board,formsBlock);
-
         }
+
     }
 
-/*
-    QFile file("f.txt");
-    file.open(QIODevice::WriteOnly);
-    QByteArray output;
-    gzipDecompress(bodyBlock,output);
-    file.write(output);
-    file.close();
-    */
+
     qDebug() << "end load forms : " << time.msecsTo( QTime::currentTime() ) << "mS";
 
 }
 
+
+
+
 void GFMLoader::parserUnknownBlock(const QByteArray &bodyBlock,IBlock *block){
+
+
 
 }
 

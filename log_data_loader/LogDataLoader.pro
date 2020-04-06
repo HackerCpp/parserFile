@@ -11,7 +11,7 @@ INCLUDEPATH += include \
 ../log_data_lib/include/curves
 
 LIBS += \
-../build/release/LogData.lib
+../build/release/LogData.lib \
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
