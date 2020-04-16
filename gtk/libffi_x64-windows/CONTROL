@@ -1,0 +1,7 @@
+Package: libffi
+Version: 3.3-1
+Architecture: x64-windows
+Multi-Arch: same
+Abi: fb19aa5ffad43d3b1afdacc55e409500bfa3de47
+Description: Portable, high level programming interface to various calling conventions
+Type: Port

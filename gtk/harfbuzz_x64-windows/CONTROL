@@ -1,0 +1,23 @@
+Package: harfbuzz
+Version: 2.5.3
+Depends: freetype, ragel
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 82b128a5a6e11e871560471b3eff176092122376
+Description: HarfBuzz OpenType text shaping engine
+Type: Port
+
+Package: harfbuzz
+Feature: glib
+Depends: glib
+Architecture: x64-windows
+Multi-Arch: same
+Description: Glib Unicode callbacks support
+Type: Port
+
+Package: harfbuzz
+Feature: ucdn
+Architecture: x64-windows
+Multi-Arch: same
+Description: Builtin (UCDN) Unicode callbacks support
+Type: Port

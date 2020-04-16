@@ -9,18 +9,18 @@ class ObjectOfTheBoard : public QThread,public QGraphicsItem
     Q_OBJECT
 protected:
 
-    QRect m_visibilitySquare;
-    bool m_needToRedraw;
+    QRectF m_visibilitySquare;
+    bool m_endRedraw,m_needToRedraw;
     QImage *m_curentPixmap,*m_doublePixMap;
 
-    virtual QRectF boundingRect()const{return m_visibilitySquare;}
+    virtual QRectF boundingRect()const override{return m_visibilitySquare;}
     void redraw();
 public:
     ObjectOfTheBoard();
     ~ObjectOfTheBoard(){}
     virtual void resize(){}
 public slots:
-    void changingTheVisibilityZone(QRect newVisibilityZone);
+    void changingTheVisibilityZone(QRectF newVisibilityZone);
 };
 
 #endif // OBJECTOFTHEBOARD_H

@@ -13,7 +13,7 @@ protected:
 
     qreal m_resolution;
     qreal m_maximum,m_minimum;
-    uint m_size;
+    uint m_sizeOffsetInByte;
     uint m_sizeOfType;
     QString m_mnemonic;
     QString m_dataType;
@@ -42,6 +42,8 @@ public:
     virtual QString recordPoint();
 
     virtual uint size()override;
+    virtual uint sizeOffset()override{return 0;}
+    virtual uint sizeOffsetInBytes(){return m_sizeOffsetInByte;}
     virtual qreal maximum()override;
     virtual qreal minimum()override;
 
@@ -53,7 +55,7 @@ public:
 
     virtual void setShortCut(ShortCut shortCut);
     virtual void setOffset(uint offset);
-    virtual void setSize(uint size);
+    virtual void setSizeOffset(uint sizeOffset);
     virtual void setMnemonic(QString mnemonic);
     virtual void setDataType(QString dataType);
     virtual void setRecordPoint(QString recordPoint);

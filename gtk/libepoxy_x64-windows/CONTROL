@@ -1,0 +1,8 @@
+Package: libepoxy
+Version: 1.5.3-3
+Depends: tool-meson
+Architecture: x64-windows
+Multi-Arch: same
+Abi: ec9638072354c3031efa8e2484c88b0a75184a55
+Description: Epoxy is a library for handling OpenGL function pointer management for you
+Type: Port

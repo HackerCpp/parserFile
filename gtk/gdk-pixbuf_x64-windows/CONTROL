@@ -1,0 +1,8 @@
+Package: gdk-pixbuf
+Version: 2.36.9-4
+Depends: gettext, glib, libpng, zlib
+Architecture: x64-windows
+Multi-Arch: same
+Abi: b077b94b950e651459fe8cdce2dd4bd95b821251
+Description: Image loading library.
+Type: Port

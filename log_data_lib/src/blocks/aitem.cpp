@@ -14,7 +14,6 @@ QString AItem::visible(){
         if(i != VisibleView::MAXIMIM - 1)
             f_visible.append(":");
     }
-    qDebug() << f_visible;
     return f_visible;
 }
 

@@ -5,15 +5,15 @@
 #include <QPainter>
 #include "boardfortrack.h"
 
-class AGraphicItem
+class AGraphicItem : public QThread
 {
-
 protected:
     AItem *m_itemInfo;
     ICurve *m_curve;
     BoardForTrack *m_board;
+    bool m_isActive;
 
-    virtual void drawBody(QPainter *per,QRect visibleRect,bool *flag){}
+    virtual void drawBody(QPainter *per,QRectF visibleRect,bool *flag){}
     virtual void drawHeader(QPainter *per,int &position,bool *flag){}
 
 public:
@@ -23,7 +23,12 @@ public:
     qreal topValue();
     qreal bottomValue();
 
-    virtual void paint(QPainter *per,QPainter *perHead,QRect visibleRect,int &position,bool *flag);
+    virtual void paint(QPainter *per,QPainter *perHead,QRectF visibleRect,int &position,bool *flag);
+    virtual bool isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per){return false;}
+    virtual void setActive(bool active){m_isActive = active;}
+    virtual void run()override{}
+
+    bool isActive(){return m_isActive;}
 };
 
 #endif // AGRAPHICITEM_H

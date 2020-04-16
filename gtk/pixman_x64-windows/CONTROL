@@ -1,0 +1,7 @@
+Package: pixman
+Version: 0.38.4-1
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 5849c4b2adfb8bef6093fbc9fe0a030ae3e1dedf
+Description: Pixman is a low-level software library for pixel manipulation, providing features such as image compositing and trapezoid rasterization.
+Type: Port

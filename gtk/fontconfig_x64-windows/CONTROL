@@ -1,0 +1,8 @@
+Package: fontconfig
+Version: 2.12.4-10
+Depends: dirent, expat, freetype, libiconv
+Architecture: x64-windows
+Multi-Arch: same
+Abi: aefec494fdac49467132e0cbcc164b6e995d9379
+Description: Library for configuring and customizing font access.
+Type: Port

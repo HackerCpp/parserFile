@@ -5,15 +5,19 @@
 ObjectOfTheBoard::ObjectOfTheBoard(){
 }
 
-void ObjectOfTheBoard::changingTheVisibilityZone(QRect newVisibilityZone){
+void ObjectOfTheBoard::changingTheVisibilityZone(QRectF newVisibilityZone){
     m_visibilitySquare = newVisibilityZone;
     redraw();
 }
 
 
 void ObjectOfTheBoard::redraw(){
-    if(!isRunning())
+    if(!isRunning()){
+        m_endRedraw = false;
         start(QThread::InheritPriority);
-    else
+    }
+    else{
+        m_endRedraw = true;
         m_needToRedraw = true;
+    }
 }

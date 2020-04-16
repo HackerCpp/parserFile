@@ -2,20 +2,27 @@
 #define VERTICALTRACK_H
 #include "agraphictrack.h"
 #include "rightborder.h"
+#include "selectingarea.h"
+#include <QMenu>
 
 class VerticalTrack : public AGraphicTrack
 {
+    SelectingArea *m_selectingArea;
+    QMenu *m_menu;
     int m_curentWidth;
 public:
     VerticalTrack(ATrack *track,QMap<QString,ICurve*> *curves,BoardForTrack *board);
     ~VerticalTrack()override;
 
     void resize()override;
+    virtual void activate(bool activate)override;
 
 private:
     void init();
-    void resizePictures();
+    void resizePictures()override;
     void drawGrid(qreal step_mm,QPainter *per,QPen pen);
+    void setActiveSelectingArea();
+    void deleteAllPictures();
 
     virtual bool is_openCloseClick(QPointF point) override;
     virtual bool is_borderClick(QPointF point)override;

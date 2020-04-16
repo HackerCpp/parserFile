@@ -26,6 +26,7 @@ public:
     virtual bool setUserBaseValue(ICurve *userBaseValue);
 
     virtual uint size();
+    virtual uint sizeOffset(){return 0;}
     virtual qreal maximum();
     virtual qreal minimum();
     virtual Desc *desc();

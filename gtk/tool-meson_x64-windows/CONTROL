@@ -1,0 +1,7 @@
+Package: tool-meson
+Version: 0.53.2
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 61dc9c998d2e1720bc41e29cf88240c294278687
+Description: Meson build system
+Type: Port

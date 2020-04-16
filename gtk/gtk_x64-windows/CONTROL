@@ -1,0 +1,8 @@
+Package: gtk
+Version: 3.22.19-3
+Depends: atk, cairo, gdk-pixbuf, gettext, glib, libepoxy, pango
+Architecture: x64-windows
+Multi-Arch: same
+Abi: c3239dc1af19036a7608542830414b2027f1e29f
+Description: Portable library for creating graphical user interfaces.
+Type: Port

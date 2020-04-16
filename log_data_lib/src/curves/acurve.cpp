@@ -56,9 +56,8 @@ QString ACurve :: dataType()
     return m_dataType;
 }
 
-uint ACurve::size()
-{
-    return m_size;
+uint ACurve::size(){
+    return 0;
 }
 
 qreal ACurve::maximum(){
@@ -92,8 +91,8 @@ void ACurve::setOffset(uint offset){
     m_offset = offset;
 }
 
-void ACurve::setSize(uint size){
-    m_size = size;
+void ACurve::setSizeOffset(uint sizeOffset){
+    m_sizeOffsetInByte = sizeOffset;
 }
 
 void ACurve::setMnemonic(QString mnemonic){

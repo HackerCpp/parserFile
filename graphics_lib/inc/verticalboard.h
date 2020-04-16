@@ -22,6 +22,7 @@ public:
 
     void newTrack()override;
     bool addCurve(ICurve *curve,int indexTab);
+    virtual void redraw()override{emit scrollChanged();}
 private:
     void init();
     virtual void resizeEvent(QResizeEvent *event)override;
@@ -30,7 +31,7 @@ public slots:
     void scrollChanged();
 
 signals:
-    void changingTheVisibilityZone(QRect visibleArea);
+    void changingTheVisibilityZone(QRectF visibleArea);
 
 };
 

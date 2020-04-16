@@ -18,7 +18,7 @@ uint VLineItem::amountSaturation(uint index,uint width){
     return 0;
 }
 
-void VLineItem::drawBody(QPainter *per,QRect visibleRect,bool *flag){
+void VLineItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
     if(!m_itemInfo || !per || !m_board){
         qDebug() << "LineItemInfo = nullptr или painter = nullptr m_board = null Не удаётся нарисовать кривую";
         return;
@@ -34,7 +34,8 @@ void VLineItem::drawBody(QPainter *per,QRect visibleRect,bool *flag){
     }
     QColor f_color = QColor(f_lineItemInfo->color());
     QPen f_pen(f_color);
-    f_pen.setWidth(f_lineItemInfo->widthLine());
+    int f_widthLine = m_isActive ? f_lineItemInfo->widthLine() + 4 : f_lineItemInfo->widthLine();
+    f_pen.setWidth(f_widthLine);
     per->setPen(f_pen);
     int f_width = per->device()->width();
     int f_height = per->device()->height();
@@ -86,7 +87,19 @@ void VLineItem::drawBody(QPainter *per,QRect visibleRect,bool *flag){
 }
 
 void VLineItem::drawHeader(QPainter *per,int &position,bool *flag){
-
+    LineItem *f_lineItemInfo = dynamic_cast<LineItem*>(m_itemInfo);
+    if(!f_lineItemInfo){
+        qDebug() << "m_itemInfo не переводится в m_lineItem не получается нарисовать";
+        return;
+    }
+    QColor f_color = f_lineItemInfo->color();
+    per->setPen(QPen(f_color,f_lineItemInfo->widthLine()));
+    per->setFont(QFont("Times", 10, QFont::Bold));
+    int f_width = per->device()->width();
+    per->setBrush(QBrush(QColor(255,255,255,200)));
+    per->drawRect(1,position,f_width - 2,40);
+    per->drawText(QRect(1,position,f_width - 2,40),Qt::AlignHCenter|Qt::AlignVCenter,m_curve->mnemonic());
+    position += 40;
 }
 
 qreal VLineItem::operator[](int index){
@@ -102,3 +115,25 @@ qreal VLineItem::pixelX(int index,int width){
     else
         return 0;
 }
+
+bool VLineItem::isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per){
+    QImage *img = dynamic_cast<QImage*>(per->device());
+    if(!img){
+        qDebug() << "Невозможно проверить картинка для проверки не найдена";
+        return false;
+    }
+    img->fill(0x0);
+    bool flag = false;
+    drawBody(per,visibleRect,&flag);
+    for(int i = area.left(); i < area.right();++i){
+        for(int j = area.top(); j < area.bottom();++j){
+            if(img->pixel(i,j) != 4278190080){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+
+

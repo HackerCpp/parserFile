@@ -1,5 +1,7 @@
 #include "vacuitem.h"
 
+
+
 VAcuItem::VAcuItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
     :VerticalItem(curve,board)
 {
@@ -11,6 +13,197 @@ VAcuItem::VAcuItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
     }
 }
 
-/*void VAcuItem::paint(QPainter *per,QPainter *perHead,QRect rect,bool *flag){
+QColor get_linear_color(qreal value, MulticolorItem multicol1,MulticolorItem multicol2){
+    QColor color;
+    double r1,r2,d;
+    d = multicol2.bound - multicol1.bound;
+    if(d == 0.0)
+        r1 = r2 = 0.5;
+    else{
+        r1 = (multicol2.bound - value) / d;
+        r2 = (value - multicol1.bound) / d;
+    }
+    if(r1 < 0 || r2 < 0)
+        return QColor(Qt::white);
+    color.setRed(r1 * QColor(multicol1.value).red() + r2 * QColor(multicol2.value).red());
+    color.setGreen(r1 * QColor(multicol1.value).green() + r2 * QColor(multicol2.value).green());
+    color.setBlue(r1 * QColor(multicol1.value).blue() + r2 * QColor(multicol2.value).blue());
+    return color;
+}
 
-}*/
+void inline VAcuItem::drawInterpolationVertical(QPainter *per,QRectF visibleRect,bool *flag){
+    qreal quantityElem = m_curve->sizeOffset();
+    qreal f_width = per->device()->width()/2;
+    qreal step = f_width / quantityElem;
+    ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
+    qreal f_yTop = visibleRect.y();
+    qreal f_height = per->device()->height();
+    qreal f_topOffset = m_board->offsetUp();
+    qreal f_downOffset = f_height - f_topOffset;
+    uint indexBegin  = 0;
+    qreal f_scaleForMainValue = m_board->scale();
+    if((f_mainValue->minimum() * f_scaleForMainValue) > f_yTop  + f_downOffset || (f_mainValue->maximum() * f_scaleForMainValue) < f_yTop - f_topOffset){
+        return;
+    }
+    for(uint i = 0; i < f_mainValue->size(); ++i){
+       if((f_mainValue->data(i) * f_scaleForMainValue) > f_yTop - f_topOffset && (f_mainValue->data(i) * f_scaleForMainValue) < f_yTop + f_downOffset){
+           indexBegin = i;// > 2?i - 2 : 0;
+           break;
+       }
+    }
+    int f_indexMin = indexBegin;
+    int f_indexMax = indexBegin;
+
+    for(uint i = indexBegin;i < f_mainValue->size();++i){
+        if(*flag)
+            return;
+        if((f_mainValue->data(i) * f_scaleForMainValue) > f_yTop + f_downOffset || (f_mainValue->data(i) * f_scaleForMainValue) < f_yTop - f_topOffset){
+            break;
+        }
+        f_indexMin = f_mainValue->data(i) < f_mainValue->data(f_indexMin)? i : f_indexMin;
+        f_indexMax = f_mainValue->data(i) > f_mainValue->data(f_indexMax)? i : f_indexMax;
+    }
+
+    int f_curentHeight = (f_mainValue->data(f_indexMax) * f_scaleForMainValue) - (f_mainValue->data(f_indexMin) * f_scaleForMainValue);
+
+    AcuItem *f_AcuItemInfo = dynamic_cast<AcuItem*>(m_itemInfo);
+    QList<MulticolorItem> *f_multicolor = f_AcuItemInfo->multiColor();
+    QColor color;
+    per->setPen(QPen(QColor(0,0,0,0),0));
+    uint i;
+    for(int j = 0; j < quantityElem; ++j){
+        if(*flag)
+            return;
+        QLinearGradient linearGradient(0,0,0,f_height);
+        linearGradient.setInterpolationMode(QLinearGradient::ColorInterpolation);
+        for(i = indexBegin;i < f_mainValue->size();++i){
+            if(*flag)
+                return;
+            if((f_mainValue->data(i) * f_scaleForMainValue) > f_yTop + f_downOffset || (f_mainValue->data(i) * f_scaleForMainValue) < f_yTop - f_topOffset){
+                break;
+            }
+            if(m_curve->data(i * quantityElem + j) >= f_multicolor->last().bound){
+                color = QColor(f_multicolor->last().value);
+            }
+            else if(m_curve->data(i * quantityElem + j) <= f_multicolor->first().bound){
+                color = QColor(f_multicolor->first().value);
+            }
+            else{
+                MulticolorItem prev_mul;
+                prev_mul = *f_multicolor->begin();
+                for(auto value = f_multicolor->begin(); value < f_multicolor->end(); ++value) {
+                    if(m_curve->data(i * quantityElem + j) <= value->bound){
+                        color = get_linear_color(m_curve->data(i * quantityElem + j),prev_mul,*value);
+                        break;
+                    }
+                    prev_mul = *value;
+                }
+            }
+            linearGradient.setColorAt(((f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset)/f_height,color);
+        }
+
+        QBrush brush(linearGradient);
+        per->setBrush(brush);
+        qreal prevStep = j * step;
+        per->drawRect(prevStep,(f_mainValue->data(f_indexMin) * f_scaleForMainValue) - f_yTop + f_topOffset,step + 1,f_curentHeight);
+    }
+}
+void inline VAcuItem::drawInterpolationHorizontal(QPainter *per,QRectF visibleRect,bool *flag){
+    float quantityElem = m_curve->sizeOffset();
+    float f_width = per->device()->width();
+    //float step = f_width  / quantityElem;
+    float step = 2000  / quantityElem;
+    ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
+    float f_yTop = visibleRect.y();
+    float f_height = per->device()->height();
+    float f_topOffset = m_board->offsetUp();
+    float f_downOffset = f_height - f_topOffset;
+    uint indexBegin  = 0;
+    float f_scaleForMainValue = m_board->scale();
+    if((f_mainValue->minimum() * f_scaleForMainValue) > f_yTop  + f_downOffset || (f_mainValue->maximum() * f_scaleForMainValue) < f_yTop - f_topOffset){
+        return;
+    }
+    for(uint i = 0; i < f_mainValue->size(); ++i){
+       if((f_mainValue->data(i) * f_scaleForMainValue) > f_yTop - f_topOffset && (f_mainValue->data(i) * f_scaleForMainValue) < f_yTop + f_downOffset){
+           indexBegin = i;// > 2?i - 2 : 0;
+           break;
+       }
+    }
+    AcuItem *f_AcuItemInfo = dynamic_cast<AcuItem*>(m_itemInfo);
+    QList<MulticolorItem> *f_multicolor = f_AcuItemInfo->multiColor();
+    MulticolorItem f_multicolorFirst = f_multicolor->first();
+    MulticolorItem f_multicolorLast = f_multicolor->last();
+    QColor color;
+    per->setPen(QPen(QColor(0,0,0,0),0));
+    uint i;
+    //QTime time;
+    //time.start();
+    int prevStep = ((f_mainValue->data(indexBegin) * f_scaleForMainValue) - f_yTop + f_topOffset);
+    for(i = indexBegin + 1;i < f_mainValue->size();++i){
+        if(*flag)
+            return;
+        if((f_mainValue->data(i) * f_scaleForMainValue) > f_yTop + f_downOffset || (f_mainValue->data(i) * f_scaleForMainValue) < f_yTop - f_topOffset){
+            break;
+        }
+        if(prevStep == (int)((f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset)){
+            prevStep = ((f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset);
+            continue;
+        }
+        QLinearGradient linearGradient(0,0,f_width,0);
+        int prevXValue = 0;
+        for(int j = 1; j < quantityElem; ++j){
+            prevXValue = j * step;
+            if(prevXValue >= f_width)
+                break;
+            if(prevXValue == (int)((j - 1) * step)){
+                continue;
+            }
+            if(m_curve->data(i * quantityElem + j)  >= f_multicolorLast.bound){
+                color = f_multicolorLast.value;
+            }
+            else if(m_curve->data(i *quantityElem + j) <= f_multicolorFirst.bound){
+                color = f_multicolorFirst.value;
+            }
+            else{
+                MulticolorItem prev_mul;
+                prev_mul = *f_multicolor->begin();
+                foreach(auto value,*f_multicolor){
+                    if(m_curve->data(i *quantityElem + j) <= value.bound){
+                        color = get_linear_color(m_curve->data(i *quantityElem + j),prev_mul,value);
+                        break;
+                    }
+                    prev_mul = value;
+                }
+            }
+
+            linearGradient.setColorAt(j * step/f_width,color);
+        }
+        QBrush brush(linearGradient);
+        per->setBrush(brush);
+        per->drawRect(0,prevStep,f_width,2*m_board->pixelPerMm());
+        prevStep = ((f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset);
+    }
+
+    //qDebug() << time.elapsed();
+}
+
+void VAcuItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
+    AcuItem* m_acuItem = dynamic_cast<AcuItem*>(m_itemInfo);
+    if(!m_acuItem){
+        qDebug() << "Не удалось преобразовать AItem in AcuItem";
+        return;
+
+    }
+    if(!m_acuItem->showMode()){
+        //drawInterpolationVertical(per,visibleRect,flag);
+        drawInterpolationHorizontal(per,visibleRect,flag);
+    }
+    else if(m_acuItem->showMode() == 1){
+        //m_window->clear(sf::Color::Black);
+        drawInterpolationHorizontal(per,visibleRect,flag);
+        //m_window->display();
+    }
+    else if(m_acuItem->showMode() == 2){
+
+    }
+}

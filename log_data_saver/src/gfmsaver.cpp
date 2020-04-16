@@ -122,7 +122,7 @@ QByteArray GFMSaver::getHeader(DataBlock*dataBlock){
             f_line = "[%1][%2]  {%3}:%4 : %5 : %6 %7\r\n";
 
 
-        f_line = f_line.arg(curveAbstract->offset()).arg(curveAbstract->size()).arg(curveAbstract->shortCut().Ref())
+        f_line = f_line.arg(curveAbstract->offset()).arg(curveAbstract->sizeOffsetInBytes()).arg(curveAbstract->shortCut().Ref())
                 .arg(curveAbstract->mnemonic()).arg(curveAbstract->dataType()).arg(curveAbstract->recordPoint())
                 .arg(QString(curveAbstract->desc()->getForSave()));
 
@@ -344,13 +344,20 @@ QByteArray GFMSaver::formBlokSave(FormsBlock * formsBlock){
 
                            xmlWriter.writeStartElement("multi_color");
                            xmlWriter.writeAttribute("level_count",str.setNum(acuItem->levelCount()));
-                           for(int a =0; a < acuItem->levelCount();a++){
-                                   MulticolorItem *struc =acuItem->multiColor()[a];
+                           QList<MulticolorItem> *f_multicolorList = acuItem->multiColor();
+                           foreach(auto multicolor,*f_multicolorList){
+                               xmlWriter.writeStartElement("level");
+                               xmlWriter.writeAttribute("bound",str.setNum(multicolor.bound));
+                               xmlWriter.writeAttribute("color",multicolor.value);
+                               xmlWriter.writeEndElement();//close level
+                           }
+                           /*for(int a =0; a < acuItem->levelCount();a++){
+                                   MulticolorItem *struc = acuItem->multiColor()[a];
                                    xmlWriter.writeStartElement("level");
                                    xmlWriter.writeAttribute("bound",str.setNum(struc->bound));
                                    xmlWriter.writeAttribute("color",struc->value);
                                    xmlWriter.writeEndElement();//close level
-                           }
+                           }*/
                            xmlWriter.writeEndElement();//close multi_color
 
                            xmlWriter.writeStartElement("bruch_color");

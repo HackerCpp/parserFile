@@ -1,11 +1,8 @@
 #include "agraphicboard.h"
 #include <QGraphicsScene>
 
-AGraphicBoard::AGraphicBoard()
-{
+AGraphicBoard::AGraphicBoard(){
     m_minimumSize = 2000;
-    //setSceneRect(QRect(0,-10,m_minimumSize,m_minimumSize));
-    //resize();
 }
 
 void AGraphicBoard::resize(){
@@ -24,8 +21,8 @@ void AGraphicBoard::resize(){
     }
     m_top = f_topPosition - (20 * m_pixelPerMm);
     m_length = f_bottomPosition - m_top + (20 * m_pixelPerMm);
-    if(m_length < 1000)
-        m_length = 1000;
+    if(m_length < 800)
+        m_length = 800;
     setSceneRect(QRect(0,m_top,f_width,m_length));
     foreach(auto item, m_items){
         int rightPosition = item->boundingRect().x() + item->boundingRect().width();
@@ -34,9 +31,56 @@ void AGraphicBoard::resize(){
             f_track->resize();
         }
         else{
-            qDebug() << "не удалось преобразовать QGraphicItem in AGraphicTrack;";
+            //qDebug() << "не удалось преобразовать QGraphicItem in AGraphicTrack;";
         }
     }
+}
+
+
+void AGraphicBoard::resizePicture(){
+    QList<QGraphicsItem *> m_items = this->items();
+    foreach(auto item, m_items){
+        AGraphicTrack *f_track = dynamic_cast<AGraphicTrack *>(item);
+        if(f_track){
+           f_track->resizePictures();
+        }
+    }
+}
+
+void AGraphicBoard::activate(bool activate){
+    QList<QGraphicsItem *> m_items = this->items();
+    foreach(auto item, m_items){
+        AGraphicTrack *f_track = dynamic_cast<AGraphicTrack *>(item);
+        if(f_track){
+           f_track->activate(activate);
+        }
+    }
+}
+
+void AGraphicBoard::setFormatTime(FormatTime format){
+    setScaleForTime(1.f/qreal(m_dividersTime[format]));
+    redraw();
+    resize();
+}
+
+void AGraphicBoard::setFormatDepth(FormatDepth format){
+    setScaleForDepth(1.f/qreal(m_dividersDepth[format]));
+    redraw();
+    resize();
+}
+
+void AGraphicBoard::setLengthPicture(LengthPicture format){
+    setPictureHeightMM(m_lengtgPicture[format]);
+    resizePicture();
+    redraw();
+    resize();
+}
+
+void AGraphicBoard::setFormatPicture(QImage::Format format){
+    m_formatImg = format;
+    resizePicture();
+    redraw();
+    resize();
 }
 
 void AGraphicBoard::mousePressEvent(QMouseEvent *event){

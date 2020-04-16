@@ -1,0 +1,7 @@
+Package: pcre
+Version: 8.44
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 269289bd62a000a19b754320616fa7bed22efc1d
+Description: Perl Compatible Regular Expressions
+Type: Port

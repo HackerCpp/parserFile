@@ -1,0 +1,8 @@
+Package: gettext
+Version: 0.19-15
+Depends: libiconv
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 1b9c53e572811558fbb6dbb22f08c17b84b7dbb1
+Description: The GNU gettext utilities are a set of tools that provides a framework to help other GNU packages produce multi-lingual messages. Provides libintl.
+Type: Port

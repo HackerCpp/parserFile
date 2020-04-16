@@ -8,9 +8,9 @@ void AGraphicTrack::swapPixMap(){
     QImage *ptr = m_curentPixmap;
     m_curentPixmap = m_doublePixMap;
     m_doublePixMap = ptr;
-    /*ptr = m_curentHeader;
+    ptr = m_curentHeader;
     m_curentHeader = m_doubleHeader;
-    m_doubleHeader = ptr;*/
+    m_doubleHeader = ptr;
     ptr = nullptr;
     toSetTheLocationOfTheImageAfterDrawing();
 }
@@ -114,6 +114,7 @@ void AGraphicTrack::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
 void AGraphicTrack::sceneUpdate(){
     if(m_needToRedraw){
         m_needToRedraw = false;
+        m_endRedraw = false;
         start(QThread::InheritPriority);
     }
     else

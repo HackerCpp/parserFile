@@ -1,0 +1,7 @@
+Package: ragel
+Version: 6.10-3
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 1440504188f505a57a7dc6782fedea374b8fecec
+Description: Ragel State Machine Compiler
+Type: Port

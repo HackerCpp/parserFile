@@ -4,7 +4,7 @@
 AGraphicItem::AGraphicItem(ICurve *curve,BoardForTrack *board)
     : m_curve(curve), m_board(board)
 {
-
+    m_isActive = false;
 }
 
 AGraphicItem::~AGraphicItem(){
@@ -20,15 +20,16 @@ qreal AGraphicItem::bottomValue(){
     return f_mainValue->maximum() * m_board->scale();
 }
 
-void AGraphicItem::paint(QPainter *per,QPainter *perHead,QRect visibleRect,
+
+void AGraphicItem::paint(QPainter *per,QPainter *perHead,QRectF visibleRect,
                          int &position,bool *flag){
-    if(m_itemInfo->visible(AItem::BOARD_LEGEND_VIEW)){
-        drawHeader(perHead,position,flag);
-    }
+    /*if(m_itemInfo->visible(AItem::BOARD_LEGEND_VIEW)){
+
+    }*/
 
     if(m_itemInfo->visible(AItem::BOARD_GRAPH_VIEW)){
+        drawHeader(perHead,position,flag);
         drawBody(per,visibleRect,flag);
     }
 }
-
 

@@ -11,7 +11,7 @@ struct MulticolorItem{
 class AcuItem : public AItem{
     QString m_brushColor;
     QString m_transparentColor;
-    QList<MulticolorItem*> *m_multicolor;
+    QList<MulticolorItem> *m_multicolor;
     unsigned int  m_showMode;
     int m_levelCount;
 public:
@@ -20,7 +20,7 @@ public:
     ~AcuItem();
 
     void setColor (QString bruchColor, QString transparentColor);
-    void setMulticolor(MulticolorItem *multicolor);
+    void setMulticolor(MulticolorItem multicolor);
     void setShowMode(unsigned int showMode);
     void setLevelCount(int levelCount);
 
@@ -30,7 +30,7 @@ public:
     QString transparentColor();
     unsigned  int showMode();
     int levelCount();
-    QList <MulticolorItem*> multiColor();
+    QList<MulticolorItem> *multiColor();
 
 };
 

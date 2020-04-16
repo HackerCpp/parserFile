@@ -1,0 +1,8 @@
+Package: atk
+Version: 2.24.0-5
+Depends: gettext, glib
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 3a38d2a4460fbacd7f5f70315625be30968b5d81
+Description: GNOME Accessibility Toolkit
+Type: Port

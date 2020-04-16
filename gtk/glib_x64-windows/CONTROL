@@ -1,0 +1,8 @@
+Package: glib
+Version: 2.52.3-14-5
+Depends: gettext, libffi, libiconv, pcre, zlib
+Architecture: x64-windows
+Multi-Arch: same
+Abi: e3d4a878ad62ca9a5f02575b6af1bb693543a61c
+Description: Portable, general-purpose utility library.
+Type: Port

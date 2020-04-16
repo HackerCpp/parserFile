@@ -20,13 +20,17 @@ public:
     ~AGraphicTrack()override;
 
     virtual void resize()override{}
+    virtual void resizePictures(){}
 
     qreal topValue();
     qreal bottomValue();
+    virtual void activate(bool activate){}
 protected:
+    QImage *m_infoPixMap,*m_curentHeader,*m_doubleHeader;
     BoardForTrack *m_board;
     int m_topPositionPicture;
     QRectF m_boundingRect;
+    int m_heightHeader;
     Border *m_border;
     int m_positionOfTheBorder;
     QList<AGraphicItem*> *m_items;
@@ -40,6 +44,7 @@ protected:
     virtual void run()override{}
     virtual QRectF boundingRect()const override{return m_boundingRect;}
     virtual void swapPixMap();
+
     virtual void toSetTheLocationOfTheImageAfterDrawing(){}
 
     void init();

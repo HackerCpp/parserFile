@@ -18,8 +18,8 @@ VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves)
         return;
     }
     VerticalTrack *f_prevTrack = nullptr;
-    foreach(auto value,*tracksInfo){
-       VerticalTrack *f_track  = new VerticalTrack(value,curves,this);
+    foreach(auto trackInfo,*tracksInfo){
+       VerticalTrack *f_track  = new VerticalTrack(trackInfo,curves,this);
        connect(this,&VerticalBoard::changingTheVisibilityZone,f_track,&ObjectOfTheBoard::changingTheVisibilityZone);
        m_canvas->addItem(f_track);
        if(f_prevTrack){
@@ -27,7 +27,6 @@ VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves)
        }
        f_prevTrack = f_track;
     }
-
     connect(horizontalScrollBar(), &QScrollBar::valueChanged, this, &VerticalBoard::scrollChanged);
     connect(verticalScrollBar(), &QScrollBar::valueChanged, this, &VerticalBoard::scrollChanged);
     resize();
@@ -66,7 +65,7 @@ void inline VerticalBoard::scrollChanged(){
         qDebug() << "нулевой размер у борда, сигнал трэкам не может быть отправлен" << m_board->name();
         return;
     }
-    QRect f_rectForScene = QRect(f_rect[0].x(),f_rect[0].y(),f_rect[2].x() - f_rect[0].x(), f_rect[2].y() - f_rect[0].y());
+    QRectF f_rectForScene = QRectF(f_rect[0].x(),f_rect[0].y(),f_rect[2].x() - f_rect[0].x(), f_rect[2].y() - f_rect[0].y());
     changingTheVisibilityZone(f_rectForScene);
 }
 
