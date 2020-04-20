@@ -39,7 +39,7 @@ template<typename T> QByteArray Curve<T>::data(){
 
 
 template<typename T> uint Curve<T>::setData(qreal data,uint index){
-    if(index>m_data->size()){
+    if(index >= m_data->size()){
         qDebug()<<"Индекс вышел за пределы массива, вернули 0";
         return 0;
     }

@@ -1,4 +1,4 @@
-QT += core gui widgets opengl xml testlib
+QT += core gui widgets opengl xml
 
 LIBS += -L$$PWD/../SFML/lib
 CONFIG(release, debug|release): LIBS += -lsfml-audio -lsfml-graphics -lsfml-main -lsfml-network -lsfml-window -lsfml-system
@@ -6,14 +6,10 @@ CONFIG(debug, debug|release): LIBS += -lsfml-audio-d -lsfml-graphics-d -lsfml-ma
 INCLUDEPATH += $$PWD/../SFML/include
 DEPENDPATH += $$PWD/../SFML/include
 
-LIBS += -L$$PWD/../Cairo/lib
-CONFIG(release, debug|release): LIBS += -lcairo -cairo-gobject
-INCLUDEPATH += $$PWD/../Cairo/include
-DEPENDPATH += $$PWD/../Cairo/include
-
 CONFIG += c++11
 INCLUDEPATH += $$PWD $$PWD/inc $$PWD/inc/items $$PWD/inc/tools
 SOURCES += \
+    $$PWD/src/tools/settingsitem.cpp \
     $$PWD/src/tools/selectingarea.cpp \
     $$PWD/src/items/vacuitem.cpp \
     $$PWD/src/items/vmarkitem.cpp \
@@ -47,7 +43,10 @@ HEADERS += \
     $$PWD/inc/items/vmarkitem.h \
     $$PWD/inc/objectoftheboard.h \
     $$PWD/inc/rightborder.h \
+    $$PWD/inc/tools/settingsitem.h \
     $$PWD/inc/verticalboard.h \
     $$PWD/inc/items/verticalitem.h \
     $$PWD/inc/verticaltrack.h \
     $$PWD/inc/ruler.h
+
+FORMS +=

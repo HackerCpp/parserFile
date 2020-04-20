@@ -24,9 +24,11 @@ public:
     qreal bottomValue();
 
     virtual void paint(QPainter *per,QPainter *perHead,QRectF visibleRect,int &position,bool *flag);
-    virtual bool isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per){return false;}
+    virtual bool isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per){return true;}
     virtual void setActive(bool active){m_isActive = active;}
     virtual void run()override{}
+    ICurve *curve(){return m_curve;}
+    AItem *itemInfo(){return m_itemInfo;}
 
     bool isActive(){return m_isActive;}
 };

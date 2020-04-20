@@ -24,7 +24,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG += c++11
 INCLUDEPATH+=\
-../gfm_lib/inc \
 ../graphics_lib/inc \
 ../log_data_lib/include/logData \
 ../log_data_lib/include/externalComponents \
@@ -46,7 +45,6 @@ LIBS += \
 ../PythonQT3.2/build/lib/PythonQt-Qt5-Python383.lib \
 ../PythonQT3.2/build/lib/PythonQt_QtAll-Qt5-Python383.lib\
 ../PythonQT3.2/build/lib/python38.lib \
-#../build/release/GFM.lib \
 #../build/release/graphics.lib
 
 #include(../gfm_lib/GFM.pri)

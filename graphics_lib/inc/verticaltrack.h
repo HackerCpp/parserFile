@@ -7,9 +7,11 @@
 
 class VerticalTrack : public AGraphicTrack
 {
+    Q_OBJECT
     SelectingArea *m_selectingArea;
     QMenu *m_menu;
     int m_curentWidth;
+    int m_сurrentСountOfActive = 0;
 public:
     VerticalTrack(ATrack *track,QMap<QString,ICurve*> *curves,BoardForTrack *board);
     ~VerticalTrack()override;
@@ -48,6 +50,7 @@ protected:
     virtual void run() override;
 public slots:
     virtual void changeBegin(int newBegin)override;
+    void openSettingsActiveItems();
 
 
 };

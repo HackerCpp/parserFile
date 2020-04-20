@@ -12,6 +12,8 @@
 #include "markItem.h"
 #include "AcuItem.h"
 #include "headerblock.h"
+#include "addCurve.h"
+
 
 bool GFMLoader::gzipDecompress(QByteArray input, QByteArray &output){
     output.clear();
@@ -71,6 +73,8 @@ struct BlockByte{
     uint sizeBodyBlock;
     QByteArray bodyBlock;
 };
+bool f = true;
+double r = 0;
 
 void findBlocksByteFFFE(QByteArray byteArrayFile,QList<BlockByte> *blocksList,int position){
     int indexBeginBlock = byteArrayFile.indexOf("[",position);
@@ -150,6 +154,8 @@ void GFMLoader::run(){
         value.bodyBlock.clear();
     }
 
+   // addCurve *add = new addCurve();
+  //  add->addCurveInBlock(m_blocks);
     delete blocksList;
     byteArrayFile.clear();
     qDebug() << "end load gfm : " << time.msecsTo( QTime::currentTime() ) << "mS";
@@ -300,8 +306,7 @@ void findItemLine(QXmlStreamReader *xmlReader,ATrack *track,LineItem *lineItem){
     while(!xmlReader->atEnd() && !xmlReader->hasError()){
         QXmlStreamReader::TokenType token = xmlReader->readNext();
         QXmlStreamAttributes attributes = xmlReader->attributes();
-        bool f = true;
-        double r = 0;
+
         if(xmlReader->name() == "paint_mode" && token == QXmlStreamReader::StartElement){
             lineItem->setPaintMode(attributes.value("mode").toString());
         }
@@ -314,18 +319,18 @@ void findItemLine(QXmlStreamReader *xmlReader,ATrack *track,LineItem *lineItem){
         }
         else if(xmlReader->name() == "begin" && token == QXmlStreamReader::StartElement){
             f = attributes.value("set_begin_value").toInt();
-            r = attributes.value("begin_value").toDouble();
+            r =convertUnitOfGFM(attributes.value("begin_value").toString(),"CM");
         }
         else if(xmlReader->name() == "zero_offset" && token == QXmlStreamReader::StartElement){
-            qreal c = convertUnitOfGFM(attributes.value("value").toString(),attributes.value("unit").toString());
+            qreal c = convertUnitOfGFM(attributes.value("value").toString(),"CM");//attributes.value("unit").toString()
             lineItem->setBegin(f,r,c);
         }
         else if(xmlReader->name() == "end" && token == QXmlStreamReader::StartElement){
             f = attributes.value("set_end_value").toInt();
-            r = attributes.value("end_value").toDouble();
+            r = convertUnitOfGFM(attributes.value("end_value").toString(),"CM");
         }
         else if(xmlReader->name() == "value_scale" && token == QXmlStreamReader::StartElement){
-            qreal c = convertUnitOfGFM(attributes.value("value").toString(),attributes.value("unit").toString());
+            qreal c = convertUnitOfGFM(attributes.value("value").toString(),"CM");
             lineItem->setEnd(f,r,c);
         }
         else if(xmlReader->name() == "multi_scale" && token == QXmlStreamReader::StartElement){
@@ -365,8 +370,6 @@ void findItemAcu(QXmlStreamReader *xmlReader,ATrack *track,AcuItem *acuItem){
         QXmlStreamReader::TokenType token = xmlReader->readNext();
         QXmlStreamAttributes attributes = xmlReader->attributes();
         QString color;
-        bool f = true;
-        double r = 0;
         if(xmlReader->name() == "style" && token == QXmlStreamReader::StartElement){
             acuItem->setShowMode(attributes.value("show_mode").toInt());
         }
@@ -387,19 +390,23 @@ void findItemAcu(QXmlStreamReader *xmlReader,ATrack *track,AcuItem *acuItem){
         }
         else if(xmlReader->name() == "begin" && token == QXmlStreamReader::StartElement){
             f=attributes.value("set_begin_value").toInt();
-            r = attributes.value("begin_value").toDouble();
+            r = convertUnitOfGFM(attributes.value("begin_value").toString(),"CM");
         }
         else if(xmlReader->name() == "zero_offset" && token == QXmlStreamReader::StartElement){
-            qreal c = convertUnitOfGFM(attributes.value("value").toString(),attributes.value("unit").toString());
+            qreal c = convertUnitOfGFM(attributes.value("value").toString(),"CM");
             acuItem->setBegin(f,r,c);
+
         }
         else if(xmlReader->name() == "end" && token == QXmlStreamReader::StartElement){
             f = attributes.value("set_end_value").toInt();
             r = attributes.value("end_value").toDouble();
+
         }
-        else if(xmlReader->name() == "value_scale" && token == QXmlStreamReader::StartElement){
-            qreal c = convertUnitOfGFM(attributes.value("value").toString(),attributes.value("unit").toString());
+        else if(xmlReader->name() == "step_scale" && token == QXmlStreamReader::StartElement){
+            qreal c = convertUnitOfGFM(attributes.value("value").toString(),"CM");
+
             acuItem->setEnd(f,r,c);
+            qDebug()<<acuItem->endValue();
         }
         else if(xmlReader->name() == "acu" && token == QXmlStreamReader::EndElement){
             AItem * item = dynamic_cast<AItem *>(acuItem);
@@ -431,18 +438,21 @@ void findTrack(QXmlStreamReader *xmlReader,ABoard *board,ATrack *track){
             LineItem *f_item = new LineItem();
             f_item->setTypeItem(LINE);
             f_item->setName(attributes.value("name").toString(),attributes.value("visible").toString());
+
             findItemLine(xmlReader,track,f_item);
         }
         else if((xmlReader->name() == "mark") && token == QXmlStreamReader::StartElement){
             markItem *f_item = new markItem();
             f_item->setTypeItem(MARK);
             f_item->setName(attributes.value("name").toString(),attributes.value("visible").toString());
+
             findItemMark(xmlReader,track,f_item);
         }
         else if((xmlReader->name() == "acu") && token == QXmlStreamReader::StartElement){
             AcuItem *f_item = new AcuItem();
             f_item->setTypeItem(ACU);
             f_item->setName(attributes.value("name").toString(),attributes.value("visible").toString());
+
             findItemAcu(xmlReader,track,f_item);
         }
         else if(xmlReader->name() == "track" && token == QXmlStreamReader::EndElement){
@@ -495,16 +505,17 @@ void GFMLoader::parserFormsBlock(const QByteArray &bodyBlock,IBlock *block){
             f_board = new Board();
             f_board->setName(attributes.value("name").toString());
             findBoard(&xmlReader,f_board,formsBlock);
+
         }
     }
-    /*
-    QFile file("dd.txt");
+
+    /*QFile file("dd.txt");
     file.open(QIODevice::WriteOnly);
     QByteArray output;
     gzipDecompress(bodyBlock,output);
     file.write(output);
-    file.close();
-    */
+    file.close();*/
+
     qDebug() << "end load forms : " << time.msecsTo( QTime::currentTime() ) << "mS";
 }
 
@@ -515,6 +526,7 @@ void GFMLoader::parserUnknownBlock(const QByteArray &bodyBlock,IBlock *block){
 void GFMLoader::findShortCuts(QByteArray *header,DataBlock *dataBlock){
    QString body = " ";
    body += m_codec->toUnicode(*header);
+
    QByteArray f_header = m_codec->toUnicode(*header).toLocal8Bit();
    QByteArray f_refBegin = "<SHORTCUT REF=\"{";
    QByteArray f_refEnd = "}";
@@ -578,6 +590,7 @@ void GFMLoader::findCurves(QByteArray *header,DataBlock * dataBlock){
         findCurveInfo(value,dataBlock,dynamic_cast<ICurve *>(curves->last()));
     }
     dataBlock->setCurves(*curves);
+
 }
 
 void GFMLoader::findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *curve){
@@ -593,13 +606,15 @@ void GFMLoader::findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *
     int indexShortCutBegin = curveLine.indexOf("{",indexEndsize);
     int indexShortCutEnd = curveLine.indexOf("}",indexShortCutBegin);
     QString f_shortCut = curveLine.mid(indexShortCutBegin + 1,indexShortCutEnd - indexShortCutBegin - 1);
+   // qDebug()<<"aaaaaaaaaaaaaaaa"<<f_shortCut;
     QList<ShortCut> shortCuts = *dataBlock->shortCuts();
     ShortCut shortCut;
     foreach(auto value,shortCuts){
+        //qDebug()<<"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"<<value.Ref();
         if (f_shortCut == value.Ref()){
             shortCut.setRef(value.Ref());
             shortCut.setName(value.Name());
-           // <<value.Name()<<"qqqqqqqqqqqqqqqq";
+           // qDebug()<<value.Name()<<"qqqqqqqqqqqqqqqq";
 
 
         }

@@ -66,8 +66,6 @@ public:
     virtual void setMultiScale(bool isMultiScale,qreal gleamCount,qreal gleamScale);
     virtual void setName(QString name, QString visible);
     virtual void setTypeItem(TypeItem type){m_type = type;}
-
-
 };
 
 

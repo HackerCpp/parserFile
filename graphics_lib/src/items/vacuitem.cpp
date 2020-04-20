@@ -11,6 +11,21 @@ VAcuItem::VAcuItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
     else{
         qDebug() << "Не удалось преобразовать AItemInfo в AcuItemInfo" << itemInfo->name();
     }
+    bool ok = true;
+    QString f_dataStep = m_curve->desc()->getParam("data_step");
+    m_dataStep =  f_dataStep.left(f_dataStep.indexOf("(")).toDouble(&ok);
+    if(!ok){
+        qDebug() << "Не удалось преобразовать data_step в акустике";
+        m_dataStep = 2;
+    }
+    else{
+        QString f_type = f_dataStep.mid(f_dataStep.indexOf("("));
+        if(f_type == "(USEC)")
+           ;
+        else{
+            qDebug() << "не описанный тип данных data_step акустика" << f_type;
+        }
+    }
 }
 
 QColor get_linear_color(qreal value, MulticolorItem multicol1,MulticolorItem multicol2){
@@ -110,9 +125,8 @@ void inline VAcuItem::drawInterpolationVertical(QPainter *per,QRectF visibleRect
 }
 void inline VAcuItem::drawInterpolationHorizontal(QPainter *per,QRectF visibleRect,bool *flag){
     float quantityElem = m_curve->sizeOffset();
-    float f_width = per->device()->width();
-    //float step = f_width  / quantityElem;
-    float step = 2000  / quantityElem;
+    float f_width = m_widthPicturePix;
+    float step = m_dataStepPix;
     ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
     float f_yTop = visibleRect.y();
     float f_height = per->device()->height();
@@ -136,8 +150,8 @@ void inline VAcuItem::drawInterpolationHorizontal(QPainter *per,QRectF visibleRe
     QColor color;
     per->setPen(QPen(QColor(0,0,0,0),0));
     uint i;
-    //QTime time;
-    //time.start();
+    QTime time;
+    time.start();
     int prevStep = ((f_mainValue->data(indexBegin) * f_scaleForMainValue) - f_yTop + f_topOffset);
     for(i = indexBegin + 1;i < f_mainValue->size();++i){
         if(*flag)
@@ -145,17 +159,19 @@ void inline VAcuItem::drawInterpolationHorizontal(QPainter *per,QRectF visibleRe
         if((f_mainValue->data(i) * f_scaleForMainValue) > f_yTop + f_downOffset || (f_mainValue->data(i) * f_scaleForMainValue) < f_yTop - f_topOffset){
             break;
         }
-        if(prevStep == (int)((f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset)){
-            prevStep = ((f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset);
+        int f_curentIntY = (int)((f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset);
+        if(prevStep == f_curentIntY){
+            //prevStep = ((f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset);
             continue;
         }
-        QLinearGradient linearGradient(0,0,f_width,0);
+        QLinearGradient linearGradient(m_offsetPix,0,f_width + m_offsetPix,0);
         int prevXValue = 0;
         for(int j = 1; j < quantityElem; ++j){
             prevXValue = j * step;
             if(prevXValue >= f_width)
                 break;
-            if(prevXValue == (int)((j - 1) * step)){
+            int f_curentInt = (int)((j - 1) * step);
+            if(prevXValue == f_curentInt){
                 continue;
             }
             if(m_curve->data(i * quantityElem + j)  >= f_multicolorLast.bound){
@@ -175,33 +191,59 @@ void inline VAcuItem::drawInterpolationHorizontal(QPainter *per,QRectF visibleRe
                     prev_mul = value;
                 }
             }
-
             linearGradient.setColorAt(j * step/f_width,color);
         }
         QBrush brush(linearGradient);
         per->setBrush(brush);
-        per->drawRect(0,prevStep,f_width,2*m_board->pixelPerMm());
+        per->drawRect(m_offsetPix,prevStep,f_width,2*m_board->pixelPerMm());
         prevStep = ((f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset);
     }
 
-    //qDebug() << time.elapsed();
+    qDebug() << time.elapsed();
 }
 
 void VAcuItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
     AcuItem* m_acuItem = dynamic_cast<AcuItem*>(m_itemInfo);
+    float f_quantityElem = m_curve->sizeOffset();
+    float f_pixelPerMM = m_board->pixelPerMm();
+    float f_width = per->device()->width();
+    qreal f_widthMksec = m_dataStep * f_quantityElem;
+    qreal f_pixelPerMksec;
+
+    if(!m_acuItem->isBeginValue()){
+        m_offsetPix = (m_acuItem->zeroOffset()/10) * m_board->pixelPerMm();
+        if(m_acuItem->isEndValue()){
+            qreal rightBorderMksek = m_acuItem->endValue();
+            f_pixelPerMksec = (f_width -  m_offsetPix) / rightBorderMksek;
+        }
+        else {
+            qreal f_mkSecPerMM = 1/m_acuItem->scale();
+            f_pixelPerMksec  = (1 / f_mkSecPerMM) *f_pixelPerMM;
+        }
+    }
+    else{
+        qreal leftBorderMksek = m_acuItem->beginValue()/10;
+        if(m_acuItem->isEndValue()){
+            qreal rightBorderMksek = m_acuItem->endValue();
+            f_pixelPerMksec = f_width / (rightBorderMksek - leftBorderMksek);
+        }
+        else{
+            qreal f_mkSecPerMM = (1/m_acuItem->scale());
+            f_pixelPerMksec  = (1.f / f_mkSecPerMM) * f_pixelPerMM;
+        }
+        m_offsetPix = -leftBorderMksek * f_pixelPerMksec;
+    }
+    m_widthPicturePix = f_widthMksec * f_pixelPerMksec;
+    m_dataStepPix = m_widthPicturePix / f_quantityElem;
     if(!m_acuItem){
         qDebug() << "Не удалось преобразовать AItem in AcuItem";
         return;
-
     }
     if(!m_acuItem->showMode()){
-        //drawInterpolationVertical(per,visibleRect,flag);
         drawInterpolationHorizontal(per,visibleRect,flag);
     }
     else if(m_acuItem->showMode() == 1){
-        //m_window->clear(sf::Color::Black);
         drawInterpolationHorizontal(per,visibleRect,flag);
-        //m_window->display();
     }
     else if(m_acuItem->showMode() == 2){
 

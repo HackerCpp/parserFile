@@ -9,7 +9,6 @@
 #include <QSplitter>
 #include "inc/tabs/abstracttab.h"
 #include "inc/tabs/abstracttabsavefiles.h"
-#include "gfm.h"
 #include <QTabBar>
 #include <QTabWidget>
 #include <QComboBox>

@@ -8,6 +8,7 @@
 #include "rightborder.h"
 #include "boardfortrack.h"
 #include "itimscreater.h"
+#include <QTabWidget>
 
 
 

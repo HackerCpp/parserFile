@@ -1,4 +1,5 @@
 #include "vlineitem.h"
+#include "SFML/System.hpp"
 
 VLineItem::VLineItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
     :VerticalItem(curve,board)
@@ -19,6 +20,7 @@ uint VLineItem::amountSaturation(uint index,uint width){
 }
 
 void VLineItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
+    //sf::Clock f_clock;
     if(!m_itemInfo || !per || !m_board){
         qDebug() << "LineItemInfo = nullptr или painter = nullptr m_board = null Не удаётся нарисовать кривую";
         return;
@@ -84,6 +86,7 @@ void VLineItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
             break;
         }
     }
+    //qDebug() << f_clock.getElapsedTime().asMicroseconds();
 }
 
 void VLineItem::drawHeader(QPainter *per,int &position,bool *flag){
@@ -93,8 +96,10 @@ void VLineItem::drawHeader(QPainter *per,int &position,bool *flag){
         return;
     }
     QColor f_color = f_lineItemInfo->color();
-    per->setPen(QPen(f_color,f_lineItemInfo->widthLine()));
-    per->setFont(QFont("Times", 10, QFont::Bold));
+    int f_widthLine = m_isActive ? f_lineItemInfo->widthLine() + 4 : f_lineItemInfo->widthLine();
+    per->setPen(QPen(f_color,f_widthLine));
+    int f_fontSize = m_isActive ? 14 : 10;
+    per->setFont(QFont("Times", f_fontSize, QFont::Bold));
     int f_width = per->device()->width();
     per->setBrush(QBrush(QColor(255,255,255,200)));
     per->drawRect(1,position,f_width - 2,40);
@@ -117,6 +122,9 @@ qreal VLineItem::pixelX(int index,int width){
 }
 
 bool VLineItem::isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per){
+    if(!m_itemInfo->visible(AItem::BOARD_GRAPH_VIEW)){
+        return false;
+    }
     QImage *img = dynamic_cast<QImage*>(per->device());
     if(!img){
         qDebug() << "Невозможно проверить картинка для проверки не найдена";

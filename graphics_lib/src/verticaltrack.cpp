@@ -1,6 +1,12 @@
 #include "verticaltrack.h"
 #include "AcuItem.h"
 #include "qgraphicsscene.h"
+#include "settingsitem.h"
+#include <QTabWidget>
+#include "shortcut.h"
+#include "SFML/Graphics.hpp"
+
+using namespace sf;
 
 VerticalTrack::VerticalTrack(ATrack *track,QMap<QString,ICurve*> *curves,BoardForTrack *board)
     : AGraphicTrack(track,curves,board)
@@ -13,7 +19,7 @@ VerticalTrack::VerticalTrack(ATrack *track,QMap<QString,ICurve*> *curves,BoardFo
     }
     m_selectingArea = nullptr;
     m_menu = new QMenu("&Menu");
-    m_menu->addAction("&Settings",qApp, SLOT(aboutQt()));
+    m_menu->addAction("&Settings",this, SLOT(openSettingsActiveItems()));
     m_menu->addAction("&Edit",qApp, SLOT(aboutQt()));
     m_menu->setMaximumSize(1000,1000);
     m_border = new RightBorder();
@@ -158,8 +164,12 @@ void VerticalTrack::setActiveSelectingArea(){
     int f_width = m_selectingArea->right() - m_selectingArea->left();
     int f_height = m_selectingArea->bottom() - m_selectingArea->top();
     QRectF area(f_x,f_y,f_width,f_height);
+    bool isActive = false;
+    m_сurrentСountOfActive = 0;
     foreach(auto item, *m_items){
-        item->setActive(item->isLocatedInTheArea(area,m_visibilitySquare,&painter));
+        bool isActive = item->isLocatedInTheArea(area,m_visibilitySquare,&painter);
+        item->setActive(isActive);
+        m_сurrentСountOfActive += isActive ? 1 : 0;
     }
     redraw();
 }
@@ -298,9 +308,10 @@ void  VerticalTrack::curvesReleaseHandler(QPointF point){
     m_selectingArea->hide();
     scene()->update();
     setActiveSelectingArea();
-
-    //m_menu->move(QCursor::pos());
-    //m_menu->show();
+    if(m_сurrentСountOfActive){
+        m_menu->move(QCursor::pos());
+        m_menu->show();
+    }
 }
 
 void  VerticalTrack::headerReleaseHandler(QPointF point){
@@ -386,4 +397,21 @@ void VerticalTrack::changeBegin(int newBegin){
         m_board->resize();
 }
 
-
+void VerticalTrack::openSettingsActiveItems(){
+    QTabWidget *f_tabWidget = new QTabWidget();
+    f_tabWidget->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+    f_tabWidget->setMinimumSize(500,500);
+    int f_count = 0;
+    foreach(auto itemInfo,*m_items){
+        if(itemInfo->isActive()){
+            f_tabWidget->addTab(SettingsItem::createSettingsItem(itemInfo),itemInfo->curve()->shortCut().Name() + ":" + itemInfo->curve()->mnemonic());
+            f_count++;
+        }
+    }
+    if(!f_count){
+        delete f_tabWidget;
+        f_tabWidget = nullptr;
+        return;
+    }
+    f_tabWidget->show();
+}
