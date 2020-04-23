@@ -5,7 +5,7 @@
 #include "vmarkitem.h"
 
 AGraphicItem *ItimsCreater::createItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board,OrientationItem orientation){
-    TypeItem f_type = itemInfo->Type();
+    TypeItem f_type = itemInfo->type();
     AGraphicItem * f_item = nullptr;
     if(orientation == VERTICAL){
         switch(f_type){

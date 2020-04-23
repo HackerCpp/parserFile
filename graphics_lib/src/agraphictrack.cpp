@@ -19,7 +19,8 @@ void AGraphicTrack::init(){
      m_items = new QList<AGraphicItem*>;
      m_visibilitySquare.setRect(0,0,2000,2000);
      m_border = nullptr;
-     m_isBorderClick = m_isCurvesClick = m_isHeaderClick = m_isOpenCloseClick = false;
+     m_isLeftBorderClick = m_isRightBorderClick = m_isLeftCurvesClick
+      =  m_isRightCurvesClick = m_isLeftHeaderClick = m_isOpenCloseClick = false;
      m_isOpen = true;
      m_positionOfTheBorder = 0;
      m_boundingRect = QRectF(0,0,2000,2000);
@@ -65,48 +66,74 @@ void AGraphicTrack::mousePressEvent(QGraphicsSceneMouseEvent *event){
         return;
     }
     if(m_isOpen){
-        if(is_borderClick(m_prevPoint)){
-            borderClickHandler(m_prevPoint);
-            m_isBorderClick = true;
+        if(event->button() == Qt::LeftButton){
+            if(is_borderClick(m_prevPoint)){
+                borderLeftClickHandler(m_prevPoint);
+                m_isLeftBorderClick = true;
+            }
+            else if(is_headerClick(m_prevPoint)){
+                headerLeftClickHandler(m_prevPoint);
+                m_isLeftHeaderClick = true;
+            }
+            else if(is_CurvesClick(m_prevPoint)){
+                curvesLeftClickHandler(m_prevPoint);
+                m_isLeftCurvesClick = true;
+            }
         }
-        else if(is_headerClick(m_prevPoint)){
-            headerClickHandler(m_prevPoint);
-            m_isHeaderClick = true;
-        }
-        else if(is_CurvesClick(m_prevPoint)){
-            curvesClickHandler(m_prevPoint);
-            m_isCurvesClick = true;
+        else if(event->button() == Qt::RightButton){
+            if(is_borderClick(m_prevPoint)){
+                borderRightClickHandler(m_prevPoint);
+                m_isRightBorderClick = true;
+            }
+            else if(is_CurvesClick(m_prevPoint)){
+                curvesRightClickHandler(m_prevPoint);
+                m_isRightCurvesClick = true;
+            }
         }
     }
 }
 
 void AGraphicTrack::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
     QPointF f_curentPoint = event->scenePos();
-    if(m_isBorderClick){
-        borderMoveHandler(f_curentPoint);
+    if(m_isLeftBorderClick){
+        borderLeftMoveHandler(f_curentPoint);
     }
-    else if(m_isHeaderClick){
-        headerMoveHandler(f_curentPoint);
+    else if(m_isRightBorderClick){
+        borderRightMoveHandler(f_curentPoint);
     }
-    else if(m_isCurvesClick){
-        curvesMoveHandler(f_curentPoint);
+    else if(m_isLeftHeaderClick){
+        headerLeftMoveHandler(f_curentPoint);
+    }
+    else if(m_isLeftCurvesClick){
+        curvesLeftMoveHandler(f_curentPoint);
+    }
+    else if(m_isRightCurvesClick){
+        curvesRightMoveHandler(f_curentPoint);
     }
     m_prevPoint = f_curentPoint;
 }
 
 void AGraphicTrack::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     QPointF f_curentPoint = event->scenePos();
-    if(m_isBorderClick){
-        m_isBorderClick = m_isOpenCloseClick = false;
-        borderReleaseHandler(f_curentPoint);
+    if(m_isLeftBorderClick){
+        m_isLeftBorderClick = m_isOpenCloseClick = false;
+        borderLeftReleaseHandler(f_curentPoint);
     }
-    else if(m_isHeaderClick){
-        m_isHeaderClick = false;
-        headerReleaseHandler(f_curentPoint);
+    if(m_isRightBorderClick){
+        m_isRightBorderClick = m_isOpenCloseClick = false;
+        borderRightReleaseHandler(f_curentPoint);
     }
-    else if(m_isCurvesClick){
-        m_isCurvesClick = false;
-        curvesReleaseHandler(f_curentPoint);
+    else if(m_isLeftHeaderClick){
+        m_isLeftHeaderClick = false;
+        headerLeftReleaseHandler(f_curentPoint);
+    }
+    else if(m_isLeftCurvesClick){
+        m_isLeftCurvesClick = false;
+        curvesLeftReleaseHandler(f_curentPoint);
+    }
+    else if(m_isRightCurvesClick){
+        m_isRightCurvesClick = false;
+        curvesRightReleaseHandler(f_curentPoint);
     }
     //m_isBorderClick = m_isCurvesClick = m_isHeaderClick = m_isOpenCloseClick = false;
 }

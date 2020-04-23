@@ -1,4 +1,4 @@
-QT -= gui
+QT += gui widgets
 
 TEMPLATE = lib
 DEFINES += SAVER_LIBRARY

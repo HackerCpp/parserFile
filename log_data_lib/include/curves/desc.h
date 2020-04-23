@@ -8,9 +8,9 @@ class Desc{
     QHash<QString,QString> *m_calibration;
 public:
     Desc(QByteArray desc);
-    QByteArray getForSave();
-    QString getParam(QString index);
-    QString getCalib(QString index);
+    QByteArray forSave();
+    QString param(QString index);
+    QString calib(QString index);
 };
 
 #endif // DESC_H

@@ -35,16 +35,17 @@ public:
     void setWidth(qreal width){m_width = width;}
     void setItem(AItem *item);
 
-    bool IsGreed(){return m_isGreed;}
-    QString Name(){return m_name;}
-    Types Type(){return m_type;}
-    qreal Begin(){return m_begin;}
-    qreal Width(){return m_width;}
-    qreal LogarithmBase();
-    qreal DecadeCount();
-    qreal DecadeStart();
-    qreal DecadeEnd();
-    QList<AItem*> *Items(){return m_items;}
+    bool isGreed(){return m_isGreed;}
+    QString name(){return m_name;}
+    int number(){return m_name.remove("Track").toInt();}
+    Types type(){return m_type;}
+    qreal begin(){return m_begin;}
+    qreal width(){return m_width;}
+    qreal logarithmBase();
+    qreal decadeCount();
+    qreal decadeStart();
+    qreal decadeEnd();
+    QList<AItem*> *items(){return m_items;}
 
 };
 

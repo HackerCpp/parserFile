@@ -1,6 +1,6 @@
 #ifndef SETTINGSITEM_H
 #define SETTINGSITEM_H
-#include <QWidget>
+
 #include "agraphicitem.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -16,23 +16,47 @@
 #include "vlineitem.h"
 #include <QColorDialog>
 #include <QSpinBox>
+#include <QTabWidget>
+/*MAIN CLASS SETTINGS FOR ITEMS*********************************************/
+class SettingsItems : public QWidget{
+    Q_OBJECT
+    QTabWidget *m_tabWidgets;
+    QVBoxLayout *m_mainLayout;
+    QHBoxLayout *m_btnLayout;
+    QPushButton *m_btnOk,*m_btnCansel,*m_btnApply;
+public :
+    SettingsItems();
+    ~SettingsItems();
 
+    void addItem(AGraphicItem *item);
+signals:
+    void changeSettings();
+
+public slots:
+    void cansel();
+    void ok();
+    void apply();
+};
+
+/*******************************************************************************/
 class Selection : public QGroupBox{
     Q_OBJECT
     QGridLayout *m_mainLout;
-    struct Lineelect{
+    struct LineSlect{
         QRadioButton radioBtn;
         QLineEdit lineEdit;
         QLabel label;
     };
     QButtonGroup *m_btnGroup;
-    QVector<Lineelect*> * m_lines;
+    QVector<LineSlect*> * m_lines;
 
 public:
     Selection(QStringList names,int activeIndex);
     ~Selection();
 
     bool setValue(QString param,QString value);
+    int indexActive(){return m_btnGroup->checkedId();}
+    QString value(QString param);
 public slots:
     void bthToggle(int index,bool active);
 };
@@ -43,11 +67,15 @@ protected:
     AGraphicItem *m_item;
     QVBoxLayout *m_mainVLout;
     Selection *m_leftBorderSettings,*m_rightBorderSettings;
+    virtual void applyBaseSettings();
+    virtual void applySpecificSettings(){}
 
 public:
     static SettingsItem * createSettingsItem(AGraphicItem *item);
     SettingsItem(AGraphicItem *item);
     ~SettingsItem(){}
+
+    void apply();
 };
 /************************************************************************/
 class SettingsLineItem : public SettingsItem{
@@ -66,6 +94,8 @@ class SettingsLineItem : public SettingsItem{
 public:
     SettingsLineItem(AGraphicItem *lineItem);
     ~SettingsLineItem();
+
+
 public slots:
     void changeColor();
     void changeWidthLine(int newWidth);

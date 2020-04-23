@@ -176,15 +176,13 @@ void TabGFM::dataReady(){
     }
     //m_logData->setInterpreter(interpreter);
     //m_logData->openInterpreter();
-    ISaverLogData * gfmSaver = new GFMSaver();
-    m_logData->setSaver(gfmSaver);
-    m_logData->save();
 }
 
 void TabGFM::saveGFM(){
-    QDateTime date;
-    QString stringDate = date.currentDateTime().toString("dd_MM_yyyy_hh_mm");
-    QString fileName = QFileDialog::getSaveFileName(nullptr,"Сохранить файл как",stringDate,"GFM(*.gfm)");
+
+    ISaverLogData * gfmSaver = new GFMSaver();
+    m_logData->setSaver(gfmSaver);
+    m_logData->save();
     //m_gfm->saveFile(fileName);
 }
 

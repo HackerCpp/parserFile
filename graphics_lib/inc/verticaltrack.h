@@ -9,7 +9,7 @@ class VerticalTrack : public AGraphicTrack
 {
     Q_OBJECT
     SelectingArea *m_selectingArea;
-    QMenu *m_menu;
+    QMenu *m_curvesMenu,*m_trackMenu;
     int m_curentWidth;
     int m_сurrentСountOfActive = 0;
 public:
@@ -32,27 +32,37 @@ private:
     virtual bool is_headerClick(QPointF point)override;
 
     virtual void  openCloseClickHandler(QPointF point)override;
-    virtual void  borderClickHandler(QPointF point)override;
-    virtual void  curvesClickHandler(QPointF point)override;
-    virtual void  headerClickHandler(QPointF point)override;
+    virtual void  borderLeftClickHandler(QPointF point)override;
+    virtual void  borderRightClickHandler(QPointF point)override;
+    virtual void  curvesLeftClickHandler(QPointF point)override;
+    virtual void  curvesRightClickHandler(QPointF point)override;
+    virtual void  headerLeftClickHandler(QPointF point)override;
 
-    virtual void  borderMoveHandler(QPointF point)override;
-    virtual void  curvesMoveHandler(QPointF point)override;
-    virtual void  headerMoveHandler(QPointF point)override;
+    virtual void  borderLeftMoveHandler(QPointF point)override;
+    virtual void  borderRightMoveHandler(QPointF point)override;
+    virtual void  curvesLeftMoveHandler(QPointF point)override;
+    virtual void  curvesRightMoveHandler(QPointF point)override;
+    virtual void  headerLeftMoveHandler(QPointF point)override;
 
-    virtual void  borderReleaseHandler(QPointF point)override;
-    virtual void  curvesReleaseHandler(QPointF point)override;
-    virtual void  headerReleaseHandler(QPointF point)override;
+    virtual void  borderLeftReleaseHandler(QPointF point)override;
+    virtual void  borderRightReleaseHandler(QPointF point)override;
+    virtual void  curvesLeftReleaseHandler(QPointF point)override;
+    virtual void  curvesRightReleaseHandler(QPointF point)override;
+    virtual void  headerLeftReleaseHandler(QPointF point)override;
 
 protected:
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*)override;
     virtual void toSetTheLocationOfTheImageAfterDrawing()override;
     virtual void run() override;
+
 public slots:
     virtual void changeBegin(int newBegin)override;
     void openSettingsActiveItems();
-
-
+    void applySettings();
+    void insertLeftTrack();
+    void insertRightTrack();
+    void deleteTrack();
+    void openSettingsTrack();
 };
 
 #endif // VERTICALTRACK_H

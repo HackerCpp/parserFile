@@ -16,12 +16,12 @@
 
 
 
-class addCurve : public  ALoaderLogData{
+class AddCurve : public  ALoaderLogData{
 
 
 public:
-    addCurve();
-    ~addCurve();
+    AddCurve();
+    ~AddCurve();
     void addItemInTrack(ATrack *track);
     void addTrackInCurve(ABoard *board);
     void addCurveInBlock(QList<IBlock*> *m_block);

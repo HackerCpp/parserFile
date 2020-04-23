@@ -26,6 +26,7 @@ public:
 private:
     void init();
     virtual void resizeEvent(QResizeEvent *event)override;
+    virtual void insertNewTrack(int curentTrackNumber,InsertPossition position = InsertPossition::RIGHT)override;
 
 public slots:
     void scrollChanged();

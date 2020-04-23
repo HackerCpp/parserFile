@@ -1,4 +1,4 @@
-#include "AcuItem.h"
+#include "acuItem.h"
 #include <QDebug>
 #include <QList>
 

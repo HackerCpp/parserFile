@@ -19,18 +19,18 @@ void ATrack::setItem(AItem *items){
         qDebug() << "не удалось вставить кривые, нулевой указатель";
 }
 
-qreal ATrack::LogarithmBase(){
+qreal ATrack::logarithmBase(){
     return m_logarithm.logarithmBase;
 }
 
-qreal ATrack::DecadeCount(){
+qreal ATrack::decadeCount(){
     return m_logarithm.decadeCount;
 }
 
-qreal ATrack::DecadeStart(){
+qreal ATrack::decadeStart(){
     return m_logarithm.decadeStart;
 }
 
-qreal ATrack::DecadeEnd(){
+qreal ATrack::decadeEnd(){
     return m_logarithm.decadeEnd;
 }

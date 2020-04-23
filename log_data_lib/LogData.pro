@@ -22,10 +22,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/blocks/acuItem.cpp \
+    src/blocks/lineItem.cpp \
     src/externalComponents/asaverlogdata.cpp \
     src/externalComponents/isaverlogdata.cpp \
-    src/blocks/AcuItem.cpp \
-    src/blocks/LineItem.cpp \
     src/blocks/astyleitem.cpp \
     src/blocks/aitem.cpp \
     src/blocks/atrack.cpp \
@@ -58,10 +58,9 @@ SOURCES += \
 
 
 HEADERS += \
-    include/blocks/AcuItem.h \
-    include/blocks/LineItem.h \
     include/blocks/ablock.h \
     include/blocks/aboard.h \
+    include/blocks/acuItem.h \
     include/blocks/aitem.h \
     include/blocks/astyleitem.h \
     include/blocks/atrack.h \
@@ -69,6 +68,7 @@ HEADERS += \
     include/blocks/headerblock.h \
     include/blocks/iboard.h \
     include/blocks/items.h \
+    include/blocks/lineItem.h \
     include/blocks/markItem.h \
     include/blocks/toolinfoblock.h \
     include/blocks/datablock.h \

@@ -59,6 +59,101 @@ void VerticalBoard::resizeEvent(QResizeEvent *event){
     scrollChanged();
 }
 
+void VerticalBoard::insertNewTrack(int curentTrackNumber,InsertPossition position){
+    QList<QGraphicsItem *> m_items = this->items();
+    QList<ATrack *> *f_listTracksInfo = m_board->tracks();
+    ATrack *f_curentTrackInfo = nullptr;
+    int newNumberTrack = 0;
+    foreach(auto trackInfo, *f_listTracksInfo){
+        newNumberTrack = newNumberTrack > trackInfo->number() ? newNumberTrack : trackInfo->number();
+        if(trackInfo->number() == curentTrackNumber){
+            f_curentTrackInfo = trackInfo;
+            continue;
+        }
+    }
+    newNumberTrack++;
+    VerticalTrack *f_curentTrack = nullptr;
+    foreach(auto item, m_items){
+        VerticalTrack *f_track = dynamic_cast<VerticalTrack *>(item);
+        if(f_track){
+            if(f_track->trackInfo()->number() == curentTrackNumber){
+              f_curentTrack = f_track;
+              break;
+            }
+        }
+    }
+    ATrack * f_trackInfo = new ATrack();
+    f_trackInfo->setName("Track " + QString::number(newNumberTrack));
+    f_trackInfo->setType(Types::LINEAR);
+    f_trackInfo->setWidth(25);
+    f_trackInfo->setIsGreed(true);
+    VerticalTrack *f_nextTrack = nullptr,*f_prevTrack = nullptr;
+    ATrack *f_prevTrackInfo = nullptr;
+
+    if(position == InsertPossition::RIGHT){
+        f_prevTrack = f_curentTrack;
+        f_prevTrackInfo = f_curentTrackInfo;
+
+        foreach(auto item, m_items){
+            VerticalTrack *f_track = dynamic_cast<VerticalTrack *>(item);
+            if(f_track){
+                int f_error = (f_track->trackInfo()->begin() - (f_prevTrackInfo->begin() + f_prevTrackInfo->width()));
+                if(!f_error ){
+                  f_nextTrack = f_track;
+                  break;
+                }
+            }
+        }
+
+    }
+    else if(position == InsertPossition::LEFT){
+        f_nextTrack = f_curentTrack;
+
+        foreach(auto trackInfo, *f_listTracksInfo){
+            int f_error = (trackInfo->begin() + trackInfo->width()) - f_curentTrackInfo->begin();
+            if(!f_error){
+                f_prevTrackInfo = trackInfo;
+                break;
+            }
+        }
+        if(f_prevTrackInfo){
+            foreach(auto item, m_items){
+                VerticalTrack *f_track = dynamic_cast<VerticalTrack *>(item);
+                if(f_track){
+                    if(f_track->trackInfo()->number() == f_prevTrackInfo->number()){
+                      f_prevTrack = f_track;
+                      break;
+                    }
+                }
+            }
+        }
+    }
+    VerticalTrack *f_track  = new VerticalTrack(f_trackInfo,nullptr,this);
+    connect(this,&VerticalBoard::changingTheVisibilityZone,f_track,&ObjectOfTheBoard::changingTheVisibilityZone);
+    m_canvas->addItem(f_track);
+    if(!f_prevTrack && f_nextTrack){
+       f_listTracksInfo->push_front(f_trackInfo);
+       f_trackInfo->setBegin(0);
+       connect(f_track,&VerticalTrack::changedPositionBorder,f_nextTrack,&VerticalTrack::changeBegin);
+    }
+    else if(f_prevTrack && !f_nextTrack){
+        f_listTracksInfo->push_back(f_trackInfo);
+        f_trackInfo->setBegin(f_prevTrackInfo->begin() + f_prevTrackInfo->width());
+        connect(f_prevTrack,&VerticalTrack::changedPositionBorder,f_track,&VerticalTrack::changeBegin);
+    }
+    else if(f_prevTrack && f_nextTrack){
+        int f_indexPositionPrevInfo = f_listTracksInfo->indexOf(f_prevTrackInfo);
+        f_trackInfo->setBegin(f_prevTrackInfo->begin() + f_prevTrackInfo->width());
+
+        f_listTracksInfo->insert(f_indexPositionPrevInfo,f_trackInfo);
+        disconnect(f_prevTrack,&VerticalTrack::changedPositionBorder,f_nextTrack,&VerticalTrack::changeBegin);
+        connect(f_prevTrack,&VerticalTrack::changedPositionBorder,f_track,&VerticalTrack::changeBegin);
+        connect(f_track,&VerticalTrack::changedPositionBorder,f_nextTrack,&VerticalTrack::changeBegin);
+    }
+    f_track->changeBegin(f_track->trackInfo()->begin() * m_pixelPerMm);
+    redraw();
+}
+
 void inline VerticalBoard::scrollChanged(){
     QPolygonF f_rect = mapToScene(QRect(x(),y(),width(),height()));
     if(f_rect.isEmpty()){

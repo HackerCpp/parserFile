@@ -12,7 +12,7 @@ VAcuItem::VAcuItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
         qDebug() << "Не удалось преобразовать AItemInfo в AcuItemInfo" << itemInfo->name();
     }
     bool ok = true;
-    QString f_dataStep = m_curve->desc()->getParam("data_step");
+    QString f_dataStep = m_curve->desc()->param("data_step");
     m_dataStep =  f_dataStep.left(f_dataStep.indexOf("(")).toDouble(&ok);
     if(!ok){
         qDebug() << "Не удалось преобразовать data_step в акустике";
@@ -150,8 +150,8 @@ void inline VAcuItem::drawInterpolationHorizontal(QPainter *per,QRectF visibleRe
     QColor color;
     per->setPen(QPen(QColor(0,0,0,0),0));
     uint i;
-    QTime time;
-    time.start();
+    //QTime time;
+    //time.start();
     int prevStep = ((f_mainValue->data(indexBegin) * f_scaleForMainValue) - f_yTop + f_topOffset);
     for(i = indexBegin + 1;i < f_mainValue->size();++i){
         if(*flag)
@@ -195,11 +195,11 @@ void inline VAcuItem::drawInterpolationHorizontal(QPainter *per,QRectF visibleRe
         }
         QBrush brush(linearGradient);
         per->setBrush(brush);
-        per->drawRect(m_offsetPix,prevStep,f_width,2*m_board->pixelPerMm());
+        per->drawRect(m_offsetPix,prevStep,f_width,1 * m_board->pixelPerMm());
         prevStep = ((f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset);
     }
 
-    qDebug() << time.elapsed();
+    //qDebug() << time.elapsed();
 }
 
 void VAcuItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
@@ -217,8 +217,8 @@ void VAcuItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
             f_pixelPerMksec = (f_width -  m_offsetPix) / rightBorderMksek;
         }
         else {
-            qreal f_mkSecPerMM = 1/m_acuItem->scale();
-            f_pixelPerMksec  = (1 / f_mkSecPerMM) *f_pixelPerMM;
+            qreal f_scale = m_acuItem->scale();
+            f_pixelPerMksec  = f_scale * f_pixelPerMM;
         }
     }
     else{
@@ -228,8 +228,8 @@ void VAcuItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
             f_pixelPerMksec = f_width / (rightBorderMksek - leftBorderMksek);
         }
         else{
-            qreal f_mkSecPerMM = (1/m_acuItem->scale());
-            f_pixelPerMksec  = (1.f / f_mkSecPerMM) * f_pixelPerMM;
+            qreal f_scale = m_acuItem->scale();
+            f_pixelPerMksec  = f_scale * f_pixelPerMM;
         }
         m_offsetPix = -leftBorderMksek * f_pixelPerMksec;
     }

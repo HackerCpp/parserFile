@@ -13,7 +13,7 @@ class AGraphicBoard : public QGraphicsView,public BoardForTrack
     int m_lengtgPicture[3] = {3000,16200,32500};
     int m_minimumSize;
 protected:
-
+    virtual void insertNewTrack(int curentTrackNumber,InsertPossition position = InsertPossition::RIGHT)override{}
 public:
     enum FormatTime{MSEC_SM_100, SEC_SM_1, SEC_SM_5, SEC_SM_10,
                    SEC_SM_30, MIN_SM_1, MIN_SM_5,

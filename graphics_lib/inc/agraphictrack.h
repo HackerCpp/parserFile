@@ -26,6 +26,7 @@ public:
     qreal topValue();
     qreal bottomValue();
     virtual void activate(bool activate){}
+    ATrack *trackInfo(){return m_track;}
 protected:
     QImage *m_infoPixMap,*m_curentHeader,*m_doubleHeader;
     BoardForTrack *m_board;
@@ -34,11 +35,13 @@ protected:
     int m_heightHeader;
     Border *m_border;
     int m_positionOfTheBorder;
-    QList<AGraphicItem*> *m_items;
 
+    QList<AGraphicItem*> *m_items;
     ATrack *m_track;
 
-    bool m_isBorderClick,m_isCurvesClick,m_isHeaderClick,m_isOpenCloseClick,m_isOpen;
+    bool m_isLeftBorderClick,m_isRightBorderClick,
+    m_isLeftCurvesClick,m_isRightCurvesClick,m_isLeftHeaderClick,
+    m_isOpenCloseClick,m_isOpen;
     QPointF m_prevPoint;
 
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*) override{}
@@ -56,17 +59,23 @@ protected:
     virtual bool is_headerClick(QPointF point){return false;}
 
     virtual void  openCloseClickHandler(QPointF point){}
-    virtual void  borderClickHandler(QPointF point){}
-    virtual void  curvesClickHandler(QPointF point){}
-    virtual void  headerClickHandler(QPointF point){}
+    virtual void  borderRightClickHandler(QPointF point){}
+    virtual void  borderLeftClickHandler(QPointF point){}
+    virtual void  curvesLeftClickHandler(QPointF point){}
+    virtual void  curvesRightClickHandler(QPointF point){}
+    virtual void  headerLeftClickHandler(QPointF point){}
 
-    virtual void  borderMoveHandler(QPointF point){}
-    virtual void  curvesMoveHandler(QPointF point){}
-    virtual void  headerMoveHandler(QPointF point){}
+    virtual void  borderLeftMoveHandler(QPointF point){}
+    virtual void  borderRightMoveHandler(QPointF point){}
+    virtual void  curvesLeftMoveHandler(QPointF point){}
+    virtual void  curvesRightMoveHandler(QPointF point){}
+    virtual void  headerLeftMoveHandler(QPointF point){}
 
-    virtual void  borderReleaseHandler(QPointF point){}
-    virtual void  curvesReleaseHandler(QPointF point){}
-    virtual void  headerReleaseHandler(QPointF point){}
+    virtual void  borderLeftReleaseHandler(QPointF point){}
+    virtual void  borderRightReleaseHandler(QPointF point){}
+    virtual void  curvesLeftReleaseHandler(QPointF point){}
+    virtual void  curvesRightReleaseHandler(QPointF point){}
+    virtual void  headerLeftReleaseHandler(QPointF point){}
 
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *event)override;
     virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event)override;

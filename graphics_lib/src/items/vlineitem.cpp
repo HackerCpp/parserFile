@@ -9,14 +9,57 @@ VLineItem::VLineItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
     if(f_lineitem)
         m_itemInfo = f_lineitem;
     else{
-        qDebug() << "Не удалось преобразовать AItemInfo в LineItemInfo" << itemInfo->name() << itemInfo->Type();
+        qDebug() << "Не удалось преобразовать AItemInfo в LineItemInfo" << itemInfo->name() << itemInfo->type();
     }
 
 }
-uint VLineItem::amountSaturation(uint index,uint width){
-    if(width && index < static_cast<uint>(m_curve->size()))
-        return static_cast<uint>((m_curve->data(index) * m_scale)/width);
-    return 0;
+
+VLineItem::Transition VLineItem::amountSaturation(uint curentIndex,int width){
+    if(width && curentIndex < static_cast<uint>(m_curve->size()) && curentIndex > 0){
+        qreal f_cur = ((m_curve->data(curentIndex) * m_scale) + m_offsetPix) / width;
+        qreal f_prev = ((m_curve->data(curentIndex - 1) * m_scale) + m_offsetPix) / width;
+        f_cur += (f_cur > 0 ? 1 : -1);
+        f_prev += (f_prev > 0 ? 1 : -1);
+        if((int)f_cur > (int)f_prev)
+            return RIGHT_TRANSITION;
+        else if((int)f_cur < (int)f_prev)
+            return LEFT_TRANSITION;
+    }
+    return NO_TRANSITION;
+}
+
+void VLineItem::loadDrawingParam(int width){
+    LineItem *f_lineItemInfo = dynamic_cast<LineItem*>(m_itemInfo);
+    if(!f_lineItemInfo){
+        qDebug() << "m_itemInfo не переводится в m_lineItem не получается нарисовать";
+        return;
+    }
+    qreal f_pixelPerMM = m_board->pixelPerMm();
+    qreal f_pixelPerUnit;
+    if(!f_lineItemInfo->isBeginValue()){
+        m_offsetPix = (f_lineItemInfo->zeroOffset()/10) * m_board->pixelPerMm();
+        if(f_lineItemInfo->isEndValue()){
+            qreal rightBorderUnit = f_lineItemInfo->endValue();
+            f_pixelPerUnit = (width -  m_offsetPix) / rightBorderUnit;
+        }
+        else {
+            qreal f_scale = f_lineItemInfo->scale();
+            f_pixelPerUnit  = f_scale * f_pixelPerMM;
+        }
+    }
+    else{
+        qreal leftBorderUnit = f_lineItemInfo->beginValue()/10;
+        if(f_lineItemInfo->isEndValue()){
+            qreal rightBorderUnit = f_lineItemInfo->endValue();
+            f_pixelPerUnit = width / (rightBorderUnit - leftBorderUnit);
+        }
+        else{
+            qreal f_scale = f_lineItemInfo->scale();
+            f_pixelPerUnit  = f_scale * f_pixelPerMM;
+        }
+        m_offsetPix = -leftBorderUnit * f_pixelPerUnit;
+    }
+    m_scale = f_pixelPerUnit;
 }
 
 void VLineItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
@@ -47,6 +90,7 @@ void VLineItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
     int f_downOffset = f_height - f_topOffset;
     int indexBegin  = 0;
     qreal f_scaleForMainValue = m_board->scale();
+    loadDrawingParam(f_width);
     if((f_mainValue->minimum() * f_scaleForMainValue) > f_yTop  + f_downOffset || (f_mainValue->maximum() * f_scaleForMainValue) < f_yTop - f_topOffset){
         return;
     }
@@ -66,12 +110,13 @@ void VLineItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
     for(i = indexBegin + 1;i < f_mainValue->size(); ++i){
         if(*flag)
             return;
-        if(amountSaturation(i,f_width) > amountSaturation(prevIndex,f_width)){
+        VLineItem::Transition f_transition = amountSaturation(i,f_width);
+        if(f_transition == RIGHT_TRANSITION ){
             per->drawLine(prevPoint,QPointF(f_width,(f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset));
             per->drawLine(QPointF(0,(f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset),QPointF(pixelX(i,f_width),(f_mainValue->data(i)*f_scaleForMainValue) - f_yTop + f_topOffset));
             per->drawText(QPointF(50,(f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset),QString::number(f_mainValue->data(i)));
         }
-        else if(amountSaturation(i,f_width) < amountSaturation(prevIndex,f_width)){
+        else if(f_transition == LEFT_TRANSITION){
             per->drawLine(prevPoint,QPointF(0,(f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset));
             per->drawLine(QPointF(f_width,(f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset),QPointF(pixelX(i,f_width),(f_mainValue->data(i)*f_scaleForMainValue) - f_yTop + f_topOffset));
         }
@@ -109,14 +154,16 @@ void VLineItem::drawHeader(QPainter *per,int &position,bool *flag){
 
 qreal VLineItem::operator[](int index){
     if(index < m_curve->size())
-        return m_curve->data(index) * m_scale;
+        return m_curve->data(index) * m_scale + m_offsetPix;
     else
         return 0;
 }
 
 qreal VLineItem::pixelX(int index,int width){
-    if(index < m_curve->size())
-        return fmod(m_curve->data(index) * m_scale,width);
+    if(index < m_curve->size()){
+        qreal f_value = fmod((m_curve->data(index) * m_scale) + m_offsetPix,width);
+        return f_value > 0 ? f_value : width + f_value;
+    }
     else
         return 0;
 }
@@ -130,12 +177,12 @@ bool VLineItem::isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per)
         qDebug() << "Невозможно проверить картинка для проверки не найдена";
         return false;
     }
-    img->fill(0x0);
+    img->fill(0xffffffff);
     bool flag = false;
     drawBody(per,visibleRect,&flag);
     for(int i = area.left(); i < area.right();++i){
         for(int j = area.top(); j < area.bottom();++j){
-            if(img->pixel(i,j) != 4278190080){
+            if(img->pixel(i,j) != 4294967295){
                 return true;
             }
         }

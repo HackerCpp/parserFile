@@ -58,7 +58,7 @@ public:
     virtual qreal glemScale(){return m_multiScale.gleamScale;}
 
 
-    virtual TypeItem Type(){return m_type;}
+    virtual TypeItem type(){return m_type;}
 
 
     virtual void setBegin(bool isBegin, qreal begin, qreal zeroOffset);
@@ -66,6 +66,8 @@ public:
     virtual void setMultiScale(bool isMultiScale,qreal gleamCount,qreal gleamScale);
     virtual void setName(QString name, QString visible);
     virtual void setTypeItem(TypeItem type){m_type = type;}
+
+
 };
 
 

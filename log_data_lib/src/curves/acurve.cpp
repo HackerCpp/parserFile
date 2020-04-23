@@ -83,8 +83,8 @@ QString ACurve::mnemonic(){
 
 
 void ACurve::setShortCut(ShortCut shortCut){
-    m_shortCut.setName(shortCut.Name());
-    m_shortCut.setRef(shortCut.Ref());
+    m_shortCut.setName(shortCut.name());
+    m_shortCut.setRef(shortCut.ref());
 }
 
 void ACurve::setOffset(uint offset){

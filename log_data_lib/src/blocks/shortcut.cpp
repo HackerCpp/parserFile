@@ -13,12 +13,12 @@ void ShortCut::setName(QString name){
     m_name = name;
     m_nameWithoutNumber = m_name.mid(0,m_name.indexOf("["));
 }
-QString ShortCut::NameWithoutNumber(){
+QString ShortCut::nameWithoutNumber(){
     return m_nameWithoutNumber;
 }
-QString ShortCut::Ref(){
+QString ShortCut::ref(){
     return m_ref;
 }
-QString ShortCut::Name(){
+QString ShortCut::name(){
     return m_name;
 }

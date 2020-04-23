@@ -1,15 +1,18 @@
 #include"addCurve.h"
-#include"LineItem.h"
+#include"lineItem.h"
 #include <QList>
 #include <QDebug>
-addCurve ::addCurve(){
+
+AddCurve::AddCurve(){
    ;
 }
-addCurve ::~addCurve()
+
+AddCurve::~AddCurve()
 {
    ;
 }
-void addCurve :: addCurveInBlock(QList<IBlock*> *m_block)
+
+void AddCurve::addCurveInBlock(QList<IBlock*> *m_block)
 {
     bool flag = false;
 
@@ -68,25 +71,20 @@ void addCurve :: addCurveInBlock(QList<IBlock*> *m_block)
 
             dataBlock->setCurves(*m_curve);
 
-
-
-
-
-
-
         }
     }
 }
-void addCurve :: addTrackInCurve(ABoard *board)
+
+void AddCurve::addTrackInCurve(ABoard *board)
 {
     ATrack *track = new ATrack;
     QList<ATrack*> *f_track = board->tracks();
-    qreal m_logarithmBase = f_track->value(0)->LogarithmBase();
-    qreal m_decadeCount = f_track->value(0)->DecadeCount();
-    qreal m_decadeStart = f_track->value(0)->DecadeStart();
-    qreal m_decadeEnd = f_track->value(0)->DecadeEnd();
-    qreal m_begin = f_track->value(f_track->size()-1)->Begin();
-    qreal m_wigth = f_track->value(f_track->size()-1)->Width();
+    qreal m_logarithmBase = f_track->value(0)->logarithmBase();
+    qreal m_decadeCount = f_track->value(0)->decadeCount();
+    qreal m_decadeStart = f_track->value(0)->decadeStart();
+    qreal m_decadeEnd = f_track->value(0)->decadeEnd();
+    qreal m_begin = f_track->value(f_track->size()-1)->begin();
+    qreal m_wigth = f_track->value(f_track->size()-1)->width();
     track->setLogarithm(m_logarithmBase,m_decadeCount,m_decadeStart,m_decadeEnd);
     track->setName("Track");
     track->setType(LINEAR);
@@ -95,7 +93,8 @@ void addCurve :: addTrackInCurve(ABoard *board)
     addItemInTrack(track);
     board->setTrack(track);
 }
-void addCurve:: addItemInTrack(ATrack *track)
+
+void AddCurve::addItemInTrack(ATrack *track)
 {
 
     LineItem *item = new LineItem();

@@ -3,7 +3,7 @@
 #include <qvariant.h>
 #include <QImage>
 
-
+enum InsertPossition{RIGHT,LEFT};
 class BoardForTrack{
 
 protected:
@@ -42,6 +42,7 @@ public:
     QImage::Format formatPicture(){return m_formatImg;}
     qreal scale();
     virtual void resize(){}
+    virtual void insertNewTrack(int curentTrackNumber,InsertPossition position = InsertPossition::RIGHT){}
 };
 
 #endif // BOARDFORTRACK_H

@@ -1,5 +1,5 @@
 #include "verticaltrack.h"
-#include "AcuItem.h"
+#include "acuItem.h"
 #include "qgraphicsscene.h"
 #include "settingsitem.h"
 #include <QTabWidget>
@@ -12,31 +12,38 @@ VerticalTrack::VerticalTrack(ATrack *track,QMap<QString,ICurve*> *curves,BoardFo
     : AGraphicTrack(track,curves,board)
 {
     setZValue(0);
-    m_curentWidth = m_track->Width();
+    m_curentWidth = m_track->width();
     if(!track){
         qDebug() << "Передан нулевой указатель на трекИнфо, не получается создать трек.";
         return;
     }
     m_selectingArea = nullptr;
-    m_menu = new QMenu("&Menu");
-    m_menu->addAction("&Settings",this, SLOT(openSettingsActiveItems()));
-    m_menu->addAction("&Edit",qApp, SLOT(aboutQt()));
-    m_menu->setMaximumSize(1000,1000);
+
+    m_curvesMenu = new QMenu("&CurvesMenu");
+    m_curvesMenu->addAction("&Curve settings",this, SLOT(openSettingsActiveItems()));
+    m_curvesMenu->addAction("&Curve edit",qApp, SLOT(aboutQt()));
+    m_curvesMenu->setMaximumSize(1000,1000);
+
+    m_trackMenu = new QMenu("&TrackMenu");
+    m_trackMenu->addAction("&Track settings",this, SLOT(openSettingsTrack()));
+    m_trackMenu->addAction("&Insert a track on the right",this, SLOT(insertRightTrack()));
+    m_trackMenu->addAction("&Insert a track on the left",this, SLOT(insertLeftTrack()));
+    m_trackMenu->addAction("&Delete a track",this, SLOT(deleteTrack()));
     m_border = new RightBorder();
     qreal f_pixelPerMm = m_board->pixelPerMm();
     uint f_pictureHeight = m_board->pictureHeight();
     int f_topY = m_board->top();
     uint f_lengthY = m_board->length();
-    m_positionOfTheBorder = (m_track->Begin() + m_track->Width()) * f_pixelPerMm - m_border->width();
-    int f_pictureWidth = m_track->Width() * f_pixelPerMm  - m_border->width();
+    m_positionOfTheBorder = (m_track->begin() + m_track->width()) * f_pixelPerMm - m_border->width();
+    int f_pictureWidth = m_track->width() * f_pixelPerMm  - m_border->width();
     QImage::Format f_format = m_board->formatPicture();
     m_curentPixmap = new QImage(f_pictureWidth,f_pictureHeight,f_format);
     m_doublePixMap = new QImage(f_pictureWidth,f_pictureHeight,f_format);
     m_curentHeader = new QImage(f_pictureWidth,3000,QImage::Format_ARGB4444_Premultiplied);
     m_doubleHeader = new QImage(f_pictureWidth,3000,QImage::Format_ARGB4444_Premultiplied);
     m_infoPixMap = new QImage(f_pictureWidth,30,QImage::Format_ARGB4444_Premultiplied);
-    m_boundingRect = QRectF(m_track->Begin() * f_pixelPerMm,f_topY,m_track->Width() * f_pixelPerMm,f_lengthY);
-    QList <AItem*> *itemInfo = track->Items();
+    m_boundingRect = QRectF(m_track->begin() * f_pixelPerMm,f_topY,m_track->width() * f_pixelPerMm,f_lengthY);
+    QList <AItem*> *itemInfo = track->items();
     int f_count = 0,y = 0;
     foreach(auto item,*itemInfo){
         QString name = item->name();
@@ -67,7 +74,7 @@ void VerticalTrack::resize(){
     int f_topY = m_board->top();
     uint f_lengthY = m_board->length();
     QGraphicsItem::prepareGeometryChange();
-    m_boundingRect = QRectF(m_track->Begin() * f_pixelPerMm,f_topY,m_track->Width() * f_pixelPerMm,f_lengthY);
+    m_boundingRect = QRectF(m_track->begin() * f_pixelPerMm,f_topY,m_track->width() * f_pixelPerMm,f_lengthY);
     update();
 }
 
@@ -114,7 +121,7 @@ void VerticalTrack::resizePictures(){
         return;
     qreal f_pixelPerMm = m_board->pixelPerMm();
     uint f_pictureHeight = m_board->pictureHeight();
-    int f_pictureWidth = m_track->Width() * f_pixelPerMm  - m_border->width();
+    int f_pictureWidth = m_track->width() * f_pixelPerMm  - m_border->width();
 
     QImage *f_img = m_infoPixMap;
     m_infoPixMap = new QImage(f_pictureWidth,30,QImage::Format_ARGB4444_Premultiplied);
@@ -154,12 +161,12 @@ void VerticalTrack::drawGrid(qreal step_mm,QPainter *per,QPen pen){
 void VerticalTrack::setActiveSelectingArea(){
     qreal f_pixelPerMm = m_board->pixelPerMm();
     uint f_pictureHeight = m_board->pictureHeight();
-    int f_pictureWidth = m_track->Width() * f_pixelPerMm  - m_border->width();
+    int f_pictureWidth = m_track->width() * f_pixelPerMm  - m_border->width();
     QImage::Format f_format =  QImage::Format_Grayscale8;
 
     QImage f_image(f_pictureWidth,f_pictureHeight,f_format);
     QPainter painter(&f_image);
-    int f_x = m_selectingArea->left()-(m_track->Begin() * f_pixelPerMm);
+    int f_x = m_selectingArea->left()-(m_track->begin() * f_pixelPerMm);
     int f_y = m_selectingArea->top() - m_visibilitySquare.y() + m_board->offsetUp();
     int f_width = m_selectingArea->right() - m_selectingArea->left();
     int f_height = m_selectingArea->bottom() - m_selectingArea->top();
@@ -167,7 +174,7 @@ void VerticalTrack::setActiveSelectingArea(){
     bool isActive = false;
     m_сurrentСountOfActive = 0;
     foreach(auto item, *m_items){
-        bool isActive = item->isLocatedInTheArea(area,m_visibilitySquare,&painter);
+        isActive = item->isLocatedInTheArea(area,m_visibilitySquare,&painter);
         item->setActive(isActive);
         m_сurrentСountOfActive += isActive ? 1 : 0;
     }
@@ -186,10 +193,10 @@ bool VerticalTrack::is_openCloseClick(QPointF point){
 bool VerticalTrack::is_borderClick(QPointF point){
     qreal f_pixelPerMm = m_board->pixelPerMm();
 
-    int borderEnd = (m_track->Begin() + m_track->Width()) * f_pixelPerMm;
+    int borderEnd = (m_track->begin() + m_track->width()) * f_pixelPerMm;
     int borderBegin = borderEnd - m_border->width();
     if(point.x() >= borderBegin && point.x() <= borderEnd){
-        setZValue(50);
+
         return true;
     }
     return false;
@@ -218,30 +225,35 @@ void  VerticalTrack::openCloseClickHandler(QPointF point){
         m_track->setWidth(m_curentWidth);
     }
     else{
-        m_curentWidth = m_track->Width();
+        m_curentWidth = m_track->width();
         m_track->setWidth(m_border->width()/f_pixelPerMm);
     }
-    m_boundingRect = QRectF(m_track->Begin() * f_pixelPerMm,f_topY,m_track->Width() * f_pixelPerMm,f_lengthY);
-    m_positionOfTheBorder = (m_track->Begin() + m_track->Width()) * f_pixelPerMm - m_border->width();
+    m_boundingRect = QRectF(m_track->begin() * f_pixelPerMm,f_topY,m_track->width() * f_pixelPerMm,f_lengthY);
+    m_positionOfTheBorder = (m_track->begin() + m_track->width()) * f_pixelPerMm - m_border->width();
     m_border->setopen(m_isOpen);
     resizePictures();
     update();
 
     const QMetaMethod valueChangedSignal = QMetaMethod::fromSignal(&AGraphicTrack::changedPositionBorder);
     if(isSignalConnected(valueChangedSignal))
-        emit changedPositionBorder((m_track->Begin() + m_track->Width()) * f_pixelPerMm);
+        emit changedPositionBorder((m_track->begin() + m_track->width()) * f_pixelPerMm);
     else
         m_board->resize();
 }
 
-void  VerticalTrack::borderClickHandler(QPointF point){
+void  VerticalTrack::borderLeftClickHandler(QPointF point){
+    setZValue(50);
     m_border->click(true);
     m_boundingRect = m_visibilitySquare;
     update();
 }
 
-void  VerticalTrack::curvesClickHandler(QPointF point){
-    m_menu->hide();
+void  VerticalTrack::borderRightClickHandler(QPointF point){
+
+}
+
+void  VerticalTrack::curvesLeftClickHandler(QPointF point){
+    m_curvesMenu->hide();
     if(!m_selectingArea){
         m_selectingArea = new SelectingArea(QRectF(point.x(),point.y(),1,1));
         scene()->addItem(m_selectingArea);
@@ -252,24 +264,32 @@ void  VerticalTrack::curvesClickHandler(QPointF point){
     m_selectingArea->show();
 }
 
-void  VerticalTrack::headerClickHandler(QPointF point){
+void  VerticalTrack::curvesRightClickHandler(QPointF point){
 
 }
 
-void  VerticalTrack::borderMoveHandler(QPointF point){
+void  VerticalTrack::headerLeftClickHandler(QPointF point){
+
+}
+
+void  VerticalTrack::borderLeftMoveHandler(QPointF point){
     qreal f_pixelPerMm = m_board->pixelPerMm();
     int newPosition = m_positionOfTheBorder - (m_prevPoint.x() - point.x());
-    if(newPosition > m_track->Begin() * f_pixelPerMm){
+    if(newPosition > m_track->begin() * f_pixelPerMm){
         m_positionOfTheBorder = newPosition;
         update();
     }
 }
 
-void  VerticalTrack::curvesMoveHandler(QPointF point){
+void  VerticalTrack::borderRightMoveHandler(QPointF point){
+
+}
+
+void  VerticalTrack::curvesLeftMoveHandler(QPointF point){
     int f_height =  m_selectingArea->height() - (m_prevPoint.y() - point.y());
     int f_width =  m_selectingArea->width() - (m_prevPoint.x() - point.x());
-    if(m_selectingArea->boundingRect().x() + f_width < ((m_track->Begin() + m_track->Width()) * m_board->pixelPerMm()) - m_border->width()
-       && m_selectingArea->boundingRect().x() + f_width > m_track->Begin() * m_board->pixelPerMm()){
+    if(m_selectingArea->boundingRect().x() + f_width < ((m_track->begin() + m_track->width()) * m_board->pixelPerMm()) - m_border->width()
+       && m_selectingArea->boundingRect().x() + f_width > m_track->begin() * m_board->pixelPerMm()){
         m_selectingArea->setWidth(f_width);
     }
     m_selectingArea->setHeight(f_height);
@@ -277,49 +297,62 @@ void  VerticalTrack::curvesMoveHandler(QPointF point){
     scene()->update();
 }
 
-void  VerticalTrack::headerMoveHandler(QPointF point){
+void  VerticalTrack::curvesRightMoveHandler(QPointF point){
+
+}
+
+void  VerticalTrack::headerLeftMoveHandler(QPointF point){
     int f_newPos = m_board->positionHeader() - (m_prevPoint.y() - point.y());
     if(f_newPos <  m_visibilitySquare.height() - 50 && (f_newPos + m_heightHeader) >  50)
         m_board->setPositionHeader(f_newPos);
     scene()->update();
 }
 
-void  VerticalTrack::borderReleaseHandler(QPointF point){
+void  VerticalTrack::borderLeftReleaseHandler(QPointF point){
     setZValue(0);
     m_infoPixMap->fill(0x0);
     qreal f_pixelPerMm = m_board->pixelPerMm();
     int f_topY = m_board->top();
     uint f_lengthY = m_board->length();
     QGraphicsItem::prepareGeometryChange();
-    m_track->setWidth(((m_positionOfTheBorder + m_border->width())/f_pixelPerMm) - m_track->Begin());
+    m_track->setWidth(((m_positionOfTheBorder + m_border->width())/f_pixelPerMm) - m_track->begin());
     m_border->click(false);
-    m_boundingRect = QRectF(m_track->Begin() * f_pixelPerMm,f_topY,m_track->Width() * f_pixelPerMm,f_lengthY);
-    m_positionOfTheBorder = (m_track->Begin() + m_track->Width()) * f_pixelPerMm - m_border->width();
+    m_boundingRect = QRectF(m_track->begin() * f_pixelPerMm,f_topY,m_track->width() * f_pixelPerMm,f_lengthY);
+    m_positionOfTheBorder = (m_track->begin() + m_track->width()) * f_pixelPerMm - m_border->width();
     resizePictures();
     update();
     const QMetaMethod valueChangedSignal = QMetaMethod::fromSignal(&AGraphicTrack::changedPositionBorder);
     if(isSignalConnected(valueChangedSignal))
-        emit changedPositionBorder((m_track->Begin() + m_track->Width()) * f_pixelPerMm);
+        emit changedPositionBorder((m_track->begin() + m_track->width()) * f_pixelPerMm);
     else
         m_board->resize();
 }
 
-void  VerticalTrack::curvesReleaseHandler(QPointF point){
+void  VerticalTrack::borderRightReleaseHandler(QPointF point){
+
+}
+
+void  VerticalTrack::curvesLeftReleaseHandler(QPointF point){
     m_selectingArea->hide();
     scene()->update();
     setActiveSelectingArea();
     if(m_сurrentСountOfActive){
-        m_menu->move(QCursor::pos());
-        m_menu->show();
+        m_curvesMenu->move(QCursor::pos());
+        m_curvesMenu->show();
     }
 }
 
-void  VerticalTrack::headerReleaseHandler(QPointF point){
+void  VerticalTrack::curvesRightReleaseHandler(QPointF point){
+    m_trackMenu->move(QCursor::pos());
+    m_trackMenu->show();
+}
+
+void  VerticalTrack::headerLeftReleaseHandler(QPointF point){
 
 }
 
 void VerticalTrack::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*){
-    int LeftPos = m_track->Begin() * m_board->pixelPerMm();
+    int LeftPos = m_track->begin() * m_board->pixelPerMm();
 
     if(m_curentPixmap)
         painter->drawImage(QRect(LeftPos,m_topPositionPicture,m_curentPixmap->width(),m_curentPixmap->height()),*m_curentPixmap);
@@ -355,7 +388,7 @@ void VerticalTrack::run(){
     m_doubleHeader->fill(0x0);
     painter.setPen(QPen(QColor(0,0,0,200),1,Qt::DashLine));//Qt::DotLine  Qt::DashLine Qt::DashDotDotLine
     qreal f_pixelPerMm = m_board->pixelPerMm();
-    if(m_track->IsGreed()){
+    if(m_track->isGreed()){
         drawGrid(5 * f_pixelPerMm,&painter,QPen(QColor(0,0,0,200),0.5,Qt::DashLine));
         drawGrid(20 * f_pixelPerMm,&painter,QPen(QColor(0,0,0,200),1));
     }
@@ -386,32 +419,46 @@ void VerticalTrack::changeBegin(int newBegin){
 
     QGraphicsItem::prepareGeometryChange();
     m_track->setBegin(newBegin/f_pixelPerMm);
-    m_boundingRect = QRectF(m_track->Begin() * f_pixelPerMm,f_topY,m_track->Width() * f_pixelPerMm,f_lengthY);
-    m_positionOfTheBorder = (m_track->Begin() + m_track->Width()) * f_pixelPerMm - m_border->width();
+    m_boundingRect = QRectF(m_track->begin() * f_pixelPerMm,f_topY,m_track->width() * f_pixelPerMm,f_lengthY);
+    m_positionOfTheBorder = (m_track->begin() + m_track->width()) * f_pixelPerMm - m_border->width();
     //resizePictures();
     update();
     const QMetaMethod valueChangedSignal = QMetaMethod::fromSignal(&AGraphicTrack::changedPositionBorder);
     if(isSignalConnected(valueChangedSignal))
-        emit changedPositionBorder((m_track->Begin() + m_track->Width()) * f_pixelPerMm);
+        emit changedPositionBorder((m_track->begin() + m_track->width()) * f_pixelPerMm);
     else
         m_board->resize();
 }
 
+void VerticalTrack::applySettings(){
+    redraw();
+}
+
 void VerticalTrack::openSettingsActiveItems(){
-    QTabWidget *f_tabWidget = new QTabWidget();
-    f_tabWidget->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
-    f_tabWidget->setMinimumSize(500,500);
+    SettingsItems *f_tabWidget = new SettingsItems();
+    connect(f_tabWidget,&SettingsItems::changeSettings,this,&VerticalTrack::applySettings);
     int f_count = 0;
-    foreach(auto itemInfo,*m_items){
-        if(itemInfo->isActive()){
-            f_tabWidget->addTab(SettingsItem::createSettingsItem(itemInfo),itemInfo->curve()->shortCut().Name() + ":" + itemInfo->curve()->mnemonic());
+    foreach(auto item,*m_items){
+        if(item->isActive()){
+            f_tabWidget->addItem(item);
             f_count++;
         }
     }
-    if(!f_count){
-        delete f_tabWidget;
-        f_tabWidget = nullptr;
-        return;
-    }
-    f_tabWidget->show();
+
+}
+
+void VerticalTrack::insertLeftTrack(){
+    m_board->insertNewTrack(m_track->number(),InsertPossition::LEFT);
+}
+
+void VerticalTrack::insertRightTrack(){
+    m_board->insertNewTrack(m_track->number(),InsertPossition::RIGHT);
+}
+
+void VerticalTrack::deleteTrack(){
+
+}
+
+void VerticalTrack::openSettingsTrack(){
+
 }

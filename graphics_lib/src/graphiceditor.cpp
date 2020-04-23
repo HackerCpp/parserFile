@@ -1,7 +1,5 @@
 #include "graphiceditor.h"
-//#include "agraphicboard.h"
-#include "SFML/Graphics.hpp"
-using namespace sf;
+
 
 
 GraphicEditor::GraphicEditor(QMap<QString,ICurve*> *curves,FormsBlock *forms,QWidget *parent)

@@ -37,13 +37,13 @@ Desc::Desc(QByteArray desc){
         parserParameters(f_calibration,m_calibration);
 
 }
-QString Desc::getParam(QString index){
+QString Desc::param(QString index){
     return m_parameters->value(index);
 }
-QString Desc::getCalib(QString index){
+QString Desc::calib(QString index){
     return m_calibration->value(index);
 }
-QByteArray Desc::getForSave(){
+QByteArray Desc::forSave(){
     QByteArray f_byteArray;
     QString f_string = "<desc";
     for(auto i = m_parameters->begin(); i != m_parameters->end();i++) {

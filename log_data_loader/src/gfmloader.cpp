@@ -8,12 +8,11 @@
 #include "board.h"
 #include "track.h"
 #include "items.h"
-#include "LineItem.h"
+#include "lineItem.h"
 #include "markItem.h"
-#include "AcuItem.h"
+#include "acuItem.h"
 #include "headerblock.h"
 #include "addCurve.h"
-
 
 bool GFMLoader::gzipDecompress(QByteArray input, QByteArray &output){
     output.clear();
@@ -154,8 +153,7 @@ void GFMLoader::run(){
         value.bodyBlock.clear();
     }
 
-   // addCurve *add = new addCurve();
-  //  add->addCurveInBlock(m_blocks);
+
     delete blocksList;
     byteArrayFile.clear();
     qDebug() << "end load gfm : " << time.msecsTo( QTime::currentTime() ) << "mS";
@@ -252,10 +250,10 @@ void GFMLoader::parserDataBlock(const QByteArray &bodyBlock,IBlock *block){
     ICurve *f_mainTime = nullptr;
     ICurve *f_mainDepth = nullptr;
     foreach(auto curve,*f_curves){
-        if(curve->desc()->getParam("draw_type") == "TIME"){
+        if(curve->desc()->param("draw_type") == "TIME"){
             f_mainTime = curve;
         }
-        else if(curve->desc()->getParam("draw_type") == "DEPTH"){
+        else if(curve->desc()->param("draw_type") == "DEPTH"){
             f_mainDepth = curve;
         }
     }
@@ -319,18 +317,18 @@ void findItemLine(QXmlStreamReader *xmlReader,ATrack *track,LineItem *lineItem){
         }
         else if(xmlReader->name() == "begin" && token == QXmlStreamReader::StartElement){
             f = attributes.value("set_begin_value").toInt();
-            r =convertUnitOfGFM(attributes.value("begin_value").toString(),"CM");
+            r =attributes.value("begin_value").toDouble();
         }
         else if(xmlReader->name() == "zero_offset" && token == QXmlStreamReader::StartElement){
-            qreal c = convertUnitOfGFM(attributes.value("value").toString(),"CM");//attributes.value("unit").toString()
+            qreal c = convertUnitOfGFM(attributes.value("value").toString(),attributes.value("unit").toString());//attributes.value("unit").toString()
             lineItem->setBegin(f,r,c);
         }
         else if(xmlReader->name() == "end" && token == QXmlStreamReader::StartElement){
             f = attributes.value("set_end_value").toInt();
-            r = convertUnitOfGFM(attributes.value("end_value").toString(),"CM");
+            r = attributes.value("end_value").toDouble();
         }
         else if(xmlReader->name() == "value_scale" && token == QXmlStreamReader::StartElement){
-            qreal c = convertUnitOfGFM(attributes.value("value").toString(),"CM");
+            qreal c = convertUnitOfGFM(attributes.value("value").toString(),attributes.value("unit").toString());
             lineItem->setEnd(f,r,c);
         }
         else if(xmlReader->name() == "multi_scale" && token == QXmlStreamReader::StartElement){
@@ -390,10 +388,10 @@ void findItemAcu(QXmlStreamReader *xmlReader,ATrack *track,AcuItem *acuItem){
         }
         else if(xmlReader->name() == "begin" && token == QXmlStreamReader::StartElement){
             f=attributes.value("set_begin_value").toInt();
-            r = convertUnitOfGFM(attributes.value("begin_value").toString(),"CM");
+            r = attributes.value("begin_value").toDouble();
         }
         else if(xmlReader->name() == "zero_offset" && token == QXmlStreamReader::StartElement){
-            qreal c = convertUnitOfGFM(attributes.value("value").toString(),"CM");
+            qreal c = convertUnitOfGFM(attributes.value("value").toString(),attributes.value("unit").toString());
             acuItem->setBegin(f,r,c);
 
         }
@@ -403,10 +401,10 @@ void findItemAcu(QXmlStreamReader *xmlReader,ATrack *track,AcuItem *acuItem){
 
         }
         else if(xmlReader->name() == "step_scale" && token == QXmlStreamReader::StartElement){
-            qreal c = convertUnitOfGFM(attributes.value("value").toString(),"CM");
+            qreal c = convertUnitOfGFM(attributes.value("value").toString(),attributes.value("unit").toString());
 
             acuItem->setEnd(f,r,c);
-            qDebug()<<acuItem->endValue();
+
         }
         else if(xmlReader->name() == "acu" && token == QXmlStreamReader::EndElement){
             AItem * item = dynamic_cast<AItem *>(acuItem);
@@ -508,14 +506,14 @@ void GFMLoader::parserFormsBlock(const QByteArray &bodyBlock,IBlock *block){
 
         }
     }
-
-    /*QFile file("dd.txt");
+/*
+    QFile file("dd.txt");
     file.open(QIODevice::WriteOnly);
     QByteArray output;
     gzipDecompress(bodyBlock,output);
     file.write(output);
-    file.close();*/
-
+    file.close();
+*/
     qDebug() << "end load forms : " << time.msecsTo( QTime::currentTime() ) << "mS";
 }
 
@@ -606,15 +604,15 @@ void GFMLoader::findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *
     int indexShortCutBegin = curveLine.indexOf("{",indexEndsize);
     int indexShortCutEnd = curveLine.indexOf("}",indexShortCutBegin);
     QString f_shortCut = curveLine.mid(indexShortCutBegin + 1,indexShortCutEnd - indexShortCutBegin - 1);
-   // qDebug()<<"aaaaaaaaaaaaaaaa"<<f_shortCut;
+
     QList<ShortCut> shortCuts = *dataBlock->shortCuts();
     ShortCut shortCut;
     foreach(auto value,shortCuts){
-        //qDebug()<<"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"<<value.Ref();
-        if (f_shortCut == value.Ref()){
-            shortCut.setRef(value.Ref());
-            shortCut.setName(value.Name());
-           // qDebug()<<value.Name()<<"qqqqqqqqqqqqqqqq";
+
+        if (f_shortCut == value.ref()){
+            shortCut.setRef(value.ref());
+            shortCut.setName(value.name());
+
 
 
         }
@@ -632,7 +630,7 @@ void GFMLoader::findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *
     curveAbstract->setDataType(dataType);
 
     int indexEndRecordPoint = indexEndType;
-    if(!shortCut.Ref().isEmpty()){
+    if(!shortCut.ref().isEmpty()){
         int indexBeginRecordPoint = curveLine.indexOf(":",indexEndType);
         indexEndRecordPoint = curveLine.indexOf(" ",indexBeginRecordPoint + 3);
         QString recordPoint = curveLine.mid(indexBeginRecordPoint + 2,indexEndRecordPoint - indexBeginRecordPoint - 2);

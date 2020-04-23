@@ -13,9 +13,9 @@
 #include "board.h"
 #include "track.h"
 #include "items.h"
-#include "LineItem.h"
+#include "lineItem.h"
 #include "markItem.h"
-#include "AcuItem.h"
+#include "acuItem.h"
 #include "formsblock.h"
 #include <QTextCodec>
 #include "datablock.h"
@@ -30,7 +30,7 @@ public:
     bool isReady()override;
 
     QByteArray formBlokSave(FormsBlock* formsBlock);
-    //void saveBlock(QList<IBlock*> *m_blocks);
+
     bool gzipCompress(QByteArray input, QByteArray &output, int level);
     QByteArray  getForSave(IBlock *block);
     QByteArray  getForSaveDataBlock(IBlock *block);

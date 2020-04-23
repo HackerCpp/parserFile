@@ -10,14 +10,15 @@
 #include "board.h"
 #include "track.h"
 #include "items.h"
-#include "LineItem.h"
+#include "lineItem.h"
 #include "markItem.h"
-#include "AcuItem.h"
+#include "acuItem.h"
 #include "datablock.h"
 #include"acurve.h"
 #include "formsblock.h"
 #include "unknownblock.h"
 #include "headerblock.h"
+#include <QFileDialog>
 
 
 GFMSaver::GFMSaver(){
@@ -31,8 +32,10 @@ bool GFMSaver::save(){
     if(!m_blocks){
         qDebug() << "Нечего сохранять,добавьте данные";
     }
-    QFile *fileGFM = new QFile("1.gfm");
-    qDebug() << "create file" << fileGFM->fileName();
+    QDateTime date;
+    QString stringDate = date.currentDateTime().toString("dd_MM_yyyy_hh_mm");
+    QString fileName = QFileDialog::getSaveFileName(nullptr,"Сохранить файл как",stringDate,"GFM(*.gfm)");
+    QFile *fileGFM = new QFile(fileName);
     m_codec = QTextCodec::codecForMib(1015);
     fileGFM->open(QIODevice::WriteOnly);// | QIODevice::Append);
     fileGFM->write(m_codec->fromUnicode("GFM"));
@@ -104,7 +107,7 @@ QByteArray GFMSaver::getHeader(DataBlock*dataBlock){
     QList<ShortCut> *f_shortCut = dataBlock->shortCuts();
     foreach(auto value,*f_shortCut){
         QString f_str = "<SHORTCUT REF=\"{%1}\" NAME=\"%2\"/>\r\n";
-        f_str = f_str.arg(value.Ref()).arg(value.Name());
+        f_str = f_str.arg(value.ref()).arg(value.name());
         param.append(f_str);
     }
 
@@ -122,9 +125,9 @@ QByteArray GFMSaver::getHeader(DataBlock*dataBlock){
             f_line = "[%1][%2]  {%3}:%4 : %5 : %6 %7\r\n";
 
 
-        f_line = f_line.arg(curveAbstract->offset()).arg(curveAbstract->sizeOffsetInBytes()).arg(curveAbstract->shortCut().Ref())
+        f_line = f_line.arg(curveAbstract->offset()).arg(curveAbstract->sizeOffsetInBytes()).arg(curveAbstract->shortCut().ref())
                 .arg(curveAbstract->mnemonic()).arg(curveAbstract->dataType()).arg(curveAbstract->recordPoint())
-                .arg(QString(curveAbstract->desc()->getForSave()));
+                .arg(QString(curveAbstract->desc()->forSave()));
 
 
         f_blockForWrite = f_line.toLocal8Bit();
@@ -258,31 +261,31 @@ QByteArray GFMSaver::formBlokSave(FormsBlock * formsBlock){
                    QString str;
                    ATrack * track = board->tracks()->value(j);
                    xmlWriter.writeStartElement("track");
-                   xmlWriter.writeAttribute("name", track->Name());
-                   xmlWriter.writeAttribute("show_grid", QString::number(track->IsGreed()));
+                   xmlWriter.writeAttribute("name", track->name());
+                   xmlWriter.writeAttribute("show_grid", QString::number(track->isGreed()));
                    xmlWriter.writeAttribute("type", "LINEAR");
 
                    xmlWriter.writeStartElement("begin");
-                   xmlWriter.writeAttribute("value", str.setNum(track->Begin()));
+                   xmlWriter.writeAttribute("value", str.setNum(track->begin()));
                    xmlWriter.writeAttribute("unit", "MM");
                    xmlWriter.writeEndElement();//close begin
 
                    xmlWriter.writeStartElement("width");
-                   xmlWriter.writeAttribute("value", str.setNum(track->Width()));
+                   xmlWriter.writeAttribute("value", str.setNum(track->width()));
                    xmlWriter.writeAttribute("unit", "MM");
                    xmlWriter.writeEndElement();//close width
 
                    xmlWriter.writeStartElement("logarithm");
-                   xmlWriter.writeAttribute("logarithm_base", str.setNum(track->LogarithmBase()));
-                   xmlWriter.writeAttribute("decades_count", str.setNum(track->DecadeCount()));
-                   xmlWriter.writeAttribute("decade_start", str.setNum(track->DecadeStart()));
-                   xmlWriter.writeAttribute("decade_end", str.setNum(track->DecadeEnd()));
+                   xmlWriter.writeAttribute("logarithm_base", str.setNum(track->logarithmBase()));
+                   xmlWriter.writeAttribute("decades_count", str.setNum(track->decadeCount()));
+                   xmlWriter.writeAttribute("decade_start", str.setNum(track->decadeStart()));
+                   xmlWriter.writeAttribute("decade_end", str.setNum(track->decadeEnd()));
                    xmlWriter.writeEndElement(); //close logarithm
-                   QList<AItem*> *items = track->Items();
+                   QList<AItem*> *items = track->items();
                    foreach(auto item,*items){
                    //for(int k = 0; k < track->Items().size();k++){
                        //AItem *items = track->Items()[k];
-                       if(item->Type() == TypeItem::LINE){
+                       if(item->type() == TypeItem::LINE){
                            LineItem * lineItem = dynamic_cast<LineItem *>(item);
                            xmlWriter.writeStartElement("line");
                            xmlWriter.writeAttribute("name", lineItem->name());
@@ -329,7 +332,7 @@ QByteArray GFMSaver::formBlokSave(FormsBlock * formsBlock){
 
                            xmlWriter.writeEndElement();//close line
                        }
-                       if(item->Type() == TypeItem::ACU){
+                       if(item->type() == TypeItem::ACU){
                            AcuItem * acuItem = dynamic_cast<AcuItem *>(item);
                            xmlWriter.writeStartElement("acu");
                            xmlWriter.writeAttribute("name", acuItem->name());
@@ -351,13 +354,7 @@ QByteArray GFMSaver::formBlokSave(FormsBlock * formsBlock){
                                xmlWriter.writeAttribute("color",multicolor.value);
                                xmlWriter.writeEndElement();//close level
                            }
-                           /*for(int a =0; a < acuItem->levelCount();a++){
-                                   MulticolorItem *struc = acuItem->multiColor()[a];
-                                   xmlWriter.writeStartElement("level");
-                                   xmlWriter.writeAttribute("bound",str.setNum(struc->bound));
-                                   xmlWriter.writeAttribute("color",struc->value);
-                                   xmlWriter.writeEndElement();//close level
-                           }*/
+
                            xmlWriter.writeEndElement();//close multi_color
 
                            xmlWriter.writeStartElement("bruch_color");
@@ -388,7 +385,7 @@ QByteArray GFMSaver::formBlokSave(FormsBlock * formsBlock){
 
                            xmlWriter.writeEndElement();//close acu
                        }
-                       if(item->Type() == TypeItem::MARK){
+                       if(item->type() == TypeItem::MARK){
                            markItem * MarkItem = dynamic_cast<markItem *>(item);
                            xmlWriter.writeStartElement("mark");
                            xmlWriter.writeAttribute("name", MarkItem->name());
@@ -421,5 +418,5 @@ QByteArray GFMSaver::formBlokSave(FormsBlock * formsBlock){
            QByteArray forms;
            gzipCompress(xml,forms,2);
            return forms;
-        //   qDebug() << "end save " << time.msecsTo( QTime::currentTime() ) << "mS";
+
 }
