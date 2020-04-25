@@ -1,11 +1,11 @@
 #include "markItem.h"
 
 
-markItem::markItem()
+markItem :: markItem()
 {
 
 }
-markItem::~markItem()
+markItem :: ~markItem()
 {
 
 }
@@ -32,7 +32,7 @@ QString markItem::color()
 {
     return m_color;
 }
-bool markItem::isDashes()
+bool markItem:: isDashes()
 {
     return m_isDashes;
 }

@@ -35,7 +35,14 @@ AGraphicTrack::AGraphicTrack(ATrack *track,QMap<QString,ICurve*> *curves,BoardFo
 AGraphicTrack::~AGraphicTrack(){
 
 }
-
+void AGraphicTrack::addIteam(AGraphicItem* item){
+    if(m_items)
+        m_items->push_back(item);
+}
+void AGraphicTrack::clearItems(){
+    if(m_items)
+        m_items->clear();
+}
 qreal AGraphicTrack::topValue(){
     if(!m_items){
         return 0;

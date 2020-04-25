@@ -43,7 +43,7 @@ VerticalTrack::VerticalTrack(ATrack *track,QMap<QString,ICurve*> *curves,BoardFo
     m_doubleHeader = new QImage(f_pictureWidth,3000,QImage::Format_ARGB4444_Premultiplied);
     m_infoPixMap = new QImage(f_pictureWidth,30,QImage::Format_ARGB4444_Premultiplied);
     m_boundingRect = QRectF(m_track->begin() * f_pixelPerMm,f_topY,m_track->width() * f_pixelPerMm,f_lengthY);
-    QList <AItem*> *itemInfo = track->items();
+    /*QList <AItem*> *itemInfo = track->items();
     int f_count = 0,y = 0;
     foreach(auto item,*itemInfo){
         QString name = item->name();
@@ -62,7 +62,7 @@ VerticalTrack::VerticalTrack(ATrack *track,QMap<QString,ICurve*> *curves,BoardFo
     }
     if(f_count){
         //qDebug() << "Кривые не все вставлены в трек, некоторые не найдены" << f_count << y;
-    }
+    }*/
 }
 
 VerticalTrack::~VerticalTrack(){

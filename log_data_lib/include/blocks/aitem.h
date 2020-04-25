@@ -17,7 +17,7 @@ public:
 protected:
     TypeItem m_type;
     QString m_name;
-
+    int m_numberOfTrack;
     struct Begin{
         bool is_beginValue;
         qreal beginValue;
@@ -44,6 +44,9 @@ public:
     virtual QString name(){return m_name;}
     virtual QString visible();
     virtual bool visible(VisibleView what){return m_visible[what];}
+    virtual int numberOfTrack(){return m_numberOfTrack;}
+
+
 
     virtual bool isBeginValue(){return m_begin.is_beginValue;}
     virtual qreal beginValue(){return m_begin.beginValue;}
@@ -66,6 +69,7 @@ public:
     virtual void setMultiScale(bool isMultiScale,qreal gleamCount,qreal gleamScale);
     virtual void setName(QString name, QString visible);
     virtual void setTypeItem(TypeItem type){m_type = type;}
+    virtual void setNumberOfTrack(int numberOfTrack){m_numberOfTrack = numberOfTrack;}
 
 
 };

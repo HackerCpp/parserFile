@@ -3,6 +3,7 @@
 
 ABoard::ABoard(){
     m_tracks = new QList<ATrack*>;
+    m_items = new QMap<QString, AItem*>;
 }
 
 ABoard::~ABoard(){
@@ -22,6 +23,17 @@ void ABoard::setTrack(ATrack *track){
 
 QList<ATrack*> *ABoard::tracks(){
     return m_tracks;
+}
+void ABoard::setItem(QString name, AItem *items)
+{
+    if(m_items)
+        m_items->insert(name,items);
+    else
+        qDebug() << "не удалось вставить кривые, нулевой указатель";
+}
+QMap<QString,AItem*> *ABoard::items()
+{
+    return m_items;
 }
 
 QString ABoard::name()

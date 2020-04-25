@@ -3,6 +3,7 @@
 #include <QGraphicsView>
 #include "agraphictrack.h"
 #include "boardfortrack.h"
+#include <QMap>
 
 class AGraphicBoard : public QGraphicsView,public BoardForTrack
 {
@@ -13,6 +14,7 @@ class AGraphicBoard : public QGraphicsView,public BoardForTrack
     int m_lengtgPicture[3] = {3000,16200,32500};
     int m_minimumSize;
 protected:
+    QMap<QString,AGraphicItem *> *m_items;
     virtual void insertNewTrack(int curentTrackNumber,InsertPossition position = InsertPossition::RIGHT)override{}
 public:
     enum FormatTime{MSEC_SM_100, SEC_SM_1, SEC_SM_5, SEC_SM_10,

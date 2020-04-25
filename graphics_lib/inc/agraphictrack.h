@@ -27,6 +27,8 @@ public:
     qreal bottomValue();
     virtual void activate(bool activate){}
     ATrack *trackInfo(){return m_track;}
+    void addIteam(AGraphicItem* item);
+    void clearItems();
 protected:
     QImage *m_infoPixMap,*m_curentHeader,*m_doubleHeader;
     BoardForTrack *m_board;
@@ -48,6 +50,7 @@ protected:
     virtual void run()override{}
     virtual QRectF boundingRect()const override{return m_boundingRect;}
     virtual void swapPixMap();
+
 
     virtual void toSetTheLocationOfTheImageAfterDrawing(){}
 

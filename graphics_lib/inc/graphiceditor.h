@@ -10,6 +10,7 @@ class GraphicEditor : public QTabWidget, AGraphicEditor{
     Q_OBJECT
     AGraphicBoard *m_curentBoard;
 
+    void newBoard();
 public:
     GraphicEditor(QMap<QString,ICurve*> *curves,FormsBlock *forms,QWidget *parent = nullptr);
     virtual ~GraphicEditor();

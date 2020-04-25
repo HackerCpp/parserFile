@@ -257,9 +257,10 @@ QByteArray GFMSaver::formBlokSave(FormsBlock * formsBlock){
                ABoard* board = formsBlock->boards()->value(i);
                xmlWriter.writeStartElement("board");
                xmlWriter.writeAttribute("name", board->name());
-               for(int j =0;j<board->tracks()->size();j++){
+               QList<ATrack*>*tracks = board->tracks();
+               foreach(auto track,*tracks)
+               {
                    QString str;
-                   ATrack * track = board->tracks()->value(j);
                    xmlWriter.writeStartElement("track");
                    xmlWriter.writeAttribute("name", track->name());
                    xmlWriter.writeAttribute("show_grid", QString::number(track->isGreed()));
@@ -281,111 +282,111 @@ QByteArray GFMSaver::formBlokSave(FormsBlock * formsBlock){
                    xmlWriter.writeAttribute("decade_start", str.setNum(track->decadeStart()));
                    xmlWriter.writeAttribute("decade_end", str.setNum(track->decadeEnd()));
                    xmlWriter.writeEndElement(); //close logarithm
-                   QList<AItem*> *items = track->items();
+                   QMap<QString,AItem*> *items = board->items();
                    foreach(auto item,*items){
-                   //for(int k = 0; k < track->Items().size();k++){
-                       //AItem *items = track->Items()[k];
-                       if(item->type() == TypeItem::LINE){
-                           LineItem * lineItem = dynamic_cast<LineItem *>(item);
-                           xmlWriter.writeStartElement("line");
-                           xmlWriter.writeAttribute("name", lineItem->name());
-                           xmlWriter.writeAttribute("visible", lineItem->visible());
+                       if(track->number()==item->numberOfTrack())
+                       {
+                           if(item->type() == TypeItem::LINE){
+                                LineItem * lineItem = dynamic_cast<LineItem *>(item);
+                                xmlWriter.writeStartElement("line");
+                                xmlWriter.writeAttribute("name", lineItem->name());
+                                xmlWriter.writeAttribute("visible", lineItem->visible());
 
-                           xmlWriter.writeStartElement("paint_mode");
-                           xmlWriter.writeAttribute("mode", lineItem->paintMode());
-                           xmlWriter.writeEndElement();//close paint mode
+                                 xmlWriter.writeStartElement("paint_mode");
+                                 xmlWriter.writeAttribute("mode", lineItem->paintMode());
+                                xmlWriter.writeEndElement();//close paint mode
 
-                           xmlWriter.writeStartElement("style");
-                           xmlWriter.writeAttribute("color", lineItem->color());
-                           xmlWriter.writeAttribute("dashes", str.setNum(lineItem->isDashes()));
+                                xmlWriter.writeStartElement("style");
+                                xmlWriter.writeAttribute("color", lineItem->color());
+                                xmlWriter.writeAttribute("dashes", str.setNum(lineItem->isDashes()));
 
-                           xmlWriter.writeStartElement("width");
-                           xmlWriter.writeAttribute("value", str.setNum(lineItem->widthLine()));
-                           xmlWriter.writeAttribute("unit", "PIX");
-                           xmlWriter.writeEndElement();//close width
-                           xmlWriter.writeEndElement();//close style
+                                xmlWriter.writeStartElement("width");
+                                xmlWriter.writeAttribute("value", str.setNum(lineItem->widthLine()));
+                                xmlWriter.writeAttribute("unit", "PIX");
+                                xmlWriter.writeEndElement();//close width
+                                xmlWriter.writeEndElement();//close style
 
-                           xmlWriter.writeStartElement("begin");
-                           xmlWriter.writeAttribute("set_begin_value", str.setNum(lineItem->isBeginValue()));
-                           xmlWriter.writeAttribute("begin_value", str.setNum(lineItem->beginValue()));
+                                xmlWriter.writeStartElement("begin");
+                                xmlWriter.writeAttribute("set_begin_value", str.setNum(lineItem->isBeginValue()));
+                                xmlWriter.writeAttribute("begin_value", str.setNum(lineItem->beginValue()));
 
-                           xmlWriter.writeStartElement("zero_offset");
-                           xmlWriter.writeAttribute("value", str.setNum(lineItem->zeroOffset()));
-                           xmlWriter.writeAttribute("unit", "MM");
-                           xmlWriter.writeEndElement();//close zero_offset
-                           xmlWriter.writeEndElement();//close begin
+                                xmlWriter.writeStartElement("zero_offset");
+                                xmlWriter.writeAttribute("value", str.setNum(lineItem->zeroOffset()));
+                                xmlWriter.writeAttribute("unit", "MM");
+                                xmlWriter.writeEndElement();//close zero_offset
+                                xmlWriter.writeEndElement();//close begin
 
-                           xmlWriter.writeStartElement("end");
-                           xmlWriter.writeAttribute("set_end_value", str.setNum(lineItem->isEndValue()));
-                           xmlWriter.writeAttribute("end_value", str.setNum(lineItem->endValue()));
-                           xmlWriter.writeStartElement("value_scale");
-                           xmlWriter.writeAttribute("value", str.setNum(lineItem->scale()));
-                           xmlWriter.writeAttribute("unit", "MM");
-                           xmlWriter.writeEndElement();//close value_scale
-                           xmlWriter.writeEndElement();//close end
+                                xmlWriter.writeStartElement("end");
+                                xmlWriter.writeAttribute("set_end_value", str.setNum(lineItem->isEndValue()));
+                                xmlWriter.writeAttribute("end_value", str.setNum(lineItem->endValue()));
+                                xmlWriter.writeStartElement("value_scale");
+                                xmlWriter.writeAttribute("value", str.setNum(lineItem->scale()));
+                                xmlWriter.writeAttribute("unit", "MM");
+                                xmlWriter.writeEndElement();//close value_scale
+                                xmlWriter.writeEndElement();//close end
 
-                           xmlWriter.writeStartElement("multi_scale");
-                           xmlWriter.writeAttribute("is_multi_scale", str.setNum(lineItem->isMultiScale()));
-                           xmlWriter.writeAttribute("gleam_count", str.setNum(lineItem->glemCount()));
-                           xmlWriter.writeAttribute("gleam_scale", str.setNum(lineItem->glemScale()));
-                           xmlWriter.writeEndElement();//close multi_scale
+                                xmlWriter.writeStartElement("multi_scale");
+                                xmlWriter.writeAttribute("is_multi_scale", str.setNum(lineItem->isMultiScale()));
+                                xmlWriter.writeAttribute("gleam_count", str.setNum(lineItem->glemCount()));
+                                xmlWriter.writeAttribute("gleam_scale", str.setNum(lineItem->glemScale()));
+                                xmlWriter.writeEndElement();//close multi_scale
 
-                           xmlWriter.writeEndElement();//close line
-                       }
-                       if(item->type() == TypeItem::ACU){
-                           AcuItem * acuItem = dynamic_cast<AcuItem *>(item);
-                           xmlWriter.writeStartElement("acu");
-                           xmlWriter.writeAttribute("name", acuItem->name());
-                           xmlWriter.writeAttribute("visible", acuItem->visible());
+                                xmlWriter.writeEndElement();//close line
+                          }
+                          if(item->type() == TypeItem::ACU){
+                                AcuItem * acuItem = dynamic_cast<AcuItem *>(item);
+                                xmlWriter.writeStartElement("acu");
+                                xmlWriter.writeAttribute("name", acuItem->name());
+                                xmlWriter.writeAttribute("visible", acuItem->visible());
 
-                           xmlWriter.writeStartElement("style");
-                           xmlWriter.writeAttribute("show_mode", str.setNum(acuItem->showMode()));
+                                xmlWriter.writeStartElement("style");
+                                 xmlWriter.writeAttribute("show_mode", str.setNum(acuItem->showMode()));
 
-                           xmlWriter.writeStartElement("transparent");
-                           xmlWriter.writeAttribute("color", acuItem->transparentColor());
-                           xmlWriter.writeEndElement();//close transparent
+                                xmlWriter.writeStartElement("transparent");
+                                xmlWriter.writeAttribute("color", acuItem->transparentColor());
+                                xmlWriter.writeEndElement();//close transparent
 
-                           xmlWriter.writeStartElement("multi_color");
-                           xmlWriter.writeAttribute("level_count",str.setNum(acuItem->levelCount()));
-                           QList<MulticolorItem> *f_multicolorList = acuItem->multiColor();
-                           foreach(auto multicolor,*f_multicolorList){
-                               xmlWriter.writeStartElement("level");
-                               xmlWriter.writeAttribute("bound",str.setNum(multicolor.bound));
-                               xmlWriter.writeAttribute("color",multicolor.value);
-                               xmlWriter.writeEndElement();//close level
-                           }
+                                xmlWriter.writeStartElement("multi_color");
+                                xmlWriter.writeAttribute("level_count",str.setNum(acuItem->levelCount()));
+                                QList<MulticolorItem> *f_multicolorList = acuItem->multiColor();
+                                foreach(auto multicolor,*f_multicolorList){
+                                    xmlWriter.writeStartElement("level");
+                                    xmlWriter.writeAttribute("bound",str.setNum(multicolor.bound));
+                                    xmlWriter.writeAttribute("color",multicolor.value);
+                                    xmlWriter.writeEndElement();//close level
+                               }
 
-                           xmlWriter.writeEndElement();//close multi_color
+                               xmlWriter.writeEndElement();//close multi_color
 
-                           xmlWriter.writeStartElement("bruch_color");
-                           xmlWriter.writeAttribute("color",acuItem->bruchColor());
-                           xmlWriter.writeEndElement();//close bruch_color
-                           xmlWriter.writeEndElement();//close style
+                                xmlWriter.writeStartElement("bruch_color");
+                                xmlWriter.writeAttribute("color",acuItem->bruchColor());
+                                xmlWriter.writeEndElement();//close bruch_color
+                                xmlWriter.writeEndElement();//close style
 
-                           xmlWriter.writeStartElement("begin");
-                           xmlWriter.writeAttribute("set_begin_value", str.setNum(acuItem->isBeginValue()));
-                           xmlWriter.writeAttribute("begin_value", str.setNum(acuItem->beginValue()));
+                                xmlWriter.writeStartElement("begin");
+                                xmlWriter.writeAttribute("set_begin_value", str.setNum(acuItem->isBeginValue()));
+                                xmlWriter.writeAttribute("begin_value", str.setNum(acuItem->beginValue()));
 
-                           xmlWriter.writeStartElement("zero_offset");
-                           xmlWriter.writeAttribute("value", str.setNum(acuItem->zeroOffset()));
-                           xmlWriter.writeAttribute("unit", "MM");
-                           xmlWriter.writeEndElement();//close zero_offset
-                           xmlWriter.writeEndElement();//close begin
+                                xmlWriter.writeStartElement("zero_offset");
+                                xmlWriter.writeAttribute("value", str.setNum(acuItem->zeroOffset()));
+                                xmlWriter.writeAttribute("unit", "MM");
+                                xmlWriter.writeEndElement();//close zero_offset
+                                xmlWriter.writeEndElement();//close begin
 
-                           xmlWriter.writeStartElement("end");
-                           xmlWriter.writeAttribute("set_end_value", str.setNum(acuItem->isEndValue()));
-                           xmlWriter.writeAttribute("end_value", str.setNum(acuItem->endValue()));
+                                xmlWriter.writeStartElement("end");
+                                xmlWriter.writeAttribute("set_end_value", str.setNum(acuItem->isEndValue()));
+                                xmlWriter.writeAttribute("end_value", str.setNum(acuItem->endValue()));
 
-                           xmlWriter.writeStartElement("step_scale");
-                           xmlWriter.writeAttribute("value", str.setNum(acuItem->scale()));
-                           xmlWriter.writeAttribute("unit", "MM");
-                           xmlWriter.writeEndElement();//close value_scale
+                                xmlWriter.writeStartElement("step_scale");
+                                xmlWriter.writeAttribute("value", str.setNum(acuItem->scale()));
+                                xmlWriter.writeAttribute("unit", "MM");
+                                xmlWriter.writeEndElement();//close value_scale
 
-                           xmlWriter.writeEndElement();//close end
+                                xmlWriter.writeEndElement();//close end
 
-                           xmlWriter.writeEndElement();//close acu
-                       }
-                       if(item->type() == TypeItem::MARK){
+                                xmlWriter.writeEndElement();//close acu
+                        }
+                        if(item->type() == TypeItem::MARK){
                            markItem * MarkItem = dynamic_cast<markItem *>(item);
                            xmlWriter.writeStartElement("mark");
                            xmlWriter.writeAttribute("name", MarkItem->name());
@@ -408,7 +409,8 @@ QByteArray GFMSaver::formBlokSave(FormsBlock * formsBlock){
 
                            xmlWriter.writeEndElement();//close mark
                        }
-                   }
+                    }
+                  }
                    xmlWriter.writeEndElement();//close track
                }
                xmlWriter.writeEndElement();//close board

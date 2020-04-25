@@ -13,6 +13,8 @@ public:
     virtual void setTrack(ATrack *track){}
     virtual QList<ATrack*> *tracks(){return nullptr;}
     virtual QString name(){return QString();}
+    virtual void setItem(QString name, AItem *item){}
+    virtual QMap<QString,AItem*> *items(){return nullptr;}
 };
 
 #endif // IBOARD_H

@@ -2,17 +2,14 @@
 #include"lineItem.h"
 #include <QList>
 #include <QDebug>
-
-AddCurve::AddCurve(){
+AddCurve ::AddCurve(){
    ;
 }
-
-AddCurve::~AddCurve()
+AddCurve ::~AddCurve()
 {
    ;
 }
-
-void AddCurve::addCurveInBlock(QList<IBlock*> *m_block)
+void AddCurve :: addCurveInBlock(QList<IBlock*> *m_block)
 {
     bool flag = false;
 
@@ -71,11 +68,16 @@ void AddCurve::addCurveInBlock(QList<IBlock*> *m_block)
 
             dataBlock->setCurves(*m_curve);
 
+
+
+
+
+
+
         }
     }
 }
-
-void AddCurve::addTrackInCurve(ABoard *board)
+void AddCurve :: addTrackInCurve(ABoard *board)
 {
     ATrack *track = new ATrack;
     QList<ATrack*> *f_track = board->tracks();
@@ -93,8 +95,7 @@ void AddCurve::addTrackInCurve(ABoard *board)
     addItemInTrack(track);
     board->setTrack(track);
 }
-
-void AddCurve::addItemInTrack(ATrack *track)
+void AddCurve:: addItemInTrack(ATrack *track)
 {
 
     LineItem *item = new LineItem();
@@ -106,6 +107,6 @@ void AddCurve::addItemInTrack(ATrack *track)
     item->setPaintMode("PAINT_CURVE");
     item->setWidth(1);
     AItem * f_item = dynamic_cast<AItem *>(item);
-    track->setItem(f_item);
+    //track->setItem(f_item->name(),f_item);
 }
 

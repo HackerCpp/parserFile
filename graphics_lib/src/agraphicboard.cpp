@@ -2,14 +2,15 @@
 #include <QGraphicsScene>
 
 AGraphicBoard::AGraphicBoard(){
+    m_items = new QMap<QString,AGraphicItem *>;
     m_minimumSize = 2000;
 }
 
 void AGraphicBoard::resize(){
     QList<QGraphicsItem *> m_items = this->items();
     int f_width = 0;
-    qreal f_topPosition = 999999999999999999;
-    qreal f_bottomPosition = -999999999999999999;
+    qreal f_topPosition = 1000000000000000000;
+    qreal f_bottomPosition = -1000000000000000000;
     foreach(auto item, m_items){
         int rightPosition = item->boundingRect().x() + item->boundingRect().width();
         AGraphicTrack *f_track = dynamic_cast<AGraphicTrack *>(item);
@@ -19,13 +20,16 @@ void AGraphicBoard::resize(){
         }
         f_width = (f_width > rightPosition ? f_width : rightPosition);
     }
+    if(f_topPosition == 1000000000000000000){
+        f_topPosition = -20;
+        f_bottomPosition = 800;
+    }
     m_top = f_topPosition - (20 * m_pixelPerMm);
     m_length = f_bottomPosition - m_top + (20 * m_pixelPerMm);
     if(m_length < 800)
         m_length = 800;
     setSceneRect(QRect(0,m_top,f_width,m_length));
     foreach(auto item, m_items){
-        int rightPosition = item->boundingRect().x() + item->boundingRect().width();
         AGraphicTrack *f_track = dynamic_cast<AGraphicTrack *>(item);
         if(f_track){
             f_track->resize();

@@ -9,8 +9,8 @@ class BoardForTrack{
 protected:
     qreal m_pixelPerMm;
     uint m_pictureHeight,m_offsetUp;
-    int m_top;
-    uint m_length;
+    qreal m_top;
+    qreal m_length;
     qreal m_scaleForDepth, m_scaleForTime;
     bool m_isDrawTime;
     int m_positionHeader;

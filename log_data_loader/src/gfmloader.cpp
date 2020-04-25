@@ -14,6 +14,7 @@
 #include "headerblock.h"
 #include "addCurve.h"
 
+
 bool GFMLoader::gzipDecompress(QByteArray input, QByteArray &output){
     output.clear();
     if(input.length() > 0){
@@ -151,6 +152,7 @@ void GFMLoader::run(){
         parser(value.bodyBlock,block);
         m_blocks->push_back(block);
         value.bodyBlock.clear();
+
     }
 
 
@@ -300,7 +302,7 @@ void findSettingsForItem(QXmlStreamReader *xmlReader,QString name){
     }
 }
 
-void findItemLine(QXmlStreamReader *xmlReader,ATrack *track,LineItem *lineItem){
+void findItemLine(QXmlStreamReader *xmlReader,ABoard *board,LineItem *lineItem){
     while(!xmlReader->atEnd() && !xmlReader->hasError()){
         QXmlStreamReader::TokenType token = xmlReader->readNext();
         QXmlStreamAttributes attributes = xmlReader->attributes();
@@ -336,13 +338,13 @@ void findItemLine(QXmlStreamReader *xmlReader,ATrack *track,LineItem *lineItem){
         }
         else if(xmlReader->name() == "line"  && token == QXmlStreamReader::EndElement){
             AItem * item = dynamic_cast<AItem *>(lineItem);
-            track->setItem(item);
+            board->setItem(item->name(), item);
             return;
         }
     }
 }
 
-void findItemMark(QXmlStreamReader *xmlReader,ATrack *track,markItem *markItem){
+void findItemMark(QXmlStreamReader *xmlReader,ABoard *board,markItem *markItem){
     while(!xmlReader->atEnd() && !xmlReader->hasError()){
         QXmlStreamReader::TokenType token = xmlReader->readNext();
         QXmlStreamAttributes attributes = xmlReader->attributes();
@@ -357,13 +359,13 @@ void findItemMark(QXmlStreamReader *xmlReader,ATrack *track,markItem *markItem){
         }
         else if( xmlReader->name() == "mark"  && token == QXmlStreamReader::EndElement){
             AItem * item = dynamic_cast<AItem *>(markItem);
-            track->setItem(item);
+            board->setItem(item->name(),item);
             return;
         }
     }
 }
 
-void findItemAcu(QXmlStreamReader *xmlReader,ATrack *track,AcuItem *acuItem){
+void findItemAcu(QXmlStreamReader *xmlReader,ABoard *board,AcuItem *acuItem){
     while(!xmlReader->atEnd() && !xmlReader->hasError()){
         QXmlStreamReader::TokenType token = xmlReader->readNext();
         QXmlStreamAttributes attributes = xmlReader->attributes();
@@ -408,7 +410,7 @@ void findItemAcu(QXmlStreamReader *xmlReader,ATrack *track,AcuItem *acuItem){
         }
         else if(xmlReader->name() == "acu" && token == QXmlStreamReader::EndElement){
             AItem * item = dynamic_cast<AItem *>(acuItem);
-            track->setItem(item);
+            board->setItem(item->name(),item);
             return;
         }
     }
@@ -436,22 +438,22 @@ void findTrack(QXmlStreamReader *xmlReader,ABoard *board,ATrack *track){
             LineItem *f_item = new LineItem();
             f_item->setTypeItem(LINE);
             f_item->setName(attributes.value("name").toString(),attributes.value("visible").toString());
-
-            findItemLine(xmlReader,track,f_item);
+            f_item->setNumberOfTrack(track->number());
+            findItemLine(xmlReader,board,f_item);
         }
         else if((xmlReader->name() == "mark") && token == QXmlStreamReader::StartElement){
             markItem *f_item = new markItem();
             f_item->setTypeItem(MARK);
             f_item->setName(attributes.value("name").toString(),attributes.value("visible").toString());
-
-            findItemMark(xmlReader,track,f_item);
+            f_item->setNumberOfTrack(track->number());
+            findItemMark(xmlReader,board,f_item);
         }
         else if((xmlReader->name() == "acu") && token == QXmlStreamReader::StartElement){
             AcuItem *f_item = new AcuItem();
             f_item->setTypeItem(ACU);
             f_item->setName(attributes.value("name").toString(),attributes.value("visible").toString());
-
-            findItemAcu(xmlReader,track,f_item);
+            f_item->setNumberOfTrack(track->number());
+            findItemAcu(xmlReader,board,f_item);
         }
         else if(xmlReader->name() == "track" && token == QXmlStreamReader::EndElement){
             board->setTrack(track);
@@ -472,6 +474,8 @@ void findBoard(QXmlStreamReader *xmlReader,ABoard *board,FormsBlock *formsBlock)
         else if(xmlReader->name() == "track" && token == QXmlStreamReader::StartElement){
             ATrack *f_track = new Track();
             f_track->setName(attributes.value("name").toString());
+            QString a = f_track->name().remove("Track");
+            f_track->setNumber(a.toInt());
             f_track->setIsGreed(attributes.value("show_grid").toInt());
             if(attributes.value("type").toString() == "LINEAR"){
                 Types h = LINEAR;

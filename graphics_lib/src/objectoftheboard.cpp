@@ -2,7 +2,20 @@
 #include <QApplication>
 #include <QScreen>
 
-ObjectOfTheBoard::ObjectOfTheBoard(){
+ObjectOfTheBoard::ObjectOfTheBoard()
+    :m_curentPixmap(nullptr),m_doublePixMap(nullptr)
+{
+}
+
+ObjectOfTheBoard::~ObjectOfTheBoard(){
+    m_endRedraw = true;
+    wait();
+    if(m_curentPixmap){
+        delete m_curentPixmap; m_curentPixmap = nullptr;
+    }
+    if(m_doublePixMap){
+        delete m_doublePixMap; m_doublePixMap = nullptr;
+    }
 }
 
 void ObjectOfTheBoard::changingTheVisibilityZone(QRectF newVisibilityZone){

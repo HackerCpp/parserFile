@@ -17,7 +17,7 @@ protected:
     void redraw();
 public:
     ObjectOfTheBoard();
-    ~ObjectOfTheBoard(){}
+    virtual ~ObjectOfTheBoard();
     virtual void resize(){}
 public slots:
     void changingTheVisibilityZone(QRectF newVisibilityZone);

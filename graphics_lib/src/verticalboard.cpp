@@ -29,6 +29,38 @@ VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves)
     }
     connect(horizontalScrollBar(), &QScrollBar::valueChanged, this, &VerticalBoard::scrollChanged);
     connect(verticalScrollBar(), &QScrollBar::valueChanged, this, &VerticalBoard::scrollChanged);
+
+    QMap<QString,AItem*> *itemsInfo = m_board->items();
+    int f_count = 0,y = 0;
+    foreach(auto item,itemsInfo->keys()){
+        QString name = itemsInfo->value(item)->name();
+        ICurve *curve = curves->value(name);
+        if(!curve){
+            ++f_count;
+            //qDebug() << "Curve null" << name;
+        }
+        else{
+            ++y;
+            m_items->insert(item,ItimsCreater::createItem(itemsInfo->value(item),curve,this,ItimsCreater::VERTICAL));
+        }
+    }
+    if(f_count){
+        //qDebug() << "Кривые не все вставлены в трек, некоторые не найдены" << f_count << y;
+    }
+    QList<QGraphicsItem *> f_tracks = this->items();
+    foreach(auto item,*m_items){
+        foreach(auto track, f_tracks){
+            VerticalTrack *f_track = dynamic_cast<VerticalTrack *>(track);
+            if(f_track){
+                if(f_track->trackInfo()->number() == item->itemInfo()->numberOfTrack()){
+                    f_track->addIteam(item);
+                    break;
+                }
+            }
+        }
+
+    }
+
     resize();
 }
 

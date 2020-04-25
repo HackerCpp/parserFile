@@ -155,7 +155,7 @@ void TabGFM::dataReady(){
     QList<IBlock*> *blocks = m_logData->blocks();
     foreach(auto block,*blocks){
         if(block->name() == IBlock::FORMS_BLOCK){
-            forms = dynamic_cast<FormsBlock*>(block);
+            forms = dynamic_cast<FormsBlock *>(block);
             if(!forms){
                 qDebug() << "Forms найдены, но динамически не переводятся";
             }
