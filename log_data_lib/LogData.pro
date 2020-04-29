@@ -1,8 +1,8 @@
 QT -= gui
 
 TEMPLATE = lib
-#CONFIG += staticlib
-CONFIG += dynamiclib
+CONFIG += staticlib
+#CONFIG += dynamiclib
 
 
 CONFIG += c++17
@@ -22,6 +22,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/blocks/iteminfocreater.cpp \
     src/blocks/acuItem.cpp \
     src/blocks/lineItem.cpp \
     src/externalComponents/asaverlogdata.cpp \
@@ -67,6 +68,7 @@ HEADERS += \
     include/blocks/formsblock.h \
     include/blocks/headerblock.h \
     include/blocks/iboard.h \
+    include/blocks/iteminfocreater.h \
     include/blocks/items.h \
     include/blocks/lineItem.h \
     include/blocks/markItem.h \

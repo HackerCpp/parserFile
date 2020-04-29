@@ -1,7 +1,7 @@
 #ifndef VLINEITEM_H
 #define VLINEITEM_H
 #include "verticalitem.h"
-#include "LineItem.h"
+#include "lineItem.h"
 
 class VLineItem : public VerticalItem{
     enum Transition{NO_TRANSITION,LEFT_TRANSITION,RIGHT_TRANSITION};
@@ -15,9 +15,11 @@ class VLineItem : public VerticalItem{
     qreal operator[](int index);
     qreal pixelX(int index,int width);
 
-    virtual bool isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per)override;
-    virtual void run()override{}
+    bool isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per)override;
     void loadDrawingParam(int width);
+
+    QColor color()override;
+    void setColor(QColor color)override;
 public:
     VLineItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board);
     ~VLineItem(){}

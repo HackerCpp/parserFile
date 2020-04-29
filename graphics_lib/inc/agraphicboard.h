@@ -4,6 +4,7 @@
 #include "agraphictrack.h"
 #include "boardfortrack.h"
 #include <QMap>
+#include "iboard.h"
 
 class AGraphicBoard : public QGraphicsView,public BoardForTrack
 {
@@ -15,7 +16,9 @@ class AGraphicBoard : public QGraphicsView,public BoardForTrack
     int m_minimumSize;
 protected:
     QMap<QString,AGraphicItem *> *m_items;
-    virtual void insertNewTrack(int curentTrackNumber,InsertPossition position = InsertPossition::RIGHT)override{}
+    QMap<QString,ICurve*> *m_curves;
+    IBoard *m_boardInfo;
+
 public:
     enum FormatTime{MSEC_SM_100, SEC_SM_1, SEC_SM_5, SEC_SM_10,
                    SEC_SM_30, MIN_SM_1, MIN_SM_5,
@@ -25,9 +28,11 @@ public:
                     F1_5000, F1_10000};
     enum LengthPicture{MIN,AWERAGE,MAX};
 
-    AGraphicBoard();
+    AGraphicBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves);
     ~AGraphicBoard()override{}
 
+    virtual void insertNewTrack(int curentTrackNumber,InsertPossition position = InsertPossition::RIGHT)override
+        {Q_UNUSED(curentTrackNumber) Q_UNUSED(position)}
     virtual void newTrack(){}
 
     virtual void resize()override;
@@ -40,11 +45,16 @@ public:
     virtual void setLengthPicture(LengthPicture format);
     virtual void setFormatPicture(QImage::Format format)override;
     virtual void activate(bool activate);
+    virtual void distributionOfItemsBetweenTracks(){}
+    void openCurveSettings()override;
 
 private:
     virtual void mousePressEvent(QMouseEvent *event)override;
     virtual void mouseMoveEvent(QMouseEvent *event)override;
     virtual void mouseReleaseEvent(QMouseEvent *event)override;
+
+public slots:
+    void curveUpdate();
 };
 
 #endif // AGRAPHICBOARD_H

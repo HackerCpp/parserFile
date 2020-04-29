@@ -1,7 +1,17 @@
 #include "aitem.h"
 
 AItem::AItem(){
-
+    m_numberOfTrack = 1;
+    m_begin.is_beginValue = false;
+    m_begin.beginValue = 0;
+    m_begin.zeroOffset = 0;
+    m_end.is_endValue = false;
+    m_end.endValue = 1000000;
+    m_end.scale = 0.001;
+    m_visible[VIEW_NUM] = MAXIMIM - 1;
+    for(int visible = BOARD_GRAPH_VIEW;visible < MAXIMIM;++visible){
+        m_visible[visible] = 1;
+    }
 }
 AItem::~AItem(){
 
@@ -37,6 +47,8 @@ void AItem::setMultiScale(bool isMultiScale,qreal gleamCount,qreal gleamScale){
 
 void AItem::setName(QString name, QString visible){
     m_name = name;
+    if(visible == nullptr)
+        return;
     visible = visible.remove(":");
     m_visible[VisibleView::VIEW_NUM] = QString(visible[0]).toInt();
     if(m_visible[VisibleView::VIEW_NUM] != visible.size() - 1 ||
@@ -51,4 +63,8 @@ void AItem::setName(QString name, QString visible){
     }
 }
 
+void AItem::setVisible(VisibleView what,bool value){
+    if(what > VisibleView::VIEW_NUM && what < VisibleView::MAXIMIM)
+        m_visible[what] = value;
+}
 

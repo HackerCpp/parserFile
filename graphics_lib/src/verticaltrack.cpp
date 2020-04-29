@@ -5,6 +5,7 @@
 #include <QTabWidget>
 #include "shortcut.h"
 #include "SFML/Graphics.hpp"
+#include "curveeditor.h"
 
 using namespace sf;
 
@@ -21,7 +22,7 @@ VerticalTrack::VerticalTrack(ATrack *track,QMap<QString,ICurve*> *curves,BoardFo
 
     m_curvesMenu = new QMenu("&CurvesMenu");
     m_curvesMenu->addAction("&Curve settings",this, SLOT(openSettingsActiveItems()));
-    m_curvesMenu->addAction("&Curve edit",qApp, SLOT(aboutQt()));
+    m_curvesMenu->addAction("&Curve edit",this, SLOT(openEditorActiveItems()));
     m_curvesMenu->setMaximumSize(1000,1000);
 
     m_trackMenu = new QMenu("&TrackMenu");
@@ -29,6 +30,7 @@ VerticalTrack::VerticalTrack(ATrack *track,QMap<QString,ICurve*> *curves,BoardFo
     m_trackMenu->addAction("&Insert a track on the right",this, SLOT(insertRightTrack()));
     m_trackMenu->addAction("&Insert a track on the left",this, SLOT(insertLeftTrack()));
     m_trackMenu->addAction("&Delete a track",this, SLOT(deleteTrack()));
+    m_trackMenu->addAction("&Open curve browser",this, SLOT(openCurveBrowser()));
     m_border = new RightBorder();
     qreal f_pixelPerMm = m_board->pixelPerMm();
     uint f_pictureHeight = m_board->pictureHeight();
@@ -42,27 +44,15 @@ VerticalTrack::VerticalTrack(ATrack *track,QMap<QString,ICurve*> *curves,BoardFo
     m_curentHeader = new QImage(f_pictureWidth,3000,QImage::Format_ARGB4444_Premultiplied);
     m_doubleHeader = new QImage(f_pictureWidth,3000,QImage::Format_ARGB4444_Premultiplied);
     m_infoPixMap = new QImage(f_pictureWidth,30,QImage::Format_ARGB4444_Premultiplied);
+    m_nameTrack = new QImage(100,30,QImage::Format_ARGB32);
+    m_nameTrack->fill(0x0);
+    QPainter per(m_nameTrack);
+    per.setPen(QPen(QColor(100,100,100,100)));
+
+    per.setFont(QFont("Times", 14, QFont::Bold));
+    per.drawText(QRect(0,0,m_nameTrack->width(),m_nameTrack->height()),Qt::AlignHCenter|Qt::AlignVCenter,m_track->name());
+
     m_boundingRect = QRectF(m_track->begin() * f_pixelPerMm,f_topY,m_track->width() * f_pixelPerMm,f_lengthY);
-    /*QList <AItem*> *itemInfo = track->items();
-    int f_count = 0,y = 0;
-    foreach(auto item,*itemInfo){
-        QString name = item->name();
-        ICurve *curve = curves->value(name);
-        if(!curve){
-            ++f_count;
-            //qDebug() << "Curve null" << name;
-        }
-        else{
-            ++y;
-            if(dynamic_cast<AcuItem*>(item))
-                m_items->push_front(ItimsCreater::createItem(item,curve,m_board,ItimsCreater::VERTICAL));
-            else
-                m_items->push_back(ItimsCreater::createItem(item,curve,m_board,ItimsCreater::VERTICAL));
-        }
-    }
-    if(f_count){
-        //qDebug() << "Кривые не все вставлены в трек, некоторые не найдены" << f_count << y;
-    }*/
 }
 
 VerticalTrack::~VerticalTrack(){
@@ -353,6 +343,7 @@ void  VerticalTrack::headerLeftReleaseHandler(QPointF point){
 
 void VerticalTrack::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*){
     int LeftPos = m_track->begin() * m_board->pixelPerMm();
+    int f_rightPos = (m_track->begin() + m_track->width()) * m_board->pixelPerMm();
 
     if(m_curentPixmap)
         painter->drawImage(QRect(LeftPos,m_topPositionPicture,m_curentPixmap->width(),m_curentPixmap->height()),*m_curentPixmap);
@@ -362,6 +353,9 @@ void VerticalTrack::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QW
         painter->drawImage(QRect(m_positionOfTheBorder,m_visibilitySquare.y(),m_border->width(),m_border->height()),*m_border);
     if(m_infoPixMap){
         painter->drawImage(QRect(LeftPos,m_visibilitySquare.y(),m_infoPixMap->width(),m_infoPixMap->height()),*m_infoPixMap);
+    }
+    if(m_nameTrack){
+        painter->drawImage(QRect(f_rightPos - m_nameTrack->width() - m_border->width() - 5,m_visibilitySquare.y(),m_nameTrack->width(),m_nameTrack->height()),*m_nameTrack);
     }
 }
 
@@ -461,4 +455,18 @@ void VerticalTrack::deleteTrack(){
 
 void VerticalTrack::openSettingsTrack(){
 
+}
+
+void VerticalTrack::openCurveBrowser(){
+    m_board->openCurveSettings();
+}
+
+void VerticalTrack::openEditorActiveItems(){
+    foreach(auto item,*m_items){
+        if(item->isActive()){
+            CurveEditor *f_curveEditor  = new CurveEditor(item);
+            connect(f_curveEditor,&CurveEditor::changeSettings,this,&VerticalTrack::applySettings);
+            f_curveEditor->show();
+        }
+    }
 }

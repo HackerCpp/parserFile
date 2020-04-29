@@ -2,7 +2,8 @@
 #include <QDebug>
 
 ATrack::ATrack(){
-
+    m_number = 1;
+    m_name = "Track 1";
 }
 
 void ATrack::setLogarithm(qreal log_base,qreal dec_count, qreal dec_start,qreal dec_end){

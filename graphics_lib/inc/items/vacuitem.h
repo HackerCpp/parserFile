@@ -12,8 +12,11 @@ class VAcuItem : public VerticalItem{
 
     void inline drawInterpolationVertical(QPainter *per,QRectF visibleRect,bool *flag);
     void inline drawInterpolationHorizontal(QPainter *per,QRectF visibleRect,bool *flag);
+    void drawInterpolationHorForCheckArea(QPainter *per,QRectF visibleRect,bool *flag);
 
     virtual void drawBody(QPainter *per,QRectF visibleRect,bool *flag)override;
+    bool isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per)override;
+    void loadDrawingParam(int width);
 
 public:
     VAcuItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board);

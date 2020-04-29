@@ -13,8 +13,8 @@ protected:
     BoardForTrack *m_board;
     bool m_isActive;
 
-    virtual void drawBody(QPainter *per,QRectF visibleRect,bool *flag){}
-    virtual void drawHeader(QPainter *per,int &position,bool *flag){}
+    virtual void drawBody(QPainter *per,QRectF visibleRect,bool *flag){Q_UNUSED(per) Q_UNUSED(visibleRect) Q_UNUSED(flag)}
+    virtual void drawHeader(QPainter *per,int &position,bool *flag){Q_UNUSED(per) Q_UNUSED(position) Q_UNUSED(flag)}
 
 public:
     AGraphicItem(ICurve *curve,BoardForTrack *board);
@@ -24,11 +24,13 @@ public:
     qreal bottomValue();
 
     virtual void paint(QPainter *per,QPainter *perHead,QRectF visibleRect,int &position,bool *flag);
-    virtual bool isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per){return true;}
+    virtual bool isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per){Q_UNUSED(area) Q_UNUSED(visibleRect) Q_UNUSED(per) return true;}
     virtual void setActive(bool active){m_isActive = active;}
     virtual void run()override{}
     ICurve *curve(){return m_curve;}
     AItem *itemInfo(){return m_itemInfo;}
+    virtual QColor color(){return Qt::black;}
+    virtual void setColor(QColor color){Q_UNUSED(color)}
 
     bool isActive(){return m_isActive;}
 };

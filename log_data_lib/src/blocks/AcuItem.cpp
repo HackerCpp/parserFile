@@ -4,6 +4,7 @@
 
 AcuItem::AcuItem(){
     m_multicolor = new QList<MulticolorItem>;
+    m_type = ACU;
 }
 
 AcuItem::~AcuItem(){

@@ -1,7 +1,9 @@
 #include "agraphicboard.h"
 #include <QGraphicsScene>
+#include "browsergraphicitems.h"
 
-AGraphicBoard::AGraphicBoard(){
+AGraphicBoard::AGraphicBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves)
+    : m_curves(curves),m_boardInfo(boardInfo){
     m_items = new QMap<QString,AGraphicItem *>;
     m_minimumSize = 2000;
 }
@@ -61,6 +63,12 @@ void AGraphicBoard::activate(bool activate){
     }
 }
 
+void AGraphicBoard::openCurveSettings(){
+    BrowserGraphicItems *f_curveBrowser = new BrowserGraphicItems(m_boardInfo,m_items);
+    connect(f_curveBrowser,&BrowserGraphicItems::changeSettings,this,&AGraphicBoard::curveUpdate);
+    f_curveBrowser->show();
+}
+
 void AGraphicBoard::setFormatTime(FormatTime format){
     setScaleForTime(1.f/qreal(m_dividersTime[format]));
     redraw();
@@ -98,3 +106,10 @@ void AGraphicBoard::mousePressEvent(QMouseEvent *event){
  void AGraphicBoard::mouseReleaseEvent(QMouseEvent *event){
      QGraphicsView::mouseReleaseEvent(event);
  }
+
+ void AGraphicBoard::curveUpdate(){
+     distributionOfItemsBetweenTracks();
+     redraw();
+ }
+
+

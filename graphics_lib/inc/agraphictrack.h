@@ -30,7 +30,7 @@ public:
     void addIteam(AGraphicItem* item);
     void clearItems();
 protected:
-    QImage *m_infoPixMap,*m_curentHeader,*m_doubleHeader;
+    QImage *m_infoPixMap,*m_curentHeader,*m_doubleHeader,*m_nameTrack;
     BoardForTrack *m_board;
     int m_topPositionPicture;
     QRectF m_boundingRect;

@@ -13,6 +13,8 @@ public:
     QString ref();
     QString name();
     QString nameWithoutNumber();
+    QString dateTime();
+    QString device();
 };
 
 #endif // SHORTCUT_H

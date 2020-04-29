@@ -510,14 +510,14 @@ void GFMLoader::parserFormsBlock(const QByteArray &bodyBlock,IBlock *block){
 
         }
     }
-/*
+
     QFile file("dd.txt");
     file.open(QIODevice::WriteOnly);
     QByteArray output;
     gzipDecompress(bodyBlock,output);
     file.write(output);
     file.close();
-*/
+
     qDebug() << "end load forms : " << time.msecsTo( QTime::currentTime() ) << "mS";
 }
 

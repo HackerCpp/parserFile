@@ -36,7 +36,11 @@ AGraphicTrack::~AGraphicTrack(){
 
 }
 void AGraphicTrack::addIteam(AGraphicItem* item){
-    if(m_items)
+    if(!m_items || !item)
+    return;
+    if(item->itemInfo()->type() == ACU)
+        m_items->push_front(item);
+    else
         m_items->push_back(item);
 }
 void AGraphicTrack::clearItems(){

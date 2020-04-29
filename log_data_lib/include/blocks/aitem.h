@@ -68,6 +68,7 @@ public:
     virtual void setEnd(bool isEnd,qreal end,qreal scale);
     virtual void setMultiScale(bool isMultiScale,qreal gleamCount,qreal gleamScale);
     virtual void setName(QString name, QString visible);
+    virtual void setVisible(VisibleView what,bool value);
     virtual void setTypeItem(TypeItem type){m_type = type;}
     virtual void setNumberOfTrack(int numberOfTrack){m_numberOfTrack = numberOfTrack;}
 

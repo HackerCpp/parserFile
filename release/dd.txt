@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<forms active_name="MAK-2 УНГФ">
+  <board name="MAK-2">
+    <track name="Track 2" show_grid="0" type="LINEAR">
+      <begin value="0" unit="CM"/>
+      <width value="1,5" unit="CM"/>
+      <logarithm logarithm_base="10" decades_count="3" decade_start="1" decade_end="10"/>
+      <mark name="2020_02_21_06-13-46.MTK:MARK" visible="6:1:1:1:1:1:1">
+        <style color="#ff5b3566" dashes="0">
+          <width value="3" unit="PIX"/>
+        </style>
+        <value_scale value="-1" unit="CM"/>
+      </mark>
+    </track>
+    <track name="Track 1" show_grid="1" type="LINEAR">
+      <begin value="1,5" unit="CM"/>
+      <width value="9,5" unit="CM"/>
+      <logarithm logarithm_base="10" decades_count="3" decade_start="1" decade_end="10"/>
+      <line name="2020_02_21_06-13-46.MTK:MARK(ADCU)" visible="6:0:0:0:0:0:0">
+        <paint_mode mode="PAINT_CURVE"/>
+        <style color="#ffff7f00" dashes="0">
+          <width value="1" unit="PIX"/>
+        </style>
+        <begin set_begin_value="1" begin_value="0">
+          <zero_offset value="0" unit="CM"/>
+        </begin>
+        <end set_end_value="0" end_value="95">
+          <value_scale value="0,1" unit="CM"/>
+        </end>
+        <multi_scale is_multi_scale="0" gleam_count="3" gleam_scale="5"/>
+      </line>
+      <line name="2020_02_21_06-13-46.MTK:SPEED(M/HR)" visible="6:0:0:0:0:0:0">
+        <paint_mode mode="PAINT_CURVE"/>
+        <style color="#ffcc0000" dashes="0">
+          <width value="1" unit="PIX"/>
+        </style>
+        <begin set_begin_value="1" begin_value="0">
+          <zero_offset value="0" unit="CM"/>
+        </begin>
+        <end set_end_value="0" end_value="95">
+          <value_scale value="0,1" unit="CM"/>
+        </end>
+        <multi_scale is_multi_scale="0" gleam_count="3" gleam_scale="5"/>
+      </line>
+      <line name="2020_02_21_06-13-46.MTK:TENSION(TONNE)" visible="6:0:0:0:0:0:0">
+        <paint_mode mode="PAINT_CURVE"/>
+        <style color="#ff734f7b" dashes="0">
+          <width value="1" unit="PIX"/>
+        </style>
+        <begin set_begin_value="1" begin_value="0">
+          <zero_offset value="0" unit="CM"/>
+        </begin>
+        <end set_end_value="0" end_value="95">
+          <value_scale value="0,1" unit="CM"/>
+        </end>
+        <multi_scale is_multi_scale="0" gleam_count="3" gleam_scale="5"/>
+      </line>
+      <acu name="2020_02_21_06-13-46.MAK_2:WF1(USEC)" visible="6:1:1:1:1:1:1">
+        <style show_mode="1">
+          <transparent color="#ffc49f00"/>
+          <multi_color level_count="10">
+            <level bound="-2048" color="#ff000000"/>
+            <level bound="-2047" color="#ff7f7fff"/>
+            <level bound="-1000" color="#ff0000ff"/>
+            <level bound="-50" color="#ff00ffff"/>
+            <level bound="0" color="#ffafafaf"/>
+            <level bound="50" color="#ff00ff00"/>
+            <level bound="500" color="#ff00ff00"/>
+            <level bound="1000" color="#ff007f00"/>
+            <level bound="2046" color="#ff7f00ff"/>
+            <level bound="2047" color="#ffffff00"/>
+          </multi_color>
+          <brush_color color="#ff7fff7f"/>
+        </style>
+        <begin set_begin_value="1" begin_value="100">
+          <zero_offset value="-0,333333" unit="CM"/>
+        </begin>
+        <end set_end_value="1" end_value="2500">
+          <step_scale value="0,00395833" unit="CM"/>
+        </end>
+      </acu>
+      <line name="2020_02_21_06-13-46.MAK_2:DT(USEC/M)" visible="6:0:0:0:1:1:1">
+        <paint_mode mode="PAINT_CURVE"/>
+        <style color="#ffcc0000" dashes="0">
+          <width value="1" unit="PIX"/>
+        </style>
+        <begin set_begin_value="1" begin_value="0">
+          <zero_offset value="0" unit="CM"/>
+        </begin>
+        <end set_end_value="0" end_value="95">
+          <value_scale value="0,1" unit="CM"/>
+        </end>
+        <multi_scale is_multi_scale="0" gleam_count="3" gleam_scale="5"/>
+      </line>
+      <line name="2020_02_21_06-13-46.MAK_2:ALPHA(DB/M)" visible="6:0:0:0:1:1:1">
+        <paint_mode mode="PAINT_CURVE"/>
+        <style color="#ff9000cf" dashes="0">
+          <width value="1" unit="PIX"/>
+        </style>
+        <begin set_begin_value="1" begin_value="0">
+          <zero_offset value="0" unit="CM"/>
+        </begin>
+        <end set_end_value="0" end_value="95">
+          <value_scale value="0,1" unit="CM"/>
+        </end>
+        <multi_scale is_multi_scale="0" gleam_count="3" gleam_scale="5"/>
+      </line>
+      <line name="2020_02_21_06-13-46.MTK:WHEEL_CORR(CM/KM)" visible="6:0:0:0:1:1:1">
+        <paint_mode mode="PAINT_CURVE"/>
+        <style color="#ffffd600" dashes="0">
+          <width value="1" unit="PIX"/>
+        </style>
+        <begin set_begin_value="1" begin_value="0">
+          <zero_offset value="0" unit="CM"/>
+        </begin>
+        <end set_end_value="0" end_value="95">
+          <value_scale value="0,1" unit="CM"/>
+        </end>
+        <multi_scale is_multi_scale="0" gleam_count="3" gleam_scale="5"/>
+      </line>
+      <line name="2020_02_21_06-13-46.MAK_2:A1(ADCU)" visible="6:0:0:0:1:1:1">
+        <paint_mode mode="PAINT_CURVE"/>
+        <style color="#ff0000cc" dashes="0">
+          <width value="1" unit="PIX"/>
+        </style>
+        <begin set_begin_value="1" begin_value="0">
+          <zero_offset value="0" unit="CM"/>
+        </begin>
+        <end set_end_value="0" end_value="95">
+          <value_scale value="0,1" unit="CM"/>
+        </end>
+        <multi_scale is_multi_scale="0" gleam_count="3" gleam_scale="5"/>
+      </line>
+      <line name="2020_02_21_06-13-46.MAK_2:A2(ADCU)" visible="6:0:0:0:1:1:1">
+        <paint_mode mode="PAINT_CURVE"/>
+        <style color="#ff007f7f" dashes="0">
+          <width value="1" unit="PIX"/>
+        </style>
+        <begin set_begin_value="1" begin_value="0">
+          <zero_offset value="0" unit="CM"/>
+        </begin>
+        <end set_end_value="0" end_value="95">
+          <value_scale value="0,1" unit="CM"/>
+        </end>
+        <multi_scale is_multi_scale="0" gleam_count="3" gleam_scale="5"/>
+      </line>
+    </track>
+    <track name="Track 3" show_grid="1" type="LINEAR">
+      <begin value="11" unit="CM"/>
+      <width value="9" unit="CM"/>
+      <logarithm logarithm_base="10" decades_count="3" decade_start="1" decade_end="10"/>
+      <acu name="2020_02_21_06-13-46.MAK_2:WF2(USEC)" visible="6:1:1:1:1:1:1">
+        <style show_mode="1">
+          <transparent color="#ff009700"/>
+          <multi_color level_count="10">
+            <level bound="-2048" color="#ff000000"/>
+            <level bound="-2047" color="#ff7f7fff"/>
+            <level bound="-1000" color="#ff0000ff"/>
+            <level bound="-50" color="#ff00ffff"/>
+            <level bound="0" color="#ffafafaf"/>
+            <level bound="50" color="#ff00ff00"/>
+            <level bound="500" color="#ff00ff00"/>
+            <level bound="1000" color="#ff007f00"/>
+            <level bound="2046" color="#ff7f00ff"/>
+            <level bound="2047" color="#ffffff00"/>
+          </multi_color>
+          <brush_color color="#ff7fff7f"/>
+        </style>
+        <begin set_begin_value="1" begin_value="100">
+          <zero_offset value="-0,333333" unit="CM"/>
+        </begin>
+        <end set_end_value="1" end_value="2500">
+          <step_scale value="0,00375" unit="CM"/>
+        </end>
+      </acu>
+    </track>
+    <track name="Track 4" show_grid="1" type="LINEAR">
+      <begin value="20" unit="CM"/>
+      <width value="10,5" unit="CM"/>
+      <logarithm logarithm_base="10" decades_count="3" decade_start="1" decade_end="10"/>
+      <line name="2020_02_21_06-13-46.MAK_2:TT1(USEC)" visible="6:1:1:1:1:1:1">
+        <paint_mode mode="PAINT_CURVE"/>
+        <style color="#ff0000cc" dashes="0">
+          <width value="3" unit="PIX"/>
+        </style>
+        <begin set_begin_value="0" begin_value="0">
+          <zero_offset value="0" unit="CM"/>
+        </begin>
+        <end set_end_value="0" end_value="1050">
+          <value_scale value="0,01" unit="CM"/>
+        </end>
+        <multi_scale is_multi_scale="0" gleam_count="3" gleam_scale="5"/>
+      </line>
+      <line name="2020_02_21_06-13-46.MAK_2:TT2(USEC)" visible="6:1:1:1:1:1:1">
+        <paint_mode mode="PAINT_CURVE"/>
+        <style color="#ffa40000" dashes="0">
+          <width value="3" unit="PIX"/>
+        </style>
+        <begin set_begin_value="0" begin_value="0">
+          <zero_offset value="0" unit="CM"/>
+        </begin>
+        <end set_end_value="0" end_value="1050">
+          <value_scale value="0,01" unit="CM"/>
+        </end>
+        <multi_scale is_multi_scale="0" gleam_count="3" gleam_scale="5"/>
+      </line>
+      <line name="2020_02_21_06-13-46.MAK_2:A1(DB)" visible="6:1:1:1:1:1:1">
+        <paint_mode mode="PAINT_CURVE"/>
+        <style color="#ff870000" dashes="0">
+          <width value="1" unit="PIX"/>
+        </style>
+        <begin set_begin_value="0" begin_value="0">
+          <zero_offset value="0" unit="CM"/>
+        </begin>
+        <end set_end_value="0" end_value="367,5">
+          <value_scale value="0,0285714" unit="CM"/>
+        </end>
+        <multi_scale is_multi_scale="0" gleam_count="3" gleam_scale="5"/>
+      </line>
+      <line name="2020_02_21_06-13-46.MAK_2:A2(DB)" visible="6:1:1:1:1:1:1">
+        <paint_mode mode="PAINT_CURVE"/>
+        <style color="#ff4e9703" dashes="0">
+          <width value="1" unit="PIX"/>
+        </style>
+        <begin set_begin_value="0" begin_value="0">
+          <zero_offset value="0" unit="CM"/>
+        </begin>
+        <end set_end_value="0" end_value="367,5">
+          <value_scale value="0,0285714" unit="CM"/>
+        </end>
+        <multi_scale is_multi_scale="0" gleam_count="3" gleam_scale="5"/>
+      </line>
+    </track>
+  </board>
+  <board name="MAK-2 УНГФ">
+    <track name="Track 2" show_grid="0" type="LINEAR">
+      <begin value="0" unit="CM"/>
+      <width value="1,5" unit="CM"/>
+      <logarithm logarithm_base="10" decades_count="3" decade_start="1" decade_end="10"/>
+      <mark name="2020_02_21_06-13-46.MTK:MARK" visible="6:1:1:1:1:1:1">
+        <style color="#ff5b3566" dashes="0">
+          <width value="3" unit="PIX"/>
+        </style>
+        <value_scale value="-1" unit="CM"/>
+      </mark>
+    </track>
+    <track name="Track 1" show_grid="1" type="LINEAR">
+      <begin value="1,5" unit="CM"/>
+      <width value="12,5" unit="CM"/>
+      <logarithm logarithm_base="10" decades_count="3" decade_start="1" decade_end="10"/>
+      <line name="2020_02_21_06-13-46.MTK:MARK(ADCU)" visible="6:0:0:0:0:0:0">
+        <paint_mode mode="PAINT_CURVE"/>
+        <style color="#ffff7f00" dashes="0">
+          <width value="1" unit="PIX"/>
+        </style>
+        <begin set_begin_value="1" begin_value="0">
+          <zero_offset value="0" unit="CM"/>
+        </begin>
+        <end set_end_value="0" end_value="125">
+          <value_scale value="0,1" unit="CM"/>
+        </end>
+        <multi_scale is_multi_scale="0" gleam_count="3" gleam_scale="5"/>
+      </line>
+      <line name="2020_02_21_06-13-46.MTK:SPEED(M/HR)" visible="6:0:0:0:0:0:0">
+        <paint_mode mode="PAINT_CURVE"/>
+        <style color="#ffcc0000" dashes="0">
+          <width value="1" unit="PIX"/>
+        </style>
+        <begin set_begin_value="1" begin_value="0">
+          <zero_offset value="0" unit="CM"/>
+        </begin>
+        <end set_end_value="0" end_value="125">
+          <value_scale value="0,1" unit="CM"/>
+        </end>
+        <multi_scale is_multi_scale="0" gleam_count="3" gleam_scale="5"/>
+      </line>
+      <line name="2020_02_21_06-13-46.MTK:TENSION(TONNE)" visible="6:0:0:0:0:0:0">
+        <paint_mode mode="PAINT_CURVE"/>
+        <style color="#ff734f7b" dashes="0">
+          <width value="1" unit="PIX"/>
+        </style>
+        <begin set_begin_value="1" begin_value="0">
+          <zero_offset value="0" unit="CM"/>
+        </begin>
+        <end set_end_value="0" end_value="125">
+          <value_scale value="0,1" unit="CM"/>
+        </end>
+        <multi_scale is_multi_scale="0" gleam_count="3" gleam_scale="5"/>
+      </line>
+      <acu name="2020_02_21_06-13-46.MAK_2:WF1(USEC)" visible="6:1:1:1:1:1:1">
+        <style show_mode="1">
+          <transparent color="#ffc49f00"/>
+          <multi_color level_count="10">
+            <level bound="-2048" color="#ff000000"/>
+            <level bound="-2047" color="#ff7f7fff"/>
+            <level bound="-1000" color="#ff0000ff"/>
+            <level bound="-50" color="#ff81d3f8"/>
+            <level bound="0" color="#ffafafaf"/>
+            <level bound="50" color="#ff00ff00"/>
+            <level bound="500" color="#ff00ff00"/>
+            <level bound="1000" color="#ff007f00"/>
+            <level bound="2046" color="#ff7f00ff"/>
+            <level bound="2047" color="#ffffff00"/>
+          </multi_color>
+          <brush_color color="#ff7fff7f"/>
+        </style>
+        <begin set_begin_value="0" begin_value="129">
+          <zero_offset value="-0,86" unit="CM"/>
+        </begin>
+        <end set_end_value="0" end_value="2004">
+          <step_scale value="0,00666667" unit="CM"/>
+        </end>
+      </acu>
+      <line name="2020_02_21_06-13-46.MAK_2:DT(USEC/M)" visible="6:0:0:0:1:1:1">
+        <paint_mode mode="PAINT_CURVE"/>
+        <style color="#ffcc0000" dashes="0">
+          <width value="1" unit="PIX"/>
+        </style>
+        <begin set_begin_value="1" begin_value="0">
+          <zero_offset value="0" unit="CM"/>
+        </begin>
+        <end set_end_value="0" end_value="125">
+          <value_scale value="0,1" unit="CM"/>
+        </end>
+        <multi_scale is_multi_scale="0" gleam_count="3" gleam_scale="5"/>
+      </line>
+      <line name="2020_02_21_06-13-46.MAK_2:ALPHA(DB/M)" visible="6:0:0:0:1:1:1">
+        <paint_mode mode="PAINT_CURVE"/>
+        <style color="#ff8f00cf" dashes="0">
+          <width value="1" unit="PIX"/>
+        </style>
+        <begin set_begin_value="1" begin_value="0">
+          <zero_offset value="0" unit="CM"/>
+        </begin>
+        <end set_end_value="0" end_value="125">
+          <value_scale value="0,1" unit="CM"/>
+        </end>
+        <multi_scale is_multi_scale="0" gleam_count="3" gleam_scale="5"/>
+      </line>
+      <line name="2020_02_21_06-13-46.MTK:WHEEL_CORR(CM/KM)" visible="6:0:0:0:1:1:1">
+        <paint_mode mode="PAINT_CURVE"/>
+        <style color="#ffffd600" dashes="0">
+          <width value="1" unit="PIX"/>
+        </style>
+        <begin set_begin_value="1" begin_value="0">
+          <zero_offset value="0" unit="CM"/>
+        </begin>
+        <end set_end_value="0" end_value="125">
+          <value_scale value="0,1" unit="CM"/>
+        </end>
+        <multi_scale is_multi_scale="0" gleam_count="3" gleam_scale="5"/>
+      </line>
+      <line name="2020_02_21_06-13-46.MAK_2:A1(ADCU)" visible="6:0:0:0:1:1:1">
+        <paint_mode mode="PAINT_CURVE"/>
+        <style color="#ff0000cc" dashes="0">
+          <width value="1" unit="PIX"/>
+        </style>
+        <begin set_begin_value="1" begin_value="0">
+          <zero_offset value="0" unit="CM"/>
+        </begin>
+        <end set_end_value="0" end_value="125">
+          <value_scale value="0,1" unit="CM"/>
+        </end>
+        <multi_scale is_multi_scale="0" gleam_count="3" gleam_scale="5"/>
+      </line>
+      <line name="2020_02_21_06-13-46.MAK_2:A2(ADCU)" visible="6:0:0:0:1:1:1">
+        <paint_mode mode="PAINT_CURVE"/>
+        <style color="#ff007f7f" dashes="0">
+          <width value="1" unit="PIX"/>
+        </style>
+        <begin set_begin_value="1" begin_value="0">
+          <zero_offset value="0" unit="CM"/>
+        </begin>
+        <end set_end_value="0" end_value="125">
+          <value_scale value="0,1" unit="CM"/>
+        </end>
+        <multi_scale is_multi_scale="0" gleam_count="3" gleam_scale="5"/>
+      </line>
+    </track>
+    <track name="Track 3" show_grid="1" type="LINEAR">
+      <begin value="14" unit="CM"/>
+      <width value="12,5" unit="CM"/>
+      <logarithm logarithm_base="10" decades_count="3" decade_start="1" decade_end="10"/>
+      <acu name="2020_02_21_06-13-46.MAK_2:WF2(USEC)" visible="6:1:1:1:1:1:1">
+        <style show_mode="1">
+          <transparent color="#ff009700"/>
+          <multi_color level_count="10">
+            <level bound="-2048" color="#ff000000"/>
+            <level bound="-2047" color="#ff7f7fff"/>
+            <level bound="-1000" color="#ff0000ff"/>
+            <level bound="-50" color="#ff81d3f8"/>
+            <level bound="0" color="#ffafafaf"/>
+            <level bound="50" color="#ff00ff00"/>
+            <level bound="500" color="#ff00ff00"/>
+            <level bound="1000" color="#ff007f00"/>
+            <level bound="2046" color="#ff7f00ff"/>
+            <level bound="2047" color="#ffffff00"/>
+          </multi_color>
+          <brush_color color="#ff7fff7f"/>
+        </style>
+        <begin set_begin_value="0" begin_value="139,5">
+          <zero_offset value="-0,93" unit="CM"/>
+        </begin>
+        <end set_end_value="0" end_value="2014,5">
+          <step_scale value="0,00666667" unit="CM"/>
+        </end>
+      </acu>
+    </track>
+    <track name="Track 4" show_grid="1" type="LINEAR">
+      <begin value="26,5" unit="CM"/>
+      <width value="8,5" unit="CM"/>
+      <logarithm logarithm_base="10" decades_count="3" decade_start="1" decade_end="10"/>
+      <line name="2020_02_21_06-13-46.MAK_2:TT1(USEC)" visible="6:1:1:1:1:1:1">
+        <paint_mode mode="PAINT_CURVE"/>
+        <style color="#ff0000cc" dashes="0">
+          <width value="2" unit="PIX"/>
+        </style>
+        <begin set_begin_value="0" begin_value="-100">
+          <zero_offset value="1" unit="CM"/>
+        </begin>
+        <end set_end_value="0" end_value="750">
+          <value_scale value="0,01" unit="CM"/>
+        </end>
+        <multi_scale is_multi_scale="0" gleam_count="3" gleam_scale="5"/>
+      </line>
+      <line name="2020_02_21_06-13-46.MAK_2:TT2(USEC)" visible="6:1:1:1:1:1:1">
+        <paint_mode mode="PAINT_CURVE"/>
+        <style color="#ffa40000" dashes="0">
+          <width value="2" unit="PIX"/>
+        </style>
+        <begin set_begin_value="0" begin_value="0">
+          <zero_offset value="0" unit="CM"/>
+        </begin>
+        <end set_end_value="0" end_value="850">
+          <value_scale value="0,01" unit="CM"/>
+        </end>
+        <multi_scale is_multi_scale="0" gleam_count="3" gleam_scale="5"/>
+      </line>
+      <line name="2020_02_21_06-13-46.MAK_2:A1(DB)" visible="6:1:1:1:1:1:1">
+        <paint_mode mode="PAINT_CURVE"/>
+        <style color="#ff870000" dashes="0">
+          <width value="1" unit="PIX"/>
+        </style>
+        <begin set_begin_value="0" begin_value="-35">
+          <zero_offset value="1" unit="CM"/>
+        </begin>
+        <end set_end_value="0" end_value="262,5">
+          <value_scale value="0,0285714" unit="CM"/>
+        </end>
+        <multi_scale is_multi_scale="0" gleam_count="3" gleam_scale="5"/>
+      </line>
+      <line name="2020_02_21_06-13-46.MAK_2:A2(DB)" visible="6:1:1:1:1:1:1">
+        <paint_mode mode="PAINT_CURVE"/>
+        <style color="#ff4e9700" dashes="0">
+          <width value="1" unit="PIX"/>
+        </style>
+        <begin set_begin_value="0" begin_value="-35">
+          <zero_offset value="1" unit="CM"/>
+        </begin>
+        <end set_end_value="0" end_value="262,5">
+          <value_scale value="0,0285714" unit="CM"/>
+        </end>
+        <multi_scale is_multi_scale="0" gleam_count="3" gleam_scale="5"/>
+      </line>
+    </track>
+  </board>
+</forms>

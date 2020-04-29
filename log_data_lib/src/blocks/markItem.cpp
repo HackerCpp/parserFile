@@ -1,9 +1,8 @@
 #include "markItem.h"
 
 
-markItem :: markItem()
-{
-
+markItem :: markItem(){
+    m_type = MARK;
 }
 markItem :: ~markItem()
 {

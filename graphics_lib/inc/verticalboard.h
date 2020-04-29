@@ -9,7 +9,7 @@
 class VerticalBoard : public AGraphicBoard
 {
     Q_OBJECT
-    IBoard *m_board;
+
     bool m_isDrawTime;
     int headerTopOffset;
     QGraphicsScene *m_canvas;
@@ -23,6 +23,9 @@ public:
     void newTrack()override;
     bool addCurve(ICurve *curve,int indexTab);
     virtual void redraw()override{emit scrollChanged();}
+    void updateItems();
+    void distributionOfItemsBetweenTracks()override;
+
 private:
     void init();
     virtual void resizeEvent(QResizeEvent *event)override;

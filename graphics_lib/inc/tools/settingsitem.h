@@ -2,40 +2,30 @@
 #define SETTINGSITEM_H
 
 #include "agraphicitem.h"
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QGridLayout>
 #include <QCheckBox>
 #include <QButtonGroup>
 #include <QGroupBox>
 #include <QRadioButton>
-#include <QSharedPointer>
 #include <QLineEdit>
 #include <QLabel>
-#include <QObject>
 #include "vlineitem.h"
 #include <QColorDialog>
 #include <QSpinBox>
 #include <QTabWidget>
+#include "basesettingswindow.h"
+
 /*MAIN CLASS SETTINGS FOR ITEMS*********************************************/
-class SettingsItems : public QWidget{
+class SettingsItems : public BaseSettingsWindow{
     Q_OBJECT
+
     QTabWidget *m_tabWidgets;
-    QVBoxLayout *m_mainLayout;
-    QHBoxLayout *m_btnLayout;
-    QPushButton *m_btnOk,*m_btnCansel,*m_btnApply;
 public :
     SettingsItems();
     ~SettingsItems();
 
     void addItem(AGraphicItem *item);
-signals:
-    void changeSettings();
-
 public slots:
-    void cansel();
-    void ok();
-    void apply();
+    void apply() override;
 };
 
 /*******************************************************************************/
@@ -43,9 +33,19 @@ class Selection : public QGroupBox{
     Q_OBJECT
     QGridLayout *m_mainLout;
     struct LineSlect{
-        QRadioButton radioBtn;
-        QLineEdit lineEdit;
-        QLabel label;
+        QRadioButton *radioBtn;
+        QLineEdit *lineEdit;
+        QLabel *label;
+        LineSlect(){
+            radioBtn = new QRadioButton;
+            lineEdit = new QLineEdit;
+            label = new QLabel;
+        }
+        ~LineSlect(){
+            if(radioBtn){ delete radioBtn;radioBtn = nullptr;}
+            if(lineEdit){ delete lineEdit;lineEdit = nullptr;}
+            if(label){ delete label;label = nullptr;}
+        }
     };
     QButtonGroup *m_btnGroup;
     QVector<LineSlect*> * m_lines;
@@ -60,7 +60,7 @@ public:
 public slots:
     void bthToggle(int index,bool active);
 };
-
+/**************************************************************/
 class SettingsItem : public QWidget
 {
 protected:
@@ -73,7 +73,7 @@ protected:
 public:
     static SettingsItem * createSettingsItem(AGraphicItem *item);
     SettingsItem(AGraphicItem *item);
-    ~SettingsItem(){}
+    ~SettingsItem();
 
     void apply();
 };

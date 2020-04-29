@@ -75,10 +75,10 @@ void GraphicEditor::newBoard(){
     ABoard* f_newBoard = new ABoard();
     f_newBoard->setName("noName");
     ATrack * f_track = new ATrack();
-    f_track->setNumber(0);
+    f_track->setNumber(1);
     f_track->setType(Types::LINEAR);
     f_track->setBegin(0);
-    f_track->setWidth(40);
+    f_track->setWidth(80);
     f_track->setIsGreed(true);
     f_newBoard->setTrack(f_track);
     m_forms->boards()->push_back(f_newBoard);
@@ -86,12 +86,12 @@ void GraphicEditor::newBoard(){
     m_curentBoard = f_grBoard;
     insertTab(count() - 1,f_grBoard,f_newBoard->name());
     setCurrentWidget(m_curentBoard);
+    m_curentBoard->insertNewTrack(1,InsertPossition::LEFT);
 }
 
 void GraphicEditor::changeBoard(int index){
     if(tabText(index) == "+"){
         newBoard();
-
         return;
     }
     for(int i = 0; i < count();++i){

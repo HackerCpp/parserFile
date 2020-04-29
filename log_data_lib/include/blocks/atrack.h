@@ -28,13 +28,13 @@ public:
 
 
     void setIsGreed(bool isGreed){m_isGreed = isGreed;}
-    void setName(QString name){m_name = name;}
+    void setName(QString name){m_name = name; m_number = QString(m_name).remove("Track ").toInt();}
     void setType(Types type){m_type = type;}
     void setLogarithm(qreal log_base,qreal dec_count, qreal dec_start,qreal dec_end);
     void setBegin(qreal begin){m_begin = begin;}
     void setWidth(qreal width){m_width = width;}
 
-    void setNumber(int number){m_number = number;}
+    void setNumber(int number){m_number = number; m_name = "Track " + QString::number(m_number);}
 
 
     bool isGreed(){return m_isGreed;}

@@ -134,6 +134,17 @@ void VLineItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
     //qDebug() << f_clock.getElapsedTime().asMicroseconds();
 }
 
+QColor VLineItem::color(){
+    LineItem *f_lineItemInfo = dynamic_cast<LineItem*>(m_itemInfo);
+    return (f_lineItemInfo ? QColor(f_lineItemInfo->color()) : Qt::black);
+}
+
+void VLineItem::setColor(QColor color){
+    LineItem *f_lineItemInfo = dynamic_cast<LineItem*>(m_itemInfo);
+    if(f_lineItemInfo)
+        f_lineItemInfo->setColor(color.name(),f_lineItemInfo->isDashes());
+}
+
 void VLineItem::drawHeader(QPainter *per,int &position,bool *flag){
     LineItem *f_lineItemInfo = dynamic_cast<LineItem*>(m_itemInfo);
     if(!f_lineItemInfo){

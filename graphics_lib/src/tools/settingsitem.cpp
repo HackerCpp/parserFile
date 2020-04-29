@@ -5,38 +5,24 @@
 
 SettingsItems::SettingsItems(){
     m_tabWidgets = new QTabWidget;
-    m_mainLayout = new QVBoxLayout;
-    m_btnLayout = new QHBoxLayout;
-    m_btnOk = new QPushButton("OK");
-    m_btnCansel = new QPushButton("CANCEL");
-    m_btnApply = new QPushButton("APPLY");
-    m_btnLayout->addStretch(100);
-    m_btnLayout->addWidget(m_btnOk);
-    m_btnLayout->addWidget(m_btnApply);
-    m_btnLayout->addWidget(m_btnCansel);
-    m_mainLayout->addWidget(m_tabWidgets);
-    m_mainLayout->addLayout(m_btnLayout);
-    this->setLayout(m_mainLayout);
-    setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
-    setMinimumSize(500,500);
-    connect(m_btnCansel,&QPushButton::pressed,this,&SettingsItems::cansel);
-    connect(m_btnApply,&QPushButton::pressed,this,&SettingsItems::apply);
-    connect(m_btnOk,&QPushButton::pressed,this,&SettingsItems::ok);
-    setWindowFlags(Qt::WindowStaysOnTopHint);
+    m_scroll->setWidget(m_tabWidgets);
     show();
 }
 
 SettingsItems::~SettingsItems(){
+    if(m_tabWidgets){
+        for(int i = 0; i < m_tabWidgets->count();++i){
+            SettingsItem *f_tabSettingsItem = dynamic_cast<SettingsItem *>(m_tabWidgets->widget(i));
+            if(f_tabSettingsItem){delete f_tabSettingsItem; f_tabSettingsItem = nullptr;}
+        }
+        delete m_tabWidgets; m_tabWidgets = nullptr;
+    }
 
 }
 
 void SettingsItems::addItem(AGraphicItem *item){
     SettingsItem *f_tabSettingsItem = SettingsItem::createSettingsItem(item);
     m_tabWidgets->addTab(f_tabSettingsItem,item->curve()->shortCut().name() + ":" + item->curve()->mnemonic());
-}
-
-void SettingsItems::cansel(){
-    this->destroy(true,true);
 }
 
 void SettingsItems::apply(){
@@ -48,38 +34,31 @@ void SettingsItems::apply(){
     emit changeSettings();
 }
 
-void SettingsItems::ok(){
-    apply();
-    cansel();
-}
 
 
 /*******************************************************************************/
-
-
-
-
 Selection::Selection(QStringList name,int activeIndex){
     m_btnGroup = new QButtonGroup;
-    m_lines = new QVector<LineSlect*>(name.size());
+    m_lines = new QVector<LineSlect*>;
     m_mainLout = new QGridLayout(this);
     int f_countRow = 0;
     foreach(auto f_name,name){
         LineSlect *f_lineSelect = new LineSlect;
-        m_lines->data()[f_countRow] = f_lineSelect;
-        m_lines->data()[f_countRow]->radioBtn.setText(f_name.left(f_name.indexOf(":")));
-        m_lines->data()[f_countRow]->label.setText(f_name.mid(f_name.indexOf(":") + 1));
-        m_btnGroup->addButton(&m_lines->data()[f_countRow]->radioBtn,f_countRow);
-        m_mainLout->addWidget(&m_lines->data()[f_countRow]->radioBtn,f_countRow,0);
-        m_mainLout->addWidget(&m_lines->data()[f_countRow]->lineEdit,f_countRow,1);
-        m_mainLout->addWidget(&m_lines->data()[f_countRow]->label,f_countRow,2);
-        m_lines->data()[f_countRow]->lineEdit.setEnabled(false);
-        m_lines->data()[f_countRow]->lineEdit.setValidator( new QDoubleValidator(-1000000000, 1000000000, 9, &m_lines->data()[f_countRow]->lineEdit) );
-        m_lines->data()[f_countRow]->lineEdit.setMaxLength(10);
+
+        f_lineSelect->radioBtn->setText(f_name.left(f_name.indexOf(":")));
+        f_lineSelect->label->setText(f_name.mid(f_name.indexOf(":") + 1));
+        m_btnGroup->addButton(f_lineSelect->radioBtn,f_countRow);
+        m_mainLout->addWidget(f_lineSelect->radioBtn,f_countRow,0);
+        m_mainLout->addWidget(f_lineSelect->lineEdit,f_countRow,1);
+        m_mainLout->addWidget(f_lineSelect->label,f_countRow,2);
+        f_lineSelect->lineEdit->setEnabled(false);
+        f_lineSelect->lineEdit->setValidator( new QDoubleValidator(-1000000000, 1000000000, 9, f_lineSelect->lineEdit) );
+        f_lineSelect->lineEdit->setMaxLength(10);
+        m_lines->push_back(f_lineSelect);
         ++f_countRow;
     }
-    m_lines->data()[activeIndex]->lineEdit.setEnabled(true);
-    m_lines->data()[activeIndex]->radioBtn.setChecked(true);
+    m_lines->data()[activeIndex]->lineEdit->setEnabled(true);
+    m_lines->data()[activeIndex]->radioBtn->setChecked(true);
     this->setLayout(m_mainLout);
     setMaximumSize(300,100);
     setMinimumSize(300,100);
@@ -88,8 +67,8 @@ Selection::Selection(QStringList name,int activeIndex){
 
 bool Selection::setValue(QString param,QString value){
     foreach(auto line,*m_lines){
-        if(line->radioBtn.text() == param){
-            line->lineEdit.setText(value);
+        if(line->radioBtn->text() == param){
+            line->lineEdit->setText(value);
             return true;
         }
     }
@@ -98,24 +77,26 @@ bool Selection::setValue(QString param,QString value){
 
 QString Selection::value(QString param){
     foreach(auto line,*m_lines){
-        if(line->radioBtn.text() == param){
-            return line->lineEdit.text().replace(",", ".");
+        if(line->radioBtn->text() == param){
+            return line->lineEdit->text().replace(",", ".");
         }
     }
     return "0";
 }
 
 void Selection::bthToggle(int index,bool active){
-    m_lines->data()[index]->lineEdit.setEnabled(active);
+    m_lines->data()[index]->lineEdit->setEnabled(active);
 }
 
-
-
 Selection::~Selection(){
-    /*if(m_mainLout){
-        delete m_mainLout;
-        m_mainLout = nullptr;
-    }*/
+    if(m_lines){
+        foreach(auto line,*m_lines){
+            if(line){delete line;line = nullptr;}
+        }
+        delete m_lines;m_lines = nullptr;
+    }
+    if(m_mainLout){delete m_mainLout;m_mainLout = nullptr;}
+    if(m_btnGroup){delete m_btnGroup;m_btnGroup = nullptr;}
 }
 /***************************************************************************/
 SettingsItem * SettingsItem::createSettingsItem(AGraphicItem *item){
@@ -152,8 +133,6 @@ SettingsItem::SettingsItem(AGraphicItem *item):
     m_rightBorderSettings = new Selection(f_names,(int)!m_item->itemInfo()->isEndValue());
     m_rightBorderSettings->setValue("Right Border",QString::number(m_item->itemInfo()->endValue()));
     m_rightBorderSettings->setValue("Scale",QString::number((1/m_item->itemInfo()->scale()) * 10));
-    //qDebug() << m_item->curve()->mnemonic() << m_item->itemInfo()->isEndValue() <<
-      //        m_item->itemInfo()->endValue() <<  m_item->itemInfo()->scale();
 
     m_mainVLout->addWidget(m_leftBorderSettings);
     m_mainVLout->addWidget(m_rightBorderSettings);
@@ -161,12 +140,24 @@ SettingsItem::SettingsItem(AGraphicItem *item):
     m_mainVLout->setMargin(2);
     show();
 }
+SettingsItem::~SettingsItem(){
+    m_item = nullptr;
+    if(m_leftBorderSettings){delete m_leftBorderSettings;m_leftBorderSettings = nullptr;}
+    if(m_rightBorderSettings){delete m_rightBorderSettings;m_rightBorderSettings = nullptr;}
+    if(m_mainVLout){delete m_mainVLout;m_mainVLout = nullptr;}
+
+}
 
 void SettingsItem::applyBaseSettings(){
-    m_item->itemInfo()->setBegin(!m_leftBorderSettings->indexActive(),
+    if(!m_item || !m_leftBorderSettings || !m_rightBorderSettings)
+        return;
+    AItem *f_itemInfo = m_item->itemInfo();
+    if(!f_itemInfo)
+        return;
+    f_itemInfo->setBegin(!m_leftBorderSettings->indexActive(),
                                  m_leftBorderSettings->value("Left Border").toDouble() * 10,
                                  m_leftBorderSettings->value("Zero offset").toDouble() * 10);
-    m_item->itemInfo()->setEnd(!m_rightBorderSettings->indexActive(),
+    f_itemInfo->setEnd(!m_rightBorderSettings->indexActive(),
                                  m_rightBorderSettings->value("Right Border").toDouble(),
                                  1/(m_rightBorderSettings->value("Scale").toDouble()/10));
 }
@@ -216,7 +207,13 @@ SettingsLineItem::SettingsLineItem(AGraphicItem *lineItem)
 }
 
 SettingsLineItem::~SettingsLineItem(){
-
+    if(m_labelColor){delete m_labelColor;m_labelColor = nullptr;}
+    if(m_labelWidthLine){delete m_labelWidthLine;m_labelWidthLine = nullptr;}
+    if(m_btnSelectColor){delete m_btnSelectColor;m_btnSelectColor = nullptr;}
+    if(m_spinBoxWidthLine){delete m_spinBoxWidthLine;m_spinBoxWidthLine = nullptr;}
+    if(m_checkBoxIsDashes){delete m_checkBoxIsDashes;m_checkBoxIsDashes = nullptr;}
+    if(m_gridStyleLayout){delete m_gridStyleLayout;m_gridStyleLayout = nullptr;}
+    if(m_styleGrup){delete m_styleGrup;m_styleGrup = nullptr;}
 }
 
 void SettingsLineItem::changeColor(){

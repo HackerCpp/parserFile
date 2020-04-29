@@ -42,7 +42,9 @@ public:
     QImage::Format formatPicture(){return m_formatImg;}
     qreal scale();
     virtual void resize(){}
-    virtual void insertNewTrack(int curentTrackNumber,InsertPossition position = InsertPossition::RIGHT){}
+    virtual void insertNewTrack(int curentTrackNumber,InsertPossition position = InsertPossition::RIGHT)
+        {Q_UNUSED(curentTrackNumber) Q_UNUSED(position)}
+    virtual void openCurveSettings(){}
 };
 
 #endif // BOARDFORTRACK_H

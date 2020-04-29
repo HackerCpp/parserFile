@@ -9,6 +9,14 @@ DEPENDPATH += $$PWD/../SFML/include
 CONFIG += c++11
 INCLUDEPATH += $$PWD $$PWD/inc $$PWD/inc/items $$PWD/inc/tools
 SOURCES += \
+    $$PWD/inc/tools/qsfmlcanvas.cpp \
+    $$PWD/inc/tools/sfmlitemeditor.cpp \
+    $$PWD/src/tools/basesettingswindow.cpp \
+    $$PWD/src/tools/curveeditor.cpp \
+    $$PWD/src/tools/modelcurveeditor.cpp \
+    $$PWD/src/tools/customdelegates.cpp \
+    $$PWD/src/tools/browsergraphicitems.cpp \
+    $$PWD/src/tools/modelforgraphicsitems.cpp \
     $$PWD/src/tools/settingsitem.cpp \
     $$PWD/src/tools/selectingarea.cpp \
     $$PWD/src/items/vacuitem.cpp \
@@ -37,6 +45,13 @@ HEADERS += \
     $$PWD/inc/igraphiceditor.h \
     $$PWD/inc/igraphiceditor.h \
     $$PWD/inc/items/itimscreater.h \
+    $$PWD/inc/tools/basesettingswindow.h \
+    $$PWD/inc/tools/browsergraphicitems.h \
+    $$PWD/inc/tools/curveeditor.h \
+    $$PWD/inc/tools/customdelegates.h \
+    $$PWD/inc/tools/modelcurveeditor.h \
+    $$PWD/inc/tools/modelforgraphicsitems.h \
+    $$PWD/inc/tools/qsfmlcanvas.h \
     $$PWD/inc/tools/selectingarea.h \
     $$PWD/inc/items/vacuitem.h \
     $$PWD/inc/items/vlineitem.h \
@@ -44,6 +59,7 @@ HEADERS += \
     $$PWD/inc/objectoftheboard.h \
     $$PWD/inc/rightborder.h \
     $$PWD/inc/tools/settingsitem.h \
+    $$PWD/inc/tools/sfmlitemeditor.h \
     $$PWD/inc/verticalboard.h \
     $$PWD/inc/items/verticalitem.h \
     $$PWD/inc/verticaltrack.h \
