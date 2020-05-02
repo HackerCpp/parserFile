@@ -1,7 +1,8 @@
 #ifndef VACUITEM_H
 #define VACUITEM_H
 #include "verticalitem.h"
-#include "AcuItem.h"
+#include "acuItem.h"
+#include "colorscale.h"
 
 class VAcuItem : public VerticalItem{
     qreal m_dataStepPix;

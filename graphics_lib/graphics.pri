@@ -9,6 +9,7 @@ DEPENDPATH += $$PWD/../SFML/include
 CONFIG += c++11
 INCLUDEPATH += $$PWD $$PWD/inc $$PWD/inc/items $$PWD/inc/tools
 SOURCES += \
+    $$PWD/inc/tools/colorscale.cpp \
     $$PWD/inc/tools/qsfmlcanvas.cpp \
     $$PWD/inc/tools/sfmlitemeditor.cpp \
     $$PWD/src/tools/basesettingswindow.cpp \
@@ -47,6 +48,7 @@ HEADERS += \
     $$PWD/inc/items/itimscreater.h \
     $$PWD/inc/tools/basesettingswindow.h \
     $$PWD/inc/tools/browsergraphicitems.h \
+    $$PWD/inc/tools/colorscale.h \
     $$PWD/inc/tools/curveeditor.h \
     $$PWD/inc/tools/customdelegates.h \
     $$PWD/inc/tools/modelcurveeditor.h \
