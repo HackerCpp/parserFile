@@ -23,7 +23,11 @@ VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves)
     //qDebug() << m_boardInfo->name();
     foreach(auto trackInfo,*tracksInfo){
         //qDebug() << trackInfo->name() << trackInfo->begin() << trackInfo->width();
+<<<<<<< HEAD
        VerticalTrack *f_track  = new VerticalTrack(trackInfo,this);
+=======
+       VerticalTrack *f_track  = new VerticalTrack(trackInfo,curves,this);
+>>>>>>> 47a899f9b8c7094f65cae4e635527110c8d3fe27
        connect(this,&VerticalBoard::changingTheVisibilityZone,f_track,&ObjectOfTheBoard::changingTheVisibilityZone);
        m_canvas->addItem(f_track);
        if(f_prevTrack){

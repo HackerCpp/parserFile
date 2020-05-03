@@ -69,21 +69,30 @@ protected:
     virtual void  curvesLeftClickHandler(QPointF point){Q_UNUSED(point)}
     virtual void  curvesRightClickHandler(QPointF point){Q_UNUSED(point)}
     virtual void  headerLeftClickHandler(QPointF point){Q_UNUSED(point)}
+<<<<<<< HEAD
     virtual void  headerRightClickHandler(QPointF point){Q_UNUSED(point)}
+=======
+>>>>>>> 47a899f9b8c7094f65cae4e635527110c8d3fe27
 
     virtual void  borderLeftMoveHandler(QPointF point){Q_UNUSED(point)}
     virtual void  borderRightMoveHandler(QPointF point){Q_UNUSED(point)}
     virtual void  curvesLeftMoveHandler(QPointF point){Q_UNUSED(point)}
     virtual void  curvesRightMoveHandler(QPointF point){Q_UNUSED(point)}
     virtual void  headerLeftMoveHandler(QPointF point){Q_UNUSED(point)}
+<<<<<<< HEAD
     virtual void  headerRightMoveHandler(QPointF point){Q_UNUSED(point)}
+=======
+>>>>>>> 47a899f9b8c7094f65cae4e635527110c8d3fe27
 
     virtual void  borderLeftReleaseHandler(QPointF point){Q_UNUSED(point)}
     virtual void  borderRightReleaseHandler(QPointF point){Q_UNUSED(point)}
     virtual void  curvesLeftReleaseHandler(QPointF point){Q_UNUSED(point)}
     virtual void  curvesRightReleaseHandler(QPointF point){Q_UNUSED(point)}
     virtual void  headerLeftReleaseHandler(QPointF point){Q_UNUSED(point)}
+<<<<<<< HEAD
     virtual void  headerRightReleaseHandler(QPointF point){Q_UNUSED(point)}
+=======
+>>>>>>> 47a899f9b8c7094f65cae4e635527110c8d3fe27
 
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *event)override;
     virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event)override;
