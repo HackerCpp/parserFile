@@ -13,7 +13,7 @@ class VerticalTrack : public AGraphicTrack
     int m_curentWidth;
     int m_сurrentСountOfActive = 0;
 public:
-    VerticalTrack(ATrack *track,QMap<QString,ICurve*> *curves,BoardForTrack *board);
+    VerticalTrack(ATrack *track,BoardForTrack *board);
     ~VerticalTrack()override;
 
     void resize()override;
@@ -37,6 +37,7 @@ private:
     virtual void  curvesLeftClickHandler(QPointF point)override;
     virtual void  curvesRightClickHandler(QPointF point)override;
     virtual void  headerLeftClickHandler(QPointF point)override;
+    virtual void  headerRightClickHandler(QPointF point)override;
 
     virtual void  borderLeftMoveHandler(QPointF point)override;
     virtual void  borderRightMoveHandler(QPointF point)override;
@@ -49,6 +50,7 @@ private:
     virtual void  curvesLeftReleaseHandler(QPointF point)override;
     virtual void  curvesRightReleaseHandler(QPointF point)override;
     virtual void  headerLeftReleaseHandler(QPointF point)override;
+    virtual void  headerRightReleaseHandler(QPointF point)override;
 
 protected:
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*)override;

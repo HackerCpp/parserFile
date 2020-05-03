@@ -146,7 +146,9 @@ void VLineItem::setColor(QColor color){
 }
 
 void VLineItem::drawHeader(QPainter *per,int &position,bool *flag){
+    Q_UNUSED(flag)
     LineItem *f_lineItemInfo = dynamic_cast<LineItem*>(m_itemInfo);
+    m_positionHeaderArea = position;
     if(!f_lineItemInfo){
         qDebug() << "m_itemInfo не переводится в m_lineItem не получается нарисовать";
         return;
@@ -158,9 +160,9 @@ void VLineItem::drawHeader(QPainter *per,int &position,bool *flag){
     per->setFont(QFont("Times", f_fontSize, QFont::Bold));
     int f_width = per->device()->width();
     per->setBrush(QBrush(QColor(255,255,255,200)));
-    per->drawRect(1,position,f_width - 2,40);
-    per->drawText(QRect(1,position,f_width - 2,40),Qt::AlignHCenter|Qt::AlignVCenter,m_curve->mnemonic());
-    position += 40;
+    per->drawRect(1,position,f_width - 2,m_heightHeaderArea);
+    per->drawText(QRect(1,position,f_width - 2,m_heightHeaderArea),Qt::AlignHCenter|Qt::AlignVCenter,m_curve->mnemonic());
+    position += m_heightHeaderArea;
 }
 
 qreal VLineItem::operator[](int index){

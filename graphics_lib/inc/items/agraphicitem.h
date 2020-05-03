@@ -12,6 +12,7 @@ protected:
     ICurve *m_curve;
     BoardForTrack *m_board;
     bool m_isActive;
+    int m_positionHeaderArea,m_heightHeaderArea;
 
     virtual void drawBody(QPainter *per,QRectF visibleRect,bool *flag){Q_UNUSED(per) Q_UNUSED(visibleRect) Q_UNUSED(flag)}
     virtual void drawHeader(QPainter *per,int &position,bool *flag){Q_UNUSED(per) Q_UNUSED(position) Q_UNUSED(flag)}
@@ -24,9 +25,11 @@ public:
     qreal bottomValue();
 
     virtual void paint(QPainter *per,QPainter *perHead,QRectF visibleRect,int &position,bool *flag);
-    virtual bool isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per){Q_UNUSED(area) Q_UNUSED(visibleRect) Q_UNUSED(per) return true;}
+    virtual bool isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per){Q_UNUSED(area) Q_UNUSED(visibleRect) Q_UNUSED(per) return false;}
+    virtual bool isClickHeaderArea(QPoint pos){Q_UNUSED(pos)return false;}
     virtual void setActive(bool active){m_isActive = active;}
     virtual void run()override{}
+    virtual void updateParam(int pictureWidth){Q_UNUSED(pictureWidth)}
     ICurve *curve(){return m_curve;}
     AItem *itemInfo(){return m_itemInfo;}
     virtual QColor color(){return Qt::black;}

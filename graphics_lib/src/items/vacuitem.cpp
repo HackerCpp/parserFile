@@ -239,9 +239,7 @@ void VAcuItem::loadDrawingParam(int width){
 }
 
 void VAcuItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
-    float f_width = per->device()->width();
     AcuItem* f_acuItem = dynamic_cast<AcuItem*>(m_itemInfo);
-    loadDrawingParam(f_width);
 
     if(!f_acuItem){
         qDebug() << "Не удалось преобразовать AItem in AcuItem";
@@ -258,6 +256,12 @@ void VAcuItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
     }
 }
 
+void VAcuItem::updateParam(int pictureWidth){
+    loadDrawingParam(pictureWidth);
+    QImage image(pictureWidth,1000,QImage::Format_ARGB32);
+
+
+}
 
 void VAcuItem::drawInterpolationHorForCheckArea(QPainter *per,QRectF visibleRect,bool *flag){
     float f_width = m_widthPicturePix;

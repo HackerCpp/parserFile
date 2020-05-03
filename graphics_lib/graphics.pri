@@ -44,7 +44,7 @@ HEADERS += \
     $$PWD/inc/boardfortrack.h \
     $$PWD/inc/graphiceditor.h \
     $$PWD/inc/igraphiceditor.h \
-    $$PWD/inc/igraphiceditor.h \
+    #$$PWD/inc/igraphiceditor.h \
     $$PWD/inc/items/itimscreater.h \
     $$PWD/inc/tools/basesettingswindow.h \
     $$PWD/inc/tools/browsergraphicitems.h \
@@ -66,5 +66,3 @@ HEADERS += \
     $$PWD/inc/items/verticalitem.h \
     $$PWD/inc/verticaltrack.h \
     $$PWD/inc/ruler.h
-
-FORMS +=

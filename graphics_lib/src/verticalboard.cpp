@@ -20,10 +20,10 @@ VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves)
         return;
     }
     VerticalTrack *f_prevTrack = nullptr;
-    qDebug() << m_boardInfo->name() << "&&&&&&&&&&&&&&&&&&&&&&&&";
+    //qDebug() << m_boardInfo->name();
     foreach(auto trackInfo,*tracksInfo){
-        qDebug() << trackInfo->name() << trackInfo->begin() << trackInfo->width();
-       VerticalTrack *f_track  = new VerticalTrack(trackInfo,curves,this);
+        //qDebug() << trackInfo->name() << trackInfo->begin() << trackInfo->width();
+       VerticalTrack *f_track  = new VerticalTrack(trackInfo,this);
        connect(this,&VerticalBoard::changingTheVisibilityZone,f_track,&ObjectOfTheBoard::changingTheVisibilityZone);
        m_canvas->addItem(f_track);
        if(f_prevTrack){
@@ -36,6 +36,7 @@ VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves)
     updateItems();
     distributionOfItemsBetweenTracks();
     resize();
+    updateItemsParam();
 }
 
 VerticalBoard::VerticalBoard(QMap<QString,ICurve*> *curves):AGraphicBoard(nullptr,curves){
@@ -105,6 +106,7 @@ void VerticalBoard::init(){
 }
 
 void VerticalBoard::resizeEvent(QResizeEvent *event){
+    Q_UNUSED(event)
     resize();
     scrollChanged();
 }
@@ -179,7 +181,7 @@ void VerticalBoard::insertNewTrack(int curentTrackNumber,InsertPossition positio
             }
         }
     }
-    VerticalTrack *f_track  = new VerticalTrack(f_trackInfo,nullptr,this);
+    VerticalTrack *f_track  = new VerticalTrack(f_trackInfo,this);
     connect(this,&VerticalBoard::changingTheVisibilityZone,f_track,&ObjectOfTheBoard::changingTheVisibilityZone);
     m_canvas->addItem(f_track);
     if(!f_prevTrack && f_nextTrack){
