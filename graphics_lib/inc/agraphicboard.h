@@ -46,6 +46,7 @@ public:
     virtual void setFormatPicture(QImage::Format format)override;
     virtual void activate(bool activate);
     virtual void distributionOfItemsBetweenTracks(){}
+    void updateItemsParam();
     void openCurveSettings()override;
 
 private:

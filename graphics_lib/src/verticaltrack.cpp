@@ -53,6 +53,7 @@ VerticalTrack::VerticalTrack(ATrack *track,QMap<QString,ICurve*> *curves,BoardFo
     per.drawText(QRect(0,0,m_nameTrack->width(),m_nameTrack->height()),Qt::AlignHCenter|Qt::AlignVCenter,m_track->name());
 
     m_boundingRect = QRectF(m_track->begin() * f_pixelPerMm,f_topY,m_track->width() * f_pixelPerMm,f_lengthY);
+    updateItemsParam();
 }
 
 VerticalTrack::~VerticalTrack(){
@@ -129,6 +130,7 @@ void VerticalTrack::resizePictures(){
     m_doublePixMap = new QImage(f_pictureWidth,f_pictureHeight,f_format);
     m_curentHeader = new QImage(f_pictureWidth,3000,QImage::Format_ARGB4444_Premultiplied);
     m_doubleHeader = new QImage(f_pictureWidth,3000,QImage::Format_ARGB4444_Premultiplied);
+    updateItemsParam();
     redraw();
 }
 
@@ -425,6 +427,7 @@ void VerticalTrack::changeBegin(int newBegin){
 }
 
 void VerticalTrack::applySettings(){
+    updateItemsParam();
     redraw();
 }
 

@@ -25,6 +25,7 @@ void AGraphicTrack::init(){
      m_positionOfTheBorder = 0;
      m_boundingRect = QRectF(0,0,2000,2000);
      connect(this,&AGraphicTrack::finished,this,&AGraphicTrack::sceneUpdate);
+     setAcceptDrops(true);
 }
 
 AGraphicTrack::AGraphicTrack(ATrack *track,QMap<QString,ICurve*> *curves,BoardForTrack *board)
@@ -43,10 +44,20 @@ void AGraphicTrack::addIteam(AGraphicItem* item){
     else
         m_items->push_back(item);
 }
+
 void AGraphicTrack::clearItems(){
     if(m_items)
         m_items->clear();
 }
+
+void AGraphicTrack::updateItemsParam(){
+    if(!m_items || !m_doublePixMap)
+        return;
+    foreach(auto grItem,*m_items){
+        grItem->updateParam(m_doublePixMap->width());
+    }
+}
+
 qreal AGraphicTrack::topValue(){
     if(!m_items){
         return 0;

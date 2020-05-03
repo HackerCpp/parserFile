@@ -27,6 +27,7 @@ public:
     virtual bool isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per){Q_UNUSED(area) Q_UNUSED(visibleRect) Q_UNUSED(per) return true;}
     virtual void setActive(bool active){m_isActive = active;}
     virtual void run()override{}
+    virtual void updateParam(int pictureWidth){Q_UNUSED(pictureWidth)}
     ICurve *curve(){return m_curve;}
     AItem *itemInfo(){return m_itemInfo;}
     virtual QColor color(){return Qt::black;}

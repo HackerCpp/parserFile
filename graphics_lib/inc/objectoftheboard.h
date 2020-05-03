@@ -3,6 +3,7 @@
 #include <QGraphicsItem>
 #include <QDebug>
 #include <QThread>
+#include <QDragEnterEvent>
 
 class ObjectOfTheBoard : public QThread,public QGraphicsItem
 {
@@ -15,6 +16,8 @@ protected:
 
     virtual QRectF boundingRect()const override{return m_visibilitySquare;}
     void redraw();
+
+
 public:
     ObjectOfTheBoard();
     virtual ~ObjectOfTheBoard();
