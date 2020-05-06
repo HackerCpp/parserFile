@@ -11,5 +11,5 @@ CONFIG(debug, debug|release) {
   DEBUG_EXT = 
 }
 
-win32::LIBS += $$PWD/lib/PythonQt-Qt5-Python383.lib
+win32::LIBS += $$PWD/lib/PythonQt-Qt5-Python373.lib
 unix::LIBS += -L$$PWD/../lib -lPythonQt-Qt5-Python$${PYTHON_VERSION}$${DEBUG_EXT}

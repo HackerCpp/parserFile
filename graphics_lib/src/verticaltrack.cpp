@@ -6,7 +6,10 @@
 #include "shortcut.h"
 #include "SFML/Graphics.hpp"
 #include "curveeditor.h"
-
+#include <QApplication>
+#include <QDrag>
+#include <QPainter>
+#include <QGraphicsSceneDragDropEvent>
 using namespace sf;
 
 VerticalTrack::VerticalTrack(ATrack *track,BoardForTrack *board)
@@ -173,6 +176,36 @@ void VerticalTrack::setActiveSelectingArea(){
     redraw();
 }
 
+void VerticalTrack::startDrag(QPointF point){
+    QMimeData *f_mimeData = nullptr;
+
+    QPoint f_pointInHeaderPicture = QPoint(point.x() - (m_track->begin() * m_board->pixelPerMm()),point.y() - m_visibilitySquare.y() - m_board->positionHeader());
+    QImage *f_image = new QImage(200,100,QImage::Format_ARGB32);
+    bool flag = false;
+    int position = 0;
+    //QTextStream *f_stream = new QTextStream()
+    foreach(auto grItem, *m_items){
+        if(grItem->isClickHeaderArea(f_pointInHeaderPicture)){
+            f_image->fill(0x0);
+            grItem->drawHeader(new QPainter(f_image),position,&flag);
+            f_mimeData = new QMimeData;
+            f_mimeData->setText(QString::number(reinterpret_cast<long long>(grItem)));
+            grItem->itemInfo()->setVisible(AItem::BOARD_GRAPH_VIEW,false);
+            m_items->removeOne(grItem);
+            break;
+        }
+    }
+    if(f_mimeData){
+            QDrag *f_drag = new QDrag(this);
+            f_drag->setMimeData(f_mimeData);
+            f_drag->setPixmap(QPixmap::fromImage(*f_image));
+
+
+            f_drag->exec();
+    }
+    redraw();
+}
+
 bool VerticalTrack::is_openCloseClick(QPointF point){
     QPointF   pointRightDown = QPointF(m_boundingRect.x() + m_boundingRect.width(),m_visibilitySquare.y() + m_border->width());
     QPointF   pointLeftUp = QPointF(pointRightDown.x() - m_border->width(),m_visibilitySquare.y());
@@ -267,6 +300,7 @@ void  VerticalTrack::curvesRightClickHandler(QPointF point){
 
 void  VerticalTrack::headerLeftClickHandler(QPointF point){
     Q_UNUSED(point)
+    m_ptDragPos = point;
 }
 
 void  VerticalTrack::headerRightClickHandler(QPointF point){
@@ -311,6 +345,12 @@ void  VerticalTrack::curvesRightMoveHandler(QPointF point){
 }
 
 void  VerticalTrack::headerLeftMoveHandler(QPointF point){
+    int distance = abs(m_ptDragPos.x() - point.x());
+    if(distance > 20 * m_board->pixelPerMm()){
+        startDrag(point);
+        m_isLeftHeaderClick = false;
+        return;
+    }
     int f_newPos = m_board->positionHeader() - (m_prevPoint.y() - point.y());
     if(f_newPos <  m_visibilitySquare.height() - 50 && (f_newPos + m_heightHeader) >  50)
         m_board->setPositionHeader(f_newPos);
@@ -368,6 +408,30 @@ void  VerticalTrack::headerRightReleaseHandler(QPointF point){
         m_curvesMenu->move(QCursor::pos());
         m_curvesMenu->show();
     }
+}
+
+void VerticalTrack::dragEnterEvent(QGraphicsSceneDragDropEvent *event){
+    //qDebug() << "drEnterEvent";
+}
+
+void VerticalTrack::dragLeaveEvent(QGraphicsSceneDragDropEvent *event){
+    //qDebug() << "drLeaveEvent" << m_track->name();
+}
+
+void VerticalTrack::dragMoveEvent(QGraphicsSceneDragDropEvent *event){
+   // qDebug() << "drMoveEvent";
+}
+
+void VerticalTrack::dropEvent(QGraphicsSceneDragDropEvent *event){
+    bool ok = false;
+     AGraphicItem* f_item = reinterpret_cast<AGraphicItem*>(event->mimeData()->text().toLongLong(&ok));
+     if(f_item && ok){
+        f_item->itemInfo()->setVisible(AItem::BOARD_GRAPH_VIEW,true);
+        f_item->itemInfo()->setNumberOfTrack(m_track->number());
+        f_item->updateParam(m_doublePixMap->width());
+        addIteam(f_item);
+     }
+     redraw();
 }
 
 void VerticalTrack::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*){

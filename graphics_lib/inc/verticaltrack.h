@@ -12,6 +12,7 @@ class VerticalTrack : public AGraphicTrack
     QMenu *m_curvesMenu,*m_trackMenu;
     int m_curentWidth;
     int m_сurrentСountOfActive = 0;
+    QPointF m_ptDragPos;
 public:
     VerticalTrack(ATrack *track,BoardForTrack *board);
     ~VerticalTrack()override;
@@ -25,6 +26,7 @@ private:
     void drawGrid(qreal step_mm,QPainter *per,QPen pen);
     void setActiveSelectingArea();
     void deleteAllPictures();
+    void startDrag(QPointF point);
 
     virtual bool is_openCloseClick(QPointF point) override;
     virtual bool is_borderClick(QPointF point)override;
@@ -52,10 +54,16 @@ private:
     virtual void  headerLeftReleaseHandler(QPointF point)override;
     virtual void  headerRightReleaseHandler(QPointF point)override;
 
+    virtual void dragEnterEvent(QGraphicsSceneDragDropEvent *event)override;
+    virtual void dragLeaveEvent(QGraphicsSceneDragDropEvent *event)override;
+    virtual void dragMoveEvent(QGraphicsSceneDragDropEvent *event)override;
+    virtual void dropEvent(QGraphicsSceneDragDropEvent *event)override;
+
 protected:
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*)override;
     virtual void toSetTheLocationOfTheImageAfterDrawing()override;
     virtual void run() override;
+
 
 public slots:
     virtual void changeBegin(int newBegin)override;

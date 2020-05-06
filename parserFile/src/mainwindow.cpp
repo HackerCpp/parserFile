@@ -4,6 +4,7 @@
 #include <QtWidgets>
 #include <QDebug>
 #include "inc/tabs/tab38k.h"
+#include "inc/tabs/tabgfm.h"
 
 MainWindow::MainWindow(QWidget *parent){
     this->setParent(parent);
@@ -78,6 +79,13 @@ void MainWindow::applyStyle(){
     }
     file.close();
 }
+
+void MainWindow::openConsolePython(){
+    TabGFM * tab = dynamic_cast<TabGFM *>(this->tabWid->currentWidget());
+    if(tab)
+        tab->openPythonConsole();
+}
+
 MainWindow::~MainWindow(){
     delete this->menu;
     this->menu = nullptr;
@@ -89,11 +97,13 @@ void MainWindow::saveCSV(){
    if(tab)
        tab->saveCSV();
 }
+
 void MainWindow::saveGFM(){
    AbstractTabSaveFiles * tab = dynamic_cast<AbstractTabSaveFiles *>(this->tabWid->currentWidget());
    if(tab)
        tab->saveGFM();
 }
+
 void MainWindow::openFile(){
     QFileDialog fileDialog;
     QString filePath = fileDialog.getOpenFileName(this, tr("Open File"),"C:/",tr("*.tlm *.gfm"));

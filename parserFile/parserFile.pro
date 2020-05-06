@@ -42,8 +42,8 @@ LIBS += \
 ../build/release/LogDataInterpreter.lib \
 ../build/release/LogDataLoader.lib \
 ../build/release/LogDataSaver.lib \
-../PythonQT3.2/build/lib/PythonQt-Qt5-Python383.lib \
-../PythonQT3.2/build/lib/PythonQt_QtAll-Qt5-Python383.lib\
+../PythonQT3.2/build/lib/PythonQt-Qt5-Python373.lib \
+../PythonQT3.2/build/lib/PythonQt_QtAll-Qt5-Python373.lib\
 ../python3/python3_x64-windows/lib/python37.lib \
 #../build/release/graphics.lib
 

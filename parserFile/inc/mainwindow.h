@@ -25,6 +25,7 @@ public slots:
     void openFile();
     void closeTab(int index);
     void applyStyle();
+    void openConsolePython();
 };
 
 #endif // MAINWINDOW_H
