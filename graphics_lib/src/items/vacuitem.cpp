@@ -30,24 +30,6 @@ VAcuItem::VAcuItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
     }
 }
 
-QColor get_linear_color(qreal value, MulticolorItem multicol1,MulticolorItem multicol2){
-    QColor color;
-    double r1,r2,d;
-    d = multicol2.bound - multicol1.bound;
-    if(d == 0.0)
-        r1 = r2 = 0.5;
-    else{
-        r1 = (multicol2.bound - value) / d;
-        r2 = (value - multicol1.bound) / d;
-    }
-    if(r1 < 0 || r2 < 0)
-        return QColor(Qt::white);
-    color.setRed(r1 * QColor(multicol1.value).red() + r2 * QColor(multicol2.value).red());
-    color.setGreen(r1 * QColor(multicol1.value).green() + r2 * QColor(multicol2.value).green());
-    color.setBlue(r1 * QColor(multicol1.value).blue() + r2 * QColor(multicol2.value).blue());
-    return color;
-}
-
 void inline VAcuItem::drawInterpolationVertical(QPainter *per,QRectF visibleRect,bool *flag){
     qreal quantityElem = m_curve->sizeOffset();
     qreal f_width = per->device()->width()/2;
@@ -110,7 +92,7 @@ void inline VAcuItem::drawInterpolationVertical(QPainter *per,QRectF visibleRect
                 prev_mul = *f_multicolor->begin();
                 for(auto value = f_multicolor->begin(); value < f_multicolor->end(); ++value) {
                     if(m_curve->data(i * quantityElem + j) <= value->bound){
-                        color = get_linear_color(m_curve->data(i * quantityElem + j),prev_mul,*value);
+                        color = ColorScale::get_linear_color(m_curve->data(i * quantityElem + j),prev_mul,*value);
                         break;
                     }
                     prev_mul = *value;
@@ -189,7 +171,7 @@ void inline VAcuItem::drawInterpolationHorizontal(QPainter *per,QRectF visibleRe
                 prev_mul = *f_multicolor->begin();
                 foreach(auto value,*f_multicolor){
                     if(m_curve->data(i * quantityElem + j) <= value.bound){
-                        color = get_linear_color(m_curve->data(i * quantityElem + j),prev_mul,value);
+                        color = ColorScale::get_linear_color(m_curve->data(i * quantityElem + j),prev_mul,value);
                         break;
                     }
                     prev_mul = value;

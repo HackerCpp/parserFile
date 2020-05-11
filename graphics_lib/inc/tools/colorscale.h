@@ -3,6 +3,7 @@
 #include <map>
 #include <QColor>
 #include <QImage>
+#include "acuItem.h"
 
 
 namespace InterpolationFunction {
@@ -23,6 +24,7 @@ public:
     void fillTab(QColor* colorTab, int size, InterpolationFunction::InterpolationFunction function = InterpolationFunction::Linear) const;
     void draw(QImage &img,QRect area,const QPointF &start,const QPointF& end,GradientStyle::GradientStyle style=GradientStyle::Linear, int size = 500) const;
 
+    static QColor get_linear_color(qreal value, MulticolorItem multicol1,MulticolorItem multicol2);
 };
 
 #endif // COLORSCALE_H

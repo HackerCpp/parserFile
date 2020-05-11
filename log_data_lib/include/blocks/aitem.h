@@ -5,8 +5,12 @@
 #include <QDebug>
 
 //enum PaintMode{CURVE_MODE,NUMBERS_MODE};
-enum TypeItem{LINE,ACU,MARK};
+enum TypeItem{LINE,ACU,MARK,SPEC};
 
+struct MulticolorItem{
+    qreal bound;
+    QString value;
+};
 
 class AItem{
 public:

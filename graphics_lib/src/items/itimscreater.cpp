@@ -1,12 +1,12 @@
 #include "itimscreater.h"
-#include "verticalitem.h"
 #include "vlineitem.h"
 #include "vacuitem.h"
 #include "vmarkitem.h"
+#include "vspectritem.h"
 
 AGraphicItem *ItimsCreater::createItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board,OrientationItem orientation){
     TypeItem f_type = itemInfo->type();
-    AGraphicItem * f_item = nullptr;
+    AGraphicItem *f_item = nullptr;
     if(orientation == VERTICAL){
         switch(f_type){
             case TypeItem::LINE :{
@@ -21,11 +21,16 @@ AGraphicItem *ItimsCreater::createItem(AItem *itemInfo,ICurve *curve,BoardForTra
                 f_item = new VMarkItem(itemInfo,curve,board);
                 break;
             }
+            case TypeItem::SPEC :{
+                f_item = new VSpectrItem(itemInfo,curve,board);
+                break;
+            }
+            default :{
+                qDebug() << "Не описанный тип Item:" << f_type;
+            }
         }
 
     }
-    if(!f_item){
-        qDebug() << "Не описанный тип Item:" << f_type;
-    }
+
     return f_item;
 }

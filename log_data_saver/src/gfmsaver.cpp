@@ -19,7 +19,7 @@
 #include "unknownblock.h"
 #include "headerblock.h"
 #include <QFileDialog>
-
+#include "specItem.h"
 
 GFMSaver::GFMSaver(){
 
@@ -54,6 +54,7 @@ bool GFMSaver::save(){
     fileGFM = nullptr;
     return true;
 }
+
 
 bool GFMSaver::isReady(){
     return false;
@@ -385,6 +386,59 @@ QByteArray GFMSaver::formBlokSave(FormsBlock * formsBlock){
                                 xmlWriter.writeEndElement();//close end
 
                                 xmlWriter.writeEndElement();//close acu
+                        }
+                          if(item->type() == TypeItem::SPEC){
+                                SpecItem * specItem = dynamic_cast<SpecItem *>(item);
+                                xmlWriter.writeStartElement("spec");
+                                xmlWriter.writeAttribute("name", specItem->name());
+                                xmlWriter.writeAttribute("visible", specItem->visible());
+
+                                xmlWriter.writeStartElement("style");
+                                 xmlWriter.writeAttribute("show_mode", str.setNum(specItem->showMode()));
+
+                                xmlWriter.writeStartElement("transparent");
+                                xmlWriter.writeAttribute("color", specItem->transparentColor());
+                                xmlWriter.writeEndElement();//close transparent
+
+                                xmlWriter.writeStartElement("multi_color");
+                                xmlWriter.writeAttribute("level_count",str.setNum(specItem->levelCount()));
+                                QList<MulticolorItem> *f_multicolorList = specItem->multiColor();
+                                foreach(auto multicolor,*f_multicolorList){
+                                    xmlWriter.writeStartElement("level");
+                                    xmlWriter.writeAttribute("bound",str.setNum(multicolor.bound));
+                                    xmlWriter.writeAttribute("color",multicolor.value);
+                                    xmlWriter.writeEndElement();//close level
+                               }
+
+                               xmlWriter.writeEndElement();//close multi_color
+
+                                xmlWriter.writeStartElement("bruch_color");
+                                xmlWriter.writeAttribute("color",specItem->bruchColor());
+                                xmlWriter.writeEndElement();//close bruch_color
+                                xmlWriter.writeEndElement();//close style
+
+                                xmlWriter.writeStartElement("begin");
+                                xmlWriter.writeAttribute("set_begin_value", str.setNum(specItem->isBeginValue()));
+                                xmlWriter.writeAttribute("begin_value", str.setNum(specItem->beginValue()));
+
+                                xmlWriter.writeStartElement("zero_offset");
+                                xmlWriter.writeAttribute("value", str.setNum(specItem->zeroOffset()));
+                                xmlWriter.writeAttribute("unit", "MM");
+                                xmlWriter.writeEndElement();//close zero_offset
+                                xmlWriter.writeEndElement();//close begin
+
+                                xmlWriter.writeStartElement("end");
+                                xmlWriter.writeAttribute("set_end_value", str.setNum(specItem->isEndValue()));
+                                xmlWriter.writeAttribute("end_value", str.setNum(specItem->endValue()));
+
+                                xmlWriter.writeStartElement("value_scale");
+                                xmlWriter.writeAttribute("value", str.setNum(specItem->scale()));
+                                xmlWriter.writeAttribute("unit", "MM");
+                                xmlWriter.writeEndElement();//close value_scale
+
+                                xmlWriter.writeEndElement();//close end
+
+                                xmlWriter.writeEndElement();//close spec
                         }
                         if(item->type() == TypeItem::MARK){
                            markItem * MarkItem = dynamic_cast<markItem *>(item);

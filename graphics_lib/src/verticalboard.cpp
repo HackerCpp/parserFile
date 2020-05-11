@@ -47,6 +47,7 @@ VerticalBoard::VerticalBoard():AGraphicBoard(nullptr,nullptr){
     init();
 }
 
+//Создаём графические кривые. Если нет информации для кривой создаём.
 void VerticalBoard::updateItems(){
     if(!m_curves || !m_boardInfo)
         return;
@@ -61,7 +62,9 @@ void VerticalBoard::updateItems(){
             }
             if(f_itemInfo){
                 if(m_items->find(curveKey) == m_items->end()){
-                    m_items->insert(curveKey,ItimsCreater::createItem(f_itemInfo,m_curves->value(curveKey),this,ItimsCreater::VERTICAL));
+                    AGraphicItem *f_graphicItem = ItimsCreater::createItem(f_itemInfo,m_curves->value(curveKey),this,ItimsCreater::VERTICAL);
+                    if(f_graphicItem)
+                        m_items->insert(curveKey,f_graphicItem);
                 }
             }
         }
