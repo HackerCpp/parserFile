@@ -25,6 +25,7 @@ SOURCES += \
     src/blocks/iteminfocreater.cpp \
     src/blocks/acuItem.cpp \
     src/blocks/lineItem.cpp \
+    src/blocks/specItem.cpp \
     src/externalComponents/asaverlogdata.cpp \
     src/externalComponents/isaverlogdata.cpp \
     src/blocks/astyleitem.cpp \
@@ -72,6 +73,7 @@ HEADERS += \
     include/blocks/items.h \
     include/blocks/lineItem.h \
     include/blocks/markItem.h \
+    include/blocks/specItem.h \
     include/blocks/toolinfoblock.h \
     include/blocks/datablock.h \
     include/blocks/iblock.h \

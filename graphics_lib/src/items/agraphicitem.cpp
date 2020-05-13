@@ -5,6 +5,8 @@ AGraphicItem::AGraphicItem(ICurve *curve,BoardForTrack *board)
     : m_curve(curve), m_board(board)
 {
     m_isActive = false;
+    m_positionHeaderArea = 0;
+    m_heightHeaderArea = 20;
 }
 
 AGraphicItem::~AGraphicItem(){

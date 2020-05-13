@@ -13,7 +13,7 @@
 #include "acuItem.h"
 #include "headerblock.h"
 #include "addCurve.h"
-
+#include "specItem.h"
 
 bool GFMLoader::gzipDecompress(QByteArray input, QByteArray &output){
     output.clear();
@@ -73,8 +73,6 @@ struct BlockByte{
     uint sizeBodyBlock;
     QByteArray bodyBlock;
 };
-bool f = true;
-double r = 0;
 
 void findBlocksByteFFFE(QByteArray byteArrayFile,QList<BlockByte> *blocksList,int position){
     int indexBeginBlock = byteArrayFile.indexOf("[",position);
@@ -152,10 +150,7 @@ void GFMLoader::run(){
         parser(value.bodyBlock,block);
         m_blocks->push_back(block);
         value.bodyBlock.clear();
-
     }
-
-
     delete blocksList;
     byteArrayFile.clear();
     qDebug() << "end load gfm : " << time.msecsTo( QTime::currentTime() ) << "mS";
@@ -291,7 +286,6 @@ QString convertUnitInGFM(qreal value){ // изменение единиц изм
     return help.replace(".",",");
 }
 
-
 void findSettingsForItem(QXmlStreamReader *xmlReader,QString name){
     while(!xmlReader->atEnd() && !xmlReader->hasError()){
         QXmlStreamReader::TokenType token = xmlReader->readNext();
@@ -303,6 +297,10 @@ void findSettingsForItem(QXmlStreamReader *xmlReader,QString name){
 }
 
 void findItemLine(QXmlStreamReader *xmlReader,ABoard *board,LineItem *lineItem){
+    bool m_isBegin;
+    bool m_isEnd;
+    double m_begin;
+    double m_end;
     while(!xmlReader->atEnd() && !xmlReader->hasError()){
         QXmlStreamReader::TokenType token = xmlReader->readNext();
         QXmlStreamAttributes attributes = xmlReader->attributes();
@@ -318,20 +316,20 @@ void findItemLine(QXmlStreamReader *xmlReader,ABoard *board,LineItem *lineItem){
             lineItem->setWidth(convertUnitOfGFM(attributes.value("value").toString(),attributes.value("unit").toString()));
         }
         else if(xmlReader->name() == "begin" && token == QXmlStreamReader::StartElement){
-            f = attributes.value("set_begin_value").toInt();
-            r =attributes.value("begin_value").toDouble();
+            m_isBegin = attributes.value("set_begin_value").toInt();
+            m_begin =attributes.value("begin_value").toDouble();
         }
         else if(xmlReader->name() == "zero_offset" && token == QXmlStreamReader::StartElement){
-            qreal c = convertUnitOfGFM(attributes.value("value").toString(),attributes.value("unit").toString());//attributes.value("unit").toString()
-            lineItem->setBegin(f,r,c);
+            qreal m_zeroOffeset = convertUnitOfGFM(attributes.value("value").toString(),attributes.value("unit").toString());//attributes.value("unit").toString()
+            lineItem->setBegin(m_isBegin,m_begin,m_zeroOffeset);
         }
         else if(xmlReader->name() == "end" && token == QXmlStreamReader::StartElement){
-            f = attributes.value("set_end_value").toInt();
-            r = attributes.value("end_value").toDouble();
+            m_isEnd = attributes.value("set_end_value").toInt();
+            m_end = attributes.value("end_value").toDouble();
         }
         else if(xmlReader->name() == "value_scale" && token == QXmlStreamReader::StartElement){
-            qreal c = convertUnitOfGFM(attributes.value("value").toString(),attributes.value("unit").toString());
-            lineItem->setEnd(f,r,c);
+            qreal m_scale = convertUnitOfGFM(attributes.value("value").toString(),attributes.value("unit").toString());
+            lineItem->setEnd(m_isEnd,m_end,m_scale);
         }
         else if(xmlReader->name() == "multi_scale" && token == QXmlStreamReader::StartElement){
             lineItem->setMultiScale(attributes.value("is_multi_scale").toInt(),attributes.value("gleam_count").toDouble(),attributes.value("gleam_scale").toDouble());
@@ -366,10 +364,14 @@ void findItemMark(QXmlStreamReader *xmlReader,ABoard *board,markItem *markItem){
 }
 
 void findItemAcu(QXmlStreamReader *xmlReader,ABoard *board,AcuItem *acuItem){
+    bool m_isBegin;
+    bool m_isEnd;
+    double m_begin;
+    double m_end;
+    QString color;
     while(!xmlReader->atEnd() && !xmlReader->hasError()){
         QXmlStreamReader::TokenType token = xmlReader->readNext();
         QXmlStreamAttributes attributes = xmlReader->attributes();
-        QString color;
         if(xmlReader->name() == "style" && token == QXmlStreamReader::StartElement){
             acuItem->setShowMode(attributes.value("show_mode").toInt());
         }
@@ -389,27 +391,84 @@ void findItemAcu(QXmlStreamReader *xmlReader,ABoard *board,AcuItem *acuItem){
             acuItem->setColor(attributes.value("color").toString(),color);
         }
         else if(xmlReader->name() == "begin" && token == QXmlStreamReader::StartElement){
-            f=attributes.value("set_begin_value").toInt();
-            r = attributes.value("begin_value").toDouble();
+            m_isBegin=attributes.value("set_begin_value").toInt();
+            m_begin = attributes.value("begin_value").toDouble();
         }
         else if(xmlReader->name() == "zero_offset" && token == QXmlStreamReader::StartElement){
-            qreal c = convertUnitOfGFM(attributes.value("value").toString(),attributes.value("unit").toString());
-            acuItem->setBegin(f,r,c);
+            qreal m_zeroOffeset = convertUnitOfGFM(attributes.value("value").toString(),attributes.value("unit").toString());
+            acuItem->setBegin(m_isBegin,m_begin,m_zeroOffeset);
 
         }
         else if(xmlReader->name() == "end" && token == QXmlStreamReader::StartElement){
-            f = attributes.value("set_end_value").toInt();
-            r = attributes.value("end_value").toDouble();
+            m_isEnd = attributes.value("set_end_value").toInt();
+            m_end = attributes.value("end_value").toDouble();
 
         }
         else if(xmlReader->name() == "step_scale" && token == QXmlStreamReader::StartElement){
-            qreal c = convertUnitOfGFM(attributes.value("value").toString(),attributes.value("unit").toString());
+            qreal m_scale = convertUnitOfGFM(attributes.value("value").toString(),attributes.value("unit").toString());
 
-            acuItem->setEnd(f,r,c);
+            acuItem->setEnd(m_isEnd,m_end,m_scale);
 
         }
         else if(xmlReader->name() == "acu" && token == QXmlStreamReader::EndElement){
             AItem * item = dynamic_cast<AItem *>(acuItem);
+            board->setItem(item->name(),item);
+            return;
+        }
+    }
+}
+
+void findItemSpec(QXmlStreamReader *xmlReader,ABoard *board,SpecItem *specItem){
+    QString colorSpec;
+    bool m_isBegin;
+    bool m_isEnd;
+    double m_begin;
+    double m_end;
+
+    while(!xmlReader->atEnd() && !xmlReader->hasError()){
+        QXmlStreamReader::TokenType token = xmlReader->readNext();
+        QXmlStreamAttributes attributes = xmlReader->attributes();
+
+        if(xmlReader->name() == "style" && token == QXmlStreamReader::StartElement){
+            specItem->setShowMode(attributes.value("show_mode").toInt());
+        }
+        else if(xmlReader->name() == "transparent" && token == QXmlStreamReader::StartElement){
+           colorSpec =  attributes.value("color").toString();
+        }
+        else if(xmlReader->name() == "multi_color" && token == QXmlStreamReader::StartElement){
+            specItem->setLevelCount(attributes.value("level_count").toInt());
+        }
+        else if(xmlReader->name() == "level" && token == QXmlStreamReader::StartElement){
+            MulticolorItem f_multicolor;
+            f_multicolor.bound = attributes.value("bound").toDouble();
+            f_multicolor.value = attributes.value("color").toString();
+            specItem->setMulticolor(f_multicolor);
+        }
+        else if(xmlReader->name() == "brush_color" && token == QXmlStreamReader::StartElement){
+            specItem->setColor(attributes.value("color").toString(),colorSpec);
+        }
+        else if(xmlReader->name() == "begin" && token == QXmlStreamReader::StartElement){
+           m_isBegin=attributes.value("set_begin_value").toInt();
+            m_begin = attributes.value("begin_value").toDouble();
+        }
+        else if(xmlReader->name() == "zero_offset" && token == QXmlStreamReader::StartElement){
+            qreal m_zeroOffeset = convertUnitOfGFM(attributes.value("value").toString(),attributes.value("unit").toString());
+            specItem->setBegin(m_isBegin,m_begin,m_zeroOffeset);
+
+        }
+        else if(xmlReader->name() == "end" && token == QXmlStreamReader::StartElement){
+            m_isEnd = attributes.value("set_end_value").toInt();
+            m_end = attributes.value("end_value").toDouble();
+
+        }
+        else if(xmlReader->name() == "value_scale" && token == QXmlStreamReader::StartElement){
+            qreal m_scale = convertUnitOfGFM(attributes.value("value").toString(),attributes.value("unit").toString());
+
+            specItem->setEnd(m_isEnd,m_end,m_scale);
+
+        }
+        else if(xmlReader->name() == "spec" && token == QXmlStreamReader::EndElement){
+            AItem * item = dynamic_cast<AItem *>(specItem);
             board->setItem(item->name(),item);
             return;
         }
@@ -421,8 +480,7 @@ void findTrack(QXmlStreamReader *xmlReader,ABoard *board,ATrack *track){
         QXmlStreamReader::TokenType token = xmlReader->readNext();
         QXmlStreamAttributes attributes = xmlReader->attributes();
         if(xmlReader->name() == "begin" && token == QXmlStreamReader::StartElement){
-            qreal f_result = convertUnitOfGFM(attributes.value("value").toString(),attributes.value("unit").toString());
-            track->setBegin(f_result);
+            track->setBegin(convertUnitOfGFM(attributes.value("value").toString(),attributes.value("unit").toString()));
         }
         else if(xmlReader->name() == "width" && token == QXmlStreamReader::StartElement){
             track->setWidth(convertUnitOfGFM(attributes.value("value").toString(),attributes.value("unit").toString()));
@@ -455,6 +513,13 @@ void findTrack(QXmlStreamReader *xmlReader,ABoard *board,ATrack *track){
             f_item->setNumberOfTrack(track->number());
             findItemAcu(xmlReader,board,f_item);
         }
+        else if((xmlReader->name() == "spec") && token == QXmlStreamReader::StartElement){
+            SpecItem *f_item = new SpecItem();
+            f_item->setTypeItem(SPEC);
+            f_item->setName(attributes.value("name").toString(),attributes.value("visible").toString());
+            f_item->setNumberOfTrack(track->number());
+            findItemSpec(xmlReader,board,f_item);
+        }
         else if(xmlReader->name() == "track" && token == QXmlStreamReader::EndElement){
             board->setTrack(track);
             return;
@@ -476,6 +541,7 @@ void findBoard(QXmlStreamReader *xmlReader,ABoard *board,FormsBlock *formsBlock)
             f_track->setName(attributes.value("name").toString());
             QString a = f_track->name().remove("Track");
             f_track->setNumber(a.toInt());
+
             f_track->setIsGreed(attributes.value("show_grid").toInt());
             if(attributes.value("type").toString() == "LINEAR"){
                 Types h = LINEAR;
@@ -511,7 +577,7 @@ void GFMLoader::parserFormsBlock(const QByteArray &bodyBlock,IBlock *block){
         }
     }
 
-    QFile file("dd.txt");
+    QFile file("qq2.txt");
     file.open(QIODevice::WriteOnly);
     QByteArray output;
     gzipDecompress(bodyBlock,output);
@@ -592,7 +658,6 @@ void GFMLoader::findCurves(QByteArray *header,DataBlock * dataBlock){
         findCurveInfo(value,dataBlock,dynamic_cast<ICurve *>(curves->last()));
     }
     dataBlock->setCurves(*curves);
-
 }
 
 void GFMLoader::findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *curve){
@@ -612,13 +677,9 @@ void GFMLoader::findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *
     QList<ShortCut> shortCuts = *dataBlock->shortCuts();
     ShortCut shortCut;
     foreach(auto value,shortCuts){
-
         if (f_shortCut == value.ref()){
             shortCut.setRef(value.ref());
             shortCut.setName(value.name());
-
-
-
         }
     }
     curveAbstract->setShortCut(shortCut);

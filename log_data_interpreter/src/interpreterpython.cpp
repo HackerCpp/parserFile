@@ -43,7 +43,7 @@ bool InterpreterPython::openConsole(){
     }
 
 
-
+    m_console->append("py> from LogData.Curves import*");
     m_console->show();
 
 

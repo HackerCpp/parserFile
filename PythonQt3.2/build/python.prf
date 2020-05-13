@@ -1,8 +1,8 @@
 # profile to include and link Python
 
 # Change this variable to your python version (2.6, 2.7, 3.3, ...)
-win32:PYTHON_VERSION=38
-unix:PYTHON_VERSION=3.8
+win32:PYTHON_VERSION=37
+unix:PYTHON_VERSION=3.7
 
 macx {
   # for macx you need to have the Python development kit installed as framework
@@ -30,8 +30,8 @@ macx {
     DEBUG_EXT = 
   }
 
-  win32:INCLUDEPATH += C:/python38/PC C:/python38/include
-  win32:LIBS += C:/python38/libs/python38$${DEBUG_EXT}.lib
+  win32:INCLUDEPATH += ../../../python3/python3_x64-windows/include/python3.7
+  win32:LIBS += E:/Project/ParserFile/parserFile/python3/python3_x64-windows/lib/python37.lib
 } else:unix {
   # on linux, python-config is used to autodetect Python.
   # make sure that you have installed a matching python-dev package.

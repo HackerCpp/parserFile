@@ -6,11 +6,14 @@
 #include "shortcut.h"
 #include "SFML/Graphics.hpp"
 #include "curveeditor.h"
-
+#include <QApplication>
+#include <QDrag>
+#include <QPainter>
+#include <QGraphicsSceneDragDropEvent>
 using namespace sf;
 
-VerticalTrack::VerticalTrack(ATrack *track,QMap<QString,ICurve*> *curves,BoardForTrack *board)
-    : AGraphicTrack(track,curves,board)
+VerticalTrack::VerticalTrack(ATrack *track,BoardForTrack *board)
+    : AGraphicTrack(track,board)
 {
     setZValue(0);
     m_curentWidth = m_track->width();
@@ -53,6 +56,7 @@ VerticalTrack::VerticalTrack(ATrack *track,QMap<QString,ICurve*> *curves,BoardFo
     per.drawText(QRect(0,0,m_nameTrack->width(),m_nameTrack->height()),Qt::AlignHCenter|Qt::AlignVCenter,m_track->name());
 
     m_boundingRect = QRectF(m_track->begin() * f_pixelPerMm,f_topY,m_track->width() * f_pixelPerMm,f_lengthY);
+    updateItemsParam();
 }
 
 VerticalTrack::~VerticalTrack(){
@@ -129,6 +133,7 @@ void VerticalTrack::resizePictures(){
     m_doublePixMap = new QImage(f_pictureWidth,f_pictureHeight,f_format);
     m_curentHeader = new QImage(f_pictureWidth,3000,QImage::Format_ARGB4444_Premultiplied);
     m_doubleHeader = new QImage(f_pictureWidth,3000,QImage::Format_ARGB4444_Premultiplied);
+    updateItemsParam();
     redraw();
 }
 
@@ -171,6 +176,36 @@ void VerticalTrack::setActiveSelectingArea(){
     redraw();
 }
 
+void VerticalTrack::startDrag(QPointF point){
+    QMimeData *f_mimeData = nullptr;
+
+    QPoint f_pointInHeaderPicture = QPoint(point.x() - (m_track->begin() * m_board->pixelPerMm()),point.y() - m_visibilitySquare.y() - m_board->positionHeader());
+    QImage *f_image = new QImage(200,100,QImage::Format_ARGB32);
+    bool flag = false;
+    int position = 0;
+    //QTextStream *f_stream = new QTextStream()
+    foreach(auto grItem, *m_items){
+        if(grItem->isClickHeaderArea(f_pointInHeaderPicture)){
+            f_image->fill(0x0);
+            grItem->drawHeader(new QPainter(f_image),position,&flag);
+            f_mimeData = new QMimeData;
+            f_mimeData->setText(QString::number(reinterpret_cast<long long>(grItem)));
+            grItem->itemInfo()->setVisible(AItem::BOARD_GRAPH_VIEW,false);
+            m_items->removeOne(grItem);
+            break;
+        }
+    }
+    if(f_mimeData){
+            QDrag *f_drag = new QDrag(this);
+            f_drag->setMimeData(f_mimeData);
+            f_drag->setPixmap(QPixmap::fromImage(*f_image));
+
+
+            f_drag->exec();
+    }
+    redraw();
+}
+
 bool VerticalTrack::is_openCloseClick(QPointF point){
     QPointF   pointRightDown = QPointF(m_boundingRect.x() + m_boundingRect.width(),m_visibilitySquare.y() + m_border->width());
     QPointF   pointLeftUp = QPointF(pointRightDown.x() - m_border->width(),m_visibilitySquare.y());
@@ -193,6 +228,7 @@ bool VerticalTrack::is_borderClick(QPointF point){
 }
 
 bool VerticalTrack::is_CurvesClick(QPointF point){
+    Q_UNUSED(point)
     return true;
 }
 
@@ -205,6 +241,7 @@ bool VerticalTrack::is_headerClick(QPointF point){
 }
 
 void  VerticalTrack::openCloseClickHandler(QPointF point){
+    Q_UNUSED(point)
     qreal f_pixelPerMm = m_board->pixelPerMm();
     int f_topY = m_board->top();
     uint f_lengthY = m_board->length();
@@ -232,6 +269,7 @@ void  VerticalTrack::openCloseClickHandler(QPointF point){
 }
 
 void  VerticalTrack::borderLeftClickHandler(QPointF point){
+    Q_UNUSED(point)
     setZValue(50);
     m_border->click(true);
     m_boundingRect = m_visibilitySquare;
@@ -239,6 +277,7 @@ void  VerticalTrack::borderLeftClickHandler(QPointF point){
 }
 
 void  VerticalTrack::borderRightClickHandler(QPointF point){
+    Q_UNUSED(point)
 
 }
 
@@ -255,11 +294,25 @@ void  VerticalTrack::curvesLeftClickHandler(QPointF point){
 }
 
 void  VerticalTrack::curvesRightClickHandler(QPointF point){
+    Q_UNUSED(point)
 
 }
 
 void  VerticalTrack::headerLeftClickHandler(QPointF point){
+    Q_UNUSED(point)
+    m_ptDragPos = point;
+}
 
+void  VerticalTrack::headerRightClickHandler(QPointF point){
+    QPoint f_pointInHeaderPicture = QPoint(point.x() - (m_track->begin() * m_board->pixelPerMm()),point.y() - m_visibilitySquare.y() - m_board->positionHeader());
+    bool isActive = false;
+    m_сurrentСountOfActive = 0;
+    foreach(auto grItem, *m_items){
+        isActive = grItem->isClickHeaderArea(f_pointInHeaderPicture);
+        grItem->setActive(isActive);
+        m_сurrentСountOfActive += isActive;
+    }
+    redraw();
 }
 
 void  VerticalTrack::borderLeftMoveHandler(QPointF point){
@@ -272,7 +325,7 @@ void  VerticalTrack::borderLeftMoveHandler(QPointF point){
 }
 
 void  VerticalTrack::borderRightMoveHandler(QPointF point){
-
+    Q_UNUSED(point)
 }
 
 void  VerticalTrack::curvesLeftMoveHandler(QPointF point){
@@ -288,10 +341,16 @@ void  VerticalTrack::curvesLeftMoveHandler(QPointF point){
 }
 
 void  VerticalTrack::curvesRightMoveHandler(QPointF point){
-
+    Q_UNUSED(point)
 }
 
 void  VerticalTrack::headerLeftMoveHandler(QPointF point){
+    int distance = abs(m_ptDragPos.x() - point.x());
+    if(distance > 20 * m_board->pixelPerMm()){
+        startDrag(point);
+        m_isLeftHeaderClick = false;
+        return;
+    }
     int f_newPos = m_board->positionHeader() - (m_prevPoint.y() - point.y());
     if(f_newPos <  m_visibilitySquare.height() - 50 && (f_newPos + m_heightHeader) >  50)
         m_board->setPositionHeader(f_newPos);
@@ -299,6 +358,7 @@ void  VerticalTrack::headerLeftMoveHandler(QPointF point){
 }
 
 void  VerticalTrack::borderLeftReleaseHandler(QPointF point){
+    Q_UNUSED(point)
     setZValue(0);
     m_infoPixMap->fill(0x0);
     qreal f_pixelPerMm = m_board->pixelPerMm();
@@ -319,10 +379,11 @@ void  VerticalTrack::borderLeftReleaseHandler(QPointF point){
 }
 
 void  VerticalTrack::borderRightReleaseHandler(QPointF point){
-
+    Q_UNUSED(point)
 }
 
 void  VerticalTrack::curvesLeftReleaseHandler(QPointF point){
+    Q_UNUSED(point)
     m_selectingArea->hide();
     scene()->update();
     setActiveSelectingArea();
@@ -333,12 +394,44 @@ void  VerticalTrack::curvesLeftReleaseHandler(QPointF point){
 }
 
 void  VerticalTrack::curvesRightReleaseHandler(QPointF point){
+    Q_UNUSED(point)
     m_trackMenu->move(QCursor::pos());
     m_trackMenu->show();
 }
 
 void  VerticalTrack::headerLeftReleaseHandler(QPointF point){
+    Q_UNUSED(point)
+}
+void  VerticalTrack::headerRightReleaseHandler(QPointF point){
+    Q_UNUSED(point)
+    if(m_сurrentСountOfActive){
+        m_curvesMenu->move(QCursor::pos());
+        m_curvesMenu->show();
+    }
+}
 
+void VerticalTrack::dragEnterEvent(QGraphicsSceneDragDropEvent *event){
+    //qDebug() << "drEnterEvent";
+}
+
+void VerticalTrack::dragLeaveEvent(QGraphicsSceneDragDropEvent *event){
+    //qDebug() << "drLeaveEvent" << m_track->name();
+}
+
+void VerticalTrack::dragMoveEvent(QGraphicsSceneDragDropEvent *event){
+   // qDebug() << "drMoveEvent";
+}
+
+void VerticalTrack::dropEvent(QGraphicsSceneDragDropEvent *event){
+    bool ok = false;
+     AGraphicItem* f_item = reinterpret_cast<AGraphicItem*>(event->mimeData()->text().toLongLong(&ok));
+     if(f_item && ok){
+        f_item->itemInfo()->setVisible(AItem::BOARD_GRAPH_VIEW,true);
+        f_item->itemInfo()->setNumberOfTrack(m_track->number());
+        f_item->updateParam(m_doublePixMap->width());
+        addIteam(f_item);
+     }
+     redraw();
 }
 
 void VerticalTrack::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*){
@@ -425,6 +518,7 @@ void VerticalTrack::changeBegin(int newBegin){
 }
 
 void VerticalTrack::applySettings(){
+    updateItemsParam();
     redraw();
 }
 

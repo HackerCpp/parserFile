@@ -3,11 +3,6 @@
 #include "aitem.h"
 
 
-struct MulticolorItem{
-    qreal bound;
-    QString value;
-};
-
 class AcuItem : public AItem{
     QString m_brushColor;
     QString m_transparentColor;

@@ -1,7 +1,8 @@
 #ifndef VACUITEM_H
 #define VACUITEM_H
 #include "verticalitem.h"
-#include "AcuItem.h"
+#include "acuItem.h"
+#include "colorscale.h"
 
 class VAcuItem : public VerticalItem{
     qreal m_dataStepPix;
@@ -14,7 +15,8 @@ class VAcuItem : public VerticalItem{
     void inline drawInterpolationHorizontal(QPainter *per,QRectF visibleRect,bool *flag);
     void drawInterpolationHorForCheckArea(QPainter *per,QRectF visibleRect,bool *flag);
 
-    virtual void drawBody(QPainter *per,QRectF visibleRect,bool *flag)override;
+    void drawBody(QPainter *per,QRectF visibleRect,bool *flag)override;
+    void updateParam(int pictureWidth)override;
     bool isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per)override;
     void loadDrawingParam(int width);
 

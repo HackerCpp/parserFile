@@ -3,6 +3,7 @@
 #include "objectoftheboard.h"
 #include "iteminfocreater.h"
 #include "browsergraphicitems.h"
+#include "ruler.h"
 
 
 
@@ -11,7 +12,7 @@ VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves)
 {
     init();
     if(!m_boardInfo){
-        qDebug() << "Передан нулевой указатель bordInfo";
+        qDebug() << "Передан нулевой указатель boardInfo";
         return;
     }
     QList<ATrack*> *tracksInfo = m_boardInfo->tracks();
@@ -20,8 +21,15 @@ VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves)
         return;
     }
     VerticalTrack *f_prevTrack = nullptr;
+    //qDebug() << m_boardInfo->name();
+    Ruler *f_ruler = new Ruler(this);
+    connect(this,&VerticalBoard::changingTheVisibilityZone,f_ruler,&ObjectOfTheBoard::changingTheVisibilityZone);
+    m_canvas->addItem(f_ruler);
     foreach(auto trackInfo,*tracksInfo){
-       VerticalTrack *f_track  = new VerticalTrack(trackInfo,curves,this);
+        //qDebug() << trackInfo->name() << trackInfo->begin() << trackInfo->width();
+       VerticalTrack *f_track  = new VerticalTrack(trackInfo,this);
+       if(!f_track)
+           continue;
        connect(this,&VerticalBoard::changingTheVisibilityZone,f_track,&ObjectOfTheBoard::changingTheVisibilityZone);
        m_canvas->addItem(f_track);
        if(f_prevTrack){
@@ -34,6 +42,7 @@ VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves)
     updateItems();
     distributionOfItemsBetweenTracks();
     resize();
+    updateItemsParam();
 }
 
 VerticalBoard::VerticalBoard(QMap<QString,ICurve*> *curves):AGraphicBoard(nullptr,curves){
@@ -44,6 +53,7 @@ VerticalBoard::VerticalBoard():AGraphicBoard(nullptr,nullptr){
     init();
 }
 
+//Создаём графические кривые. Если нет информации для кривой создаём.
 void VerticalBoard::updateItems(){
     if(!m_curves || !m_boardInfo)
         return;
@@ -58,7 +68,9 @@ void VerticalBoard::updateItems(){
             }
             if(f_itemInfo){
                 if(m_items->find(curveKey) == m_items->end()){
-                    m_items->insert(curveKey,ItimsCreater::createItem(f_itemInfo,m_curves->value(curveKey),this,ItimsCreater::VERTICAL));
+                    AGraphicItem *f_graphicItem = ItimsCreater::createItem(f_itemInfo,m_curves->value(curveKey),this,ItimsCreater::VERTICAL);
+                    if(f_graphicItem)
+                        m_items->insert(curveKey,f_graphicItem);
                 }
             }
         }
@@ -103,6 +115,7 @@ void VerticalBoard::init(){
 }
 
 void VerticalBoard::resizeEvent(QResizeEvent *event){
+    Q_UNUSED(event)
     resize();
     scrollChanged();
 }
@@ -177,7 +190,7 @@ void VerticalBoard::insertNewTrack(int curentTrackNumber,InsertPossition positio
             }
         }
     }
-    VerticalTrack *f_track  = new VerticalTrack(f_trackInfo,nullptr,this);
+    VerticalTrack *f_track  = new VerticalTrack(f_trackInfo,this);
     connect(this,&VerticalBoard::changingTheVisibilityZone,f_track,&ObjectOfTheBoard::changingTheVisibilityZone);
     m_canvas->addItem(f_track);
     if(!f_prevTrack && f_nextTrack){

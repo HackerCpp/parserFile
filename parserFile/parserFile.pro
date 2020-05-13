@@ -34,7 +34,7 @@ INCLUDEPATH+=\
 ../log_data_interpreter/include \
 ../PythonQT3.2/src \
 ../PythonQT3.2/extensions/PythonQt_QtAll \
-C:/python38/include
+../python3\python3_x64-windows\include\python3.7
 
 
 LIBS += \
@@ -42,9 +42,9 @@ LIBS += \
 ../build/release/LogDataInterpreter.lib \
 ../build/release/LogDataLoader.lib \
 ../build/release/LogDataSaver.lib \
-../PythonQT3.2/build/lib/PythonQt-Qt5-Python383.lib \
-../PythonQT3.2/build/lib/PythonQt_QtAll-Qt5-Python383.lib\
-../PythonQT3.2/build/lib/python38.lib \
+../PythonQT3.2/build/lib/PythonQt-Qt5-Python373.lib \
+../PythonQT3.2/build/lib/PythonQt_QtAll-Qt5-Python373.lib\
+../python3/python3_x64-windows/lib/python37.lib \
 #../build/release/graphics.lib
 
 #include(../gfm_lib/GFM.pri)

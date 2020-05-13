@@ -29,6 +29,7 @@ class TabGFM : public AbstractTab,public AbstractTabSaveFiles{
 public:
     explicit TabGFM(QString path,QWidget *parent = nullptr);
     void saveGFM();
+    void openPythonConsole();
     ~TabGFM();
 public slots:
     void changeDrawType(int index);

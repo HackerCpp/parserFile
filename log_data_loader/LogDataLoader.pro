@@ -8,10 +8,12 @@ CONFIG += c++17
 INCLUDEPATH += include \
 ../log_data_lib/include/externalComponents \
 ../log_data_lib/include/blocks \
+../log_data_saver/inc \
 ../log_data_lib/include/curves
 
 LIBS += \
 ../build/release/LogData.lib \
+../build/release/LogDataSaver.lib \
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings

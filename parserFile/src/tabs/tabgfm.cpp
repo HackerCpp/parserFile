@@ -150,7 +150,7 @@ void TabGFM::changePictureFormat(int index){
 }
 
 void TabGFM::dataReady(){
-    //IInterpreterLogData *interpreter = new InterpreterPython();
+
     FormsBlock *forms = nullptr;
     QList<IBlock*> *blocks = m_logData->blocks();
     foreach(auto block,*blocks){
@@ -174,16 +174,23 @@ void TabGFM::dataReady(){
         m_comboFormatTime.hide();
         m_comboFormatDepth.show();
     }
-    //m_logData->setInterpreter(interpreter);
-    //m_logData->openInterpreter();
 }
 
 void TabGFM::saveGFM(){
-
     ISaverLogData * gfmSaver = new GFMSaver();
     m_logData->setSaver(gfmSaver);
     m_logData->save();
     //m_gfm->saveFile(fileName);
+}
+
+void TabGFM::openPythonConsole(){
+    if(!m_logData)
+        return;
+    if(!m_logData->isReady())
+        return;
+    IInterpreterLogData *interpreter = new InterpreterPython();
+    m_logData->setInterpreter(interpreter);
+    m_logData->openInterpreter();
 }
 
 TabGFM::~TabGFM(){

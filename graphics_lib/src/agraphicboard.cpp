@@ -6,6 +6,7 @@ AGraphicBoard::AGraphicBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves)
     : m_curves(curves),m_boardInfo(boardInfo){
     m_items = new QMap<QString,AGraphicItem *>;
     m_minimumSize = 2000;
+
 }
 
 void AGraphicBoard::resize(){
@@ -46,9 +47,9 @@ void AGraphicBoard::resize(){
 void AGraphicBoard::resizePicture(){
     QList<QGraphicsItem *> m_items = this->items();
     foreach(auto item, m_items){
-        AGraphicTrack *f_track = dynamic_cast<AGraphicTrack *>(item);
-        if(f_track){
-           f_track->resizePictures();
+        ObjectOfTheBoard *f_objectOfTheBoard = dynamic_cast<ObjectOfTheBoard *>(item);
+        if(f_objectOfTheBoard){
+           f_objectOfTheBoard->resizePictures();
         }
     }
 }
@@ -63,6 +64,16 @@ void AGraphicBoard::activate(bool activate){
     }
 }
 
+void AGraphicBoard::updateItemsParam(){
+    QList<QGraphicsItem *> m_items = this->items();
+    foreach(auto item, m_items){
+        AGraphicTrack *f_track = dynamic_cast<AGraphicTrack *>(item);
+        if(f_track){
+           f_track->updateItemsParam();
+        }
+    }
+}
+
 void AGraphicBoard::openCurveSettings(){
     BrowserGraphicItems *f_curveBrowser = new BrowserGraphicItems(m_boardInfo,m_items);
     connect(f_curveBrowser,&BrowserGraphicItems::changeSettings,this,&AGraphicBoard::curveUpdate);
@@ -71,12 +82,14 @@ void AGraphicBoard::openCurveSettings(){
 
 void AGraphicBoard::setFormatTime(FormatTime format){
     setScaleForTime(1.f/qreal(m_dividersTime[format]));
+    updateItemsParam();
     redraw();
     resize();
 }
 
 void AGraphicBoard::setFormatDepth(FormatDepth format){
     setScaleForDepth(1.f/qreal(m_dividersDepth[format]));
+    updateItemsParam();
     redraw();
     resize();
 }
@@ -84,6 +97,7 @@ void AGraphicBoard::setFormatDepth(FormatDepth format){
 void AGraphicBoard::setLengthPicture(LengthPicture format){
     setPictureHeightMM(m_lengtgPicture[format]);
     resizePicture();
+    updateItemsParam();
     redraw();
     resize();
 }
@@ -91,6 +105,7 @@ void AGraphicBoard::setLengthPicture(LengthPicture format){
 void AGraphicBoard::setFormatPicture(QImage::Format format){
     m_formatImg = format;
     resizePicture();
+    updateItemsParam();
     redraw();
     resize();
 }
@@ -109,6 +124,7 @@ void AGraphicBoard::mousePressEvent(QMouseEvent *event){
 
  void AGraphicBoard::curveUpdate(){
      distributionOfItemsBetweenTracks();
+     updateItemsParam();
      redraw();
  }
 
