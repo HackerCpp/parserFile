@@ -3,6 +3,7 @@
 #include "objectoftheboard.h"
 #include "iteminfocreater.h"
 #include "browsergraphicitems.h"
+#include "ruler.h"
 
 
 
@@ -11,7 +12,7 @@ VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves)
 {
     init();
     if(!m_boardInfo){
-        qDebug() << "Передан нулевой указатель bordInfo";
+        qDebug() << "Передан нулевой указатель boardInfo";
         return;
     }
     QList<ATrack*> *tracksInfo = m_boardInfo->tracks();
@@ -21,9 +22,14 @@ VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves)
     }
     VerticalTrack *f_prevTrack = nullptr;
     //qDebug() << m_boardInfo->name();
+    Ruler *f_ruler = new Ruler(this);
+    connect(this,&VerticalBoard::changingTheVisibilityZone,f_ruler,&ObjectOfTheBoard::changingTheVisibilityZone);
+    m_canvas->addItem(f_ruler);
     foreach(auto trackInfo,*tracksInfo){
         //qDebug() << trackInfo->name() << trackInfo->begin() << trackInfo->width();
        VerticalTrack *f_track  = new VerticalTrack(trackInfo,this);
+       if(!f_track)
+           continue;
        connect(this,&VerticalBoard::changingTheVisibilityZone,f_track,&ObjectOfTheBoard::changingTheVisibilityZone);
        m_canvas->addItem(f_track);
        if(f_prevTrack){

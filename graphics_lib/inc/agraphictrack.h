@@ -22,7 +22,7 @@ public:
     ~AGraphicTrack()override;
 
     virtual void resize()override{}
-    virtual void resizePictures(){}
+    virtual void resizePictures()override{}
 
     qreal topValue();
     qreal bottomValue();
@@ -51,7 +51,7 @@ protected:
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*) override{Q_UNUSED(painter)}
     virtual void run()override{}
     virtual QRectF boundingRect()const override{return m_boundingRect;}
-    virtual void swapPixMap();
+    virtual void swapPixMap()override;
 
 
     virtual void toSetTheLocationOfTheImageAfterDrawing(){}

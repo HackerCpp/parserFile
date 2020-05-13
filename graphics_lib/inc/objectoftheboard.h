@@ -16,12 +16,15 @@ protected:
 
     virtual QRectF boundingRect()const override{return m_visibilitySquare;}
     void redraw();
+    virtual void sceneUpdate();
 
 
 public:
     ObjectOfTheBoard();
     virtual ~ObjectOfTheBoard();
     virtual void resize(){}
+    virtual void resizePictures(){}
+    virtual void swapPixMap();
 public slots:
     void changingTheVisibilityZone(QRectF newVisibilityZone);
 };

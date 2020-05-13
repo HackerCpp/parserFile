@@ -47,9 +47,9 @@ void AGraphicBoard::resize(){
 void AGraphicBoard::resizePicture(){
     QList<QGraphicsItem *> m_items = this->items();
     foreach(auto item, m_items){
-        AGraphicTrack *f_track = dynamic_cast<AGraphicTrack *>(item);
-        if(f_track){
-           f_track->resizePictures();
+        ObjectOfTheBoard *f_objectOfTheBoard = dynamic_cast<ObjectOfTheBoard *>(item);
+        if(f_objectOfTheBoard){
+           f_objectOfTheBoard->resizePictures();
         }
     }
 }

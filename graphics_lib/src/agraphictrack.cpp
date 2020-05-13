@@ -24,7 +24,7 @@ void AGraphicTrack::init(){
      m_isOpen = true;
      m_positionOfTheBorder = 0;
      m_boundingRect = QRectF(0,0,2000,2000);
-     connect(this,&AGraphicTrack::finished,this,&AGraphicTrack::sceneUpdate);
+     //connect(this,&AGraphicTrack::finished,this,&AGraphicTrack::sceneUpdate);
      setAcceptDrops(true);
 }
 
