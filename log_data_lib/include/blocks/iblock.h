@@ -4,10 +4,11 @@
 #include <stdint.h>
 #include <QString>
 #include <QList>
+#include <QObject>
 
 
 
-class IBlock{
+class IBlock : public QObject{
 
 public:
     enum TypeBlock {NO_BLOCK,DATA_BLOCK, FORMS_BLOCK,

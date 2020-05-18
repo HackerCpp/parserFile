@@ -14,9 +14,12 @@
 #include <QComboBox>
 #include "ilogdata.h"
 #include "graphiceditor.h"
+#include <QSplitter>
 
 class TabGFM : public AbstractTab,public AbstractTabSaveFiles{
     Q_OBJECT
+
+    QSplitter *m_splitter;
     QHBoxLayout *m_barHLayout;
     QVBoxLayout *m_mainVerticalLayout;
     QWidget *m_toolBar;

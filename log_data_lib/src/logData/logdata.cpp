@@ -90,7 +90,6 @@ QList<IBlock*> *LogData::blocks(){
 
 void LogData::findCurvesMap(){
     foreach(auto block,*m_blocks){
-        // qDebug()<<"aaaaaaaaaaaaaaaaaaaaaaaaaa";
         if(block->name() == IBlock::DATA_BLOCK){
            DataBlock *dataBlock = dynamic_cast<DataBlock*>(block);
            if(dataBlock){
@@ -107,9 +106,7 @@ void LogData::findCurvesMap(){
                        qDebug() << "Нулевая кривая в блоке";
                    }
                    if(!curve->shortCut().name().isEmpty()){
-
                        QString name = curve->shortCut().nameWithoutNumber() + ':' + curve->mnemonic();
-
                        m_curvesMap->insert(name,curve);
                    }
                }
