@@ -20,6 +20,9 @@ ObjectOfTheBoard::~ObjectOfTheBoard(){
     }
 }
 
+
+
+
 void ObjectOfTheBoard::changingTheVisibilityZone(QRectF newVisibilityZone){
     QGraphicsItem::prepareGeometryChange();
     m_visibilitySquare = newVisibilityZone;
@@ -37,7 +40,10 @@ void ObjectOfTheBoard::redraw(){
         m_needToRedraw = true;
     }
 }
-
+void ObjectOfTheBoard:: toSetTheLocationOfTheImageAfterDrawing()
+{
+    ;
+}
 void ObjectOfTheBoard::sceneUpdate(){
     if(m_needToRedraw){
         m_needToRedraw = false;
@@ -55,4 +61,5 @@ void ObjectOfTheBoard::swapPixMap(){
     m_curentPixmap = m_doublePixMap;
     m_doublePixMap = ptr;
     ptr = nullptr;
+    toSetTheLocationOfTheImageAfterDrawing();
 }

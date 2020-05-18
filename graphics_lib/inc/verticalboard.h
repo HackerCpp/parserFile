@@ -24,13 +24,13 @@ public:
     bool addCurve(ICurve *curve,int indexTab);
     virtual void redraw()override{emit scrollChanged();}
     void updateItems();
-    void distributionOfItemsBetweenTracks()override;
+
 
 private:
     void init();
     virtual void resizeEvent(QResizeEvent *event)override;
     virtual void insertNewTrack(int curentTrackNumber,InsertPossition position = InsertPossition::RIGHT)override;
-
+    virtual  void distributionOfItemsBetweenTracks()override;
 public slots:
     void scrollChanged();
 

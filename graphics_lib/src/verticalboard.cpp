@@ -24,6 +24,7 @@ VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves)
     //qDebug() << m_boardInfo->name();
     Ruler *f_ruler = new Ruler(this);
     connect(this,&VerticalBoard::changingTheVisibilityZone,f_ruler,&ObjectOfTheBoard::changingTheVisibilityZone);
+
     m_canvas->addItem(f_ruler);
     foreach(auto trackInfo,*tracksInfo){
         //qDebug() << trackInfo->name() << trackInfo->begin() << trackInfo->width();
@@ -44,6 +45,7 @@ VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves)
     resize();
     updateItemsParam();
 }
+
 
 VerticalBoard::VerticalBoard(QMap<QString,ICurve*> *curves):AGraphicBoard(nullptr,curves){
     init();

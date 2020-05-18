@@ -495,6 +495,7 @@ void VerticalTrack::run(){
     }
     m_infoPixMap->fill(0x0);
     m_heightHeader = f_position;
+
     swapPixMap();
     //qDebug() << time.msecsTo(QTime::currentTime());
 }
