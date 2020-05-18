@@ -7,12 +7,15 @@
 #include "gfmsaver.h"
 #include "graphiceditor.h"
 #include "interpreterpython.h"
+#include "datamodel.h"
+#include "datatreeview.h"
 
 
 TabGFM::TabGFM(QString path,QWidget *parent) : AbstractTab(parent){
     m_logData = ILogData::createLogData();
     ILoaderLogData * gfmLoader = new GFMLoader(path);
     m_logData->setLoader(gfmLoader);
+    m_splitter = new QSplitter(this);
     m_logData->load();
     if(!m_logData->isReady()){
         connect(m_logData,&ILogData::ready,this,&TabGFM::dataReady);
@@ -164,7 +167,15 @@ void TabGFM::dataReady(){
 
     }
     m_graphicEditor = new GraphicEditor(m_logData->curves(),forms);
-    m_mainVerticalLayout->addWidget(m_graphicEditor);
+    //m_mainVerticalLayout->addWidget(m_graphicEditor);
+    DataModel *f_model = new DataModel(m_logData);
+    DataTreeView *f_treeView = new DataTreeView(this);
+    f_treeView->setStyleSheet("background:white;");
+    m_splitter->addWidget(f_treeView);
+    m_splitter->addWidget(m_graphicEditor);
+    m_mainVerticalLayout->addWidget(m_splitter);
+    f_treeView->setModel(f_model);
+    //m_mainVerticalLayout->addWidget(f_treeView);
     m_comboBox.currentIndexChanged(m_comboBox.currentIndex());
     if(!m_comboBox.currentIndex()){
         m_comboFormatTime.show();

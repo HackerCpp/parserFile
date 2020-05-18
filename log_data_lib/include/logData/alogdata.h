@@ -21,9 +21,11 @@ public:
     virtual bool setLoader(ILoaderLogData *loader)override;
     virtual bool setSaver(ISaverLogData *saver)override;
     virtual bool setInterpreter(IInterpreterLogData *interpreter)override;
+    virtual void setName(QString name)override{}
 
     virtual QMap<QString,ICurve*> *curves()override;
     virtual QList<IBlock*> *blocks()override;
+    virtual QString name()override{ return QString();}
 
 /*signals:
     virtual void ready()override;*/

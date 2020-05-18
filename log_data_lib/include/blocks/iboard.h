@@ -4,7 +4,8 @@
 #include <QString>
 #include "atrack.h"
 
-class IBoard{
+class IBoard : public QObject{
+    Q_OBJECT
 public:
     IBoard(){}
     virtual ~IBoard(){}

@@ -8,6 +8,14 @@ DEPENDPATH += $$PWD/../SFML/include
 
 CONFIG += c++11
 INCLUDEPATH += $$PWD $$PWD/inc $$PWD/inc/items $$PWD/inc/tools
+
+LIBS += \
+../build/release/LogData.lib \
+#../build/release/LogDataInterpreter.lib \
+#../build/release/LogDataLoader.lib \
+#../build/release/LogDataSaver.lib \
+
+
 SOURCES += \
     $$PWD/src/tools/colorscale.cpp \
     $$PWD/src/tools/qsfmlcanvas.cpp \
@@ -45,7 +53,6 @@ HEADERS += \
     $$PWD/inc/boardfortrack.h \
     $$PWD/inc/graphiceditor.h \
     $$PWD/inc/igraphiceditor.h \
-    #$$PWD/inc/igraphiceditor.h \
     $$PWD/inc/items/itimscreater.h \
     $$PWD/inc/tools/basesettingswindow.h \
     $$PWD/inc/tools/browsergraphicitems.h \

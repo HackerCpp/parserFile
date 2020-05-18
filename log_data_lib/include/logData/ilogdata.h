@@ -6,6 +6,7 @@
 #include "iinterpreterlogdata.h"
 #include "isaverlogdata.h"
 
+
 class ILogData : public QObject{
     Q_OBJECT
 public:
@@ -21,9 +22,11 @@ public:
     virtual bool setLoader(ILoaderLogData *loader);
     virtual bool setSaver(ISaverLogData *saver);
     virtual bool setInterpreter(IInterpreterLogData *interpreter);
+    virtual void setName(QString name){}
 
     virtual QMap<QString,ICurve*> *curves();
     virtual QList<IBlock*> *blocks();
+    virtual QString name(){return QString();}
 
 signals:
     virtual void ready();
@@ -32,7 +35,7 @@ public slots:
     virtual void findCurvesMap();
 
 public:
-    static ILogData *createLogData();
+    static QSharedPointer<ILogData> createLogData();
 };
 
 #endif // ILOGDATA_H

@@ -51,6 +51,7 @@ LIBS += \
 include(../graphics_lib/graphics.pri)
 
 SOURCES += \
+    inc/logdataview.cpp \
     src/tabs/abstracttab.cpp \
     #src/fileCreation/creategfm.cpp \
     src/main.cpp \
@@ -75,6 +76,7 @@ SOURCES += \
 
 HEADERS += \
     #inc/fileCreation/creategfm.h \
+    inc/logdataview.h \
      inc/mainwindow.h \
     inc/filereader.h \
     inc/parsers/parsertlm.h \

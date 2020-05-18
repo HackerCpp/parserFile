@@ -107,6 +107,7 @@ void findBlocksByteFFFE(QByteArray byteArrayFile,QList<BlockByte> *blocksList,in
 GFMLoader::GFMLoader(QString path){
     m_path = path;
     m_codec = QTextCodec::codecForMib(1015);
+
 }
 
 GFMLoader::~GFMLoader(){

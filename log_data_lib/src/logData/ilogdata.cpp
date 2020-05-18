@@ -1,5 +1,6 @@
 #include "ilogdata.h"
 #include "logdata.h"
+#include <QSharedPointer>
 
 ILogData::ILogData(){
 
@@ -51,6 +52,7 @@ void ILogData::findCurvesMap(){
 }
 
 
-ILogData *ILogData::createLogData(){
-    return dynamic_cast<ILogData*>(new LogData());
+QSharedPointer<ILogData> ILogData::createLogData(){
+    QSharedPointer<ILogData> f_ptrLogData(dynamic_cast<ILogData*>(new LogData()));
+    return f_ptrLogData;
 }

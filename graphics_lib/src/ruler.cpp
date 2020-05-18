@@ -8,8 +8,8 @@ Ruler::Ruler(BoardForTrack *board):
     setZValue(100);
     m_positionX = 0;
     uint f_pictureHeight = m_board->pictureHeight();
-    uint f_pixelPerMm = m_board->pixelPerMm();
-    m_width = 20 * f_pixelPerMm;
+    qreal f_pixelPerMm = m_board->pixelPerMm();
+    m_width = static_cast<int>(20.0 * f_pixelPerMm);
     m_curentPixmap = new QImage(m_width,f_pictureHeight,QImage::Format_ARGB4444_Premultiplied);
     m_doublePixMap = new QImage(m_width,f_pictureHeight,QImage::Format_ARGB4444_Premultiplied);
 }
@@ -20,13 +20,14 @@ void Ruler::mousePressEvent(QGraphicsSceneMouseEvent *event){
 
 void Ruler::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
     QGraphicsItem::prepareGeometryChange();
-    m_positionX -= (m_prevPoint - event->pos()).x();
+    m_positionX -= static_cast<int>((m_prevPoint - event->pos()).x());
     m_positionX = m_positionX > 0?m_positionX:0;
     m_prevPoint = event->pos();
     /*scene()->*/update();
 }
 
 void Ruler::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
+    Q_UNUSED(event)
 }
 
 
@@ -46,21 +47,21 @@ void Ruler::run(){
     QPen f_pen(Qt::white,1);
     f_painter.setPen(f_pen);
     qreal f_step = 10 * m_board->pixelPerMm();
-    qreal mm5 = 5 * m_board->pixelPerMm();
+    qreal f_maxWidth = 5 * m_board->pixelPerMm();
     for(qreal i = f_step - fmod(m_visibilitySquare.y(),f_step);i < f_height;i += f_step){
-        f_painter.drawLine(QPointF(0,i),QPointF(mm5,i));
-        f_painter.drawLine(QPointF(f_width - mm5,i),QPointF(f_width,i));
+        f_painter.drawLine(QPointF(0,i),QPointF(f_maxWidth,i));
+        f_painter.drawLine(QPointF(f_width - f_maxWidth,i),QPointF(f_width,i));
         qreal f_number = (m_visibilitySquare.y() + m_board->top() + (i + m_board->offsetUp())) / m_board->scale() / 10000;
-        f_painter.drawText(QRectF(mm5,i - 10,f_step,20),Qt::AlignHCenter|Qt::AlignVCenter,QString::number(f_number));
+        f_painter.drawText(QRectF(f_maxWidth,i - 10,f_step,20),Qt::AlignHCenter|Qt::AlignVCenter,QString::number(f_number));
         if(m_endRedraw)
             return;
     }
     f_step = 1 * m_board->pixelPerMm();
-    qreal mm4 = 2 * m_board->pixelPerMm();
+    qreal f_minWidth = 2 * m_board->pixelPerMm();
     f_painter.setPen(QPen(Qt::white,0.8));
     for(qreal i = f_step - fmod(m_visibilitySquare.y(),f_step);i < f_height;i += f_step){
-        f_painter.drawLine(QPointF(0,i),QPointF(mm4,i));
-        f_painter.drawLine(QPointF(f_width - mm4,i),QPointF(f_width,i));
+        f_painter.drawLine(QPointF(0,i),QPointF(f_minWidth,i));
+        f_painter.drawLine(QPointF(f_width - f_minWidth,i),QPointF(f_width,i));
         if(m_endRedraw)
             return;
     }
@@ -70,7 +71,7 @@ void Ruler::run(){
 void Ruler::resizePictures(){
     if(m_doublePixMap){delete m_doublePixMap;m_doublePixMap = nullptr;}
     if(m_doublePixMap){delete m_curentPixmap;m_curentPixmap = nullptr;}
-    uint f_pictureHeight = m_board->pictureHeight();
+    int f_pictureHeight = static_cast<int>(m_board->pictureHeight());
     m_curentPixmap = new QImage(m_width,f_pictureHeight,QImage::Format_ARGB4444_Premultiplied);
     m_doublePixMap = new QImage(m_width,f_pictureHeight,QImage::Format_ARGB4444_Premultiplied);
     redraw();
