@@ -13,7 +13,7 @@ class GraphicEditor : public QTabWidget, AGraphicEditor{
     void newBoard();
 public:
     GraphicEditor(QSharedPointer<ILogData> logData,QWidget *parent = nullptr);
-    virtual ~GraphicEditor();
+    virtual ~GraphicEditor()override;
 
     void setDrawTime();
     void setDrawDepth();
@@ -21,6 +21,7 @@ public:
     void setFormatDepth(AGraphicBoard::FormatDepth format);
     void setLengthPicture(AGraphicBoard::LengthPicture format);
     void setFormatPicture(QImage::Format format);
+    void refresh() override;
 public slots:
     void changeBoard(int index);
 

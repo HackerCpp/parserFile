@@ -18,6 +18,7 @@ protected:
 public:
     AGraphicEditor(QSharedPointer<ILogData> logData);
     virtual ~AGraphicEditor()override;
+    virtual void refresh(){}
 };
 
 #endif // IGRAPHICEDITOR_H

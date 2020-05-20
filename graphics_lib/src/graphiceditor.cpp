@@ -7,46 +7,26 @@
 GraphicEditor::GraphicEditor(QSharedPointer<ILogData> logData,QWidget *parent)
     : QTabWidget(parent),AGraphicEditor(logData){
     this->setStyleSheet("QGraphicsView{background-color:white;}");
+    QList<ABoard*> *f_boards = nullptr;
 
-    QList<ABoard*> *boards;
     foreach(auto block,*logData->blocks()){
         if(block->name() == IBlock::FORMS_BLOCK){
             FormsBlock *formBlock = dynamic_cast<FormsBlock*>(block);
             m_forms = formBlock;
-            boards = m_forms->boards();
-            if(!boards){
+           f_boards = m_forms->boards();
+            if(!f_boards){
                 qDebug() << "FormsBlock Вернул нулевой указатель на борды";
                 return;
             }
 
         }
-        else if(block->name() == IBlock::DATA_BLOCK){
-           DataBlock *dataBlock = dynamic_cast<DataBlock*>(block);
-           if(dataBlock){
-               QList<ICurve*> *curves = dataBlock->curves();
-               if(!curves){
-                   qDebug() << "В Дата блоке нет кривых для формирования дерева поиска";
-               }
-               if(!logData->curves()){
-                   qDebug() << "Контейнер для кривых не создан";
-               }
-
-               foreach(auto curve,*curves){
-                   if(!curve){
-                       qDebug() << "Нулевая кривая в блоке";
-                   }
-                   if(!curve->shortCut().name().isEmpty()){
-                       QString name = curve->shortCut().nameWithoutNumber() + ':' + curve->mnemonic();
-                       logData->curves()->insert(name,curve);
-                   }
-               }
-           }
+     }
+    if(f_boards)
+    {
+        foreach(auto boardInfo,*f_boards){
+            AGraphicBoard *f_grBoard = new VerticalBoard(boardInfo,m_curves);
+            addTab(f_grBoard,boardInfo->name());
         }
-    }
-
-    foreach(auto boardInfo,*boards){
-        AGraphicBoard *f_grBoard = new VerticalBoard(boardInfo,logData->curves());
-        addTab(f_grBoard,boardInfo->name());
     }
     AGraphicBoard *f_board = dynamic_cast<AGraphicBoard *>(currentWidget());
     m_curentBoard = f_board;
@@ -139,4 +119,7 @@ void GraphicEditor::changeBoard(int index){
         m_curentBoard = f_board;
         m_curentBoard->activate(true);
     }
+}
+void GraphicEditor::refresh(){
+
 }
