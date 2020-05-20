@@ -10,7 +10,7 @@ Ruler::Ruler(BoardForTrack *board):
     uint f_pictureHeight = m_board->pictureHeight();
     qreal f_pixelPerMm = m_board->pixelPerMm();
 
-    m_width = static_cast<int>(20.0 * f_pixelPerMm);
+    m_width = static_cast<int>(40.0 * f_pixelPerMm);
 
     m_curentPixmap = new QImage(m_width,f_pictureHeight,QImage::Format_ARGB4444_Premultiplied);
     m_doublePixMap = new QImage(m_width,f_pictureHeight,QImage::Format_ARGB4444_Premultiplied);

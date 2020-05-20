@@ -12,7 +12,7 @@ class GraphicEditor : public QTabWidget, AGraphicEditor{
 
     void newBoard();
 public:
-    GraphicEditor(QMap<QString,ICurve*> *curves,FormsBlock *forms,QWidget *parent = nullptr);
+    GraphicEditor(QSharedPointer<ILogData> logData,QWidget *parent = nullptr);
     virtual ~GraphicEditor();
 
     void setDrawTime();
