@@ -10,6 +10,10 @@ protected:
     bool m_isReady;
 public:
     ALogData();
+    ALogData(ALogData &logdata){}
+
+    ALogData &operator=(const ALogData &logData){Q_UNUSED(logData)}
+
     virtual ~ALogData()override;
 
     virtual bool load()override;
@@ -24,7 +28,7 @@ public:
     virtual void setName(QString name)override{}
 
     virtual QMap<QString,ICurve*> *curves()override;
-    virtual QList<IBlock*> *blocks()override;
+    virtual QList<QSharedPointer<IBlock> > *blocks()override;
     virtual QString name()override{ return QString();}
 
 /*signals:

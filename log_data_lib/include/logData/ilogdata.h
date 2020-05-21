@@ -11,6 +11,10 @@ class ILogData : public QObject{
     Q_OBJECT
 public:
     ILogData();
+    ILogData(ILogData &logData){Q_UNUSED(logData)}
+
+    ILogData &operator=(const ILogData &logData){Q_UNUSED(logData)}
+
     virtual ~ILogData();
 
     virtual bool load();
@@ -25,7 +29,7 @@ public:
     virtual void setName(QString name){}
 
     virtual QMap<QString,ICurve*> *curves();
-    virtual QList<IBlock*> *blocks();
+    virtual QList<QSharedPointer<IBlock> > *blocks();
     virtual QString name(){return QString();}
 
 signals:

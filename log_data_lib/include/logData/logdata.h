@@ -10,12 +10,16 @@ class LogData : public ALogData{
     ILoaderLogData *m_loader;
     ISaverLogData *m_saver;
     IInterpreterLogData *m_interpreter;
-    QList<IBlock*> *m_blocks;
+    QList<QSharedPointer<IBlock> > *m_blocks;
     QMap<QString,ICurve*> *m_curvesMap;
     QString m_name;
 
 public:
     LogData();
+    LogData(const LogData &logData);
+
+    LogData &operator=(const LogData &logData);
+
     ~LogData()override;
 
     bool load()override;
@@ -28,7 +32,7 @@ public:
     virtual void setName(QString name)override{m_name = name;}
 
     virtual QMap<QString,ICurve*> *curves()override;
-    virtual QList<IBlock*> *blocks()override;
+    virtual QList<QSharedPointer<IBlock> > *blocks()override;
     virtual QString name()override{return m_name;}
 
 public slots:

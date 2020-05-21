@@ -17,7 +17,7 @@ bool ILoaderLogData::isReady(){
     return true;
 }
 
-bool ILoaderLogData::setBlocks(QList<IBlock*> *blocks){
+bool ILoaderLogData::setBlocks(QList<QSharedPointer<IBlock> > *blocks){
     return false;
 }
 

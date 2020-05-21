@@ -9,10 +9,14 @@ LogDataView::LogDataView(QWidget *parent) : QWidget(parent)
     m_mainHorLayout = new QHBoxLayout(this);
     m_splitter = new QSplitter();
     m_dataModel = new DataModel();
+    m_doubleDataModel = new DataModel();
     m_dataTreeView = new DataTreeView();
     m_dataTreeView->setModel(m_dataModel);
+    m_doubleDataTreeWiev = new DataTreeView();
+    m_doubleDataTreeWiev->setModel(m_doubleDataModel);
 
     m_splitter->addWidget(m_dataTreeView);
+    m_splitter->addWidget(m_doubleDataTreeWiev);
     m_splitter->addWidget(m_tabs);
     m_mainHorLayout->addWidget(m_splitter);
 
@@ -32,12 +36,12 @@ void LogDataView::addLogData(QSharedPointer<ILogData> logData){
 }
 
 void LogDataView::lastDataReady(){
-    FormsBlock *forms = nullptr;
+    QSharedPointer<FormsBlock> f_forms = nullptr;
     QSharedPointer<ILogData> f_curentLogData = m_logDataList->last();
     m_dataModel->addLogData(f_curentLogData);
     if(!f_curentLogData)
         return;
-    QList<IBlock*> *blocks = f_curentLogData->blocks();
+    QList<QSharedPointer<IBlock> > *blocks = f_curentLogData->blocks();
     foreach(auto block,*blocks){
         if(block->name() == IBlock::FORMS_BLOCK){
             forms = dynamic_cast<FormsBlock *>(block);

@@ -43,7 +43,7 @@ QMap<QString,ICurve*> *ILogData::curves(){
     return nullptr;
 }
 
-QList<IBlock*> *ILogData::blocks(){
+QList<QSharedPointer<IBlock> > *ILogData::blocks(){
     return nullptr;
 }
 

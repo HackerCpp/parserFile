@@ -18,8 +18,8 @@ class LogDataView : public QWidget
     QTabWidget *m_tabs;
     QHBoxLayout *m_mainHorLayout;
     QSplitter *m_splitter;
-    DataModel *m_dataModel;
-    DataTreeView *m_dataTreeView;
+    DataModel *m_dataModel,*m_doubleDataModel;
+    DataTreeView *m_dataTreeView,*m_doubleDataTreeWiev;
 
 public:
     explicit LogDataView(QWidget *parent = nullptr);

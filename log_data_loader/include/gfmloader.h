@@ -28,7 +28,7 @@ public:
     bool download()override;
     void run()override;
 
-    void parser(const QByteArray &bodyBlock,IBlock *block);
+    void parser(const QByteArray &bodyBlock,QSharedPointer<IBlock>block);
     void parserDataBlock(const QByteArray &bodyBlock,IBlock *block);
     void parserFormsBlock(const QByteArray &bodyBlock,IBlock *block);
     void parserUnknownBlock(const QByteArray &bodyBlock,IBlock *block);

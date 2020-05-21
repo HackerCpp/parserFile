@@ -4,7 +4,7 @@
 
 HearedBlock::HearedBlock(){
     m_type = HEADER_BLOCK;
-    m_info = new QList <HearedInfo>;
+    m_info = new QList<QSharedPointer<HeaderInfo>>;
 }
 
 HearedBlock::~HearedBlock(){
@@ -14,13 +14,13 @@ HearedBlock::~HearedBlock(){
     }
 }
 
-void HearedBlock::setHeaderInfo(HearedInfo info){
+void HearedBlock::setHeaderInfo(QSharedPointer<HeaderInfo> info){
     if(!m_info){
         qDebug() << "m_info не создан";
     }
     m_info->push_back(info);
 }
 
-QList<HearedInfo> *HearedBlock::infoHeader(){
+QList<QSharedPointer<HeaderInfo>> *HearedBlock::infoHeader(){
     return m_info;
 }

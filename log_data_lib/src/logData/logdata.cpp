@@ -1,12 +1,39 @@
 #include "logdata.h"
 #include "datablock.h"
+#include "ilogdata.h"
 
 LogData::LogData(){
     m_loader = nullptr;
     m_saver = nullptr;
     m_interpreter = nullptr;
-    m_blocks = new QList<IBlock*>;
+    m_blocks = new QList<QSharedPointer<IBlock> >;
     m_curvesMap = new QMap<QString,ICurve*>;
+}
+
+LogData::LogData(const LogData &logData){
+    if (this == &logData)
+        return;
+    m_loader = nullptr;
+    m_saver = nullptr;
+    m_interpreter = nullptr;
+    m_blocks = new QList<QSharedPointer<IBlock> >;
+    ILogData &f_logdata = const_cast<LogData &>(logData);
+    m_name = f_logdata.name();
+}
+
+LogData &LogData::operator=(const LogData &logData){
+    if (this == &logData)
+        return *this;
+    m_loader = nullptr;
+    m_saver = nullptr;
+    m_interpreter = nullptr;
+    m_blocks = new QList<QSharedPointer<IBlock> >;
+    ILogData &f_logdata = const_cast<LogData &>(logData);
+    QList<QSharedPointer<IBlock> > *f_blocks = f_logdata.blocks();
+    foreach(auto block,*f_blocks){
+        m_blocks->push_back(block);
+    }
+    m_name = f_logdata.name();
 }
 
 LogData::~LogData(){
@@ -84,14 +111,14 @@ QMap<QString,ICurve*> *LogData::curves(){
    return m_curvesMap;
 }
 
-QList<IBlock*> *LogData::blocks(){
+QList<QSharedPointer<IBlock> > *LogData::blocks(){
     return m_blocks;
 }
 
 void LogData::findCurvesMap(){
     foreach(auto block,*m_blocks){
         if(block->name() == IBlock::DATA_BLOCK){
-           DataBlock *dataBlock = dynamic_cast<DataBlock*>(block);
+           DataBlock *dataBlock = dynamic_cast<DataBlock *>(block.data());
            if(dataBlock){
                QList<ICurve*> *curves = dataBlock->curves();
                if(!curves){

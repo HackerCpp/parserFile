@@ -14,7 +14,7 @@ public:
     virtual bool download();
     virtual bool isReady();
 
-    virtual bool setBlocks(QList<IBlock*> *blocks);
+    virtual bool setBlocks(QList<QSharedPointer<IBlock> >  *blocks);
 
 signals:
     void ready();

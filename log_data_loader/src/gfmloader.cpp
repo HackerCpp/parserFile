@@ -135,6 +135,7 @@ void GFMLoader::run(){
     }
     if(blocksList->isEmpty())
         return;
+    IBlock::TypeBlock f_type = IBlock::NO_BLOCK;
     foreach(BlockByte value,*blocksList){
         IBlock *block = nullptr;
         QString name = value.nameBlock;
@@ -148,8 +149,9 @@ void GFMLoader::run(){
             block = new DataBlock;
         if(block == nullptr)
             continue;
-        parser(value.bodyBlock,block);
-        m_blocks->push_back(block);
+        QSharedPointer<IBlock>f_block = IBlock::blockCreater(f_type);
+        parser(value.bodyBlock,f_block);
+        m_blocks->push_back(f_block);
         value.bodyBlock.clear();
     }
     delete blocksList;
@@ -159,19 +161,16 @@ void GFMLoader::run(){
     emit ready();
 }
 
-void GFMLoader::parser(const QByteArray &bodyBlock,IBlock *block){
-    ABlock *f_block = dynamic_cast<ABlock *>(block);
-    if(!f_block){
-        qDebug() << "Не удалось перевести интерфейс блока в абстрактный";
-    }
-    if(f_block->name() == IBlock::DATA_BLOCK)
-        parserDataBlock(bodyBlock,block);
-    else if(f_block->name() == IBlock::FORMS_BLOCK)
-        parserFormsBlock(bodyBlock,block);
-    else if(f_block->name() == IBlock::HEADER_BLOCK)
-        parserHeaderBlock(bodyBlock,block);
+void GFMLoader::parser(const QByteArray &bodyBlock,QSharedPointer<IBlock> block){
+
+    if(block->name() == IBlock::DATA_BLOCK)
+        parserDataBlock(bodyBlock,block.data());
+    else if(block->name() == IBlock::FORMS_BLOCK)
+        parserFormsBlock(bodyBlock,block.data());
+    else if(block->name() == IBlock::HEADER_BLOCK)
+        parserHeaderBlock(bodyBlock,block.data());
     else
-        parserUnknownBlock(bodyBlock,block);
+        parserUnknownBlock(bodyBlock,block.data());
 }
 
 void GFMLoader::parserHeaderBlock(const QByteArray &bodyBlock,IBlock *block){
@@ -190,14 +189,14 @@ void GFMLoader::parserHeaderBlock(const QByteArray &bodyBlock,IBlock *block){
         if(IndexBeginName == -1){
           return;
         }
-        HearedInfo f_info;
+        QSharedPointer<HeaderInfo> f_info(new HeaderInfo());
         nameHeader = body.mid(IndexBeginName,IndexEndName-IndexBeginName+1);
-        f_info.name = nameHeader;
+        f_info->setName(nameHeader);
         body = body.mid(IndexEndName+1, body.size() - IndexEndName);
         IndexBeginName = body.indexOf(beginName);
         int IndexLineOff = body.indexOf(endLine);
         bodyHeader = body.mid(0,IndexBeginName);
-        f_info.body = bodyHeader;
+        f_info->setBody(bodyHeader);
         body = body.mid(IndexLineOff+2, body.size() - IndexLineOff);
         hearedBlock->setHeaderInfo(f_info);
     }

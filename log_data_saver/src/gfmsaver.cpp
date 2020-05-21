@@ -41,13 +41,13 @@ bool GFMSaver::save(){
     fileGFM->write(m_codec->fromUnicode("GFM"));
     fileGFM->write(m_codec->fromUnicode("\r\n").mid(2));
 
-    foreach(IBlock *block,*m_blocks){
+    foreach(auto block,*m_blocks){
         if(block->name() == IBlock::DATA_BLOCK)
-            fileGFM->write(getForSaveDataBlock(block));
+            fileGFM->write(getForSaveDataBlock(block.data()));
         else if(block->name() == IBlock::FORMS_BLOCK)
-           fileGFM->write(getForSaveFormsBlock(block));
+           fileGFM->write(getForSaveFormsBlock(block.data()));
         else if(block->name() == IBlock::HEADER_BLOCK)
-            fileGFM->write(getForSaveHeaderBlock(block));
+            fileGFM->write(getForSaveHeaderBlock(block.data()));
     }
     fileGFM->close();
     delete fileGFM;
@@ -157,10 +157,10 @@ QByteArray  GFMSaver:: getForSaveHeaderBlock(IBlock *block){
     blockForWrite.append(m_codec->fromUnicode(f_name).mid(2));
 
     QByteArray f_data;
-    QList<HearedInfo> *f_headerInfo = headerBlock->infoHeader();
+    QList<QSharedPointer<HeaderInfo> > *f_headerInfo = headerBlock->infoHeader();
     foreach(auto value,*f_headerInfo){
-        f_data.append(m_codec->fromUnicode(value.name).mid(2));
-        f_data.append(m_codec->fromUnicode(value.body).mid(2));
+        f_data.append(m_codec->fromUnicode(value->name()).mid(2));
+        f_data.append(m_codec->fromUnicode(value->body()).mid(2));
     }
 
     int f_dataBlockSize = f_data.size() + 8;

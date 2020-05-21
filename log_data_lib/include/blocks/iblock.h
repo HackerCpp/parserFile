@@ -7,7 +7,6 @@
 #include <QObject>
 
 
-
 class IBlock : public QObject{
 
 public:
@@ -19,6 +18,8 @@ public:
 
     virtual TypeBlock name();
     virtual bool parser(const char *body,uint32_t size);
+
+    static QSharedPointer<IBlock> blockCreater(IBlock::TypeBlock type);
 };
 
 #endif // IBLOCK_H

@@ -34,7 +34,7 @@ QMap<QString,ICurve*> *ALogData::curves(){
    return nullptr;
 }
 
-QList<IBlock*> *ALogData::blocks(){
+QList<QSharedPointer<IBlock> > *ALogData::blocks(){
    return nullptr;
 }
 

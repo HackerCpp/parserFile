@@ -9,7 +9,7 @@
 
 class DataModel : public  QAbstractItemModel
 {
-    QVector<DataBlock*> *m_dataBlocks;
+
     QVector<QSharedPointer<ILogData> > *m_logDataVector;
 
 public:
@@ -17,6 +17,9 @@ public:
     ~DataModel() override;
 
     void addLogData(QSharedPointer<ILogData> logData);
+    void removeLogData(QSharedPointer<ILogData> logData);
+    QVector<QSharedPointer<ILogData> > *logDataVector(){return m_logDataVector;}
+    void update();
 
     QModelIndex index(int row, int column, const QModelIndex &parent) const override;
     QModelIndex parent(const QModelIndex &child) const override;
@@ -24,6 +27,7 @@ public:
     int columnCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
+    Qt::ItemFlags flags(const QModelIndex &index) const override;
 };
 
 #endif // DATAMODEL_H

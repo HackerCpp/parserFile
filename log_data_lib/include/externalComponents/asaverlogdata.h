@@ -5,7 +5,7 @@
 class ASaverLogData : public ISaverLogData{
 protected:
     bool m_isReady;
-    QList<IBlock*> *m_blocks;
+    QList<QSharedPointer<IBlock> > *m_blocks;
 public:
     ASaverLogData();
     ~ASaverLogData()override;
@@ -14,7 +14,7 @@ public:
     virtual bool save()override;
     virtual bool isReady()override;
 
-    virtual bool setBlocks(QList<IBlock*> *blocks)override;
+    virtual bool setBlocks(QList<QSharedPointer<IBlock> > *blocks)override;
 };
 
 #endif // ASAVERLOGDATA_H
