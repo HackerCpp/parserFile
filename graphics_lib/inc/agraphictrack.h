@@ -34,7 +34,7 @@ public:
 protected:
     QImage *m_infoPixMap,*m_curentHeader,*m_doubleHeader,*m_nameTrack;
     BoardForTrack *m_board;
-    int m_topPositionPicture;
+
     QRectF m_boundingRect;
     int m_heightHeader;
     Border *m_border;

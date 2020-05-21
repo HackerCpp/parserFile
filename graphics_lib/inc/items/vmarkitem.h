@@ -4,12 +4,17 @@
 #include "markItem.h"
 
 class VMarkItem : public VerticalItem{
+        virtual void drawBody(QPainter *per,QRectF visibleRect,bool *flag)override;
+
+
 
 public:
     VMarkItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board);
     ~VMarkItem(){}
 
-    //void paint(QPainter *per,QPainter *perHead,QRect rect,bool *flag)override;
+
+
+
 };
 
 #endif // VMARKITEM_H

@@ -32,8 +32,8 @@ VAcuItem::VAcuItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
 
 void inline VAcuItem::drawInterpolationVertical(QPainter *per,QRectF visibleRect,bool *flag){
     qreal quantityElem = m_curve->sizeOffset();
-    qreal f_width = per->device()->width()/2;
-    qreal step = f_width / quantityElem;
+    qreal f_width = per->device()->width()/2;//!!
+    qreal step = f_width / quantityElem; //!!!!!
     ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
     qreal f_yTop = visibleRect.y();
     qreal f_height = per->device()->height();
@@ -50,6 +50,8 @@ void inline VAcuItem::drawInterpolationVertical(QPainter *per,QRectF visibleRect
            break;
        }
     }
+
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     int f_indexMin = indexBegin;
     int f_indexMax = indexBegin;
 
@@ -64,7 +66,7 @@ void inline VAcuItem::drawInterpolationVertical(QPainter *per,QRectF visibleRect
     }
 
     int f_curentHeight = (f_mainValue->data(f_indexMax) * f_scaleForMainValue) - (f_mainValue->data(f_indexMin) * f_scaleForMainValue);
-
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     AcuItem *f_AcuItemInfo = dynamic_cast<AcuItem*>(m_itemInfo);
     QList<MulticolorItem> *f_multicolor = f_AcuItemInfo->multiColor();
     QColor color;

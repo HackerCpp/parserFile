@@ -52,6 +52,6 @@ void LogDataView::lastDataReady(){
         }
 
     }
-    GraphicEditor *m_graphicEditor = new GraphicEditor(m_logDataList->last()->curves(),forms);
+    GraphicEditor *m_graphicEditor = new GraphicEditor(f_curentLogData);
     m_tabs->addTab(m_graphicEditor,f_curentLogData->name());
 }

@@ -9,11 +9,13 @@
 class GraphicEditor : public QTabWidget, AGraphicEditor{
     Q_OBJECT
     AGraphicBoard *m_curentBoard;
-
+    QMap<QString,ICurve*> *m_curves;
+    FormsBlock *m_forms;
     void newBoard();
+
 public:
-    GraphicEditor(QMap<QString,ICurve*> *curves,FormsBlock *forms,QWidget *parent = nullptr);
-    virtual ~GraphicEditor();
+    GraphicEditor(QSharedPointer<ILogData> logData,QWidget *parent = nullptr);
+    virtual ~GraphicEditor()override;
 
     void setDrawTime();
     void setDrawDepth();
@@ -21,6 +23,9 @@ public:
     void setFormatDepth(AGraphicBoard::FormatDepth format);
     void setLengthPicture(AGraphicBoard::LengthPicture format);
     void setFormatPicture(QImage::Format format);
+    void refresh() override;
+    void addCurves(QSharedPointer<ILogData> logData);
+    void addForms(QSharedPointer<ILogData> logData);
 public slots:
     void changeBoard(int index);
 

@@ -10,6 +10,7 @@ class Ruler : public ObjectOfTheBoard
     BoardForTrack *m_board;
     QPointF m_prevPoint;
 
+
     void mousePressEvent(QGraphicsSceneMouseEvent *event)override;
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event)override;
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event)override;
@@ -21,6 +22,7 @@ public:
     void run() override;
     QRectF boundingRect()const override;
     void resizePictures()override;
+    void toSetTheLocationOfTheImageAfterDrawing() override;
 };
 
 #endif // RULER_H

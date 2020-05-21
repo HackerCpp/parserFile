@@ -1,10 +1,10 @@
 #include "igraphiceditor.h"
+#include "datablock.h"
 
 
+AGraphicEditor::AGraphicEditor(QSharedPointer<ILogData> logData){
 
-AGraphicEditor::AGraphicEditor(QMap<QString,ICurve*> *curves,FormsBlock *forms)
-    :m_curves(curves),m_forms(forms){
-
+    m_logData = logData;
 }
 
 AGraphicEditor::~AGraphicEditor(){

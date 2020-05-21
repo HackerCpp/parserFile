@@ -13,12 +13,11 @@ protected:
     QRectF m_visibilitySquare;
     bool m_endRedraw,m_needToRedraw;
     QImage *m_curentPixmap,*m_doublePixMap;
-
+    int m_topPositionPicture;
     virtual QRectF boundingRect()const override{return m_visibilitySquare;}
     void redraw();
     virtual void sceneUpdate();
-
-
+    virtual void toSetTheLocationOfTheImageAfterDrawing();
 public:
     ObjectOfTheBoard();
     virtual ~ObjectOfTheBoard();

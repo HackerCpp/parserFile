@@ -114,7 +114,9 @@ void VLineItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
         if(f_transition == RIGHT_TRANSITION ){
             per->drawLine(prevPoint,QPointF(f_width,(f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset));
             per->drawLine(QPointF(0,(f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset),QPointF(pixelX(i,f_width),(f_mainValue->data(i)*f_scaleForMainValue) - f_yTop + f_topOffset));
-            per->drawText(QPointF(50,(f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset),QString::number(f_mainValue->data(i)));
+
+            //per->drawText(QPointF(50,(f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset),QString::number(f_mainValue->data(i)));
+
         }
         else if(f_transition == LEFT_TRANSITION){
             per->drawLine(prevPoint,QPointF(0,(f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset));
@@ -123,7 +125,9 @@ void VLineItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
         }
         else{
             per->drawLine(prevPoint,QPointF(pixelX(i,f_width),(f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset));
-            //per->drawText(QPointF(50,(f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset),QString::number(f_mainValue->data(i)));
+
+           // per->drawText(QPointF(50,(f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset),QString::number(f_mainValue->data(i)));
+
         }
 
         prevPoint = QPointF(pixelX(i,f_width),((f_mainValue->data(i)*f_scaleForMainValue) - f_yTop) + f_topOffset);

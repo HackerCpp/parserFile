@@ -2,7 +2,7 @@
 #define IGRAPHICEDITOR_H
 #include "icurve.h"
 #include "formsblock.h"
-
+#include "logdata.h"
 class IGraphicEditor
 {
 public:
@@ -13,11 +13,12 @@ public:
 class AGraphicEditor : public IGraphicEditor
 {
 protected:
-    QMap<QString,ICurve*> *m_curves;
-    FormsBlock *m_forms;
+    QSharedPointer<ILogData> m_logData;
+
 public:
-    AGraphicEditor(QMap<QString,ICurve*> *curves,FormsBlock *forms);
+    AGraphicEditor(QSharedPointer<ILogData> logData);
     virtual ~AGraphicEditor()override;
+    virtual void refresh(){}
 };
 
 #endif // IGRAPHICEDITOR_H
