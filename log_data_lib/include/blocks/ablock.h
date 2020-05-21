@@ -7,7 +7,7 @@ class ABlock : public IBlock{
 protected:
     TypeBlock m_type;
 public:
-    ABlock(){}
+    ABlock(){m_type = NO_BLOCK;}
     virtual ~ABlock(){}
 
     TypeBlock name()override{return m_type;}

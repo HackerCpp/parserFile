@@ -135,21 +135,27 @@ void GFMLoader::run(){
     }
     if(blocksList->isEmpty())
         return;
-    IBlock::TypeBlock f_type = IBlock::NO_BLOCK;
+
     foreach(BlockByte value,*blocksList){
-        IBlock *block = nullptr;
         QString name = value.nameBlock;
-        if(name == "[HEADER]")
-            block = new HearedBlock;
-        else if(name == "[TOOL_INFO]")
-            block = new ToolInfoBlock;
-        else if(name == "[FORMS]")
-            block = new FormsBlock;
-        else if(name == "[DATA_BLOCK]")
-            block = new DataBlock;
-        if(block == nullptr)
+        IBlock::TypeBlock f_type = IBlock::NO_BLOCK;
+        if(name == "[HEADER]"){
+            f_type = IBlock::HEADER_BLOCK;
+        }
+        else if(name == "[TOOL_INFO]"){
+            f_type = IBlock::TOOLINFO_BLOCK;
+        }
+        else if(name == "[FORMS]"){
+            f_type = IBlock::FORMS_BLOCK;
+        }
+        else if(name == "[DATA_BLOCK]"){
+            f_type = IBlock::DATA_BLOCK;
+        }
+        if(f_type == IBlock::NO_BLOCK)
             continue;
-        QSharedPointer<IBlock>f_block = IBlock::blockCreater(f_type);
+        QSharedPointer<IBlock> f_block = IBlock::blockCreater(f_type);
+        if(!f_block.data())
+            continue;
         parser(value.bodyBlock,f_block);
         m_blocks->push_back(f_block);
         value.bodyBlock.clear();
@@ -577,7 +583,7 @@ void GFMLoader::parserFormsBlock(const QByteArray &bodyBlock,IBlock *block){
         }
     }
 
-    QFile file("qq2.txt");
+    QFile file("forms.txt");
     file.open(QIODevice::WriteOnly);
     QByteArray output;
     gzipDecompress(bodyBlock,output);

@@ -24,8 +24,8 @@ public:
     void setLengthPicture(AGraphicBoard::LengthPicture format);
     void setFormatPicture(QImage::Format format);
     void refresh() override;
-    void addCurves(QSharedPointer<ILogData> logData);
-    void addForms(QSharedPointer<ILogData> logData);
+    void addCurves();
+    void addForms();
 public slots:
     void changeBoard(int index);
 

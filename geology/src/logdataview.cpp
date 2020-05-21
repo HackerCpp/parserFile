@@ -36,22 +36,10 @@ void LogDataView::addLogData(QSharedPointer<ILogData> logData){
 }
 
 void LogDataView::lastDataReady(){
-    QSharedPointer<FormsBlock> f_forms = nullptr;
     QSharedPointer<ILogData> f_curentLogData = m_logDataList->last();
     m_dataModel->addLogData(f_curentLogData);
     if(!f_curentLogData)
         return;
-    QList<QSharedPointer<IBlock> > *blocks = f_curentLogData->blocks();
-    foreach(auto block,*blocks){
-        if(block->name() == IBlock::FORMS_BLOCK){
-            forms = dynamic_cast<FormsBlock *>(block);
-            if(!forms){
-                qDebug() << "Forms найдены, но динамически не переводятся";
-            }
-            break;
-        }
-
-    }
     GraphicEditor *m_graphicEditor = new GraphicEditor(f_curentLogData);
     m_tabs->addTab(m_graphicEditor,f_curentLogData->name());
 }

@@ -152,13 +152,13 @@ void DataTreeView::dropEvent(QDropEvent *event){
         f_model->addLogData(QSharedPointer<ILogData>(f_logData));
     }
     else if(f_baseFormat == "dataBlock"){
-        IBlock *f_dataBlock = dynamic_cast<IBlock*>(reinterpret_cast<QObject*>(event->mimeData()->data("dataBlock").toLongLong(&ok)));
+        QSharedPointer<IBlock> f_dataBlock(dynamic_cast<IBlock*>(reinterpret_cast<QObject*>(event->mimeData()->data("dataBlock").toLongLong(&ok))));
         DataModel *f_model = dynamic_cast<DataModel *>(model());
         if(!f_model || !f_dataBlock)
             return;
         if(dynamic_cast<ILogData *>(f_mousePositionObject)){
             ILogData *f_logData = dynamic_cast<ILogData *>(f_mousePositionObject);
-            QList<IBlock*> *f_blocks = f_logData->blocks();
+            QList<QSharedPointer<IBlock> > *f_blocks = f_logData->blocks();
             f_blocks->push_back(f_dataBlock);
             f_model->update();
         }

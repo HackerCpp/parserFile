@@ -7,28 +7,28 @@
 GraphicEditor::GraphicEditor(QSharedPointer<ILogData> logData,QWidget *parent)
     : QTabWidget(parent),AGraphicEditor(logData){
     this->setStyleSheet("QGraphicsView{background-color:white;}");
-    addCurves(m_logData);
-    addForms(m_logData);
+    m_curves = new QMap<QString,ICurve*>;
+    addCurves();
+    addForms();
 
 
 }
-void GraphicEditor::addCurves(QSharedPointer<ILogData> logData)
-{
 
+void GraphicEditor::addCurves(){
+    if(!m_curves)
+        return;
 
-    m_curves = new QMap<QString,ICurve*>;
-
-    foreach(auto block,*logData->blocks()){
+    foreach(auto block,*m_logData->blocks()){
          if(block->name() == IBlock::DATA_BLOCK){
-           DataBlock *dataBlock = dynamic_cast<DataBlock*>(block);
-           if(dataBlock){
-               QList<ICurve*> *curves = dataBlock->curves();
-               if(!curves){
+           DataBlock *f_dataBlock = dynamic_cast<DataBlock*>(block.data());
+           if(f_dataBlock){
+               QList<ICurve*> *f_curves = f_dataBlock->curves();
+               if(!f_curves){
                    qDebug() << "В Дата блоке нет кривых для формирования дерева поиска";
                    continue;
                }
 
-               foreach(auto curve,*curves){
+               foreach(auto curve,*f_curves){
                    if(!curve){
                        qDebug() << "Нулевая кривая в блоке";
                        continue;
@@ -43,17 +43,15 @@ void GraphicEditor::addCurves(QSharedPointer<ILogData> logData)
     }
 
 }
-void GraphicEditor::addForms(QSharedPointer<ILogData> logData){
-
+void GraphicEditor::addForms(){
+    if(!m_curves)
+        return;
     QList<ABoard*> *f_boards = nullptr;
 
-    foreach(auto block,*logData->blocks()){
+    foreach(auto block,*m_logData->blocks()){
         if(block->name() == IBlock::FORMS_BLOCK){
-            FormsBlock *formBlock = dynamic_cast<FormsBlock*>(block);
-
-            m_forms = formBlock;
-
-           f_boards = m_forms->boards();
+            m_forms = dynamic_cast<FormsBlock *>(block.data());
+            f_boards = m_forms->boards();
             if(!f_boards){
                 qDebug() << "FormsBlock Вернул нулевой указатель на борды";
                 return;
@@ -61,9 +59,7 @@ void GraphicEditor::addForms(QSharedPointer<ILogData> logData){
 
         }
      }
-
-    if(f_boards)
-    {
+    if(f_boards){
         foreach(auto boardInfo,*f_boards){
             AGraphicBoard *f_grBoard = new VerticalBoard(boardInfo,m_curves);
             addTab(f_grBoard,boardInfo->name());
@@ -164,12 +160,10 @@ void GraphicEditor::changeBoard(int index){
     }
 }
 void GraphicEditor::refresh(){
-
     if(m_curves){
-
         m_curves->clear();
     }
 
-    addCurves(m_logData);
-    addForms(m_logData);
+    addCurves();
+    addForms();
 }

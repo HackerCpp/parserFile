@@ -24,20 +24,19 @@ QSharedPointer<IBlock>IBlock::blockCreater(IBlock::TypeBlock type){
             break;
         }
         case DATA_BLOCK:{
-            f_block = new DataBlock;
+            f_block = new DataBlock();
             break;
         }
         case FORMS_BLOCK:{
-            f_block = new FormsBlock;
+            f_block = new FormsBlock();
             break;
-
         }
         case TOOLINFO_BLOCK:{
-            f_block = new ToolInfoBlock;
+            f_block = new ToolInfoBlock();
             break;
         }
         case HEADER_BLOCK:{
-            f_block = new HearedBlock;
+            f_block = new HearedBlock();
             break;
         }
     }
