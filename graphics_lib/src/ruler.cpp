@@ -75,7 +75,7 @@ void Ruler::run(){
         if(m_endRedraw)
             return;
     }
-    //sleep(2);
+
     swapPixMap();
 
 }

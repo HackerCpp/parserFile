@@ -13,8 +13,8 @@ public:
 class AGraphicEditor : public IGraphicEditor
 {
 protected:
-    QMap<QString,ICurve*> *m_curves;
-    FormsBlock *m_forms;
+    QSharedPointer<ILogData> m_logData;
+
 public:
     AGraphicEditor(QSharedPointer<ILogData> logData);
     virtual ~AGraphicEditor()override;
