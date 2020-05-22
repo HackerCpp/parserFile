@@ -32,6 +32,8 @@ include(../graphics_lib/graphics.pri)
 
 
 SOURCES += \
+    inc/graphicscontrolpanel.cpp \
+    inc/graphicwidget.cpp \
     src/datamodel.cpp \
     src/datatreeview.cpp \
     src/logdataview.cpp \
@@ -44,6 +46,8 @@ SOURCES += \
 HEADERS += \
     inc/datamodel.h \
     inc/datatreeview.h \
+    inc/graphicscontrolpanel.h \
+    inc/graphicwidget.h \
     inc/logdataview.h \
     inc/mainwindow.h \
     inc/menu.h \

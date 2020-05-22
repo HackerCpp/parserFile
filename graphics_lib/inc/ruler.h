@@ -16,7 +16,7 @@ class Ruler : public ObjectOfTheBoard
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event)override;
 public:
     Ruler(BoardForTrack *board);
-    ~Ruler(){}
+    ~Ruler()override{}
  protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*)override;
     void run() override;

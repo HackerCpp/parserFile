@@ -103,7 +103,7 @@ void VerticalBoard::distributionOfItemsBetweenTracks(){
 }
 
 VerticalBoard::~VerticalBoard(){
-
+    //if(m_canvas){delete m_canvas;m_canvas = nullptr;}
 }
 
 

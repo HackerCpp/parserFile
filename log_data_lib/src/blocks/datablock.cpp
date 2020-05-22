@@ -8,6 +8,24 @@ DataBlock::DataBlock(){
     m_shortCuts = new QList<ShortCut>;
 }
 
+DataBlock::DataBlock(DataBlock &block){
+    m_curves = new QList<ICurve*>;
+    m_type = DATA_BLOCK;
+    m_shortCuts = new QList<ShortCut>;
+    QList<ShortCut> *f_shortCuts = block.shortCuts();
+    foreach(auto shortCut,*f_shortCuts){
+        m_shortCuts->push_back(shortCut);
+    }
+    m_numberOfVectors = block.numberOfVectors();
+    m_nameRecord = block.nameRecord();
+    m_moduleMnemonics = block.moduleMnemonic();
+    m_plugins = block.plugins();
+    QList<ICurve*> *f_curves = block.curves();
+    foreach(auto curve,*f_curves){
+        m_curves->push_back(curve);
+    }
+}
+
 DataBlock::~DataBlock(){
     if(m_curves){
         delete m_curves;

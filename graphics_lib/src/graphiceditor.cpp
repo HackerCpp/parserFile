@@ -8,10 +8,13 @@ GraphicEditor::GraphicEditor(QSharedPointer<ILogData> logData,QWidget *parent)
     : QTabWidget(parent),AGraphicEditor(logData){
     this->setStyleSheet("QGraphicsView{background-color:white;}");
     m_curves = new QMap<QString,ICurve*>;
+    m_curentDrawType = 0;
+    m_curentFormatTime = AGraphicBoard::MIN_SM_1;
+    m_curentFormatdepth = AGraphicBoard::F1_100;
+    m_curentLenghPicture = AGraphicBoard::MIN;
+    m_curentImageFormat = QImage::Format_RGB16;
     addCurves();
     addForms();
-
-
 }
 
 void GraphicEditor::addCurves(){
@@ -72,7 +75,13 @@ void GraphicEditor::addForms(){
     addTab(new QWidget(),"+");
     connect(this,&QTabWidget::currentChanged,this,&GraphicEditor::changeBoard);
 
+    setDrawType(m_curentDrawType);
+    setFormatTime(m_curentFormatTime);
+    setFormatDepth(m_curentFormatdepth);
+    setLengthPicture(m_curentLenghPicture);
+    setFormatPicture(m_curentImageFormat);
 }
+
 GraphicEditor::~GraphicEditor(){
 
 }
@@ -93,14 +102,22 @@ void GraphicEditor::setDrawDepth(){
     }
 }
 
+void GraphicEditor::setDrawType(int drawType){
+    m_curentDrawType = drawType;
+    drawType ? setDrawDepth() : setDrawTime();
+}
+
 void GraphicEditor::setFormatTime(AGraphicBoard::FormatTime format){
+    m_curentFormatTime = format;
     for(int i = 0; i < count();++i){
-        AGraphicBoard * editor = dynamic_cast<AGraphicBoard *>(widget(i));
-        if(editor)
+        AGraphicBoard *editor = dynamic_cast<AGraphicBoard *>(widget(i));
+        if(editor){
             editor->setFormatTime(format);
+        }
     }
 }
 void GraphicEditor::setFormatDepth(AGraphicBoard::FormatDepth format){
+    m_curentFormatdepth = format;
     for(int i = 0; i < count();++i){
         AGraphicBoard * editor = dynamic_cast<AGraphicBoard *>(widget(i));
         if(editor)
@@ -109,6 +126,7 @@ void GraphicEditor::setFormatDepth(AGraphicBoard::FormatDepth format){
 }
 
 void GraphicEditor::setLengthPicture(AGraphicBoard::LengthPicture format){
+    m_curentLenghPicture = format;
     for(int i = 0; i < count();++i){
         AGraphicBoard * editor = dynamic_cast<AGraphicBoard *>(widget(i));
         if(editor)
@@ -117,6 +135,7 @@ void GraphicEditor::setLengthPicture(AGraphicBoard::LengthPicture format){
 }
 
 void GraphicEditor::setFormatPicture(QImage::Format format){
+    m_curentImageFormat = format;
     for(int i = 0; i < count();++i){
         AGraphicBoard * editor = dynamic_cast<AGraphicBoard *>(widget(i));
         if(editor)
@@ -136,6 +155,12 @@ void GraphicEditor::newBoard(){
     f_newBoard->setTrack(f_track);
     m_forms->boards()->push_back(f_newBoard);
     AGraphicBoard *f_grBoard = new VerticalBoard(f_newBoard,m_curves);
+
+    f_grBoard->setFormatTime(m_curentFormatTime);
+    f_grBoard->setFormatDepth(m_curentFormatdepth);
+    m_curentDrawType ? f_grBoard->setDrawDepth() : f_grBoard->setDrawTime();
+    f_grBoard->setFormatPicture(m_curentImageFormat);
+    f_grBoard->setLengthPicture(m_curentLenghPicture);
     m_curentBoard = f_grBoard;
     insertTab(count() - 1,f_grBoard,f_newBoard->name());
     setCurrentWidget(m_curentBoard);
@@ -162,6 +187,18 @@ void GraphicEditor::changeBoard(int index){
 void GraphicEditor::refresh(){
     if(m_curves){
         m_curves->clear();
+    }
+    int f_count = count() - 1;
+    for(int index = f_count; index >=0;index--){
+        AGraphicBoard *f_board = dynamic_cast<AGraphicBoard *>(widget(index));
+        if(f_board){
+            delete f_board;
+            f_board == nullptr;
+        }
+        else{
+            delete widget(index);
+        }
+        removeTab(index);
     }
 
     addCurves();

@@ -18,6 +18,7 @@ class DataBlock : public ABlock{
 
 public:
     DataBlock();
+    DataBlock(DataBlock &block);
     ~DataBlock();
 
     void setNumberOfVectors(uint numberOfVectors);
@@ -32,6 +33,8 @@ public:
     QList<ICurve*> *curves();
     QList<ShortCut> *shortCuts();
     QString nameRecord();
+    QString moduleMnemonic(){return m_moduleMnemonics;}
+    QString plugins(){return m_plugins;}
 
 
 };

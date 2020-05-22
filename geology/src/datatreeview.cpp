@@ -40,7 +40,7 @@ void DataTreeView::startCustomDrag(QPointF point){
         //f_model->removeLogData(QSharedPointer<ILogData>(f_logData));
     }
     else if(dynamic_cast<DataBlock*>(f_object)){
-        DataBlock *f_dataBlock = dynamic_cast<DataBlock*>(f_object);
+        DataBlock *f_dataBlock = new DataBlock(dynamic_cast<DataBlock &>(*f_object));
         f_mimeData = new QMimeData;
         f_mimeData->setData("dataBlock",QString::number(reinterpret_cast<long long>(f_dataBlock)).toLocal8Bit());
         f_painter.drawText(f_image->rect(),Qt::AlignLeft|Qt::AlignTop,"DATA_BLOCK");
