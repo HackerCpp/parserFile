@@ -9,21 +9,6 @@ ACurve::~ACurve(){
 
 }
 
-uint ACurve::setData(qreal data){
-    return 0;
-}
-
-uint ACurve::setData(qreal data,uint index){
-    return 0;
-}
-
-uint ACurve::setData(const char *dataPtr,uint numberOfVectors){
-    qDebug() << "setData ACurve";
-    return 0;
-}
-
-
-
 ICurve *ACurve::time(){
    return m_time;
 }

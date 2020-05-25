@@ -13,9 +13,9 @@ public:
 
     virtual qreal data(uint index);
     virtual QByteArray data();
-    virtual uint setData(qreal data);
-    virtual uint setData(qreal data,uint index);
-    virtual uint setData(const char *dataPtr,uint numberOfVectors);
+    virtual void setData(qreal data);
+    virtual void setData(qreal data,uint index);
+    virtual void setData(const char *dataPtr,uint numberOfVectors);
 
     virtual ICurve *time();
     virtual ICurve *depth();

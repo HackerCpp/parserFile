@@ -16,8 +16,8 @@ public:
 
      qreal data(uint index)override;
      QByteArray data() override;
-     uint setData(const char *dataPtr,uint numberOfVectors)override;
-     uint setData(qreal data,uint index)override;
+     void setData(const char *dataPtr,uint numberOfVectors)override;
+     void setData(qreal data,uint index)override;
 
      uint size()override;
      uint sizeOffset()override;
@@ -38,16 +38,15 @@ template<typename T> QByteArray Curve<T>::data(){
 }
 
 
-template<typename T> uint Curve<T>::setData(qreal data,uint index){
+template<typename T> void Curve<T>::setData(qreal data,uint index){
     if(index>m_data->size()){
         qDebug()<<"Индекс вышел за пределы массива, вернули 0";
-        return 0;
+        return;
     }
     m_data->data()[index] = data;
-    return size();
 }
 
-template<typename T> uint Curve<T>::setData(const char *dataPtr,uint numberOfVectors){
+template<typename T> void Curve<T>::setData(const char *dataPtr,uint numberOfVectors){
     uint dataSize = numberOfVectors * (m_sizeOffsetInByte/m_sizeOfType);
     uint dataSizeInBytes = numberOfVectors * m_sizeOffsetInByte;
     m_data = new QVector<T>(dataSize);
@@ -55,7 +54,6 @@ template<typename T> uint Curve<T>::setData(const char *dataPtr,uint numberOfVec
     m_minimum = static_cast<qreal>(*std::min_element(m_data->begin(),m_data->end()));
     m_maximum = static_cast<qreal>(*std::max_element(m_data->begin(),m_data->end()));
     m_positiveOffset = m_minimum < 0?m_minimum:0;
-    return dataSizeInBytes;
 }
 
 template<typename T> uint Curve<T>::size(){

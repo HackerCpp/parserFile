@@ -27,9 +27,9 @@ public:
 
     virtual qreal data(uint index)override{return 0;}
     virtual QByteArray data()override{return 0;}
-    virtual uint setData(qreal data)override;
-    virtual uint setData(qreal data,uint index)override;
-    virtual uint setData(const char *dataPtr,uint numberOfVectors)override;
+    virtual void setData(qreal data)override{}
+    virtual void setData(qreal data,uint index)override{}
+    virtual void setData(const char *dataPtr,uint numberOfVectors)override{}
 
 
     virtual ICurve *time()override;

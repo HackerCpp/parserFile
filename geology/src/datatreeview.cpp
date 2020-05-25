@@ -8,6 +8,7 @@
 #include "ilogdata.h"
 #include "datamodel.h"
 #include <QPainter>
+#include "aboard.h"
 
 
 DataTreeView::DataTreeView(QWidget *parent)
@@ -36,14 +37,18 @@ void DataTreeView::startCustomDrag(QPointF point){
         f_mimeData = new QMimeData;
         f_mimeData->setData("logData",QString::number(reinterpret_cast<long long>(f_logData)).toLocal8Bit());
         f_painter.drawText(f_image->rect(),Qt::AlignLeft|Qt::AlignTop,f_logData->name().mid(f_logData->name().indexOf("/") + 1));
-        //DataModel *f_model = dynamic_cast<DataModel *>(model());
-        //f_model->removeLogData(QSharedPointer<ILogData>(f_logData));
     }
     else if(dynamic_cast<DataBlock*>(f_object)){
         DataBlock *f_dataBlock = new DataBlock(dynamic_cast<DataBlock &>(*f_object));
         f_mimeData = new QMimeData;
         f_mimeData->setData("dataBlock",QString::number(reinterpret_cast<long long>(f_dataBlock)).toLocal8Bit());
         f_painter.drawText(f_image->rect(),Qt::AlignLeft|Qt::AlignTop,"DATA_BLOCK");
+    }
+    else if(dynamic_cast<ABoard*>(f_object)){
+        ABoard *f_boarddInfo = dynamic_cast<ABoard *>(f_object);
+        f_mimeData = new QMimeData;
+        f_mimeData->setData("board",QString::number(reinterpret_cast<long long>(f_boarddInfo)).toLocal8Bit());
+        f_painter.drawText(f_image->rect(),Qt::AlignLeft|Qt::AlignTop,f_boarddInfo->name());
     }
     else if(dynamic_cast<ICurve *>(f_object)){
         ICurve *f_curve = dynamic_cast<ICurve*>(f_object);

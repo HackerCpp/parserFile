@@ -207,7 +207,7 @@ int DataModel::rowCount(const QModelIndex &parent )const{
 }
 
 int DataModel::columnCount(const QModelIndex &parent )const{
-    return 2;
+    return 1;
 }
 
 QVariant DataModel::data(const QModelIndex &index, int role )const{

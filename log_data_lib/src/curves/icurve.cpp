@@ -14,18 +14,16 @@ qreal ICurve::data(uint index){
 QByteArray ICurve::data(){
     return QByteArray();
 }
-uint ICurve::setData(qreal data){
-    return 0;
+
+void ICurve::setData(qreal data){
 }
 
-uint ICurve::setData(qreal data,uint index){
+void ICurve::setData(qreal data,uint index){
     qDebug() << "setData interf curve";
-    return 0;
 }
 
-uint ICurve::setData(const char *dataPtr,uint numberOfVectors){
+void ICurve::setData(const char *dataPtr,uint numberOfVectors){
     qDebug() << "setData interf curve";
-    return 0;
 }
 
 ICurve *ICurve::time(){
