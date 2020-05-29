@@ -109,7 +109,7 @@ void inline VSpectrItem::drawInterpolationVertical(QPainter *per,QRectF visibleR
             gradient.insert(((f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset),color);
         }
         qreal prevStep = j * step;
-        QRect f_drawRect = QRect(prevStep,(f_mainValue->data(f_indexMin) * f_scaleForMainValue) - f_yTop + f_topOffset,step,f_curentHeight);
+        QRect f_drawRect = QRect(prevStep,0.0,10,f_height);
         gradient.draw(*f_image,f_drawRect,QPointF(0.0,0.0),QPointF(0.0,f_height),GradientStyle::Linear,70000);
     }
     qDebug() << "end";
