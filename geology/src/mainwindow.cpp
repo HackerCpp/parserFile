@@ -14,12 +14,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_logDataView = new LogDataView(this);
     m_logDataView->installEventFilter(this);
-    m_logDataView->setMinimumSize(100,100);
 
     m_mainHorLayout->addWidget(m_menu,100,Qt::AlignTop);
     m_mainHorLayout->addWidget(m_logDataView);
     this->setLayout(m_mainHorLayout);
-
+    m_flagHideMenu = false;
 }
 
 MainWindow::~MainWindow()
@@ -32,9 +31,10 @@ MainWindow::~MainWindow()
 bool MainWindow::eventFilter(QObject *o, QEvent *e){
     if(e->type() == QEvent::Enter){
         if(o == m_logDataView){
+            if(m_flagHideMenu)
                 m_menu->hideLeft();
-                return true;
-            }
+            return true;
+        }
         else if(o == m_menu){
                 m_menu->showRight();
                 return true;
@@ -60,7 +60,7 @@ void MainWindow::openFile(){
         m_logDataView->addLogData(f_logData);
         f_logData->setLoader(f_loader);
         f_logData->load();
-
+        m_flagHideMenu = true;
     }
 }
 

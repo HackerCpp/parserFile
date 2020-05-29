@@ -71,7 +71,12 @@ void DataBlock::setcurve(ICurve* curve){
         qDebug() << "евозможно добавить кривую m_curves не определён";
         return;
     }
+    foreach(auto f_curve,*m_curves){
+        if(f_curve == curve)
+            return;
+    }
     m_curves->push_back(curve);
+    emit dataUpdate();
 }
 
 
@@ -86,6 +91,7 @@ QList<ICurve*> *DataBlock::curves(){
 QList<ShortCut> *DataBlock::shortCuts(){
     return m_shortCuts;
 }
+
 QString DataBlock:: nameRecord()
 {
     return m_nameRecord;

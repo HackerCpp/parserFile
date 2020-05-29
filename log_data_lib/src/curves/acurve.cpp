@@ -88,18 +88,9 @@ void ACurve::setDataType(QString dataType){
     m_dataType = dataType;
 }
 
-void ACurve::setRecordPoint(QString recordPoint){
-    m_recordPoint = recordPoint;
-}
-
 void ACurve::setDesc(Desc *desc){
     m_desc = desc;
 }
-QString ACurve::recordPoint()
-{
-    return m_recordPoint;
-}
-
 
 uint ACurve::offset(){
     return m_offset;

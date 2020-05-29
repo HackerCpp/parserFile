@@ -8,6 +8,7 @@
 
 
 class IBlock : public QObject{
+    Q_OBJECT
 
 public:
     enum TypeBlock {NO_BLOCK,DATA_BLOCK, FORMS_BLOCK,
@@ -23,6 +24,9 @@ public:
 
     static QSharedPointer<IBlock> blockCreater(IBlock::TypeBlock type);
     static QSharedPointer<IBlock> blockCreater(const IBlock &block);
+
+signals:
+    virtual void dataUpdate();
 };
 
 #endif // IBLOCK_H

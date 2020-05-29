@@ -7,6 +7,7 @@ AGraphicItem::AGraphicItem(ICurve *curve,BoardForTrack *board)
     m_isActive = false;
     m_positionHeaderArea = 0;
     m_heightHeaderArea = 20;
+    m_recordPointDepth = curve->recordPoint();
 }
 
 AGraphicItem::~AGraphicItem(){

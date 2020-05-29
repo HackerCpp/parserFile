@@ -2,12 +2,18 @@
 #define DATATREEVIEW_H
 #include <QTreeView>
 #include <QMenu>
+#include "datablock.h"
+#include "ilogdata.h"
 
 
 class DataTreeView : public QTreeView
 {
-    QMenu *m_menu;
+    Q_OBJECT
+
+    QMenu *m_dataBlockMenu,*m_logDataMenu;
     QPointF m_prevPoint,m_ptDragPos;
+    IBlock *m_curentBlock;
+    ILogData *m_curentLogData;
 public:
     DataTreeView(QWidget *parent = nullptr);
     ~DataTreeView()override;
@@ -22,6 +28,14 @@ public:
     void dragMoveEvent(QDragMoveEvent *event) override;
     void dragLeaveEvent(QDragLeaveEvent *event) override;
     void dropEvent(QDropEvent *event) override;
+
+public slots:
+    void newCurve();
+    void deleteDataBlock();
+    void saveGFM();
+    void openPythonConsole();
+    void openPythonScript();
+
 };
 
 #endif // DATATREEVIEW_H

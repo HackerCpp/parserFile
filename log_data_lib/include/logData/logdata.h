@@ -11,7 +11,6 @@ class LogData : public ALogData{
     ISaverLogData *m_saver;
     IInterpreterLogData *m_interpreter;
     QList<QSharedPointer<IBlock> > *m_blocks;
-    QMap<QString,ICurve*> *m_curvesMap;
     QString m_name;
 
 public:
@@ -24,19 +23,24 @@ public:
 
     bool load()override;
     bool save()override;
-    bool openInterpreter()override;
+    bool openInterpreterConsole()override;
+    bool openInterpreterScript()override;
+
+    virtual bool isInterpreter()override{return m_interpreter != nullptr;}
 
     bool setLoader(ILoaderLogData *loader)override;
     bool setSaver(ISaverLogData *saver)override;
     bool setInterpreter(IInterpreterLogData *interpreter)override;
     virtual void setName(QString name)override{m_name = name;}
 
-    virtual QMap<QString,ICurve*> *curves()override;
+    void addBlock(QSharedPointer<IBlock> block)override;
+
     virtual QList<QSharedPointer<IBlock> > *blocks()override;
     virtual QString name()override{return m_name;}
 
 public slots:
-    void findCurvesMap()override;
+    void dataUpdate()override;
+    void dataReady()override;
 
 };
 

@@ -1,5 +1,4 @@
 #include "vlineitem.h"
-#include "SFML/System.hpp"
 
 VLineItem::VLineItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
     :VerticalItem(curve,board)
@@ -63,7 +62,6 @@ void VLineItem::loadDrawingParam(int width){
 }
 
 void VLineItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
-    //sf::Clock f_clock;
     if(!m_itemInfo || !per || !m_board){
         qDebug() << "LineItemInfo = nullptr или painter = nullptr m_board = null Не удаётся нарисовать кривую";
         return;
@@ -85,17 +83,18 @@ void VLineItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
     int f_width = per->device()->width();
     int f_height = per->device()->height();
     ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
+    qreal f_recordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
     int f_yTop = visibleRect.y();
     int f_topOffset = m_board->offsetUp();
     int f_downOffset = f_height - f_topOffset;
     int indexBegin  = 0;
     qreal f_scaleForMainValue = m_board->scale();
     loadDrawingParam(f_width);
-    if((f_mainValue->minimum() * f_scaleForMainValue) > f_yTop  + f_downOffset || (f_mainValue->maximum() * f_scaleForMainValue) < f_yTop - f_topOffset){
+    if(((f_mainValue->minimum() + f_recordPoint) * f_scaleForMainValue) > f_yTop  + f_downOffset || ((f_mainValue->maximum() + f_recordPoint) * f_scaleForMainValue) < f_yTop - f_topOffset){
         return;
     }
     for(uint i = 0; i < f_mainValue->size(); ++i){
-       if((f_mainValue->data(i) * f_scaleForMainValue) > f_yTop - f_topOffset && (f_mainValue->data(i) * f_scaleForMainValue) < f_yTop + f_downOffset){
+       if(((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) > f_yTop - f_topOffset && ((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) < f_yTop + f_downOffset){
            indexBegin = i;// > 2?i - 2 : 0;
            break;
        }
@@ -103,40 +102,38 @@ void VLineItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
     uint i = 0;
     uint prevIndex = 0;
     if(f_mainValue->size() > m_curve->size()){
-        qDebug() << "size mainValue > m_curve";
+        qDebug() << "size mainValue > m_curve" << f_mainValue->size() << m_curve->size() ;
         return;
     }
-    QPointF prevPoint = QPointF(pixelX(indexBegin,f_width),(f_mainValue->data(indexBegin) * f_scaleForMainValue) - f_yTop + f_topOffset - 1);
+    QPointF prevPoint = QPointF(pixelX(indexBegin,f_width),((f_mainValue->data(indexBegin)  + f_recordPoint) * f_scaleForMainValue) - f_yTop + f_topOffset - 1);
     for(i = indexBegin + 1;i < f_mainValue->size(); ++i){
         if(*flag)
             return;
         VLineItem::Transition f_transition = amountSaturation(i,f_width);
         if(f_transition == RIGHT_TRANSITION ){
-            per->drawLine(prevPoint,QPointF(f_width,(f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset));
-            per->drawLine(QPointF(0,(f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset),QPointF(pixelX(i,f_width),(f_mainValue->data(i)*f_scaleForMainValue) - f_yTop + f_topOffset));
+            per->drawLine(prevPoint,QPointF(f_width,((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) - f_yTop + f_topOffset));
+            per->drawLine(QPointF(0,((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) - f_yTop + f_topOffset),QPointF(pixelX(i,f_width),((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) - f_yTop + f_topOffset));
 
             //per->drawText(QPointF(50,(f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset),QString::number(f_mainValue->data(i)));
 
         }
         else if(f_transition == LEFT_TRANSITION){
-            per->drawLine(prevPoint,QPointF(0,(f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset));
-            per->drawLine(QPointF(f_width,(f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset),QPointF(pixelX(i,f_width),(f_mainValue->data(i)*f_scaleForMainValue) - f_yTop + f_topOffset));
+            per->drawLine(prevPoint,QPointF(0,((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) - f_yTop + f_topOffset));
+            per->drawLine(QPointF(f_width,((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) - f_yTop + f_topOffset),QPointF(pixelX(i,f_width),((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) - f_yTop + f_topOffset));
             //per->drawText(QPointF(50,(f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset),QString::number(f_mainValue->data(i)));
         }
         else{
-            per->drawLine(prevPoint,QPointF(pixelX(i,f_width),(f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset));
-
+            per->drawLine(prevPoint,QPointF(pixelX(i,f_width),((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) - f_yTop + f_topOffset));
            // per->drawText(QPointF(50,(f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset),QString::number(f_mainValue->data(i)));
 
         }
 
-        prevPoint = QPointF(pixelX(i,f_width),((f_mainValue->data(i)*f_scaleForMainValue) - f_yTop) + f_topOffset);
+        prevPoint = QPointF(pixelX(i,f_width),(((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) - f_yTop) + f_topOffset);
         prevIndex = i;
-        if((f_mainValue->data(i) * f_scaleForMainValue) > f_yTop + f_downOffset || (f_mainValue->data(i) * f_scaleForMainValue) < f_yTop - f_topOffset){
+        if(((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) > f_yTop + f_downOffset || ((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) < f_yTop - f_topOffset){
             break;
         }
     }
-    //qDebug() << f_clock.getElapsedTime().asMicroseconds();
 }
 
 QColor VLineItem::color(){
@@ -209,4 +206,6 @@ bool VLineItem::isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per)
 }
 
 
-
+void VLineItem::updateParam(int pictureWidth){
+    m_recordPointDepth = m_curve->recordPoint();
+}

@@ -103,7 +103,12 @@ void VerticalBoard::distributionOfItemsBetweenTracks(){
 }
 
 VerticalBoard::~VerticalBoard(){
-    //if(m_canvas){delete m_canvas;m_canvas = nullptr;}
+    QList<QGraphicsItem*> f_items = m_canvas->items();
+    foreach(auto item,f_items){
+        delete item;item = nullptr;
+    }
+    if(m_canvas){delete m_canvas;m_canvas = nullptr;}
+
 }
 
 

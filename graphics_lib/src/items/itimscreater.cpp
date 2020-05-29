@@ -26,7 +26,7 @@ AGraphicItem *ItimsCreater::createItem(AItem *itemInfo,ICurve *curve,BoardForTra
                 break;
             }
             default :{
-                qDebug() << "Не описанный тип Item:" << f_type;
+                qDebug() << "Не описанный тип Item itemCreater.cpp:" << f_type;
             }
         }
 

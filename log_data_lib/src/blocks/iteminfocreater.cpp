@@ -1,6 +1,6 @@
 #include "iteminfocreater.h"
 #include "lineItem.h"
-#include "acuItem.h"
+#include "AcuItem.h"
 #include "markItem.h"
 
 ItemInfoCreater::ItemInfoCreater(){
@@ -21,11 +21,12 @@ AItem *ItemInfoCreater::CreateItemInfo(ICurve *curve){
         f_item->setEnd(false,curve->maximum(),20.f/f_maximum);
         f_item->setName(curve->shortCut().nameWithoutNumber() + ':' + curve->mnemonic(),nullptr);
     }
+    else if(f_drawType == "MARK"){
+        f_item = new markItem();
+    }
     /*else if(f_drawType == "ACOUSTIC"){
         f_item = new AcuItem();
     }
-    else if(f_drawType == "MARK"){
-        f_item = new markItem;
-    }*/
+    */
     return f_item;
 }

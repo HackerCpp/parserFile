@@ -13,6 +13,7 @@ class ABoard : public IBoard{
 
 public:
     ABoard();
+    ABoard(const ABoard &object);
     virtual ~ABoard()override;
 
     virtual void setName(QString name)override;

@@ -1,22 +1,29 @@
 #include "datatreeview.h"
 #include <QMouseEvent>
 #include <QDebug>
-#include "datablock.h"
+#include "newcurvetab.h"
 #include "icurve.h"
 #include <QDrag>
 #include <QApplication>
-#include "ilogdata.h"
+#include "interpreterpython.h"
 #include "datamodel.h"
 #include <QPainter>
 #include "aboard.h"
+#include "gfmsaver.h"
 
 
 DataTreeView::DataTreeView(QWidget *parent)
     : QTreeView(parent){
 
-    m_menu = new QMenu("");
-    //m_menu->addAction("&Curve settings",this, SLOT(openSettingsActiveItems()));
-    //m_menu->addAction("&Curve edit",this, SLOT(openEditorActiveItems()));
+    m_dataBlockMenu = new QMenu("");
+    m_dataBlockMenu->addAction("&Add new curve",this, SLOT(newCurve()));
+    m_dataBlockMenu->addAction("&Delete",this, SLOT(deleteDataBlock()));
+
+    m_logDataMenu = new QMenu("");
+    m_logDataMenu->addAction("&Save GFM",this, SLOT(saveGFM()));
+    m_logDataMenu->addAction("&Open python console",this, SLOT(openPythonConsole()));
+    m_logDataMenu->addAction("&Open python script",this, SLOT(openPythonScript()));
+
     setAcceptDrops(true);
     setDragDropMode(DragDrop);
 }
@@ -45,7 +52,7 @@ void DataTreeView::startCustomDrag(QPointF point){
         f_painter.drawText(f_image->rect(),Qt::AlignLeft|Qt::AlignTop,"DATA_BLOCK");
     }
     else if(dynamic_cast<ABoard*>(f_object)){
-        ABoard *f_boarddInfo = dynamic_cast<ABoard *>(f_object);
+        ABoard *f_boarddInfo = new ABoard(dynamic_cast<ABoard &>(*f_object));
         f_mimeData = new QMimeData;
         f_mimeData->setData("board",QString::number(reinterpret_cast<long long>(f_boarddInfo)).toLocal8Bit());
         f_painter.drawText(f_image->rect(),Qt::AlignLeft|Qt::AlignTop,f_boarddInfo->name());
@@ -57,7 +64,6 @@ void DataTreeView::startCustomDrag(QPointF point){
         f_painter.drawText(f_image->rect(),Qt::AlignLeft|Qt::AlignTop,f_curve->mnemonic());
     }
 
-
     if(f_mimeData){
             QDrag *f_drag = new QDrag(this);
             f_drag->setMimeData(f_mimeData);
@@ -68,27 +74,36 @@ void DataTreeView::startCustomDrag(QPointF point){
 
 void DataTreeView::mousePressEvent(QMouseEvent *event){
 
-    /*QObject *f_object = static_cast<QObject *>(indexAt(event->pos()).internalPointer());
-    ICurve * f_curve = dynamic_cast<ICurve *>(f_object);
+    QObject *f_object = static_cast<QObject *>(indexAt(event->pos()).internalPointer());
+    /*ICurve * f_curve = dynamic_cast<ICurve *>(f_object);
     if(f_curve){
         qDebug() << f_curve->mnemonic();
-    }
-    DataBlock *f_dataBlock = dynamic_cast<DataBlock *>(f_object);
-    if(f_dataBlock){
-        qDebug() << f_dataBlock->numberOfVectors();
     }*/
+    if(event->button() == Qt::RightButton){
+        DataBlock *f_dataBlock = dynamic_cast<DataBlock *>(f_object);
+        if(f_dataBlock){
+            m_curentBlock = f_dataBlock;
+            m_dataBlockMenu->move(QCursor::pos());
+            m_dataBlockMenu->show();
+            return;
+        }
+        ILogData *f_logData = dynamic_cast<ILogData *>(f_object);
+        if(f_logData){
+            m_curentLogData = f_logData;
+            m_logDataMenu->move(QCursor::pos());
+            m_logDataMenu->show();
+        }
+    }
     m_prevPoint = event->pos();
     QTreeView::mousePressEvent(event);
 }
 
 void DataTreeView::mouseReleaseEvent(QMouseEvent *event){
     QTreeView::mouseReleaseEvent(event);
-
 }
 
 void DataTreeView::mouseDoubleClickEvent(QMouseEvent *event){
     QTreeView::mouseDoubleClickEvent(event);
-
 }
 
 void DataTreeView::mouseMoveEvent(QMouseEvent *event){
@@ -104,12 +119,12 @@ void DataTreeView::mouseMoveEvent(QMouseEvent *event){
 void DataTreeView::dragEnterEvent(QDragEnterEvent *event){
     QPoint point = event->pos();
     bool ok;
-    QObject *f_mousePositionObject = static_cast<QObject *>(indexAt(QPoint(point.x(),point.y())).internalPointer());
-    QObject* f_dragObject = reinterpret_cast<QObject*>(event->mimeData()->text().toLongLong(&ok));
+    //QObject *f_mousePositionObject = static_cast<QObject *>(indexAt(QPoint(point.x(),point.y())).internalPointer());
+    //QObject* f_dragObject = reinterpret_cast<QObject*>(event->mimeData()->text().toLongLong(&ok));
     QStringList f_format = event->mimeData()->formats();
     QString f_baseFormat = f_format.first();
     bool f_accepted = false;
-    if(f_baseFormat == "logData" || f_baseFormat == "dataBlock"){
+    if(f_baseFormat == "logData" || f_baseFormat == "dataBlock" || f_baseFormat == "board"){
         f_accepted = true;
     }
     event->setAccepted(f_accepted);
@@ -119,7 +134,7 @@ void DataTreeView::dragMoveEvent(QDragMoveEvent *event){
     QPoint point = event->pos();
     bool ok;
     QObject *f_mousePositionObject = static_cast<QObject *>(indexAt(QPoint(point.x(),point.y())).internalPointer());
-    QObject* f_dragObject = reinterpret_cast<QObject*>(event->mimeData()->text().toLongLong(&ok));
+    //QObject* f_dragObject = reinterpret_cast<QObject*>(event->mimeData()->text().toLongLong(&ok));
     QStringList f_format = event->mimeData()->formats();
     QString f_baseFormat = f_format.first();
     bool f_accepted = false;
@@ -129,6 +144,10 @@ void DataTreeView::dragMoveEvent(QDragMoveEvent *event){
     else if(f_baseFormat == "dataBlock" && dynamic_cast<ILogData*>(f_mousePositionObject)){
         f_accepted = true;
     }
+    else if(f_baseFormat == "board" && dynamic_cast<FormsBlock*>(f_mousePositionObject)){
+        f_accepted = true;
+    }
+
     event->setAccepted(f_accepted);
 }
 
@@ -163,8 +182,18 @@ void DataTreeView::dropEvent(QDropEvent *event){
             return;
         if(dynamic_cast<ILogData *>(f_mousePositionObject)){
             ILogData *f_logData = dynamic_cast<ILogData *>(f_mousePositionObject);
-            QList<QSharedPointer<IBlock> > *f_blocks = f_logData->blocks();
-            f_blocks->push_back(f_dataBlock);
+            f_logData->addBlock(f_dataBlock);
+            f_model->update();
+        }
+    }
+    else if(f_baseFormat == "board"){
+        ABoard *f_board = dynamic_cast<ABoard*>(reinterpret_cast<QObject*>(event->mimeData()->data("board").toLongLong(&ok)));
+        DataModel *f_model = dynamic_cast<DataModel *>(model());
+        if(!f_board || !f_model)
+            return;
+        if(dynamic_cast<FormsBlock *>(f_mousePositionObject)){
+            FormsBlock *f_forms = dynamic_cast<FormsBlock *>(f_mousePositionObject);
+            f_forms->addBoard(f_board);
             f_model->update();
         }
     }
@@ -181,4 +210,48 @@ void DataTreeView::dropEvent(QDropEvent *event){
             f_model->update();
         }
     }*/
+}
+
+void DataTreeView::newCurve(){
+    DataBlock *f_dataBlock = dynamic_cast<DataBlock *>(m_curentBlock);
+    if(!f_dataBlock)
+        return;
+    NewCurveTab *f_newCurveTab = new NewCurveTab(f_dataBlock);
+    f_newCurveTab->move(QCursor::pos());
+    f_newCurveTab->show();
+}
+
+void DataTreeView::deleteDataBlock(){
+    if(!m_curentBlock)
+        return;
+    DataModel *f_model = dynamic_cast<DataModel *>(model());
+    f_model->deleteBlock(m_curentBlock);
+}
+
+void DataTreeView::saveGFM(){
+    if(!m_curentLogData)
+        return;
+    ISaverLogData * gfmSaver = new GFMSaver();
+    m_curentLogData->setSaver(gfmSaver);
+    m_curentLogData->save();
+}
+
+void DataTreeView::openPythonConsole(){
+    if(!m_curentLogData)
+        return;
+    if(!m_curentLogData->isInterpreter()){
+        IInterpreterLogData *f_interpreter = dynamic_cast<IInterpreterLogData *>(new InterpreterPython());
+        m_curentLogData->setInterpreter(f_interpreter);
+    }
+    m_curentLogData->openInterpreterConsole();
+}
+
+void DataTreeView::openPythonScript(){
+    if(!m_curentLogData)
+        return;
+    if(!m_curentLogData->isInterpreter()){
+        IInterpreterLogData *f_interpreter = dynamic_cast<IInterpreterLogData *>(new InterpreterPython());
+        m_curentLogData->setInterpreter(f_interpreter);
+    }
+    m_curentLogData->openInterpreterScript();
 }

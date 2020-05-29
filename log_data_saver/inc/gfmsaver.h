@@ -36,6 +36,7 @@ public:
     QByteArray  getForSaveFormsBlock(IBlock *block);
     QByteArray  getHeader(DataBlock*dataBlock);
     QByteArray  getForSaveHeaderBlock(IBlock *block);
+    QByteArray  getForSaveToolInfoBlock(IBlock *block);
 };
 
 #endif // GFMSAVER_H

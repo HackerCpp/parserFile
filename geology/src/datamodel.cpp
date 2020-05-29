@@ -3,6 +3,7 @@
 #include <QColor>
 #include "formsblock.h"
 #include "headerblock.h"
+#include "QTextEdit"
 
 
 DataModel::DataModel(){
@@ -259,17 +260,74 @@ QVariant DataModel::data(const QModelIndex &index, int role )const{
             return f_board->name();
         }
         else if(dynamic_cast<HeaderInfo *>(static_cast<QObject*>(index.internalPointer()))){
-            return dynamic_cast<HeaderInfo *>(static_cast<QObject*>(index.internalPointer()))->name();
+            HeaderInfo *f_header = dynamic_cast<HeaderInfo *>(static_cast<QObject*>(index.internalPointer()));
+            QTextEdit f_textEdit;
+            f_textEdit.setHtml(f_header->name() + ":" + f_header->body());
+            return  f_textEdit.toPlainText().replace(",","\n").replace("#(null)","the number is not known");
         }
     }
     else if(role == Qt::ForegroundRole){
-           return QColor(Qt::black);
+           //return QColor(Qt::black);
+        return QVariant();
+    }
+    else if(role == Qt::ToolTipRole){
+        if (!index.isValid()){
+            return QVariant();
+        }
+        if(index.column()){
+            if(dynamic_cast<HeaderInfo *>(static_cast<QObject*>(index.internalPointer()))){
+                return dynamic_cast<HeaderInfo *>(static_cast<QObject*>(index.internalPointer()))->body();
+             }
+            else return QVariant();
+        }
+        if (dynamic_cast<ILogData*>(static_cast<QObject*>(index.internalPointer()))){
+            ILogData *f_logData = static_cast<ILogData *>(index.internalPointer());
+            return f_logData->name().mid(f_logData->name().indexOf("/") + 1);
+        }
+        else if(dynamic_cast<ICurve *>(static_cast<QObject*>(index.internalPointer()))){
+            ICurve *f_curve = static_cast<ICurve *>(index.internalPointer());
+            QString f_toolTip = "Mnemonic : " + f_curve->mnemonic() + "\n"
+                    + "Record point : " + QString::number(f_curve->recordPoint()) + "\n"
+                    + "Minimum : " + QString::number(f_curve->minimum()) + "\n"
+                    + "Maximum : " + QString::number(f_curve->maximum()) + "\n";
+            return f_toolTip;
+        }
+        else if(dynamic_cast<IBlock*>(static_cast<QObject*>(index.internalPointer()))){
+            IBlock *f_block = static_cast<IBlock *>(index.internalPointer());
+            IBlock::TypeBlock f_type = f_block->name();
+            switch(f_type){
+                case IBlock::DATA_BLOCK:{
+                    DataBlock *f_dataBlock = dynamic_cast<DataBlock *>(f_block);
+                    QList<ICurve *> *f_curves = f_dataBlock->curves();
+                    QString f_toolTip;
+                    foreach(auto curve,*f_curves){
+                        f_toolTip += curve->mnemonic() + "\n";
+                    }
+                    return f_toolTip;
+                }
+                case IBlock::FORMS_BLOCK:{
+                    return "FORMS";
+                }
+                case IBlock::TOOLINFO_BLOCK:{
+                    return "TOOLINFO";
+                }
+                case IBlock::HEADER_BLOCK:{
+                    return "HEADER";
+                }
+                default:{
+                    return QModelIndex();
+                }
+            }
+        }
+        else
+            return QVariant();
     }
     else if(role == Qt::BackgroundRole){
-           return QColor(Qt::white);
+           return QVariant();
     }
     else if(role == Qt::FontRole){
-           return QFont("Times", 12, QFont::Bold);
+           //return QFont("Times", 12, QFont::Bold);
+        return QVariant();
     }
     else
         return QVariant();
@@ -295,3 +353,18 @@ QVariant DataModel::headerData(int section, Qt::Orientation orientation, int rol
     return QVariant();
 }
 
+bool DataModel::deleteBlock(IBlock *block){
+    if(!block)
+        return false;
+    foreach(auto logData,*m_logDataVector){
+        QList<QSharedPointer<IBlock> > *f_blocks = logData->blocks();
+        foreach(auto f_block,*f_blocks){
+            if(block == f_block.data()){
+                f_blocks->removeOne(f_block);
+                update();
+                return true;
+            }
+        }
+    }
+    return false;
+}

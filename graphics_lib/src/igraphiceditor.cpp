@@ -3,7 +3,6 @@
 
 
 AGraphicEditor::AGraphicEditor(QSharedPointer<ILogData> logData){
-
     m_logData = logData;
 }
 

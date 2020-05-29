@@ -9,15 +9,12 @@ class markItem : public AItem{
     bool m_isDashes;
     qreal m_valueScale;
 public:
-
     markItem();
     ~markItem();
 
     void setColor(QString color, bool isDashes);
     void setWidth(unsigned int width);
     void setValueScale(qreal valueScale);
-
-
 
     qreal valueScale();
     QString color();

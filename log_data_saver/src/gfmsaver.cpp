@@ -10,10 +10,11 @@
 #include "board.h"
 #include "track.h"
 #include "items.h"
-#include "lineItem.h"
+#include "LineItem.h"
 #include "markItem.h"
-#include "acuItem.h"
+#include "AcuItem.h"
 #include "datablock.h"
+#include "toolinfoblock.h"
 #include"acurve.h"
 #include "formsblock.h"
 #include "unknownblock.h"
@@ -48,6 +49,8 @@ bool GFMSaver::save(){
            fileGFM->write(getForSaveFormsBlock(block.data()));
         else if(block->name() == IBlock::HEADER_BLOCK)
             fileGFM->write(getForSaveHeaderBlock(block.data()));
+        else if(block->name() == IBlock::TOOLINFO_BLOCK)
+            fileGFM->write(getForSaveToolInfoBlock(block.data()));
     }
     fileGFM->close();
     delete fileGFM;
@@ -60,7 +63,9 @@ bool GFMSaver::isReady(){
     return false;
 }
 
-QByteArray  GFMSaver:: getForSaveDataBlock(IBlock *block){
+
+
+QByteArray  GFMSaver::getForSaveDataBlock(IBlock *block){
     QByteArray blockForWrite;
     DataBlock *dataBlock = dynamic_cast<DataBlock *>(block);
     if(!dataBlock){
@@ -113,21 +118,20 @@ QByteArray GFMSaver::getHeader(DataBlock*dataBlock){
     }
 
     QList<ICurve*> *f_curve = dataBlock->curves();
-    foreach(auto value,*f_curve)
-    {
+    foreach(auto value,*f_curve){
         ACurve *curveAbstract =  dynamic_cast<ACurve *>(value);
         QByteArray f_blockForWrite;
         QString f_line;
 
 
-        if(curveAbstract->recordPoint().isEmpty())
+        /*if(curveAbstract->recordPoint().isEmpty())
             f_line = "[%1][%2]  {%3}:%4 : %5%6 %7\r\n";
-        else
+        else*/
             f_line = "[%1][%2]  {%3}:%4 : %5 : %6 %7\r\n";
 
-
+        QString f_recordPoint = QString::number(curveAbstract->recordPoint()) + "M";
         f_line = f_line.arg(curveAbstract->offset()).arg(curveAbstract->sizeOffsetInBytes()).arg(curveAbstract->shortCut().ref())
-                .arg(curveAbstract->mnemonic()).arg(curveAbstract->dataType()).arg(curveAbstract->recordPoint())
+                .arg(curveAbstract->mnemonic()).arg(curveAbstract->dataType()).arg(f_recordPoint)
                 .arg(QString(curveAbstract->desc()->forSave()));
 
 
@@ -139,11 +143,11 @@ QByteArray GFMSaver::getHeader(DataBlock*dataBlock){
     return headerParameters;
 }
 
-QByteArray  GFMSaver:: getForSave(IBlock *block){
+QByteArray  GFMSaver::getForSave(IBlock *block){
     return QByteArray();
 }
 
-QByteArray  GFMSaver:: getForSaveHeaderBlock(IBlock *block){
+QByteArray  GFMSaver::getForSaveHeaderBlock(IBlock *block){
     QByteArray blockForWrite;
 
     HearedBlock *headerBlock = dynamic_cast<HearedBlock*>(block);
@@ -175,7 +179,7 @@ QByteArray  GFMSaver:: getForSaveHeaderBlock(IBlock *block){
     return blockForWrite;
 }
 
-QByteArray  GFMSaver:: getForSaveFormsBlock(IBlock *block){
+QByteArray  GFMSaver::getForSaveFormsBlock(IBlock *block){
     QByteArray blockForWrite;
     FormsBlock *formsBlock = dynamic_cast<FormsBlock *>(block);
     if(!formsBlock){
@@ -200,6 +204,30 @@ QByteArray  GFMSaver:: getForSaveFormsBlock(IBlock *block){
     return blockForWrite;
 }
 
+QByteArray  GFMSaver::getForSaveToolInfoBlock(IBlock *block){
+    QByteArray blockForWrite;
+    ToolInfoBlock *f_toolInfoBlock = dynamic_cast<ToolInfoBlock *>(block);
+    if(!f_toolInfoBlock){
+        qDebug() << "Не удалось перевести IBlock в ToolInfoBlock";
+        return QByteArray();
+    }
+
+    QString f_name = "[TOOL_INFO]";
+    int f_nameSize = f_name.size() * 2;
+    blockForWrite.append(reinterpret_cast<char*>(&f_nameSize),2);       //Размер названия блока
+    blockForWrite.append(m_codec->fromUnicode(f_name).mid(2));
+    QByteArray f_data = f_toolInfoBlock->toolInfo();
+    int f_dataBlockSize = f_data.size() + 8;
+    if(f_dataBlockSize % 2){
+        ++f_dataBlockSize;
+        f_data.append('0');
+    }
+    blockForWrite.append(reinterpret_cast<char*>(&f_dataBlockSize),4);
+    blockForWrite.append(m_codec->fromUnicode("\r\n").mid(2));
+    blockForWrite.append(f_data);
+    blockForWrite.append(m_codec->fromUnicode("\r\n").mid(2));
+    return blockForWrite;
+}
 
 bool GFMSaver::gzipCompress(QByteArray input, QByteArray &output, int level){
     output.clear();
@@ -285,7 +313,7 @@ QByteArray GFMSaver::formBlokSave(FormsBlock * formsBlock){
                    xmlWriter.writeEndElement(); //close logarithm
                    QMap<QString,AItem*> *items = board->items();
                    foreach(auto item,*items){
-                       if(track->number()==item->numberOfTrack())
+                       if(track->number() == item->numberOfTrack())
                        {
                            if(item->type() == TypeItem::LINE){
                                 LineItem * lineItem = dynamic_cast<LineItem *>(item);

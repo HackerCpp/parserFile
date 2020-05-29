@@ -1,17 +1,11 @@
 #include "curveeditor.h"
 
 
-CurveEditor::CurveEditor(AGraphicItem *graphicItem)
-{
+CurveEditor::CurveEditor(AGraphicItem *graphicItem){
     m_splitter = new QSplitter();
-    m_graphicsEditor = new SFMLItemEditor(nullptr,QPoint(0,0),QSize(100,100));
-    m_graphicsEditor->setGraphicItem(graphicItem);
     m_table = new QTableView();
-    m_scrollSFML = new QScrollArea;
-    //m_scrollSFML->setWidget(m_graphicsEditor);
     m_modelCurveEditor = new ModelCurveEditor(graphicItem);
     m_table->setModel(m_modelCurveEditor);
-    m_splitter->addWidget(m_scrollSFML);
     m_splitter->addWidget(m_table);
 
     m_scroll->setWidget(m_splitter);

@@ -2,6 +2,7 @@
 #define IINTERPRETERLOGDATA_H
 
 #include "icurve.h"
+#include "iblock.h"
 
 class IInterpreterLogData{
 
@@ -12,7 +13,9 @@ public:
     virtual bool openConsole();
     virtual bool openScript();
 
-    virtual bool setCurves(QMap<QString,ICurve*> *curves);
+    virtual bool setBlocks(QList<QSharedPointer<IBlock> > *blocks);
+
+    virtual void dataUpdate(){}
 };
 
 #endif // IINTERPRETERLOGDATA_H

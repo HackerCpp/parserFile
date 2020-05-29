@@ -7,7 +7,6 @@ LogData::LogData(){
     m_saver = nullptr;
     m_interpreter = nullptr;
     m_blocks = new QList<QSharedPointer<IBlock> >;
-    m_curvesMap = new QMap<QString,ICurve*>;
 }
 
 LogData::LogData(const LogData &logData){
@@ -56,11 +55,10 @@ bool LogData::load(){
     if(!m_loader)
         return false;
     m_loader->download();
-    if(!m_loader->isReady()){
-        connect(m_loader,&ILoaderLogData::ready,this,&ILogData::findCurvesMap);
-    }
+    if(!m_loader->isReady())
+        connect(m_loader,&ILoaderLogData::ready,this,&ILogData::dataReady);
     else
-        findCurvesMap();
+        dataReady();
     return true;
 }
 
@@ -76,10 +74,17 @@ bool LogData::save(){
     return true;
 }
 
-bool LogData::openInterpreter(){
+bool LogData::openInterpreterConsole(){
     if(!m_interpreter)
         return false;
     m_interpreter->openConsole();
+    return true;
+}
+
+bool LogData::openInterpreterScript(){
+    if(!m_interpreter)
+        return false;
+    m_interpreter->openScript();
     return true;
 }
 
@@ -103,44 +108,29 @@ bool LogData::setInterpreter(IInterpreterLogData *interpreter){
     if(m_interpreter)
         delete m_interpreter;
     m_interpreter = interpreter;
-    m_interpreter->setCurves(m_curvesMap);
+    m_interpreter->setBlocks(m_blocks);
     return true;
-}
-
-QMap<QString,ICurve*> *LogData::curves(){
-   return m_curvesMap;
 }
 
 QList<QSharedPointer<IBlock> > *LogData::blocks(){
     return m_blocks;
 }
 
-void LogData::findCurvesMap(){
+void LogData::dataUpdate(){
+    if(m_interpreter)
+        m_interpreter->dataUpdate();
+}
+
+void LogData::addBlock(QSharedPointer<IBlock> block){
+    m_blocks->push_back(block);
+    connect(block.data(),&IBlock::dataUpdate,this,&ILogData::dataUpdate);
+    dataUpdate();
+}
+
+void LogData::dataReady(){
     foreach(auto block,*m_blocks){
-        if(block->name() == IBlock::DATA_BLOCK){
-           DataBlock *dataBlock = dynamic_cast<DataBlock *>(block.data());
-           if(dataBlock){
-               QList<ICurve*> *curves = dataBlock->curves();
-               if(!curves){
-                   qDebug() << "В Дата блоке нет кривых для формирования дерева поиска";
-               }
-               if(!m_curvesMap){
-                   qDebug() << "Контейнер для кривых не создан";
-               }
-
-               foreach(auto curve,*curves){
-                   if(!curve){
-                       qDebug() << "Нулевая кривая в блоке";
-                   }
-                   if(!curve->shortCut().name().isEmpty()){
-                       QString name = curve->shortCut().nameWithoutNumber() + ':' + curve->mnemonic();
-                       m_curvesMap->insert(name,curve);
-                   }
-               }
-           }
-        }
+        connect(block.data(),&IBlock::dataUpdate,this,&ILogData::dataUpdate);
     }
-
     m_isReady = true;
     emit ready();
 }

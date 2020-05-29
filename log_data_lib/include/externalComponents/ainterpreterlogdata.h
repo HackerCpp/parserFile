@@ -7,7 +7,7 @@
 
 class AinterpreterLogData : public IInterpreterLogData{
 protected:
-    QMap<QString,ICurve*> *m_curves;
+    QList<QSharedPointer<IBlock> > *m_blocks;
 
 public:
     AinterpreterLogData();
@@ -16,7 +16,7 @@ public:
     virtual bool openConsole()override;
     virtual bool openScript()override;
 
-    virtual bool setCurves(QMap<QString,ICurve*> *curves)override;
+    virtual bool setBlocks(QList<QSharedPointer<IBlock> > *blocks)override;
 };
 
 #endif // AINTERPRETERLOGDATA_H

@@ -1,7 +1,7 @@
 #ifndef VLINEITEM_H
 #define VLINEITEM_H
 #include "verticalitem.h"
-#include "lineItem.h"
+#include "LineItem.h"
 
 class VLineItem : public VerticalItem{
     enum Transition{NO_TRANSITION,LEFT_TRANSITION,RIGHT_TRANSITION};
@@ -22,7 +22,9 @@ class VLineItem : public VerticalItem{
     void setColor(QColor color)override;
 public:
     VLineItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board);
-    ~VLineItem(){}
+    ~VLineItem()override{}
+
+    void updateParam(int pictureWidth)override;
 
 
 };

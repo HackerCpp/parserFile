@@ -18,11 +18,6 @@ bool ILogData::save(){
     return false;
 }
 
-
-bool ILogData::openInterpreter(){
-   return false;
-}
-
 bool ILogData::isReady(){
     return true;
 }
@@ -46,11 +41,6 @@ QMap<QString,ICurve*> *ILogData::curves(){
 QList<QSharedPointer<IBlock> > *ILogData::blocks(){
     return nullptr;
 }
-
-void ILogData::findCurvesMap(){
-
-}
-
 
 QSharedPointer<ILogData> ILogData::createLogData(){
     QSharedPointer<ILogData> f_ptrLogData(dynamic_cast<ILogData*>(new LogData()));

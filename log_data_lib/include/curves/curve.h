@@ -12,6 +12,7 @@ public:
          m_sizeOfType = sizeof(T);
          m_minimum = m_maximum = m_positiveOffset = 0;
      }
+     Curve(int size,int offset);
     ~Curve()override{}
 
      qreal data(uint index)override;
@@ -23,8 +24,17 @@ public:
      uint sizeOffset()override;
 };
 
+template<typename T> Curve<T>::Curve(int size,int offset){
+    int f_size = size * offset;
+    m_data = new QVector<T>(f_size);
+    m_sizeOfType = sizeof(T);
+    m_sizeOffsetInByte = offset * m_sizeOfType;
+    m_minimum = m_maximum = m_positiveOffset = 0;
+    m_offset = offset;
+}
+
 template<typename T> qreal Curve<T>::data(uint index){
-    if(index>m_data->size()){
+    if(index > m_data->size()){
         qDebug()<<"Индекс вышел за пределы массива, вернули 0";
         return 0;
     }

@@ -18,10 +18,6 @@ bool ALogData::save(){
     return false;
 }
 
-bool ALogData::openInterpreter(){
-    return false;
-}
-
 bool ALogData::isReady(){
    return m_isReady;
 }
@@ -39,13 +35,18 @@ QList<QSharedPointer<IBlock> > *ALogData::blocks(){
 }
 
 bool ALogData::setLoader(ILoaderLogData *loader){
+    Q_UNUSED(loader)
     return false;
 }
 
 bool ALogData::setSaver(ISaverLogData *saver){
+    Q_UNUSED(saver)
     return false;
 }
 
-void ALogData::findCurvesMap(){
-
+void ALogData::dataReady(){
+    dataUpdate();
+    m_isReady = true;
+    emit ready();
 }
+

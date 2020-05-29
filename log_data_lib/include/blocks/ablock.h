@@ -2,6 +2,7 @@
 #define ABLOCK_H
 
 #include "iblock.h"
+#include <QDebug>
 
 class ABlock : public IBlock{
 protected:

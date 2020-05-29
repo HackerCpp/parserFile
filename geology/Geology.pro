@@ -19,13 +19,19 @@ INCLUDEPATH += inc\
                ../log_data_lib/include/blocks \
                ../log_data_lib/include/curves \
                ../log_data_lib/include/externalComponents \
-               ../log_data_loader/include
+               ../log_data_loader/include \
+                ../log_data_saver/inc \
+                ../log_data_interpreter/include \
+                ../PythonQT3.2/src \
+                ../PythonQT3.2/extensions/PythonQt_QtAll \
+                ../python3\python3_x64-windows\include\python3.7 \
 
 LIBS += \
 ../build/release/LogData.lib \
 ../build/release/LogDataInterpreter.lib \
 ../build/release/LogDataLoader.lib \
 ../build/release/LogDataSaver.lib \
+../python3/python3_x64-windows/lib/python37.lib \
 
 include(../graphics_lib/graphics.pri)
 
@@ -34,6 +40,7 @@ include(../graphics_lib/graphics.pri)
 SOURCES += \
     inc/graphicscontrolpanel.cpp \
     inc/graphicwidget.cpp \
+    inc/newcurvetab.cpp \
     src/datamodel.cpp \
     src/datatreeview.cpp \
     src/logdataview.cpp \
@@ -51,6 +58,7 @@ HEADERS += \
     inc/logdataview.h \
     inc/mainwindow.h \
     inc/menu.h \
+    inc/newcurvetab.h \
     inc/windowformenu.h \
     inc/filereader.h \
 
@@ -59,3 +67,6 @@ HEADERS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    res.qrc

@@ -8,9 +8,9 @@
 #include "board.h"
 #include "track.h"
 #include "items.h"
-#include "lineItem.h"
+#include "LineItem.h"
 #include "markItem.h"
-#include "acuItem.h"
+#include "AcuItem.h"
 #include "headerblock.h"
 #include "addCurve.h"
 #include "specItem.h"
@@ -175,12 +175,18 @@ void GFMLoader::parser(const QByteArray &bodyBlock,QSharedPointer<IBlock> block)
         parserFormsBlock(bodyBlock,block.data());
     else if(block->name() == IBlock::HEADER_BLOCK)
         parserHeaderBlock(bodyBlock,block.data());
+    else if(block->name() == IBlock::TOOLINFO_BLOCK)
+        parserToolInfoBlock(bodyBlock,block.data());
     else
         parserUnknownBlock(bodyBlock,block.data());
 }
 
 void GFMLoader::parserHeaderBlock(const QByteArray &bodyBlock,IBlock *block){
     HearedBlock * hearedBlock = dynamic_cast<HearedBlock*>(block);
+    if(!hearedBlock){
+        qDebug() <<  "не удалось преобразовать IBlock в HearedBlock. Парсер дата блока";
+        return;
+    }
     QString endName = "]";
     QString beginName = "[";
     QString endLine = "\r\n";
@@ -212,6 +218,7 @@ void GFMLoader::parserDataBlock(const QByteArray &bodyBlock,IBlock *block){
     DataBlock * dataBlock = dynamic_cast<DataBlock *>(block);
     if(!dataBlock){
         qDebug() <<  "не удалось преобразовать IBlock в DataBlock. Парсер дата блока";
+        return;
     }
     QByteArray endHeader = "</PARAMETERS>",beginHeader = "<PARAMETERS",
             beginPlugin = "<PLUGINS>", endPlugins = "</PLUGINS>";
@@ -255,9 +262,11 @@ void GFMLoader::parserDataBlock(const QByteArray &bodyBlock,IBlock *block){
     foreach(auto curve,*f_curves){
         if(curve->desc()->param("draw_type") == "TIME"){
             f_mainTime = curve;
+            dataBlock->setMainTime(curve);
         }
         else if(curve->desc()->param("draw_type") == "DEPTH"){
             f_mainDepth = curve;
+            dataBlock->setMainDepth(curve);
         }
     }
     foreach(auto curve,*f_curves){
@@ -270,6 +279,14 @@ void GFMLoader::parserDataBlock(const QByteArray &bodyBlock,IBlock *block){
     }
 }
 
+void GFMLoader::parserToolInfoBlock(const QByteArray &bodyBlock,IBlock *block){
+    ToolInfoBlock * f_toolInfoBlock = dynamic_cast<ToolInfoBlock *>(block);
+    if(!f_toolInfoBlock){
+        qDebug() <<  "не удалось преобразовать IBlock в ToolInfoBlock. Парсер дата блока";
+        return;
+    }
+    f_toolInfoBlock->setToolInfo(bodyBlock);
+}
 
 qreal convertUnitOfGFM(QString value, QString unit){     //изменение единиц измерения из заданных в мм + пересчет значения в qreal
     value = value.replace(",",".");
@@ -661,6 +678,8 @@ void GFMLoader::findCurves(QByteArray *header,DataBlock * dataBlock){
             curves->push_back(new Curve<int16_t>);
         else if(value.indexOf("FLOAT32") != -1)
             curves->push_back(new Curve<float_t>);
+        else if(value.indexOf("DOUBLE64") != -1)
+            curves->push_back(new Curve<double>);
         findCurveInfo(value,dataBlock,dynamic_cast<ICurve *>(curves->last()));
     }
     dataBlock->setCurves(*curves);
@@ -705,7 +724,19 @@ void GFMLoader::findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *
         int indexBeginRecordPoint = curveLine.indexOf(":",indexEndType);
         indexEndRecordPoint = curveLine.indexOf(" ",indexBeginRecordPoint + 3);
         QString recordPoint = curveLine.mid(indexBeginRecordPoint + 2,indexEndRecordPoint - indexBeginRecordPoint - 2);
-        curveAbstract->setRecordPoint(recordPoint);
+        bool ok;
+        qreal f_recordPointValue = recordPoint.left(recordPoint.indexOf("(")).toDouble(&ok);
+        QString f_recordPointUnit = recordPoint.mid(recordPoint.indexOf("(") + 1).remove(")");
+        f_recordPointValue = ok ? f_recordPointValue : 0;
+        if(f_recordPointUnit == "СМ" || f_recordPointUnit == "CM")
+            f_recordPointValue = f_recordPointValue / 100;
+        else if(f_recordPointUnit == "M" || f_recordPointUnit == "М" ){
+            ;
+        }
+        else{
+            qDebug() << "Неизвестная величина gfmloader.cpp при переводе точки записи" ;
+        }
+        curveAbstract->setRecordPoint(f_recordPointValue);
     }
     Desc *desc = new Desc(curveLine.mid(indexEndRecordPoint));
     curveAbstract->setDesc(desc);

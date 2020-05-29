@@ -44,8 +44,8 @@ void GraphicEditor::addCurves(){
            }
         }
     }
-
 }
+
 void GraphicEditor::addForms(){
     if(!m_curves)
         return;

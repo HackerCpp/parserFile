@@ -13,6 +13,7 @@ protected:
     BoardForTrack *m_board;
     bool m_isActive;
     int m_positionHeaderArea,m_heightHeaderArea;
+    qreal m_recordPointDepth;
 
     virtual void drawBody(QPainter *per,QRectF visibleRect,bool *flag){Q_UNUSED(per) Q_UNUSED(visibleRect) Q_UNUSED(flag)}
 

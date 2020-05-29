@@ -17,7 +17,7 @@ protected:
     uint m_sizeOfType;
     QString m_mnemonic;
     QString m_dataType;
-    QString m_recordPoint;
+    qreal m_recordPoint;
     qreal m_positiveOffset;
     uint m_offset;
 
@@ -32,6 +32,7 @@ public:
     virtual void setData(const char *dataPtr,uint numberOfVectors)override{}
 
 
+
     virtual ICurve *time()override;
     virtual ICurve *depth()override;
     virtual ICurve *userBaseValue()override;
@@ -39,13 +40,14 @@ public:
     virtual bool setTime(ICurve *time)override;
     virtual bool setDepth(ICurve *depth)override;
     virtual bool setUserBaseValue(ICurve *userBaseValue)override;
-    virtual QString recordPoint();
+
 
     virtual uint size()override;
     virtual uint sizeOffset()override{return 0;}
     virtual uint sizeOffsetInBytes(){return m_sizeOffsetInByte;}
     virtual qreal maximum()override;
     virtual qreal minimum()override;
+    virtual qreal recordPoint()override{return m_recordPoint;}
 
 
 
@@ -53,13 +55,13 @@ public:
     virtual ShortCut shortCut()override;
     virtual QString mnemonic()override;
 
-    virtual void setShortCut(ShortCut shortCut);
+    virtual void setShortCut(ShortCut shortCut)override;
     virtual void setOffset(uint offset);
     virtual void setSizeOffset(uint sizeOffset);
-    virtual void setMnemonic(QString mnemonic);
+    virtual void setMnemonic(QString mnemonic)override;
     virtual void setDataType(QString dataType);
-    virtual void setRecordPoint(QString recordPoint);
-    virtual void setDesc(Desc *desc);
+    virtual void setRecordPoint(qreal recordPoint)override{m_recordPoint = recordPoint;}
+    virtual void setDesc(Desc *desc)override;
 
     virtual QString dataType();
 

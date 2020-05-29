@@ -24,6 +24,7 @@ class ATrack{
 
 public:
     ATrack();
+    ATrack(const ATrack &other);
     ~ATrack(){}
 
 

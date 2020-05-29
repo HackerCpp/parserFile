@@ -9,7 +9,7 @@ GraphicWidget::GraphicWidget(QWidget *parent) : QWidget(parent)
 
     m_mainVLayout->addWidget(m_controlPanel);
     m_mainVLayout->addWidget(m_tabWidget);
-    m_mainVLayout->addStretch(1000);
+    //m_mainVLayout->addStretch(1);
 
     setLayout(m_mainVLayout);
 

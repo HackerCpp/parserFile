@@ -38,7 +38,7 @@ VSpectrItem::VSpectrItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
 
 void inline VSpectrItem::drawInterpolationVertical(QPainter *per,QRectF visibleRect,bool *flag){
     qreal quantityElem = m_curve->sizeOffset();
-    qreal f_width = per->device()->width()/2;
+    qreal f_width = per->device()->width();
     qreal step = f_width / quantityElem;
     ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
     qreal f_yTop = visibleRect.y();
@@ -56,8 +56,8 @@ void inline VSpectrItem::drawInterpolationVertical(QPainter *per,QRectF visibleR
            break;
        }
     }
-    int f_indexMin = indexBegin;
-    int f_indexMax = indexBegin;
+    uint f_indexMin = indexBegin;
+    uint f_indexMax = indexBegin;
 
     for(uint i = indexBegin;i < f_mainValue->size();++i){
         if(*flag)
@@ -68,20 +68,22 @@ void inline VSpectrItem::drawInterpolationVertical(QPainter *per,QRectF visibleR
         f_indexMin = f_mainValue->data(i) < f_mainValue->data(f_indexMin)? i : f_indexMin;
         f_indexMax = f_mainValue->data(i) > f_mainValue->data(f_indexMax)? i : f_indexMax;
     }
-
+    QImage *f_image = dynamic_cast<QImage*>(per->device());
     int f_curentHeight = (f_mainValue->data(f_indexMax) * f_scaleForMainValue) - (f_mainValue->data(f_indexMin) * f_scaleForMainValue);
-
-    SpecItem *f_spectrItemInfo = dynamic_cast<SpecItem*>(m_itemInfo);
-    QList<MulticolorItem> *f_multicolor = f_spectrItemInfo->multiColor();
+    int indexWidthBegin = -fmin(m_offsetPix,0) / m_dataStepPix;
+    int indexWidthEnd = quantityElem - fmax((m_widthPicturePix + m_offsetPix - f_image->width()),0) / m_dataStepPix;
+    SpecItem *f_specItemInfo = dynamic_cast<SpecItem*>(m_itemInfo);
+    QList<MulticolorItem> *f_multicolor = f_specItemInfo->multiColor();
     QColor color;
     per->setPen(QPen(QColor(0,0,0,0),0));
+
     uint i;
     for(int j = 0; j < quantityElem; ++j){
         if(*flag)
             return;
-        QLinearGradient linearGradient(0,0,0,f_height);
-        linearGradient.setInterpolationMode(QLinearGradient::ColorInterpolation);
-        for(i = indexBegin;i < f_mainValue->size();++i){
+        ColorScale gradient;
+
+        for(i = f_indexMin;i < f_mainValue->size();++i){
             if(*flag)
                 return;
             if((f_mainValue->data(i) * f_scaleForMainValue) > f_yTop + f_downOffset || (f_mainValue->data(i) * f_scaleForMainValue) < f_yTop - f_topOffset){
@@ -96,23 +98,23 @@ void inline VSpectrItem::drawInterpolationVertical(QPainter *per,QRectF visibleR
             else{
                 MulticolorItem prev_mul;
                 prev_mul = *f_multicolor->begin();
-                for(auto value = f_multicolor->begin(); value < f_multicolor->end(); ++value) {
-                    if(m_curve->data(i * quantityElem + j) <= value->bound){
-                        color = ColorScale::get_linear_color(m_curve->data(i * quantityElem + j),prev_mul,*value);
+                foreach(auto value,*f_multicolor) {
+                    if(m_curve->data(i * quantityElem + j) <= value.bound){
+                        color = ColorScale::get_linear_color(m_curve->data(i * quantityElem + j),prev_mul,value);
                         break;
                     }
-                    prev_mul = *value;
+                    prev_mul = value;
                 }
             }
-            linearGradient.setColorAt(((f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset)/f_height,color);
+            gradient.insert(((f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset),color);
         }
-
-        QBrush brush(linearGradient);
-        per->setBrush(brush);
         qreal prevStep = j * step;
-        per->drawRect(prevStep,(f_mainValue->data(f_indexMin) * f_scaleForMainValue) - f_yTop + f_topOffset,step + 1,f_curentHeight);
+        QRect f_drawRect = QRect(prevStep,(f_mainValue->data(f_indexMin) * f_scaleForMainValue) - f_yTop + f_topOffset,step,f_curentHeight);
+        gradient.draw(*f_image,f_drawRect,QPointF(0.0,0.0),QPointF(0.0,f_height),GradientStyle::Linear,70000);
     }
+    qDebug() << "end";
 }
+
 void inline VSpectrItem::drawInterpolationHorizontal(QPainter *per,QRectF visibleRect,bool *flag){
     qreal quantityElem = m_curve->sizeOffset();
     float step = m_dataStepPix;
@@ -235,10 +237,10 @@ void VSpectrItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
         return;
     }
     if(!f_spectrItemInfo->showMode()){
-        drawInterpolationHorizontal(per,visibleRect,flag);
+        drawInterpolationVertical(per,visibleRect,flag);
     }
     else if(f_spectrItemInfo->showMode() == 1){
-        drawInterpolationHorizontal(per,visibleRect,flag);
+        drawInterpolationVertical(per,visibleRect,flag);
     }
     else if(f_spectrItemInfo->showMode() == 2){
 
@@ -247,8 +249,6 @@ void VSpectrItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
 
 void VSpectrItem::updateParam(int pictureWidth){
     loadDrawingParam(pictureWidth);
-    //QImage image(pictureWidth,1000,QImage::Format_ARGB32);
-
 }
 
 void VSpectrItem::drawInterpolationHorForCheckArea(QPainter *per,QRectF visibleRect,bool *flag){

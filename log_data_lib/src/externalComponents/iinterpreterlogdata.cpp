@@ -16,6 +16,6 @@ bool IInterpreterLogData::openScript(){
      return false;
 }
 
-bool IInterpreterLogData::setCurves(QMap<QString,ICurve*> *curves){
+bool IInterpreterLogData::setBlocks(QList<QSharedPointer<IBlock> > *blocks){
     return false;
 }

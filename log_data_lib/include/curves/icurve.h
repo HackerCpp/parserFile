@@ -16,6 +16,10 @@ public:
     virtual void setData(qreal data);
     virtual void setData(qreal data,uint index);
     virtual void setData(const char *dataPtr,uint numberOfVectors);
+    virtual void setDesc(Desc *desc){Q_UNUSED(desc)}
+    virtual void setShortCut(ShortCut shortCut){Q_UNUSED(shortCut)}
+    virtual void setMnemonic(QString mnemonic){Q_UNUSED(mnemonic)}
+    virtual void setRecordPoint(qreal recordPoint){Q_UNUSED(recordPoint)}
 
     virtual ICurve *time();
     virtual ICurve *depth();
@@ -32,6 +36,7 @@ public:
     virtual Desc *desc();
     virtual ShortCut shortCut();
     virtual QString mnemonic();
+    virtual qreal recordPoint(){return 0;}
 };
 
 #endif // INTERFACECURVE_H

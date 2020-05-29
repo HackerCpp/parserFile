@@ -56,7 +56,7 @@ void AddCurve :: addCurveInBlock(QList<IBlock*> *m_block)
 
             f_curve->setDataType("UINT16");
 
-           QString m_recordPoint = n_curve->recordPoint();
+           qreal m_recordPoint = n_curve->recordPoint();
 
            f_curve->setRecordPoint(m_recordPoint);
             qDebug()<<m_sizeOffset<<"LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL";

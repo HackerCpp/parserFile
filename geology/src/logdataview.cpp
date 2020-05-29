@@ -9,15 +9,15 @@ LogDataView::LogDataView(QWidget *parent) : QWidget(parent)
     m_mainHorLayout = new QHBoxLayout(this);
     m_splitter = new QSplitter();
     m_dataModel = new DataModel();
-    m_doubleDataModel = new DataModel();
+    //m_doubleDataModel = new DataModel();
     m_dataTreeView = new DataTreeView();
     m_graphicWidget = new GraphicWidget();
     m_dataTreeView->setModel(m_dataModel);
-    m_doubleDataTreeWiev = new DataTreeView();
-    m_doubleDataTreeWiev->setModel(m_doubleDataModel);
+    //m_doubleDataTreeWiev = new DataTreeView();
+    //m_doubleDataTreeWiev->setModel(m_doubleDataModel);
 
     m_splitter->addWidget(m_dataTreeView);
-    m_splitter->addWidget(m_doubleDataTreeWiev);
+    //m_splitter->addWidget(m_doubleDataTreeWiev);
     m_splitter->addWidget(m_graphicWidget);
     m_mainHorLayout->addWidget(m_splitter);
 
@@ -37,10 +37,11 @@ void LogDataView::addLogData(QSharedPointer<ILogData> logData){
 }
 
 void LogDataView::lastDataReady(){
+    qDebug() << "lastDataready";
     QSharedPointer<ILogData> f_curentLogData = m_logDataList->last();
-    m_dataModel->addLogData(f_curentLogData);
+    m_dataModel->addLogData(m_logDataList->last());
     if(!f_curentLogData)
         return;
-    m_graphicWidget->addLogData(f_curentLogData);
+    m_graphicWidget->addLogData(m_logDataList->last());
 
 }

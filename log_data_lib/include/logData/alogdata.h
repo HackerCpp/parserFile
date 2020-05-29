@@ -6,6 +6,7 @@
 #include "iblock.h"
 
 class ALogData : public ILogData{
+
 protected:
     bool m_isReady;
 public:
@@ -18,24 +19,28 @@ public:
 
     virtual bool load()override;
     virtual bool save()override;
-    virtual bool openInterpreter()override;
+    virtual bool openInterpreterConsole()override{return false;}
+    virtual bool openInterpreterScript()override{return false;}
 
     virtual bool isReady()override;
+    virtual bool isInterpreter()override{return false;}
 
     virtual bool setLoader(ILoaderLogData *loader)override;
     virtual bool setSaver(ISaverLogData *saver)override;
     virtual bool setInterpreter(IInterpreterLogData *interpreter)override;
     virtual void setName(QString name)override{}
 
+    virtual void addBlock(QSharedPointer<IBlock> block)override{Q_UNUSED(block)}
+
     virtual QMap<QString,ICurve*> *curves()override;
     virtual QList<QSharedPointer<IBlock> > *blocks()override;
     virtual QString name()override{ return QString();}
 
-/*signals:
-    virtual void ready()override;*/
+
 
 public slots:
-    virtual void findCurvesMap()override;
+    virtual void dataUpdate()override{}
+    virtual void dataReady()override;
 };
 
 #endif // ALOGDATA_H
