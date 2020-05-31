@@ -34,6 +34,7 @@ public slots:
     void setFormatDepth(AGraphicBoard::FormatDepth format);
     void setLengthPicture(AGraphicBoard::LengthPicture format);
     void setFormatPicture(QImage::Format format);
+    void setScalePixelPerMm(qreal scalePixelPerMm);
     void changeBoard(int index);
     void refresh() override;
 

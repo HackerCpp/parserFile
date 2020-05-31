@@ -10,6 +10,7 @@
 #include <QDrag>
 #include <QPainter>
 #include <QGraphicsSceneDragDropEvent>
+#include <QGraphicsView>
 using namespace sf;
 
 VerticalTrack::VerticalTrack(ATrack *track,BoardForTrack *board)
@@ -34,6 +35,7 @@ VerticalTrack::VerticalTrack(ATrack *track,BoardForTrack *board)
     m_trackMenu->addAction("&Insert a track on the left",this, SLOT(insertLeftTrack()));
     m_trackMenu->addAction("&Delete a track",this, SLOT(deleteTrack()));
     m_trackMenu->addAction("&Open curve browser",this, SLOT(openCurveBrowser()));
+    m_trackMenu->addAction("&Save Picture",this, SLOT(savePicture()));
     m_border = new RightBorder();
     qreal f_pixelPerMm = m_board->pixelPerMm();
     uint f_pictureHeight = m_board->pictureHeight();
@@ -564,4 +566,17 @@ void VerticalTrack::openEditorActiveItems(){
             f_curveEditor->show();
         }
     }
+}
+
+void VerticalTrack::savePicture(){
+    QString puti_save;
+    QImage image(scene()->views().first()->sceneRect().width(), scene()->views().first()->sceneRect().height(), QImage::Format_ARGB32_Premultiplied);
+    image.fill(QColor(Qt::white).rgb());
+    QPainter painter(&image);
+    qDebug() << scene() << scene()->views().first()->sceneRect();
+    QRect picture(0,0,scene()->views().first()->sceneRect().width(),scene()->views().first()->sceneRect().height());
+    scene()->render(&painter,picture,scene()->views().first()->sceneRect());
+    painter.end();
+    image.save("ff.jpg","jpg",100);
+
 }

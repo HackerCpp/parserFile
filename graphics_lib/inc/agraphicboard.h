@@ -44,6 +44,7 @@ public:
     virtual void setFormatDepth(FormatDepth format);
     virtual void setLengthPicture(LengthPicture format);
     virtual void setFormatPicture(QImage::Format format)override;
+    void setScalePixelPerMm(qreal scalePixelPerMm)override;
     virtual void activate(bool activate);
     virtual void distributionOfItemsBetweenTracks(){}
     void updateItemsParam();

@@ -14,7 +14,7 @@ class GraphicsControlPanel : public QWidget
     QHBoxLayout *m_hLayout;
     QComboBox m_comboBox,m_comboFormatTime,
     m_comboFormatDepth,m_comboPictureLength,
-    m_comboPictureFormat;
+    m_comboPictureFormat,m_comboScalePixelPerMm;
     QPushButton *m_btnRefresh;
 public:
     GraphicsControlPanel();
@@ -25,12 +25,15 @@ public slots:
     void changeFormatDepth(int index);
     void changePictureHeight(int index);
     void changePictureFormat(int index);
+    void changeScalePixelPerMm(int index);
 signals:
     void changedDrawType(int drawType);
     void changedFormatTime(AGraphicBoard::FormatTime format);
     void changedFormatDepth(AGraphicBoard::FormatDepth format);
     void changedPictureHeight(AGraphicBoard::LengthPicture format);
     void changedPictureFormat(QImage::Format format);
+    void changedScalePixelPerMm(qreal scalePixelPerMm);
+
     void refresh();
 
 

@@ -116,6 +116,14 @@ void AGraphicBoard::setFormatPicture(QImage::Format format){
     resize();
 }
 
+void AGraphicBoard::setScalePixelPerMm(qreal scalePixelPerMm){
+    m_scalePixelPerMm = scalePixelPerMm;
+    resizePicture();
+    updateItemsParam();
+    redraw();
+    resize();
+}
+
 void AGraphicBoard::mousePressEvent(QMouseEvent *event){
      QGraphicsView::mousePressEvent(event);
  }

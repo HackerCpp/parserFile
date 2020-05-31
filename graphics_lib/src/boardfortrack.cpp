@@ -5,6 +5,7 @@
 BoardForTrack::BoardForTrack(){
     QList<QScreen *> f_screens = QApplication::screens();
     m_pixelPerMm = f_screens.at(0)->physicalDotsPerInch()/2.54/10;
+    m_scalePixelPerMm = 1;
     m_pictureHeight = 4000;
     m_offsetUp = 500;
     m_top = -10;

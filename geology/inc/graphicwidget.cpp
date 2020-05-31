@@ -23,5 +23,6 @@ void GraphicWidget::addLogData(QSharedPointer<ILogData> logData){
     connect(m_controlPanel,&GraphicsControlPanel::changedFormatDepth,m_graphicEditor,&GraphicEditor::setFormatDepth);
     connect(m_controlPanel,&GraphicsControlPanel::changedPictureHeight,m_graphicEditor,&GraphicEditor::setLengthPicture);
     connect(m_controlPanel,&GraphicsControlPanel::changedPictureFormat,m_graphicEditor,&GraphicEditor::setFormatPicture);
+    connect(m_controlPanel,&GraphicsControlPanel::changedScalePixelPerMm,m_graphicEditor,&GraphicEditor::setScalePixelPerMm);
     connect(m_controlPanel,&GraphicsControlPanel::refresh,m_graphicEditor,&GraphicEditor::refresh);
 }

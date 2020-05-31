@@ -33,6 +33,11 @@ GraphicsControlPanel::GraphicsControlPanel()
     m_comboPictureFormat.insertItem(0,"multicolored image");//"Format_ARGB4444_Premultiplied");
     m_comboPictureFormat.insertItem(1,"black and white image");//"Format_Grayscale8");
 
+    m_comboScalePixelPerMm.insertItem(0,"0.5");
+    m_comboScalePixelPerMm.insertItem(1,"1");
+    m_comboScalePixelPerMm.insertItem(2,"2");
+    m_comboScalePixelPerMm.insertItem(3,"3");
+
 
 
     m_comboBox.insertItem(0,"Время");
@@ -42,6 +47,7 @@ GraphicsControlPanel::GraphicsControlPanel()
     m_hLayout->addWidget(&m_comboFormatDepth);
     m_hLayout->addWidget(&m_comboPictureLength);
     m_hLayout->addWidget(&m_comboPictureFormat);
+    m_hLayout->addWidget(&m_comboScalePixelPerMm);
     m_hLayout->addWidget(m_btnRefresh);
     m_hLayout->addStretch(100);
     setLayout(m_hLayout);
@@ -50,6 +56,7 @@ GraphicsControlPanel::GraphicsControlPanel()
     connect(&m_comboFormatDepth,static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),this,&GraphicsControlPanel::changeFormatDepth);
     connect(&m_comboPictureLength,static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),this,&GraphicsControlPanel::changePictureHeight);
     connect(&m_comboPictureFormat,static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),this,&GraphicsControlPanel::changePictureFormat);
+    connect(&m_comboScalePixelPerMm,static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),this,&GraphicsControlPanel::changedScalePixelPerMm);
     connect(m_btnRefresh,&QPushButton::pressed,this,&GraphicsControlPanel::refresh);
     changeDrawType(0);
 
@@ -100,4 +107,24 @@ void GraphicsControlPanel::changePictureFormat(int index){
         }
     }
     emit changedPictureFormat(f_format);
+}
+
+void GraphicsControlPanel::changeScalePixelPerMm(int  index){
+    qreal f_scale  =  1;
+    switch(index){
+    case 0:{
+        f_scale = 0.5;
+        break;
+    }
+    case 2:{
+        f_scale = 2;
+        break;
+    }
+    case 3:{
+        f_scale = 3;
+        break;
+    }
+
+    }
+    emit changedScalePixelPerMm(f_scale);
 }

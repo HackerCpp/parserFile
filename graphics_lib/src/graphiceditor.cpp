@@ -128,18 +128,26 @@ void GraphicEditor::setFormatDepth(AGraphicBoard::FormatDepth format){
 void GraphicEditor::setLengthPicture(AGraphicBoard::LengthPicture format){
     m_curentLenghPicture = format;
     for(int i = 0; i < count();++i){
-        AGraphicBoard * editor = dynamic_cast<AGraphicBoard *>(widget(i));
-        if(editor)
-            editor->setLengthPicture(format);
+        AGraphicBoard * f_board = dynamic_cast<AGraphicBoard *>(widget(i));
+        if(f_board)
+            f_board->setLengthPicture(format);
     }
 }
 
 void GraphicEditor::setFormatPicture(QImage::Format format){
     m_curentImageFormat = format;
     for(int i = 0; i < count();++i){
-        AGraphicBoard * editor = dynamic_cast<AGraphicBoard *>(widget(i));
-        if(editor)
-            editor->setFormatPicture(format);
+        AGraphicBoard * f_board = dynamic_cast<AGraphicBoard *>(widget(i));
+        if(f_board)
+            f_board->setFormatPicture(format);
+    }
+}
+
+void GraphicEditor::setScalePixelPerMm(qreal scalePixelPerMm){
+    for(int i = 0; i < count();++i){
+        AGraphicBoard * f_board = dynamic_cast<AGraphicBoard *>(widget(i));
+        if(f_board)
+            f_board->setScalePixelPerMm(scalePixelPerMm);
     }
 }
 

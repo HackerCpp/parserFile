@@ -75,6 +75,7 @@ public slots:
     void openSettingsTrack();
     void openCurveBrowser();
     void openEditorActiveItems();
+    void savePicture();
 };
 
 #endif // VERTICALTRACK_H
