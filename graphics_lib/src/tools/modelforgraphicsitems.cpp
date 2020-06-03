@@ -46,7 +46,7 @@ QVariant ModelForGraphicsItems::data(const QModelIndex &index, int role )const{
       }
     }
     else if(role == Qt::ForegroundRole){
-           return this->m_items->at(index.row())->color();
+           return QVariant();//this->m_items->at(index.row())->color();
     }
     else if(role == Qt::FontRole){
            return QFont("Times", 12, QFont::Bold);

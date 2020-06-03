@@ -1,6 +1,4 @@
 #include "vmarkitem.h"
-#include "SFML/System.hpp"
-
 
 VMarkItem::VMarkItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
     :VerticalItem(curve,board)

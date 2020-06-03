@@ -1,7 +1,5 @@
 #ifndef SFMLITEMEDITOR_H
 #define SFMLITEMEDITOR_H
-#include "qsfmlcanvas.h"
-#include <SFML/Graphics.hpp>
 #include "agraphicitem.h"
 #include <QGraphicsItem>
 

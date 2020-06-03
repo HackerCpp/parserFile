@@ -15,12 +15,16 @@ AGraphicItem::~AGraphicItem(){
 }
 qreal AGraphicItem::topValue(){
     ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() : m_curve->depth();
-    return f_mainValue->minimum() * m_board->scale();
+    qreal f_recordPoint = m_board->isDrawTime() ? 0 : m_curve->recordPoint() * 1000;
+    //qDebug() << f_mainValue->minimum() << f_recordPoint << (f_mainValue->minimum() + f_recordPoint) * m_board->scale() << m_curve->mnemonic();
+    return (f_mainValue->minimum() + f_recordPoint) * m_board->scale();
 }
 
 qreal AGraphicItem::bottomValue(){
     ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() : m_curve->depth();
-    return f_mainValue->maximum() * m_board->scale();
+    qreal f_recordPoint = m_board->isDrawTime() ? 0 : m_curve->recordPoint() * 1000;
+    //qDebug() << f_mainValue->maximum() << f_recordPoint << (f_mainValue->maximum() + f_recordPoint) * m_board->scale() << m_curve->mnemonic();
+    return (f_mainValue->maximum() + f_recordPoint) * m_board->scale();
 }
 
 

@@ -1,11 +1,10 @@
 #ifndef QSFMLCANVAS_H
 #define QSFMLCANVAS_H
 
-#include <SFML/Graphics.hpp>
 #include <QWidget>
 #include <QTimer>
 #include <QGraphicsProxyWidget>
-using namespace sf;
+
 class QSFMLCanvas : public QWidget, public RenderWindow
 {
 public :

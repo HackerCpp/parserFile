@@ -1,6 +1,5 @@
 #include "colorscale.h"
 #include <cmath>
-#include <SFML/System.hpp>
 #include <QDebug>
 
 
@@ -21,11 +20,10 @@ double interpolateCosinus(double y1, double y2, double mu)
 
 QColor GradientLinear(QColor* colorTab,int size,const QPointF& start,const QPointF& end,int x,int y)
 {
-    QPointF dir  = end-start;
+    QPointF dir  = end - start;
     QPointF pix  = QPointF(x,y) - start;
     double dotProduct = pix.x() * dir.x() + pix.y() * dir.y();
     dotProduct *= (size-1)/(dir.x() * dir.x() +dir.y() * dir.y());
-
     if((int)dotProduct < 0.0      ) return colorTab[0];
     if((int)dotProduct > (size-1) ) return colorTab[size-1];
     return colorTab[(int)dotProduct];
@@ -97,7 +95,7 @@ void ColorScale::fillTab(QColor* colorTab, int size,InterpolationFunction::Inter
     double pos = 0.0;
     double distance = last->first - start->first;
     ColorScale::const_iterator it =  start;
-
+    //qDebug() << start->first << last->first << it->first;
     double(*pFunction)(double,double,double);
 
     switch (function)
@@ -107,24 +105,28 @@ void ColorScale::fillTab(QColor* colorTab, int size,InterpolationFunction::Inter
         default: pFunction = interpolateCosinus;  break;
 
     }
-    while(it!=last)
+    //qDebug() << "begin fillcolorTab";
+    while(it != last)
     {
+
         QColor startColor = it->second;
         double    startPos   = it->first;
         it++;
         QColor endColor   = it->second;
         double    endPos     = it->first;
-        double nb_color         = ((endPos-startPos)*(double)size/distance);
+        double nb_color         = ((endPos - startPos) * (double)size/distance);
 
-        for(int i = (int)pos;i<=(int)(pos + nb_color);i++)
+        for(int i = (int)pos;i <= (int)(pos + nb_color);i++)
         {
             colorTab[i].setRed((unsigned char)pFunction(startColor.red(),endColor.red(),ABS((double)i - pos)/(nb_color - 1.0)));
             colorTab[i].setGreen((unsigned char)pFunction(startColor.green(),endColor.green(),ABS((double)i - pos)/(nb_color-1.0)));
             colorTab[i].setBlue((unsigned char)pFunction(startColor.blue(),endColor.blue(),ABS((double)i - pos)/(nb_color-1.0)));
+
             //colorTab[i].setAlpha((unsigned char)pFunction(startColor.alpha(),endColor.alpha(),ABS((double)i - pos)/(nb_color-1.0)));
         }
         pos += nb_color;
     }
+    //qDebug() << "end fillcolorTab";
 
 }
 
@@ -138,7 +140,7 @@ void ColorScale::draw(QImage &img,QRect area,const QPointF& start,const QPointF&
 
     QColor* tab = new QColor[size];
     fillTab(tab,size);
-    //qDebug() << "fill tab" << clock.restart().asMicroseconds();
+
     switch (style)
     {
         case GradientStyle::Linear : pFunction = GradientLinear; break;
@@ -153,7 +155,9 @@ void ColorScale::draw(QImage &img,QRect area,const QPointF& start,const QPointF&
     {
         for(int j= area.y();j < area.y() + area.height();j++)
         {
-            img.setPixelColor(i,j,pFunction(tab,size,start,end,i,j));
+            QColor f_color = pFunction(tab,size,start,end,i,j);
+            if(f_color.isValid())
+                img.setPixelColor(i,j,f_color);
         }
     }
     delete[] tab;

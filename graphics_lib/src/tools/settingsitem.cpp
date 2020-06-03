@@ -60,8 +60,8 @@ Selection::Selection(QStringList name,int activeIndex){
     m_lines->data()[activeIndex]->lineEdit->setEnabled(true);
     m_lines->data()[activeIndex]->radioBtn->setChecked(true);
     this->setLayout(m_mainLout);
-    setMaximumSize(300,100);
-    setMinimumSize(300,100);
+    //setMaximumSize(300,100);
+    //setMinimumSize(300,100);
     connect(m_btnGroup,QOverload<int,bool>::of(&QButtonGroup::buttonToggled),this,&Selection::bthToggle);
 }
 
@@ -98,12 +98,15 @@ Selection::~Selection(){
     if(m_mainLout){delete m_mainLout;m_mainLout = nullptr;}
     if(m_btnGroup){delete m_btnGroup;m_btnGroup = nullptr;}
 }
-/***************************************************************************/
+/******************************Base settings*********************************************/
 SettingsItem * SettingsItem::createSettingsItem(AGraphicItem *item){
     TypeItem f_type = item->itemInfo()->type();
     switch(f_type){
         case TypeItem::LINE:{
             return new SettingsLineItem(item);
+        }
+        case TypeItem::SPEC:{
+            return new SettingsSpectrItem(item);
         }
         /*case TypeItem::ACU:{
             break;
@@ -166,7 +169,7 @@ void SettingsItem::apply(){
     applyBaseSettings();
     applySpecificSettings();
 }
-/********************************************************************************************/
+/***************************Settings for line item*****************************************************************/
 
 SettingsLineItem::SettingsLineItem(AGraphicItem *lineItem)
     : SettingsItem(lineItem)
@@ -197,8 +200,8 @@ SettingsLineItem::SettingsLineItem(AGraphicItem *lineItem)
     m_btnSelectColor->setStyleSheet("background-color:" + m_lineItemInfo->color());
 
     m_styleGrup->setLayout(m_gridStyleLayout);
-    m_styleGrup->setMaximumSize(300,100);
-    m_styleGrup->setMinimumSize(300,100);
+    //m_styleGrup->setMaximumSize(300,100);
+    //m_styleGrup->setMinimumSize(300,100);
     m_mainVLout->addWidget(m_styleGrup);
     m_mainVLout->addStretch(100);
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
@@ -226,7 +229,74 @@ void SettingsLineItem::changeWidthLine(int newWidth){
     m_lineItemInfo->setWidth(newWidth);
 }
 
+/************************Settings for spectr item************************/
 
+SettingsSpectrItem::SettingsSpectrItem(AGraphicItem *spectrItem)
+    : SettingsItem(spectrItem){
+    m_specItem = dynamic_cast<VSpectrItem*>(spectrItem);
+    if(!m_specItem){
+        qDebug() << "не удалось преобразовать AGraphicItem в VSpectrItem присоздании окна настроек";
+        return;
+    }
+    m_specItemInfo = dynamic_cast<SpecItem *>(m_specItem->itemInfo());
+    if(!m_specItemInfo){
+        qDebug() << "SpecItem вернул не тот itemInfo";
+    }
+    m_styleGrup = new QGroupBox;
+    m_vLayout = new QHBoxLayout();
+    QList<MulticolorItem> *f_multicolor = m_specItemInfo->multiColor();
+    m_image = new QImage(this->width()/2,f_multicolor->size() * 30,QImage::Format_ARGB32);
+    m_labelForImage = new QLabel();
+    QPainter painter(m_image);
+    m_image->fill(0x00000000);
+
+    qreal f_minimum = f_multicolor->first().bound;
+    qreal f_maximum = f_multicolor->first().bound;
+    foreach(auto level,*f_multicolor){
+        f_minimum = level.bound < f_minimum ? level.bound : f_minimum;
+        f_maximum = level.bound > f_maximum ? level.bound : f_maximum;
+    }
+    qreal f_heightGradient = f_maximum - f_minimum;
+    QLinearGradient f_gradient(0,0,0,m_image->height());
+
+    foreach(auto level,*f_multicolor){
+        f_gradient.setColorAt(1 - (level.bound - f_minimum)/f_heightGradient,level.value);
+    }
+    QBrush f_brush(f_gradient);
+    painter.setBrush(f_brush);
+    painter.drawRect(m_image->width()/2,0,m_image->width()/2,m_image->height());
+
+    painter.setPen(QPen(Qt::white,1));
+    int index = 0;
+    int f_step = m_image->height() / f_multicolor->size();
+
+    foreach(auto level,*f_multicolor){
+        QBrush f_brush(QColor(level.value));
+        int f_yPosition = m_image->height() - index;
+        painter.drawText(QRect(0,f_yPosition - 20,40,20),QString::number(level.bound));
+        painter.setBrush(f_brush);
+        painter.drawRect(40,f_yPosition - 20,20,20);
+        index += f_step;
+    }
+
+
+
+    m_labelForImage->setPixmap(QPixmap::fromImage(*m_image));
+
+    m_vLayout->addWidget(m_labelForImage);
+    painter.end();
+    m_styleGrup->setLayout(m_vLayout);
+    m_mainVLout->addWidget(m_styleGrup);
+    m_mainVLout->addStretch(100);
+}
+
+SettingsSpectrItem::~SettingsSpectrItem(){
+
+}
+
+void SettingsSpectrItem::applySpecificSettings(){
+
+}
 
 
 

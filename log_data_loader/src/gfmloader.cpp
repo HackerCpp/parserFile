@@ -277,6 +277,7 @@ void GFMLoader::parserDataBlock(const QByteArray &bodyBlock,IBlock *block){
             curve->setDepth(f_mainDepth);
         }
     }
+
 }
 
 void GFMLoader::parserToolInfoBlock(const QByteArray &bodyBlock,IBlock *block){
@@ -680,6 +681,10 @@ void GFMLoader::findCurves(QByteArray *header,DataBlock * dataBlock){
             curves->push_back(new Curve<float_t>);
         else if(value.indexOf("DOUBLE64") != -1)
             curves->push_back(new Curve<double>);
+        else if(value.indexOf("UINT64") != -1)
+            curves->push_back(new Curve<uint64_t>);
+        else if(value.indexOf("INT64") != -1)
+            curves->push_back(new Curve<int64_t>);
         findCurveInfo(value,dataBlock,dynamic_cast<ICurve *>(curves->last()));
     }
     dataBlock->setCurves(*curves);
@@ -723,20 +728,21 @@ void GFMLoader::findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *
     if(!shortCut.ref().isEmpty()){
         int indexBeginRecordPoint = curveLine.indexOf(":",indexEndType);
         indexEndRecordPoint = curveLine.indexOf(" ",indexBeginRecordPoint + 3);
-        QString recordPoint = curveLine.mid(indexBeginRecordPoint + 2,indexEndRecordPoint - indexBeginRecordPoint - 2);
+        QString recordPoint = curveLine.mid(indexBeginRecordPoint + 2,indexEndRecordPoint - indexBeginRecordPoint - 2).replace(",",".");
         bool ok;
         qreal f_recordPointValue = recordPoint.left(recordPoint.indexOf("(")).toDouble(&ok);
         QString f_recordPointUnit = recordPoint.mid(recordPoint.indexOf("(") + 1).remove(")");
-        f_recordPointValue = ok ? f_recordPointValue : 0;
-        if(f_recordPointUnit == "СМ" || f_recordPointUnit == "CM")
-            f_recordPointValue = f_recordPointValue / 100;
-        else if(f_recordPointUnit == "M" || f_recordPointUnit == "М" ){
-            ;
+        if(ok){
+            if(f_recordPointUnit == "СМ" || f_recordPointUnit == "CM")
+                f_recordPointValue = f_recordPointValue / 100;
+            else if(f_recordPointUnit == "M" || f_recordPointUnit == "М" ){
+                ;
+            }
+            else{
+                qDebug() << "Неизвестная величина gfmloader.cpp при переводе точки записи"  << f_recordPointUnit;
+            }
+            curveAbstract->setRecordPoint(f_recordPointValue);
         }
-        else{
-            qDebug() << "Неизвестная величина gfmloader.cpp при переводе точки записи" ;
-        }
-        curveAbstract->setRecordPoint(f_recordPointValue);
     }
     Desc *desc = new Desc(curveLine.mid(indexEndRecordPoint));
     curveAbstract->setDesc(desc);

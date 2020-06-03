@@ -123,13 +123,16 @@ QByteArray GFMSaver::getHeader(DataBlock*dataBlock){
         QByteArray f_blockForWrite;
         QString f_line;
 
-
-        /*if(curveAbstract->recordPoint().isEmpty())
+        QString f_recordPoint = "";
+        if(curveAbstract->recordPoint() == ACurve::M_NOVALID){
             f_line = "[%1][%2]  {%3}:%4 : %5%6 %7\r\n";
-        else*/
+        }
+        else{
             f_line = "[%1][%2]  {%3}:%4 : %5 : %6 %7\r\n";
+            f_recordPoint = QString::number(curveAbstract->recordPoint()) + "(M)";
+        }
 
-        QString f_recordPoint = QString::number(curveAbstract->recordPoint()) + "M";
+
         f_line = f_line.arg(curveAbstract->offset()).arg(curveAbstract->sizeOffsetInBytes()).arg(curveAbstract->shortCut().ref())
                 .arg(curveAbstract->mnemonic()).arg(curveAbstract->dataType()).arg(f_recordPoint)
                 .arg(QString(curveAbstract->desc()->forSave()));

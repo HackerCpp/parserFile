@@ -1,17 +1,15 @@
 #include "verticaltrack.h"
-#include "acuItem.h"
+#include "AcuItem.h"
 #include "qgraphicsscene.h"
 #include "settingsitem.h"
 #include <QTabWidget>
 #include "shortcut.h"
-#include "SFML/Graphics.hpp"
 #include "curveeditor.h"
 #include <QApplication>
 #include <QDrag>
 #include <QPainter>
 #include <QGraphicsSceneDragDropEvent>
 #include <QGraphicsView>
-using namespace sf;
 
 VerticalTrack::VerticalTrack(ATrack *track,BoardForTrack *board)
     : AGraphicTrack(track,board)

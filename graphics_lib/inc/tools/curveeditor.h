@@ -5,7 +5,6 @@
 #include "modelcurveeditor.h"
 #include <QTableView>
 #include <QSplitter>
-#include "sfmlitemeditor.h"
 
 class CurveEditor : public BaseSettingsWindow
 {

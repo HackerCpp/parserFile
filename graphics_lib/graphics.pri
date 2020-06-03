@@ -1,11 +1,5 @@
 QT += core gui widgets opengl xml
 
-LIBS += -L$$PWD/../SFML/lib
-CONFIG(release, debug|release): LIBS += -lsfml-audio -lsfml-graphics -lsfml-main -lsfml-network -lsfml-window -lsfml-system
-CONFIG(debug, debug|release): LIBS += -lsfml-audio-d -lsfml-graphics-d -lsfml-main-d -lsfml-network-d -lsfml-window-d -lsfml-system-d
-INCLUDEPATH += $$PWD/../SFML/include
-DEPENDPATH += $$PWD/../SFML/include
-
 CONFIG += c++11
 INCLUDEPATH += $$PWD $$PWD/inc $$PWD/inc/items $$PWD/inc/tools
 
@@ -17,6 +11,7 @@ LIBS += \
 
 
 SOURCES += \
+    $$PWD/inc/tools/spectrreader.cpp \
     $$PWD/src/tools/colorscale.cpp \
     $$PWD/src/tools/basesettingswindow.cpp \
     $$PWD/src/tools/curveeditor.cpp \
@@ -67,6 +62,7 @@ HEADERS += \
     $$PWD/inc/objectoftheboard.h \
     $$PWD/inc/rightborder.h \
     $$PWD/inc/tools/settingsitem.h \
+    $$PWD/inc/tools/spectrreader.h \
     $$PWD/inc/verticalboard.h \
     $$PWD/inc/items/verticalitem.h \
     $$PWD/inc/verticaltrack.h \

@@ -9,6 +9,7 @@
 #include <QLineEdit>
 #include <QLabel>
 #include "vlineitem.h"
+#include "vspectritem.h"
 #include <QColorDialog>
 #include <QSpinBox>
 #include <QTabWidget>
@@ -60,7 +61,7 @@ public:
 public slots:
     void bthToggle(int index,bool active);
 };
-/**************************************************************/
+/*******************Base settings*******************************************/
 class SettingsItem : public QWidget
 {
 protected:
@@ -77,7 +78,7 @@ public:
 
     void apply();
 };
-/************************************************************************/
+/***********************Settings for line item*************************************************/
 class SettingsLineItem : public SettingsItem{
     Q_OBJECT
 
@@ -93,12 +94,32 @@ class SettingsLineItem : public SettingsItem{
 
 public:
     SettingsLineItem(AGraphicItem *lineItem);
-    ~SettingsLineItem();
+    ~SettingsLineItem()override;
 
+    void applySpecificSettings()override{}
 
 public slots:
     void changeColor();
     void changeWidthLine(int newWidth);
+};
+/************************Settings for spectr item************************/
+class SettingsSpectrItem : public SettingsItem{
+    Q_OBJECT
+
+    VSpectrItem *m_specItem;
+    SpecItem *m_specItemInfo;
+    /*style*/
+    QGroupBox *m_styleGrup;
+    QHBoxLayout *m_vLayout;
+    QImage * m_image;
+    QLabel *m_labelForImage;
+
+public:
+    SettingsSpectrItem(AGraphicItem *spectrItem);
+    ~SettingsSpectrItem();
+
+    void applySpecificSettings()override;
+
 };
 
 

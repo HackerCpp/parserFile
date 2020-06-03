@@ -149,6 +149,7 @@ void VLineItem::setColor(QColor color){
 
 void VLineItem::drawHeader(QPainter *per,int &position,bool *flag){
     Q_UNUSED(flag)
+    per->save();
     LineItem *f_lineItemInfo = dynamic_cast<LineItem*>(m_itemInfo);
     m_positionHeaderArea = position;
     if(!f_lineItemInfo){
@@ -165,6 +166,7 @@ void VLineItem::drawHeader(QPainter *per,int &position,bool *flag){
     per->drawRect(1,position,f_width - 2,m_heightHeaderArea);
     per->drawText(QRect(1,position,f_width - 2,m_heightHeaderArea),Qt::AlignHCenter|Qt::AlignVCenter,m_curve->mnemonic());
     position += m_heightHeaderArea;
+    per->restore();
 }
 
 qreal VLineItem::operator[](int index){
