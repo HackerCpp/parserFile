@@ -9,7 +9,7 @@ class VAcuItem : public VerticalItem{
     qreal m_offsetPix;
     qreal m_dataStep;
     qreal m_widthPicturePix;
-    qreal m_curentPictureWidth;
+    qreal m_curentPictureWidth,m_prevPictureWidth;
     bool m_updatedParam;
 
     void inline drawInterpolationHorizontal(QPainter *per,QRectF visibleRect,bool *flag);
@@ -24,7 +24,7 @@ class VAcuItem : public VerticalItem{
 
 public:
     VAcuItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board);
-    ~VAcuItem()override{}
+    ~VAcuItem()override;
 
 };
 
