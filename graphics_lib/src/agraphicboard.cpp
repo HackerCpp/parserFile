@@ -10,7 +10,13 @@ AGraphicBoard::AGraphicBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves)
 }
 
 AGraphicBoard::~AGraphicBoard(){
-    //if(m_items){delete m_items;m_items = nullptr;}
+    if(m_items){
+        foreach(auto item,*m_items){
+           if(item){delete item;item = nullptr;}
+        }
+        delete m_items;m_items = nullptr;
+    }
+
     //if(m_curves){delete m_curves;m_curves = nullptr;}
     //if(m_boardInfo){delete m_boardInfo;m_boardInfo = nullptr;}
 }

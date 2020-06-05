@@ -7,22 +7,22 @@ AGraphicItem::AGraphicItem(ICurve *curve,BoardForTrack *board)
     m_isActive = false;
     m_positionHeaderArea = 0;
     m_heightHeaderArea = 20;
-    m_recordPointDepth = curve->recordPoint();
+    m_recordPointDepth = qIsNaN(curve->recordPoint()) ? 0 : curve->recordPoint();
 }
 
 AGraphicItem::~AGraphicItem(){
-
 }
+
 qreal AGraphicItem::topValue(){
     ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() : m_curve->depth();
-    qreal f_recordPoint = m_board->isDrawTime() ? 0 : m_curve->recordPoint() * 1000;
+    qreal f_recordPoint = m_board->isDrawTime() ? 0 : (qIsNaN(m_curve->recordPoint()) ? 0 : m_curve->recordPoint()) * 1000;
     //qDebug() << f_mainValue->minimum() << f_recordPoint << (f_mainValue->minimum() + f_recordPoint) * m_board->scale() << m_curve->mnemonic();
     return (f_mainValue->minimum() + f_recordPoint) * m_board->scale();
 }
 
 qreal AGraphicItem::bottomValue(){
     ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() : m_curve->depth();
-    qreal f_recordPoint = m_board->isDrawTime() ? 0 : m_curve->recordPoint() * 1000;
+    qreal f_recordPoint =  m_board->isDrawTime() ? 0 : (qIsNaN(m_curve->recordPoint()) ? 0 : m_curve->recordPoint()) * 1000;
     //qDebug() << f_mainValue->maximum() << f_recordPoint << (f_mainValue->maximum() + f_recordPoint) * m_board->scale() << m_curve->mnemonic();
     return (f_mainValue->maximum() + f_recordPoint) * m_board->scale();
 }

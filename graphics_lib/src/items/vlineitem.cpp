@@ -84,6 +84,7 @@ void VLineItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
     int f_height = per->device()->height();
     ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
     qreal f_recordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
+    f_recordPoint = qIsNaN(f_recordPoint) ? 0 : f_recordPoint;
     int f_yTop = visibleRect.y();
     int f_topOffset = m_board->offsetUp();
     int f_downOffset = f_height - f_topOffset;
@@ -105,6 +106,7 @@ void VLineItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
         qDebug() << "size mainValue > m_curve" << f_mainValue->size() << m_curve->size() ;
         return;
     }
+
     QPointF prevPoint = QPointF(pixelX(indexBegin,f_width),((f_mainValue->data(indexBegin)  + f_recordPoint) * f_scaleForMainValue) - f_yTop + f_topOffset - 1);
     for(i = indexBegin + 1;i < f_mainValue->size(); ++i){
         if(*flag)
@@ -115,7 +117,6 @@ void VLineItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
             per->drawLine(QPointF(0,((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) - f_yTop + f_topOffset),QPointF(pixelX(i,f_width),((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) - f_yTop + f_topOffset));
 
             //per->drawText(QPointF(50,(f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset),QString::number(f_mainValue->data(i)));
-
         }
         else if(f_transition == LEFT_TRANSITION){
             per->drawLine(prevPoint,QPointF(0,((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) - f_yTop + f_topOffset));

@@ -107,7 +107,7 @@ QByteArray  GFMSaver::getForSaveDataBlock(IBlock *block){
     return blockForWrite;
 }
 
-QByteArray GFMSaver::getHeader(DataBlock*dataBlock){
+QByteArray GFMSaver::getHeader(DataBlock * dataBlock){
     QByteArray headerParameters;
     QString param = "<PARAMETERS LOG=\"" + dataBlock->nameRecord() + "\">\r\n";
     QList<ShortCut> *f_shortCut = dataBlock->shortCuts();
@@ -117,26 +117,27 @@ QByteArray GFMSaver::getHeader(DataBlock*dataBlock){
         param.append(f_str);
     }
 
-    QList<ICurve*> *f_curve = dataBlock->curves();
-    foreach(auto value,*f_curve){
-        ACurve *curveAbstract =  dynamic_cast<ACurve *>(value);
+    QList<ICurve*> *f_curves = dataBlock->curves();
+    foreach(auto curve,*f_curves){
+        ACurve *curveAbstract =  dynamic_cast<ACurve *>(curve);
+        if(!curveAbstract){
+            qDebug() << "Не удаётся перевести ICurve in ACurve (saver getHeader)";
+        }
+
         QByteArray f_blockForWrite;
         QString f_line;
 
         QString f_recordPoint = "";
-        if(curveAbstract->recordPoint() == ACurve::M_NOVALID){
+        if(qIsNaN(curveAbstract->recordPoint())){
             f_line = "[%1][%2]  {%3}:%4 : %5%6 %7\r\n";
         }
         else{
             f_line = "[%1][%2]  {%3}:%4 : %5 : %6 %7\r\n";
             f_recordPoint = QString::number(curveAbstract->recordPoint()) + "(M)";
         }
-
-
         f_line = f_line.arg(curveAbstract->offset()).arg(curveAbstract->sizeOffsetInBytes()).arg(curveAbstract->shortCut().ref())
                 .arg(curveAbstract->mnemonic()).arg(curveAbstract->dataType()).arg(f_recordPoint)
                 .arg(QString(curveAbstract->desc()->forSave()));
-
 
         f_blockForWrite = f_line.toLocal8Bit();
         param.append(f_blockForWrite);

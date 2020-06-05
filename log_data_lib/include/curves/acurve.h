@@ -23,7 +23,6 @@ protected:
     uint m_offset;
 
 public:
-    static const qreal M_NOVALID;
 
     ACurve();
     virtual ~ACurve()override;

@@ -5,6 +5,7 @@
 VAcuItem::VAcuItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
     :VerticalItem(curve,board)
 {
+    m_isEndThread = m_isRedraw = false;
     AcuItem * f_acuitem = dynamic_cast<AcuItem*>(itemInfo);
     if(f_acuitem)
         m_itemInfo = f_acuitem;
@@ -27,17 +28,20 @@ VAcuItem::VAcuItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
         }
     }
     m_updatedParam = true;
+    connect(this,&QThread::finished,this,&VAcuItem::endThreadHandler);
 }
 
 VAcuItem::~VAcuItem(){
-    ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
-    qreal f_recordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
-    qreal f_scaleForMainValue = m_board->scale();
-    qreal f_top = (f_mainValue->minimum() + f_recordPoint) * f_scaleForMainValue;
-    qreal f_bottom = (f_mainValue->maximum() + f_recordPoint) * f_scaleForMainValue;
-    for(int y_top = f_top - 1000; y_top < f_bottom + 1000; y_top += 11000){
-        QFile(m_curve->mnemonic() + QString::number(m_prevPictureWidth) + QString::number(y_top) + ".png").remove();
+    m_isRedraw = false;
+    m_isEndThread = true;
+    foreach(auto path,m_picturePath){
+        if(!QFile::exists(path) )
+            continue;
+        QFile(path).remove();
     }
+    m_picturePath.clear();
+    terminate();
+    wait();
 }
 
 
@@ -120,7 +124,7 @@ void inline VAcuItem::drawInterpolationHorizontal(QPainter *per,QRectF visibleRe
     }
 }
 
-void inline VAcuItem::drawInterpolationHorizontalNoOffset(QPainter *per,int y_top,int y_bottom){
+void inline VAcuItem::drawInterpolationHorizontalNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag){
     qreal quantityElem = m_curve->sizeOffset();
     float step = m_dataStepPix;
     ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
@@ -157,6 +161,9 @@ void inline VAcuItem::drawInterpolationHorizontalNoOffset(QPainter *per,int y_to
     int indexWidthEnd = quantityElem - fmax((m_widthPicturePix + m_offsetPix - f_image->width()),0) / m_dataStepPix;
 
     for(i = indexBegin + 1;i < f_mainValue->size();++i){
+        if(*flag)
+            return;
+
         if(((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) > f_yTop + f_downOffset - 20 || ((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) < f_yTop){
             break;
         }
@@ -167,6 +174,8 @@ void inline VAcuItem::drawInterpolationHorizontalNoOffset(QPainter *per,int y_to
         ColorScale gradient;
         int prevXValue = indexWidthBegin - 1;
         for(int j = indexWidthBegin; j < indexWidthEnd; ++j){
+            if(*flag)
+                return;
             int f_curentInt = (int)(j * step);
             if(prevXValue == f_curentInt){
                 continue;
@@ -261,8 +270,10 @@ void VAcuItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
     qreal f_bottom = (f_mainValue->maximum() + f_recordPoint) * f_scaleForMainValue;
 
     qreal f_dstPicturePosition = visibleRect.y() - f_topOffset; //0
-    for(int y_top = f_top - 1000; y_top < f_dstPicturePosition + f_height; y_top += 1500){
-        QString f_fileName = "p/" + m_curve->mnemonic() + QString::number(m_curentPictureWidth) + QString::number(y_top) + ".png";
+    for(int y_top = f_top - 1000; y_top < f_dstPicturePosition + f_height; y_top += (M_HEIGHT_PICTURE - 1000)){
+        QString f_fileName = "temporary/" + m_curve->mnemonic() + QString::number(m_curentPictureWidth) + QString::number(y_top) + ".png";
+        if(!QFile::exists(f_fileName) )
+            continue;
         QImage f_srcImage(f_fileName);
         qreal f_srcPicturePosition =  y_top + 500;//??
         int f_drawHeight = f_srcImage.height() - 500;
@@ -276,31 +287,53 @@ void VAcuItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
 
 void VAcuItem::run(){
     m_updatedParam = true;
-
+    foreach(auto path,m_picturePath){
+        if(!QFile::exists(path) )
+            continue;
+      QFile(path).remove();
+    }
+    m_picturePath.clear();
     loadDrawingParam(m_curentPictureWidth);
     ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
     qreal f_recordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
     qreal f_scaleForMainValue = m_board->scale();
     qreal f_top = (f_mainValue->minimum() + f_recordPoint) * f_scaleForMainValue;
     qreal f_bottom = (f_mainValue->maximum() + f_recordPoint) * f_scaleForMainValue;
-    int f_heightPictures = 2500;
+    int f_heightPictures = M_HEIGHT_PICTURE;
     for(int y_top = f_top - 1000; y_top < f_bottom + 1000; y_top += (f_heightPictures - 1000)){
-        QFile(m_curve->mnemonic() + QString::number(m_prevPictureWidth) + QString::number(y_top) + ".png").remove();
+        if(m_isEndThread)
+            return;
         QImage f_image(m_curentPictureWidth,f_heightPictures,QImage::Format_ARGB32);
         QPainter f_painter(&f_image);
-        drawInterpolationHorizontalNoOffset(&f_painter,y_top,y_top + 12000);
-        QString f_namePicture = "p/" + m_curve->mnemonic() + QString::number(m_curentPictureWidth) + QString::number(y_top) + ".png";
+        drawInterpolationHorizontalNoOffset(&f_painter,y_top,y_top + 12000,&m_isEndThread);
+        QString f_namePicture = "temporary/" + m_curve->mnemonic() + QString::number(m_curentPictureWidth) + QString::number(y_top) + ".png";
         f_image.save(f_namePicture,"PNG",100);
+        m_picturePath << f_namePicture;
     }
     m_updatedParam = false;
 }
 
 void VAcuItem::updateParam(int pictureWidth){
-    quit();
-    m_prevPictureWidth  = m_curentPictureWidth;
+    m_isEndThread = true;
     m_curentPictureWidth = pictureWidth;
-    //loadDrawingParam(m_curentPictureWidth);
-    start();
+    if( isRunning ()){
+        m_isRedraw = true;
+    }
+    else{
+        loadDrawingParam(m_curentPictureWidth);
+        m_isEndThread = false;
+        start(QThread::InheritPriority);
+    }
+
+}
+
+void VAcuItem::endThreadHandler(){
+    if(m_isRedraw){
+        m_isRedraw = false;
+        loadDrawingParam(m_curentPictureWidth);
+        m_isEndThread = false;
+        start(QThread::InheritPriority);
+    }
 }
 
 void VAcuItem::drawInterpolationHorForCheckArea(QPainter *per,QRectF visibleRect,bool *flag){
@@ -378,3 +411,5 @@ bool VAcuItem::isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per){
         }
         return false;
 }
+
+

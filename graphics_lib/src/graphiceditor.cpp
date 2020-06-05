@@ -75,11 +75,11 @@ void GraphicEditor::addForms(){
     addTab(new QWidget(),"+");
     connect(this,&QTabWidget::currentChanged,this,&GraphicEditor::changeBoard);
 
-    setDrawType(m_curentDrawType);
+    /*setDrawType(m_curentDrawType);
     setFormatTime(m_curentFormatTime);
     setFormatDepth(m_curentFormatdepth);
     setLengthPicture(m_curentLenghPicture);
-    setFormatPicture(m_curentImageFormat);
+    setFormatPicture(m_curentImageFormat);*/
 }
 
 GraphicEditor::~GraphicEditor(){
@@ -208,6 +208,7 @@ void GraphicEditor::refresh(){
         }
         removeTab(index);
     }
+
 
     addCurves();
     addForms();

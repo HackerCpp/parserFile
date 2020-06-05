@@ -34,7 +34,10 @@ AGraphicTrack::AGraphicTrack(ATrack *track,BoardForTrack *board)
 }
 
 AGraphicTrack::~AGraphicTrack(){
-
+    if(m_items){
+        m_items->clear();
+        delete m_items;m_items = nullptr;
+    }
 }
 void AGraphicTrack::addIteam(AGraphicItem* item){
     if(!m_items || !item)

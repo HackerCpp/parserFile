@@ -1,11 +1,12 @@
 #include "acurve.h"
 #include <QDebug>
 
-const qreal ACurve::M_NOVALID = 999999999;
+
 
 ACurve::ACurve(){
     m_time = m_depth = m_userValue = nullptr;
-    m_recordPoint = M_NOVALID;
+    m_recordPoint = qQNaN();
+    m_offset = 1;
 }
 
 ACurve::~ACurve(){

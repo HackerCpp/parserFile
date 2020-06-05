@@ -5,15 +5,21 @@
 #include "colorscale.h"
 
 class VAcuItem : public VerticalItem{
+    Q_OBJECT
+
     qreal m_dataStepPix;
     qreal m_offsetPix;
     qreal m_dataStep;
     qreal m_widthPicturePix;
-    qreal m_curentPictureWidth,m_prevPictureWidth;
+    qreal m_curentPictureWidth;
     bool m_updatedParam;
+    const uint16_t M_HEIGHT_PICTURE = 32767;
+    QStringList m_picturePath;
+
+    bool m_isEndThread,m_isRedraw;
 
     void inline drawInterpolationHorizontal(QPainter *per,QRectF visibleRect,bool *flag);
-    void inline drawInterpolationHorizontalNoOffset(QPainter *per,int y_top,int y_bottom);
+    void inline drawInterpolationHorizontalNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag);
     void drawInterpolationHorForCheckArea(QPainter *per,QRectF visibleRect,bool *flag);
 
     void drawBody(QPainter *per,QRectF visibleRect,bool *flag)override;
@@ -25,6 +31,10 @@ class VAcuItem : public VerticalItem{
 public:
     VAcuItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board);
     ~VAcuItem()override;
+
+public slots:
+    void endThreadHandler();
+
 
 };
 

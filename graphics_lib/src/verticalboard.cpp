@@ -40,9 +40,14 @@ VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves)
     }
     connect(horizontalScrollBar(), &QScrollBar::valueChanged, this, &VerticalBoard::scrollChanged);
     connect(verticalScrollBar(), &QScrollBar::valueChanged, this, &VerticalBoard::scrollChanged);
+    //Создаём графические кривые. Если нет информации для кривой создаём.
+
     updateItems();
+    //распределяем графические кривые между треками
     distributionOfItemsBetweenTracks();
+    //Определяем размер сцены
     resize();
+    //Обновляем параметры всех кривых
     updateItemsParam();
 }
 
@@ -105,10 +110,10 @@ void VerticalBoard::distributionOfItemsBetweenTracks(){
 VerticalBoard::~VerticalBoard(){
     QList<QGraphicsItem*> f_items = m_canvas->items();
     foreach(auto item,f_items){
-        delete item;item = nullptr;
+        delete item; item = nullptr;
     }
-    if(m_canvas){delete m_canvas;m_canvas = nullptr;}
 
+    if(m_canvas){delete m_canvas;m_canvas = nullptr;}
 }
 
 
