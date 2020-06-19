@@ -18,7 +18,7 @@ public:
     VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves);
     VerticalBoard(QMap<QString,ICurve*> *curves);
     VerticalBoard();
-    ~VerticalBoard()override;
+    virtual ~VerticalBoard()override;
 
     void newTrack()override;
     bool addCurve(ICurve *curve,int indexTab);

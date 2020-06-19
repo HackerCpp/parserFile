@@ -14,10 +14,12 @@ IBlock::TypeBlock IBlock::name(){
 }
 
 bool IBlock::parser(const char *body,uint32_t size){
+    Q_UNUSED(body)
+    Q_UNUSED(size)
     return false;
 }
 
-QSharedPointer<IBlock> IBlock::blockCreater(IBlock::TypeBlock type){
+IBlock *IBlock::blockCreater(IBlock::TypeBlock type){
     IBlock *f_block = nullptr;
     switch (type) {
         case NO_BLOCK:{
@@ -40,10 +42,10 @@ QSharedPointer<IBlock> IBlock::blockCreater(IBlock::TypeBlock type){
             break;
         }
     }
-    return QSharedPointer<IBlock>(dynamic_cast<IBlock *>(f_block));
+    return f_block;
 }
 
-QSharedPointer<IBlock> IBlock::blockCreater(const IBlock &block){
+IBlock *IBlock::blockCreater(const IBlock &block){
     IBlock &f_block = const_cast<IBlock &>(block);
     IBlock *f_returnBlock = nullptr;
     TypeBlock f_type = f_block.name();
@@ -68,5 +70,5 @@ QSharedPointer<IBlock> IBlock::blockCreater(const IBlock &block){
             break;
         }
     }
-    return QSharedPointer<IBlock>(dynamic_cast<IBlock *>(f_returnBlock));
+    return f_returnBlock;
 }

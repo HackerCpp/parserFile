@@ -16,7 +16,7 @@ bool AinterpreterLogData::openScript(){
     return false;
 }
 
-bool AinterpreterLogData::setBlocks(QList<QSharedPointer<IBlock> > *blocks){
+bool AinterpreterLogData::setBlocks(QList<IBlock *> *blocks){
     m_blocks = blocks;
     return true;
 }

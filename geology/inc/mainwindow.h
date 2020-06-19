@@ -24,5 +24,6 @@ public slots:
     void openFile()override;
     void saveGFM()override;
     void openConsolePython()override;
+    void openInterpretations()override;
 };
 #endif // MAINWINDOW_H

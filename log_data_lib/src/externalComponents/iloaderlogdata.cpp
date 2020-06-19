@@ -17,7 +17,8 @@ bool ILoaderLogData::isReady(){
     return true;
 }
 
-bool ILoaderLogData::setBlocks(QList<QSharedPointer<IBlock> > *blocks){
+bool ILoaderLogData::setBlocks(QList<IBlock *> *blocks){
+    Q_UNUSED(blocks)
     return false;
 }
 

@@ -109,7 +109,7 @@ void AGraphicBoard::setFormatDepth(FormatDepth format){
 void AGraphicBoard::setLengthPicture(LengthPicture format){
     setPictureHeightMM(m_lengtgPicture[format]);
     resizePicture();
-    updateItemsParam();
+    //updateItemsParam();
     redraw();
     resize();
 }
@@ -123,6 +123,11 @@ void AGraphicBoard::setFormatPicture(QImage::Format format){
 }
 
 void AGraphicBoard::setScalePixelPerMm(qreal scalePixelPerMm){
+    if(scalePixelPerMm == 0){
+        qDebug() << "scale pixel per mm = 0";
+        return;
+    }
+
     m_scalePixelPerMm = scalePixelPerMm;
     resizePicture();
     updateItemsParam();

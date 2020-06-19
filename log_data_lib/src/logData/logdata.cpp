@@ -6,7 +6,7 @@ LogData::LogData(){
     m_loader = nullptr;
     m_saver = nullptr;
     m_interpreter = nullptr;
-    m_blocks = new QList<QSharedPointer<IBlock> >;
+    m_blocks = new QList<IBlock *>;
 }
 
 LogData::LogData(const LogData &logData){
@@ -15,7 +15,7 @@ LogData::LogData(const LogData &logData){
     m_loader = nullptr;
     m_saver = nullptr;
     m_interpreter = nullptr;
-    m_blocks = new QList<QSharedPointer<IBlock> >;
+    m_blocks = new QList<IBlock *>;
     ILogData &f_logdata = const_cast<LogData &>(logData);
     m_name = f_logdata.name();
 }
@@ -26,13 +26,14 @@ LogData &LogData::operator=(const LogData &logData){
     m_loader = nullptr;
     m_saver = nullptr;
     m_interpreter = nullptr;
-    m_blocks = new QList<QSharedPointer<IBlock> >;
+    m_blocks = new QList<IBlock *>;
     ILogData &f_logdata = const_cast<LogData &>(logData);
-    QList<QSharedPointer<IBlock> > *f_blocks = f_logdata.blocks();
+    QList<IBlock *> *f_blocks = f_logdata.blocks();
     foreach(auto block,*f_blocks){
         m_blocks->push_back(block);
     }
     m_name = f_logdata.name();
+    return *this;
 }
 
 LogData::~LogData(){
@@ -112,7 +113,7 @@ bool LogData::setInterpreter(IInterpreterLogData *interpreter){
     return true;
 }
 
-QList<QSharedPointer<IBlock> > *LogData::blocks(){
+QList<IBlock *> *LogData::blocks(){
     return m_blocks;
 }
 
@@ -121,15 +122,15 @@ void LogData::dataUpdate(){
         m_interpreter->dataUpdate();
 }
 
-void LogData::addBlock(QSharedPointer<IBlock> block){
+void LogData::addBlock(IBlock *block){
     m_blocks->push_back(block);
-    connect(block.data(),&IBlock::dataUpdate,this,&ILogData::dataUpdate);
+    connect(block,&IBlock::dataUpdate,this,&ILogData::dataUpdate);
     dataUpdate();
 }
 
 void LogData::dataReady(){
     foreach(auto block,*m_blocks){
-        connect(block.data(),&IBlock::dataUpdate,this,&ILogData::dataUpdate);
+        connect(block,&IBlock::dataUpdate,this,&ILogData::dataUpdate);
     }
     m_isReady = true;
     emit ready();

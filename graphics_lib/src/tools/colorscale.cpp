@@ -121,8 +121,7 @@ void ColorScale::fillTab(QColor* colorTab, int size,InterpolationFunction::Inter
             colorTab[i].setRed((unsigned char)pFunction(startColor.red(),endColor.red(),ABS((double)i - pos)/(nb_color - 1.0)));
             colorTab[i].setGreen((unsigned char)pFunction(startColor.green(),endColor.green(),ABS((double)i - pos)/(nb_color-1.0)));
             colorTab[i].setBlue((unsigned char)pFunction(startColor.blue(),endColor.blue(),ABS((double)i - pos)/(nb_color-1.0)));
-
-            //colorTab[i].setAlpha((unsigned char)pFunction(startColor.alpha(),endColor.alpha(),ABS((double)i - pos)/(nb_color-1.0)));
+            colorTab[i].setAlpha((unsigned char)pFunction(startColor.alpha(),endColor.alpha(),ABS((double)i - pos)/(nb_color-1.0)));
         }
         pos += nb_color;
     }

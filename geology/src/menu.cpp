@@ -16,6 +16,7 @@ Menu::Menu(QWidget *parent)
     mainMenu->addAction("&About Qt",qApp, SLOT(aboutQt()), Qt::CTRL + Qt::Key_Q);
     mainMenu->addAction("&ApplyStyle",this, SIGNAL(applyStyle()), Qt::CTRL + Qt::Key_A);
     mainMenu->addSeparator();
+    mainMenu->addAction("&Interpretations",m_parentWindow, SLOT(openInterpretations()), Qt::CTRL + Qt::Key_W);
     mainMenu->addAction("&Exit", qApp, SLOT(quit()),Qt::Key_Escape);
     mnuArray->push_back(mainMenu);
     QMenu * fileMenu= new QMenu("&File",this);

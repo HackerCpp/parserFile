@@ -5,7 +5,7 @@
 #include <QPainter>
 #include "boardfortrack.h"
 
-class AGraphicItem : public QThread
+class AGraphicItem
 {
 protected:
     AItem *m_itemInfo;
@@ -20,7 +20,7 @@ protected:
 
 public:
     AGraphicItem(ICurve *curve,BoardForTrack *board);
-    ~AGraphicItem();
+    virtual ~AGraphicItem();
 
     qreal topValue();
     qreal bottomValue();
@@ -30,7 +30,7 @@ public:
     virtual bool isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per){Q_UNUSED(area) Q_UNUSED(visibleRect) Q_UNUSED(per) return false;}
     virtual bool isClickHeaderArea(QPoint pos){Q_UNUSED(pos)return false;}
     virtual void setActive(bool active){m_isActive = active;}
-    virtual void run()override{}
+
     virtual void updateParam(int pictureWidth){Q_UNUSED(pictureWidth)}
     ICurve *curve(){return m_curve;}
     AItem *itemInfo(){return m_itemInfo;}

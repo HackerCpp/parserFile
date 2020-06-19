@@ -1,26 +1,4 @@
-/*QWidget 
-{
-	background-color:#80bed1;
-}
-
-QTextEdit,QLineEdit
-{
-	background-color:#E0FFFF;
-	selection-background-color: qlineargradient(x1: 0, y1: 0, x2:0.6,y2: 0.4,stop: 0 #4682B4, stop: 1 #1E90FF);		
-}
-
-QTableView
-{
-	background-color:#E0FFFF;
-	selection-background-color: qlineargradient(x1: 0, y1: 0, x2:0.9,y2: 0.9,stop: 0 #4682B4, stop: 1 #E0FFFF);
-	selection-color:black;
-
-}
-QHeaderView::section{
-	background-color:#AFEEEE;
-}
-
-* QSS Qt Stylesheets Collection.
+/* QSS Qt Stylesheets Collection.
 * Created in 2013 by Khromathyon Software.
 * QSS Theme: Visual Studio(R) 2012 Dark Theme.
 * License: WTFPL
@@ -32,7 +10,6 @@ QMainWindow {
 
 
 QMenuBar {
-
   background-color:#2d2d30;
   text-transform: uppercase;
   color:#f1f1f1;
@@ -46,6 +23,7 @@ QMenu {
   border:0.5px solid #333337;
   color:#f1f1f1;
 }
+
 QMenu::item:selected {
   background-color:#2d2d30;
   border-color:#333337;
@@ -120,7 +98,7 @@ QComboBox:drop-down {
   border-style:none;
 }
 
-/*Needs fix*/
+
 QScrollBar{
   background:#3e3e42;
   border-style:none;
@@ -137,6 +115,7 @@ QScrollBar:handle {
   margin: inherited;
 
 }
+
 QPushButton {
   border-style:none;
   border-bottom:1px solid #007acc;
@@ -214,15 +193,16 @@ QTreeView::item:selected
   background:#007acc;
 }
 
-QTreeView::item:selected!active {
+QTreeView::item:selected:active {
   background: #3f3f46;
 }
 
 QTreeView::item:selected {
   background: #3f3f46;
 }
+
 QListView {
   background-color:#252526;
   border-style:none;
-
 }
+

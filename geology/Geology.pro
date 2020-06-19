@@ -38,9 +38,9 @@ include(../graphics_lib/graphics.pri)
 
 
 SOURCES += \
-    inc/graphicscontrolpanel.cpp \
-    inc/graphicwidget.cpp \
-    inc/newcurvetab.cpp \
+    src/graphicscontrolpanel.cpp \
+    src/graphicwidget.cpp \
+    src/newcurvetab.cpp \
     src/datamodel.cpp \
     src/datatreeview.cpp \
     src/logdataview.cpp \

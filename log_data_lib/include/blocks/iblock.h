@@ -16,17 +16,17 @@ public:
 
 public:
     IBlock();
-    IBlock(const IBlock &block){}
+    IBlock(const IBlock &block){Q_UNUSED(block)}
     virtual ~IBlock();
 
     virtual TypeBlock name();
     virtual bool parser(const char *body,uint32_t size);
 
-    static QSharedPointer<IBlock> blockCreater(IBlock::TypeBlock type);
-    static QSharedPointer<IBlock> blockCreater(const IBlock &block);
+    static IBlock * blockCreater(IBlock::TypeBlock type);
+    static IBlock * blockCreater(const IBlock &block);
 
 signals:
-    virtual void dataUpdate();
+    void dataUpdate();
 };
 
 #endif // IBLOCK_H

@@ -2,6 +2,8 @@
 #include <QFileDialog>
 #include "filereader.h"
 #include "gfmloader.h"
+#include "gfmsaver.h"
+#include "interpreterpython.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -65,11 +67,52 @@ void MainWindow::openFile(){
 }
 
 void MainWindow::saveGFM(){
-
+    ILogData *f_logData = m_logDataView->curentLogData();
+    if(!f_logData)
+        return;
+    ISaverLogData * gfmSaver = new GFMSaver();
+    f_logData->setSaver(gfmSaver);
+    f_logData->save();
 }
 
 void MainWindow::openConsolePython(){
-
+    ILogData *f_logData = m_logDataView->curentLogData();
+    if(!f_logData)
+        return;
+    if(!f_logData->isInterpreter()){
+        IInterpreterLogData *f_interpreter = dynamic_cast<IInterpreterLogData *>(new InterpreterPython());
+        f_logData->setInterpreter(f_interpreter);
+    }
+    f_logData->openInterpreterConsole();
 }
 
+void MainWindow::openInterpretations(){
+    QDir dir(QDir().absolutePath()+ "/interpretations");
+    dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
+    QFileInfoList f_fileList = dir.entryInfoList();
 
+    foreach(auto file,f_fileList)
+        if(file.suffix() != "dll")
+            f_fileList.removeOne(file);
+
+    foreach(auto file,f_fileList){
+        QString f_path = file.absoluteFilePath();
+        QLibrary  lib(f_path);
+        lib.load();
+        qDebug() << lib.isLoaded() << f_path;
+        typedef QString (*Fct) ();
+        typedef ILogData *(*F)(ILogData *logData);
+        Fct version = (Fct)(lib.resolve("version"));
+        Fct name = (Fct)(lib.resolve("name"));
+        F interpr = (F)(lib.resolve("interpretation"));
+        if(version)
+            qDebug() << version();
+        if(name)
+            qDebug() << name();
+        if(interpr){
+            QSharedPointer<ILogData> f_logData(interpr(m_logDataView->curentLogData()));
+            m_logDataView->addLogData(f_logData);
+        }
+    }
+
+}

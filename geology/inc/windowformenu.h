@@ -13,6 +13,7 @@ public slots:
     virtual void openFile(){}
     virtual void saveGFM(){}
     virtual void openConsolePython(){}
+    virtual void openInterpretations(){}
 };
 
 #endif // WINDOWFORMENU_H

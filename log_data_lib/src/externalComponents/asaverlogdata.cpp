@@ -18,7 +18,7 @@ bool ASaverLogData::isReady(){
     return false;
 }
 
-bool ASaverLogData::setBlocks(QList<QSharedPointer<IBlock> > *blocks){
+bool ASaverLogData::setBlocks(QList<IBlock *> *blocks){
     m_blocks = blocks;
     return false;
 }

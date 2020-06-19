@@ -16,6 +16,7 @@ bool IInterpreterLogData::openScript(){
      return false;
 }
 
-bool IInterpreterLogData::setBlocks(QList<QSharedPointer<IBlock> > *blocks){
+bool IInterpreterLogData::setBlocks(QList<IBlock *> *blocks){
+    Q_UNUSED(blocks)
     return false;
 }

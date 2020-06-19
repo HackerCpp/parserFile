@@ -8,7 +8,7 @@ class ALoaderLogData :public ILoaderLogData{
 
 protected:
     bool m_isReady;
-    QList<QSharedPointer<IBlock> > *m_blocks;
+    QList<IBlock *> *m_blocks;
 public:
     ALoaderLogData();
     virtual ~ALoaderLogData();
@@ -17,7 +17,7 @@ public:
     virtual bool download()override;
     virtual bool isReady()override;
 
-     virtual bool setBlocks(QList<QSharedPointer<IBlock> > *blocks)override;
+     virtual bool setBlocks(QList<IBlock *> *blocks)override;
 };
 
 #endif // ALOADERLOGDATA_H

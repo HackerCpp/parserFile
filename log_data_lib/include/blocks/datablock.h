@@ -43,7 +43,7 @@ public:
     ICurve *depth(){return m_mainDepth;}
 
 signals:
-    void dataUpdate() override;
+    void dataUpdate();
 
 };
 

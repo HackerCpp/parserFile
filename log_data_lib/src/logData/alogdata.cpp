@@ -23,6 +23,7 @@ bool ALogData::isReady(){
 }
 
 bool ALogData::setInterpreter(IInterpreterLogData *interpreter){
+    Q_UNUSED(interpreter)
     return false;
 }
 
@@ -30,7 +31,7 @@ QMap<QString,ICurve*> *ALogData::curves(){
    return nullptr;
 }
 
-QList<QSharedPointer<IBlock> > *ALogData::blocks(){
+QList<IBlock *> *ALogData::blocks(){
    return nullptr;
 }
 

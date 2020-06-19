@@ -11,7 +11,8 @@ LIBS += \
 
 
 SOURCES += \
-    $$PWD/inc/tools/spectrreader.cpp \
+    $$PWD/src/items/drawingthroughadisk.cpp \
+    $$PWD/src/tools/spectrreader.cpp \
     $$PWD/src/tools/colorscale.cpp \
     $$PWD/src/tools/basesettingswindow.cpp \
     $$PWD/src/tools/curveeditor.cpp \
@@ -46,6 +47,7 @@ HEADERS += \
     $$PWD/inc/boardfortrack.h \
     $$PWD/inc/graphiceditor.h \
     $$PWD/inc/igraphiceditor.h \
+    $$PWD/inc/items/drawingthroughadisk.h \
     $$PWD/inc/items/itimscreater.h \
     $$PWD/inc/tools/basesettingswindow.h \
     $$PWD/inc/tools/browsergraphicitems.h \

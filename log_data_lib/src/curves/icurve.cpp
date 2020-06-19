@@ -9,6 +9,7 @@ ICurve::~ICurve(){
 }
 
 qreal ICurve::data(uint index){
+    Q_UNUSED(index)
     return 0;
 }
 QByteArray ICurve::data(){
@@ -16,14 +17,17 @@ QByteArray ICurve::data(){
 }
 
 void ICurve::setData(qreal data){
+    Q_UNUSED(data)
 }
 
 void ICurve::setData(qreal data,uint index){
-    qDebug() << "setData interf curve";
+    Q_UNUSED(data)
+    Q_UNUSED(index)
 }
 
 void ICurve::setData(const char *dataPtr,uint numberOfVectors){
-    qDebug() << "setData interf curve";
+    Q_UNUSED(dataPtr)
+    Q_UNUSED(numberOfVectors)
 }
 
 ICurve *ICurve::time(){
@@ -39,14 +43,17 @@ ICurve *ICurve::userBaseValue(){
 }
 
 bool ICurve::setTime(ICurve *time){
+    Q_UNUSED(time)
     return false;
 }
 
 bool ICurve::setDepth(ICurve *depth){
+    Q_UNUSED(depth)
     return false;
 }
 
 bool ICurve::setUserBaseValue(ICurve *userBaseValue){
+    Q_UNUSED(userBaseValue)
     return false;
 }
 

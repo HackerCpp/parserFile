@@ -26,6 +26,7 @@ GraphicsControlPanel::GraphicsControlPanel()
     m_comboFormatDepth.insertItem(7,"1:5000");
     m_comboFormatDepth.insertItem(8,"1:10000");
 
+
     m_comboPictureLength.insertItem(0,"MIN Picture");
     m_comboPictureLength.insertItem(1,"AVR Picture");
     m_comboPictureLength.insertItem(2,"MAX Picture");
@@ -33,10 +34,13 @@ GraphicsControlPanel::GraphicsControlPanel()
     m_comboPictureFormat.insertItem(0,"multicolored image");//"Format_ARGB4444_Premultiplied");
     m_comboPictureFormat.insertItem(1,"black and white image");//"Format_Grayscale8");
 
-    m_comboScalePixelPerMm.insertItem(0,"0.5");
-    m_comboScalePixelPerMm.insertItem(1,"1");
-    m_comboScalePixelPerMm.insertItem(2,"2");
-    m_comboScalePixelPerMm.insertItem(3,"3");
+    m_comboScalePixelPerMm.insertItem(0,"x0.5");
+    m_comboScalePixelPerMm.insertItem(1,"x1");
+    m_comboScalePixelPerMm.insertItem(2,"x2");
+    m_comboScalePixelPerMm.insertItem(3,"x3");
+    m_comboScalePixelPerMm.insertItem(4,"x4");
+    m_comboScalePixelPerMm.insertItem(5,"x5");
+    m_comboScalePixelPerMm.setMinimumWidth(100);
 
 
 
@@ -45,7 +49,7 @@ GraphicsControlPanel::GraphicsControlPanel()
     m_hLayout->addWidget(&m_comboBox);
     m_hLayout->addWidget(&m_comboFormatTime);
     m_hLayout->addWidget(&m_comboFormatDepth);
-    m_hLayout->addWidget(&m_comboPictureLength);
+    //m_hLayout->addWidget(&m_comboPictureLength);
     m_hLayout->addWidget(&m_comboPictureFormat);
     m_hLayout->addWidget(&m_comboScalePixelPerMm);
     m_hLayout->addWidget(m_btnRefresh);
@@ -56,7 +60,7 @@ GraphicsControlPanel::GraphicsControlPanel()
     connect(&m_comboFormatDepth,static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),this,&GraphicsControlPanel::changeFormatDepth);
     connect(&m_comboPictureLength,static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),this,&GraphicsControlPanel::changePictureHeight);
     connect(&m_comboPictureFormat,static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),this,&GraphicsControlPanel::changePictureFormat);
-    connect(&m_comboScalePixelPerMm,static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),this,&GraphicsControlPanel::changedScalePixelPerMm);
+    connect(&m_comboScalePixelPerMm,SIGNAL(currentIndexChanged(const QString)),this,SLOT(changeScalePixelPerMm(const QString)));
     connect(m_btnRefresh,&QPushButton::pressed,this,&GraphicsControlPanel::refresh);
     changeDrawType(0);
 
@@ -109,22 +113,7 @@ void GraphicsControlPanel::changePictureFormat(int index){
     emit changedPictureFormat(f_format);
 }
 
-void GraphicsControlPanel::changeScalePixelPerMm(int  index){
-    qreal f_scale  =  1;
-    switch(index){
-    case 0:{
-        f_scale = 0.5;
-        break;
-    }
-    case 2:{
-        f_scale = 2;
-        break;
-    }
-    case 3:{
-        f_scale = 3;
-        break;
-    }
-
-    }
+void GraphicsControlPanel::changeScalePixelPerMm(const QString scale){
+    qreal f_scale  =  QString(scale).remove("x").toDouble();
     emit changedScalePixelPerMm(f_scale);
 }

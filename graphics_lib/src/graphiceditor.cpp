@@ -23,7 +23,7 @@ void GraphicEditor::addCurves(){
 
     foreach(auto block,*m_logData->blocks()){
          if(block->name() == IBlock::DATA_BLOCK){
-           DataBlock *f_dataBlock = dynamic_cast<DataBlock*>(block.data());
+           DataBlock *f_dataBlock = dynamic_cast<DataBlock*>(block);
            if(f_dataBlock){
                QList<ICurve*> *f_curves = f_dataBlock->curves();
                if(!f_curves){
@@ -53,7 +53,7 @@ void GraphicEditor::addForms(){
 
     foreach(auto block,*m_logData->blocks()){
         if(block->name() == IBlock::FORMS_BLOCK){
-            m_forms = dynamic_cast<FormsBlock *>(block.data());
+            m_forms = dynamic_cast<FormsBlock *>(block);
             f_boards = m_forms->boards();
             if(!f_boards){
                 qDebug() << "FormsBlock Вернул нулевой указатель на борды";

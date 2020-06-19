@@ -22,7 +22,7 @@ class VLineItem : public VerticalItem{
     void setColor(QColor color)override;
 public:
     VLineItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board);
-    ~VLineItem()override{}
+    ~VLineItem(){}
 
     void updateParam(int pictureWidth)override;
 

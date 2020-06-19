@@ -8,8 +8,7 @@
 
 DataModel::DataModel(){
     m_logDataVector = new QVector<QSharedPointer<ILogData> >;
-
-
+    m_curentLogData = nullptr;
 }
 
 DataModel::~DataModel(){
@@ -17,6 +16,7 @@ DataModel::~DataModel(){
 }
 
 void DataModel::addLogData(QSharedPointer<ILogData> logData){
+    m_curentLogData = logData.data();
     if(m_logDataVector){
        beginInsertRows(QModelIndex(),m_logDataVector->size(), m_logDataVector->size());
        m_logDataVector->push_back(logData);
@@ -47,7 +47,7 @@ QModelIndex DataModel::index(int row, int column, const QModelIndex &parent)cons
     }
     else if (dynamic_cast<ILogData*>(static_cast<QObject*>(parent.internalPointer()))){
         ILogData *f_logData = static_cast<ILogData *>(parent.internalPointer());
-        return createIndex(row,column,f_logData->blocks()->at(row).data());
+        return createIndex(row,column,f_logData->blocks()->at(row));
     }
     else if(dynamic_cast<IBlock*>(static_cast<QObject*>(parent.internalPointer()))){
         IBlock *f_block = static_cast<IBlock *>(parent.internalPointer());
@@ -91,7 +91,7 @@ QModelIndex DataModel::parent(const QModelIndex &child)const{
     else if(dynamic_cast<IBlock*>(static_cast<QObject*>(child.internalPointer()))){
         IBlock *f_block = static_cast<IBlock *>(child.internalPointer());
         foreach(auto logData,*m_logDataVector){
-            QList<QSharedPointer<IBlock> > *f_blocks = logData->blocks();
+            QList<IBlock *> *f_blocks = logData->blocks();
             foreach(auto block,*f_blocks){
                 if(block == f_block){
                     return createIndex(m_logDataVector->indexOf(logData),0,logData.data());
@@ -102,14 +102,14 @@ QModelIndex DataModel::parent(const QModelIndex &child)const{
     else if(dynamic_cast<ICurve*>(static_cast<QObject*>(child.internalPointer()))){
         ICurve *f_curve = static_cast<ICurve *>(child.internalPointer());
         foreach(auto logData,*m_logDataVector){
-            QList<QSharedPointer<IBlock> > *f_blocks = logData->blocks();
+            QList<IBlock *> *f_blocks = logData->blocks();
             foreach(auto block,*f_blocks){
-                DataBlock *f_dataBlock = dynamic_cast<DataBlock *>(block.data());
+                DataBlock *f_dataBlock = dynamic_cast<DataBlock *>(block);
                 if(f_dataBlock){
                     QList<ICurve*> *f_curves = f_dataBlock->curves();
                     foreach(auto curve,*f_curves){
                         if(curve == f_curve){
-                            return createIndex(f_blocks->indexOf(block),0,block.data());
+                            return createIndex(f_blocks->indexOf(block),0,block);
                         }
                     }
                 }
@@ -119,14 +119,14 @@ QModelIndex DataModel::parent(const QModelIndex &child)const{
     else if(dynamic_cast<IBoard *>(static_cast<QObject*>(child.internalPointer()))){
         IBoard *f_board = static_cast<IBoard *>(child.internalPointer());
         foreach(auto logData,*m_logDataVector){
-            QList<QSharedPointer<IBlock> > *f_blocks = logData->blocks();
+            QList<IBlock *> *f_blocks = logData->blocks();
             foreach(auto block,*f_blocks){
-                FormsBlock *f_formsBlock = dynamic_cast<FormsBlock *>(block.data());
+                FormsBlock *f_formsBlock = dynamic_cast<FormsBlock *>(block);
                 if(f_formsBlock){
                     QList<ABoard*> *f_boards = f_formsBlock->boards();
                     foreach(auto board,*f_boards){
                         if(board == f_board){
-                            return createIndex(f_blocks->indexOf(block),0,block.data());
+                            return createIndex(f_blocks->indexOf(block),0,block);
                         }
                     }
                 }
@@ -136,14 +136,14 @@ QModelIndex DataModel::parent(const QModelIndex &child)const{
     else if(dynamic_cast<HeaderInfo *>((QObject*)child.internalPointer())){
         HeaderInfo *f_headerinfo = dynamic_cast<HeaderInfo *>((QObject*)child.internalPointer());
         foreach(auto logData,*m_logDataVector){
-            QList<QSharedPointer<IBlock> > *f_blocks = logData->blocks();
+            QList<IBlock *> *f_blocks = logData->blocks();
             foreach(auto block,*f_blocks){
-                    HearedBlock *f_formsBlock = dynamic_cast<HearedBlock *>(block.data());
+                    HearedBlock *f_formsBlock = dynamic_cast<HearedBlock *>(block);
                     if(f_formsBlock){
                         QList<QSharedPointer<HeaderInfo> > *f_listHeaderInfo = f_formsBlock->infoHeader();
                         foreach(auto headerInfo,*f_listHeaderInfo){
                             if(headerInfo == f_headerinfo)
-                                return createIndex(f_blocks->indexOf(block),0,block.data());
+                                return createIndex(f_blocks->indexOf(block),0,block);
                         }
                     }
             }
@@ -183,10 +183,10 @@ int DataModel::rowCount(const QModelIndex &parent )const{
             }
             case IBlock::HEADER_BLOCK:{
                 foreach(auto logData,*m_logDataVector){
-                    QList<QSharedPointer<IBlock> > *f_blocks = logData->blocks();
+                    QList<IBlock *> *f_blocks = logData->blocks();
                     foreach(auto block,*f_blocks){
                         if(block == f_block){
-                            HearedBlock *f_headerBlock = dynamic_cast<HearedBlock *>(block.data());
+                            HearedBlock *f_headerBlock = dynamic_cast<HearedBlock *>(block);
                             if(f_headerBlock){
                                 if(f_headerBlock->infoHeader()){
                                     return f_headerBlock->infoHeader()->size();
@@ -323,7 +323,17 @@ QVariant DataModel::data(const QModelIndex &index, int role )const{
             return QVariant();
     }
     else if(role == Qt::BackgroundRole){
-           return QVariant();
+        return QVariant();
+    }
+    else if(role == Qt::CheckStateRole){
+        if (dynamic_cast<ILogData*>(static_cast<QObject*>(index.internalPointer()))){
+            ILogData *f_logData = static_cast<ILogData *>(index.internalPointer());
+            if(f_logData == m_curentLogData)
+                return Qt::Checked;
+            else
+                return Qt::Unchecked;
+        }
+        return QVariant();
     }
     else if(role == Qt::FontRole){
            //return QFont("Times", 12, QFont::Bold);
@@ -357,13 +367,19 @@ bool DataModel::deleteBlock(IBlock *block){
     if(!block)
         return false;
     foreach(auto logData,*m_logDataVector){
-        QList<QSharedPointer<IBlock> > *f_blocks = logData->blocks();
-        foreach(auto f_block,*f_blocks){
-            if(block == f_block.data()){
+        QList<IBlock *> *f_blocks = logData->blocks();
+        if(!f_blocks)
+            continue;
+        /*foreach(auto f_block,*f_blocks){
+            if(block == f_block){
                 f_blocks->removeOne(f_block);
                 update();
                 return true;
             }
+        }*/
+        if(f_blocks->removeOne(block)){
+            update();
+            return true;
         }
     }
     return false;

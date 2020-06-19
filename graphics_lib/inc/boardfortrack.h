@@ -21,12 +21,13 @@ public:
     BoardForTrack();
     ~BoardForTrack(){}
 
-    void setScaleForTime(qreal scale){m_scaleForTime = scale * (m_pixelPerMm * m_scalePixelPerMm);}
-    void setScaleForDepth(qreal scale){m_scaleForDepth = scale * (m_pixelPerMm * m_scalePixelPerMm);}
+    void setScaleForTime(qreal scale){m_scaleForTime = scale ;}
+    void setScaleForDepth(qreal scale){m_scaleForDepth = scale ;}
     virtual void setPictureHeightMM(int heightMM);
     void setPositionHeader(int newPos){m_positionHeader = newPos;}
     virtual void setFormatPicture(QImage::Format format){m_formatImg = format;}
     virtual void setScalePixelPerMm(qreal scalePixelPerMm){m_scalePixelPerMm = scalePixelPerMm;}
+    virtual void customUpdate(){}
 
     void setFormatDepth(){}
 

@@ -10,9 +10,9 @@
 #include "board.h"
 #include "track.h"
 #include "items.h"
-#include "LineItem.h"
+#include "lineItem.h"
 #include "markItem.h"
-#include "AcuItem.h"
+#include "acuItem.h"
 #include "datablock.h"
 #include "toolinfoblock.h"
 #include"acurve.h"
@@ -44,13 +44,13 @@ bool GFMSaver::save(){
 
     foreach(auto block,*m_blocks){
         if(block->name() == IBlock::DATA_BLOCK)
-            fileGFM->write(getForSaveDataBlock(block.data()));
+            fileGFM->write(getForSaveDataBlock(block));
         else if(block->name() == IBlock::FORMS_BLOCK)
-           fileGFM->write(getForSaveFormsBlock(block.data()));
+           fileGFM->write(getForSaveFormsBlock(block));
         else if(block->name() == IBlock::HEADER_BLOCK)
-            fileGFM->write(getForSaveHeaderBlock(block.data()));
+            fileGFM->write(getForSaveHeaderBlock(block));
         else if(block->name() == IBlock::TOOLINFO_BLOCK)
-            fileGFM->write(getForSaveToolInfoBlock(block.data()));
+            fileGFM->write(getForSaveToolInfoBlock(block));
     }
     fileGFM->close();
     delete fileGFM;
@@ -148,6 +148,7 @@ QByteArray GFMSaver::getHeader(DataBlock * dataBlock){
 }
 
 QByteArray  GFMSaver::getForSave(IBlock *block){
+    Q_UNUSED(block)
     return QByteArray();
 }
 

@@ -131,14 +131,27 @@ SettingsItem::SettingsItem(AGraphicItem *item):
     m_leftBorderSettings = new Selection(f_names,(int)!m_item->itemInfo()->isBeginValue());
     m_leftBorderSettings->setValue("Left Border",QString::number(m_item->itemInfo()->beginValue() / 10));
     m_leftBorderSettings->setValue("Zero offset",QString::number(m_item->itemInfo()->zeroOffset() / 10));
+
     f_names.clear();
     f_names << "Right Border:units" << "Scale:unit/sm";
     m_rightBorderSettings = new Selection(f_names,(int)!m_item->itemInfo()->isEndValue());
     m_rightBorderSettings->setValue("Right Border",QString::number(m_item->itemInfo()->endValue()));
     m_rightBorderSettings->setValue("Scale",QString::number((1/m_item->itemInfo()->scale()) * 10));
 
+    m_labelRecordPoint = new QLabel("Record point");
+    m_editRecordPoint = new QLineEdit;
+    m_recordPointLayout = new QHBoxLayout();
+    m_groupBox = new QGroupBox;
+    m_editRecordPoint->setValidator( new QDoubleValidator(-1000000000, 1000000000, 9, m_editRecordPoint) );
+    m_recordPointLayout->addWidget(m_labelRecordPoint);
+    m_recordPointLayout->addWidget(m_editRecordPoint);
+    m_groupBox->setLayout(m_recordPointLayout);
+    m_editRecordPoint->setText(QString::number(m_item->curve()->recordPoint()));
+
+
     m_mainVLout->addWidget(m_leftBorderSettings);
     m_mainVLout->addWidget(m_rightBorderSettings);
+    m_mainVLout->addWidget(m_groupBox);
     this->setLayout(m_mainVLout);
     m_mainVLout->setMargin(2);
     show();
@@ -148,6 +161,10 @@ SettingsItem::~SettingsItem(){
     if(m_leftBorderSettings){delete m_leftBorderSettings;m_leftBorderSettings = nullptr;}
     if(m_rightBorderSettings){delete m_rightBorderSettings;m_rightBorderSettings = nullptr;}
     if(m_mainVLout){delete m_mainVLout;m_mainVLout = nullptr;}
+    if(m_labelRecordPoint){delete m_labelRecordPoint;m_labelRecordPoint = nullptr;}
+    if(m_editRecordPoint){delete m_editRecordPoint;m_editRecordPoint = nullptr;}
+    if(m_recordPointLayout){delete m_recordPointLayout;m_recordPointLayout = nullptr;}
+    if(m_groupBox){delete m_groupBox;m_groupBox = nullptr;}
 
 }
 
@@ -163,6 +180,7 @@ void SettingsItem::applyBaseSettings(){
     f_itemInfo->setEnd(!m_rightBorderSettings->indexActive(),
                                  m_rightBorderSettings->value("Right Border").toDouble(),
                                  1/(m_rightBorderSettings->value("Scale").toDouble()/10));
+    m_item->curve()->setRecordPoint(m_editRecordPoint->text().toDouble());
 }
 
 void SettingsItem::apply(){

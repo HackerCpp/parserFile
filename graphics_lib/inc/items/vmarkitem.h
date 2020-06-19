@@ -9,7 +9,7 @@ class VMarkItem : public VerticalItem{
     bool isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per)override;
 public:
     VMarkItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board);
-    ~VMarkItem()override{}
+    ~VMarkItem(){}
 
     QColor color()override;
     void setColor(QColor color)override;

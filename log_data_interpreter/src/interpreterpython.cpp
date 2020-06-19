@@ -34,7 +34,7 @@ void InterpreterPython::init(){
     if(!m_blocks)
         return;
     foreach(auto block,*m_blocks){
-        DataBlock *f_block = dynamic_cast<DataBlock *>(block.data());
+        DataBlock *f_block = dynamic_cast<DataBlock *>(block);
         if(!f_block)
             continue;
         foreach(auto curve,*f_block->curves()){

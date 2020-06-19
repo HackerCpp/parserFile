@@ -153,8 +153,8 @@ void GFMLoader::run(){
         }
         if(f_type == IBlock::NO_BLOCK)
             continue;
-        QSharedPointer<IBlock> f_block = IBlock::blockCreater(f_type);
-        if(!f_block.data())
+        IBlock *f_block = IBlock::blockCreater(f_type);
+        if(!f_block)
             continue;
         parser(value.bodyBlock,f_block);
         m_blocks->push_back(f_block);
@@ -167,18 +167,18 @@ void GFMLoader::run(){
     emit ready();
 }
 
-void GFMLoader::parser(const QByteArray &bodyBlock,QSharedPointer<IBlock> block){
+void GFMLoader::parser(const QByteArray &bodyBlock,IBlock *block){
 
     if(block->name() == IBlock::DATA_BLOCK)
-        parserDataBlock(bodyBlock,block.data());
+        parserDataBlock(bodyBlock,block);
     else if(block->name() == IBlock::FORMS_BLOCK)
-        parserFormsBlock(bodyBlock,block.data());
+        parserFormsBlock(bodyBlock,block);
     else if(block->name() == IBlock::HEADER_BLOCK)
-        parserHeaderBlock(bodyBlock,block.data());
+        parserHeaderBlock(bodyBlock,block);
     else if(block->name() == IBlock::TOOLINFO_BLOCK)
-        parserToolInfoBlock(bodyBlock,block.data());
+        parserToolInfoBlock(bodyBlock,block);
     else
-        parserUnknownBlock(bodyBlock,block.data());
+        parserUnknownBlock(bodyBlock,block);
 }
 
 void GFMLoader::parserHeaderBlock(const QByteArray &bodyBlock,IBlock *block){

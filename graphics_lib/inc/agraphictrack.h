@@ -54,7 +54,7 @@ protected:
     virtual void swapPixMap()override;
 
 
-    virtual void toSetTheLocationOfTheImageAfterDrawing(){}
+    //virtual void toSetTheLocationOfTheImageAfterDrawing()override{}
 
     void init();
 

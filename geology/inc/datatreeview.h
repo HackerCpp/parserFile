@@ -35,6 +35,7 @@ public slots:
     void saveGFM();
     void openPythonConsole();
     void openPythonScript();
+    void makeActiveProject();
 
 };
 

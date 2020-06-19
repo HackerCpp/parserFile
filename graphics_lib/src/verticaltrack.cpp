@@ -1,5 +1,5 @@
 #include "verticaltrack.h"
-#include "AcuItem.h"
+#include "acuItem.h"
 #include "qgraphicsscene.h"
 #include "settingsitem.h"
 #include <QTabWidget>
@@ -61,6 +61,8 @@ VerticalTrack::VerticalTrack(ATrack *track,BoardForTrack *board)
 
 VerticalTrack::~VerticalTrack(){
     deleteAllPictures();
+    if(m_infoPixMap){delete m_infoPixMap;m_infoPixMap = nullptr;}
+    if(m_nameTrack){delete m_nameTrack; m_nameTrack = nullptr;}
 }
 
 void VerticalTrack::resize(){
@@ -75,22 +77,10 @@ void VerticalTrack::resize(){
 void VerticalTrack::deleteAllPictures(){
     m_endRedraw = true;
     wait();
-    if(m_curentPixmap){
-        delete m_curentPixmap;
-        m_curentPixmap = nullptr;
-    }
-    if(m_doublePixMap){
-        delete m_doublePixMap;
-        m_doublePixMap = nullptr;
-    }
-    if(m_curentHeader){
-        delete m_curentHeader;
-        m_curentHeader = nullptr;
-    }
-    if(m_doubleHeader){
-        delete m_doubleHeader;
-        m_doubleHeader = nullptr;
-    }
+    if(m_curentPixmap){delete m_curentPixmap;m_curentPixmap = nullptr;}
+    if(m_doublePixMap){delete m_doublePixMap;m_doublePixMap = nullptr;}
+    if(m_curentHeader){delete m_curentHeader;m_curentHeader = nullptr;}
+    if(m_doubleHeader){delete m_doubleHeader; m_doubleHeader = nullptr;}
 }
 
 void VerticalTrack::activate(bool activate){
@@ -110,7 +100,7 @@ void VerticalTrack::init(){
 void VerticalTrack::resizePictures(){
 
     deleteAllPictures();
-
+    m_positionOfTheBorder = (m_track->begin() + m_track->width()) * m_board->pixelPerMm() - m_border->width();
     if(!m_isOpen)
         return;
     qreal f_pixelPerMm = m_board->pixelPerMm();

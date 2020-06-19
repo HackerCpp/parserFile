@@ -16,11 +16,10 @@ class LogDataView : public QWidget
     Q_OBJECT
 
     QList<QSharedPointer<ILogData> > *m_logDataList;
-    //QTabWidget *m_tabs;
     QHBoxLayout *m_mainHorLayout;
     QSplitter *m_splitter;
-    DataModel *m_dataModel;//,*m_doubleDataModel;
-    DataTreeView *m_dataTreeView;//,*m_doubleDataTreeWiev;
+    DataModel *m_dataModel;
+    DataTreeView *m_dataTreeView;
     GraphicWidget *m_graphicWidget;
 
 public:
@@ -28,6 +27,7 @@ public:
     ~LogDataView();
 
     void addLogData(QSharedPointer<ILogData> logData);
+    ILogData * curentLogData(){return m_dataModel->curentLogData();};
 public slots:
     void lastDataReady();
 

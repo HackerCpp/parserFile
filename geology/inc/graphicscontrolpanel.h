@@ -25,7 +25,7 @@ public slots:
     void changeFormatDepth(int index);
     void changePictureHeight(int index);
     void changePictureFormat(int index);
-    void changeScalePixelPerMm(int index);
+    void changeScalePixelPerMm(const QString scale);
 signals:
     void changedDrawType(int drawType);
     void changedFormatTime(AGraphicBoard::FormatTime format);

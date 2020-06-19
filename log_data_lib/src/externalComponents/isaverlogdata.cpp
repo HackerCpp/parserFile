@@ -17,7 +17,7 @@ bool ISaverLogData::isReady(){
     return false;
 }
 
-bool ISaverLogData::setBlocks(QList<QSharedPointer<IBlock> > *blocks){
+bool ISaverLogData::setBlocks(QList<IBlock *> *blocks){
     Q_UNUSED(blocks)
     return false;
 }

@@ -23,14 +23,17 @@ bool ILogData::isReady(){
 }
 
 bool ILogData::setLoader(ILoaderLogData *loader){
+    Q_UNUSED(loader)
     return false;
 }
 
 bool ILogData::setSaver(ISaverLogData *saver){
+    Q_UNUSED(saver)
     return false;
 }
 
 bool ILogData::setInterpreter(IInterpreterLogData *interpreter){
+    Q_UNUSED(interpreter)
     return false;
 }
 
@@ -38,7 +41,7 @@ QMap<QString,ICurve*> *ILogData::curves(){
     return nullptr;
 }
 
-QList<QSharedPointer<IBlock> > *ILogData::blocks(){
+QList<IBlock *> *ILogData::blocks(){
     return nullptr;
 }
 

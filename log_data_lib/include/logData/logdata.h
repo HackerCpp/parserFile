@@ -10,7 +10,7 @@ class LogData : public ALogData{
     ILoaderLogData *m_loader;
     ISaverLogData *m_saver;
     IInterpreterLogData *m_interpreter;
-    QList<QSharedPointer<IBlock> > *m_blocks;
+    QList<IBlock *> *m_blocks;
     QString m_name;
 
 public:
@@ -33,9 +33,9 @@ public:
     bool setInterpreter(IInterpreterLogData *interpreter)override;
     virtual void setName(QString name)override{m_name = name;}
 
-    void addBlock(QSharedPointer<IBlock> block)override;
+    void addBlock(IBlock *block)override;
 
-    virtual QList<QSharedPointer<IBlock> > *blocks()override;
+    virtual QList<IBlock *> *blocks()override;
     virtual QString name()override{return m_name;}
 
 public slots:

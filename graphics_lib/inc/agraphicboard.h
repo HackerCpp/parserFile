@@ -29,11 +29,12 @@ public:
     enum LengthPicture{MIN,AWERAGE,MAX};
 
     AGraphicBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves);
-    ~AGraphicBoard()override;
+    virtual ~AGraphicBoard()override;
 
     virtual void insertNewTrack(int curentTrackNumber,InsertPossition position = InsertPossition::RIGHT)override
         {Q_UNUSED(curentTrackNumber) Q_UNUSED(position)}
     virtual void newTrack(){}
+    void customUpdate()override{redraw();}
 
     virtual void resize()override;
     virtual void resizePicture();

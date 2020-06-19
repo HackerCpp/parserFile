@@ -9,6 +9,7 @@
 VSpectrItem::VSpectrItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
     :VerticalItem(curve,board)
 {
+    m_lengthOverlay = 500;
     SpecItem * f_spectrItemInfo = dynamic_cast<SpecItem*>(itemInfo);
     if(f_spectrItemInfo)
         m_itemInfo = f_spectrItemInfo;
@@ -41,9 +42,9 @@ VSpectrItem::VSpectrItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
 
 }
 
-
-
 void inline VSpectrItem::drawInterpolationVertical(QPainter *per,QRectF visibleRect,bool *flag){
+    if(!per->isActive())
+        return;
     qreal quantityElem = m_curve->sizeOffset();
     qreal f_width = per->device()->width();
     qreal step = (m_widthPicturePix - 1) / quantityElem;
@@ -128,6 +129,93 @@ void inline VSpectrItem::drawInterpolationVertical(QPainter *per,QRectF visibleR
     //qDebug() << "end";
 }
 
+void inline VSpectrItem::drawInterpolationVerticalNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag){
+    if(!per->isActive())
+        return;
+    qreal quantityElem = m_curve->sizeOffset();
+    qreal f_width = per->device()->width();
+    qreal step = (m_widthPicturePix - 1) / quantityElem;
+    ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
+    qreal f_yTop = y_top;
+    qreal f_height = per->device()->height();
+    qreal f_topOffset = 0;
+    qreal f_downOffset = f_height - f_topOffset;
+    uint indexBegin  = 0;
+    qreal f_scaleForMainValue = m_board->scale();
+    qreal f_recordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
+    if((f_mainValue->minimum() * f_scaleForMainValue) > f_yTop  + f_downOffset || (f_mainValue->maximum() * f_scaleForMainValue) < f_yTop - f_topOffset){
+        return;
+    }
+    for(uint i = 0; i < f_mainValue->size(); ++i){
+       if((f_mainValue->data(i) * f_scaleForMainValue) > f_yTop - f_topOffset && (f_mainValue->data(i) * f_scaleForMainValue) < f_yTop + f_downOffset){
+           indexBegin = i;// > 2?i - 2 : 0;
+           break;
+       }
+    }
+    uint f_indexMin = indexBegin;
+    uint f_indexMax = indexBegin;
+
+    for(uint i = indexBegin;i < f_mainValue->size();++i){
+        if(*flag)
+            return;
+        if((f_mainValue->data(i) * f_scaleForMainValue) > f_yTop + f_downOffset || (f_mainValue->data(i) * f_scaleForMainValue) < f_yTop - f_topOffset){
+            break;
+        }
+        f_indexMin = f_mainValue->data(i) < f_mainValue->data(f_indexMin)? i : f_indexMin;
+        f_indexMax = f_mainValue->data(i) > f_mainValue->data(f_indexMax)? i : f_indexMax;
+    }
+
+    QImage *f_image = dynamic_cast<QImage*>(per->device());
+    int f_curentHeight = qAbs((f_mainValue->data(f_indexMax) * f_scaleForMainValue) - (f_mainValue->data(f_indexMin) * f_scaleForMainValue));
+    int indexWidthBegin = -fmin(m_offsetPix,0) / m_dataStepPix;
+    int indexWidthEnd = quantityElem - fmax((m_widthPicturePix + m_offsetPix - f_image->width()),0) / m_dataStepPix;
+
+
+    SpecItem *f_specItemInfo = dynamic_cast<SpecItem*>(m_itemInfo);
+    QList<MulticolorItem> *f_multicolor = f_specItemInfo->multiColor();
+    QColor color;
+    per->setPen(QPen(QColor(0,0,0,0),0));
+
+    uint i;
+    for(int j = indexWidthBegin; j < indexWidthEnd; ++j){
+        if(*flag)
+            return;
+        ColorScale gradient;
+
+        for(i = indexBegin;i < f_mainValue->size();++i){
+            if(*flag)
+                return;
+            if((f_mainValue->data(i) * f_scaleForMainValue) > f_yTop + f_downOffset || (f_mainValue->data(i) * f_scaleForMainValue) < f_yTop - f_topOffset){
+                break;
+            }
+            if(m_curve->data(i * quantityElem + j) >= f_multicolor->last().bound){
+                color = QColor(f_multicolor->last().value);
+            }
+            else if(m_curve->data(i * quantityElem + j) <= f_multicolor->first().bound){
+                color = QColor(f_multicolor->first().value);
+            }
+            else{
+                MulticolorItem prev_mul;
+                prev_mul = *f_multicolor->begin();
+                foreach(auto value,*f_multicolor) {
+                    if(m_curve->data(i * quantityElem + j) <= value.bound){
+                        color = ColorScale::get_linear_color(m_curve->data(i * quantityElem + j),prev_mul,value);
+                        break;
+                    }
+                    prev_mul = value;
+                }
+            }
+            qreal f_y = ((f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset) - ((f_mainValue->data(f_indexMin) * f_scaleForMainValue) - f_yTop + f_topOffset);
+            gradient.insert(f_y,color);
+        }
+        qreal f_yMin = ((f_mainValue->data(f_indexMin) * f_scaleForMainValue) - f_yTop + f_topOffset);
+
+        qreal prevStep = j * step;
+        QRect f_drawRect = QRect(prevStep + m_offsetPix,f_yMin,step + 1,f_curentHeight);
+        gradient.draw(*f_image,f_drawRect,QPointF(fmax(m_offsetPix,0),f_yMin),QPointF(fmax(m_offsetPix,0),f_yMin + f_curentHeight),GradientStyle::Linear,70000);
+    }
+    //qDebug() << "end";
+}
 void VSpectrItem::loadDrawingParam(int width){
     qreal f_width = width;
     SpecItem* f_spectrItemInfo = dynamic_cast<SpecItem*>(m_itemInfo);
@@ -135,7 +223,6 @@ void VSpectrItem::loadDrawingParam(int width){
         return;
     qreal f_quantityElem = m_curve->sizeOffset();
     qreal f_pixelPerMM = m_board->pixelPerMm();
-    //qDebug() << "dataStep : " << m_dataStep << m_curve->sizeOffset();
     qreal f_widthHz = m_dataStep * f_quantityElem;
     qreal f_pixelPerHz;
     if(!f_spectrItemInfo->isBeginValue()){
@@ -174,7 +261,7 @@ void VSpectrItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
         qDebug() << "Не удалось преобразовать AItem in SpectrItem";
         return;
     }
-    if(!f_spectrItemInfo->showMode()){
+    /*if(!f_spectrItemInfo->showMode()){
         drawInterpolationVertical(per,visibleRect,flag);
     }
     else if(f_spectrItemInfo->showMode() == 1){
@@ -182,11 +269,86 @@ void VSpectrItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
     }
     else if(f_spectrItemInfo->showMode() == 2){
 
+    }*/
+    qreal f_yTop = visibleRect.y();
+    qreal f_height = per->device()->height();
+    qreal f_width = per->device()->width();
+    qreal f_topOffset = m_board->offsetUp();
+
+    ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
+    qreal f_recordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
+    qreal f_scaleForMainValue = m_board->scale();
+    qreal f_top = (f_mainValue->minimum() + f_recordPoint) * f_scaleForMainValue;
+    qreal f_bottom = (f_mainValue->maximum() + f_recordPoint) * f_scaleForMainValue;
+    int f_stock = 1000;
+    qreal f_dstPicturePosition = visibleRect.y() - f_topOffset; //0
+    QImage f_srcImage;
+    for(int y_top = f_top - f_stock; y_top < f_dstPicturePosition + f_height /*f_bottom + 1000*/; y_top += (M_HEIGHT_PICTURE - f_stock)){
+        if(*flag)
+            return;
+        if((y_top + M_HEIGHT_PICTURE) < (f_yTop - m_board->offsetUp()))
+            continue;
+        QString f_fileName = "temporary/" + m_curve->mnemonic() + QString::number(m_curentPictureWidth) + QString::number(y_top) + ".png";
+        if(QFile::exists(f_fileName) ){
+            f_srcImage.load(f_fileName,"PNG");
+            if(f_srcImage.isNull())
+                continue;
+            qreal f_srcPicturePosition =  y_top + m_lengthOverlay;//??
+            int f_drawHeight = f_srcImage.height() - m_lengthOverlay;
+            QRect f_dstRect(0,(f_srcPicturePosition - f_dstPicturePosition),f_width,f_drawHeight);
+            QRect f_srcRect(0,m_lengthOverlay,f_srcImage.width(),f_drawHeight);
+            per->drawImage(f_dstRect,f_srcImage,f_srcRect);
+        }
     }
 }
 
+void VSpectrItem::run(){
+    m_updatedParam = true;
+    foreach(auto path,m_picturePath){
+        if(!QFile::exists(path) )
+            continue;
+        QFile(path).remove();
+    }
+    m_picturePath.clear();
+    //loadDrawingParam(m_curentPictureWidth);
+    ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
+    qreal f_recordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
+    qreal f_scaleForMainValue = m_board->scale();
+    qreal f_top = (f_mainValue->minimum() + f_recordPoint) * f_scaleForMainValue;
+    qreal f_bottom = (f_mainValue->maximum() + f_recordPoint) * f_scaleForMainValue;
+    int f_stock = 1000;
+    int f_heightPictures = M_HEIGHT_PICTURE;
+    m_board->customUpdate();
+    qreal f_onePersent = 100 / ((f_bottom + f_stock) - (f_top - f_stock));
+    for(int y_top = f_top - f_stock; y_top < f_bottom + f_stock; y_top += (f_heightPictures - f_stock)){
+        if(m_isEndThread)
+            return;
+        m_curentDrawPersent = (y_top - (f_top - f_stock)) * f_onePersent;
+        QImage f_image(m_curentPictureWidth,f_heightPictures,QImage::Format_ARGB32);
+        QPainter f_painter(&f_image);
+        drawInterpolationVerticalNoOffset(&f_painter,y_top,y_top + f_heightPictures,&m_isEndThread);
+        QString f_namePicture = "temporary/" + m_curve->mnemonic() + QString::number(m_curentPictureWidth) + QString::number(y_top) + ".png";
+        f_image.save(f_namePicture,"PNG");
+        while(!QFile::exists(f_namePicture));
+        m_picturePath << f_namePicture;
+    }
+    m_curentDrawPersent = 100;
+    m_updatedParam = false;
+    m_board->customUpdate();
+}
+
 void VSpectrItem::updateParam(int pictureWidth){
-    loadDrawingParam(pictureWidth);
+    m_isEndThread = true;
+    m_curentPictureWidth = pictureWidth;
+
+    if( isRunning ()){
+        m_isRedraw = true;
+    }
+    else{
+        loadDrawingParam(m_curentPictureWidth);
+        m_isEndThread = false;
+        start();
+    }
 }
 
 void VSpectrItem::drawInterpolationHorForCheckArea(QPainter *per,QRectF visibleRect,bool *flag){
@@ -208,8 +370,6 @@ void VSpectrItem::drawInterpolationHorForCheckArea(QPainter *per,QRectF visibleR
        }
     }
     uint i;
-    //QTime time;
-    //time.start();
     int prevStep = ((f_mainValue->data(indexBegin) * f_scaleForMainValue) - f_yTop + f_topOffset);
     for(i = indexBegin + 1;i < f_mainValue->size();++i){
         if(*flag)

@@ -11,6 +11,7 @@ class DataModel : public  QAbstractItemModel
 {
 
     QVector<QSharedPointer<ILogData> > *m_logDataVector;
+    ILogData *m_curentLogData;
 
 public:
     DataModel();
@@ -29,6 +30,9 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
     Qt::ItemFlags flags(const QModelIndex &index) const override;
     bool deleteBlock(IBlock *block);
+
+    void setCurentLogData(ILogData *logData){m_curentLogData = logData;}
+    ILogData *curentLogData(){return m_curentLogData;}
 };
 
 #endif // DATAMODEL_H

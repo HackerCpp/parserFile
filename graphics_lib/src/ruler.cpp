@@ -88,6 +88,8 @@ void Ruler::resizePictures(){
     if(m_doublePixMap){delete m_doublePixMap;m_doublePixMap = nullptr;}
     if(m_curentPixmap){delete m_curentPixmap;m_curentPixmap = nullptr;}
     int f_pictureHeight = static_cast<int>(m_board->pictureHeight());
+    qreal f_pixelPerMm = m_board->pixelPerMm();
+    m_width = static_cast<int>(20.0 * f_pixelPerMm);
     m_curentPixmap = new QImage(m_width,f_pictureHeight,QImage::Format_ARGB4444_Premultiplied);
     m_doublePixMap = new QImage(m_width,f_pictureHeight,QImage::Format_ARGB4444_Premultiplied);
     redraw();

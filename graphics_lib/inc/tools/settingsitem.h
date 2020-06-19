@@ -68,6 +68,11 @@ protected:
     AGraphicItem *m_item;
     QVBoxLayout *m_mainVLout;
     Selection *m_leftBorderSettings,*m_rightBorderSettings;
+    QLabel *m_labelRecordPoint;
+    QLineEdit *m_editRecordPoint;
+    QHBoxLayout *m_recordPointLayout;
+    QGroupBox *m_groupBox;
+
     virtual void applyBaseSettings();
     virtual void applySpecificSettings(){}
 

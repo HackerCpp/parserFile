@@ -12,7 +12,7 @@ public:
     virtual ~ABlock(){}
 
     TypeBlock name()override{return m_type;}
-    virtual bool parser(const char *body,uint32_t size)override{return false;}
+    virtual bool parser(const char *body,uint32_t size)override{Q_UNUSED(body)Q_UNUSED(size)return false;}
 };
 
 #endif // ABLOCK_H

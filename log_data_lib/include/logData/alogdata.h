@@ -11,7 +11,7 @@ protected:
     bool m_isReady;
 public:
     ALogData();
-    ALogData(ALogData &logdata){}
+    ALogData(ALogData &logdata){Q_UNUSED(logdata)}
 
     ALogData &operator=(const ALogData &logData){Q_UNUSED(logData)}
 
@@ -28,12 +28,12 @@ public:
     virtual bool setLoader(ILoaderLogData *loader)override;
     virtual bool setSaver(ISaverLogData *saver)override;
     virtual bool setInterpreter(IInterpreterLogData *interpreter)override;
-    virtual void setName(QString name)override{}
+    virtual void setName(QString name)override{Q_UNUSED(name)}
 
-    virtual void addBlock(QSharedPointer<IBlock> block)override{Q_UNUSED(block)}
+    virtual void addBlock(IBlock *block)override{Q_UNUSED(block)}
 
     virtual QMap<QString,ICurve*> *curves()override;
-    virtual QList<QSharedPointer<IBlock> > *blocks()override;
+    virtual QList<IBlock *> *blocks()override;
     virtual QString name()override{ return QString();}
 
 

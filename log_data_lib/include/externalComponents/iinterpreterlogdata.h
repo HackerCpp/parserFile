@@ -13,7 +13,7 @@ public:
     virtual bool openConsole();
     virtual bool openScript();
 
-    virtual bool setBlocks(QList<QSharedPointer<IBlock> > *blocks);
+    virtual bool setBlocks(QList<IBlock *> *blocks);
 
     virtual void dataUpdate(){}
 };

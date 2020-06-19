@@ -21,7 +21,7 @@ bool ALoaderLogData::isReady(){
 
 }
 
-bool ALoaderLogData::setBlocks(QList<QSharedPointer<IBlock> > *blocks){
+bool ALoaderLogData::setBlocks(QList<IBlock *> *blocks){
     m_blocks = blocks;
     return false;
 }

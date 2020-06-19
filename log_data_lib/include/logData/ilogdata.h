@@ -29,16 +29,16 @@ public:
     virtual bool setLoader(ILoaderLogData *loader);
     virtual bool setSaver(ISaverLogData *saver);
     virtual bool setInterpreter(IInterpreterLogData *interpreter);
-    virtual void setName(QString name){}
+    virtual void setName(QString name){Q_UNUSED(name)}
 
-    virtual void addBlock(QSharedPointer<IBlock> block){Q_UNUSED(block)}
+    virtual void addBlock(IBlock *block){Q_UNUSED(block)}
 
     virtual QMap<QString,ICurve*> *curves();
-    virtual QList<QSharedPointer<IBlock> > *blocks();
+    virtual QList<IBlock *> *blocks();
     virtual QString name(){return QString();}
 
 signals:
-    virtual void ready();
+    void ready();
 
 public slots:
     virtual void dataUpdate(){}

@@ -23,6 +23,7 @@ DataTreeView::DataTreeView(QWidget *parent)
     m_logDataMenu->addAction("&Save GFM",this, SLOT(saveGFM()));
     m_logDataMenu->addAction("&Open python console",this, SLOT(openPythonConsole()));
     m_logDataMenu->addAction("&Open python script",this, SLOT(openPythonScript()));
+    m_logDataMenu->addAction("&Make active",this, SLOT(makeActiveProject()));
 
     setAcceptDrops(true);
     setDragDropMode(DragDrop);
@@ -176,7 +177,7 @@ void DataTreeView::dropEvent(QDropEvent *event){
         f_model->addLogData(QSharedPointer<ILogData>(f_logData));
     }
     else if(f_baseFormat == "dataBlock"){
-        QSharedPointer<IBlock> f_dataBlock(dynamic_cast<IBlock*>(reinterpret_cast<QObject*>(event->mimeData()->data("dataBlock").toLongLong(&ok))));
+        IBlock *f_dataBlock = (dynamic_cast<IBlock*>(reinterpret_cast<QObject*>(event->mimeData()->data("dataBlock").toLongLong(&ok))));
         DataModel *f_model = dynamic_cast<DataModel *>(model());
         if(!f_model || !f_dataBlock)
             return;
@@ -225,6 +226,8 @@ void DataTreeView::deleteDataBlock(){
     if(!m_curentBlock)
         return;
     DataModel *f_model = dynamic_cast<DataModel *>(model());
+    if(!f_model)
+        return;
     f_model->deleteBlock(m_curentBlock);
 }
 
@@ -254,4 +257,12 @@ void DataTreeView::openPythonScript(){
         m_curentLogData->setInterpreter(f_interpreter);
     }
     m_curentLogData->openInterpreterScript();
+}
+
+void DataTreeView::makeActiveProject(){
+    DataModel *f_model = dynamic_cast<DataModel *>(model());
+    if(!f_model)
+        return;
+    f_model->setCurentLogData(m_curentLogData);
+
 }
