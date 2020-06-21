@@ -43,7 +43,7 @@ protected:
     QList<AGraphicItem*> *m_items;
     ATrack *m_track;
 
-    bool m_isLeftBorderClick, m_isRightBorderClick,
+    bool m_isDoubleClick,m_isLeftBorderClick, m_isRightBorderClick,
     m_isLeftCurvesClick, m_isRightCurvesClick, m_isLeftHeaderClick,
     m_isRightHeaderClick, m_isOpenCloseClick, m_isOpen;
     QPointF m_prevPoint;
@@ -63,6 +63,7 @@ protected:
     virtual bool is_CurvesClick(QPointF point){Q_UNUSED(point)return false;}
     virtual bool is_headerClick(QPointF point){Q_UNUSED(point)return false;}
 
+    virtual void  doubleClickHandler(QPointF point){Q_UNUSED(point)}
     virtual void  openCloseClickHandler(QPointF point){Q_UNUSED(point)}
     virtual void  borderRightClickHandler(QPointF point){Q_UNUSED(point)}
     virtual void  borderLeftClickHandler(QPointF point){Q_UNUSED(point)}
@@ -71,7 +72,7 @@ protected:
     virtual void  headerLeftClickHandler(QPointF point){Q_UNUSED(point)}
     virtual void  headerRightClickHandler(QPointF point){Q_UNUSED(point)}
 
-
+    virtual void  doubleClickMoveHandler(QPointF point){Q_UNUSED(point)}
     virtual void  borderLeftMoveHandler(QPointF point){Q_UNUSED(point)}
     virtual void  borderRightMoveHandler(QPointF point){Q_UNUSED(point)}
     virtual void  curvesLeftMoveHandler(QPointF point){Q_UNUSED(point)}
@@ -79,6 +80,7 @@ protected:
     virtual void  headerLeftMoveHandler(QPointF point){Q_UNUSED(point)}
     virtual void  headerRightMoveHandler(QPointF point){Q_UNUSED(point)}
 
+    virtual void  doubleClickReleaseHandler(QPointF point){Q_UNUSED(point)}
     virtual void  borderLeftReleaseHandler(QPointF point){Q_UNUSED(point)}
     virtual void  borderRightReleaseHandler(QPointF point){Q_UNUSED(point)}
     virtual void  curvesLeftReleaseHandler(QPointF point){Q_UNUSED(point)}
@@ -89,6 +91,7 @@ protected:
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *event)override;
     virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event)override;
     virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event)override;
+    virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)override;
 
 
     virtual void dragEnterEvent(QGraphicsSceneDragDropEvent *event)override{Q_UNUSED(event)}
@@ -99,7 +102,7 @@ signals:
     void changedPositionBorder(int position);
 public slots:
     virtual void changeBegin(int newBegin){Q_UNUSED(newBegin)}
-    void sceneUpdate();
+    void sceneUpdate()override;
 
 };
 

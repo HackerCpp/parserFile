@@ -20,7 +20,8 @@ void AGraphicTrack::init(){
      m_visibilitySquare.setRect(0,0,2000,2000);
      m_border = nullptr;
      m_isLeftBorderClick = m_isRightBorderClick = m_isLeftCurvesClick
-      =  m_isRightCurvesClick = m_isLeftHeaderClick = m_isOpenCloseClick = m_isRightHeaderClick = false;
+      =  m_isRightCurvesClick = m_isLeftHeaderClick = m_isOpenCloseClick
+      = m_isRightHeaderClick = m_isDoubleClick =false;
      m_isOpen = true;
      m_positionOfTheBorder = 0;
      m_boundingRect = QRectF(0,0,2000,2000);
@@ -124,7 +125,10 @@ void AGraphicTrack::mousePressEvent(QGraphicsSceneMouseEvent *event){
 
 void AGraphicTrack::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
     QPointF f_curentPoint = event->scenePos();
-    if(m_isLeftBorderClick){
+    if(m_isDoubleClick){
+        doubleClickMoveHandler(f_curentPoint);
+    }
+    else if(m_isLeftBorderClick){
         borderLeftMoveHandler(f_curentPoint);
     }
     else if(m_isRightBorderClick){
@@ -144,6 +148,10 @@ void AGraphicTrack::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
 
 void AGraphicTrack::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     QPointF f_curentPoint = event->scenePos();
+    if(m_isDoubleClick){
+        doubleClickReleaseHandler(f_curentPoint);
+        m_isDoubleClick = false;
+    }
     if(m_isLeftBorderClick){
         m_isLeftBorderClick = m_isOpenCloseClick = false;
         borderLeftReleaseHandler(f_curentPoint);
@@ -169,6 +177,12 @@ void AGraphicTrack::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
         curvesLeftReleaseHandler(f_curentPoint);
     }
     //m_isBorderClick = m_isCurvesClick = m_isHeaderClick = m_isOpenCloseClick = false;
+}
+
+void AGraphicTrack::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event){
+
+    doubleClickHandler(event->pos());
+    m_isDoubleClick = true;
 }
 
 void AGraphicTrack::sceneUpdate(){

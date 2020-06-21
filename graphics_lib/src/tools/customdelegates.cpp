@@ -24,6 +24,9 @@ QWidget *CheckBoxDelegate::createEditor(QWidget *parent, const QStyleOptionViewI
 
     //Cоздаем checkbox editor
     QCheckBox *editor = new QCheckBox(parent);
+    QAbstractItemModel *model = const_cast<QAbstractItemModel *>(index.model());
+    if(model)
+        model->setData(index,!(index.data().toBool()), Qt::EditRole);
     return editor;
 }
 
@@ -82,7 +85,7 @@ void CheckBoxDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
 /****************************************************************************************************/
 
 ColorDelegate::ColorDelegate(QObject *parent){
-
+    Q_UNUSED(parent)
 }
 
 void ColorDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index)const{
@@ -97,6 +100,7 @@ void ColorDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
 
 QWidget *ColorDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const{
     Q_UNUSED(option)
+    Q_UNUSED(index)
 
     //Cоздаем checkbox editor
     QColorDialog *editor = new QColorDialog(parent);
@@ -125,6 +129,7 @@ void ColorDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionView
 /****************************************************************************************************/
 
 ComboBoxDelegate::ComboBoxDelegate(QStringList values,QObject *parent){
+    Q_UNUSED(parent)
     m_values = values;
 }
 
@@ -134,6 +139,7 @@ ComboBoxDelegate::ComboBoxDelegate(QStringList values,QObject *parent){
 
 QWidget *ComboBoxDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const{
     Q_UNUSED(option)
+    Q_UNUSED(index)
 
     //Cоздаем checkbox editor
     QComboBox *editor = new QComboBox(parent);

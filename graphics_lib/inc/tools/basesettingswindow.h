@@ -23,7 +23,7 @@ signals:
     void changeSettings();
 
 public slots:
-    void cansel();
+    virtual void cansel();
     void ok();
     virtual void apply();
 };

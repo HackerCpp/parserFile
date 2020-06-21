@@ -183,6 +183,16 @@ QWidget{
   color:#f1f1f1;
 }
 
+QHeaderView::section{
+    background:#2d2d30;
+    color:#f1f1f1;
+    border-style:none;
+    border-bottom-style: solid;
+    border-bottom: 2px solid #007acc;
+    /*color:#f1f1f1;
+    background:#007acc;*/
+}
+
 QTreeView {
   background-color:#2d2d30;
   border-style:none;

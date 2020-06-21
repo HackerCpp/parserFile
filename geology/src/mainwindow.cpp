@@ -4,6 +4,7 @@
 #include "gfmloader.h"
 #include "gfmsaver.h"
 #include "interpreterpython.h"
+#include "tabinterpretations.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -27,8 +28,6 @@ MainWindow::~MainWindow()
 {
 
 }
-
-
 
 bool MainWindow::eventFilter(QObject *o, QEvent *e){
     if(e->type() == QEvent::Enter){
@@ -87,6 +86,9 @@ void MainWindow::openConsolePython(){
 }
 
 void MainWindow::openInterpretations(){
+    ILogData *f_urentLogdata = m_logDataView->curentLogData();
+    if(!f_urentLogdata)
+        return;
     QDir dir(QDir().absolutePath()+ "/interpretations");
     dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
     QFileInfoList f_fileList = dir.entryInfoList();
@@ -94,25 +96,18 @@ void MainWindow::openInterpretations(){
     foreach(auto file,f_fileList)
         if(file.suffix() != "dll")
             f_fileList.removeOne(file);
-
-    foreach(auto file,f_fileList){
-        QString f_path = file.absoluteFilePath();
-        QLibrary  lib(f_path);
-        lib.load();
-        qDebug() << lib.isLoaded() << f_path;
-        typedef QString (*Fct) ();
-        typedef ILogData *(*F)(ILogData *logData);
-        Fct version = (Fct)(lib.resolve("version"));
-        Fct name = (Fct)(lib.resolve("name"));
-        F interpr = (F)(lib.resolve("interpretation"));
-        if(version)
-            qDebug() << version();
-        if(name)
-            qDebug() << name();
-        if(interpr){
-            QSharedPointer<ILogData> f_logData(interpr(m_logDataView->curentLogData()));
-            m_logDataView->addLogData(f_logData);
-        }
+    QString f_path = TabInterpretations().getAbsolutePath(f_fileList);
+    if(f_path == nullptr)
+        return;
+    QLibrary  lib(f_path);
+    lib.load();
+    //typedef QString (*FString)();
+    typedef ILogData *(*FIlogData)(ILogData *);
+    //FString version = (FString)(lib.resolve("version"));
+    //FString name = (FString)(lib.resolve("name"));
+    FIlogData interpr = (FIlogData)(lib.resolve("interpretation"));
+    if(interpr){
+        QSharedPointer<ILogData> f_logData(interpr(f_urentLogdata));
+        m_logDataView->addLogData(f_logData);
     }
-
 }
