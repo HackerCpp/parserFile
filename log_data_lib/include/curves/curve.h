@@ -6,9 +6,10 @@
 template<typename T>
 class Curve : public ACurve{
      QVector<T> *m_data;
-
+     void updateDataType();
 public:
      Curve(){
+         updateDataType();
          m_sizeOfType = sizeof(T);
          m_minimum = m_maximum = m_positiveOffset = 0;
      }
@@ -24,7 +25,31 @@ public:
      uint sizeOffset()override;
 };
 
-template<typename T> Curve<T>::Curve(int size,int offset){
+template<typename T> void Curve<T>::updateDataType(){
+    if(std::is_same<T, uint8_t>::value)
+        m_dataType = "UINT8";
+    else if(std::is_same<T, int8_t>::value)
+        m_dataType = "INT8";
+    else if(std::is_same<T, uint32_t>::value)
+        m_dataType = "UINT32";
+    else if(std::is_same<T, int32_t>::value)
+        m_dataType = "INT32";
+    else if(std::is_same<T, uint16_t>::value)
+        m_dataType = "UINT16";
+    else if(std::is_same<T, int16_t>::value)
+        m_dataType = "INT16";
+    else if(std::is_same<T, float_t>::value)
+        m_dataType = "FLOAT32";
+    else if(std::is_same<T, double>::value)
+        m_dataType = "DOUBLE64";
+    else if(std::is_same<T, uint64_t>::value)
+        m_dataType = "UINT64";
+    else if(std::is_same<T, int64_t>::value)
+        m_dataType = "INT64";
+}
+
+template<typename T> Curve<T>::Curve(int size,int offset){  
+    updateDataType();
     int f_size = size * offset;
     m_data = new QVector<T>(f_size);
     m_sizeOfType = sizeof(T);
