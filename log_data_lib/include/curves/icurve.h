@@ -7,6 +7,7 @@
 
 class ICurve : public QObject{
     Q_OBJECT
+
 public:
     ICurve();
     virtual ~ICurve();
@@ -37,6 +38,8 @@ public:
     virtual ShortCut shortCut();
     virtual QString mnemonic();
     virtual qreal recordPoint(){return 0;}
+
+    static ICurve * curveCreater(const ICurve &curve);
 };
 
 #endif // INTERFACECURVE_H
