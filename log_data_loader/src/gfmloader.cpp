@@ -721,8 +721,8 @@ void GFMLoader::findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *
 
     int indexBeginType = curveLine.indexOf(":",indexEndParamMnemon);
     int indexEndType = curveLine.indexOf(" ",indexBeginType + 4);
-    QString dataType = curveLine.mid(indexBeginType + 2,indexEndType - indexBeginType - 2);
-    curveAbstract->setDataType(dataType);
+    //QString dataType = curveLine.mid(indexBeginType + 2,indexEndType - indexBeginType - 2);
+    //curveAbstract->setDataType(dataType);
 
     int indexEndRecordPoint = indexEndType;
     if(!shortCut.ref().isEmpty()){

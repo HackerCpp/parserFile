@@ -7,8 +7,9 @@
 
 
 class ACurve : public ICurve{
-    ICurve *m_time,*m_depth,*m_userValue;
+
 protected:
+    ICurve *m_time,*m_depth,*m_userValue;
     Desc *m_desc;
     ShortCut m_shortCut;
 
@@ -21,7 +22,6 @@ protected:
     qreal m_recordPoint;
     qreal m_positiveOffset;
     uint m_offset;
-
 public:
 
     ACurve();

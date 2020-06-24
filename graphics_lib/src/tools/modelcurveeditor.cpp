@@ -8,7 +8,7 @@ ModelCurveEditor::ModelCurveEditor(AGraphicItem *graphicItem){
         return;
     m_time = m_curve->time();
     m_depth = m_curve->depth();
-    for(int i = 0;i < m_curve->size(); ++i){
+    for(uint i = 0;i < m_curve->size(); ++i){
         m_vector->push_back(m_curve->data(i));
     }
 }

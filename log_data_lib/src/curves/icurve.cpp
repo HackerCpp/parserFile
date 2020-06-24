@@ -1,4 +1,5 @@
 #include "icurve.h"
+#include "curve.h"
 
 ICurve::ICurve(){
 
@@ -78,6 +79,42 @@ ShortCut ICurve::shortCut(){
 
 QString ICurve::mnemonic(){
     return nullptr;
+}
+
+ICurve * ICurve::curveCreater(const ICurve &curve){
+    ICurve *f_curve = nullptr;
+    if(dynamic_cast<const Curve<uint8_t>*>(&curve)){
+        f_curve = new Curve<uint8_t>(dynamic_cast<const Curve<uint8_t>&>(curve));
+    }
+    else if(dynamic_cast<const Curve<int8_t>*>(&curve)){
+        f_curve = new Curve<int8_t>(dynamic_cast<const Curve<int8_t>&>(curve));
+    }
+    else if(dynamic_cast<const Curve<uint32_t>*>(&curve)){
+        f_curve = new Curve<uint32_t>(dynamic_cast<const Curve<uint32_t>&>(curve));
+    }
+    else if(dynamic_cast<const Curve<int32_t>*>(&curve)){
+        f_curve = new Curve<int32_t>(dynamic_cast<const Curve<int32_t>&>(curve));
+    }
+    else if(dynamic_cast<const Curve<uint16_t>*>(&curve)){
+        f_curve = new Curve<uint16_t>(dynamic_cast<const Curve<uint16_t>&>(curve));
+    }
+    else if(dynamic_cast<const Curve<int16_t>*>(&curve)){
+        f_curve = new Curve<int16_t>(dynamic_cast<const Curve<int16_t>&>(curve));
+    }
+    else if(dynamic_cast<const Curve<float_t>*>(&curve)){
+        f_curve = new Curve<float_t>(dynamic_cast<const Curve<float_t>&>(curve));
+    }
+    else if(dynamic_cast<const Curve<double>*>(&curve)){
+        f_curve = new Curve<double>(dynamic_cast<const Curve<double>&>(curve));
+    }
+    else if(dynamic_cast<const Curve<uint64_t>*>(&curve)){
+        f_curve = new Curve<uint64_t>(dynamic_cast<const Curve<uint64_t>&>(curve));
+    }
+    else if(dynamic_cast<const Curve<int64_t>*>(&curve)){
+        f_curve = new Curve<int64_t>(dynamic_cast<const Curve<int64_t>&>(curve));
+    }
+
+    return f_curve;
 }
 
 

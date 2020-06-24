@@ -118,6 +118,7 @@ QByteArray GFMSaver::getHeader(DataBlock * dataBlock){
     }
 
     QList<ICurve*> *f_curves = dataBlock->curves();
+    int f_offset = 0;
     foreach(auto curve,*f_curves){
         ACurve *curveAbstract =  dynamic_cast<ACurve *>(curve);
         if(!curveAbstract){
@@ -135,9 +136,10 @@ QByteArray GFMSaver::getHeader(DataBlock * dataBlock){
             f_line = "[%1][%2]  {%3}:%4 : %5 : %6 %7\r\n";
             f_recordPoint = QString::number(curveAbstract->recordPoint()) + "(M)";
         }
-        f_line = f_line.arg(curveAbstract->offset()).arg(curveAbstract->sizeOffsetInBytes()).arg(curveAbstract->shortCut().ref())
+        f_line = f_line.arg(f_offset/*curveAbstract->offset()*/).arg(curveAbstract->sizeOffsetInBytes()).arg(curveAbstract->shortCut().ref())
                 .arg(curveAbstract->mnemonic()).arg(curveAbstract->dataType()).arg(f_recordPoint)
                 .arg(QString(curveAbstract->desc()->forSave()));
+        f_offset += curveAbstract->sizeOffsetInBytes();
 
         f_blockForWrite = f_line.toLocal8Bit();
         param.append(f_blockForWrite);
