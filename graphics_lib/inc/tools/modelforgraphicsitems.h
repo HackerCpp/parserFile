@@ -8,7 +8,7 @@ class ModelForGraphicsItems : public QAbstractListModel
     QStringList m_headerList;
 public:
     ModelForGraphicsItems(QMap<QString,AGraphicItem *> *items);
-    ~ModelForGraphicsItems();
+    ~ModelForGraphicsItems()override;
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;

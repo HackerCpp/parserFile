@@ -36,6 +36,7 @@ public:
     AItem *itemInfo(){return m_itemInfo;}
     virtual QColor color(){return Qt::black;}
     virtual void setColor(QColor color){Q_UNUSED(color)}
+    BoardForTrack *board(){return m_board;}
 
     bool isActive(){return m_isActive;}
 };

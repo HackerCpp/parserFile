@@ -38,7 +38,7 @@ include(../graphics_lib/graphics.pri)
 
 
 SOURCES += \
-    inc/tabinterpretations.cpp \
+    src/tabinterpretations.cpp \
     src/graphicscontrolpanel.cpp \
     src/graphicwidget.cpp \
     src/newcurvetab.cpp \

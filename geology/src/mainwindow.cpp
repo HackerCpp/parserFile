@@ -89,7 +89,7 @@ void MainWindow::openInterpretations(){
     ILogData *f_urentLogdata = m_logDataView->curentLogData();
     if(!f_urentLogdata)
         return;
-    QDir dir(QDir().absolutePath()+ "/interpretations");
+    QDir dir(QDir().absolutePath()+ "/interpretations/release");
     dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
     QFileInfoList f_fileList = dir.entryInfoList();
 

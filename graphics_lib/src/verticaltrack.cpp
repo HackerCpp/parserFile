@@ -179,9 +179,11 @@ void VerticalTrack::startDrag(QPointF point){
             f_image->fill(0x0);
             grItem->drawHeader(new QPainter(f_image),position,&flag);
             f_mimeData = new QMimeData;
-            f_mimeData->setText(QString::number(reinterpret_cast<long long>(grItem)));
-            grItem->itemInfo()->setVisible(AItem::BOARD_GRAPH_VIEW,false);
-            m_items->removeOne(grItem);
+            //f_mimeData->setText(QString::number(reinterpret_cast<long long>(grItem)));
+            f_mimeData->setData("item",QString::number(reinterpret_cast<long long>(grItem)).toLocal8Bit());
+            f_mimeData->setData("items",QString::number(reinterpret_cast<long long>(m_items)).toLocal8Bit());
+            //grItem->itemInfo()->setVisible(AItem::BOARD_GRAPH_VIEW,false);
+            //m_items->removeOne(grItem);
             break;
         }
     }
@@ -414,14 +416,22 @@ void VerticalTrack::dragMoveEvent(QGraphicsSceneDragDropEvent *event){
 
 void VerticalTrack::dropEvent(QGraphicsSceneDragDropEvent *event){
     bool ok = false;
-     AGraphicItem* f_item = reinterpret_cast<AGraphicItem*>(event->mimeData()->text().toLongLong(&ok));
+    AGraphicItem* f_item = reinterpret_cast<AGraphicItem*>(event->mimeData()->data("item").toLongLong(&ok));
+     //AGraphicItem* f_item = reinterpret_cast<AGraphicItem*>(event->mimeData()->text().toLongLong(&ok));
+    QList<AGraphicItem*> *f_items = reinterpret_cast<QList<AGraphicItem*> *>(event->mimeData()->data("items").toLongLong(&ok));
+
      if(f_item && ok){
         f_item->itemInfo()->setVisible(AItem::BOARD_GRAPH_VIEW,true);
         f_item->itemInfo()->setNumberOfTrack(m_track->number());
         f_item->updateParam(m_doublePixMap->width());
         addIteam(f_item);
+        if(dynamic_cast<QList<AGraphicItem*> *>(f_items)){
+           f_items->removeOne(f_item);
+        }
+         redraw();
      }
-     redraw();
+
+
 }
 
 void VerticalTrack::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*){

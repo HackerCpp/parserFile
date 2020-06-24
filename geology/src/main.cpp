@@ -23,16 +23,10 @@ int main(int argc, char *argv[])
         qDebug() << "file style.css not open;";
     }
     file.close();
-    qputenv("PYTHONPATH",QString(QDir().absolutePath() + "/python3/Lib").toLatin1());
+    qputenv("PYTHON_PATH",QString(QDir().absolutePath() + "/python3/Lib").toLatin1());
+    qputenv("PYTHON_PATH",QString(QDir().absolutePath()).toLatin1());
     w.show();
-    /*QString f_path = QDir().absolutePath() + "/dynlib.dll";
-    QLibrary  lib(f_path);
-    lib.load();
-    qDebug() << lib.isLoaded() << f_path;
-    typedef QString (*Fct) (const QString);
-    Fct fct = (Fct)(lib.resolve("str"));
-    if(fct)
-        qDebug() << fct("uutftfyfyt");*/
+
 
     return a.exec();
 }

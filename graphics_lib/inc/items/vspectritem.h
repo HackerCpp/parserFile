@@ -16,8 +16,9 @@ class VSpectrItem : public DrawingThroughADisk, public VerticalItem{
     void inline drawInterpolationVertical(QPainter *per,QRectF visibleRect,bool *flag);
     void inline drawInterpolationVerticalNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag);
     void drawInterpolationHorForCheckArea(QPainter *per,QRectF visibleRect,bool *flag);
-
+public:
     void drawBody(QPainter *per,QRectF visibleRect,bool *flag)override;
+    void drawOneWawe(QPainter *per,int position,bool *flag);
     void updateParam(int pictureWidth)override;
     bool isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per)override;
     void loadDrawingParam(int width)override;

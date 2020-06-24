@@ -284,10 +284,12 @@ void VSpectrItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
     qreal f_dstPicturePosition = visibleRect.y() - f_topOffset; //0
     QImage f_srcImage;
     for(int y_top = f_top - f_stock; y_top < f_dstPicturePosition + f_height /*f_bottom + 1000*/; y_top += (M_HEIGHT_PICTURE - f_stock)){
-        if(*flag)
+        if(*flag){
             return;
-        if((y_top + M_HEIGHT_PICTURE) < (f_yTop - m_board->offsetUp()))
+        }
+        if((y_top + M_HEIGHT_PICTURE) < (f_yTop - m_board->offsetUp())){
             continue;
+        }
         QString f_fileName = "temporary/" + m_curve->mnemonic() + QString::number(m_curentPictureWidth) + QString::number(y_top) + ".png";
         if(QFile::exists(f_fileName) ){
             f_srcImage.load(f_fileName,"PNG");
@@ -299,6 +301,42 @@ void VSpectrItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
             QRect f_srcRect(0,m_lengthOverlay,f_srcImage.width(),f_drawHeight);
             per->drawImage(f_dstRect,f_srcImage,f_srcRect);
         }
+    }
+}
+
+void VSpectrItem::drawOneWawe(QPainter *per,int position,bool *flag){
+    if(!per->isActive())
+        return;
+    uint indexBegin  = 0;
+    ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
+    qreal f_scaleForMainValue = m_board->scale();
+
+    if((f_mainValue->minimum() * f_scaleForMainValue) > position){
+        indexBegin = 0;
+    }
+    else if((f_mainValue->maximum() * f_scaleForMainValue) < position){
+        indexBegin = f_mainValue->size() - 1;
+    }
+    else{
+        for(uint i = 0; i < f_mainValue->size() - 1; ++i){
+           if((f_mainValue->data(i) * f_scaleForMainValue) > position && (f_mainValue->data(i + 1) * f_scaleForMainValue) < position){
+               indexBegin = i;
+               break;
+           }
+        }
+    }
+    qDebug() << indexBegin;
+    QString valueRange = m_curve->desc()->param("val_range");
+    qreal f_minimum = valueRange.left(valueRange.indexOf("..")).toDouble();
+    qreal f_maximum = valueRange.right(valueRange.indexOf("..") - 1).toDouble();
+    qreal f_scaleY = per->device()->height() / (f_maximum - f_minimum);
+    qreal quantityElem = m_curve->sizeOffset();
+    qreal f_step = per->device()->width() / quantityElem;
+    per->setPen(QPen(Qt::black,4));
+    for(int i = 0; i < quantityElem; ++i){
+    //for(int i = indexBegin * quantityElem; i  < indexBegin * quantityElem + quantityElem; ++i){
+        per->drawPoint(qreal(i) * f_step,per->device()->height() - ((m_curve->data(indexBegin * quantityElem + i) - f_minimum) * f_scaleY));
+
     }
 }
 

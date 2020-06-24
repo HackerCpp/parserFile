@@ -1,4 +1,7 @@
 #include "curveeditor.h"
+#include "vspectritem.h"
+#include "spectrreader.h"
+
 
 
 CurveEditor::CurveEditor(AGraphicItem *graphicItem){
@@ -10,6 +13,9 @@ CurveEditor::CurveEditor(AGraphicItem *graphicItem){
 
     m_scroll->setWidget(m_splitter);
     setWindowTitle(graphicItem->itemInfo()->name());
+    if(dynamic_cast<VSpectrItem *>(graphicItem)){
+        m_splitter->addWidget(new SpectrReader(dynamic_cast<VSpectrItem *>(graphicItem)));
+    }
 }
 
 CurveEditor::~CurveEditor(){
