@@ -33,7 +33,7 @@ void ObjectOfTheBoard::changingTheVisibilityZone(QRectF newVisibilityZone){
 void ObjectOfTheBoard::redraw(){
     if(!isRunning()){
         m_endRedraw = false;
-        start(QThread::InheritPriority);
+        start();
     }
     else{
         m_endRedraw = true;
@@ -48,7 +48,7 @@ void ObjectOfTheBoard::sceneUpdate(){
     if(m_needToRedraw){
         m_needToRedraw = false;
         m_endRedraw = false;
-        start(QThread::InheritPriority);
+        start();
     }
     else{
         if(scene())
@@ -58,6 +58,10 @@ void ObjectOfTheBoard::sceneUpdate(){
 
 void ObjectOfTheBoard::swapPixMap(){
     QImage *ptr = m_curentPixmap;
+    if(m_endRedraw){
+        ptr = nullptr;
+        return;
+    }
     m_curentPixmap = m_doublePixMap;
     m_doublePixMap = ptr;
     ptr = nullptr;

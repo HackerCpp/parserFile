@@ -36,14 +36,14 @@ VerticalTrack::VerticalTrack(ATrack *track,BoardForTrack *board)
     m_trackMenu->addAction("&Save Picture",this, SLOT(savePicture()));
     m_border = new RightBorder();
     qreal f_pixelPerMm = m_board->pixelPerMm();
-    uint f_pictureHeight = m_board->pictureHeight();
+    //uint f_pictureHeight = m_board->pictureHeight();
     int f_topY = m_board->top();
     uint f_lengthY = m_board->length();
     m_positionOfTheBorder = (m_track->begin() + m_track->width()) * f_pixelPerMm - m_border->width();
     int f_pictureWidth = m_track->width() * f_pixelPerMm  - m_border->width();
-    QImage::Format f_format = m_board->formatPicture();
-    m_curentPixmap = new QImage(f_pictureWidth,f_pictureHeight,f_format);
-    m_doublePixMap = new QImage(f_pictureWidth,f_pictureHeight,f_format);
+    //QImage::Format f_format = m_board->formatPicture();
+    //m_curentPixmap = new QImage(f_pictureWidth,f_pictureHeight,f_format);
+    //m_doublePixMap = new QImage(f_pictureWidth,f_pictureHeight,f_format);
     m_curentHeader = new QImage(f_pictureWidth,3000,QImage::Format_ARGB4444_Premultiplied);
     m_doubleHeader = new QImage(f_pictureWidth,3000,QImage::Format_ARGB4444_Premultiplied);
     m_infoPixMap = new QImage(f_pictureWidth,30,QImage::Format_ARGB4444_Premultiplied);

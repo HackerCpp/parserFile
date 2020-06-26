@@ -20,7 +20,7 @@ protected:
     virtual void toSetTheLocationOfTheImageAfterDrawing();
 public:
     ObjectOfTheBoard();
-    virtual ~ObjectOfTheBoard();
+    virtual ~ObjectOfTheBoard()override;
     virtual void resize(){}
     virtual void resizePictures(){}
     virtual void swapPixMap();

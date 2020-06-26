@@ -76,14 +76,14 @@ template<typename T> Curve<T>::Curve(const Curve<T> &curve){
     m_mnemonic = curve.m_mnemonic;
     m_dataType = curve.m_dataType;
     m_recordPoint = curve.m_recordPoint;
-    foreach(auto value,*m_data){
+    foreach(auto value,*curve.m_data){
         m_data->push_back(value);
     }
 }
 
 template<typename T> qreal Curve<T>::data(uint index){
     if(static_cast<int>(index) > m_data->size()){
-        qDebug()<<"Индекс вышел за пределы массива, вернули 0";
+        qDebug()<<" qreal Curve<T> Индекс вышел за пределы массива, вернули 0";
         return 0;
     }
     return m_data->data()[index];

@@ -8,6 +8,7 @@ class DrawingThroughADisk : public QThread
     Q_OBJECT
 
 protected:
+    QString m_uid;
     bool m_isEndThread,m_isRedraw;
     qreal m_curentPictureWidth;
     bool m_updatedParam;
@@ -22,7 +23,9 @@ public:
     virtual ~DrawingThroughADisk();
 
     virtual void loadDrawingParam(int width){Q_UNUSED(width)}
-
+    virtual void drawOnTheDisk(){}
+signals:
+    void dataHardDiscReady();
 public slots:
     virtual void endThreadHandler();
 };

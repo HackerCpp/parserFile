@@ -1,16 +1,22 @@
 QT += core gui widgets opengl xml
 
 CONFIG += c++11
-INCLUDEPATH += $$PWD $$PWD/inc $$PWD/inc/items $$PWD/inc/tools
+INCLUDEPATH += $$PWD $$PWD/inc $$PWD/inc/items $$PWD/inc/tools $$PWD/inc/spectrReader
 
 LIBS += \
 ../build/release/LogData.lib \
+../PythonQT3.2/build/lib/PythonQt-Qt5-Python373.lib \
+        ../PythonQT3.2/build/lib/PythonQt_QtAll-Qt5-Python373.lib\
+        ../python3/python3_x64-windows/lib/python37.lib \
 #../build/release/LogDataInterpreter.lib \
 #../build/release/LogDataLoader.lib \
 #../build/release/LogDataSaver.lib \
 
 
 SOURCES += \
+    $$PWD/inc/spectrReader/filterlistview.cpp \
+    $$PWD/inc/tools/basecurvereader.cpp \
+    $$PWD/src/spectrReader/filterListModel.cpp \
     $$PWD/src/items/drawingthroughadisk.cpp \
     $$PWD/src/tools/spectrreader.cpp \
     $$PWD/src/tools/colorscale.cpp \
@@ -41,6 +47,7 @@ SOURCES += \
     $$PWD/src/igraphiceditor.cpp \
 
 HEADERS += \
+    $$PWD/inc/spectrReader/filterListModel.h \
     $$PWD/inc/agraphicboard.h \
     $$PWD/inc/items/agraphicitem.h \
     $$PWD/inc/agraphictrack.h \
@@ -49,6 +56,8 @@ HEADERS += \
     $$PWD/inc/igraphiceditor.h \
     $$PWD/inc/items/drawingthroughadisk.h \
     $$PWD/inc/items/itimscreater.h \
+    $$PWD/inc/spectrReader/filterlistview.h \
+    $$PWD/inc/tools/basecurvereader.h \
     $$PWD/inc/tools/basesettingswindow.h \
     $$PWD/inc/tools/browsergraphicitems.h \
     $$PWD/inc/tools/colorscale.h \

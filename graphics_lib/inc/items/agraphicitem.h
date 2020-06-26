@@ -20,6 +20,7 @@ protected:
 
 public:
     AGraphicItem(ICurve *curve,BoardForTrack *board);
+    AGraphicItem(const AGraphicItem &other);
     virtual ~AGraphicItem();
 
     qreal topValue();
@@ -32,6 +33,7 @@ public:
     virtual void setActive(bool active){m_isActive = active;}
 
     virtual void updateParam(int pictureWidth){Q_UNUSED(pictureWidth)}
+    virtual void updateParam(){}
     ICurve *curve(){return m_curve;}
     AItem *itemInfo(){return m_itemInfo;}
     virtual QColor color(){return Qt::black;}

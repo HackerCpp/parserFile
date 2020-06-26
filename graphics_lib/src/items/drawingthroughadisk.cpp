@@ -1,8 +1,10 @@
 #include "drawingthroughadisk.h"
 #include <QFile>
+#include <QUuid>
 
 DrawingThroughADisk::DrawingThroughADisk(){
 
+    m_uid = QUuid().createUuid().toString();
     m_isEndThread = m_isRedraw = false;
     m_curentDrawPersent = 0;
     m_lengthOverlay = 500;

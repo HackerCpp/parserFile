@@ -6,6 +6,10 @@ VerticalItem::VerticalItem(ICurve *curve,BoardForTrack *board)
     m_heightHeaderArea = 40;
 
 }
+VerticalItem::VerticalItem(const VerticalItem &other)
+    :AGraphicItem(other){
+    m_heightHeaderArea = other.m_heightHeaderArea;
+}
 
 void VerticalItem::drawHeader(QPainter *per,int &position,bool *flag){
     Q_UNUSED(flag)

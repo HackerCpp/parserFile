@@ -10,6 +10,18 @@ AGraphicItem::AGraphicItem(ICurve *curve,BoardForTrack *board)
     m_recordPointDepth = qIsNaN(curve->recordPoint()) ? 0 : curve->recordPoint();
 }
 
+AGraphicItem::AGraphicItem(const AGraphicItem &other){
+    if(&other == this)
+        return;
+    m_itemInfo = nullptr;
+    m_curve = ICurve::curveCreater(*other.m_curve);
+    m_board = other.m_board;
+    m_isActive = other.m_isActive;
+    m_positionHeaderArea = other.m_positionHeaderArea;
+    m_heightHeaderArea = other.m_heightHeaderArea;
+    m_recordPointDepth = other.m_recordPointDepth;
+}
+
 AGraphicItem::~AGraphicItem(){
 }
 

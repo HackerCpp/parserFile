@@ -2,6 +2,7 @@
 
 #include <QApplication>
 #include <QDir>
+#include <QMessageBox>
 
 
 int main(int argc, char *argv[])
@@ -23,8 +24,7 @@ int main(int argc, char *argv[])
         qDebug() << "file style.css not open;";
     }
     file.close();
-    qputenv("PYTHON_PATH",QString(QDir().absolutePath() + "/python3/Lib").toLatin1());
-    qputenv("PYTHON_PATH",QString(QDir().absolutePath()).toLatin1());
+    qputenv("PYTHONPATH",QString(QDir().absolutePath() + "/python3/Lib").toLatin1());
     w.show();
 
 

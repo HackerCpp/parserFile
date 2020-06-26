@@ -4,7 +4,8 @@
 
 
 
-CurveEditor::CurveEditor(AGraphicItem *graphicItem){
+CurveEditor::CurveEditor(AGraphicItem *graphicItem)
+    : m_curveReader(nullptr){
     m_splitter = new QSplitter();
     m_table = new QTableView();
     m_modelCurveEditor = new ModelCurveEditor(graphicItem);
@@ -14,16 +15,20 @@ CurveEditor::CurveEditor(AGraphicItem *graphicItem){
     m_scroll->setWidget(m_splitter);
     setWindowTitle(graphicItem->itemInfo()->name());
     if(dynamic_cast<VSpectrItem *>(graphicItem)){
-        m_splitter->addWidget(new SpectrReader(dynamic_cast<VSpectrItem *>(graphicItem)));
+        m_curveReader = new SpectrReader(dynamic_cast<VSpectrItem *>(graphicItem));
+        m_splitter->addWidget(m_curveReader);
     }
 }
 
 CurveEditor::~CurveEditor(){
     if(m_modelCurveEditor){delete m_modelCurveEditor;m_modelCurveEditor = nullptr;}
+    if(m_curveReader){delete m_curveReader;m_curveReader = nullptr;}
     if(m_table){delete m_table;m_table = nullptr;}
 }
 
 void CurveEditor::apply(){
+    if(m_curveReader)
+        m_curveReader->apply();
     if(m_modelCurveEditor)
         m_modelCurveEditor->apply();
     emit changeSettings();

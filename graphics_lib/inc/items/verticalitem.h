@@ -6,7 +6,9 @@ class VerticalItem : public AGraphicItem
 {
 public:
     VerticalItem(ICurve *curve,BoardForTrack *board);
-    ~VerticalItem(){}
+    VerticalItem(const VerticalItem &other);
+
+    ~VerticalItem()override{}
 
 
     void drawHeader(QPainter *per,int &position,bool *flag)override;

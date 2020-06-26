@@ -8,6 +8,19 @@ SpecItem::SpecItem(){
     m_type = SPEC;
 }
 
+SpecItem::SpecItem(const SpecItem &other)
+    :AItem(other){
+    m_multicolor = new QList<MulticolorItem>;
+    QList<MulticolorItem> *f_multicolor = other.m_multicolor;
+    foreach(auto value,*f_multicolor){
+        m_multicolor->push_back(value);
+    }
+    m_brushColor = other.m_brushColor;
+    m_transparentColor = other.m_transparentColor;
+    m_showMode = other.m_showMode;
+    m_levelCount = other.m_levelCount;
+}
+
 SpecItem::~SpecItem(){
 
 }

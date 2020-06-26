@@ -13,6 +13,29 @@ AItem::AItem(){
         m_visible[visible] = 1;
     }
 }
+
+AItem::AItem(const AItem &other){
+    if(&other == this)
+        return;
+    m_type = other.m_type;
+    m_name = other.m_name;
+    m_numberOfTrack = other.m_numberOfTrack;
+
+    m_begin = Begin{other.m_begin.is_beginValue,
+                other.m_begin.beginValue,
+                other.m_begin.zeroOffset,};
+    m_end = End{other.m_end.is_endValue,
+                other.m_end.endValue,
+                other.m_end.scale};
+    m_multiScale = MultiScale{other.m_multiScale.is_multiscale,
+                other.m_multiScale.gleamCount,
+                other.m_multiScale.gleamScale};
+
+    for(int i = 0; i < VisibleView::MAXIMIM;++i){
+        m_visible[i] = other.m_visible[i];
+    }
+}
+
 AItem::~AItem(){
 
 }

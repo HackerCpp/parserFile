@@ -13,6 +13,7 @@ class SpecItem : public AItem{
 public:
 
     SpecItem();
+    SpecItem(const SpecItem &other);
     ~SpecItem();
 
     void setColor (QString bruchColor, QString transparentColor);

@@ -43,6 +43,7 @@ protected:
     uint8_t m_visible[VisibleView::MAXIMIM];
 public:
     AItem();
+    AItem(const AItem &other);
     virtual ~AItem();
 
     virtual QString name(){return m_name;}

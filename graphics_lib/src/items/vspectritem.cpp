@@ -14,13 +14,13 @@ VSpectrItem::VSpectrItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
     if(f_spectrItemInfo)
         m_itemInfo = f_spectrItemInfo;
     else{
-        qDebug() << "Не удалось преобразовать AItemInfo в SpectItemInfo" << itemInfo->name();
+        qDebug() << "VSpectrItem::VSpectrItem Не удалось преобразовать AItemInfo в SpectItemInfo" << itemInfo->name();
     }
     bool ok = true;
     QString f_dataStep = m_curve->desc()->param("data_step");
     m_dataStep =  f_dataStep.left(f_dataStep.indexOf("(")).toDouble(&ok);
     if(!ok){
-        qDebug() << "Не удалось преобразовать data_step в VSpectrItem constructor";
+        qDebug() << "VSpectrItem::VSpectrItem Не удалось преобразовать data_step в VSpectrItem constructor";
         m_dataStep = 2;
     }
     else{
@@ -30,16 +30,31 @@ VSpectrItem::VSpectrItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
         else if(f_type == "(HZ)")
            ;
         else{
-            qDebug() << "не описанный тип данных data_step spectr" << f_type;
+            qDebug() << "VSpectrItem::VSpectrItem не описанный тип данных data_step spectr" << f_type;
         }
     }
     QString f_dataBegin = m_curve->desc()->param("data_begin");
     m_dataBegin = f_dataBegin.left(f_dataBegin.indexOf("(")).toDouble(&ok);
     if(!ok){
-        qDebug() << "Не удалось преобразовать data_begin в VSpectrItem constructor";
+        qDebug() << " VSpectrItem::VSpectrItem Не удалось преобразовать data_begin в VSpectrItem constructor";
         m_dataBegin = 0;
     }
 
+}
+VSpectrItem::VSpectrItem(const VSpectrItem &other)
+    :VerticalItem(other){
+    m_dataStepPix = other.m_dataStepPix;
+    m_offsetPix = other.m_offsetPix;
+    m_dataStep = other.m_dataStep;
+    m_dataBegin = other.m_dataBegin;
+    m_widthPicturePix = other.m_widthPicturePix;
+    SpecItem *f_spectrItemInfo = dynamic_cast<SpecItem *>(other.m_itemInfo);
+    if(f_spectrItemInfo)
+        m_itemInfo = new SpecItem(*f_spectrItemInfo);
+    else{
+        qDebug() << "VSpectrItem::VSpectrItem copy constructor VSpectrItem SpecItem info not found";
+        m_itemInfo = nullptr;
+    }
 }
 
 void inline VSpectrItem::drawInterpolationVertical(QPainter *per,QRectF visibleRect,bool *flag){
@@ -258,7 +273,7 @@ void VSpectrItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
     SpecItem* f_spectrItemInfo = dynamic_cast<SpecItem*>(m_itemInfo);
 
     if(!f_spectrItemInfo){
-        qDebug() << "Не удалось преобразовать AItem in SpectrItem";
+        qDebug() << " VSpectrItem::drawBody Не удалось преобразовать AItem in SpectrItem";
         return;
     }
     /*if(!f_spectrItemInfo->showMode()){
@@ -290,7 +305,7 @@ void VSpectrItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
         if((y_top + M_HEIGHT_PICTURE) < (f_yTop - m_board->offsetUp())){
             continue;
         }
-        QString f_fileName = "temporary/" + m_curve->mnemonic() + QString::number(m_curentPictureWidth) + QString::number(y_top) + ".png";
+        QString f_fileName = "temporary/" + m_uid + QString::number(y_top) + ".png";
         if(QFile::exists(f_fileName) ){
             f_srcImage.load(f_fileName,"PNG");
             if(f_srcImage.isNull())
@@ -309,8 +324,9 @@ void VSpectrItem::drawOneWawe(QPainter *per,int position,bool *flag){
         return;
     uint indexBegin  = 0;
     ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
+    if(!f_mainValue->size())
+        return;
     qreal f_scaleForMainValue = m_board->scale();
-
     if((f_mainValue->minimum() * f_scaleForMainValue) > position){
         indexBegin = 0;
     }
@@ -319,13 +335,14 @@ void VSpectrItem::drawOneWawe(QPainter *per,int position,bool *flag){
     }
     else{
         for(uint i = 0; i < f_mainValue->size() - 1; ++i){
-           if((f_mainValue->data(i) * f_scaleForMainValue) > position && (f_mainValue->data(i + 1) * f_scaleForMainValue) < position){
+           if((f_mainValue->data(i) * f_scaleForMainValue) > position && (f_mainValue->data(i + 1) * f_scaleForMainValue) < position
+                   || (f_mainValue->data(i) * f_scaleForMainValue) < position && (f_mainValue->data(i + 1) * f_scaleForMainValue) > position){
                indexBegin = i;
                break;
            }
         }
     }
-    qDebug() << indexBegin;
+
     QString valueRange = m_curve->desc()->param("val_range");
     qreal f_minimum = valueRange.left(valueRange.indexOf("..")).toDouble();
     qreal f_maximum = valueRange.right(valueRange.indexOf("..") - 1).toDouble();
@@ -334,9 +351,7 @@ void VSpectrItem::drawOneWawe(QPainter *per,int position,bool *flag){
     qreal f_step = per->device()->width() / quantityElem;
     per->setPen(QPen(Qt::black,4));
     for(int i = 0; i < quantityElem; ++i){
-    //for(int i = indexBegin * quantityElem; i  < indexBegin * quantityElem + quantityElem; ++i){
         per->drawPoint(qreal(i) * f_step,per->device()->height() - ((m_curve->data(indexBegin * quantityElem + i) - f_minimum) * f_scaleY));
-
     }
 }
 
@@ -365,7 +380,7 @@ void VSpectrItem::run(){
         QImage f_image(m_curentPictureWidth,f_heightPictures,QImage::Format_ARGB32);
         QPainter f_painter(&f_image);
         drawInterpolationVerticalNoOffset(&f_painter,y_top,y_top + f_heightPictures,&m_isEndThread);
-        QString f_namePicture = "temporary/" + m_curve->mnemonic() + QString::number(m_curentPictureWidth) + QString::number(y_top) + ".png";
+        QString f_namePicture = "temporary/" + m_uid + QString::number(y_top) + ".png";
         f_image.save(f_namePicture,"PNG");
         while(!QFile::exists(f_namePicture));
         m_picturePath << f_namePicture;
@@ -373,12 +388,10 @@ void VSpectrItem::run(){
     m_curentDrawPersent = 100;
     m_updatedParam = false;
     m_board->customUpdate();
+    emit dataHardDiscReady();
 }
 
-void VSpectrItem::updateParam(int pictureWidth){
-    m_isEndThread = true;
-    m_curentPictureWidth = pictureWidth;
-
+void VSpectrItem::drawOnTheDisk(){
     if( isRunning ()){
         m_isRedraw = true;
     }
@@ -387,6 +400,17 @@ void VSpectrItem::updateParam(int pictureWidth){
         m_isEndThread = false;
         start();
     }
+}
+
+void VSpectrItem::updateParam(int pictureWidth){
+    m_isEndThread = true;
+    m_curentPictureWidth = pictureWidth;
+    drawOnTheDisk();
+
+}
+
+void VSpectrItem::updateParam(){
+    drawOnTheDisk();
 }
 
 void VSpectrItem::drawInterpolationHorForCheckArea(QPainter *per,QRectF visibleRect,bool *flag){
@@ -432,7 +456,7 @@ bool VSpectrItem::isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *pe
         }
         QImage *img = dynamic_cast<QImage*>(per->device());
         if(!img){
-            qDebug() << "Невозможно проверить картинка для проверки не найдена";
+            qDebug() << " VSpectrItem::isLocatedInTheArea Невозможно проверить картинка для проверки не найдена";
             return false;
         }
         img->fill(0xffffffff);
@@ -440,7 +464,7 @@ bool VSpectrItem::isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *pe
         SpecItem* f_spectrItemInfo = dynamic_cast<SpecItem*>(m_itemInfo);
 
         if(!f_spectrItemInfo){
-            qDebug() << "Не удалось преобразовать AItem in SpectrItem";
+            qDebug() << " VSpectrItem::isLocatedInTheArea Не удалось преобразовать AItem in SpectrItem";
         }
         if(!f_spectrItemInfo->showMode()){
             drawInterpolationHorForCheckArea(per,visibleRect,&flag);
