@@ -346,7 +346,7 @@ void VSpectrItem::drawOneWawe(QPainter *per,int position,bool *flag){
     QString valueRange = m_curve->desc()->param("val_range");
     qreal f_minimum = valueRange.left(valueRange.indexOf("..")).toDouble();
     qreal f_maximum = valueRange.right(valueRange.indexOf("..") - 1).toDouble();
-    qreal f_scaleY = per->device()->height() / (f_maximum - f_minimum);
+    qreal f_scaleY = per->device()->height() / (f_maximum - f_minimum) * 5;
     qreal quantityElem = m_curve->sizeOffset();
     qreal f_step = per->device()->width() / quantityElem;
     per->setPen(QPen(Qt::black,4));

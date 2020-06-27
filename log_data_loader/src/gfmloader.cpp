@@ -464,7 +464,7 @@ void findItemSpec(QXmlStreamReader *xmlReader,ABoard *board,SpecItem *specItem){
         }
         else if(xmlReader->name() == "level" && token == QXmlStreamReader::StartElement){
             MulticolorItem f_multicolor;
-            f_multicolor.bound = attributes.value("bound").toDouble();
+            f_multicolor.bound = attributes.value("bound").toString().replace(",",".").toDouble();
             f_multicolor.value = attributes.value("color").toString();
             specItem->setMulticolor(f_multicolor);
         }
@@ -612,6 +612,8 @@ void GFMLoader::parserFormsBlock(const QByteArray &bodyBlock,IBlock *block){
 }
 
 void GFMLoader::parserUnknownBlock(const QByteArray &bodyBlock,IBlock *block){
+    Q_UNUSED(bodyBlock)
+    Q_UNUSED(block)
 
 }
 

@@ -213,9 +213,9 @@ SpectrReader::SpectrReader(VSpectrItem *spectrItem)
     m_comboFilters = new QComboBox();
     m_mainContext.addObject("comboFilter",m_comboFilters);
     m_mainContext.evalFile("scripts/spectrReader/menu.py");
-    //PythonQtScriptingConsole *m_console  = new PythonQtScriptingConsole(NULL, m_mainContext);
-    //m_console->append("py> from LogData.Curves import*");
-    //m_console->show();
+    PythonQtScriptingConsole *m_console  = new PythonQtScriptingConsole(NULL, m_mainContext);
+    m_console->append("py> from LogData.Curves import*");
+    m_console->show();
     m_btnAddFilter = new QPushButton("add");
     m_toolBar->addWidget(m_sliderWidth);
     m_toolBar->addWidget(m_comboFilters);
@@ -318,7 +318,7 @@ void SpectrReader::rollBackFilters(){
         ICurve * f_experCurve = spectrViewer->experimentalCurve();
         if(!f_originalCurve || !f_experCurve)
             continue;
-        for(int i = 0;i < f_originalCurve->size();++i){
+        for(uint i = 0;i < f_originalCurve->size();++i){
             f_experCurve->setData(f_originalCurve->data(i),i);
         }
         spectrViewer->experimentalSpectr()->updateParam();
@@ -335,8 +335,9 @@ void SpectrReader::applyFilters(){
         ICurve * f_originalCurve = spectrViewer->originalCurve();
         if(!f_originalCurve || !f_experCurve)
             continue;
-        for(int i = 0;i < f_originalCurve->size();++i)
+        for(int i = 0;i < f_originalCurve->size();++i){
             f_experCurve->setData(f_originalCurve->data(i),i);
+        }
 
         m_mainContext.addObject("curve",f_experCurve);
         QVector<QPair<QString, QString> > * f_listFilters = m_filterListModel->filters();
@@ -344,8 +345,9 @@ void SpectrReader::applyFilters(){
             return;
         foreach(auto value,*f_listFilters){
             QString f_path = "scripts/spectrReader/" + value.second;
-            if(QDir().exists(f_path))
+            if(QDir().exists(f_path)){
                 m_mainContext.evalFile(f_path);
+            }
         }
         spectrViewer->experimentalSpectr()->updateParam();
     }
@@ -355,13 +357,15 @@ void SpectrReader::apply(){
     if(!m_listSpectrViewer || m_listSpectrViewer->isEmpty())
         return;
     foreach(auto spectrViewer, *m_listSpectrViewer){
-        if(!spectrViewer->isActive())
+        if(!spectrViewer->isActive()){
             continue;
-        ICurve * f_originalCurve = spectrViewer->originalCurve();
-        ICurve * f_experCurve = spectrViewer->experimentalCurve();
-        if(!f_originalCurve || !f_experCurve)
+        }
+        ICurve *f_originalCurve = spectrViewer->originalCurve();
+        ICurve *f_experCurve = spectrViewer->experimentalCurve();
+        if(!f_originalCurve || !f_experCurve){
             continue;
-        for(int i = 0;i < f_originalCurve->size();++i){
+        }
+        for(uint i = 0;i < f_experCurve->size();++i){
             f_originalCurve->setData(f_experCurve->data(i),i);
         }
         spectrViewer->originalSpectr()->updateParam();
