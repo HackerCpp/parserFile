@@ -1,4 +1,4 @@
-QT += core gui widgets opengl xml
+QT += core gui widgets opengl xml charts
 
 CONFIG += c++11
 INCLUDEPATH += $$PWD $$PWD/inc $$PWD/inc/items $$PWD/inc/tools $$PWD/inc/spectrReader
@@ -14,8 +14,9 @@ LIBS += \
 
 
 SOURCES += \
-    $$PWD/inc/spectrReader/filterlistview.cpp \
-    $$PWD/inc/tools/basecurvereader.cpp \
+    $$PWD/src/spectrReader/filterlistview.cpp \
+    $$PWD/src/spectrReader/onewavewidget.cpp \
+    $$PWD/src/tools/basecurvereader.cpp \
     $$PWD/src/spectrReader/filterListModel.cpp \
     $$PWD/src/items/drawingthroughadisk.cpp \
     $$PWD/src/tools/spectrreader.cpp \
@@ -45,6 +46,7 @@ SOURCES += \
     $$PWD/src/agraphicboard.cpp \
     $$PWD/src/graphiceditor.cpp \
     $$PWD/src/igraphiceditor.cpp \
+    $$PWD/src/tools/qxtspanslider.cpp \
 
 HEADERS += \
     $$PWD/inc/spectrReader/filterListModel.h \
@@ -57,6 +59,7 @@ HEADERS += \
     $$PWD/inc/items/drawingthroughadisk.h \
     $$PWD/inc/items/itimscreater.h \
     $$PWD/inc/spectrReader/filterlistview.h \
+    $$PWD/inc/spectrReader/onewavewidget.h \
     $$PWD/inc/tools/basecurvereader.h \
     $$PWD/inc/tools/basesettingswindow.h \
     $$PWD/inc/tools/browsergraphicitems.h \
@@ -77,4 +80,6 @@ HEADERS += \
     $$PWD/inc/verticalboard.h \
     $$PWD/inc/items/verticalitem.h \
     $$PWD/inc/verticaltrack.h \
-    $$PWD/inc/ruler.h
+    $$PWD/inc/ruler.h\
+    $$PWD/inc/tools/qxtspanslider.h \
+    $$PWD/inc/tools/qxtspanslider_p.h

@@ -3,6 +3,7 @@
 #include <QApplication>
 #include <QDir>
 #include <QMessageBox>
+#include "onewavewidget.h"
 
 
 int main(int argc, char *argv[])
@@ -25,8 +26,9 @@ int main(int argc, char *argv[])
     }
     file.close();
     qputenv("PYTHONPATH",QString(QDir().absolutePath() + "/python3/Lib").toLatin1());
+    w.setMinimumSize(600,600);
     w.show();
-
+    w.setMinimumSize(0,0);
 
     return a.exec();
 }

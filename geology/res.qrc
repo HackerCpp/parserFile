@@ -1,8 +1,5 @@
 <RCC>
     <qresource prefix="/">
         <file>css/darkVC.css</file>
-        <file>css/blender.qss</file>
-        <file>css/familiar-dark.qss</file>
-        <file>css/pgilfernandez-dark.qss</file>
     </qresource>
 </RCC>

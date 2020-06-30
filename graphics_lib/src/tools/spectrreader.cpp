@@ -6,7 +6,7 @@
 #include <QPushButton>
 #include <QValidator>
 #include <QGraphicsSceneMouseEvent>
-#include "Wrapper_python.h"
+
 #include <QDir>
 #include <QGraphicsProxyWidget>
 
@@ -121,6 +121,9 @@ void SpectrScene::mousePressEvent(QGraphicsSceneMouseEvent *event){
             f_itemForSpectr->changePositionOneWave(QPoint(event->scenePos().x(),event->scenePos().y()));
         }
     }
+    SpectrViewer *f_viewer = dynamic_cast<SpectrViewer *>(views().first());
+    if(f_viewer)
+        f_viewer->changePositionOneWave(QPoint(event->scenePos().x(),event->scenePos().y()));
 }
 
 void SpectrScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
@@ -131,6 +134,9 @@ void SpectrScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
             f_itemForSpectr->changePositionOneWave(QPoint(event->scenePos().x(),event->scenePos().y()));
         }
     }
+    SpectrViewer *f_viewer = dynamic_cast<SpectrViewer *>(views().first());
+    if(f_viewer)
+        f_viewer->changePositionOneWave(QPoint(event->scenePos().x(),event->scenePos().y()));
 }
 /**************************SpectrWiever************************/
 SpectrViewer::SpectrViewer(VSpectrItem *spectrItem,int width){
@@ -145,7 +151,8 @@ SpectrViewer::SpectrViewer(VSpectrItem *spectrItem,int width){
     else{
         qDebug() << "Не удалось создать копию спектра в редакторе, конструктор копирования вернул nullptr";
     }
-
+    //m_waveWidget = new OneWaveWidget;
+    //m_waveWidget->show();
     setScene(m_scene);
 
     connect(horizontalScrollBar(), &QScrollBar::valueChanged, this, &SpectrViewer::scrollChanged);
@@ -185,6 +192,14 @@ void SpectrViewer::scrollChanged(){
 void SpectrViewer::resizeEvent(QResizeEvent *event){
     scrollChanged();
 }
+
+void SpectrViewer::changePositionOneWave(QPoint position){
+    //if(!m_waveWidget)
+        //return;
+    //bool f_flag;
+    //m_waveWidget->update(m_experimentalSpectr->oneWave(position.y(),&f_flag));
+    emit sig_changePositionOneWave(position);
+}
 /***************************BASE READER**********************************/
 SpectrReader::SpectrReader(VSpectrItem *spectrItem)
 {
@@ -193,7 +208,7 @@ SpectrReader::SpectrReader(VSpectrItem *spectrItem)
     PythonQt::init(PythonQt::IgnoreSiteModule | PythonQt::RedirectStdOut,"LogData");
     PythonQt_QtAll::init();
     PythonQt::self()->registerCPPClass("ICurve","","Curves",PythonQtCreateObject<WrapperIcurvePython>);
-    m_mainContext = PythonQt::self()->getMainModule();
+    m_pythonInterpreter = PythonQt::self()->getMainModule();
     setAcceptDrops(true);
     m_widht = 100;
     m_vMainLayout = new QVBoxLayout();
@@ -211,11 +226,10 @@ SpectrReader::SpectrReader(VSpectrItem *spectrItem)
     }
     m_toolBar = new QToolBar();
     m_comboFilters = new QComboBox();
-    m_mainContext.addObject("comboFilter",m_comboFilters);
-    m_mainContext.evalFile("scripts/spectrReader/menu.py");
-    PythonQtScriptingConsole *m_console  = new PythonQtScriptingConsole(NULL, m_mainContext);
-    m_console->append("py> from LogData.Curves import*");
-    m_console->show();
+    m_pythonInterpreter.addObject("comboFilter",m_comboFilters);
+    m_pythonInterpreter.evalFile("scripts/spectrReader/menu.py");
+    m_pythonConsole  = new PythonQtScriptingConsole(NULL, m_pythonInterpreter);
+    m_pythonConsole->append("py> from LogData.Curves import*");
     m_btnAddFilter = new QPushButton("add");
     m_toolBar->addWidget(m_sliderWidth);
     m_toolBar->addWidget(m_comboFilters);
@@ -241,14 +255,25 @@ SpectrReader::SpectrReader(VSpectrItem *spectrItem)
     m_splitterFiltersAndSpectrs->addWidget(m_spectrSplitter);
     m_splitterFiltersAndSpectrs->addWidget(m_widgetFilters);
 
-    m_vMainLayout->addWidget(m_toolBar);
-    m_vMainLayout->addWidget(m_splitterFiltersAndSpectrs);
+    m_oneWaveWidget = new OneWaveWidget(m_listSpectrViewer->first()->experimentalSpectr());
+    m_baseVSplitter = new QSplitter(Qt::Vertical);
+
+
+    m_baseVSplitter->addWidget(m_toolBar);
+    m_baseVSplitter->addWidget(m_splitterFiltersAndSpectrs);
+    m_baseVSplitter->addWidget(m_oneWaveWidget);
+    m_baseVSplitter->addWidget(m_pythonConsole);
+    m_vMainLayout->addWidget(m_baseVSplitter);
     setLayout(m_vMainLayout);
 
     connect(m_sliderWidth, &QSlider::valueChanged, this, &SpectrReader::sliderWidthChange);
     connect(m_btnAddFilter, &QPushButton::pressed, this, &SpectrReader::insertFilter);
     connect(m_btnApplyFilters, &QPushButton::pressed, this, &SpectrReader::applyFilters);
     connect(m_btnRollBack, &QPushButton::pressed, this, &SpectrReader::rollBackFilters);
+
+    //соединяем сигнал клика мышки по сцене со слотом,
+    //для перерисовки виджета графиков одной волны
+    connect(m_listSpectrViewer->first(),&SpectrViewer::sig_changePositionOneWave,this,&SpectrReader::updateOneWaweWidget);
 }
 
 void SpectrReader::changrVisibilityZone(QRectF visibilityRect){
@@ -301,6 +326,10 @@ void SpectrReader::dropEvent(QDropEvent *event){
     if(f_spectrItem){
         m_listSpectrViewer->push_back(new SpectrViewer(f_spectrItem,m_sliderWidth->value()));
         m_spectrSplitter->addWidget(m_listSpectrViewer->last());
+        m_oneWaveWidget->addItem(m_listSpectrViewer->last()->experimentalSpectr());
+        //соединяем сигнал клика мышки по сцене со слотом,
+        //для перерисовки виджета графиков одной волны
+        connect(m_listSpectrViewer->last(),&SpectrViewer::sig_changePositionOneWave,this,&SpectrReader::updateOneWaweWidget);
     }
 }
 
@@ -335,18 +364,18 @@ void SpectrReader::applyFilters(){
         ICurve * f_originalCurve = spectrViewer->originalCurve();
         if(!f_originalCurve || !f_experCurve)
             continue;
-        for(int i = 0;i < f_originalCurve->size();++i){
+        for(int i = 0; i < f_originalCurve->size(); ++i){
             f_experCurve->setData(f_originalCurve->data(i),i);
         }
 
-        m_mainContext.addObject("curve",f_experCurve);
+        m_pythonInterpreter.addObject("curve",f_experCurve);
         QVector<QPair<QString, QString> > * f_listFilters = m_filterListModel->filters();
         if(!f_listFilters)
             return;
         foreach(auto value,*f_listFilters){
             QString f_path = "scripts/spectrReader/" + value.second;
             if(QDir().exists(f_path)){
-                m_mainContext.evalFile(f_path);
+                m_pythonInterpreter.evalFile(f_path);
             }
         }
         spectrViewer->experimentalSpectr()->updateParam();
@@ -372,5 +401,7 @@ void SpectrReader::apply(){
     }
 }
 
-
+void SpectrReader::updateOneWaweWidget(QPoint scenePoint){
+    m_oneWaveWidget->update(scenePoint);
+}
 

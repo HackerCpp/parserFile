@@ -355,6 +355,38 @@ void VSpectrItem::drawOneWawe(QPainter *per,int position,bool *flag){
     }
 }
 
+QList<QPointF> VSpectrItem::oneWave(int position,bool *flag){
+    QList<QPointF> f_returnList;
+    uint indexBegin  = 0;
+    ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
+    if(!f_mainValue->size())
+        return f_returnList;
+
+    qreal f_scaleForMainValue = m_board->scale();
+    if((f_mainValue->minimum() * f_scaleForMainValue) > position){
+        indexBegin = 0;
+    }
+    else if((f_mainValue->maximum() * f_scaleForMainValue) < position){
+        indexBegin = f_mainValue->size() - 1;
+    }
+    else{
+        for(uint i = 0; i < f_mainValue->size() - 1; ++i){
+           if((f_mainValue->data(i) * f_scaleForMainValue) > position && (f_mainValue->data(i + 1) * f_scaleForMainValue) < position
+                   || (f_mainValue->data(i) * f_scaleForMainValue) < position && (f_mainValue->data(i + 1) * f_scaleForMainValue) > position){
+               indexBegin = i;
+               break;
+           }
+        }
+    }
+
+    uint f_quantityElem = m_curve->sizeOffset();
+    uint f_indexDataBegin = indexBegin * f_quantityElem;
+    for(uint i = 0; i < f_quantityElem; ++i){
+        f_returnList.push_back(QPointF(qreal(i) * m_dataStep,m_curve->data(f_indexDataBegin + i)));
+    }
+    return f_returnList;
+}
+
 void VSpectrItem::run(){
     m_updatedParam = true;
     foreach(auto path,m_picturePath){

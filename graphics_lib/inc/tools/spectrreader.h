@@ -19,6 +19,9 @@
 #include "objectoftheboard.h"
 #include <QRadioButton>
 #include "basecurvereader.h"
+#include "onewavewidget.h"
+#include "Wrapper_python.h"
+
 
 class GraphicItemForSpectr : public ObjectOfTheBoard{
     VSpectrItem * m_spectrItem;
@@ -52,6 +55,8 @@ class SpectrViewer : public QGraphicsView{
     SpectrScene *m_scene;
     VSpectrItem *m_originalSpectr,*m_experimentalSpectr;
     QRadioButton *m_radioBtnIsActive;
+    //OneWaveWidget *m_waveWidget;
+
 public:
     SpectrViewer(VSpectrItem *spectrItem,int width);
     ~SpectrViewer()override;
@@ -65,7 +70,10 @@ public:
     void resizeEvent(QResizeEvent *event)override;
     VSpectrItem *originalSpectr(){return m_originalSpectr;}
     VSpectrItem *experimentalSpectr(){return m_experimentalSpectr;}
+    void changePositionOneWave(QPoint position);
 
+signals:
+    void sig_changePositionOneWave(QPoint position);
 public slots:
     void scrollChanged();
 };
@@ -74,11 +82,12 @@ public slots:
 class SpectrReader : public BaseCurveReader
 {
     Q_OBJECT
-    PythonQtObjectPtr  m_mainContext;
-
+    PythonQtObjectPtr  m_pythonInterpreter;
+    PythonQtScriptingConsole *m_pythonConsole;
+    OneWaveWidget *m_oneWaveWidget;
     int m_widht;
     QVBoxLayout *m_vMainLayout;
-    QSplitter *m_splitterFiltersAndSpectrs, *m_spectrSplitter;
+    QSplitter *m_splitterFiltersAndSpectrs, *m_spectrSplitter,*m_baseVSplitter;
     QList<SpectrViewer *> *m_listSpectrViewer;
     QToolBar *m_toolBar;
     QSlider *m_sliderWidth;
@@ -93,13 +102,15 @@ class SpectrReader : public BaseCurveReader
     QPushButton *m_btnApplyFilters,*m_btnRollBack;
 public:
     SpectrReader(VSpectrItem *spectrItem);
-    ~SpectrReader(){}
+    ~SpectrReader()override{}
 
     void changrVisibilityZone(QRectF visibilitiRect);
-    void resizeEvent(QResizeEvent *event);
-    void dragEnterEvent(QDragEnterEvent *event);
-    void dragMoveEvent(QDragMoveEvent *event);
-    void dropEvent(QDropEvent *event);
+    void resizeEvent(QResizeEvent *event)override;
+    void dragEnterEvent(QDragEnterEvent *event)override;
+    void dragMoveEvent(QDragMoveEvent *event)override;
+    void dropEvent(QDropEvent *event)override;
+
+
 public slots:
     //void scrollChanged();
     void sliderWidthChange(int width);
@@ -107,6 +118,7 @@ public slots:
     void rollBackFilters();
     void applyFilters();
     void apply()override;
+    void updateOneWaweWidget(QPoint scenePoint);
 };
 
 #endif // SPECTRREADER_H

@@ -6,6 +6,7 @@ FilterListView::FilterListView()
 {
 
 }
+
 void FilterListView::mouseDoubleClickEvent(QMouseEvent *event){
     if(!indexAt(event->pos()).isValid())
         return;
