@@ -5,22 +5,20 @@
 #include "igraphiceditor.h"
 #include <QWidget>
 #include "verticalboard.h"
+#include "drawsettings.h"
 
 class GraphicEditor : public QTabWidget, AGraphicEditor{
     Q_OBJECT
     AGraphicBoard *m_curentBoard;
     QMap<QString,ICurve*> *m_curves;
     FormsBlock *m_forms;
-    int m_curentDrawType;
-    AGraphicBoard::FormatTime m_curentFormatTime;
-    AGraphicBoard::FormatDepth m_curentFormatdepth;
-    AGraphicBoard::LengthPicture m_curentLenghPicture;
     QImage::Format  m_curentImageFormat;
+    DrawSettings *m_drawSettings;
 
     void newBoard();
 
 public:
-    GraphicEditor(QSharedPointer<ILogData> logData,QWidget *parent = nullptr);
+    GraphicEditor(QSharedPointer<ILogData> logData,DrawSettings *drawSettings,QWidget *parent = nullptr);
     virtual ~GraphicEditor()override;
 
     void setDrawTime();
@@ -28,13 +26,9 @@ public:
 
     void addCurves();
     void addForms();
+
+    void activate(bool active);
 public slots:
-    void setDrawType(int drawType);
-    void setFormatTime(AGraphicBoard::FormatTime format);
-    void setFormatDepth(AGraphicBoard::FormatDepth format);
-    void setLengthPicture(AGraphicBoard::LengthPicture format);
-    void setFormatPicture(QImage::Format format);
-    void setScalePixelPerMm(qreal scalePixelPerMm);
     void changeBoard(int index);
     void refresh() override;
 

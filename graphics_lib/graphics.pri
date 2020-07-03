@@ -14,6 +14,7 @@ LIBS += \
 
 
 SOURCES += \
+    $$PWD/src/drawsettings.cpp \
     $$PWD/src/spectrReader/filterlistview.cpp \
     $$PWD/src/spectrReader/onewavewidget.cpp \
     $$PWD/src/tools/basecurvereader.cpp \
@@ -49,6 +50,7 @@ SOURCES += \
     $$PWD/src/tools/qxtspanslider.cpp \
 
 HEADERS += \
+    $$PWD/inc/drawsettings.h \
     $$PWD/inc/spectrReader/filterListModel.h \
     $$PWD/inc/agraphicboard.h \
     $$PWD/inc/items/agraphicitem.h \

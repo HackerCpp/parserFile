@@ -7,8 +7,8 @@
 
 
 
-VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves)
-    :AGraphicBoard(boardInfo,curves)
+VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves,DrawSettings *drawSettings)
+    :AGraphicBoard(boardInfo,curves,drawSettings)
 {
     init();
     if(!m_boardInfo){
@@ -51,11 +51,12 @@ VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves)
 }
 
 
-VerticalBoard::VerticalBoard(QMap<QString,ICurve*> *curves):AGraphicBoard(nullptr,curves){
+VerticalBoard::VerticalBoard(QMap<QString,ICurve*> *curves,DrawSettings *drawSettings)
+    :AGraphicBoard(nullptr,curves,drawSettings){
     init();
 }
 
-VerticalBoard::VerticalBoard():AGraphicBoard(nullptr,nullptr){
+VerticalBoard::VerticalBoard():AGraphicBoard(nullptr,nullptr,nullptr){
     init();
 }
 
@@ -229,7 +230,7 @@ void VerticalBoard::insertNewTrack(int curentTrackNumber,InsertPossition positio
         connect(f_prevTrack,&VerticalTrack::changedPositionBorder,f_track,&VerticalTrack::changeBegin);
         connect(f_track,&VerticalTrack::changedPositionBorder,f_nextTrack,&VerticalTrack::changeBegin);
     }
-    f_track->changeBegin(f_track->trackInfo()->begin() * m_pixelPerMm);
+    f_track->changeBegin(f_track->trackInfo()->begin() * m_drawSettings->pixelPerMm());
     redraw();
 }
 

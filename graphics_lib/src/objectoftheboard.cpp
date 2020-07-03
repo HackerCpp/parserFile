@@ -11,6 +11,7 @@ ObjectOfTheBoard::ObjectOfTheBoard()
 
 ObjectOfTheBoard::~ObjectOfTheBoard(){
     m_endRedraw = true;
+    m_needToRedraw = false;
     wait();
     if(m_curentPixmap){
         delete m_curentPixmap; m_curentPixmap = nullptr;

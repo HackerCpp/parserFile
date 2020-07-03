@@ -10,6 +10,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
+    QCoreApplication::setOrganizationName("GFM");
+    QCoreApplication::setApplicationName("Geology");
     QFile file(":/css/darkVC.css");
     if(file.isOpen()){
         qDebug() << "file style.css open";

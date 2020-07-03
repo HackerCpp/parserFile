@@ -36,14 +36,10 @@ VerticalTrack::VerticalTrack(ATrack *track,BoardForTrack *board)
     m_trackMenu->addAction("&Save Picture",this, SLOT(savePicture()));
     m_border = new RightBorder();
     qreal f_pixelPerMm = m_board->pixelPerMm();
-    //uint f_pictureHeight = m_board->pictureHeight();
     int f_topY = m_board->top();
     uint f_lengthY = m_board->length();
     m_positionOfTheBorder = (m_track->begin() + m_track->width()) * f_pixelPerMm - m_border->width();
     int f_pictureWidth = m_track->width() * f_pixelPerMm  - m_border->width();
-    //QImage::Format f_format = m_board->formatPicture();
-    //m_curentPixmap = new QImage(f_pictureWidth,f_pictureHeight,f_format);
-    //m_doublePixMap = new QImage(f_pictureWidth,f_pictureHeight,f_format);
     m_curentHeader = new QImage(f_pictureWidth,3000,QImage::Format_ARGB4444_Premultiplied);
     m_doubleHeader = new QImage(f_pictureWidth,3000,QImage::Format_ARGB4444_Premultiplied);
     m_infoPixMap = new QImage(f_pictureWidth,30,QImage::Format_ARGB4444_Premultiplied);
@@ -61,7 +57,6 @@ VerticalTrack::VerticalTrack(ATrack *track,BoardForTrack *board)
 
 VerticalTrack::~VerticalTrack(){
     deleteAllPictures();
-    if(m_infoPixMap){delete m_infoPixMap;m_infoPixMap = nullptr;}
     if(m_nameTrack){delete m_nameTrack; m_nameTrack = nullptr;}
 }
 
@@ -76,11 +71,14 @@ void VerticalTrack::resize(){
 
 void VerticalTrack::deleteAllPictures(){
     m_endRedraw = true;
+    m_needToRedraw = false;
     wait();
     if(m_curentPixmap){delete m_curentPixmap;m_curentPixmap = nullptr;}
     if(m_doublePixMap){delete m_doublePixMap;m_doublePixMap = nullptr;}
     if(m_curentHeader){delete m_curentHeader;m_curentHeader = nullptr;}
     if(m_doubleHeader){delete m_doubleHeader; m_doubleHeader = nullptr;}
+    if(m_infoPixMap){delete m_infoPixMap; m_infoPixMap = nullptr;}
+
 }
 
 void VerticalTrack::activate(bool activate){
@@ -107,16 +105,12 @@ void VerticalTrack::resizePictures(){
     uint f_pictureHeight = m_board->pictureHeight();
     int f_pictureWidth = m_track->width() * f_pixelPerMm  - m_border->width();
 
-    QImage *f_img = m_infoPixMap;
     m_infoPixMap = new QImage(f_pictureWidth,30,QImage::Format_ARGB4444_Premultiplied);
     m_infoPixMap->fill(0x0);
     QPainter painterCurent(m_infoPixMap);
     painterCurent.setFont(QFont("Times", 10, QFont::Bold));
     painterCurent.drawText(10,15,"download");
-    if(f_img){
-        delete f_img;
-        f_img = nullptr;
-    }
+
     QImage::Format f_format = m_board->formatPicture();
     m_curentPixmap = new QImage(f_pictureWidth,f_pictureHeight,f_format);
     m_curentPixmap->fill(0xffffffff);

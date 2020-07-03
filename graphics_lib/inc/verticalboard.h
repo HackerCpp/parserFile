@@ -15,8 +15,8 @@ class VerticalBoard : public AGraphicBoard
     QGraphicsScene *m_canvas;
 
 public:
-    VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves);
-    VerticalBoard(QMap<QString,ICurve*> *curves);
+    VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves,DrawSettings *drawSettings);
+    VerticalBoard(QMap<QString,ICurve*> *curves,DrawSettings *drawSettings);
     VerticalBoard();
     virtual ~VerticalBoard()override;
 

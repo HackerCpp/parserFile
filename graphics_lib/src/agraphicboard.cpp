@@ -2,8 +2,8 @@
 #include <QGraphicsScene>
 #include "browsergraphicitems.h"
 
-AGraphicBoard::AGraphicBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves)
-    : m_curves(curves),m_boardInfo(boardInfo){
+AGraphicBoard::AGraphicBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves,DrawSettings *drawSettings)
+    : BoardForTrack(drawSettings),m_curves(curves),m_boardInfo(boardInfo){
     m_items = new QMap<QString,AGraphicItem *>;
     m_minimumSize = 2000;
 
@@ -39,8 +39,8 @@ void AGraphicBoard::resize(){
         f_topPosition = -20;
         f_bottomPosition = 800;
     }
-    m_top = f_topPosition - (20 * m_pixelPerMm);
-    m_length = f_bottomPosition - m_top + (20 * m_pixelPerMm);
+    m_top = f_topPosition - (20 * m_drawSettings->pixelPerMm());
+    m_length = f_bottomPosition - m_top + (20 * m_drawSettings->pixelPerMm());
     if(m_length < 800)
         m_length = 800;
     setSceneRect(QRect(0,m_top,f_width,m_length));
@@ -90,49 +90,6 @@ void AGraphicBoard::openCurveSettings(){
     BrowserGraphicItems *f_curveBrowser = new BrowserGraphicItems(m_boardInfo,m_items);
     connect(f_curveBrowser,&BrowserGraphicItems::changeSettings,this,&AGraphicBoard::curveUpdate);
     f_curveBrowser->show();
-}
-
-void AGraphicBoard::setFormatTime(FormatTime format){
-    setScaleForTime(1.f/qreal(m_dividersTime[format]));
-    updateItemsParam();
-    redraw();
-    resize();
-}
-
-void AGraphicBoard::setFormatDepth(FormatDepth format){
-    setScaleForDepth(1.f/qreal(m_dividersDepth[format]));
-    updateItemsParam();
-    redraw();
-    resize();
-}
-
-void AGraphicBoard::setLengthPicture(LengthPicture format){
-    setPictureHeightMM(m_lengtgPicture[format]);
-    resizePicture();
-    //updateItemsParam();
-    redraw();
-    resize();
-}
-
-void AGraphicBoard::setFormatPicture(QImage::Format format){
-    m_formatImg = format;
-    resizePicture();
-    updateItemsParam();
-    redraw();
-    resize();
-}
-
-void AGraphicBoard::setScalePixelPerMm(qreal scalePixelPerMm){
-    if(scalePixelPerMm == 0){
-        qDebug() << "scale pixel per mm = 0";
-        return;
-    }
-
-    m_scalePixelPerMm = scalePixelPerMm;
-    resizePicture();
-    updateItemsParam();
-    redraw();
-    resize();
 }
 
 void AGraphicBoard::mousePressEvent(QMouseEvent *event){

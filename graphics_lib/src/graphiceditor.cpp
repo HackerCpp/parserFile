@@ -4,15 +4,10 @@
 #include "formsblock.h"
 
 
-GraphicEditor::GraphicEditor(QSharedPointer<ILogData> logData,QWidget *parent)
-    : QTabWidget(parent),AGraphicEditor(logData){
+GraphicEditor::GraphicEditor(QSharedPointer<ILogData> logData,DrawSettings *drawSettings,QWidget *parent)
+    : QTabWidget(parent),AGraphicEditor(logData),m_drawSettings(drawSettings){
     this->setStyleSheet("QGraphicsView{background-color:white;}");
     m_curves = new QMap<QString,ICurve*>;
-    m_curentDrawType = 0;
-    m_curentFormatTime = AGraphicBoard::MIN_SM_1;
-    m_curentFormatdepth = AGraphicBoard::F1_100;
-    m_curentLenghPicture = AGraphicBoard::MIN;
-    m_curentImageFormat = QImage::Format_RGB16;
     addCurves();
     addForms();
 }
@@ -30,7 +25,6 @@ void GraphicEditor::addCurves(){
                    qDebug() << "В Дата блоке нет кривых для формирования дерева поиска";
                    continue;
                }
-
                foreach(auto curve,*f_curves){
                    if(!curve){
                        qDebug() << "Нулевая кривая в блоке";
@@ -49,6 +43,7 @@ void GraphicEditor::addCurves(){
 void GraphicEditor::addForms(){
     if(!m_curves)
         return;
+    disconnect(this,&QTabWidget::currentChanged,this,&GraphicEditor::changeBoard);
     QList<ABoard*> *f_boards = nullptr;
 
     foreach(auto block,*m_logData->blocks()){
@@ -59,12 +54,11 @@ void GraphicEditor::addForms(){
                 qDebug() << "FormsBlock Вернул нулевой указатель на борды";
                 return;
             }
-
         }
-     }
+    }
     if(f_boards){
         foreach(auto boardInfo,*f_boards){
-            AGraphicBoard *f_grBoard = new VerticalBoard(boardInfo,m_curves);
+            AGraphicBoard *f_grBoard = new VerticalBoard(boardInfo,m_curves,m_drawSettings);
             addTab(f_grBoard,boardInfo->name());
         }
     }
@@ -74,81 +68,16 @@ void GraphicEditor::addForms(){
 
     addTab(new QWidget(),"+");
     connect(this,&QTabWidget::currentChanged,this,&GraphicEditor::changeBoard);
+}
 
-    /*setDrawType(m_curentDrawType);
-    setFormatTime(m_curentFormatTime);
-    setFormatDepth(m_curentFormatdepth);
-    setLengthPicture(m_curentLenghPicture);
-    setFormatPicture(m_curentImageFormat);*/
+void GraphicEditor::activate(bool active){
+    if(!m_curentBoard)
+        return;
+    m_curentBoard->activate(active);
 }
 
 GraphicEditor::~GraphicEditor(){
 
-}
-
-void GraphicEditor::setDrawTime(){
-    for(int i = 0; i < count();++i){
-        AGraphicBoard * editor = dynamic_cast<AGraphicBoard *>(widget(i));
-        if(editor)
-            editor->setDrawTime();
-    }
-}
-
-void GraphicEditor::setDrawDepth(){
-    for(int i = 0; i < count();++i){
-        AGraphicBoard * editor = dynamic_cast<AGraphicBoard *>(widget(i));
-        if(editor)
-            editor->setDrawDepth();
-    }
-}
-
-void GraphicEditor::setDrawType(int drawType){
-    m_curentDrawType = drawType;
-    drawType ? setDrawDepth() : setDrawTime();
-}
-
-void GraphicEditor::setFormatTime(AGraphicBoard::FormatTime format){
-    m_curentFormatTime = format;
-    for(int i = 0; i < count();++i){
-        AGraphicBoard *editor = dynamic_cast<AGraphicBoard *>(widget(i));
-        if(editor){
-            editor->setFormatTime(format);
-        }
-    }
-}
-void GraphicEditor::setFormatDepth(AGraphicBoard::FormatDepth format){
-    m_curentFormatdepth = format;
-    for(int i = 0; i < count();++i){
-        AGraphicBoard * editor = dynamic_cast<AGraphicBoard *>(widget(i));
-        if(editor)
-            editor->setFormatDepth(format);
-    }
-}
-
-void GraphicEditor::setLengthPicture(AGraphicBoard::LengthPicture format){
-    m_curentLenghPicture = format;
-    for(int i = 0; i < count();++i){
-        AGraphicBoard * f_board = dynamic_cast<AGraphicBoard *>(widget(i));
-        if(f_board)
-            f_board->setLengthPicture(format);
-    }
-}
-
-void GraphicEditor::setFormatPicture(QImage::Format format){
-    m_curentImageFormat = format;
-    for(int i = 0; i < count();++i){
-        AGraphicBoard * f_board = dynamic_cast<AGraphicBoard *>(widget(i));
-        if(f_board)
-            f_board->setFormatPicture(format);
-    }
-}
-
-void GraphicEditor::setScalePixelPerMm(qreal scalePixelPerMm){
-    for(int i = 0; i < count();++i){
-        AGraphicBoard * f_board = dynamic_cast<AGraphicBoard *>(widget(i));
-        if(f_board)
-            f_board->setScalePixelPerMm(scalePixelPerMm);
-    }
 }
 
 void GraphicEditor::newBoard(){
@@ -162,13 +91,7 @@ void GraphicEditor::newBoard(){
     f_track->setIsGreed(true);
     f_newBoard->setTrack(f_track);
     m_forms->boards()->push_back(f_newBoard);
-    AGraphicBoard *f_grBoard = new VerticalBoard(f_newBoard,m_curves);
-
-    f_grBoard->setFormatTime(m_curentFormatTime);
-    f_grBoard->setFormatDepth(m_curentFormatdepth);
-    m_curentDrawType ? f_grBoard->setDrawDepth() : f_grBoard->setDrawTime();
-    f_grBoard->setFormatPicture(m_curentImageFormat);
-    f_grBoard->setLengthPicture(m_curentLenghPicture);
+    AGraphicBoard *f_grBoard = new VerticalBoard(f_newBoard,m_curves,m_drawSettings);
     m_curentBoard = f_grBoard;
     insertTab(count() - 1,f_grBoard,f_newBoard->name());
     setCurrentWidget(m_curentBoard);
@@ -176,40 +99,46 @@ void GraphicEditor::newBoard(){
 }
 
 void GraphicEditor::changeBoard(int index){
+    qDebug() << "index change";
     if(tabText(index) == "+"){
         newBoard();
         return;
     }
-    for(int i = 0; i < count();++i){
-        AGraphicBoard *f_board = dynamic_cast<AGraphicBoard *>(widget(i));
-        if(f_board)
-            f_board->activate(false);
-    }
-
     AGraphicBoard *f_board = dynamic_cast<AGraphicBoard *>(widget(index));
     if(f_board){
+        if(m_curentBoard)
+            m_curentBoard->activate(false);
         m_curentBoard = f_board;
-        m_curentBoard->activate(true);
+        if(m_curentBoard)
+            m_curentBoard->activate(true);
     }
 }
+
 void GraphicEditor::refresh(){
+    disconnect(this,&QTabWidget::currentChanged,this,&GraphicEditor::changeBoard);
     if(m_curves){
         m_curves->clear();
     }
     int f_count = count() - 1;
-    for(int index = f_count; index >=0;index--){
-        AGraphicBoard *f_board = dynamic_cast<AGraphicBoard *>(widget(index));
-        if(f_board){
-            delete f_board;
-            f_board == nullptr;
-        }
-        else{
-            delete widget(index);
-        }
+    m_curentBoard = nullptr;
+    for(int index = f_count; index >= 0;index--){
+        //AGraphicBoard *f_board = dynamic_cast<AGraphicBoard *>(widget(index));
+        //if(f_board){
+            //delete f_board;
+            //f_board == nullptr;
+        //}
+        //else{
+           // delete widget(index);
+        //}
+        delete widget(index);
         removeTab(index);
     }
 
 
+    qDebug() << "all deleted";
+
     addCurves();
+    qDebug() << "curves added";
     addForms();
+    qDebug() << "forms added";
 }

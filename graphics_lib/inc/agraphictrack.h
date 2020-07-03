@@ -19,7 +19,7 @@ class AGraphicTrack :  public ObjectOfTheBoard
 
 public:
     AGraphicTrack(ATrack *track,BoardForTrack *board);
-    ~AGraphicTrack()override;
+    virtual ~AGraphicTrack()override;
 
     virtual void resize()override{}
     virtual void resizePictures()override{}
