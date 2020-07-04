@@ -60,11 +60,16 @@ void GraphicEditor::addForms(){
         foreach(auto boardInfo,*f_boards){
             AGraphicBoard *f_grBoard = new VerticalBoard(boardInfo,m_curves,m_drawSettings);
             addTab(f_grBoard,boardInfo->name());
+            if(boardInfo->name() == m_forms->activeName()){
+                setCurrentWidget(f_grBoard);
+            }
         }
     }
 
     AGraphicBoard *f_board = dynamic_cast<AGraphicBoard *>(currentWidget());
     m_curentBoard = f_board;
+    if(m_curentBoard)
+        m_curentBoard->activate(true);
 
     addTab(new QWidget(),"+");
     connect(this,&QTabWidget::currentChanged,this,&GraphicEditor::changeBoard);
@@ -99,11 +104,11 @@ void GraphicEditor::newBoard(){
 }
 
 void GraphicEditor::changeBoard(int index){
-    qDebug() << "index change";
     if(tabText(index) == "+"){
         newBoard();
         return;
     }
+    m_forms->setActiveName(tabText(index));
     AGraphicBoard *f_board = dynamic_cast<AGraphicBoard *>(widget(index));
     if(f_board){
         if(m_curentBoard)
@@ -116,9 +121,7 @@ void GraphicEditor::changeBoard(int index){
 
 void GraphicEditor::refresh(){
     disconnect(this,&QTabWidget::currentChanged,this,&GraphicEditor::changeBoard);
-    if(m_curves){
-        m_curves->clear();
-    }
+
     int f_count = count() - 1;
     m_curentBoard = nullptr;
     for(int index = f_count; index >= 0;index--){
@@ -130,15 +133,18 @@ void GraphicEditor::refresh(){
         //else{
            // delete widget(index);
         //}
-        delete widget(index);
+        QWidget *f_widget = widget(index);
         removeTab(index);
+        delete f_widget;//->deleteLater();
+    }
+    if(m_curves){
+        m_curves->clear();
     }
 
-
-    qDebug() << "all deleted";
+    //qDebug() << "all deleted";
 
     addCurves();
-    qDebug() << "curves added";
+    //qDebug() << "curves added";
     addForms();
-    qDebug() << "forms added";
+    //qDebug() << "forms added";
 }

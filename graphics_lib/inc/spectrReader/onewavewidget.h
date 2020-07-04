@@ -11,12 +11,12 @@
 class OneWaveWidget : public QWidget
 {
     Q_OBJECT
-    QList<QSplineSeries> *m_iagrams;
+    //QList<QLineSeries> *m_iagrams;
 
     QChartView *m_chartView;
     QValueAxis *xAxis;  // Ось X
     QValueAxis *yAxis;  // Ось Y
-    QList<QPair<VSpectrItem *, QSplineSeries *> > *m_spectrIitems;
+    QList<QPair<VSpectrItem *, QLineSeries *> > *m_spectrIitems;
     QSplitter *m_hSplitter;
     QxtSpanSlider *m_sliderAmplitude, *m_sliderFrequency;
     QVBoxLayout *m_vLayout;

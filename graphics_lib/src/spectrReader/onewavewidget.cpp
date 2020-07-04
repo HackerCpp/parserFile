@@ -3,8 +3,8 @@
 
 OneWaveWidget::OneWaveWidget(VSpectrItem *spectrItem)
 {
-    m_spectrIitems =  new QList<QPair<VSpectrItem *, QSplineSeries *> >;
-    m_spectrIitems->push_back(QPair<VSpectrItem *, QSplineSeries *>(spectrItem,new QSplineSeries));
+    m_spectrIitems =  new QList<QPair<VSpectrItem *, QLineSeries *> >;
+    m_spectrIitems->push_back(QPair<VSpectrItem *, QLineSeries *>(spectrItem,new QLineSeries()));
     m_hSplitter = new QSplitter;
     m_sliderAmplitude = new QxtSpanSlider(Qt::Vertical);
     //m_sliderAmplitude->setHandleMovementMode(QxtSpanSlider::HandleMovementMode::NoOverlapping);
@@ -77,8 +77,8 @@ void OneWaveWidget::update(QPoint point){
 }
 
 void OneWaveWidget::addItem(VSpectrItem *spectrItem){
-    m_spectrIitems->push_back(QPair<VSpectrItem *, QSplineSeries *>(spectrItem,new QSplineSeries));
-    QPair<VSpectrItem *, QSplineSeries *> f_value = m_spectrIitems->last();
+    m_spectrIitems->push_back(QPair<VSpectrItem *, QLineSeries *>(spectrItem,new QLineSeries));
+    QPair<VSpectrItem *, QLineSeries *> f_value = m_spectrIitems->last();
     f_value.second->setName(f_value.first->curve()->mnemonic());
     f_value.second->setPen(QPen(QColor(qrand() %255,qrand() %255,qrand() %255),2));
     m_chartView->chart()->addSeries(f_value.second);
