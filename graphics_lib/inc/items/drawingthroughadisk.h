@@ -16,6 +16,7 @@ protected:
     const uint16_t M_HEIGHT_PICTURE = 16000;
     uint16_t m_lengthOverlay;
     qreal m_curentDrawPersent;
+    volatile bool m_saversMoment;
 
 
 public:

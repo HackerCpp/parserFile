@@ -61,7 +61,7 @@ VerticalTrack::~VerticalTrack(){
     //if(m_selectingArea){delete m_selectingArea; m_selectingArea = nullptr;} Удаляется при удалении сцены
     if(m_curvesMenu){delete m_curvesMenu; m_curvesMenu = nullptr;}
     if(m_trackMenu){delete m_trackMenu; m_trackMenu = nullptr;}
-
+    if(m_border){delete m_border;m_border = nullptr;}
 }
 
 void VerticalTrack::resize(){

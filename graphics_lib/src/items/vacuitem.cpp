@@ -5,6 +5,7 @@
 VAcuItem::VAcuItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
     :VerticalItem(curve,board)
 {
+    m_saversMoment = false;
     AcuItem * f_acuitem = dynamic_cast<AcuItem*>(itemInfo);
     if(f_acuitem)
         m_itemInfo = f_acuitem;
@@ -30,6 +31,11 @@ VAcuItem::VAcuItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
 }
 
 VAcuItem::~VAcuItem(){
+    if(isRunning()){
+        m_isRedraw = false;
+        m_isEndThread = true;
+        wait();
+    }
 }
 
 
@@ -267,6 +273,7 @@ void VAcuItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
         if((y_top + M_HEIGHT_PICTURE) < (f_yTop - m_board->offsetUp()))
             continue;
         QString f_fileName = "temporary/" + m_curve->mnemonic() + QString::number(m_curentPictureWidth) + QString::number(y_top) + ".png";
+        while(m_saversMoment){}
         if(QFile::exists(f_fileName) ){
             f_srcImage.load(f_fileName,"PNG");
             if(f_srcImage.isNull())
@@ -305,10 +312,12 @@ void VAcuItem::run(){
         QImage f_image(m_curentPictureWidth,f_heightPictures,QImage::Format_ARGB32);
         QPainter f_painter(&f_image);
         drawInterpolationHorizontalNoOffset(&f_painter,y_top,y_top + f_heightPictures,&m_isEndThread);
+        m_saversMoment = true;
         QString f_namePicture = "temporary/" + m_curve->mnemonic() + QString::number(m_curentPictureWidth) + QString::number(y_top) + ".png";
         f_image.save(f_namePicture,"PNG");
         while(!QFile::exists(f_namePicture)){}
         m_picturePath << f_namePicture;
+        m_saversMoment = false;
     }
     m_curentDrawPersent = 100;
     m_updatedParam = false;

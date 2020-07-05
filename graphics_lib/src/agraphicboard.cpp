@@ -17,7 +17,7 @@ AGraphicBoard::~AGraphicBoard(){
         delete m_items;m_items = nullptr;
     }
 
-   //if(m_curves){delete m_curves;m_curves = nullptr;}
+   if(m_curves){m_curves = nullptr;}
     m_boardInfo = nullptr;
 }
 

@@ -13,6 +13,7 @@ class VAcuItem : public DrawingThroughADisk , public VerticalItem{
     qreal m_dataStep;
     qreal m_widthPicturePix;
 
+
     void inline drawInterpolationHorizontal(QPainter *per,QRectF visibleRect,bool *flag);
     void inline drawInterpolationHorizontalNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag);
     void drawInterpolationHorForCheckArea(QPainter *per,QRectF visibleRect,bool *flag);

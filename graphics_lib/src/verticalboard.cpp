@@ -74,10 +74,10 @@ void VerticalBoard::updateItems(){
                     itemsInfo->insert(curveKey,f_itemInfo);
             }
             if(f_itemInfo){
-                if(m_items->find(curveKey) == m_items->end()){
-                    AGraphicItem *f_graphicItem = ItimsCreater::createItem(f_itemInfo,m_curves->value(curveKey),this,ItimsCreater::VERTICAL);
+                if(m_items->find(curveKey) == m_items->end()){ //Если графическое представление для этой кривой не создано на этом борде
+                    AGraphicItem *f_graphicItem = ItimsCreater::createItem(f_itemInfo,m_curves->value(curveKey),this,ItimsCreater::VERTICAL);//Создаём
                     if(f_graphicItem)
-                        m_items->insert(curveKey,f_graphicItem);
+                        m_items->insert(curveKey,f_graphicItem);//И добавляем
                 }
             }
         }
@@ -109,14 +109,14 @@ void VerticalBoard::distributionOfItemsBetweenTracks(){
 
 VerticalBoard::~VerticalBoard(){
     if(m_items){
-        foreach(auto item,*m_items){
-            delete item; item = nullptr;
+        foreach(auto graphicItem,*m_items){
+            if(graphicItem){delete graphicItem; graphicItem = nullptr;}
         }
         delete m_items; m_items = nullptr;
     }
     QList<QGraphicsItem*> f_items = m_canvas->items();
     foreach(auto item,f_items){
-        delete item; item = nullptr;
+        if(item){delete item; item = nullptr;}
     }
 
     if(m_canvas){delete m_canvas;m_canvas = nullptr;}

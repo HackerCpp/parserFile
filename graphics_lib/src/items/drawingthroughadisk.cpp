@@ -4,7 +4,7 @@
 #include <QDebug>
 
 DrawingThroughADisk::DrawingThroughADisk(){
-
+    m_saversMoment = false;
     m_uid = QUuid().createUuid().toString();
     m_isEndThread = m_isRedraw = false;
     m_curentDrawPersent = 0;
@@ -13,6 +13,7 @@ DrawingThroughADisk::DrawingThroughADisk(){
 }
 
 DrawingThroughADisk::~DrawingThroughADisk(){
+    m_saversMoment = false;
     if(isRunning())
         terminate();
     foreach(auto path,m_picturePath){
