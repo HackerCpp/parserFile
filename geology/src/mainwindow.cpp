@@ -46,13 +46,14 @@ bool MainWindow::eventFilter(QObject *o, QEvent *e){
 
 void MainWindow::openFile(){
     QFileDialog fileDialog;
-    QString filePath = fileDialog.getOpenFileName(this, tr("Open File"),"C:/",tr("*.tlm *.gfm"));
+
+    QString filePath = fileDialog.getOpenFileName(this, tr("Open File"),"C:/",tr("*.forms *.gfm"));
     if(filePath == "")
         return;
     FileReader f_file(filePath);
     ILoaderLogData * f_loader = nullptr;
     QSharedPointer<ILogData> f_logData = nullptr;
-    if(f_file.getType() == ".gfm"){
+    if(f_file.getType() == ".gfm" || f_file.getType() == ".forms"){
         f_loader = new GFMLoader(filePath);
     }
     if(f_loader){

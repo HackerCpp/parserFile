@@ -8,7 +8,6 @@ Menu::Menu(QWidget *parent)
     if(!m_parentWindow)
         return;
 
-
     this->mnuBarArray = new QVector<QMenuBar*>;
     this->mnuArray = new QVector<QMenu*>;
     this->layoutForMenu = new QVBoxLayout();

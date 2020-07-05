@@ -1,7 +1,8 @@
 #include "iteminfocreater.h"
 #include "lineItem.h"
-#include "AcuItem.h"
+#include "acuItem.h"
 #include "markItem.h"
+#include "specItem.h"
 
 ItemInfoCreater::ItemInfoCreater(){
 
@@ -19,14 +20,36 @@ AItem *ItemInfoCreater::CreateItemInfo(ICurve *curve){
         f_item->setBegin(false,curve->minimum(),rand() % 5000);
         qreal f_maximum = curve->maximum() ? curve->maximum() : 1;
         f_item->setEnd(false,curve->maximum(),20.f/f_maximum);
-        f_item->setName(curve->shortCut().nameWithoutNumber() + ':' + curve->mnemonic(),nullptr);
+
     }
     else if(f_drawType == "MARK"){
         f_item = new markItem();
     }
     /*else if(f_drawType == "ACOUSTIC"){
         f_item = new AcuItem();
+    }*/
+    else if(f_drawType == "SPECTRUM"){
+        SpecItem *f_spectrItem = new SpecItem();
+        f_item = f_spectrItem;
+        QString valueRange = curve->desc()->param("val_range");
+        qreal f_minimum = valueRange.left(valueRange.indexOf("..")).toDouble();
+        qreal f_maximum = valueRange.right(valueRange.indexOf("..") - 1).toDouble();
+        f_item->setBegin(true,0,0);
+        bool ok = true;
+        QString f_dataStep = curve->desc()->param("data_step");
+        qreal f_dataStepD =  f_dataStep.left(f_dataStep.indexOf("(")).toDouble(&ok);
+                                                           //kHz
+        f_item->setEnd(true,(curve->sizeOffset() * f_dataStepD)/1000,1);
+        f_spectrItem->setMulticolor(MulticolorItem{-2047,"#ff7f7fff"});
+        f_spectrItem->setMulticolor(MulticolorItem{-1000,"#ff0000ff"});
+        f_spectrItem->setMulticolor(MulticolorItem{-50,"#ff00ffff"});
+        f_spectrItem->setMulticolor(MulticolorItem{-0,"#ffafafaf"});
+        f_spectrItem->setMulticolor(MulticolorItem{50,"#ff00ff00"});
+        f_spectrItem->setMulticolor(MulticolorItem{500,"#ff00ff00"});
+        f_spectrItem->setMulticolor(MulticolorItem{1000,"#ff007f00"});
+        f_spectrItem->setMulticolor(MulticolorItem{2046,"#ff7f00ff"});
     }
-    */
+    if(f_item)
+        f_item->setName(curve->shortCut().nameWithoutNumber() + ':' + curve->mnemonic(),nullptr);
     return f_item;
 }
