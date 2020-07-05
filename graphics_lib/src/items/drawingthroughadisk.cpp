@@ -1,6 +1,7 @@
 #include "drawingthroughadisk.h"
 #include <QFile>
 #include <QUuid>
+#include <QDebug>
 
 DrawingThroughADisk::DrawingThroughADisk(){
 
@@ -12,9 +13,8 @@ DrawingThroughADisk::DrawingThroughADisk(){
 }
 
 DrawingThroughADisk::~DrawingThroughADisk(){
-    m_isRedraw = false;
-    m_isEndThread = true;
-    wait();
+    if(isRunning())
+        terminate();
     foreach(auto path,m_picturePath){
         if(!QFile::exists(path) )
             continue;

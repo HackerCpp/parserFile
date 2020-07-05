@@ -58,7 +58,7 @@ VerticalTrack::VerticalTrack(ATrack *track,BoardForTrack *board)
 VerticalTrack::~VerticalTrack(){
     deleteAllPictures();
     if(m_nameTrack){delete m_nameTrack; m_nameTrack = nullptr;}
-    if(m_selectingArea){delete m_selectingArea; m_selectingArea = nullptr;}
+    //if(m_selectingArea){delete m_selectingArea; m_selectingArea = nullptr;} Удаляется при удалении сцены
     if(m_curvesMenu){delete m_curvesMenu; m_curvesMenu = nullptr;}
     if(m_trackMenu){delete m_trackMenu; m_trackMenu = nullptr;}
 

@@ -307,7 +307,7 @@ void VAcuItem::run(){
         drawInterpolationHorizontalNoOffset(&f_painter,y_top,y_top + f_heightPictures,&m_isEndThread);
         QString f_namePicture = "temporary/" + m_curve->mnemonic() + QString::number(m_curentPictureWidth) + QString::number(y_top) + ".png";
         f_image.save(f_namePicture,"PNG");
-        while(!QFile::exists(f_namePicture));
+        while(!QFile::exists(f_namePicture)){}
         m_picturePath << f_namePicture;
     }
     m_curentDrawPersent = 100;

@@ -41,6 +41,13 @@ VSpectrItem::VSpectrItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
     }
 
 }
+VSpectrItem::~VSpectrItem(){
+    if(isRunning()){
+        m_isRedraw = false;
+        m_isEndThread = true;
+        wait();
+    }
+}
 VSpectrItem::VSpectrItem(const VSpectrItem &other)
     :VerticalItem(other){
     m_dataStepPix = other.m_dataStepPix;
@@ -93,6 +100,8 @@ void inline VSpectrItem::drawInterpolationVertical(QPainter *per,QRectF visibleR
     }
 
     QImage *f_image = dynamic_cast<QImage*>(per->device());
+    if(f_image->isNull())
+        return;
     int f_curentHeight = qAbs((f_mainValue->data(f_indexMax) * f_scaleForMainValue) - (f_mainValue->data(f_indexMin) * f_scaleForMainValue));
     int indexWidthBegin = -fmin(m_offsetPix,0) / m_dataStepPix;
     int indexWidthEnd = quantityElem - fmax((m_widthPicturePix + m_offsetPix - f_image->width()),0) / m_dataStepPix;
@@ -307,7 +316,8 @@ void VSpectrItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
         }
         QString f_fileName = "temporary/" + m_uid + QString::number(y_top) + ".png";
         if(QFile::exists(f_fileName) ){
-            f_srcImage.load(f_fileName,"PNG");
+            if(!f_srcImage.load(f_fileName,"PNG"))
+                continue;
             if(f_srcImage.isNull())
                 continue;
             qreal f_srcPicturePosition =  y_top + m_lengthOverlay;//??
@@ -413,9 +423,10 @@ void VSpectrItem::run(){
         QPainter f_painter(&f_image);
         drawInterpolationVerticalNoOffset(&f_painter,y_top,y_top + f_heightPictures,&m_isEndThread);
         QString f_namePicture = "temporary/" + m_uid + QString::number(y_top) + ".png";
-        f_image.save(f_namePicture,"PNG");
-        while(!QFile::exists(f_namePicture));
         m_picturePath << f_namePicture;
+        f_image.save(f_namePicture,"PNG");
+        //while(!QFile::exists(f_namePicture));
+
     }
     m_curentDrawPersent = 100;
     m_updatedParam = false;

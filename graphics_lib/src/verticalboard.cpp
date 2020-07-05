@@ -231,6 +231,7 @@ void VerticalBoard::insertNewTrack(int curentTrackNumber,InsertPossition positio
         connect(f_track,&VerticalTrack::changedPositionBorder,f_nextTrack,&VerticalTrack::changeBegin);
     }
     f_track->changeBegin(f_track->trackInfo()->begin() * m_drawSettings->pixelPerMm());
+    f_track->activate(true);
     redraw();
 }
 

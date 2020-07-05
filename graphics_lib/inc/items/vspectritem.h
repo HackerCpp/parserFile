@@ -16,7 +16,7 @@ class VSpectrItem : public DrawingThroughADisk, public VerticalItem{
 public:
     VSpectrItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board);
     VSpectrItem(const VSpectrItem &other);
-    ~VSpectrItem()override{}
+    ~VSpectrItem();
 
 private:
     void inline drawInterpolationVertical(QPainter *per,QRectF visibleRect,bool *flag);
