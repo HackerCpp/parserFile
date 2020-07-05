@@ -32,7 +32,9 @@ RightBorder::RightBorder()
 }
 
 RightBorder::~RightBorder(){
-
+    if(m_collapseTab){delete m_collapseTab;m_collapseTab = nullptr;}
+    if(m_expandTab){delete m_expandTab;m_expandTab = nullptr;}
+    if(m_curentTab){delete m_curentTab;m_curentTab = nullptr;}
 }
 
 void RightBorder::click(bool isClick){

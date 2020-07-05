@@ -35,10 +35,17 @@ AGraphicTrack::AGraphicTrack(ATrack *track,BoardForTrack *board)
 }
 
 AGraphicTrack::~AGraphicTrack(){
+    m_endRedraw = true;
+    m_needToRedraw = false;
+    wait();
     if(m_items){
         m_items->clear();
         delete m_items;m_items = nullptr;
     }
+    if(m_infoPixMap){delete m_infoPixMap;m_infoPixMap = nullptr;}
+    if(m_curentHeader){delete m_curentHeader;m_curentHeader = nullptr;}
+    if(m_doubleHeader){delete m_doubleHeader;m_doubleHeader = nullptr;}
+    if(m_nameTrack){delete m_nameTrack;m_nameTrack = nullptr;}
 }
 void AGraphicTrack::addIteam(AGraphicItem* item){
     if(!m_items || !item)
@@ -55,7 +62,8 @@ void AGraphicTrack::clearItems(){
 }
 
 void AGraphicTrack::updateItemsParam(){
-    if(!m_items || !m_doublePixMap)
+                                      //Дополнительная проверка для рисования на диск
+    if(!m_items || !m_doublePixMap || m_doublePixMap->width() < 20)
         return;
     foreach(auto grItem,*m_items){
         grItem->updateParam(m_doublePixMap->width());

@@ -28,7 +28,7 @@ void Ruler::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
     /*scene()->*/update();
 }
 
-void Ruler:: toSetTheLocationOfTheImageAfterDrawing()
+void Ruler::toSetTheLocationOfTheImageAfterDrawing()
 {
     m_topPositionPicture = static_cast<int>(m_visibilitySquare.y() - m_board->offsetUp());
 }

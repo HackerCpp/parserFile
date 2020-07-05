@@ -58,6 +58,10 @@ VerticalTrack::VerticalTrack(ATrack *track,BoardForTrack *board)
 VerticalTrack::~VerticalTrack(){
     deleteAllPictures();
     if(m_nameTrack){delete m_nameTrack; m_nameTrack = nullptr;}
+    if(m_selectingArea){delete m_selectingArea; m_selectingArea = nullptr;}
+    if(m_curvesMenu){delete m_curvesMenu; m_curvesMenu = nullptr;}
+    if(m_trackMenu){delete m_trackMenu; m_trackMenu = nullptr;}
+
 }
 
 void VerticalTrack::resize(){
@@ -107,10 +111,11 @@ void VerticalTrack::resizePictures(){
 
     m_infoPixMap = new QImage(f_pictureWidth,30,QImage::Format_ARGB4444_Premultiplied);
     m_infoPixMap->fill(0x0);
-    QPainter painterCurent(m_infoPixMap);
-    painterCurent.setFont(QFont("Times", 10, QFont::Bold));
-    painterCurent.drawText(10,15,"download");
-
+    /*QPainter painterCurent(m_infoPixMap);
+    if(painterCurent.isActive() && !m_infoPixMap->isNull()){
+        painterCurent.setFont(QFont("Times", 10, QFont::Bold));
+        painterCurent.drawText(10,15,"download");
+    }*/
     QImage::Format f_format = m_board->formatPicture();
     m_curentPixmap = new QImage(f_pictureWidth,f_pictureHeight,f_format);
     m_curentPixmap->fill(0xffffffff);
@@ -429,6 +434,11 @@ void VerticalTrack::dropEvent(QGraphicsSceneDragDropEvent *event){
 }
 
 void VerticalTrack::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*){
+    if(painter->device()->width() < 20)
+        return;
+
+    if(!painter->isActive())
+        return;
     int LeftPos = m_track->begin() * m_board->pixelPerMm();
     int f_rightPos = (m_track->begin() + m_track->width()) * m_board->pixelPerMm();
 
@@ -451,7 +461,9 @@ void VerticalTrack::toSetTheLocationOfTheImageAfterDrawing(){
 }
 
 void VerticalTrack::run(){
-    if(!m_doublePixMap || !m_infoPixMap || !m_doubleHeader)
+    if(!m_doublePixMap || !m_infoPixMap || !m_doubleHeader  || !m_isOpen)
+        return;
+    if(m_doublePixMap->isNull() || m_infoPixMap->isNull() || m_doubleHeader->isNull())
         return;
     if(m_visibilitySquare.x() > boundingRect().x() + boundingRect().width()
     || m_visibilitySquare.x() + m_visibilitySquare.width() < boundingRect().x()){
@@ -461,6 +473,8 @@ void VerticalTrack::run(){
     QPainter painter(m_doublePixMap);
     QPainter painterCurent(m_infoPixMap);
     QPainter painterHeader(m_doubleHeader);
+    if(!painter.isActive() || !painterCurent.isActive() || !painterHeader.isActive() )
+        return;
     painterCurent.setBrush(QBrush(Qt::white));
     painterCurent.setFont(QFont("Times", 10, QFont::Bold));
     painterCurent.drawText(10,15,"download");

@@ -125,14 +125,6 @@ void GraphicEditor::refresh(){
     int f_count = count() - 1;
     m_curentBoard = nullptr;
     for(int index = f_count; index >= 0;index--){
-        //AGraphicBoard *f_board = dynamic_cast<AGraphicBoard *>(widget(index));
-        //if(f_board){
-            //delete f_board;
-            //f_board == nullptr;
-        //}
-        //else{
-           // delete widget(index);
-        //}
         QWidget *f_widget = widget(index);
         removeTab(index);
         delete f_widget;//->deleteLater();
