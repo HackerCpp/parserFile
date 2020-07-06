@@ -49,7 +49,9 @@ AItem *ItemInfoCreater::CreateItemInfo(ICurve *curve){
         f_spectrItem->setMulticolor(MulticolorItem{-102,"#ffff9900"});
         f_spectrItem->setMulticolor(MulticolorItem{-100,"#ffff0000"});
     }
-    if(f_item)
+    if(f_item){
         f_item->setName(curve->shortCut().nameWithoutNumber() + ':' + curve->mnemonic(),nullptr);
+        f_item->setVisible((AItem::BOARD_GRAPH_VIEW),false);
+    }
     return f_item;
 }

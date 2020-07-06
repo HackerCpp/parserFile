@@ -167,11 +167,11 @@ void inline VSpectrItem::drawInterpolationVerticalNoOffset(QPainter *per,int y_t
     uint indexBegin  = 0;
     qreal f_scaleForMainValue = m_board->scale();
     qreal f_recordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
-    if((f_mainValue->minimum() * f_scaleForMainValue) > f_yTop  + f_downOffset || (f_mainValue->maximum() * f_scaleForMainValue) < f_yTop - f_topOffset){
+    if(((f_mainValue->minimum() + f_recordPoint) * f_scaleForMainValue) > f_yTop  + f_downOffset || ((f_mainValue->maximum() + f_recordPoint) * f_scaleForMainValue) < f_yTop - f_topOffset){
         return;
     }
     for(uint i = 0; i < f_mainValue->size(); ++i){
-       if((f_mainValue->data(i) * f_scaleForMainValue) > f_yTop - f_topOffset && (f_mainValue->data(i) * f_scaleForMainValue) < f_yTop + f_downOffset){
+       if(((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) > f_yTop - f_topOffset && ((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) < f_yTop + f_downOffset){
            indexBegin = i;// > 2?i - 2 : 0;
            break;
        }
@@ -182,11 +182,11 @@ void inline VSpectrItem::drawInterpolationVerticalNoOffset(QPainter *per,int y_t
     for(uint i = indexBegin;i < f_mainValue->size();++i){
         if(*flag)
             return;
-        if((f_mainValue->data(i) * f_scaleForMainValue) > f_yTop + f_downOffset || (f_mainValue->data(i) * f_scaleForMainValue) < f_yTop - f_topOffset){
+        if(((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) > f_yTop + f_downOffset || ((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) < f_yTop - f_topOffset){
             break;
         }
-        f_indexMin = f_mainValue->data(i) < f_mainValue->data(f_indexMin)? i : f_indexMin;
-        f_indexMax = f_mainValue->data(i) > f_mainValue->data(f_indexMax)? i : f_indexMax;
+        f_indexMin = (f_mainValue->data(i) + f_recordPoint) < (f_mainValue->data(f_indexMin) + f_recordPoint)? i : f_indexMin;
+        f_indexMax = (f_mainValue->data(i) + f_recordPoint) > (f_mainValue->data(f_indexMax) + f_recordPoint)? i : f_indexMax;
     }
 
     QImage *f_image = dynamic_cast<QImage*>(per->device());
@@ -209,7 +209,7 @@ void inline VSpectrItem::drawInterpolationVerticalNoOffset(QPainter *per,int y_t
         for(i = indexBegin;i < f_mainValue->size();++i){
             if(*flag)
                 return;
-            if((f_mainValue->data(i) * f_scaleForMainValue) > f_yTop + f_downOffset || (f_mainValue->data(i) * f_scaleForMainValue) < f_yTop - f_topOffset){
+            if(((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) > f_yTop + f_downOffset || ((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) < f_yTop - f_topOffset){
                 break;
             }
             if(m_curve->data(i * quantityElem + j) >= f_multicolor->last().bound){
@@ -229,10 +229,10 @@ void inline VSpectrItem::drawInterpolationVerticalNoOffset(QPainter *per,int y_t
                     prev_mul = value;
                 }
             }
-            qreal f_y = ((f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset) - ((f_mainValue->data(f_indexMin) * f_scaleForMainValue) - f_yTop + f_topOffset);
+            qreal f_y = (((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) - f_yTop + f_topOffset) - (((f_mainValue->data(f_indexMin) + f_recordPoint) * f_scaleForMainValue) - f_yTop + f_topOffset);
             gradient.insert(f_y,color);
         }
-        qreal f_yMin = ((f_mainValue->data(f_indexMin) * f_scaleForMainValue) - f_yTop + f_topOffset);
+        qreal f_yMin = (((f_mainValue->data(f_indexMin) + f_recordPoint) * f_scaleForMainValue) - f_yTop + f_topOffset);
 
         qreal prevStep = j * step;
         QRect f_drawRect = QRect(prevStep + m_offsetPix,f_yMin,step + 1,f_curentHeight);
@@ -448,6 +448,7 @@ void VSpectrItem::drawOnTheDisk(){
 }
 
 void VSpectrItem::updateParam(int pictureWidth){
+    m_recordPointDepth = m_curve->recordPoint();
     m_isEndThread = true;
     m_curentPictureWidth = pictureWidth;
     drawOnTheDisk();

@@ -11,195 +11,7 @@
 #include <QGraphicsProxyWidget>
 
 
-void drawGrid(QPainter *per,int step,int widthLine){
-    QImage *f_image = dynamic_cast<QImage*>(per->device());
-    if(!f_image)
-        return;
-    per->setPen(QPen(Qt::black,widthLine));
-    for(int i = f_image->height() - 2;i > 0;i -= step){
-        per->drawLine(QPoint(0,i),QPoint(f_image->width(),i));
-    }
-    for(int i = 0;i < f_image->width();i += step){
-        per->drawLine(QPoint(i,0),QPoint(i,f_image->height()));
-    }
-}
 
-GraphicItemForSpectr::GraphicItemForSpectr(VSpectrItem *spectrItem,int width)
-    :m_spectrItem(spectrItem){
-    bool flag = false;
-    m_curentPixmap = new QImage(width,m_spectrItem->board()->pictureHeight(),m_spectrItem->board()->formatPicture());
-    m_doublePixMap = new QImage(width,m_spectrItem->board()->pictureHeight(),m_spectrItem->board()->formatPicture());
-    m_curentOneWaveImage = new QImage(width,200,m_spectrItem->board()->formatPicture());
-    m_curentHeaderImage = new QImage(100,40,m_spectrItem->board()->formatPicture());
-    m_curentHeaderImage->fill(0x0);
-    QPainter f_painterHeader(m_curentHeaderImage);
-    int position = 0;
-    m_spectrItem->drawHeader(&f_painterHeader,position,&flag);
-    QPainter f_painter(m_curentPixmap);
-    m_curentPixmap->fill(0xffffffff);
-    m_curentOneWaveImage->fill(0xffffffff);
-    QPainter f_painterOneWave(m_curentOneWaveImage);
-    drawGrid(&f_painterOneWave ,5 * m_spectrItem->board()->pixelPerMm(),1);
-    m_spectrItem->drawOneWawe(&f_painterOneWave,1000,&flag);
-
-    m_spectrItem->drawBody(&f_painter,QRectF(0,m_spectrItem->topValue(),m_curentPixmap->width(),1000),&flag);
-    connect(m_spectrItem,&VSpectrItem::dataHardDiscReady,this,&GraphicItemForSpectr::redraw);
-}
-
-void GraphicItemForSpectr::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*){
-    if(m_curentPixmap)
-        painter->drawImage(QRect(0,m_topPositionPicture,m_curentPixmap->width(),m_curentPixmap->height()),*m_curentPixmap);
-    if(m_curentOneWaveImage)
-        painter->drawImage(QRect(0,m_visibilitySquare.y() + m_visibilitySquare.height() - m_curentOneWaveImage->height(),m_curentOneWaveImage->width(),m_curentOneWaveImage->height()),*m_curentOneWaveImage);
-    if(m_curentHeaderImage)
-        painter->drawImage(QRect(m_visibilitySquare.x(),m_visibilitySquare.y(),m_curentHeaderImage->width(),m_curentHeaderImage->height()),*m_curentHeaderImage);
-}
-
-QRectF GraphicItemForSpectr::boundingRect()const {
-    if(!m_curentPixmap)
-        return QRectF();
-    int f_upStock = 50;
-    int f_height = m_spectrItem->bottomValue() - m_spectrItem->topValue() + m_curentOneWaveImage->height() + f_upStock * 2;
-    return QRectF(0,m_spectrItem->topValue() - f_upStock,m_curentPixmap->width(),f_height);
-}
-
-void GraphicItemForSpectr::toSetTheLocationOfTheImageAfterDrawing(){
-    m_topPositionPicture = static_cast<int>(m_visibilitySquare.y() - m_spectrItem->board()->offsetUp());
-}
-
-void GraphicItemForSpectr::changeVisibilityZone(QRectF visibilityZone){
-    m_visibilitySquare = visibilityZone;
-    redraw();
-}
-
-void GraphicItemForSpectr::changeSize(int width){
-    m_endRedraw = true;
-    bool flag = false;
-    m_spectrItem->updateParam(width);
-    wait();
-    if(m_curentPixmap){delete m_curentPixmap; m_curentPixmap = nullptr;}
-    m_curentPixmap = new QImage(width - 50,m_spectrItem->board()->pictureHeight(),m_spectrItem->board()->formatPicture());
-
-    if(m_doublePixMap){delete m_doublePixMap; m_doublePixMap = nullptr;}
-    m_doublePixMap = new QImage(width - 50,m_spectrItem->board()->pictureHeight(),m_spectrItem->board()->formatPicture());
-    m_curentPixmap->fill(0xffffffff);
-    if(m_curentOneWaveImage){delete m_curentOneWaveImage; m_curentOneWaveImage = nullptr;}
-    m_curentOneWaveImage = new QImage(width - 50,200,m_spectrItem->board()->formatPicture());
-    m_curentOneWaveImage->fill(0xffffffff);
-    QPainter f_painterOneWave(m_curentOneWaveImage);
-    drawGrid(&f_painterOneWave ,5 * m_spectrItem->board()->pixelPerMm(),1);
-    m_spectrItem->drawOneWawe(&f_painterOneWave,m_spectrItem->topValue() + 1000,&flag);
-
-    QGraphicsItem::prepareGeometryChange();
-    QGraphicsItem::update();
-}
-
-void GraphicItemForSpectr::changePositionOneWave(QPoint position){
-    bool flag = false;
-    m_curentOneWaveImage->fill(0xffffffff);
-    QPainter f_painterOneWave(m_curentOneWaveImage);
-    drawGrid(&f_painterOneWave ,5 * m_spectrItem->board()->pixelPerMm(),1);
-    m_spectrItem->drawOneWawe(&f_painterOneWave,position.y() ,&flag);
-    QGraphicsItem::prepareGeometryChange();
-    QGraphicsItem::update();
-}
-
-void GraphicItemForSpectr::run(){
-    QPainter f_painter(m_doublePixMap);
-    m_doublePixMap->fill(0xffffffff);
-    m_spectrItem->drawBody(&f_painter,m_visibilitySquare,&m_endRedraw);
-    swapPixMap();
-}
-
-/************************SpectrScene************************************************************/
-
-void SpectrScene::mousePressEvent(QGraphicsSceneMouseEvent *event){
-    QList<QGraphicsItem*> f_items = items();
-    foreach(auto item,f_items){
-        GraphicItemForSpectr * f_itemForSpectr = dynamic_cast<GraphicItemForSpectr *>(item);
-        if(f_itemForSpectr){
-            f_itemForSpectr->changePositionOneWave(QPoint(event->scenePos().x(),event->scenePos().y()));
-        }
-    }
-    SpectrViewer *f_viewer = dynamic_cast<SpectrViewer *>(views().first());
-    if(f_viewer)
-        f_viewer->changePositionOneWave(QPoint(event->scenePos().x(),event->scenePos().y()));
-}
-
-void SpectrScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
-    QList<QGraphicsItem*> f_items = items();
-    foreach(auto item,f_items){
-        GraphicItemForSpectr * f_itemForSpectr = dynamic_cast<GraphicItemForSpectr *>(item);
-        if(f_itemForSpectr){
-            f_itemForSpectr->changePositionOneWave(QPoint(event->scenePos().x(),event->scenePos().y()));
-        }
-    }
-    SpectrViewer *f_viewer = dynamic_cast<SpectrViewer *>(views().first());
-    if(f_viewer)
-        f_viewer->changePositionOneWave(QPoint(event->scenePos().x(),event->scenePos().y()));
-}
-/**************************SpectrWiever************************/
-SpectrViewer::SpectrViewer(VSpectrItem *spectrItem,int width){
-    m_scene = new SpectrScene;
-    m_radioBtnIsActive = new QRadioButton("ACtive",this);
-    m_originalSpectr = spectrItem;
-    m_experimentalSpectr = new VSpectrItem(*spectrItem);
-    if(m_experimentalSpectr){
-        m_experimentalSpectr->updateParam(width);
-        m_scene->addItem(new GraphicItemForSpectr(m_experimentalSpectr,width));
-    }
-    else{
-        qDebug() << "Не удалось создать копию спектра в редакторе, конструктор копирования вернул nullptr";
-    }
-    //m_waveWidget = new OneWaveWidget;
-    //m_waveWidget->show();
-    setScene(m_scene);
-
-    connect(horizontalScrollBar(), &QScrollBar::valueChanged, this, &SpectrViewer::scrollChanged);
-    connect(verticalScrollBar(), &QScrollBar::valueChanged, this, &SpectrViewer::scrollChanged);
-}
-
-SpectrViewer::~SpectrViewer(){
-
-}
-
-void SpectrViewer::changeWidth(int newWidth){
-    QList<QGraphicsItem*> f_items = m_scene->items();
-    foreach(auto item,f_items){
-        GraphicItemForSpectr * f_itemForSpectr = dynamic_cast<GraphicItemForSpectr *>(item);
-        if(f_itemForSpectr){
-            f_itemForSpectr->changeSize(newWidth);
-            setSceneRect(f_itemForSpectr->boundingRect());
-        }
-    }
-}
-void SpectrViewer::changeVisibilityZone(QRectF newVisibilityZone){
-    QList<QGraphicsItem*> f_items = m_scene->items();
-    foreach(auto item,f_items){
-        GraphicItemForSpectr * f_itemForSpectr = dynamic_cast<GraphicItemForSpectr *>(item);
-        if(f_itemForSpectr){
-            f_itemForSpectr->changeVisibilityZone(newVisibilityZone);
-            setSceneRect(f_itemForSpectr->boundingRect());
-        }
-    }
-}
-
-void SpectrViewer::scrollChanged(){
-    QPolygonF f_rect = mapToScene(QRect(x(),y(),width(),height()));
-    QRectF f_rectForScene = QRectF(f_rect[0].x(),f_rect[0].y(),f_rect[2].x() - f_rect[0].x(), f_rect[2].y() - f_rect[0].y());
-    changeVisibilityZone(f_rectForScene);
-}
-void SpectrViewer::resizeEvent(QResizeEvent *event){
-    scrollChanged();
-}
-
-void SpectrViewer::changePositionOneWave(QPoint position){
-    //if(!m_waveWidget)
-        //return;
-    //bool f_flag;
-    //m_waveWidget->update(m_experimentalSpectr->oneWave(position.y(),&f_flag));
-    emit sig_changePositionOneWave(position);
-}
 /***************************BASE READER**********************************/
 SpectrReader::SpectrReader(VSpectrItem *spectrItem)
 {
@@ -276,6 +88,43 @@ SpectrReader::SpectrReader(VSpectrItem *spectrItem)
     connect(m_listSpectrViewer->first(),&SpectrViewer::sig_changePositionOneWave,this,&SpectrReader::updateOneWaweWidget);
 }
 
+SpectrReader::~SpectrReader(){
+    if(m_listSpectrViewer){
+        foreach(auto value,*m_listSpectrViewer){
+            if(value){delete value; value = nullptr;}
+        }
+        delete m_listSpectrViewer; m_listSpectrViewer = nullptr;
+    }
+
+    if(m_sliderWidth){delete m_sliderWidth; m_sliderWidth = nullptr;}
+    if(m_comboFilters){delete m_comboFilters; m_comboFilters = nullptr;}
+    if(m_btnAddFilter){delete m_btnAddFilter; m_btnAddFilter = nullptr;}
+
+    if(m_filterListModel){delete m_filterListModel; m_filterListModel = nullptr;}
+
+    if(m_btnApplyFilters){delete m_btnApplyFilters; m_btnApplyFilters = nullptr;}
+    if(m_btnRollBack){delete m_btnRollBack; m_btnRollBack = nullptr;}
+
+    if(m_filterListView){delete m_filterListView; m_filterListView = nullptr;}
+    if(m_hLayoutBtnFilters){delete m_hLayoutBtnFilters; m_hLayoutBtnFilters = nullptr;}
+
+    if(m_vLayoutFilters){delete m_vLayoutFilters; m_vLayoutFilters = nullptr;}
+
+    if(m_widgetFilters){delete m_widgetFilters; m_widgetFilters = nullptr;}
+    if(m_spectrSplitter){delete m_spectrSplitter; m_spectrSplitter = nullptr;}
+
+    if(m_pythonConsole){delete m_pythonConsole; m_pythonConsole = nullptr;}
+    if(m_oneWaveWidget){delete m_oneWaveWidget; m_oneWaveWidget = nullptr;}
+    if(m_splitterFiltersAndSpectrs){delete m_splitterFiltersAndSpectrs; m_splitterFiltersAndSpectrs = nullptr;}
+    if(m_toolBar){delete m_toolBar; m_toolBar = nullptr;}
+
+    if(m_baseVSplitter){delete m_baseVSplitter; m_baseVSplitter = nullptr;}
+
+
+    if(m_vMainLayout){delete m_vMainLayout; m_vMainLayout = nullptr;}
+}
+
+
 void SpectrReader::changrVisibilityZone(QRectF visibilityRect){
     foreach(auto value,*m_listSpectrViewer){
         value->changeVisibilityZone(visibilityRect);
@@ -324,6 +173,7 @@ void SpectrReader::dropEvent(QDropEvent *event){
     AGraphicItem* f_item = reinterpret_cast<AGraphicItem*>(event->mimeData()->data("item").toLongLong(&ok));
     VSpectrItem *f_spectrItem = dynamic_cast<VSpectrItem *>(f_item);
     if(f_spectrItem){
+        f_spectrItem->itemInfo()->setVisible(AItem::BOARD_GRAPH_VIEW,true);
         m_listSpectrViewer->push_back(new SpectrViewer(f_spectrItem,m_sliderWidth->value()));
         m_spectrSplitter->addWidget(m_listSpectrViewer->last());
         m_oneWaveWidget->addItem(m_listSpectrViewer->last()->experimentalSpectr());

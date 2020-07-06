@@ -64,6 +64,7 @@ void AGraphicBoard::resizePicture(){
            f_objectOfTheBoard->resizePictures();
         }
     }
+
 }
 
 void AGraphicBoard::activate(bool activate){
@@ -74,6 +75,7 @@ void AGraphicBoard::activate(bool activate){
            f_track->activate(activate);
         }
     }
+    resize();
 }
 
 void AGraphicBoard::updateItemsParam(){

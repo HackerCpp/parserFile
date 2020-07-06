@@ -32,6 +32,7 @@ public:
     void loadDrawingParam(int width)override;
     virtual void drawOnTheDisk()override;
     void run()override;
+    qreal dataStep(){return m_dataStep;}
 
 
 

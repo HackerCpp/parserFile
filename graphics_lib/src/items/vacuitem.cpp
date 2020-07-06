@@ -347,6 +347,7 @@ void VAcuItem::drawHeader(QPainter *per,int &position,bool *flag){
 }
 
 void VAcuItem::updateParam(int pictureWidth){
+    m_recordPointDepth = m_curve->recordPoint();
     m_isEndThread = true;
     m_curentPictureWidth = pictureWidth;
 

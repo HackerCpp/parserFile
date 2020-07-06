@@ -1,7 +1,8 @@
 #include "basesettingswindow.h"
 #include <QDebug>
 
-BaseSettingsWindow::BaseSettingsWindow()
+BaseSettingsWindow::BaseSettingsWindow(QWidget* parent)
+    : QWidget(parent)
 {
     m_scroll = new QScrollArea;
     m_scroll->setWidgetResizable(true);

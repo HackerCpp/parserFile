@@ -22,10 +22,11 @@ MainWindow::MainWindow(QWidget *parent)
     m_mainHorLayout->addWidget(m_logDataView);
     this->setLayout(m_mainHorLayout);
     m_flagHideMenu = false;
+    m_settings = new QSettings("settings.ini",QSettings::IniFormat);
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow(){
+    if(m_settings){delete m_settings; m_settings = nullptr;}
 
 }
 
@@ -46,10 +47,11 @@ bool MainWindow::eventFilter(QObject *o, QEvent *e){
 
 void MainWindow::openFile(){
     QFileDialog fileDialog;
-
-    QString filePath = fileDialog.getOpenFileName(this, tr("Open File"),"C:/",tr("*.forms *.gfm"));
+    QString f_openPath = m_settings->value("paths/pathOpenFile").toString();
+    QString filePath = fileDialog.getOpenFileName(this, tr("Open File"),f_openPath,tr("*.forms *.gfm"));
     if(filePath == "")
         return;
+    m_settings->setValue("paths/pathOpenFile",filePath);
     FileReader f_file(filePath);
     ILoaderLogData * f_loader = nullptr;
     QSharedPointer<ILogData> f_logData = nullptr;

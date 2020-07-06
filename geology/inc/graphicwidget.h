@@ -26,6 +26,13 @@ public:
 public slots:
     void settingsHaveChanged();
     void tabChanged();
+
+    void changedDrawType(int drawType);
+    void changedFormatTime(DrawSettings::FormatTime format);
+    void changedFormatDepth(DrawSettings::FormatDepth format);
+    void changedPictureHeight(DrawSettings::LengthPicture format);
+    void changedPictureFormat(QImage::Format format);
+    void changedScalePixelPerMm(qreal scalePixelPerMm);
 };
 
 #endif // GRAPHICWIDGET_H

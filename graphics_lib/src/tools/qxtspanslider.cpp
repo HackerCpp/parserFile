@@ -754,8 +754,4 @@ void QxtSpanSlider::paintEvent(QPaintEvent* event)
 
     painter.drawRect(lr);
     painter.drawRect(ur);
-    painter.setPen(QPen(Qt::white));
-    painter.drawText(ur.center(),QString::number(d_ptr->upperPos));
-    painter.drawText(lr.center(),QString::number(d_ptr->lowerPos));
-
 }

@@ -17,7 +17,7 @@ protected:
     QHBoxLayout *m_btnLayout;
     QPushButton *m_btnOk,*m_btnCansel,*m_btnApply;
 public:
-    BaseSettingsWindow();
+    BaseSettingsWindow(QWidget* parent = nullptr);
     virtual ~BaseSettingsWindow();
 signals:
     void changeSettings();

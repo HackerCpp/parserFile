@@ -124,10 +124,10 @@ DrawSettings::LengthPicture GraphicsControlPanel::curentPictureHeight(){
 }
 
 QImage::Format GraphicsControlPanel::curentPictureFormat(){
-    QImage::Format f_format = QImage::Format_ARGB32;
+    QImage::Format f_format = QImage::Format_RGB16;
     switch (m_comboPictureFormat.currentIndex()){
         case 0:{
-            f_format = QImage::Format_ARGB32;
+            f_format = QImage::Format_RGB16;
             break;
         }
         case 1:{
@@ -171,10 +171,10 @@ void GraphicsControlPanel::changePictureHeight(int index){
 }
 
 void GraphicsControlPanel::changePictureFormat(int index){
-    QImage::Format f_format = QImage::Format_ARGB32;
+    QImage::Format f_format = QImage::Format_RGB16;
     switch (index){
         case 0:{
-            f_format = QImage::Format_ARGB32;
+            f_format = QImage::Format_RGB16;
             break;
         }
         case 1:{

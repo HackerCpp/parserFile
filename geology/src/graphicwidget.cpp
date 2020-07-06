@@ -19,12 +19,12 @@ GraphicWidget::GraphicWidget(QWidget *parent)
     m_mainVLayout->addWidget(m_controlPanel);
     m_mainVLayout->addWidget(m_tabWidget);
     setLayout(m_mainVLayout);
-    connect(m_controlPanel,&GraphicsControlPanel::changedDrawType,m_drawSettings,&DrawSettings::setDrawType);
-    connect(m_controlPanel,&GraphicsControlPanel::changedFormatTime,m_drawSettings,&DrawSettings::setFormatTime);
-    connect(m_controlPanel,&GraphicsControlPanel::changedFormatDepth,m_drawSettings,&DrawSettings::setFormatDepth);
-    connect(m_controlPanel,&GraphicsControlPanel::changedPictureHeight,m_drawSettings,&DrawSettings::setLengthPicture);
-    connect(m_controlPanel,&GraphicsControlPanel::changedPictureFormat,m_drawSettings,&DrawSettings::setFormatPicture);
-    connect(m_controlPanel,&GraphicsControlPanel::changedScalePixelPerMm,m_drawSettings,&DrawSettings::setScalePixelPerMm);
+    connect(m_controlPanel,&GraphicsControlPanel::changedDrawType,this,&GraphicWidget::changedDrawType);
+    connect(m_controlPanel,&GraphicsControlPanel::changedFormatTime,this,&GraphicWidget::changedFormatTime);
+    connect(m_controlPanel,&GraphicsControlPanel::changedFormatDepth,this,&GraphicWidget::changedFormatDepth);
+    connect(m_controlPanel,&GraphicsControlPanel::changedPictureHeight,this,&GraphicWidget::changedPictureHeight);
+    connect(m_controlPanel,&GraphicsControlPanel::changedPictureFormat,this,&GraphicWidget::changedPictureFormat);
+    connect(m_controlPanel,&GraphicsControlPanel::changedScalePixelPerMm,this,&GraphicWidget::changedScalePixelPerMm);
 
     connect(m_tabWidget,&QTabWidget::currentChanged,this,&GraphicWidget::tabChanged);
 
@@ -37,10 +37,9 @@ void GraphicWidget::addLogData(QSharedPointer<ILogData> logData){
 }
 
 void GraphicWidget::settingsHaveChanged(){
-    GraphicEditor *f_graphicEditor = dynamic_cast<GraphicEditor *>(m_tabWidget->currentWidget());
-    m_curentEditor = f_graphicEditor;
     if(!m_curentEditor)
         return;
+     m_curentEditor->activate(true);
 }
 
 void GraphicWidget::tabChanged(){
@@ -51,4 +50,35 @@ void GraphicWidget::tabChanged(){
     if(!m_curentEditor)
         return;
     m_curentEditor->activate(true);
+}
+
+
+void GraphicWidget::changedDrawType(int drawType){
+    m_drawSettings->setDrawType(drawType);
+    settingsHaveChanged();
+}
+
+void GraphicWidget::changedFormatTime(DrawSettings::FormatTime format){
+    m_drawSettings->setFormatTime(format);
+    settingsHaveChanged();
+}
+
+void GraphicWidget::changedFormatDepth(DrawSettings::FormatDepth format){
+    m_drawSettings->setFormatDepth(format);
+    settingsHaveChanged();
+}
+
+void GraphicWidget::changedPictureHeight(DrawSettings::LengthPicture format){
+    m_drawSettings->setLengthPicture(format);
+    settingsHaveChanged();
+}
+
+void GraphicWidget::changedPictureFormat(QImage::Format format){
+    m_drawSettings->setFormatPicture(format);
+    settingsHaveChanged();
+}
+
+void GraphicWidget::changedScalePixelPerMm(qreal scalePixelPerMm){
+    m_drawSettings->setScalePixelPerMm(scalePixelPerMm);
+    settingsHaveChanged();
 }

@@ -64,7 +64,7 @@ DrawSettings::DrawSettings()
     }
     else{
 
-        m_formatImg = QImage::Format_ARGB32;
+        m_formatImg = QImage::Format_RGB16;
         m_settings->setValue("formatImg",m_formatImg);
     }
     m_settings->endGroup();

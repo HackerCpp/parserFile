@@ -6,6 +6,10 @@
 
 void AGraphicTrack::swapPixMap(){
     QImage *ptr = m_curentPixmap;
+    if(m_endRedraw){
+        ptr = nullptr;
+        return;
+    }
     m_curentPixmap = m_doublePixMap;
     m_doublePixMap = ptr;
     ptr = m_curentHeader;

@@ -8,11 +8,14 @@ OneWaveWidget::OneWaveWidget(VSpectrItem *spectrItem)
     m_hSplitter = new QSplitter;
     m_sliderAmplitude = new QxtSpanSlider(Qt::Vertical);
     //m_sliderAmplitude->setHandleMovementMode(QxtSpanSlider::HandleMovementMode::NoOverlapping);
-    m_sliderAmplitude->setRange(-150,0);
+    QString valueRange = spectrItem->curve()->desc()->param("val_range");
+    int f_minimum = valueRange.left(valueRange.indexOf("..")).toDouble();
+    int f_maximum = valueRange.right(valueRange.indexOf("..") - 1).toDouble();
+    m_sliderAmplitude->setRange(f_minimum,f_maximum);
     m_sliderAmplitude->setSpan(m_sliderAmplitude->minimum(),m_sliderAmplitude->maximum());
 
     m_sliderFrequency = new QxtSpanSlider(Qt::Horizontal);
-    m_sliderFrequency->setRange(0,70000);
+    m_sliderFrequency->setRange(-1,spectrItem->curve()->sizeOffset() * spectrItem->dataStep() + 1);
     m_sliderFrequency->setSpan(m_sliderFrequency->minimum(),m_sliderFrequency->maximum());
 
     m_vLayout = new QVBoxLayout;
@@ -20,18 +23,18 @@ OneWaveWidget::OneWaveWidget(VSpectrItem *spectrItem)
     m_graphicsWidget = new QWidget();
 
     xAxis = new QValueAxis;                     // Ось X
-    xAxis->setRange(0, 50000);   // Диапазон от 0 до времени которое соответстует SAMPLE_NUM точек
+    xAxis->setRange(m_sliderFrequency->minimum(), m_sliderFrequency->maximum());
     xAxis->setTitleText(tr("Lines Hz"));       // Название оси X
     xAxis->setTitleBrush(Qt::magenta);          // Цвет названия
     xAxis->setLabelsColor(Qt::magenta);         // Цвет элементов оси
-xAxis->setTickCount(20);
+xAxis->setTickCount(10);
 
     yAxis = new QValueAxis;             // Ось Y
-    yAxis->setRange(-150, 0);           // Диапазон от -20 до +20 Вольт
+    yAxis->setRange(m_sliderAmplitude->minimum(), m_sliderAmplitude->maximum());           // Диапазон от -20 до +20 Вольт
     yAxis->setTitleText(tr("Amplitude"));    // Название оси Y
     yAxis->setTitleBrush(Qt::yellow);   // Цвет названия
     yAxis->setLabelsColor(Qt::yellow);  // Цвет элементов оси
-    m_chartView = new QChartView();
+    m_chartView = new ChartVievForOneWaveWidget();
 
     m_chartView->chart()->setTheme(QChart::ChartThemeDark);    // Установка темы QChartView
 
@@ -90,9 +93,10 @@ void OneWaveWidget::changeVerticalCoord(int downValue ,int upValue){
     //добавлено
     yAxis->setRange(downValue, upValue);
     //m_chartView->chart()->update();
+
 }
 
 void OneWaveWidget::changeHorizontalCoord(int downValue ,int upValue){
     xAxis->setRange(downValue, upValue);
-    m_chartView->chart()->update();
+    //m_chartView->chart()->update();
 }

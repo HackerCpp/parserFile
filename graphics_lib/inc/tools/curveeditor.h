@@ -14,7 +14,7 @@ class CurveEditor : public BaseSettingsWindow
     BaseCurveReader *m_curveReader;
     QSplitter *m_splitter;
 public:
-    CurveEditor(AGraphicItem *graphicItem);
+    CurveEditor(AGraphicItem *graphicItem,QWidget *parent = nullptr);
     ~CurveEditor()override;
 
     void apply()override;

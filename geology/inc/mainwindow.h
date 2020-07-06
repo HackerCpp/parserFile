@@ -13,6 +13,7 @@ class MainWindow : public WindowForMenu
     QHBoxLayout *m_mainHorLayout;
     LogDataView *m_logDataView;
     bool m_flagHideMenu;
+    QSettings *m_settings;
 
 public:
     MainWindow(QWidget *parent = nullptr);

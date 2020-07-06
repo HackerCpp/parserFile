@@ -4,8 +4,8 @@
 
 
 
-CurveEditor::CurveEditor(AGraphicItem *graphicItem)
-    :m_modelCurveEditor(nullptr),m_table(nullptr), m_curveReader(nullptr){
+CurveEditor::CurveEditor(AGraphicItem *graphicItem,QWidget *parent)
+    :BaseSettingsWindow(parent), m_modelCurveEditor(nullptr),m_table(nullptr), m_curveReader(nullptr){
     m_splitter = new QSplitter();
     //m_table = new QTableView();
     //m_modelCurveEditor = new ModelCurveEditor(graphicItem);

@@ -181,7 +181,7 @@ void VerticalTrack::startDrag(QPointF point){
             //f_mimeData->setText(QString::number(reinterpret_cast<long long>(grItem)));
             f_mimeData->setData("item",QString::number(reinterpret_cast<long long>(grItem)).toLocal8Bit());
             f_mimeData->setData("items",QString::number(reinterpret_cast<long long>(m_items)).toLocal8Bit());
-            //grItem->itemInfo()->setVisible(AItem::BOARD_GRAPH_VIEW,false);
+            grItem->itemInfo()->setVisible(AItem::BOARD_GRAPH_VIEW,false);
             //m_items->removeOne(grItem);
             break;
         }

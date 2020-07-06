@@ -14,13 +14,17 @@ LIBS += \
 
 
 SOURCES += \
+    $$PWD/inc/spectrReader/chartvievforonewavewidget.cpp \
+    $$PWD/src/spectrReader/graphicitemforspectr.cpp \
+    $$PWD/src/spectrReader/spectrscene.cpp \
+    $$PWD/src/spectrReader/spectrviewer.cpp \
+    $$PWD/src/spectrReader/spectrreader.cpp \
     $$PWD/src/drawsettings.cpp \
     $$PWD/src/spectrReader/filterlistview.cpp \
     $$PWD/src/spectrReader/onewavewidget.cpp \
     $$PWD/src/tools/basecurvereader.cpp \
     $$PWD/src/spectrReader/filterListModel.cpp \
     $$PWD/src/items/drawingthroughadisk.cpp \
-    $$PWD/src/tools/spectrreader.cpp \
     $$PWD/src/tools/colorscale.cpp \
     $$PWD/src/tools/basesettingswindow.cpp \
     $$PWD/src/tools/curveeditor.cpp \
@@ -51,7 +55,14 @@ SOURCES += \
 
 HEADERS += \
     $$PWD/inc/drawsettings.h \
+    $$PWD/inc/spectrReader/chartvievforonewavewidget.h \
     $$PWD/inc/spectrReader/filterListModel.h \
+    $$PWD/inc/spectrReader/spectrreader.h \
+    $$PWD/inc/spectrReader/filterlistview.h \
+    $$PWD/inc/spectrReader/graphicitemforspectr.h \
+    $$PWD/inc/spectrReader/onewavewidget.h \
+    $$PWD/inc/spectrReader/spectrscene.h \
+    $$PWD/inc/spectrReader/spectrviewer.h \
     $$PWD/inc/agraphicboard.h \
     $$PWD/inc/items/agraphicitem.h \
     $$PWD/inc/agraphictrack.h \
@@ -60,8 +71,6 @@ HEADERS += \
     $$PWD/inc/igraphiceditor.h \
     $$PWD/inc/items/drawingthroughadisk.h \
     $$PWD/inc/items/itimscreater.h \
-    $$PWD/inc/spectrReader/filterlistview.h \
-    $$PWD/inc/spectrReader/onewavewidget.h \
     $$PWD/inc/tools/basecurvereader.h \
     $$PWD/inc/tools/basesettingswindow.h \
     $$PWD/inc/tools/browsergraphicitems.h \
@@ -78,7 +87,6 @@ HEADERS += \
     $$PWD/inc/objectoftheboard.h \
     $$PWD/inc/rightborder.h \
     $$PWD/inc/tools/settingsitem.h \
-    $$PWD/inc/tools/spectrreader.h \
     $$PWD/inc/verticalboard.h \
     $$PWD/inc/items/verticalitem.h \
     $$PWD/inc/verticaltrack.h \
