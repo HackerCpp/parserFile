@@ -3,21 +3,26 @@
 
 #include <QChartView>
 #include <QGraphicsTextItem>
+#include "modelonewave.h"
+
 using namespace QtCharts;
 
-
-class ChartVievForOneWaveWidget : public QChartView
+class ChartViewForOneWaveWidget : public QChartView
 {
     QGraphicsTextItem *m_textItem;
     QGraphicsLineItem *m_verticalLine;
+    ModelOneWave * m_modelOneWave;
+
+    bool m_flagMousePress;
 public:
-    ChartVievForOneWaveWidget();
-    ~ChartVievForOneWaveWidget()override{}
+    ChartViewForOneWaveWidget(ModelOneWave *modelOneWave);
+    ~ChartViewForOneWaveWidget()override{}
 
     //void resizeEvent(QResizeEvent *event) override{}
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
-    void mouseReleaseEvent(QMouseEvent *event) override{}
+    void mouseReleaseEvent(QMouseEvent *event) override;
+    void dataUpdate();
 };
 
 #endif // CHARTVIEVFORONEWAVEWIDGET_H

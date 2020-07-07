@@ -1,5 +1,6 @@
 #include "onewavewidget.h"
 #include <QList>
+#include "customdelegates.h"
 
 OneWaveWidget::OneWaveWidget(VSpectrItem *spectrItem)
 {
@@ -8,6 +9,15 @@ OneWaveWidget::OneWaveWidget(VSpectrItem *spectrItem)
     m_hSplitter = new QSplitter;
     m_sliderAmplitude = new QxtSpanSlider(Qt::Vertical);
     //m_sliderAmplitude->setHandleMovementMode(QxtSpanSlider::HandleMovementMode::NoOverlapping);
+
+
+    m_modelOneWave = new ModelOneWave();
+    m_tableViewOneWavenfo = new QTableView;
+    m_tableViewOneWavenfo->setItemDelegateForColumn(0,new CheckBoxDelegate());
+    m_tableViewOneWavenfo->setItemDelegateForColumn(2,new ColorDelegate());
+    m_tableViewOneWavenfo->setModel(m_modelOneWave);
+
+
     QString valueRange = spectrItem->curve()->desc()->param("val_range");
     int f_minimum = valueRange.left(valueRange.indexOf("..")).toDouble();
     int f_maximum = valueRange.right(valueRange.indexOf("..") - 1).toDouble();
@@ -27,14 +37,14 @@ OneWaveWidget::OneWaveWidget(VSpectrItem *spectrItem)
     xAxis->setTitleText(tr("Lines Hz"));       // Название оси X
     xAxis->setTitleBrush(Qt::magenta);          // Цвет названия
     xAxis->setLabelsColor(Qt::magenta);         // Цвет элементов оси
-xAxis->setTickCount(10);
+    xAxis->setTickCount(10);
 
     yAxis = new QValueAxis;             // Ось Y
     yAxis->setRange(m_sliderAmplitude->minimum(), m_sliderAmplitude->maximum());           // Диапазон от -20 до +20 Вольт
     yAxis->setTitleText(tr("Amplitude"));    // Название оси Y
     yAxis->setTitleBrush(Qt::yellow);   // Цвет названия
     yAxis->setLabelsColor(Qt::yellow);  // Цвет элементов оси
-    m_chartView = new ChartVievForOneWaveWidget();
+    m_chartView = new ChartViewForOneWaveWidget(m_modelOneWave);
 
     m_chartView->chart()->setTheme(QChart::ChartThemeDark);    // Установка темы QChartView
 
@@ -44,6 +54,8 @@ xAxis->setTickCount(10);
         m_chartView->chart()->addSeries(value.second);
         m_chartView->chart()->setAxisX(xAxis, value.second);   // Назначить ось xAxis, осью X для diagramA
         m_chartView->chart()->setAxisY(yAxis, value.second);
+        m_modelOneWave->insertWaveInfo(OneWaveInfo{value.second,true,value.second->name(),
+                                              value.second->pen().color().name(),0,0,0,0,0});
     }
 
     m_graphicGridLayout->addWidget(m_sliderAmplitude,0,0);
@@ -53,6 +65,8 @@ xAxis->setTickCount(10);
     m_graphicsWidget->setLayout(m_graphicGridLayout);
 
     m_hSplitter->addWidget(m_graphicsWidget);
+    m_hSplitter->addWidget(m_tableViewOneWavenfo);
+
     m_vLayout->addWidget(m_hSplitter);
 
     setLayout(m_vLayout);
@@ -65,18 +79,20 @@ OneWaveWidget::~OneWaveWidget(){
 
 }
 
-void OneWaveWidget::update(const QList<QPointF> &newPoints){
+void OneWaveWidget::update(const QList<QPointF> &newPoints){ //Добавляет точки
     xAxis->setRange(newPoints.first().y(), newPoints.last().y());
     foreach(auto value,*m_spectrIitems){
         value.second->replace(newPoints);
     }
+    m_chartView->dataUpdate();
 }
 
-void OneWaveWidget::update(QPoint point){
+void OneWaveWidget::update(QPoint point){ //Добавляет точки из SpectrItem по координатам на сцене
     bool f_flag = false;
     foreach(auto value,*m_spectrIitems){
         value.second->replace(value.first->oneWave(point.y(),&f_flag));
     }
+    m_chartView->dataUpdate();
 }
 
 void OneWaveWidget::addItem(VSpectrItem *spectrItem){
@@ -87,16 +103,15 @@ void OneWaveWidget::addItem(VSpectrItem *spectrItem){
     m_chartView->chart()->addSeries(f_value.second);
     m_chartView->chart()->setAxisX(xAxis, f_value.second);   // Назначить ось xAxis, осью X для diagramA
     m_chartView->chart()->setAxisY(yAxis, f_value.second);
+
+    m_modelOneWave->insertWaveInfo(OneWaveInfo{f_value.second,true,f_value.second->name(),
+                                          f_value.second->pen().color().name(),0,0,0,0,0});
 }
 
 void OneWaveWidget::changeVerticalCoord(int downValue ,int upValue){
-    //добавлено
     yAxis->setRange(downValue, upValue);
-    //m_chartView->chart()->update();
-
 }
 
 void OneWaveWidget::changeHorizontalCoord(int downValue ,int upValue){
     xAxis->setRange(downValue, upValue);
-    //m_chartView->chart()->update();
 }

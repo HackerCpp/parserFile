@@ -167,6 +167,7 @@ void inline VSpectrItem::drawInterpolationVerticalNoOffset(QPainter *per,int y_t
     uint indexBegin  = 0;
     qreal f_scaleForMainValue = m_board->scale();
     qreal f_recordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
+    f_recordPoint = qIsNaN(f_recordPoint) ? 0 : f_recordPoint;
     if(((f_mainValue->minimum() + f_recordPoint) * f_scaleForMainValue) > f_yTop  + f_downOffset || ((f_mainValue->maximum() + f_recordPoint) * f_scaleForMainValue) < f_yTop - f_topOffset){
         return;
     }
@@ -240,6 +241,7 @@ void inline VSpectrItem::drawInterpolationVerticalNoOffset(QPainter *per,int y_t
     }
     //qDebug() << "end";
 }
+
 void VSpectrItem::loadDrawingParam(int width){
     qreal f_width = width;
     SpecItem* f_spectrItemInfo = dynamic_cast<SpecItem*>(m_itemInfo);
@@ -372,18 +374,19 @@ QList<QPointF> VSpectrItem::oneWave(int position,bool *flag){
     ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
     if(!f_mainValue->size())
         return f_returnList;
-
     qreal f_scaleForMainValue = m_board->scale();
-    if((f_mainValue->minimum() * f_scaleForMainValue) > position){
+    qreal f_recordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
+    f_recordPoint = qIsNaN(f_recordPoint) ? 0 : f_recordPoint;
+    if(((f_mainValue->minimum() + f_recordPoint) * f_scaleForMainValue) > position){
         indexBegin = 0;
     }
-    else if((f_mainValue->maximum() * f_scaleForMainValue) < position){
+    else if(((f_mainValue->maximum() + f_recordPoint) * f_scaleForMainValue) < position){
         indexBegin = f_mainValue->size() - 1;
     }
     else{
         for(uint i = 0; i < f_mainValue->size() - 1; ++i){
-           if((f_mainValue->data(i) * f_scaleForMainValue) > position && (f_mainValue->data(i + 1) * f_scaleForMainValue) < position
-                   || (f_mainValue->data(i) * f_scaleForMainValue) < position && (f_mainValue->data(i + 1) * f_scaleForMainValue) > position){
+           if(((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) > position && ((f_mainValue->data(i + 1) + f_recordPoint) * f_scaleForMainValue) < position
+                   || ((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) < position && ((f_mainValue->data(i + 1) + f_recordPoint) * f_scaleForMainValue) > position){
                indexBegin = i;
                break;
            }

@@ -14,6 +14,8 @@
 #include <QSpinBox>
 #include <QTabWidget>
 #include "basesettingswindow.h"
+#include "modelmulticolor.h"
+#include <QTableView>
 
 /*MAIN CLASS SETTINGS FOR ITEMS*********************************************/
 class SettingsItems : public BaseSettingsWindow{
@@ -118,10 +120,14 @@ class SettingsSpectrItem : public SettingsItem{
     QHBoxLayout *m_vLayout;
     QImage * m_image;
     QLabel *m_labelForImage;
+    QTableView *m_tableViewMulticolor;
+    ModelMulticolor *m_modelMulticolor;
+    QVBoxLayout *m_bthsColorVLayout;
+    QPushButton *m_btnInsertColor, *m_btnRemoveColor, *m_btnCalculate;
 
 public:
     SettingsSpectrItem(AGraphicItem *spectrItem);
-    ~SettingsSpectrItem();
+    ~SettingsSpectrItem()override;
 
     void applySpecificSettings()override;
 

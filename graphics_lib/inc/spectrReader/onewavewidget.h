@@ -5,6 +5,7 @@
 #include <QPair>
 #include "qxtspanslider.h"
 #include "chartvievforonewavewidget.h"
+#include "modelonewave.h"
 
 
 
@@ -14,7 +15,7 @@ class OneWaveWidget : public QWidget
     Q_OBJECT
     //QList<QLineSeries> *m_iagrams;
 
-    ChartVievForOneWaveWidget *m_chartView;
+    ChartViewForOneWaveWidget *m_chartView;
     QValueAxis *xAxis;  // Ось X
     QValueAxis *yAxis;  // Ось Y
     QList<QPair<VSpectrItem *, QLineSeries *> > *m_spectrIitems;
@@ -23,6 +24,9 @@ class OneWaveWidget : public QWidget
     QVBoxLayout *m_vLayout;
     QGridLayout *m_graphicGridLayout;
     QWidget *m_graphicsWidget;
+
+    ModelOneWave *m_modelOneWave;
+    QTableView *m_tableViewOneWavenfo;
 public:
     OneWaveWidget(VSpectrItem *spectrItem);
     ~OneWaveWidget();

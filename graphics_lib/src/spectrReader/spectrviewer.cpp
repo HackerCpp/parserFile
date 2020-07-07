@@ -41,6 +41,7 @@ void SpectrViewer::changeWidth(int newWidth){
         }
     }
 }
+
 void SpectrViewer::changeVisibilityZone(QRectF newVisibilityZone){
     QList<QGraphicsItem*> f_items = m_scene->items();
     foreach(auto item,f_items){

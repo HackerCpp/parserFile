@@ -1,5 +1,6 @@
 #include "settingsitem.h"
 #include "QPushButton"
+#include "customdelegates.h"
 
 /*MAIN CLASS SETTINGS FOR ITEMS*********************************************/
 
@@ -262,7 +263,7 @@ SettingsSpectrItem::SettingsSpectrItem(AGraphicItem *spectrItem)
     }
     m_styleGrup = new QGroupBox;
     m_vLayout = new QHBoxLayout();
-    QList<MulticolorItem> *f_multicolor = m_specItemInfo->multiColor();
+    /*QList<MulticolorItem> *f_multicolor = m_specItemInfo->multiColor();
     m_image = new QImage(this->width()/2,f_multicolor->size() * 30,QImage::Format_ARGB32);
     m_labelForImage = new QLabel();
     QPainter painter(m_image);
@@ -296,16 +297,33 @@ SettingsSpectrItem::SettingsSpectrItem(AGraphicItem *spectrItem)
         painter.drawRect(40,f_yPosition - 20,20,20);
         index += f_step;
     }
+    m_labelForImage->setPixmap(QPixmap::fromImage(*m_image));*/
 
+    m_tableViewMulticolor = new QTableView;
+    m_modelMulticolor = new ModelMulticolor(m_specItemInfo->multiColor());
+    m_tableViewMulticolor->setModel(m_modelMulticolor);
+    m_tableViewMulticolor->setItemDelegateForColumn(1,new ColorDelegate());
+    m_btnInsertColor = new QPushButton("Insert color");
+    m_btnRemoveColor = new QPushButton("Remove color");
+    m_btnCalculate = new QPushButton("Calculate");
+    connect(m_btnInsertColor,&QPushButton::pressed,m_modelMulticolor,&ModelMulticolor::insertColor);
+    connect(m_btnRemoveColor,&QPushButton::pressed,m_modelMulticolor,&ModelMulticolor::removeColor);
+    connect(m_btnCalculate,&QPushButton::pressed,m_modelMulticolor,&ModelMulticolor::calculate);
 
+    m_bthsColorVLayout = new QVBoxLayout;
 
-    m_labelForImage->setPixmap(QPixmap::fromImage(*m_image));
+    m_bthsColorVLayout->addWidget(m_btnInsertColor);
+    m_bthsColorVLayout->addWidget(m_btnRemoveColor);
+    m_bthsColorVLayout->addWidget(m_btnCalculate);
+    m_bthsColorVLayout->addSpacing(1000);
 
-    m_vLayout->addWidget(m_labelForImage);
-    painter.end();
+    //m_vLayout->addWidget(m_labelForImage);
+    m_vLayout->addWidget(m_tableViewMulticolor);
+    m_vLayout->addLayout(m_bthsColorVLayout);
+    //painter.end();
     m_styleGrup->setLayout(m_vLayout);
     m_mainVLout->addWidget(m_styleGrup);
-    m_mainVLout->addStretch(100);
+    //m_mainVLout->addStretch(100);
 }
 
 SettingsSpectrItem::~SettingsSpectrItem(){
@@ -313,7 +331,8 @@ SettingsSpectrItem::~SettingsSpectrItem(){
 }
 
 void SettingsSpectrItem::applySpecificSettings(){
-
+    if(m_modelMulticolor)
+        m_modelMulticolor->apply();
 }
 
 

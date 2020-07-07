@@ -15,6 +15,8 @@ LIBS += \
 
 SOURCES += \
     $$PWD/inc/spectrReader/chartvievforonewavewidget.cpp \
+    $$PWD/inc/spectrReader/modelmulticolor.cpp \
+    $$PWD/inc/spectrReader/modelonewave.cpp \
     $$PWD/src/spectrReader/graphicitemforspectr.cpp \
     $$PWD/src/spectrReader/spectrscene.cpp \
     $$PWD/src/spectrReader/spectrviewer.cpp \
@@ -57,6 +59,8 @@ HEADERS += \
     $$PWD/inc/drawsettings.h \
     $$PWD/inc/spectrReader/chartvievforonewavewidget.h \
     $$PWD/inc/spectrReader/filterListModel.h \
+    $$PWD/inc/spectrReader/modelmulticolor.h \
+    $$PWD/inc/spectrReader/modelonewave.h \
     $$PWD/inc/spectrReader/spectrreader.h \
     $$PWD/inc/spectrReader/filterlistview.h \
     $$PWD/inc/spectrReader/graphicitemforspectr.h \
