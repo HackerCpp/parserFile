@@ -1,6 +1,7 @@
 #include "settingsitem.h"
 #include "QPushButton"
 #include "customdelegates.h"
+#include <QComboBox>
 
 /*MAIN CLASS SETTINGS FOR ITEMS*********************************************/
 
@@ -308,12 +309,16 @@ SettingsSpectrItem::SettingsSpectrItem(AGraphicItem *spectrItem)
     m_btnCalculate = new QPushButton("Calculate");
     connect(m_btnInsertColor,&QPushButton::pressed,m_modelMulticolor,&ModelMulticolor::insertColor);
     connect(m_btnRemoveColor,&QPushButton::pressed,m_modelMulticolor,&ModelMulticolor::removeColor);
-    connect(m_btnCalculate,&QPushButton::pressed,m_modelMulticolor,&ModelMulticolor::calculate);
+    connect(m_btnCalculate,&QPushButton::pressed,this,&SettingsSpectrItem::calculateColor);
 
     m_bthsColorVLayout = new QVBoxLayout;
+    m_comboColor = new QComboBox();
+    m_comboColor->insertItem(0,"Rainbow");
+    m_comboColor->insertItem(1,"HSV");
 
     m_bthsColorVLayout->addWidget(m_btnInsertColor);
     m_bthsColorVLayout->addWidget(m_btnRemoveColor);
+    m_bthsColorVLayout->addWidget(m_comboColor);
     m_bthsColorVLayout->addWidget(m_btnCalculate);
     m_bthsColorVLayout->addSpacing(1000);
 
@@ -333,6 +338,13 @@ SettingsSpectrItem::~SettingsSpectrItem(){
 void SettingsSpectrItem::applySpecificSettings(){
     if(m_modelMulticolor)
         m_modelMulticolor->apply();
+}
+
+void SettingsSpectrItem::calculateColor(){
+    if(m_comboColor->currentIndex())
+        m_modelMulticolor->calculateHSV();
+    else
+        m_modelMulticolor->calculateRainbow();
 }
 
 

@@ -8,7 +8,7 @@ ModelMulticolor::ModelMulticolor(QList<MulticolorItem> *listMulticolor)
         return;
     m_listMulticolor = new QList<MulticolorItem>;
     foreach(auto multicolor,*m_listMulticolorOriginal){
-        m_listMulticolor->push_back(multicolor);
+        m_listMulticolor->push_front(multicolor);
     }
     m_headerList << "Value" << "Color";
 
@@ -116,7 +116,7 @@ void ModelMulticolor::apply(){
         return;
     m_listMulticolorOriginal->clear();
     foreach(auto multicolor,*m_listMulticolor){
-        m_listMulticolorOriginal->push_back(multicolor);
+        m_listMulticolorOriginal->push_front(multicolor);
     }
 }
 
@@ -133,44 +133,73 @@ void ModelMulticolor::removeColor(){
         return;
     if(m_listMulticolor){
        beginRemoveRows(QModelIndex(),m_listMulticolor->size() - 1, m_listMulticolor->size() - 1);
-       m_listMulticolor->removeLast();
+       m_listMulticolor->removeAt(m_listMulticolor->size() - 2);
        endRemoveRows();
     }
 }
 
-void ModelMulticolor::calculate(){
+void ModelMulticolor::calculateHSV(){
     if(!m_listMulticolor)
         return;
     if(m_listMulticolor->size() < 2)
         return;
-    if(m_listMulticolor->first().bound > m_listMulticolor->last().bound){
+    if(m_listMulticolor->first().bound < m_listMulticolor->last().bound){
         qreal f_bound = m_listMulticolor->first().bound;
-        QString f_color = m_listMulticolor->first().value;
         m_listMulticolor->first().bound = m_listMulticolor->last().bound;
-        m_listMulticolor->first().value = m_listMulticolor->last().value;
         m_listMulticolor->last().bound = f_bound;
-        m_listMulticolor->last().value = f_color;
     }
-    QColor f_colorMinimum(m_listMulticolor->first().value);
-    QColor f_colorMaximum(m_listMulticolor->last().value);
-    qreal f_hueMinimum = f_colorMinimum.hue();
-    qreal f_hueMaximum = f_colorMaximum.hue();
+    m_listMulticolor->last().value = QColor(Qt::white).name();
+    m_listMulticolor->first().value = QColor(Qt::red).name();
+
     qreal f_minimum = m_listMulticolor->first().bound;
     qreal f_maximum = m_listMulticolor->last().bound;
 
-
-    qreal f_hueStep = (f_hueMaximum - f_hueMinimum) / qreal(m_listMulticolor->size() - 1);
-    qreal f_hueBegin =  QColor(m_listMulticolor->first().value).hue();
+    qreal f_hueStep = 360 / qreal(m_listMulticolor->size());
     qreal f_step = (f_maximum - f_minimum) / qreal(m_listMulticolor->size() - 1);
-    qreal f_beginValue = m_listMulticolor->first().bound;
-    f_hueBegin = f_hueBegin < 0 ? 0 : f_hueBegin;
-    qDebug() << f_hueStep << (f_hueMaximum - f_hueMinimum);
+
     for(int i = 1; i < m_listMulticolor->size() - 1; ++i){
-        m_listMulticolor->operator[](i).bound = (f_beginValue + (f_step * qreal(i)));
-        QColor f_col;
-        qreal hue = f_hueBegin + (f_hueStep * qreal(i));
-        f_col.setHsvF(hue,1,1,255);
-        m_listMulticolor->operator[](i).value = f_col.name();
+        m_listMulticolor->operator[](i).bound = (f_minimum + (f_step * qreal(i)));
+        QColor f_color;
+        f_color.setHsv((f_hueStep * qreal(i)),255,255);
+        m_listMulticolor->operator[](i).value = f_color.name();
     }
     emit dataChanged(index(0,0),index(m_listMulticolor->size(),2));
+}
+
+void ModelMulticolor::calculateRainbow(){
+    if(!m_listMulticolor)
+        return;
+    if(m_listMulticolor->size() < 2)
+        return;
+    qreal f_minimumValue = m_listMulticolor->last().bound;
+    qreal f_maximumValue = m_listMulticolor->first().bound;
+    if(f_minimumValue > f_maximumValue){
+        qreal min = f_maximumValue;
+        f_maximumValue = f_minimumValue;
+        f_minimumValue = min;
+    }
+    beginResetModel();
+    m_listMulticolor->clear();
+    m_listMulticolor->push_front(MulticolorItem{f_minimumValue,QColor(Qt::white).name()});
+    m_listMulticolor->push_front(MulticolorItem{f_minimumValue,QColor(142,0,255,0).name()});
+    m_listMulticolor->push_front(MulticolorItem{f_minimumValue,QColor(0,0,255,0).name()});
+    m_listMulticolor->push_front(MulticolorItem{f_minimumValue,QColor(24,127,255,0).name()});
+    m_listMulticolor->push_front(MulticolorItem{f_minimumValue,QColor(0,127,0,0).name()});
+    m_listMulticolor->push_front(MulticolorItem{f_minimumValue,QColor(255,255,0,0).name()});
+    m_listMulticolor->push_front(MulticolorItem{f_minimumValue,QColor(255,151,0,0).name()});
+    m_listMulticolor->push_front(MulticolorItem{f_maximumValue,QColor(Qt::red).name()});
+
+    if(m_listMulticolor->first().bound < m_listMulticolor->last().bound){
+        qreal f_bound = m_listMulticolor->first().bound;
+        m_listMulticolor->first().bound = m_listMulticolor->last().bound;
+        m_listMulticolor->last().bound = f_bound;
+    }
+    qreal f_step = (f_maximumValue - f_minimumValue) / qreal(m_listMulticolor->size() - 1);
+
+    for(int i = 1; i < m_listMulticolor->size() - 1; ++i){
+        m_listMulticolor->operator[](i).bound = (f_maximumValue - (f_step * qreal(i)));
+    }
+    endResetModel();
+    emit dataChanged(index(0,0),index(m_listMulticolor->size(),2));
+
 }

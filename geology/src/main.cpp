@@ -4,6 +4,7 @@
 #include <QDir>
 #include <QMessageBox>
 #include "onewavewidget.h"
+#include "pythoneditor.h"
 
 
 int main(int argc, char *argv[])
@@ -31,6 +32,8 @@ int main(int argc, char *argv[])
     w.setMinimumSize(600,600);
     w.show();
     w.setMinimumSize(0,0);
+    PythonEditor *f_editor = new PythonEditor();
+    f_editor->show();
 
     return a.exec();
 }

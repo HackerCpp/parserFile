@@ -25,7 +25,8 @@ public:
 public slots:
     void insertColor();
     void removeColor();
-    void calculate();
+    void calculateHSV();
+    void calculateRainbow();
 };
 
 #endif // MODELMULTICOLOR_H

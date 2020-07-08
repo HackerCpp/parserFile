@@ -124,12 +124,15 @@ class SettingsSpectrItem : public SettingsItem{
     ModelMulticolor *m_modelMulticolor;
     QVBoxLayout *m_bthsColorVLayout;
     QPushButton *m_btnInsertColor, *m_btnRemoveColor, *m_btnCalculate;
+    QComboBox *m_comboColor;
 
 public:
     SettingsSpectrItem(AGraphicItem *spectrItem);
     ~SettingsSpectrItem()override;
 
     void applySpecificSettings()override;
+public slots:
+    void calculateColor();
 
 };
 

@@ -3,8 +3,20 @@
 #include <QAbstractListModel>
 #include "agraphicitem.h"
 
+struct FilterInfo{
+    QString name;
+    qreal left;
+    qreal right;
+    qreal up;
+    qreal down;
+    qreal param1;
+    qreal param2;
+    qreal param3;
+    QString path;
+};
+
 class FilterListModel : public QAbstractListModel{
-    QVector<QPair<QString, QString> > *m_vectorFilters;
+    QVector<FilterInfo > *m_vectorFilters;
     QStringList m_headerList;
     public:
     FilterListModel();
@@ -18,9 +30,9 @@ class FilterListModel : public QAbstractListModel{
 
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole)override;
 
-    void insertFilter(QPair<QString, QString> newFilter);
+    void insertFilter(FilterInfo newFilter);
     void removeFilter(int index);
-    QVector<QPair<QString, QString> > *filters(){return m_vectorFilters;}
+    QVector<FilterInfo > *filters(){return m_vectorFilters;}
 
 };
 

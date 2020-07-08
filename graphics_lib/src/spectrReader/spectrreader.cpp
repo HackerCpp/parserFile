@@ -184,7 +184,7 @@ void SpectrReader::dropEvent(QDropEvent *event){
 }
 
 void SpectrReader::insertFilter(){
-    m_filterListModel->insertFilter(QPair<QString,QString>(m_comboFilters->currentText(),m_comboFilters->currentData().toString()));
+    m_filterListModel->insertFilter(FilterInfo{m_comboFilters->currentText(),0,0,0,0,0,0,0,m_comboFilters->currentData().toString()});
 }
 
 void SpectrReader::rollBackFilters(){
@@ -219,12 +219,19 @@ void SpectrReader::applyFilters(){
         }
 
         m_pythonInterpreter.addObject("curve",f_experCurve);
-        QVector<QPair<QString, QString> > * f_listFilters = m_filterListModel->filters();
+        QVector<FilterInfo > *f_listFilters = m_filterListModel->filters();
         if(!f_listFilters)
             return;
         foreach(auto value,*f_listFilters){
-            QString f_path = "scripts/spectrReader/" + value.second;
+            QString f_path = "scripts/spectrReader/" + value.path;
             if(QDir().exists(f_path)){
+                m_pythonInterpreter.addVariable("param1",value.param1);
+                m_pythonInterpreter.addVariable("param2",value.param2);
+                m_pythonInterpreter.addVariable("param3",value.param3);
+                m_pythonInterpreter.addVariable("left",value.left);
+                m_pythonInterpreter.addVariable("right",value.right);
+                m_pythonInterpreter.addVariable("up",value.up);
+                m_pythonInterpreter.addVariable("down",value.down);
                 m_pythonInterpreter.evalFile(f_path);
             }
         }
