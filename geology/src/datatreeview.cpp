@@ -23,6 +23,7 @@ DataTreeView::DataTreeView(QWidget *parent)
     m_logDataMenu->addAction("&Save GFM",this, SLOT(saveGFM()));
     m_logDataMenu->addAction("&Open python console",this, SLOT(openPythonConsole()));
     m_logDataMenu->addAction("&Open python script",this, SLOT(openPythonScript()));
+    m_logDataMenu->addAction("&Open python editor",this, SLOT(openPythonEditor()));
     m_logDataMenu->addAction("&Make active",this, SLOT(makeActiveProject()));
 
     setAcceptDrops(true);
@@ -257,6 +258,16 @@ void DataTreeView::openPythonScript(){
         m_curentLogData->setInterpreter(f_interpreter);
     }
     m_curentLogData->openInterpreterScript();
+}
+
+void DataTreeView::openPythonEditor(){
+    if(!m_curentLogData)
+        return;
+    if(!m_curentLogData->isInterpreter()){
+        IInterpreterLogData *f_interpreter = dynamic_cast<IInterpreterLogData *>(new InterpreterPython());
+        m_curentLogData->setInterpreter(f_interpreter);
+    }
+    m_curentLogData->openInterpreterEditor();
 }
 
 void DataTreeView::makeActiveProject(){

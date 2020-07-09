@@ -7,8 +7,8 @@ LIBS += \
         ../build/release/LogData.lib \
         ../PythonQT3.2/build/lib/PythonQt-Qt5-Python373.lib \
         ../PythonQT3.2/build/lib/PythonQt_QtAll-Qt5-Python373.lib\
-        ../python3/python3_x64-windows/lib/python37.lib \
-        ../QScintilla/build/release/qscintilla2_qt5.lib \
+        ../python3/python3_x64-windows/lib/python37.lib
+        #../QScintilla/build/release/qscintilla2_qt5.lib \
 #../build/release/LogDataInterpreter.lib \
 #../build/release/LogDataLoader.lib \
 #../build/release/LogDataSaver.lib \
@@ -18,7 +18,6 @@ SOURCES += \
     $$PWD/inc/spectrReader/chartvievforonewavewidget.cpp \
     $$PWD/inc/spectrReader/modelmulticolor.cpp \
     $$PWD/inc/spectrReader/modelonewave.cpp \
-    $$PWD/inc/tools/pythoneditor.cpp \
     $$PWD/src/spectrReader/graphicitemforspectr.cpp \
     $$PWD/src/spectrReader/spectrscene.cpp \
     $$PWD/src/spectrReader/spectrviewer.cpp \
@@ -85,7 +84,6 @@ HEADERS += \
     $$PWD/inc/tools/customdelegates.h \
     $$PWD/inc/tools/modelcurveeditor.h \
     $$PWD/inc/tools/modelforgraphicsitems.h \
-    $$PWD/inc/tools/pythoneditor.h \
     $$PWD/inc/tools/selectingarea.h \
     $$PWD/inc/items/vacuitem.h \
     $$PWD/inc/items/vspectritem.h \
@@ -100,3 +98,8 @@ HEADERS += \
     $$PWD/inc/ruler.h\
     $$PWD/inc/tools/qxtspanslider.h \
     $$PWD/inc/tools/qxtspanslider_p.h
+
+DISTFILES +=
+
+RESOURCES += \
+    $$PWD/grres.qrc

@@ -22,6 +22,7 @@ public:
     virtual bool save();
     virtual bool openInterpreterConsole(){return false;}
     virtual bool openInterpreterScript(){return false;}
+    virtual bool openInterpreterEditor(){return false;}
 
     virtual bool isReady();
     virtual bool isInterpreter(){return false;}

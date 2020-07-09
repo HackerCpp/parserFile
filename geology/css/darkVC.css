@@ -231,6 +231,7 @@ QSplitter::handle:vertical {
 QSplitter::handle:pressed {
     background: #11f743;
 }
+
 /*QSlider::handle{
     background: black;
 }

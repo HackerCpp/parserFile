@@ -21,6 +21,7 @@ SpectrReader::SpectrReader(VSpectrItem *spectrItem)
     PythonQt_QtAll::init();
     PythonQt::self()->registerCPPClass("ICurve","","Curves",PythonQtCreateObject<WrapperIcurvePython>);
     m_pythonInterpreter = PythonQt::self()->getMainModule();
+    m_pythonInterpreter.evalScript("from LogData.Curves import*");
     setAcceptDrops(true);
     m_widht = 100;
     m_vMainLayout = new QVBoxLayout();
@@ -33,15 +34,29 @@ SpectrReader::SpectrReader(VSpectrItem *spectrItem)
     m_listSpectrViewer = new QList<SpectrViewer *>;
 
     m_listSpectrViewer->push_back(new SpectrViewer(spectrItem,m_sliderWidth->value()));
+
+
     foreach(auto value,*m_listSpectrViewer){
         m_spectrSplitter->addWidget(value);
+        QString f_curveNameForPython = "C_" + value->experimentalCurve()->mnemonic() + "_" + value->experimentalCurve()->shortCut().device();
+        f_curveNameForPython = f_curveNameForPython.remove("[");
+        f_curveNameForPython = f_curveNameForPython.remove("]");
+        f_curveNameForPython = f_curveNameForPython.remove("(");
+        f_curveNameForPython = f_curveNameForPython.remove(")");
+        f_curveNameForPython = f_curveNameForPython.remove("-");
+        f_curveNameForPython = f_curveNameForPython.remove("/");
+        if(!m_pythonInterpreter.getVariable(f_curveNameForPython).isValid())
+            m_pythonInterpreter.addObject(f_curveNameForPython, value->experimentalCurve());
     }
+
     m_toolBar = new QToolBar();
     m_comboFilters = new QComboBox();
     m_pythonInterpreter.addObject("comboFilter",m_comboFilters);
     m_pythonInterpreter.evalFile("scripts/spectrReader/menu.py");
-    m_pythonConsole  = new PythonQtScriptingConsole(NULL, m_pythonInterpreter);
-    m_pythonConsole->append("py> from LogData.Curves import*");
+    //m_pythonConsole  = new PythonQtScriptingConsole(NULL, m_pythonInterpreter);
+    //m_pythonConsole->append("py> from LogData.Curves import*");
+    m_pyEditor = new PythonEditor(&m_pythonInterpreter,this);
+    m_pyEditor->show();
     m_btnAddFilter = new QPushButton("add");
     m_toolBar->addWidget(m_sliderWidth);
     m_toolBar->addWidget(m_comboFilters);
@@ -74,7 +89,7 @@ SpectrReader::SpectrReader(VSpectrItem *spectrItem)
     m_baseVSplitter->addWidget(m_toolBar);
     m_baseVSplitter->addWidget(m_splitterFiltersAndSpectrs);
     m_baseVSplitter->addWidget(m_oneWaveWidget);
-    m_baseVSplitter->addWidget(m_pythonConsole);
+    //m_baseVSplitter->addWidget(m_pythonConsole);
     m_vMainLayout->addWidget(m_baseVSplitter);
     setLayout(m_vMainLayout);
 
@@ -82,6 +97,7 @@ SpectrReader::SpectrReader(VSpectrItem *spectrItem)
     connect(m_btnAddFilter, &QPushButton::pressed, this, &SpectrReader::insertFilter);
     connect(m_btnApplyFilters, &QPushButton::pressed, this, &SpectrReader::applyFilters);
     connect(m_btnRollBack, &QPushButton::pressed, this, &SpectrReader::rollBackFilters);
+    connect(m_pyEditor,&PythonEditor::scriptExecuted,this,&SpectrReader::allUpdate);
 
     //соединяем сигнал клика мышки по сцене со слотом,
     //для перерисовки виджета графиков одной волны
@@ -113,13 +129,12 @@ SpectrReader::~SpectrReader(){
     if(m_widgetFilters){delete m_widgetFilters; m_widgetFilters = nullptr;}
     if(m_spectrSplitter){delete m_spectrSplitter; m_spectrSplitter = nullptr;}
 
-    if(m_pythonConsole){delete m_pythonConsole; m_pythonConsole = nullptr;}
+    //if(m_pythonConsole){delete m_pythonConsole; m_pythonConsole = nullptr;}
     if(m_oneWaveWidget){delete m_oneWaveWidget; m_oneWaveWidget = nullptr;}
     if(m_splitterFiltersAndSpectrs){delete m_splitterFiltersAndSpectrs; m_splitterFiltersAndSpectrs = nullptr;}
     if(m_toolBar){delete m_toolBar; m_toolBar = nullptr;}
 
     if(m_baseVSplitter){delete m_baseVSplitter; m_baseVSplitter = nullptr;}
-
 
     if(m_vMainLayout){delete m_vMainLayout; m_vMainLayout = nullptr;}
 }
@@ -180,6 +195,16 @@ void SpectrReader::dropEvent(QDropEvent *event){
         //соединяем сигнал клика мышки по сцене со слотом,
         //для перерисовки виджета графиков одной волны
         connect(m_listSpectrViewer->last(),&SpectrViewer::sig_changePositionOneWave,this,&SpectrReader::updateOneWaweWidget);
+        //Добавляем в контекст интерпретатора кривую
+        QString f_curveNameForPython = "C_" + m_listSpectrViewer->last()->experimentalCurve()->mnemonic() + "_" + m_listSpectrViewer->last()->experimentalCurve()->shortCut().device();
+        f_curveNameForPython = f_curveNameForPython.remove("[");
+        f_curveNameForPython = f_curveNameForPython.remove("]");
+        f_curveNameForPython = f_curveNameForPython.remove("(");
+        f_curveNameForPython = f_curveNameForPython.remove(")");
+        f_curveNameForPython = f_curveNameForPython.remove("-");
+        f_curveNameForPython = f_curveNameForPython.remove("/");
+        if(!m_pythonInterpreter.getVariable(f_curveNameForPython).isValid())
+            m_pythonInterpreter.addObject(f_curveNameForPython, m_listSpectrViewer->last()->experimentalCurve());
     }
 }
 
@@ -235,6 +260,15 @@ void SpectrReader::applyFilters(){
                 m_pythonInterpreter.evalFile(f_path);
             }
         }
+        //spectrViewer->experimentalSpectr()->updateParam();
+    }
+    allUpdate();
+}
+
+void SpectrReader::allUpdate(){
+    if(!m_listSpectrViewer || m_listSpectrViewer->isEmpty())
+        return;
+    foreach(auto spectrViewer, *m_listSpectrViewer){
         spectrViewer->experimentalSpectr()->updateParam();
     }
 }

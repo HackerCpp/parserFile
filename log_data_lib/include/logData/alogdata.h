@@ -21,6 +21,7 @@ public:
     virtual bool save()override;
     virtual bool openInterpreterConsole()override{return false;}
     virtual bool openInterpreterScript()override{return false;}
+    virtual bool openInterpreterEditor()override{return false;}
 
     virtual bool isReady()override;
     virtual bool isInterpreter()override{return false;}

@@ -26,7 +26,7 @@ INCLUDEPATH += inc\
                 ../log_data_interpreter/include \
                 ../PythonQT3.2/src \
                 ../PythonQT3.2/extensions/PythonQt_QtAll \
-                ../python3\python3_x64-windows\include\python3.7 \
+                ../python3\python3_x64-windows\include\python3.7
 
 LIBS += \
 ../build/release/LogData.lib \

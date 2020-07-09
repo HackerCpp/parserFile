@@ -7,10 +7,14 @@
 #include <QApplication>
 #include<PythonQt_QtAll.h>
 #include "gui/PythonQtScriptingConsole.h"
+#include "pythoneditor.h"
+#include <QWidget>
+
 
 class INTERPRETER_EXPORT InterpreterPython : public AinterpreterLogData{
-     PythonQtObjectPtr  m_mainContext;
+    PythonQtObjectPtr  m_mainContext;
     PythonQtScriptingConsole *m_console;
+    PythonEditor *m_pythonEditor;
     void init();
 public:
     QMap<QString,QString> exp;
@@ -19,6 +23,7 @@ public:
 
     bool openConsole()override;
     bool openScript()override;
+    bool openEditor()override;
 
     void dataUpdate()override;
 };

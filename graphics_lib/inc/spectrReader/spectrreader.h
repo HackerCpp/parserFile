@@ -22,13 +22,15 @@
 #include "onewavewidget.h"
 #include "Wrapper_python.h"
 #include "spectrviewer.h"
+#include "pythoneditor.h"
 
 
 class SpectrReader : public BaseCurveReader
 {
     Q_OBJECT
     PythonQtObjectPtr  m_pythonInterpreter;
-    PythonQtScriptingConsole *m_pythonConsole;
+    //PythonQtScriptingConsole *m_pythonConsole;
+    PythonEditor *m_pyEditor;
     OneWaveWidget *m_oneWaveWidget;
     int m_widht;
     QVBoxLayout *m_vMainLayout;
@@ -64,6 +66,7 @@ public slots:
     void applyFilters();
     void apply()override;
     void updateOneWaweWidget(QPoint scenePoint);
+    void allUpdate();
 };
 
 #endif // SPECTRREADER_H

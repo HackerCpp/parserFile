@@ -12,6 +12,7 @@ public:
 
     virtual bool openConsole();
     virtual bool openScript();
+    virtual bool openEditor(){return false;}
 
     virtual bool setBlocks(QList<IBlock *> *blocks);
 

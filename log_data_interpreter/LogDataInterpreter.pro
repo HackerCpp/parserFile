@@ -11,12 +11,14 @@ INCLUDEPATH += include \
 ../log_data_lib/include/blocks \
 ../PythonQT3.2/src \
 ../PythonQT3.2/extensions/PythonQt_QtAll \
-../python3/python3_x64-windows/include/python3.7
+../python3/python3_x64-windows/include/python3.7\
+../QScintilla/Qt4Qt5
 
 LIBS += ../PythonQT3.2/build/lib/PythonQt-Qt5-Python373.lib \
         ../PythonQT3.2/build/lib/PythonQt_QtAll-Qt5-Python373.lib\
         ../python3/python3_x64-windows/lib/python37.lib \
-../build/release/LogData.lib
+        ../build/release/LogData.lib\
+        ../QScintilla/build/release/qscintilla2_qt5.lib
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -29,12 +31,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     src/Wrapper_python.cpp \
-    src/interpreterPython.cpp
+    src/interpreterPython.cpp \
+    src/pythoneditor.cpp
 
 HEADERS += \
     include/Wrapper_python.h \
     include/interpreter_global.h \
-    include/interpreterPython.h
+    include/interpreterPython.h \
+    include/pythoneditor.h
 
 # Default rules for deployment.
 unix {

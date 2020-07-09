@@ -15,6 +15,7 @@ public:
 
     virtual bool openConsole()override;
     virtual bool openScript()override;
+    virtual bool openEditor()override{return false;}
 
     virtual bool setBlocks(QList<IBlock *> *blocks)override;
 };

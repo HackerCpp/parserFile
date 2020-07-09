@@ -9,7 +9,8 @@
 #include <QFileDialog>
 #include <datablock.h>
 
-InterpreterPython::InterpreterPython(){
+InterpreterPython::InterpreterPython()
+: m_pythonEditor(nullptr){
     PythonQt::init(PythonQt::IgnoreSiteModule | PythonQt::RedirectStdOut,"LogData");
     PythonQt_QtAll::init();
     PythonQt::self()->registerCPPClass("ICurve","","Curves",PythonQtCreateObject<WrapperIcurvePython>);
@@ -29,6 +30,7 @@ InterpreterPython::~InterpreterPython(){
 void InterpreterPython::init(){
     if(!m_mainContext){
         m_mainContext = PythonQt::self()->getMainModule();
+        m_mainContext.evalScript("from LogData.Curves import*");
         m_console = new PythonQtScriptingConsole(NULL, m_mainContext);
     }
     if(!m_blocks)
@@ -55,7 +57,7 @@ void InterpreterPython::init(){
 
 bool InterpreterPython::openConsole(){
     init();
-    m_console->append("py> from LogData.Curves import*");
+    //m_console->append("py> from LogData.Curves import*");
     m_console->show();
     return true;
 }
@@ -65,6 +67,14 @@ bool InterpreterPython::openScript(){
     QString fileName = QFileDialog::getOpenFileName(nullptr,"Выберите скрипт","*.py","PYTHON(*.py)");
     m_mainContext.evalFile(fileName);
     return false;
+}
+
+bool InterpreterPython::openEditor(){
+    init();
+    if(!m_pythonEditor)
+        m_pythonEditor = new PythonEditor(&m_mainContext);
+    m_pythonEditor->show();
+    return true;
 }
 
 void InterpreterPython::dataUpdate(){

@@ -88,6 +88,12 @@ bool LogData::openInterpreterScript(){
     m_interpreter->openScript();
     return true;
 }
+bool LogData::openInterpreterEditor(){
+    if(!m_interpreter)
+        return false;
+    m_interpreter->openEditor();
+    return true;
+}
 
 bool LogData::setLoader(ILoaderLogData *loader){
     if(m_loader)

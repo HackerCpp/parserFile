@@ -25,6 +25,7 @@ public:
     bool save()override;
     bool openInterpreterConsole()override;
     bool openInterpreterScript()override;
+    bool openInterpreterEditor()override;
 
     virtual bool isInterpreter()override{return m_interpreter != nullptr;}
 
