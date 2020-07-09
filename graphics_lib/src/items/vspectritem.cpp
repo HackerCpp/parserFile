@@ -42,9 +42,12 @@ VSpectrItem::VSpectrItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
 
 }
 VSpectrItem::~VSpectrItem(){
+    disconnect();
+    blockSignals(true);
     if(isRunning()){
         m_isRedraw = false;
         m_isEndThread = true;
+        //terminate();
         wait();
     }
 }
@@ -317,8 +320,9 @@ void VSpectrItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
             continue;
         }
         QString f_fileName = "temporary/" + m_uid + QString::number(y_top) + ".png";
-        if(QFile::exists(f_fileName) ){
-            while(m_saversMoment){}
+        if(QFile::exists(f_fileName) && m_picturePath.indexOf(f_fileName) != -1){
+            //while(m_saversMoment){}
+
             if(!f_srcImage.load(f_fileName,"PNG"))
                 continue;
             if(f_srcImage.isNull())
@@ -427,10 +431,10 @@ void VSpectrItem::run(){
         QPainter f_painter(&f_image);
         drawInterpolationVerticalNoOffset(&f_painter,y_top,y_top + f_heightPictures,&m_isEndThread);
         QString f_namePicture = "temporary/" + m_uid + QString::number(y_top) + ".png";
-        m_picturePath << f_namePicture;
         m_saversMoment = true;
         f_image.save(f_namePicture,"PNG");
         while(!QFile::exists(f_namePicture));
+        m_picturePath << f_namePicture;
         m_saversMoment = false;
     }
     m_curentDrawPersent = 100;

@@ -77,6 +77,7 @@ void VerticalTrack::deleteAllPictures(){
     m_endRedraw = true;
     m_needToRedraw = false;
     wait();
+    //terminate();
     if(m_curentPixmap){delete m_curentPixmap;m_curentPixmap = nullptr;}
     if(m_doublePixMap){delete m_doublePixMap;m_doublePixMap = nullptr;}
     if(m_curentHeader){delete m_curentHeader;m_curentHeader = nullptr;}

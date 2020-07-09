@@ -2,6 +2,7 @@
 #include "logdata.h"
 #include "datablock.h"
 #include "formsblock.h"
+#include <stdio.h>
 
 
 GraphicEditor::GraphicEditor(QSharedPointer<ILogData> logData,DrawSettings *drawSettings,QWidget *parent)
@@ -121,12 +122,16 @@ void GraphicEditor::changeBoard(int index){
 
 void GraphicEditor::refresh(){
     disconnect(this,&QTabWidget::currentChanged,this,&GraphicEditor::changeBoard);
-
+try{
     int f_count = count() - 1;
     m_curentBoard = nullptr;
     for(int index = f_count; index >= 0;index--){
         QWidget *f_widget = widget(index);
+        f_widget->hide();
         removeTab(index);
+        VerticalBoard *f_board = dynamic_cast<VerticalBoard *>(f_widget);
+        if(f_board)
+            f_board->activate(false);
         delete f_widget;//->deleteLater();
     }
     if(m_curves){
@@ -139,4 +144,20 @@ void GraphicEditor::refresh(){
     //qDebug() << "curves added";
     addForms();
     //qDebug() << "forms added";
+}
+catch (int a)
+{
+    // Любые исключения типа int, сгенерированные в блоке try выше, обрабатываются здесь
+    qDebug() << "We caught an int exception with value: " << a << '\n';
+}
+catch (double) // мы не указываем имя переменной, так как в этом нет надобности (мы её нигде в блоке не используем)
+{
+    // Любые исключения типа double, сгенерированные в блоке try выше, обрабатываются здесь
+   qDebug() << "We caught an exception of type double" << '\n';
+}
+catch (const std::string &str) // ловим исключения по константной ссылке
+{
+    // Любые исключения типа std::string, сгенерированные внутри блока try выше, обрабатываются здесь
+    qDebug() << "We caught an exception of type std::string" << '\n';
+}
 }

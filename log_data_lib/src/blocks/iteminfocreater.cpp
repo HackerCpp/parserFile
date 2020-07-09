@@ -32,8 +32,8 @@ AItem *ItemInfoCreater::CreateItemInfo(ICurve *curve){
         SpecItem *f_spectrItem = new SpecItem();
         f_item = f_spectrItem;
         QString valueRange = curve->desc()->param("val_range");
-        qreal f_minimum = valueRange.left(valueRange.indexOf("..")).toDouble();
-        qreal f_maximum = valueRange.right(valueRange.indexOf("..") - 1).toDouble();
+        //qreal f_minimum = valueRange.left(valueRange.indexOf("..")).toDouble();
+        //qreal f_maximum = valueRange.right(valueRange.indexOf("..") - 1).toDouble();
         f_item->setBegin(true,0,0);
         bool ok = true;
         QString f_dataStep = curve->desc()->param("data_step");

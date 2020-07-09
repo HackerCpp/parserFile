@@ -8,7 +8,7 @@ public:
     VerticalItem(ICurve *curve,BoardForTrack *board);
     VerticalItem(const VerticalItem &other);
 
-    ~VerticalItem()override{}
+    virtual ~VerticalItem()override{}
 
 
     void drawHeader(QPainter *per,int &position,bool *flag)override;
