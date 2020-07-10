@@ -63,6 +63,8 @@ protected:
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*)override;
     virtual void toSetTheLocationOfTheImageAfterDrawing()override;
     virtual void run() override;
+    void  swapImageHeader();
+    void  swapImageBody();
 
 
 public slots:

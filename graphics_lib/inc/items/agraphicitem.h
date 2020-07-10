@@ -15,7 +15,7 @@ protected:
     int m_positionHeaderArea,m_heightHeaderArea;
     qreal m_recordPointDepth;
 
-    virtual void drawBody(QPainter *per,QRectF visibleRect,bool *flag){Q_UNUSED(per) Q_UNUSED(visibleRect) Q_UNUSED(flag)}
+
 
 
 public:
@@ -27,6 +27,7 @@ public:
     qreal bottomValue();
 
     virtual void drawHeader(QPainter *per,int &position,bool *flag){Q_UNUSED(per) Q_UNUSED(position) Q_UNUSED(flag)}
+    virtual void drawBody(QPainter *per,QRectF visibleRect,bool *flag){Q_UNUSED(per) Q_UNUSED(visibleRect) Q_UNUSED(flag)}
     virtual void paint(QPainter *per,QPainter *perHead,QRectF visibleRect,int &position,bool *flag);
     virtual bool isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per){Q_UNUSED(area) Q_UNUSED(visibleRect) Q_UNUSED(per) return false;}
     virtual bool isClickHeaderArea(QPoint pos){Q_UNUSED(pos)return false;}
@@ -39,6 +40,7 @@ public:
     virtual QColor color(){return Qt::black;}
     virtual void setColor(QColor color){Q_UNUSED(color)}
     BoardForTrack *board(){return m_board;}
+    bool is_visible(){return m_itemInfo->visible(AItem::BOARD_GRAPH_VIEW);}
 
     bool isActive(){return m_isActive;}
 };

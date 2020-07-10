@@ -299,6 +299,7 @@ void  VerticalTrack::headerRightClickHandler(QPointF point){
     QPoint f_pointInHeaderPicture = QPoint(point.x() - (m_track->begin() * m_board->pixelPerMm()),point.y() - m_visibilitySquare.y() - m_board->positionHeader());
     bool isActive = false;
     m_сurrentСountOfActive = 0;
+    qDebug() << f_pointInHeaderPicture;
     foreach(auto grItem, *m_items){
         isActive = grItem->isClickHeaderArea(f_pointInHeaderPicture);
         grItem->setActive(isActive);
@@ -492,8 +493,29 @@ void VerticalTrack::run(){
         painter.drawLine(QPoint(0,0),QPoint(0,f_height));
     }
     int f_position = 0;
-
     foreach(auto item,*m_items){
+        if(!item || !item->is_visible())
+            continue;
+        item->drawHeader(&painterHeader,f_position,&m_endRedraw);
+
+        if(m_endRedraw){
+            m_infoPixMap->fill(0x0);
+            return;
+        }
+
+    }
+    swapImageHeader();
+    foreach(auto item,*m_items){
+        if(!item || !item->is_visible())
+            continue;
+        item->drawBody(&painter,m_visibilitySquare,&m_endRedraw);
+        if(m_endRedraw){
+            m_infoPixMap->fill(0x0);
+            return;
+        }
+
+     }
+    /*foreach(auto item,*m_items){
         if(item){
             item->paint(&painter,&painterHeader,m_visibilitySquare,f_position,&m_endRedraw);
         }
@@ -501,12 +523,36 @@ void VerticalTrack::run(){
             m_infoPixMap->fill(0x0);
             return;
         }
-    }
+    }*/
     m_infoPixMap->fill(0x0);
     m_heightHeader = f_position;
-
-    swapPixMap();
+    swapImageBody();
+    //swapPixMap();
     //qDebug() << time.msecsTo(QTime::currentTime());
+}
+
+void  VerticalTrack::swapImageHeader(){
+    QImage *ptr = m_curentHeader;
+    if(m_endRedraw){
+        ptr = nullptr;
+        return;
+    }
+    m_curentHeader = m_doubleHeader;
+    m_doubleHeader = ptr;
+    ptr = nullptr;
+    scene()->update();
+}
+
+void  VerticalTrack::swapImageBody(){
+    QImage *ptr = m_curentPixmap;
+    if(m_endRedraw){
+        ptr = nullptr;
+        return;
+    }
+    m_curentPixmap = m_doublePixMap;
+    m_doublePixMap = ptr;
+    ptr = nullptr;
+    toSetTheLocationOfTheImageAfterDrawing();
 }
 
 void VerticalTrack::changeBegin(int newBegin){
