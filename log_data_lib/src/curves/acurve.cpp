@@ -6,7 +6,7 @@
 ACurve::ACurve(){
     m_time = m_depth = m_userValue = nullptr;
     m_recordPoint = qQNaN();
-    m_offset = 1;
+    //m_offset = 1;
 }
 
 ACurve::~ACurve(){
@@ -76,9 +76,9 @@ void ACurve::setShortCut(ShortCut shortCut){
     m_shortCut.setRef(shortCut.ref());
 }
 
-void ACurve::setOffset(uint offset){
+/*void ACurve::setOffset(uint offset){
     m_offset = offset;
-}
+}*/
 
 void ACurve::setSizeOffset(uint sizeOffset){
     m_sizeOffsetInByte = sizeOffset;
@@ -96,9 +96,9 @@ void ACurve::setDesc(Desc *desc){
     m_desc = desc;
 }
 
-uint ACurve::offset(){
+/*uint ACurve::offset(){
     return m_offset;
-}
+}*/
 
 
 

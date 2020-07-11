@@ -34,9 +34,9 @@ public:
     void parserToolInfoBlock(const QByteArray &bodyBlock,IBlock *block);
     void parserUnknownBlock(const QByteArray &bodyBlock,IBlock *block);
     void findShortCuts(QByteArray *header,DataBlock *dataBlock);
-    void findCurves(QByteArray *header,DataBlock * dataBlock);
-    void findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *curve);
-    void copyData(QByteArray bodyBlock,int indexBeginData,DataBlock * dataBlock);
+    void findCurves(QByteArray *header,DataBlock * dataBlock,QByteArray bodyBlock,int indexBeginData);
+    void findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *curve,QByteArray bodyBlock,int indexBeginData);
+    //void copyData(QByteArray bodyBlock,int indexBeginData,DataBlock * dataBlock);
     void parserHeaderBlock(const QByteArray &bodyBlock,IBlock *block);
 
 

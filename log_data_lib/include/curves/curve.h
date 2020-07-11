@@ -11,7 +11,7 @@ public:
      Curve(){
          updateDataType();
          m_sizeOfType = sizeof(T);
-         m_minimum = m_maximum = m_positiveOffset = 0;
+         m_minimum = m_maximum = /*m_positiveOffset =*/ 0;
      }
      Curve(int size,int offset);
      Curve(const Curve<T> &curve);
@@ -54,8 +54,8 @@ template<typename T> Curve<T>::Curve(int size,int offset){
     m_data = new QVector<T>(f_size);
     m_sizeOfType = sizeof(T);
     m_sizeOffsetInByte = offset * m_sizeOfType;
-    m_minimum = m_maximum = m_positiveOffset = 0;
-    m_offset = offset;
+    m_minimum = m_maximum = /*m_positiveOffset =*/ 0;
+    //m_offset = offset;
 }
 template<typename T> Curve<T>::Curve(const Curve<T> &curve){
     m_data = new QVector<T>;
@@ -63,8 +63,8 @@ template<typename T> Curve<T>::Curve(const Curve<T> &curve){
     m_sizeOffsetInByte = curve.m_sizeOffsetInByte;
     m_minimum = curve.m_minimum;
     m_maximum = curve.m_maximum;
-    m_positiveOffset = curve.m_positiveOffset;
-    m_offset = curve.m_offset;
+    //m_positiveOffset = curve.m_positiveOffset;
+    //m_offset = curve.m_offset;
 
     m_time = curve.m_time;
     m_depth = curve.m_depth;
@@ -111,7 +111,7 @@ template<typename T> void Curve<T>::setData(const char *dataPtr,uint numberOfVec
     memcpy(m_data->data(),dataPtr,dataSizeInBytes);
     m_minimum = static_cast<qreal>(*std::min_element(m_data->begin(),m_data->end()));
     m_maximum = static_cast<qreal>(*std::max_element(m_data->begin(),m_data->end()));
-    m_positiveOffset = m_minimum < 0?m_minimum:0;
+    //m_positiveOffset = m_minimum < 0?m_minimum:0;
 }
 
 template<typename T> uint Curve<T>::size(){

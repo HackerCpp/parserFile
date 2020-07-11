@@ -10,8 +10,6 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    try{
-
     MainWindow w;
     QCoreApplication::setOrganizationName("GFM");
     QCoreApplication::setApplicationName("Geology");
@@ -37,24 +35,5 @@ int main(int argc, char *argv[])
     //PythonEditor *f_editor = new PythonEditor(nullptr,&w);
     //f_editor->show();
     return a.exec();
-
-        // Здесь мы пишем стейтменты, которые будут генерировать следующее исключение
-        //throw -1; // типичный стейтмент throw
-    }
-    catch (int a)
-    {
-        // Любые исключения типа int, сгенерированные в блоке try выше, обрабатываются здесь
-        std::cerr << "We caught an int exception with value: " << a << '\n';
-    }
-    catch (double) // мы не указываем имя переменной, так как в этом нет надобности (мы её нигде в блоке не используем)
-    {
-        // Любые исключения типа double, сгенерированные в блоке try выше, обрабатываются здесь
-        std::cerr << "We caught an exception of type double" << '\n';
-    }
-    catch (const std::string &str) // ловим исключения по константной ссылке
-    {
-        // Любые исключения типа std::string, сгенерированные внутри блока try выше, обрабатываются здесь
-        std::cerr << "We caught an exception of type std::string" << '\n';
-    }
 
 }

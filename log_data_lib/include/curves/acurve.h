@@ -20,8 +20,9 @@ protected:
     QString m_mnemonic;
     QString m_dataType;
     qreal m_recordPoint;
-    qreal m_positiveOffset;
-    uint m_offset;
+    //qreal m_positiveOffset;
+    //uint m_offset;
+    qreal m_scale;
 public:
 
     ACurve();
@@ -58,7 +59,7 @@ public:
     virtual QString mnemonic()override;
 
     virtual void setShortCut(ShortCut shortCut)override;
-    virtual void setOffset(uint offset);
+    /*virtual void setOffset(uint offset);*/
     virtual void setSizeOffset(uint sizeOffset);
     virtual void setMnemonic(QString mnemonic)override;
     virtual void setDataType(QString dataType);
@@ -67,7 +68,7 @@ public:
 
     virtual QString dataType();
 
-    virtual uint offset();
+    //virtual uint offset();
 
 
 

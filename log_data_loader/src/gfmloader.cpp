@@ -239,7 +239,7 @@ void GFMLoader::parserDataBlock(const QByteArray &bodyBlock,IBlock *block){
         numberOfVectors = *reinterpret_cast<uint*>(bodyBlock.mid(endHeaderIndex+endHeader.size() * 2 + 2,4).data());
     }
     else{
-        indexBeginData = endPluginsIndex + endPlugins.size()*2+6;
+        indexBeginData = endPluginsIndex + endPlugins.size() * 2 + 6;
         QString plugins = m_codec->toUnicode(bodyBlock.mid(beginPluginsIndex - 2,endPluginsIndex - beginPluginsIndex + endPlugins.size() * 2));
         dataBlock->setPlugins(plugins);
         numberOfVectors = *reinterpret_cast<uint*>(bodyBlock.mid(endPluginsIndex+endPlugins.size() * 2 + 2,4).data());
@@ -254,8 +254,8 @@ void GFMLoader::parserDataBlock(const QByteArray &bodyBlock,IBlock *block){
     QString moduleMnemonics = m_codec->toUnicode(header.mid(indexEndName+2,indexEndmoduleMnem - indexEndName - 4));
     dataBlock->setModuleMnemonic(moduleMnemonics);
     findShortCuts(&header,dataBlock);
-    findCurves(&header,dataBlock);
-    copyData(bodyBlock,indexBeginData,dataBlock);
+    findCurves(&header,dataBlock,bodyBlock,indexBeginData);
+    //copyData(bodyBlock,indexBeginData,dataBlock);
     QList<ICurve*> *f_curves = dataBlock->curves();
     ICurve *f_mainTime = nullptr;
     ICurve *f_mainDepth = nullptr;
@@ -299,7 +299,7 @@ qreal convertUnitOfGFM(QString value, QString unit){     //изменение е
     else if(unit == "PIX" || unit == "MM")
         f_result = value.toDouble();
     else
-        qDebug() << "Неизвестная величина" << unit;
+        qDebug() << "Неизвестная величина gfmLoader.cpp " << unit;
     return f_result;
 }
 
@@ -597,7 +597,6 @@ void GFMLoader::parserFormsBlock(const QByteArray &bodyBlock,IBlock *block){
             f_board = new Board();
             f_board->setName(attributes.value("name").toString());
             findBoard(&xmlReader,f_board,formsBlock);
-
         }
     }
 
@@ -648,7 +647,7 @@ void GFMLoader::findShortCuts(QByteArray *header,DataBlock *dataBlock){
 
 }
 
-void GFMLoader::findCurves(QByteArray *header,DataBlock * dataBlock){
+void GFMLoader::findCurves(QByteArray *header,DataBlock * dataBlock,QByteArray bodyBlock,int indexBeginData){
     QString BeginLine = "] ";
     QString endLine = "\r\n";
     QList<ICurve*> *curves = new QList<ICurve*>;
@@ -687,16 +686,16 @@ void GFMLoader::findCurves(QByteArray *header,DataBlock * dataBlock){
             curves->push_back(new Curve<uint64_t>);
         else if(value.indexOf("INT64") != -1)
             curves->push_back(new Curve<int64_t>);
-        findCurveInfo(value,dataBlock,dynamic_cast<ICurve *>(curves->last()));
+        findCurveInfo(value,dataBlock,dynamic_cast<ICurve *>(curves->last()),bodyBlock,indexBeginData);
     }
     dataBlock->setCurves(*curves);
 }
 
-void GFMLoader::findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *curve){
+void GFMLoader::findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *curve,QByteArray bodyBlock,int indexBeginData){
     ACurve *curveAbstract =  dynamic_cast<ACurve *>(curve);
     int indexEndOffset = curveLine.indexOf("]",1) - 1;
-    uint offset = curveLine.mid(1,indexEndOffset).toUInt();
-    curveAbstract->setOffset(offset);
+    uint f_offset = curveLine.mid(1,indexEndOffset).toUInt();
+    //curveAbstract->setOffset(offset);
 
     int indexEndsize = curveLine.indexOf("]",indexEndOffset+2) - 3;
     uint size = curveLine.mid(indexEndOffset+3,indexEndsize - indexEndOffset).toUInt();
@@ -748,9 +747,13 @@ void GFMLoader::findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *
     }
     Desc *desc = new Desc(curveLine.mid(indexEndRecordPoint));
     curveAbstract->setDesc(desc);
+
+    uint numberOfVectors = dataBlock->numberOfVectors();
+    uint f_dataOffset = f_offset * numberOfVectors;
+    curveAbstract->setData(bodyBlock.data() + indexBeginData + f_dataOffset,numberOfVectors);
 }
 
-void GFMLoader::copyData(QByteArray bodyBlock,int indexBeginData,DataBlock *dataBlock){
+/*void GFMLoader::copyData(QByteArray bodyBlock,int indexBeginData,DataBlock *dataBlock){
     uint numberOfVectors = dataBlock->numberOfVectors();
     QList<ICurve*> *curves = dataBlock->curves();
     if(!curves){
@@ -764,5 +767,5 @@ void GFMLoader::copyData(QByteArray bodyBlock,int indexBeginData,DataBlock *data
         uint offset = f_curve->offset() * numberOfVectors;
         curve->setData(bodyBlock.data() + indexBeginData + offset,numberOfVectors);
     }
-}
+}*/
 

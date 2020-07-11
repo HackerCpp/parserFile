@@ -34,22 +34,22 @@ void AddCurve :: addCurveInBlock(QList<IBlock*> *m_block)
         {
 
             DataBlock *dataBlock = dynamic_cast<DataBlock*>(block);
-            uint m_numberOfVector = dataBlock->numberOfVectors();
+            //uint m_numberOfVector = dataBlock->numberOfVectors();
             QList<ICurve*> *m_curve = dataBlock->curves();
             Curve<uint16_t> *new_curve = new Curve<uint16_t>();
             ACurve *f_curve = dynamic_cast<ACurve*>(new_curve);
             ACurve *n_curve = dynamic_cast<ACurve*>(m_curve->value(3));
-            uint m_offset = n_curve->offset();
-            f_curve->setOffset(m_offset);
+            //uint m_offset = n_curve->offset();
+            //f_curve->setOffset(m_offset);
             uint m_sizeOffset = n_curve->sizeOffset();
-            qDebug()<<m_sizeOffset<<"LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL";
+            //qDebug()<<m_sizeOffset<<"LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL";
             f_curve->setSizeOffset(m_sizeOffset);
 
             ShortCut m_shortcut = n_curve->shortCut();
             m_shortcut.setName(" ");
             f_curve->setShortCut(m_shortcut);
 
-            qDebug()<<m_sizeOffset<<"LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL";
+            //qDebug()<<m_sizeOffset<<"LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL";
             f_curve->setMnemonic("newCurve");
 
             QString m_dataType = n_curve->dataType();
@@ -63,7 +63,7 @@ void AddCurve :: addCurveInBlock(QList<IBlock*> *m_block)
             Desc *m_desc = n_curve->desc();
             f_curve->setDesc(m_desc);
             qreal m_data = n_curve->data(1);
-             qDebug()<<m_sizeOffset<<"22222222222222222222222222222222";
+             //qDebug()<<m_sizeOffset<<"22222222222222222222222222222222";
             f_curve->setData(m_data);
 
             dataBlock->setCurves(*m_curve);
@@ -97,7 +97,7 @@ void AddCurve :: addTrackInCurve(ABoard *board)
 }
 void AddCurve:: addItemInTrack(ATrack *track)
 {
-
+    Q_UNUSED(track)
     LineItem *item = new LineItem();
     item->setName(" :newCurve", "6:1:1:1:1:1:1");
     item->setTypeItem(LINE);
@@ -106,7 +106,7 @@ void AddCurve:: addItemInTrack(ATrack *track)
     item->setColor("#ff0000cc",1);
     item->setPaintMode("PAINT_CURVE");
     item->setWidth(1);
-    AItem * f_item = dynamic_cast<AItem *>(item);
+    //AItem * f_item = dynamic_cast<AItem *>(item);
     //track->setItem(f_item->name(),f_item);
 }
 
