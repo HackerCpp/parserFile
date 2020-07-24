@@ -56,11 +56,11 @@ void Ruler::run(){
     f_painter.setPen(f_pen);
     qreal f_step = 10 * m_board->pixelPerMm();
     qreal mm5 = 2 * m_board->pixelPerMm();
-    qreal devider = m_board->isDrawTime() ? 600000 :  1000;
+    qreal divider = m_board->isDrawTime() ? 600000 :  1000;
     for(qreal i = f_step - fmod(m_visibilitySquare.y(),f_step);i < f_height;i += f_step){
         f_painter.drawLine(QPointF(0,i),QPointF(mm5,i));
         f_painter.drawLine(QPointF(f_width - mm5,i),QPointF(f_width,i));
-        qreal f_number = (m_visibilitySquare.y()+i-m_board->offsetUp()) / m_board->scale()/devider;
+        qreal f_number = (m_visibilitySquare.y() + i - m_board->offsetUp()) / m_board->scale()/divider;
         f_painter.drawText(QRectF(0,i - 10,f_width,20),Qt::AlignHCenter|Qt::AlignVCenter,QString::number(round(f_number*100)/100));
 
         if(m_endRedraw)

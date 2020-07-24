@@ -1,15 +1,16 @@
 QT -= gui
 
 TEMPLATE = lib
-CONFIG += staticlib
-#CONFIG += dynamiclib
+#CONFIG += staticlib
+CONFIG += dynamiclib
 
 
 CONFIG += c++17
 INCLUDEPATH += include/blocks \
     include/curves \
     include/logData \
-    include/externalComponents
+    include/externalComponents \
+    include/customObject
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -22,10 +23,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/customObject/customobject.cpp \
+    src/customObject/customobjectiteminfo.cpp \
     src/blocks/iteminfocreater.cpp \
     src/blocks/acuItem.cpp \
     src/blocks/lineItem.cpp \
     src/blocks/specItem.cpp \
+    src/customObject/primitive.cpp \
     src/externalComponents/asaverlogdata.cpp \
     src/externalComponents/isaverlogdata.cpp \
     src/blocks/astyleitem.cpp \
@@ -44,7 +48,6 @@ SOURCES += \
     src/blocks/datablock.cpp \
     src/blocks/iblock.cpp \
     src/blocks/shortcut.cpp\
-\
     src/curves/curve.cpp \
     src/externalComponents/ainterpreterlogdata.cpp \
     src/externalComponents/iinterpreterlogdata.cpp \
@@ -78,11 +81,13 @@ HEADERS += \
     include/blocks/datablock.h \
     include/blocks/iblock.h \
     include/blocks/shortcut.h \
-\
     include/blocks/unknownblock.h \
     include/blocks/board.h \
     include/blocks/track.h \
     include/curves/acurve.h \
+    include/customObject/customobject.h \
+    include/customObject/customobjectiteminfo.h \
+    include/customObject/primitive.h \
     include/externalComponents/ainterpreterlogdata.h \
     include/externalComponents/aloaderlogdata.h \
     include/externalComponents/asaverlogdata.h \

@@ -5,6 +5,13 @@ FormsBlock::FormsBlock(){
     m_boards = new QList<ABoard*>;
 }
 
+FormsBlock::FormsBlock(const FormsBlock &other){
+    m_type = other.m_type;
+    m_boards = new QList<ABoard*>;
+    foreach(auto board,*other.m_boards){
+        m_boards->push_back(new ABoard(*board));
+    }
+}
 
 FormsBlock::~FormsBlock(){
 

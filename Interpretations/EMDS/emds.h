@@ -3,20 +3,32 @@
 
 #include "EMDS_global.h"
 #include <QString>
-#include "ilogdata.h"
-
+#include "logdata.h"
+#include "formsblock.h"
+#include "datablock.h"
+#include "board.h"
+#include "track.h"
+#include "iteminfocreater.h"
 
 
 
 class EMDS_EXPORT EMDS{
 
-    const QString M_VERSION = "1.0.0.0";
+    const QString M_VERSION = "1.0.0.1";
     const QString M_NAME = "EMDS";
     ILogData *m_logData;
+    DataBlock *m_blockChannels;
+    FormsBlock *m_formsBlock;
+    Board *m_emdsBoard;
+    QVector<ICurve *> *m_channelsA;
+
+
+    void createEmdsBoard(QList<IBlock *> *blocks);
+    void fillingTheBoard(QList<IBlock *> *blocks);
 
 public:
     EMDS();
-    EMDS(ILogData *logData){m_logData = logData;}
+    EMDS(ILogData *logData);
     ~EMDS(){}
 
 

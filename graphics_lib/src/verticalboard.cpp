@@ -17,7 +17,7 @@ VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves,Dra
     }
     QList<ATrack*> *tracksInfo = m_boardInfo->tracks();
     if(!tracksInfo){
-        qDebug() << "Bord:" << m_boardInfo->name() << "вернул нулевой указатель на треки";
+        qDebug() << "Bord:" << m_boardInfo->name() << "вернул нулевой указатель на треки VerticalBoard.cpp ";
         return;
     }
     VerticalTrack *f_prevTrack = nullptr;

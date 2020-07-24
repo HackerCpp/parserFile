@@ -10,6 +10,7 @@ class FormsBlock : public ABlock{
     QString m_activeName;
 public:
     FormsBlock();
+    FormsBlock(const FormsBlock &other);
     ~FormsBlock();
 
     void setActiveName(QString activeName);

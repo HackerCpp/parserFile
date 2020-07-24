@@ -22,8 +22,8 @@ SettingsItems::~SettingsItems(){
 
 }
 
-void SettingsItems::addItem(AGraphicItem *item){
-    SettingsItem *f_tabSettingsItem = SettingsItem::createSettingsItem(item);
+void SettingsItems::addItem(AGraphicItem *item,SelectingArea *selectingArea){
+    SettingsItem *f_tabSettingsItem = SettingsItem::createSettingsItem(item,selectingArea);
     m_tabWidgets->addTab(f_tabSettingsItem,item->curve()->shortCut().name() + ":" + item->curve()->mnemonic());
 }
 
@@ -101,14 +101,14 @@ Selection::~Selection(){
     if(m_btnGroup){delete m_btnGroup;m_btnGroup = nullptr;}
 }
 /******************************Base settings*********************************************/
-SettingsItem * SettingsItem::createSettingsItem(AGraphicItem *item){
+SettingsItem * SettingsItem::createSettingsItem(AGraphicItem *item,SelectingArea *selectingArea){
     TypeItem f_type = item->itemInfo()->type();
     switch(f_type){
         case TypeItem::LINE:{
-            return new SettingsLineItem(item);
+            return new SettingsLineItem(item,selectingArea);
         }
         case TypeItem::SPEC:{
-            return new SettingsSpectrItem(item);
+            return new SettingsSpectrItem(item,selectingArea);
         }
         /*case TypeItem::ACU:{
             break;
@@ -118,29 +118,29 @@ SettingsItem * SettingsItem::createSettingsItem(AGraphicItem *item){
         }*/
         default:{
             qDebug() << "тип при создании окна настроек не описан" << f_type;
-            return new SettingsItem(item);
+            return new SettingsItem(item,selectingArea);
         }
     }
 }
 
-SettingsItem::SettingsItem(AGraphicItem *item):
-    m_item(item)
+SettingsItem::SettingsItem(AGraphicItem *item,SelectingArea *selectingArea):
+    m_item(item),m_selectingArea(selectingArea)
 {
     m_mainVLout = new QVBoxLayout;
 
     QStringList f_names;
-    f_names << "Left Border:units" << "Zero offset:mm";
+    f_names << tr("Left Border:units") << tr("Zero offset:mm");
     m_leftBorderSettings = new Selection(f_names,(int)!m_item->itemInfo()->isBeginValue());
     m_leftBorderSettings->setValue("Left Border",QString::number(m_item->itemInfo()->beginValue() / 10));
     m_leftBorderSettings->setValue("Zero offset",QString::number(m_item->itemInfo()->zeroOffset() / 10));
 
     f_names.clear();
-    f_names << "Right Border:units" << "Scale:unit/sm";
+    f_names << tr("Right Border:units") << tr("Scale:unit/sm");
     m_rightBorderSettings = new Selection(f_names,(int)!m_item->itemInfo()->isEndValue());
     m_rightBorderSettings->setValue("Right Border",QString::number(m_item->itemInfo()->endValue()));
     m_rightBorderSettings->setValue("Scale",QString::number((1/m_item->itemInfo()->scale()) * 10));
 
-    m_labelRecordPoint = new QLabel("Record point");
+    m_labelRecordPoint = new QLabel(tr("Record point"));
     m_editRecordPoint = new QLineEdit;
     m_recordPointLayout = new QHBoxLayout();
     m_groupBox = new QGroupBox;
@@ -191,8 +191,8 @@ void SettingsItem::apply(){
 }
 /***************************Settings for line item*****************************************************************/
 
-SettingsLineItem::SettingsLineItem(AGraphicItem *lineItem)
-    : SettingsItem(lineItem)
+SettingsLineItem::SettingsLineItem(AGraphicItem *lineItem,SelectingArea *selectingArea)
+    : SettingsItem(lineItem,selectingArea)
 {
     m_lineItem = dynamic_cast<VLineItem*>(lineItem);
     if(!m_lineItem){
@@ -205,11 +205,11 @@ SettingsLineItem::SettingsLineItem(AGraphicItem *lineItem)
     }
     m_styleGrup = new QGroupBox;
     m_gridStyleLayout = new QGridLayout;
-    m_labelColor = new QLabel("Color");
-    m_labelWidthLine = new QLabel("Width");
+    m_labelColor = new QLabel(tr("Color"));
+    m_labelWidthLine = new QLabel(tr("Width"));
     m_btnSelectColor = new QPushButton;
     m_spinBoxWidthLine = new QSpinBox;
-    m_checkBoxIsDashes = new QCheckBox("Dashes");
+    m_checkBoxIsDashes = new QCheckBox(tr("Dashes"));
     m_gridStyleLayout->addWidget(m_labelColor,0,0);
     m_gridStyleLayout->addWidget(m_btnSelectColor,0,1);
     m_gridStyleLayout->addWidget(m_labelWidthLine,1,0);
@@ -251,8 +251,8 @@ void SettingsLineItem::changeWidthLine(int newWidth){
 
 /************************Settings for spectr item************************/
 
-SettingsSpectrItem::SettingsSpectrItem(AGraphicItem *spectrItem)
-    : SettingsItem(spectrItem){
+SettingsSpectrItem::SettingsSpectrItem(AGraphicItem *spectrItem,SelectingArea *selectingArea)
+    : SettingsItem(spectrItem,selectingArea){
     m_specItem = dynamic_cast<VSpectrItem*>(spectrItem);
     if(!m_specItem){
         qDebug() << "не удалось преобразовать AGraphicItem в VSpectrItem присоздании окна настроек";
@@ -263,7 +263,9 @@ SettingsSpectrItem::SettingsSpectrItem(AGraphicItem *spectrItem)
         qDebug() << "SpecItem вернул не тот itemInfo";
     }
     m_styleGrup = new QGroupBox;
-    m_vLayout = new QHBoxLayout();
+    m_styleGrup->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    m_splitterColor = new QSplitter(Qt::Horizontal);
+    m_vStyleGroupLayout = new QVBoxLayout;
     /*QList<MulticolorItem> *f_multicolor = m_specItemInfo->multiColor();
     m_image = new QImage(this->width()/2,f_multicolor->size() * 30,QImage::Format_ARGB32);
     m_labelForImage = new QLabel();
@@ -304,29 +306,41 @@ SettingsSpectrItem::SettingsSpectrItem(AGraphicItem *spectrItem)
     m_modelMulticolor = new ModelMulticolor(m_specItemInfo->multiColor());
     m_tableViewMulticolor->setModel(m_modelMulticolor);
     m_tableViewMulticolor->setItemDelegateForColumn(1,new ColorDelegate());
-    m_btnInsertColor = new QPushButton("Insert color");
-    m_btnRemoveColor = new QPushButton("Remove color");
-    m_btnCalculate = new QPushButton("Calculate");
+    m_btnInsertColor = new QPushButton(tr("Insert color"));
+    m_btnRemoveColor = new QPushButton(tr("Remove color"));
+    m_btnCalculate = new QPushButton(tr("Calculate"));
     connect(m_btnInsertColor,&QPushButton::pressed,m_modelMulticolor,&ModelMulticolor::insertColor);
     connect(m_btnRemoveColor,&QPushButton::pressed,m_modelMulticolor,&ModelMulticolor::removeColor);
     connect(m_btnCalculate,&QPushButton::pressed,this,&SettingsSpectrItem::calculateColor);
 
     m_bthsColorVLayout = new QVBoxLayout;
+    m_btnsColorWidget = new QWidget();
     m_comboColor = new QComboBox();
-    m_comboColor->insertItem(0,"Rainbow");
-    m_comboColor->insertItem(1,"HSV");
+    m_comboColor->insertItem(0,tr("Rainbow"));
+    m_comboColor->insertItem(1,tr("HSV"));
 
     m_bthsColorVLayout->addWidget(m_btnInsertColor);
     m_bthsColorVLayout->addWidget(m_btnRemoveColor);
     m_bthsColorVLayout->addWidget(m_comboColor);
     m_bthsColorVLayout->addWidget(m_btnCalculate);
-    m_bthsColorVLayout->addSpacing(1000);
+    m_bthsColorVLayout->addStretch(100);
+
+    m_oneWaveWidget = new OneWaveWidget(m_specItem);
+    if(m_selectingArea)
+        m_oneWaveWidget->update(QPoint(m_selectingArea->top(),m_selectingArea->left()));
+    else
+       m_oneWaveWidget->update(QPoint(0,0));
 
     //m_vLayout->addWidget(m_labelForImage);
-    m_vLayout->addWidget(m_tableViewMulticolor);
-    m_vLayout->addLayout(m_bthsColorVLayout);
+    m_btnsColorWidget->setLayout(m_bthsColorVLayout);
+
+    m_splitterColor->addWidget(m_tableViewMulticolor);
+    m_splitterColor->addWidget(m_btnsColorWidget);
+    m_splitterColor->addWidget(m_oneWaveWidget);
     //painter.end();
-    m_styleGrup->setLayout(m_vLayout);
+    m_vStyleGroupLayout->addWidget(m_splitterColor);
+    m_styleGrup->setLayout(m_vStyleGroupLayout);
+
     m_mainVLout->addWidget(m_styleGrup);
     //m_mainVLout->addStretch(100);
 }

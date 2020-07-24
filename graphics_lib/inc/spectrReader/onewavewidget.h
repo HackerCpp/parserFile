@@ -6,6 +6,7 @@
 #include "qxtspanslider.h"
 #include "chartvievforonewavewidget.h"
 #include "modelonewave.h"
+#include <QSizePolicy>
 
 
 
@@ -16,6 +17,8 @@ class OneWaveWidget : public QWidget
     //QList<QLineSeries> *m_iagrams;
 
     ChartViewForOneWaveWidget *m_chartView;
+
+
     QValueAxis *xAxis;  // Ось X
     QValueAxis *yAxis;  // Ось Y
     QList<QPair<VSpectrItem *, QLineSeries *> > *m_spectrIitems;
@@ -33,6 +36,7 @@ public:
 
     void update(const QList<QPointF> &newPoints);
     void update(QPoint point);
+
 
     void addItem(VSpectrItem *spectrItem);
 public slots:

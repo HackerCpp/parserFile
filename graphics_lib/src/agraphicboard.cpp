@@ -68,8 +68,8 @@ void AGraphicBoard::resizePicture(){
 }
 
 void AGraphicBoard::activate(bool activate){
-    QList<QGraphicsItem *> m_items = this->items();
-    foreach(auto item, m_items){
+    QList<QGraphicsItem *> f_items = this->items();
+    foreach(auto item, f_items){
         AGraphicTrack *f_track = dynamic_cast<AGraphicTrack *>(item);
         if(f_track){
            f_track->activate(activate);

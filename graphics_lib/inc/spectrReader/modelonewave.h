@@ -21,8 +21,10 @@ struct OneWaveInfo{
 
 class ModelOneWave : public QAbstractListModel
 {
+    Q_OBJECT
     QList<OneWaveInfo> *m_listVaweInfo;
     QStringList m_headerList;
+    QPair<qreal,qreal> m_maximumAndMinimum;
 public:
     ModelOneWave();
     ~ModelOneWave()override{}
@@ -39,6 +41,9 @@ public:
     qreal delta(){if(m_listVaweInfo && m_listVaweInfo->size()){return m_listVaweInfo->at(m_listVaweInfo->size() - 1).currentAmplitude;}return 0; }
     qreal band(){if(m_listVaweInfo && m_listVaweInfo->size()){return m_listVaweInfo->first().currentBand;}return 0;}
     qreal frequency(){if(m_listVaweInfo && m_listVaweInfo->size()){return m_listVaweInfo->first().currentFrequency;}return 0;}
+    qreal maximum(){return m_maximumAndMinimum.first;}
+    qreal minimum(){return m_maximumAndMinimum.second;}
+    QPair<qreal,qreal> calcMaximumAndMinimum();
 };
 
 #endif // MODELONEWAVE_H

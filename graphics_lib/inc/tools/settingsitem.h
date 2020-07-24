@@ -16,6 +16,8 @@
 #include "basesettingswindow.h"
 #include "modelmulticolor.h"
 #include <QTableView>
+#include "onewavewidget.h"
+#include "selectingarea.h"
 
 /*MAIN CLASS SETTINGS FOR ITEMS*********************************************/
 class SettingsItems : public BaseSettingsWindow{
@@ -26,7 +28,7 @@ public :
     SettingsItems();
     ~SettingsItems();
 
-    void addItem(AGraphicItem *item);
+    void addItem(AGraphicItem *item,SelectingArea *selectingArea);
 public slots:
     void apply() override;
 };
@@ -74,13 +76,14 @@ protected:
     QLineEdit *m_editRecordPoint;
     QHBoxLayout *m_recordPointLayout;
     QGroupBox *m_groupBox;
+    SelectingArea *m_selectingArea;
 
     virtual void applyBaseSettings();
     virtual void applySpecificSettings(){}
 
 public:
-    static SettingsItem * createSettingsItem(AGraphicItem *item);
-    SettingsItem(AGraphicItem *item);
+    static SettingsItem * createSettingsItem(AGraphicItem *item,SelectingArea *selectingArea);
+    SettingsItem(AGraphicItem *item,SelectingArea *selectingArea);
     ~SettingsItem();
 
     void apply();
@@ -100,7 +103,7 @@ class SettingsLineItem : public SettingsItem{
     QCheckBox *m_checkBoxIsDashes;
 
 public:
-    SettingsLineItem(AGraphicItem *lineItem);
+    SettingsLineItem(AGraphicItem *lineItem,SelectingArea *selectingArea);
     ~SettingsLineItem()override;
 
     void applySpecificSettings()override{}
@@ -117,17 +120,21 @@ class SettingsSpectrItem : public SettingsItem{
     SpecItem *m_specItemInfo;
     /*style*/
     QGroupBox *m_styleGrup;
-    QHBoxLayout *m_vLayout;
+    QSplitter *m_splitterColor;
+    QVBoxLayout *m_vStyleGroupLayout;
     QImage * m_image;
     QLabel *m_labelForImage;
     QTableView *m_tableViewMulticolor;
     ModelMulticolor *m_modelMulticolor;
     QVBoxLayout *m_bthsColorVLayout;
+    QWidget *m_btnsColorWidget;
     QPushButton *m_btnInsertColor, *m_btnRemoveColor, *m_btnCalculate;
     QComboBox *m_comboColor;
 
+    OneWaveWidget *m_oneWaveWidget;
+
 public:
-    SettingsSpectrItem(AGraphicItem *spectrItem);
+    SettingsSpectrItem(AGraphicItem *spectrItem,SelectingArea *selectingArea);
     ~SettingsSpectrItem()override;
 
     void applySpecificSettings()override;

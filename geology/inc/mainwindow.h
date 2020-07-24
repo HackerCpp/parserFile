@@ -5,10 +5,13 @@
 #include "menu.h"
 #include "logdataview.h"
 
+
 class MainWindow : public WindowForMenu
 {
     Q_OBJECT
 
+
+    PythonQtObjectPtr m_pythonInterpreter;
     Menu *m_menu;
     QHBoxLayout *m_mainHorLayout;
     LogDataView *m_logDataView;
@@ -25,6 +28,8 @@ public slots:
     void openFile()override;
     void saveGFM()override;
     void openConsolePython()override;
+    void openEditorPython()override;
     void openInterpretations()override;
+    void openConstructor()override;
 };
 #endif // MAINWINDOW_H

@@ -22,18 +22,18 @@ VerticalTrack::VerticalTrack(ATrack *track,BoardForTrack *board)
     }
     m_selectingArea = nullptr;
 
-    m_curvesMenu = new QMenu("&CurvesMenu");
-    m_curvesMenu->addAction("&Curve settings",this, SLOT(openSettingsActiveItems()));
-    m_curvesMenu->addAction("&Curve edit",this, SLOT(openEditorActiveItems()));
+    m_curvesMenu = new QMenu(tr("&CurvesMenu"));
+    m_curvesMenu->addAction(tr("&Curve settings"),this, SLOT(openSettingsActiveItems()));
+    m_curvesMenu->addAction(tr("&Curve edit"),this, SLOT(openEditorActiveItems()));
     m_curvesMenu->setMaximumSize(1000,1000);
 
-    m_trackMenu = new QMenu("&TrackMenu");
-    m_trackMenu->addAction("&Track settings",this, SLOT(openSettingsTrack()));
-    m_trackMenu->addAction("&Insert a track on the right",this, SLOT(insertRightTrack()));
-    m_trackMenu->addAction("&Insert a track on the left",this, SLOT(insertLeftTrack()));
-    m_trackMenu->addAction("&Delete a track",this, SLOT(deleteTrack()));
-    m_trackMenu->addAction("&Open curve browser",this, SLOT(openCurveBrowser()));
-    m_trackMenu->addAction("&Save Picture",this, SLOT(savePicture()));
+    m_trackMenu = new QMenu(tr("&TrackMenu"));
+    m_trackMenu->addAction(tr("&Track settings"),this, SLOT(openSettingsTrack()));
+    m_trackMenu->addAction(tr("&Insert a track on the right"),this, SLOT(insertRightTrack()));
+    m_trackMenu->addAction(tr("&Insert a track on the left"),this, SLOT(insertLeftTrack()));
+    m_trackMenu->addAction(tr("&Delete a track"),this, SLOT(deleteTrack()));
+    m_trackMenu->addAction(tr("&Open curve browser"),this, SLOT(openCurveBrowser()));
+    m_trackMenu->addAction(tr("&Save Picture"),this, SLOT(savePicture()));
     m_border = new RightBorder();
     qreal f_pixelPerMm = m_board->pixelPerMm();
     int f_topY = m_board->top();
@@ -89,6 +89,11 @@ void VerticalTrack::deleteAllPictures(){
 void VerticalTrack::activate(bool activate){
     if(activate){
         resizePictures();
+        if(m_items){
+            foreach(auto item,*m_items){
+                item->updateParam();
+            }
+        }
         redraw();
     }
     else{
@@ -584,7 +589,7 @@ void VerticalTrack::openSettingsActiveItems(){
     int f_count = 0;
     foreach(auto item,*m_items){
         if(item->isActive()){
-            f_tabWidget->addItem(item);
+            f_tabWidget->addItem(item,m_selectingArea);
             f_count++;
         }
     }

@@ -8,9 +8,9 @@ BaseSettingsWindow::BaseSettingsWindow(QWidget* parent)
     m_scroll->setWidgetResizable(true);
     m_mainLayout = new QVBoxLayout;
     m_btnLayout = new QHBoxLayout;
-    m_btnOk = new QPushButton("OK");
-    m_btnCansel = new QPushButton("CANCEL");
-    m_btnApply = new QPushButton("APPLY");
+    m_btnOk = new QPushButton(tr("OK"));
+    m_btnCansel = new QPushButton(tr("CANCEL"));
+    m_btnApply = new QPushButton(tr("APPLY"));
     m_btnLayout->addStretch(100);
     m_btnLayout->addWidget(m_btnOk);
     m_btnLayout->addWidget(m_btnApply);

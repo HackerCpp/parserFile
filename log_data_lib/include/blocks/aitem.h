@@ -5,7 +5,7 @@
 #include <QDebug>
 
 //enum PaintMode{CURVE_MODE,NUMBERS_MODE};
-enum TypeItem{LINE,ACU,MARK,SPEC};
+enum TypeItem{LINE,ACU,MARK,SPEC,CUSTOM};
 
 struct MulticolorItem{
     qreal bound;

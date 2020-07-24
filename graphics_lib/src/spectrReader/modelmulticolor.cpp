@@ -10,7 +10,7 @@ ModelMulticolor::ModelMulticolor(QList<MulticolorItem> *listMulticolor)
     foreach(auto multicolor,*m_listMulticolorOriginal){
         m_listMulticolor->push_front(multicolor);
     }
-    m_headerList << "Value" << "Color";
+    m_headerList << tr("Value") << tr("Color");
 
 }
 

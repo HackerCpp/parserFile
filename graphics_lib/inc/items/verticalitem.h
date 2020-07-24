@@ -6,6 +6,7 @@ class VerticalItem : public AGraphicItem
 {
 public:
     VerticalItem(ICurve *curve,BoardForTrack *board);
+    VerticalItem(CustomObject *object,BoardForTrack *board);
     VerticalItem(const VerticalItem &other);
 
     virtual ~VerticalItem()override{}

@@ -16,12 +16,10 @@ void VMarkItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
         qDebug() << "MarkItemInfo = nullptr или painter = nullptr m_board = null Не удаётся нарисовать кривую";
         return;
     }
-
     if(!m_curve){
         qDebug() << "Нулевой указатель mCurve";
         return;
     }
-
     markItem *f_markItemInfo = dynamic_cast<markItem*>(m_itemInfo);
     if(!f_markItemInfo){
         qDebug() << "m_itemInfo не переводится в m_markItem не получается нарисовать";
@@ -36,16 +34,13 @@ void VMarkItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
     int f_widthLine = static_cast<int>(m_isActive ? f_markItemInfo->widthLine() + 4 : f_markItemInfo->widthLine());
     f_pen.setWidth(f_widthLine);
     uint indexBegin  = 0;
-    qreal f_scaleForMainValue = m_board->scale();
     int f_yTop = visibleRect.y();
     int f_topOffset = m_board->offsetUp();
     int f_downOffset = f_height - f_topOffset;
     per->setPen(f_pen);
 
-    ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
-    qreal f_recordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
-    for(uint i = 0; i < f_mainValue->size(); ++i){
-       if(((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) > f_yTop - f_topOffset && ((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) < f_yTop + f_downOffset){
+    for(uint i = 0; i < currentMainValue()->size(); ++i){
+       if(mainValue(i) > f_yTop - f_topOffset && mainValue(i) < f_yTop + f_downOffset){
            indexBegin = i;
            break;
        }
@@ -53,23 +48,23 @@ void VMarkItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
 
     uint i = 0;
     qreal f_multiplierWidth = f_width/3;
-    for(i = indexBegin;i < f_mainValue->size(); i++){
+    for(i = indexBegin;i < currentMainValue()->size(); i++){
         if(*flag)
             return;
         if(static_cast<int>(m_curve->data(i)) == 0){
             continue;
         }
         else if(static_cast<int>(m_curve->data(i)) == 1){
-            per->drawLine(QPointF(f_multiplierWidth,(f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue - f_yTop + f_topOffset),QPointF(f_width,(f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue - f_yTop + f_topOffset));
+            per->drawLine(QPointF(f_multiplierWidth,mainValue(i) - f_yTop + f_topOffset),QPointF(f_width,mainValue(i) - f_yTop + f_topOffset));
         }
         else if(static_cast<int>(m_curve->data(i)) == 2){
-            per->drawLine(QPointF(2 * f_multiplierWidth,(f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue - f_yTop + f_topOffset),QPointF(f_width,(f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue - f_yTop + f_topOffset));
+            per->drawLine(QPointF(2 * f_multiplierWidth,mainValue(i) - f_yTop + f_topOffset),QPointF(f_width,mainValue(i) - f_yTop + f_topOffset));
         }
         else{
-            per->drawLine(QPointF(0,(f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue - f_yTop + f_topOffset),QPointF(f_width,(f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue - f_yTop + f_topOffset));
+            per->drawLine(QPointF(0,mainValue(i) - f_yTop + f_topOffset),QPointF(f_width,mainValue(i) - f_yTop + f_topOffset));
         }
 
-        if(((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) > f_yTop + f_downOffset || ((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) < f_yTop - f_topOffset){
+        if(mainValue(i) > f_yTop + f_downOffset || mainValue(i) < f_yTop - f_topOffset){
             break;
         }
     }

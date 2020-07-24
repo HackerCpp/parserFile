@@ -1,5 +1,6 @@
 #include "aboard.h"
 #include <QDebug>
+#include "iteminfocreater.h"
 
 ABoard::ABoard(){
     m_tracks = new QList<ATrack*>;

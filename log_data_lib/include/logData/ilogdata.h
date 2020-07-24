@@ -34,7 +34,7 @@ public:
 
     virtual void addBlock(IBlock *block){Q_UNUSED(block)}
 
-    virtual QMap<QString,ICurve*> *curves();
+    //virtual QMap<QString,ICurve*> *curves();
     virtual QList<IBlock *> *blocks();
     virtual QString name(){return QString();}
 

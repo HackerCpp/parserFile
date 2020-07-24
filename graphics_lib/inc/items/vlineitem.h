@@ -1,14 +1,14 @@
 #ifndef VLINEITEM_H
 #define VLINEITEM_H
 #include "verticalitem.h"
-#include "LineItem.h"
+#include "lineItem.h"
 
 class VLineItem : public VerticalItem{
     enum Transition{NO_TRANSITION,LEFT_TRANSITION,RIGHT_TRANSITION};
 
     qreal m_scale,m_offsetPix;
 
-    virtual void drawBody(QPainter *per,QRectF visibleRect,bool *flag)override;
+    void drawBody(QPainter *per,QRectF visibleRect,bool *flag)override;
     void drawHeader(QPainter *per,int &position,bool *flag)override;
 
     Transition amountSaturation(uint curentIndex,int width);

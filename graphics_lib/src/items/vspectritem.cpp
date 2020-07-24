@@ -41,13 +41,13 @@ VSpectrItem::VSpectrItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
     }
 
 }
+
 VSpectrItem::~VSpectrItem(){
     disconnect();
     blockSignals(true);
     if(isRunning()){
         m_isRedraw = false;
         m_isEndThread = true;
-        //terminate();
         wait();
     }
 }
@@ -68,23 +68,20 @@ VSpectrItem::VSpectrItem(const VSpectrItem &other)
 }
 
 void inline VSpectrItem::drawInterpolationVertical(QPainter *per,QRectF visibleRect,bool *flag){
-    if(!per->isActive())
+    if(!currentMainValue()  || !per->isActive())
         return;
     qreal quantityElem = m_curve->sizeOffset();
-    qreal f_width = per->device()->width();
     qreal step = (m_widthPicturePix - 1) / quantityElem;
-    ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
     qreal f_yTop = visibleRect.y();
     qreal f_height = per->device()->height();
     qreal f_topOffset = m_board->offsetUp();
     qreal f_downOffset = f_height - f_topOffset;
     uint indexBegin  = 0;
-    qreal f_scaleForMainValue = m_board->scale();
-    if((f_mainValue->minimum() * f_scaleForMainValue) > f_yTop  + f_downOffset || (f_mainValue->maximum() * f_scaleForMainValue) < f_yTop - f_topOffset){
+    if(mainValueMinimum() > f_yTop  + f_downOffset || mainValueMaximum() < f_yTop - f_topOffset){
         return;
     }
-    for(uint i = 0; i < f_mainValue->size(); ++i){
-       if((f_mainValue->data(i) * f_scaleForMainValue) > f_yTop - f_topOffset && (f_mainValue->data(i) * f_scaleForMainValue) < f_yTop + f_downOffset){
+    for(uint i = 0; i < currentMainValue()->size(); ++i){
+       if(mainValue(i) > f_yTop - f_topOffset && mainValue(i) < f_yTop + f_downOffset){
            indexBegin = i;// > 2?i - 2 : 0;
            break;
        }
@@ -92,20 +89,20 @@ void inline VSpectrItem::drawInterpolationVertical(QPainter *per,QRectF visibleR
     uint f_indexMin = indexBegin;
     uint f_indexMax = indexBegin;
 
-    for(uint i = indexBegin;i < f_mainValue->size();++i){
+    for(uint i = indexBegin;i < currentMainValue()->size();++i){
         if(*flag)
             return;
-        if((f_mainValue->data(i) * f_scaleForMainValue) > f_yTop + f_downOffset || (f_mainValue->data(i) * f_scaleForMainValue) < f_yTop - f_topOffset){
+        if(mainValue(i) > f_yTop + f_downOffset || mainValue(i) < f_yTop - f_topOffset){
             break;
         }
-        f_indexMin = f_mainValue->data(i) < f_mainValue->data(f_indexMin)? i : f_indexMin;
-        f_indexMax = f_mainValue->data(i) > f_mainValue->data(f_indexMax)? i : f_indexMax;
+        f_indexMin = mainValue(i) < mainValue(f_indexMin)? i : f_indexMin;
+        f_indexMax = mainValue(i) > mainValue(f_indexMax)? i : f_indexMax;
     }
 
     QImage *f_image = dynamic_cast<QImage*>(per->device());
     if(f_image->isNull())
         return;
-    int f_curentHeight = qAbs((f_mainValue->data(f_indexMax) * f_scaleForMainValue) - (f_mainValue->data(f_indexMin) * f_scaleForMainValue));
+    int f_curentHeight = qAbs(mainValue(f_indexMax) - mainValue(f_indexMin));
     int indexWidthBegin = -fmin(m_offsetPix,0) / m_dataStepPix;
     int indexWidthEnd = quantityElem - fmax((m_widthPicturePix + m_offsetPix - f_image->width()),0) / m_dataStepPix;
 
@@ -121,10 +118,10 @@ void inline VSpectrItem::drawInterpolationVertical(QPainter *per,QRectF visibleR
             return;
         ColorScale gradient;
 
-        for(i = indexBegin;i < f_mainValue->size();++i){
+        for(i = indexBegin;i < currentMainValue()->size();++i){
             if(*flag)
                 return;
-            if((f_mainValue->data(i) * f_scaleForMainValue) > f_yTop + f_downOffset || (f_mainValue->data(i) * f_scaleForMainValue) < f_yTop - f_topOffset){
+            if(mainValue(i) > f_yTop + f_downOffset || mainValue(i) < f_yTop - f_topOffset){
                 break;
             }
             if(m_curve->data(i * quantityElem + j) >= f_multicolor->last().bound){
@@ -144,10 +141,10 @@ void inline VSpectrItem::drawInterpolationVertical(QPainter *per,QRectF visibleR
                     prev_mul = value;
                 }
             }
-            qreal f_y = ((f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset) - ((f_mainValue->data(f_indexMin) * f_scaleForMainValue) - f_yTop + f_topOffset);
+            qreal f_y = (mainValue(i) - f_yTop + f_topOffset) - (mainValue(f_indexMin) - f_yTop + f_topOffset);
             gradient.insert(f_y,color);
         }
-        qreal f_yMin = ((f_mainValue->data(f_indexMin) * f_scaleForMainValue) - f_yTop + f_topOffset);
+        qreal f_yMin = (mainValue(f_indexMin) - f_yTop + f_topOffset);
 
         qreal prevStep = j * step;
         QRect f_drawRect = QRect(prevStep + m_offsetPix,f_yMin,step + 1,f_curentHeight);
@@ -157,25 +154,21 @@ void inline VSpectrItem::drawInterpolationVertical(QPainter *per,QRectF visibleR
 }
 
 void inline VSpectrItem::drawInterpolationVerticalNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag){
-    if(!per->isActive())
+    if(!per->isActive() || !currentMainValue())
         return;
     qreal quantityElem = m_curve->sizeOffset();
-    qreal f_width = per->device()->width();
     qreal step = (m_widthPicturePix - 1) / quantityElem;
-    ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
     qreal f_yTop = y_top;
     qreal f_height = per->device()->height();
     qreal f_topOffset = 0;
     qreal f_downOffset = f_height - f_topOffset;
     uint indexBegin  = 0;
-    qreal f_scaleForMainValue = m_board->scale();
-    qreal f_recordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
-    f_recordPoint = qIsNaN(f_recordPoint) ? 0 : f_recordPoint;
-    if(((f_mainValue->minimum() + f_recordPoint) * f_scaleForMainValue) > f_yTop  + f_downOffset || ((f_mainValue->maximum() + f_recordPoint) * f_scaleForMainValue) < f_yTop - f_topOffset){
+
+    if(mainValueMinimum() > f_yTop  + f_downOffset || mainValueMaximum() < f_yTop - f_topOffset)
         return;
-    }
-    for(uint i = 0; i < f_mainValue->size(); ++i){
-       if(((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) > f_yTop - f_topOffset && ((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) < f_yTop + f_downOffset){
+
+    for(uint i = 0; i < currentMainValue()->size(); ++i){
+       if(mainValue(i) > f_yTop - f_topOffset && mainValue(i) < f_yTop + f_downOffset){
            indexBegin = i;// > 2?i - 2 : 0;
            break;
        }
@@ -183,18 +176,18 @@ void inline VSpectrItem::drawInterpolationVerticalNoOffset(QPainter *per,int y_t
     uint f_indexMin = indexBegin;
     uint f_indexMax = indexBegin;
 
-    for(uint i = indexBegin;i < f_mainValue->size();++i){
+    for(uint i = indexBegin;i < currentMainValue()->size();++i){
         if(*flag)
             return;
-        if(((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) > f_yTop + f_downOffset || ((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) < f_yTop - f_topOffset){
+        if(mainValue(i) > f_yTop + f_downOffset || mainValue(i) < f_yTop - f_topOffset){
             break;
         }
-        f_indexMin = (f_mainValue->data(i) + f_recordPoint) < (f_mainValue->data(f_indexMin) + f_recordPoint)? i : f_indexMin;
-        f_indexMax = (f_mainValue->data(i) + f_recordPoint) > (f_mainValue->data(f_indexMax) + f_recordPoint)? i : f_indexMax;
+        f_indexMin = mainValue(i) < mainValue(f_indexMin) ? i : f_indexMin;
+        f_indexMax = mainValue(i) > mainValue(f_indexMax) ? i : f_indexMax;
     }
 
     QImage *f_image = dynamic_cast<QImage*>(per->device());
-    int f_curentHeight = qAbs((f_mainValue->data(f_indexMax) * f_scaleForMainValue) - (f_mainValue->data(f_indexMin) * f_scaleForMainValue));
+    int f_curentHeight = qAbs(mainValue(f_indexMax) - mainValue(f_indexMin));
     int indexWidthBegin = -fmin(m_offsetPix,0) / m_dataStepPix;
     int indexWidthEnd = quantityElem - fmax((m_widthPicturePix + m_offsetPix - f_image->width()),0) / m_dataStepPix;
 
@@ -210,10 +203,10 @@ void inline VSpectrItem::drawInterpolationVerticalNoOffset(QPainter *per,int y_t
             return;
         ColorScale gradient;
 
-        for(i = indexBegin;i < f_mainValue->size();++i){
+        for(i = indexBegin;i < currentMainValue()->size();++i){
             if(*flag)
                 return;
-            if(((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) > f_yTop + f_downOffset || ((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) < f_yTop - f_topOffset){
+            if(mainValue(i) > f_yTop + f_downOffset || mainValue(i) < f_yTop - f_topOffset){
                 break;
             }
             if(m_curve->data(i * quantityElem + j) >= f_multicolor->last().bound){
@@ -233,10 +226,10 @@ void inline VSpectrItem::drawInterpolationVerticalNoOffset(QPainter *per,int y_t
                     prev_mul = value;
                 }
             }
-            qreal f_y = (((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) - f_yTop + f_topOffset) - (((f_mainValue->data(f_indexMin) + f_recordPoint) * f_scaleForMainValue) - f_yTop + f_topOffset);
+            qreal f_y = (mainValue(i) - f_yTop + f_topOffset) - (mainValue(f_indexMin) - f_yTop + f_topOffset);
             gradient.insert(f_y,color);
         }
-        qreal f_yMin = (((f_mainValue->data(f_indexMin) + f_recordPoint) * f_scaleForMainValue) - f_yTop + f_topOffset);
+        qreal f_yMin = (mainValue(f_indexMin) - f_yTop + f_topOffset);
 
         qreal prevStep = j * step;
         QRect f_drawRect = QRect(prevStep + m_offsetPix,f_yMin,step + 1,f_curentHeight);
@@ -284,6 +277,8 @@ void VSpectrItem::loadDrawingParam(int width){
 }
 
 void VSpectrItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
+    if(!currentMainValue())
+        return;
     SpecItem* f_spectrItemInfo = dynamic_cast<SpecItem*>(m_itemInfo);
 
     if(!f_spectrItemInfo){
@@ -304,11 +299,9 @@ void VSpectrItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
     qreal f_width = per->device()->width();
     qreal f_topOffset = m_board->offsetUp();
 
-    ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
-    qreal f_recordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
-    qreal f_scaleForMainValue = m_board->scale();
-    qreal f_top = (f_mainValue->minimum() + f_recordPoint) * f_scaleForMainValue;
-    qreal f_bottom = (f_mainValue->maximum() + f_recordPoint) * f_scaleForMainValue;
+
+    qreal f_top = mainValueMinimum();
+    qreal f_bottom = mainValueMaximum();
     int f_stock = 1000;
     qreal f_dstPicturePosition = visibleRect.y() - f_topOffset; //0
     QImage f_srcImage;
@@ -337,23 +330,20 @@ void VSpectrItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
 }
 
 void VSpectrItem::drawOneWawe(QPainter *per,int position,bool *flag){
-    if(!per->isActive())
+    if(!per->isActive() || !currentMainValue() || !currentMainValue()->size())
         return;
     uint indexBegin  = 0;
-    ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
-    if(!f_mainValue->size())
-        return;
-    qreal f_scaleForMainValue = m_board->scale();
-    if((f_mainValue->minimum() * f_scaleForMainValue) > position){
+
+    if(mainValueMinimum() > position){
         indexBegin = 0;
     }
-    else if((f_mainValue->maximum() * f_scaleForMainValue) < position){
-        indexBegin = f_mainValue->size() - 1;
+    else if(mainValueMaximum() < position){
+        indexBegin = currentMainValue()->size() - 1;
     }
     else{
-        for(uint i = 0; i < f_mainValue->size() - 1; ++i){
-           if((f_mainValue->data(i) * f_scaleForMainValue) > position && (f_mainValue->data(i + 1) * f_scaleForMainValue) < position
-                   || (f_mainValue->data(i) * f_scaleForMainValue) < position && (f_mainValue->data(i + 1) * f_scaleForMainValue) > position){
+        for(uint i = 0; i < currentMainValue()->size() - 1; ++i){
+           if(mainValue(i) > position && mainValue(i + 1) < position
+                   || mainValue(i) < position && mainValue(i + 1) > position){
                indexBegin = i;
                break;
            }
@@ -374,29 +364,25 @@ void VSpectrItem::drawOneWawe(QPainter *per,int position,bool *flag){
 
 QList<QPointF> VSpectrItem::oneWave(int position,bool *flag){
     QList<QPointF> f_returnList;
-    uint indexBegin  = 0;
-    ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
-    if(!f_mainValue->size())
+    if(!currentMainValue() || !currentMainValue()->size())
         return f_returnList;
-    qreal f_scaleForMainValue = m_board->scale();
-    qreal f_recordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
-    f_recordPoint = qIsNaN(f_recordPoint) ? 0 : f_recordPoint;
-    if(((f_mainValue->minimum() + f_recordPoint) * f_scaleForMainValue) > position){
+
+    uint indexBegin  = 0;
+
+    if(mainValueMinimum() > position){
         indexBegin = 0;
     }
-    else if(((f_mainValue->maximum() + f_recordPoint) * f_scaleForMainValue) < position){
-        indexBegin = f_mainValue->size() - 1;
+    else if(mainValueMaximum() < position){
+        indexBegin = currentMainValue()->size() - 1;
     }
     else{
-        for(uint i = 0; i < f_mainValue->size() - 1; ++i){
-           if(((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) > position && ((f_mainValue->data(i + 1) + f_recordPoint) * f_scaleForMainValue) < position
-                   || ((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) < position && ((f_mainValue->data(i + 1) + f_recordPoint) * f_scaleForMainValue) > position){
+        for(uint i = 0; i < currentMainValue()->size() - 1; ++i){
+           if(mainValue(i) > position && mainValue(i + 1) < position || mainValue(i) < position && mainValue(i + 1) > position){
                indexBegin = i;
                break;
            }
         }
     }
-
     uint f_quantityElem = m_curve->sizeOffset();
     uint f_indexDataBegin = indexBegin * f_quantityElem;
     for(uint i = 0; i < f_quantityElem; ++i){
@@ -406,6 +392,8 @@ QList<QPointF> VSpectrItem::oneWave(int position,bool *flag){
 }
 
 void VSpectrItem::run(){
+    if(!currentMainValue())
+        return;
     m_updatedParam = true;
     foreach(auto path,m_picturePath){
         if(!QFile::exists(path) )
@@ -413,12 +401,8 @@ void VSpectrItem::run(){
         QFile(path).remove();
     }
     m_picturePath.clear();
-    //loadDrawingParam(m_curentPictureWidth);
-    ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
-    qreal f_recordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
-    qreal f_scaleForMainValue = m_board->scale();
-    qreal f_top = (f_mainValue->minimum() + f_recordPoint) * f_scaleForMainValue;
-    qreal f_bottom = (f_mainValue->maximum() + f_recordPoint) * f_scaleForMainValue;
+    qreal f_top = mainValueMinimum();
+    qreal f_bottom = mainValueMaximum();
     int f_stock = 1000;
     int f_heightPictures = M_HEIGHT_PICTURE;
     m_board->customUpdate();
@@ -448,58 +432,70 @@ void VSpectrItem::drawOnTheDisk(){
         m_isRedraw = true;
     }
     else{
-        loadDrawingParam(m_curentPictureWidth);
         m_isEndThread = false;
         start();
     }
 }
 
 void VSpectrItem::updateParam(int pictureWidth){
-    m_recordPointDepth = m_curve->recordPoint();
+    if(!m_curve || !m_board)
+        return;
     m_isEndThread = true;
     m_curentPictureWidth = pictureWidth;
+    loadDrawingParam(m_curentPictureWidth);
+    m_recordPointDepth = m_curve->recordPoint();
+    m_currentMainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
+    m_currentRecordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
+    m_currentRecordPoint = qIsNaN(m_currentRecordPoint) ? 0 : m_currentRecordPoint;
+    m_currentScaleMainValue = m_board->scale();
     drawOnTheDisk();
-
 }
 
 void VSpectrItem::updateParam(){
+    if(!m_curve || !m_board)
+        return;
+    m_isEndThread = true;
+    loadDrawingParam(m_curentPictureWidth);
+    m_recordPointDepth = m_curve->recordPoint();
+    m_currentMainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
+    m_currentRecordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
+    m_currentRecordPoint = qIsNaN(m_currentRecordPoint) ? 0 : m_currentRecordPoint;
+    m_currentScaleMainValue = m_board->scale();
     drawOnTheDisk();
 }
 
 void VSpectrItem::drawInterpolationHorForCheckArea(QPainter *per,QRectF visibleRect,bool *flag){
     float f_width = m_widthPicturePix;
-    ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
     float f_yTop = visibleRect.y();
     float f_height = per->device()->height();
     float f_topOffset = m_board->offsetUp();
     float f_downOffset = f_height - f_topOffset;
     uint indexBegin  = 0;
-    float f_scaleForMainValue = m_board->scale();
-    if((f_mainValue->minimum() * f_scaleForMainValue) > f_yTop  + f_downOffset || (f_mainValue->maximum() * f_scaleForMainValue) < f_yTop - f_topOffset){
+    if(mainValueMinimum() > f_yTop  + f_downOffset || mainValueMaximum() < f_yTop - f_topOffset){
         return;
     }
-    for(uint i = 0; i < f_mainValue->size(); ++i){
-       if((f_mainValue->data(i) * f_scaleForMainValue) > f_yTop - f_topOffset && (f_mainValue->data(i) * f_scaleForMainValue) < f_yTop + f_downOffset){
+    for(uint i = 0; i < currentMainValue()->size(); ++i){
+       if(mainValue(i) > f_yTop - f_topOffset && mainValue(i) < f_yTop + f_downOffset){
            indexBegin = i;// > 2?i - 2 : 0;
            break;
        }
     }
     uint i;
-    int prevStep = ((f_mainValue->data(indexBegin) * f_scaleForMainValue) - f_yTop + f_topOffset);
-    for(i = indexBegin + 1;i < f_mainValue->size();++i){
+    int prevStep = mainValue(indexBegin) - f_yTop + f_topOffset;
+    for(i = indexBegin + 1;i < currentMainValue()->size();++i){
         if(*flag)
             return;
-        if((f_mainValue->data(i) * f_scaleForMainValue) > f_yTop + f_downOffset || (f_mainValue->data(i) * f_scaleForMainValue) < f_yTop - f_topOffset){
+        if(mainValue(i) > f_yTop + f_downOffset || mainValue(i) < f_yTop - f_topOffset){
             break;
         }
-        int f_curentIntY = (int)((f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset);
+        int f_curentIntY = (int)(mainValue(i) - f_yTop + f_topOffset);
         if(prevStep == f_curentIntY){
             continue;
         }
         QBrush brush(Qt::black);
         per->setBrush(brush);
         per->drawRect(m_offsetPix,prevStep,f_width,1 * m_board->pixelPerMm());
-        prevStep = ((f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset);
+        prevStep = (mainValue(i) - f_yTop + f_topOffset);
     }
 }
 

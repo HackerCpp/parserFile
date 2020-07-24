@@ -2,6 +2,8 @@
 #define WINDOWFORMENU_H
 
 #include <QWidget>
+#include <PythonQt.h>
+#include <PythonQt_QtAll.h>
 
 class WindowForMenu : public QWidget
 {
@@ -13,7 +15,9 @@ public slots:
     virtual void openFile(){}
     virtual void saveGFM(){}
     virtual void openConsolePython(){}
+    virtual void openEditorPython(){}
     virtual void openInterpretations(){}
+    virtual void openConstructor(){}
 };
 
 #endif // WINDOWFORMENU_H

@@ -22,6 +22,7 @@ SpectrReader::SpectrReader(VSpectrItem *spectrItem)
     PythonQt::self()->registerCPPClass("ICurve","","Curves",PythonQtCreateObject<WrapperIcurvePython>);
     m_pythonInterpreter = PythonQt::self()->getMainModule();
     m_pythonInterpreter.evalScript("from LogData.Curves import*");
+    m_pythonInterpreter.evalScript("from LogData import*");
     setAcceptDrops(true);
     m_widht = 100;
     m_vMainLayout = new QVBoxLayout();
@@ -56,6 +57,7 @@ SpectrReader::SpectrReader(VSpectrItem *spectrItem)
     //m_pythonConsole  = new PythonQtScriptingConsole(NULL, m_pythonInterpreter);
     //m_pythonConsole->append("py> from LogData.Curves import*");
     m_pyEditor = new PythonEditor(&m_pythonInterpreter,this);
+    m_pyEditor->setWindowFlags(Qt::Window | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint | Qt::CustomizeWindowHint);
     m_pyEditor->show();
     m_btnAddFilter = new QPushButton("add");
     m_toolBar->addWidget(m_sliderWidth);
@@ -69,8 +71,8 @@ SpectrReader::SpectrReader(VSpectrItem *spectrItem)
 
     m_widgetFilters = new QWidget;
     m_hLayoutBtnFilters = new QHBoxLayout;
-    m_btnApplyFilters = new QPushButton("Apply");
-    m_btnRollBack = new QPushButton("Roll back");
+    m_btnApplyFilters = new QPushButton(tr("Apply"));
+    m_btnRollBack = new QPushButton(tr("Roll back"));
     m_hLayoutBtnFilters->addWidget(m_btnApplyFilters);
     m_hLayoutBtnFilters->addWidget(m_btnRollBack);
 

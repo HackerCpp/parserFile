@@ -20,7 +20,7 @@ OneWaveWidget::OneWaveWidget(VSpectrItem *spectrItem)
 
     QString valueRange = spectrItem->curve()->desc()->param("val_range");
     int f_minimum = valueRange.left(valueRange.indexOf("..")).toDouble();
-    int f_maximum = valueRange.right(valueRange.indexOf("..") - 1).toDouble();
+    int f_maximum = valueRange.mid(valueRange.indexOf("..") + 2).toDouble();
     m_sliderAmplitude->setRange(f_minimum,f_maximum);
     m_sliderAmplitude->setSpan(m_sliderAmplitude->minimum(),m_sliderAmplitude->maximum());
 
@@ -57,7 +57,6 @@ OneWaveWidget::OneWaveWidget(VSpectrItem *spectrItem)
         m_modelOneWave->insertWaveInfo(OneWaveInfo{value.second,true,value.second->name(),
                                               value.second->pen().color().name(),0,0,0,0,0});
     }
-
     m_graphicGridLayout->addWidget(m_sliderAmplitude,0,0);
     m_graphicGridLayout->addWidget(m_sliderFrequency,1,1);
     m_graphicGridLayout->addWidget(m_chartView,0,1);
@@ -90,10 +89,13 @@ void OneWaveWidget::update(const QList<QPointF> &newPoints){ //Добавляе�
 void OneWaveWidget::update(QPoint point){ //Добавляет точки из SpectrItem по координатам на сцене
     bool f_flag = false;
     foreach(auto value,*m_spectrIitems){
+            //second - QLineSeries, first - VSpectrItem
         value.second->replace(value.first->oneWave(point.y(),&f_flag));
     }
     m_chartView->dataUpdate();
 }
+
+
 
 void OneWaveWidget::addItem(VSpectrItem *spectrItem){
     m_spectrIitems->push_back(QPair<VSpectrItem *, QLineSeries *>(spectrItem,new QLineSeries));

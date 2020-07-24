@@ -16,8 +16,11 @@ LogData::LogData(const LogData &logData){
     m_saver = nullptr;
     m_interpreter = nullptr;
     m_blocks = new QList<IBlock *>;
-    ILogData &f_logdata = const_cast<LogData &>(logData);
-    m_name = f_logdata.name();
+    m_name = logData.m_name;
+    foreach(auto block,*logData.m_blocks){
+        m_blocks->push_back(IBlock::blockCreater(*block));
+    }
+    m_isReady = true;
 }
 
 LogData &LogData::operator=(const LogData &logData){

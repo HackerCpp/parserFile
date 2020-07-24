@@ -7,8 +7,10 @@
 
 /************************SpectrScene************************************************************/
 class SpectrScene : public QGraphicsScene{
+    QGraphicsLineItem *m_lineItem;
+    QGraphicsTextItem *m_textItem;
 public:
-    SpectrScene(){}
+    SpectrScene();
     ~SpectrScene()override{}
 
     void mousePressEvent(QGraphicsSceneMouseEvent *event)override;

@@ -1,7 +1,8 @@
 QT += core gui widgets opengl xml charts
 
 CONFIG += c++11
-INCLUDEPATH += $$PWD $$PWD/inc $$PWD/inc/items $$PWD/inc/tools $$PWD/inc/spectrReader $$PWD/../QScintilla/Qt4Qt5
+INCLUDEPATH += $$PWD $$PWD/inc $$PWD/inc/items $$PWD/inc/tools \
+$$PWD/inc/spectrReader $$PWD/inc/drawObjects $$PWD/../QScintilla/Qt4Qt5
 
 LIBS += \
         ../build/release/LogData.lib \
@@ -15,9 +16,11 @@ LIBS += \
 
 
 SOURCES += \
-    $$PWD/inc/spectrReader/chartvievforonewavewidget.cpp \
-    $$PWD/inc/spectrReader/modelmulticolor.cpp \
-    $$PWD/inc/spectrReader/modelonewave.cpp \
+    $$PWD/src/drawObjects/objectColumn.cpp \
+    $$PWD/src/items/customobjectitem.cpp \
+    $$PWD/src/spectrReader/chartvievforonewavewidget.cpp \
+    $$PWD/src/spectrReader/modelmulticolor.cpp \
+    $$PWD/src/spectrReader/modelonewave.cpp \
     $$PWD/src/spectrReader/graphicitemforspectr.cpp \
     $$PWD/src/spectrReader/spectrscene.cpp \
     $$PWD/src/spectrReader/spectrviewer.cpp \
@@ -57,7 +60,9 @@ SOURCES += \
     $$PWD/src/tools/qxtspanslider.cpp \
 
 HEADERS += \
+    $$PWD/inc/drawObjects/objectColumn.h \
     $$PWD/inc/drawsettings.h \
+    $$PWD/inc/items/customobjectitem.h \
     $$PWD/inc/spectrReader/chartvievforonewavewidget.h \
     $$PWD/inc/spectrReader/filterListModel.h \
     $$PWD/inc/spectrReader/modelmulticolor.h \

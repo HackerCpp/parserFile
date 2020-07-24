@@ -16,6 +16,7 @@ struct FilterInfo{
 };
 
 class FilterListModel : public QAbstractListModel{
+    Q_OBJECT
     QVector<FilterInfo > *m_vectorFilters;
     QStringList m_headerList;
     public:

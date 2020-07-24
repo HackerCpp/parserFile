@@ -14,7 +14,7 @@ ModelForTabInterpretation::ModelForTabInterpretation(QList<Interpretation*> *lis
     :m_listInterpretation(listInterpretation)
 {
 
-    m_headerList << "Active" << "Name" <<"Version";
+    m_headerList << tr("Active") << tr("Name") << tr("Version");
 }
 
 
@@ -150,6 +150,13 @@ QString TabInterpretations::getAbsolutePath(QFileInfoList fileInfolist){
     }
     else
         return f_returnPath;
+}
+
+TabInterpretations::~TabInterpretations(){
+}
+
+void TabInterpretations::closeEvent(QCloseEvent *event){
+    m_isClose = true;
 }
 
 void TabInterpretations::cansel(){

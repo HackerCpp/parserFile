@@ -18,9 +18,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 INCLUDEPATH += ../../log_data_lib/include/logData \
                ../../log_data_lib/include/blocks \
                ../../log_data_lib/include/curves \
-               ../../log_data_lib/include/externalComponents \
-LIBS += \
-../../build/release/LogData.lib \
+               ../../log_data_lib/include/externalComponents
+LIBS += ../../build/release/LogData.lib
 
 
 SOURCES += \

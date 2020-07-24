@@ -9,6 +9,7 @@ using namespace QtCharts;
 
 class ChartViewForOneWaveWidget : public QChartView
 {
+    Q_OBJECT
     QGraphicsTextItem *m_textItem;
     QGraphicsLineItem *m_verticalLine;
     ModelOneWave * m_modelOneWave;
@@ -18,6 +19,7 @@ public:
     ChartViewForOneWaveWidget(ModelOneWave *modelOneWave);
     ~ChartViewForOneWaveWidget()override{}
 
+    void updateLineInfo(QPointF point);
     //void resizeEvent(QResizeEvent *event) override{}
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;

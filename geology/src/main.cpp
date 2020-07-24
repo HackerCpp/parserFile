@@ -10,6 +10,10 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    QTranslator qtLanguageTranslator;
+    QString f_translatePath = QString(QDir().absolutePath() + "/translations/") + QString("QtLanguage_") + QString("ru_RU");
+    qtLanguageTranslator.load(f_translatePath);
+    qApp->installTranslator(&qtLanguageTranslator);
     MainWindow w;
     QCoreApplication::setOrganizationName("GFM");
     QCoreApplication::setApplicationName("Geology");
@@ -28,12 +32,11 @@ int main(int argc, char *argv[])
         qDebug() << "file style.css not open;";
     }
     file.close();
-    qputenv("PYTHONPATH",QString(QDir().absolutePath() + "/python3/Lib").toLatin1());
+
     w.setMinimumSize(600,600);
     w.show();
     w.setMinimumSize(0,0);
-    //PythonEditor *f_editor = new PythonEditor(nullptr,&w);
-    //f_editor->show();
+
     return a.exec();
 
 }

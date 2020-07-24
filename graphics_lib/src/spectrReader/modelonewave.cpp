@@ -5,9 +5,9 @@ ModelOneWave::ModelOneWave()
 {
 
     m_listVaweInfo = new QList<OneWaveInfo>;
-    m_headerList << "Visible" << "Name" << "Color" << "Amp. Max"
-                 << "Amp. Min" << "Band" << "Frequency" << "Amplitude";
-    m_listVaweInfo->push_back(OneWaveInfo{new QLineSeries,false,"Difference","#000000",0,0,0,0,0});
+    m_headerList << tr("Visible") << tr("Name") << tr("Color") << tr("Amp. Max")
+                 << tr("Amp. Min") << tr("Band") << tr("Frequency") << tr("Amplitude");
+    m_listVaweInfo->push_back(OneWaveInfo{new QLineSeries,false,tr("Difference"),"#000000",0,0,0,0,0});
 
 }
 
@@ -157,6 +157,28 @@ void ModelOneWave::changeCurentPosition(QPointF pointPosition){
             break;
         }
     }
-
+    calcMaximumAndMinimum();
     emit dataChanged(index(0,3),index(m_listVaweInfo->size(),8));
+}
+
+//max,min
+QPair<qreal,qreal> ModelOneWave::calcMaximumAndMinimum(){
+     //max,min
+    m_maximumAndMinimum = QPair<qreal,qreal>(-std::numeric_limits<qreal>::max(),std::numeric_limits<qreal>::max()) ;
+    //foreach(auto value,*m_listVaweInfo){
+    for(int i = 0; i < m_listVaweInfo->size() - 1; ++i){
+        qreal f_min = std::numeric_limits<qreal>::max();
+        qreal f_max = -std::numeric_limits<qreal>::max();
+           //second - QLineSeries, first - VSpectrItem
+       QList<QPointF> f_points =  m_listVaweInfo->operator[](i).lineSeries->points();
+       foreach(auto value,f_points){
+           f_min = qMin(f_min,value.y());
+           f_max = qMax(f_max,value.y());
+       }
+       m_listVaweInfo->operator[](i).amplitudeMaximum = f_max;
+       m_listVaweInfo->operator[](i).amplitudeMinimum = f_min;
+       m_maximumAndMinimum.first = qMax(m_maximumAndMinimum.first,f_max);
+       m_maximumAndMinimum.second = qMin(m_maximumAndMinimum.second,f_min);
+    }
+    return m_maximumAndMinimum;
 }

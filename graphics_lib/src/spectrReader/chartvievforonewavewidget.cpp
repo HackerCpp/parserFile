@@ -11,6 +11,7 @@ ChartViewForOneWaveWidget::ChartViewForOneWaveWidget(ModelOneWave *modelOneWave)
     m_verticalLine = new QGraphicsLineItem(0,0,0,scene()->height());
 
     m_textItem->setDefaultTextColor(QColor(Qt::white));
+    m_textItem->setFont(QFont("",4));
     m_verticalLine->setPen(QPen(Qt::white));
     m_verticalLine->setZValue(100);
     if(scene()){
@@ -19,12 +20,19 @@ ChartViewForOneWaveWidget::ChartViewForOneWaveWidget(ModelOneWave *modelOneWave)
     }
 }
 
+void ChartViewForOneWaveWidget::updateLineInfo(QPointF point){
+    m_modelOneWave->changeCurentPosition(chart()->mapToValue(point));
+    m_verticalLine->setLine(point.x(),0,point.x(),scene()->height());
+    m_textItem->setHtml("<div style='background-color:transparent;'>" + tr("Difference: ") + QString::number(m_modelOneWave->delta()) + "<br>" +
+                             tr("Band: ") + QString::number(m_modelOneWave->band()) + "<br>" +
+                             tr("Frequency: ") + QString::number(m_modelOneWave->frequency()) + "<br>" +
+                             tr("Amp max: ") + QString::number(m_modelOneWave->maximum()) + "<br>" +
+                             tr("Amp min: ") + QString::number(m_modelOneWave->minimum()) + "</div>"
+                             );
+}
+
 void ChartViewForOneWaveWidget::mousePressEvent(QMouseEvent *event){
-    m_modelOneWave->changeCurentPosition(chart()->mapToValue(event->pos()));
-    m_verticalLine->setLine(event->pos().x(),0,event->pos().x(),scene()->height());
-    m_textItem->setPlainText("Difference: " + QString::number(m_modelOneWave->delta()) + "\n" +
-                             "Band: " + QString::number(m_modelOneWave->band()) + "\n" +
-                             "Frequency: " + QString::number(m_modelOneWave->frequency()));
+    updateLineInfo(event->pos());
 
     m_flagMousePress = true;
 
@@ -33,11 +41,7 @@ void ChartViewForOneWaveWidget::mousePressEvent(QMouseEvent *event){
 
 void ChartViewForOneWaveWidget::mouseMoveEvent(QMouseEvent *event){
     if(m_flagMousePress){
-        m_modelOneWave->changeCurentPosition(chart()->mapToValue(event->pos()));
-        m_verticalLine->setLine(event->pos().x(),0,event->pos().x(),scene()->height());
-        m_textItem->setPlainText("Difference: " + QString::number(m_modelOneWave->delta()) + "\n" +
-                                 "Band: " + QString::number(m_modelOneWave->band()) + "\n" +
-                                 "Frequency: " + QString::number(m_modelOneWave->frequency()));
+        updateLineInfo(event->pos());
     }
 
     QGraphicsView::mouseMoveEvent(event);
@@ -49,8 +53,11 @@ void ChartViewForOneWaveWidget::mouseReleaseEvent(QMouseEvent *event){
 }
 
 void ChartViewForOneWaveWidget::dataUpdate(){
-    m_modelOneWave->changeCurentPosition(chart()->mapToValue(m_verticalLine->line().p1()));
+    /*m_modelOneWave->changeCurentPosition(chart()->mapToValue(m_verticalLine->line().p1()));
     m_textItem->setPlainText("Difference: " + QString::number(m_modelOneWave->delta()) + "\n" +
                              "Band: " + QString::number(m_modelOneWave->band()) + "\n" +
-                             "Frequency: " + QString::number(m_modelOneWave->frequency()));
+                             "Frequency: " + QString::number(m_modelOneWave->frequency()));*/
+
+    updateLineInfo(m_verticalLine->line().p1());
+
 }

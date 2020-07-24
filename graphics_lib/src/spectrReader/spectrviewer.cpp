@@ -5,7 +5,7 @@
 
 SpectrViewer::SpectrViewer(VSpectrItem *spectrItem,int width){
     m_scene = new SpectrScene;
-    m_radioBtnIsActive = new QRadioButton("ACtive",this);
+    m_radioBtnIsActive = new QRadioButton(tr("ACtive"),this);
     m_originalSpectr = spectrItem;
     m_experimentalSpectr = new VSpectrItem(*spectrItem);
     if(m_experimentalSpectr){

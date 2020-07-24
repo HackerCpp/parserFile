@@ -19,6 +19,7 @@
 #include <QDebug>
 #include <QAbstractItemView>
 #include <QTextBlock>
+#include <QTextCodec>
 
 
 
@@ -28,6 +29,7 @@ PythonEditor::PythonEditor(PythonQtObjectPtr *pythonContext,QWidget *parent)
     QFont f_font("DejaVu Sans",15);
     m_textEdit = new QsciScintilla;
     m_textEdit->setFont(f_font);
+    m_textEdit->setUtf8(true);
     //m_textEdit->setText("from LogData.Curves import*");
     m_pythonContext->evalScript("from LogData.Curves import*");
     m_console = new PythonQtScriptingConsole(NULL, *m_pythonContext);
@@ -307,6 +309,7 @@ void PythonEditor::runScript(){
     if(!m_pythonContext)
         return;
     m_pythonContext->evalScript(m_textEdit->text());
+
     emit scriptExecuted();
 }
 

@@ -3,17 +3,17 @@
 
 void GraphicsControlPanel::init(){
     m_hLayout = new QHBoxLayout(this);
-    m_btnRefresh = new QPushButton("refresh",this);
+    m_btnRefresh = new QPushButton(tr("refresh"),this);
 
-    m_comboFormatTime.insertItem(0,"0.1 сек/см");
-    m_comboFormatTime.insertItem(1,"1 сек/см");
-    m_comboFormatTime.insertItem(2,"5 сек/см");
-    m_comboFormatTime.insertItem(3,"10 сек/см");
-    m_comboFormatTime.insertItem(4,"30 сек/см");
-    m_comboFormatTime.insertItem(5,"1 мин/см");
-    m_comboFormatTime.insertItem(6,"5 мин/см");
-    m_comboFormatTime.insertItem(7,"10 мин/см");
-    m_comboFormatTime.insertItem(8,"30 мин/см");
+    m_comboFormatTime.insertItem(0,tr("0.1 sec/cm"));
+    m_comboFormatTime.insertItem(1,tr("1 sec/cm"));
+    m_comboFormatTime.insertItem(2,tr("5 sec/cm"));
+    m_comboFormatTime.insertItem(3,tr("10 sec/cm"));
+    m_comboFormatTime.insertItem(4,tr("30 sec/cm"));
+    m_comboFormatTime.insertItem(5,tr("1 min/cm"));
+    m_comboFormatTime.insertItem(6,tr("5 min/cm"));
+    m_comboFormatTime.insertItem(7,tr("10 min/cm"));
+    m_comboFormatTime.insertItem(8,tr("30 min/cm"));
 
     m_comboFormatDepth.insertItem(0,"1:10");
     m_comboFormatDepth.insertItem(1,"1:50");
@@ -26,12 +26,12 @@ void GraphicsControlPanel::init(){
     m_comboFormatDepth.insertItem(8,"1:10000");
 
 
-    m_comboPictureLength.insertItem(0,"MIN Picture");
-    m_comboPictureLength.insertItem(1,"AVR Picture");
-    m_comboPictureLength.insertItem(2,"MAX Picture");
+    m_comboPictureLength.insertItem(0,tr("MIN Picture"));
+    m_comboPictureLength.insertItem(1,tr("AVR Picture"));
+    m_comboPictureLength.insertItem(2,tr("MAX Picture"));
 
-    m_comboPictureFormat.insertItem(0,"multicolored image");//"Format_ARGB4444_Premultiplied");
-    m_comboPictureFormat.insertItem(1,"black and white image");//"Format_Grayscale8");
+    m_comboPictureFormat.insertItem(0,tr("multicolored image"));//"Format_ARGB4444_Premultiplied");
+    m_comboPictureFormat.insertItem(1,tr("black and white image"));//"Format_Grayscale8");
 
     m_comboScalePixelPerMm.insertItem(0,"x0.5");
     m_comboScalePixelPerMm.insertItem(1,"x1");
@@ -43,8 +43,8 @@ void GraphicsControlPanel::init(){
     m_comboScalePixelPerMm.setCurrentIndex(1);
 
 
-    m_comboBox.insertItem(0,"Глубина");
-    m_comboBox.insertItem(1,"Время");
+    m_comboBox.insertItem(0,tr("Depth"));
+    m_comboBox.insertItem(1,tr("Time"));
 
     m_hLayout->addWidget(&m_comboBox);
     m_hLayout->addWidget(&m_comboFormatTime);

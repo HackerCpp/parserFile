@@ -33,7 +33,7 @@ public:
 
     virtual void addBlock(IBlock *block)override{Q_UNUSED(block)}
 
-    virtual QMap<QString,ICurve*> *curves()override;
+    //virtual QMap<QString,ICurve*> *curves()override;
     virtual QList<IBlock *> *blocks()override;
     virtual QString name()override{ return QString();}
 

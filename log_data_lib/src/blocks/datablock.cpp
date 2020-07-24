@@ -24,6 +24,26 @@ DataBlock::DataBlock(DataBlock &block){
     foreach(auto curve,*f_curves){
         m_curves->push_back(curve);
     }
+    ICurve *f_mainTime = nullptr;
+    ICurve *f_mainDepth = nullptr;
+    foreach(auto curve,*f_curves){
+        if(curve->desc()->param("draw_type") == "TIME"){
+            f_mainTime = curve;
+            setMainTime(curve);
+        }
+        else if(curve->desc()->param("draw_type") == "DEPTH"){
+            f_mainDepth = curve;
+            setMainDepth(curve);
+        }
+    }
+    foreach(auto curve,*f_curves){
+        if(f_mainTime){
+            curve->setTime(f_mainTime);
+        }
+        if(f_mainDepth){
+            curve->setDepth(f_mainDepth);
+        }
+    }
 }
 
 DataBlock::~DataBlock(){

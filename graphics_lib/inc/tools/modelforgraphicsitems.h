@@ -4,6 +4,7 @@
 
 class ModelForGraphicsItems : public QAbstractListModel
 {
+    Q_OBJECT
     QVector<AGraphicItem *> *m_items;
     QStringList m_headerList;
 public:

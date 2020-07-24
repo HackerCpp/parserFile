@@ -6,20 +6,31 @@
 #include "interpreterpython.h"
 #include "tabinterpretations.h"
 
+#include "pythoneditor.h"
+
 
 MainWindow::MainWindow(QWidget *parent)
     : WindowForMenu(parent)
 {
-    m_menu = new Menu(this);
+    qputenv("PYTHONPATH",QString(QDir().absolutePath() + "/python3/Lib").toLatin1());
+    PythonQt::init(PythonQt::IgnoreSiteModule | PythonQt::RedirectStdOut,"LogData");
+    PythonQt_QtAll::init();
+    m_pythonInterpreter = PythonQt::self()->getMainModule();
+    PythonEditor *f_editor = new PythonEditor(&m_pythonInterpreter,this);
+    f_editor->show();
+    m_menu = new Menu(&m_pythonInterpreter,this);
+    m_pythonInterpreter.evalFile(QDir().absolutePath() + "/scripts/mainMenu/mainMenu.py");
     m_menu->installEventFilter(this);
 
     m_mainHorLayout = new QHBoxLayout(this);
 
     m_logDataView = new LogDataView(this);
     m_logDataView->installEventFilter(this);
+    m_logDataView->hide();
 
     m_mainHorLayout->addWidget(m_menu,100,Qt::AlignTop);
     m_mainHorLayout->addWidget(m_logDataView);
+
     this->setLayout(m_mainHorLayout);
     m_flagHideMenu = false;
     m_settings = new QSettings("settings.ini",QSettings::IniFormat);
@@ -58,6 +69,10 @@ void MainWindow::openFile(){
     if(f_file.getType() == ".gfm" || f_file.getType() == ".forms"){
         f_loader = new GFMLoader(filePath);
     }
+    else{
+        return;
+    }
+    m_logDataView->show();
     if(f_loader){
         f_logData = ILogData::createLogData();
         f_logData->setName(filePath);
@@ -88,6 +103,17 @@ void MainWindow::openConsolePython(){
     f_logData->openInterpreterConsole();
 }
 
+void MainWindow::openEditorPython(){
+    ILogData *f_logData = m_logDataView->curentLogData();
+    if(!f_logData)
+        return;
+    if(!f_logData->isInterpreter()){
+        IInterpreterLogData *f_interpreter = dynamic_cast<IInterpreterLogData *>(new InterpreterPython());
+        f_logData->setInterpreter(f_interpreter);
+    }
+    f_logData->openInterpreterEditor();
+}
+
 void MainWindow::openInterpretations(){
     ILogData *f_urentLogdata = m_logDataView->curentLogData();
     if(!f_urentLogdata)
@@ -113,4 +139,8 @@ void MainWindow::openInterpretations(){
         QSharedPointer<ILogData> f_logData(interpr(f_urentLogdata));
         m_logDataView->addLogData(f_logData);
     }
+}
+
+void MainWindow::openConstructor(){
+
 }

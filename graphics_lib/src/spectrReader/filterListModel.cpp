@@ -1,10 +1,12 @@
 #include "filterListModel.h"
 #include <QItemDelegate>
+#include <QString>
 
 FilterListModel::FilterListModel()
 {
     m_vectorFilters = new QVector<FilterInfo >;
-    m_headerList << "Filter name :" << "left" << "right" << "up" << "down" << "param1" << "param2" << "param3";
+    m_headerList << QT_TR_NOOP("Filter name :") << QT_TR_NOOP("left") << QT_TR_NOOP("right") << QT_TR_NOOP("up") << QT_TR_NOOP("down")
+                 << QT_TR_NOOP("param1") << QT_TR_NOOP("param2") << QT_TR_NOOP("param3");
 }
 
 
@@ -66,7 +68,7 @@ QVariant FilterListModel::headerData(int section, Qt::Orientation orientation, i
     if (role != Qt::DisplayRole)
        return QVariant();
     if (orientation == Qt::Horizontal && section < m_headerList.size()){
-        return m_headerList[section];
+        return tr(m_headerList[section].toLatin1());
     }
     else if(orientation == Qt::Vertical)
         return section;

@@ -40,8 +40,10 @@ class TabInterpretations : public BaseSettingsWindow
 public:
     TabInterpretations(){}
     TabInterpretations(QFileInfoList fileInfolist);
-    ~TabInterpretations(){}
+    ~TabInterpretations()override;
     QString getAbsolutePath(QFileInfoList fileInfolist);
+
+    void closeEvent(QCloseEvent *event)override;
 public slots:
     void cansel()override;
     void apply()override;

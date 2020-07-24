@@ -37,9 +37,9 @@ bool ILogData::setInterpreter(IInterpreterLogData *interpreter){
     return false;
 }
 
-QMap<QString,ICurve*> *ILogData::curves(){
+/*QMap<QString,ICurve*> *ILogData::curves(){
     return nullptr;
-}
+}*/
 
 QList<IBlock *> *ILogData::blocks(){
     return nullptr;
