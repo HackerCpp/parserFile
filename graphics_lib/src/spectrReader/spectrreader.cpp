@@ -232,8 +232,16 @@ void SpectrReader::rollBackFilters(){
 }
 
 void SpectrReader::applyFilters(){
+    qDebug() << "applyFilters";
+
     if(!m_listSpectrViewer || m_listSpectrViewer->isEmpty())
         return;
+    QProgressBar f_progressBar;
+
+    f_progressBar.show();
+    f_progressBar.reset();
+    f_progressBar.setRange(0,100);
+    f_progressBar.setOrientation(Qt::Horizontal);
     foreach(auto spectrViewer, *m_listSpectrViewer){
         if(!spectrViewer->isActive())
             continue;
@@ -249,6 +257,8 @@ void SpectrReader::applyFilters(){
         QVector<FilterInfo > *f_listFilters = m_filterListModel->filters();
         if(!f_listFilters)
             return;
+        f_progressBar.setValue(0);
+        qreal f_onePercent = 100.f / qreal(f_listFilters->size());
         foreach(auto value,*f_listFilters){
             QString f_path = "scripts/spectrReader/" + value.path;
             if(QDir().exists(f_path)){
@@ -261,6 +271,8 @@ void SpectrReader::applyFilters(){
                 m_pythonInterpreter.addVariable("down",value.down);
                 m_pythonInterpreter.evalFile(f_path);
             }
+            f_progressBar.setValue(f_progressBar.value() + 10);
+            QCoreApplication::processEvents();
         }
         //spectrViewer->experimentalSpectr()->updateParam();
     }

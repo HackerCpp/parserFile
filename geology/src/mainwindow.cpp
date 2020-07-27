@@ -16,8 +16,8 @@ MainWindow::MainWindow(QWidget *parent)
     PythonQt::init(PythonQt::IgnoreSiteModule | PythonQt::RedirectStdOut,"LogData");
     PythonQt_QtAll::init();
     m_pythonInterpreter = PythonQt::self()->getMainModule();
-    PythonEditor *f_editor = new PythonEditor(&m_pythonInterpreter,this);
-    f_editor->show();
+    //PythonEditor *f_editor = new PythonEditor(&m_pythonInterpreter,this);
+    //f_editor->show();
     m_menu = new Menu(&m_pythonInterpreter,this);
     m_pythonInterpreter.evalFile(QDir().absolutePath() + "/scripts/mainMenu/mainMenu.py");
     m_menu->installEventFilter(this);
