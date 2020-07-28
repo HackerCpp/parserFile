@@ -12,6 +12,42 @@ ItemInfoCreater::~ItemInfoCreater(){
 
 }
 
+void calculateRainbow(SpecItem *spectrItem,ICurve *curve){
+    if(!spectrItem)
+        return;
+    QString valueRange = curve->desc()->param("val_range");
+    qreal f_minimumValue = valueRange.left(valueRange.indexOf("..")).toDouble();
+    qreal f_maximumValue = valueRange.mid(valueRange.indexOf("..") + 2).toDouble();
+
+    if(f_minimumValue > f_maximumValue){
+        qreal min = f_maximumValue;
+        f_maximumValue = f_minimumValue;
+        f_minimumValue = min;
+    }
+
+    spectrItem->setMulticolor(MulticolorItem{f_minimumValue,"#ffffffff"});
+    spectrItem->setMulticolor(MulticolorItem{f_minimumValue,"#ff8e00ff"});
+    spectrItem->setMulticolor(MulticolorItem{f_minimumValue,"#ff0000ff"});
+    spectrItem->setMulticolor(MulticolorItem{f_minimumValue,"#ff197fff"});
+    spectrItem->setMulticolor(MulticolorItem{f_minimumValue,"#ff007f00"});
+    spectrItem->setMulticolor(MulticolorItem{f_minimumValue,"#ffffff00"});
+    spectrItem->setMulticolor(MulticolorItem{f_minimumValue,"#ffff9900"});
+    spectrItem->setMulticolor(MulticolorItem{f_maximumValue,"#ffff0000"});
+
+    QList<MulticolorItem> *f_listMulticolor = spectrItem->multiColor();
+
+    if(f_listMulticolor->first().bound > f_listMulticolor->last().bound){
+        qreal f_bound = f_listMulticolor->first().bound;
+        f_listMulticolor->first().bound = f_listMulticolor->last().bound;
+        f_listMulticolor->last().bound = f_bound;
+    }
+    qreal f_step = (f_maximumValue - f_minimumValue) / qreal(f_listMulticolor->size() - 1);
+
+    for(int i = 1; i < f_listMulticolor->size() - 1; ++i){
+        f_listMulticolor->operator[](i).bound = (f_minimumValue + (f_step * qreal(i)));
+    }
+}
+
 AItem *ItemInfoCreater::CreateItemInfo(ICurve *curve){
     QString f_drawType = curve->desc()->param("draw_type");
     AItem *f_item = nullptr;
@@ -31,23 +67,14 @@ AItem *ItemInfoCreater::CreateItemInfo(ICurve *curve){
     else if(f_drawType == "SPECTRUM"){
         SpecItem *f_spectrItem = new SpecItem();
         f_item = f_spectrItem;
-        QString valueRange = curve->desc()->param("val_range");
-        //qreal f_minimum = valueRange.left(valueRange.indexOf("..")).toDouble();
-        //qreal f_maximum = valueRange.right(valueRange.indexOf("..") - 1).toDouble();
         f_item->setBegin(true,0,0);
         bool ok = true;
         QString f_dataStep = curve->desc()->param("data_step");
         qreal f_dataStepD =  f_dataStep.left(f_dataStep.indexOf("(")).toDouble(&ok);
                                                            //kHz
         f_item->setEnd(true,(curve->sizeOffset() * f_dataStepD)/1000,1);
-        f_spectrItem->setMulticolor(MulticolorItem{-110,"#ffffffff"});
-        f_spectrItem->setMulticolor(MulticolorItem{-108,"#ff8e00ff"});
-        f_spectrItem->setMulticolor(MulticolorItem{-107,"#ff0000ff"});
-        f_spectrItem->setMulticolor(MulticolorItem{-106,"#ff197fff"});
-        f_spectrItem->setMulticolor(MulticolorItem{-105,"#ff007f00"});
-        f_spectrItem->setMulticolor(MulticolorItem{-103,"#ffffff00"});
-        f_spectrItem->setMulticolor(MulticolorItem{-102,"#ffff9900"});
-        f_spectrItem->setMulticolor(MulticolorItem{-100,"#ffff0000"});
+
+        calculateRainbow(f_spectrItem,curve);
     }
     if(f_item){
         f_item->setName(curve->shortCut().nameWithoutNumber() + ':' + curve->mnemonic(),nullptr);

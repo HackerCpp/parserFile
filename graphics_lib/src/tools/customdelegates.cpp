@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QPainter>
 #include <QComboBox>
+#include <QEvent>
 
 CustomDelegates::CustomDelegates(){
 
@@ -82,6 +83,7 @@ void CheckBoxDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
     //Готово! Отображаем!
     QApplication::style()->drawControl(QStyle::CE_CheckBox, &checkboxstyle, painter);
 }
+
 /****************************************************************************************************/
 
 ColorDelegate::ColorDelegate(QObject *parent){

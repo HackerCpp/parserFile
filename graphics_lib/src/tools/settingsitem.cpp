@@ -266,41 +266,7 @@ SettingsSpectrItem::SettingsSpectrItem(AGraphicItem *spectrItem,SelectingArea *s
     m_styleGrup->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     m_splitterColor = new QSplitter(Qt::Horizontal);
     m_vStyleGroupLayout = new QVBoxLayout;
-    /*QList<MulticolorItem> *f_multicolor = m_specItemInfo->multiColor();
-    m_image = new QImage(this->width()/2,f_multicolor->size() * 30,QImage::Format_ARGB32);
-    m_labelForImage = new QLabel();
-    QPainter painter(m_image);
-    m_image->fill(0x00000000);
 
-    qreal f_minimum = f_multicolor->first().bound;
-    qreal f_maximum = f_multicolor->first().bound;
-    foreach(auto level,*f_multicolor){
-        f_minimum = level.bound < f_minimum ? level.bound : f_minimum;
-        f_maximum = level.bound > f_maximum ? level.bound : f_maximum;
-    }
-    qreal f_heightGradient = f_maximum - f_minimum;
-    QLinearGradient f_gradient(0,0,0,m_image->height());
-
-    foreach(auto level,*f_multicolor){
-        f_gradient.setColorAt(1 - (level.bound - f_minimum)/f_heightGradient,level.value);
-    }
-    QBrush f_brush(f_gradient);
-    painter.setBrush(f_brush);
-    painter.drawRect(m_image->width()/2,0,m_image->width()/2,m_image->height());
-
-    painter.setPen(QPen(Qt::white,1));
-    int index = 0;
-    int f_step = m_image->height() / f_multicolor->size();
-
-    foreach(auto level,*f_multicolor){
-        QBrush f_brush(QColor(level.value));
-        int f_yPosition = m_image->height() - index;
-        painter.drawText(QRect(0,f_yPosition - 20,40,20),QString::number(level.bound));
-        painter.setBrush(f_brush);
-        painter.drawRect(40,f_yPosition - 20,20,20);
-        index += f_step;
-    }
-    m_labelForImage->setPixmap(QPixmap::fromImage(*m_image));*/
 
     m_tableViewMulticolor = new QTableView;
     m_modelMulticolor = new ModelMulticolor(m_specItemInfo->multiColor());

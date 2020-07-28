@@ -16,6 +16,7 @@ LIBS += \
 
 
 SOURCES += \
+    $$PWD/inc/tools/customprogressbar.cpp \
     $$PWD/src/drawObjects/objectColumn.cpp \
     $$PWD/src/items/customobjectitem.cpp \
     $$PWD/src/spectrReader/chartvievforonewavewidget.cpp \
@@ -57,9 +58,10 @@ SOURCES += \
     $$PWD/src/agraphicboard.cpp \
     $$PWD/src/graphiceditor.cpp \
     $$PWD/src/igraphiceditor.cpp \
-    $$PWD/src/tools/qxtspanslider.cpp \
+    $$PWD/src/tools/qxtspanslider.cpp
 
 HEADERS += \
+    $$PWD/inc/tools/customprogressbar.h \
     $$PWD/inc/drawObjects/objectColumn.h \
     $$PWD/inc/drawsettings.h \
     $$PWD/inc/items/customobjectitem.h \

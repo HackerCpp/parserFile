@@ -9,6 +9,7 @@
 
 #include <QDir>
 #include <QGraphicsProxyWidget>
+#include "customprogressbar.h"
 
 
 
@@ -97,8 +98,8 @@ SpectrReader::SpectrReader(VSpectrItem *spectrItem)
 
     connect(m_sliderWidth, &QSlider::valueChanged, this, &SpectrReader::sliderWidthChange);
     connect(m_btnAddFilter, &QPushButton::pressed, this, &SpectrReader::insertFilter);
-    connect(m_btnApplyFilters, &QPushButton::pressed, this, &SpectrReader::applyFilters);
-    connect(m_btnRollBack, &QPushButton::pressed, this, &SpectrReader::rollBackFilters);
+    connect(m_btnApplyFilters, &QPushButton::released, this, &SpectrReader::applyAllFilters);
+    connect(m_btnRollBack, &QPushButton::released, this, &SpectrReader::rollBackFilters);
     connect(m_pyEditor,&PythonEditor::scriptExecuted,this,&SpectrReader::allUpdate);
 
     //соединяем сигнал клика мышки по сцене со слотом,
@@ -231,17 +232,14 @@ void SpectrReader::rollBackFilters(){
     }
 }
 
-void SpectrReader::applyFilters(){
+void SpectrReader::applyAllFilters(){
     qDebug() << "applyFilters";
 
     if(!m_listSpectrViewer || m_listSpectrViewer->isEmpty())
         return;
-    QProgressBar f_progressBar;
-
-    f_progressBar.show();
-    f_progressBar.reset();
+    CustomProgressBar f_progressBar;
     f_progressBar.setRange(0,100);
-    f_progressBar.setOrientation(Qt::Horizontal);
+
     foreach(auto spectrViewer, *m_listSpectrViewer){
         if(!spectrViewer->isActive())
             continue;
@@ -258,8 +256,9 @@ void SpectrReader::applyFilters(){
         if(!f_listFilters)
             return;
         f_progressBar.setValue(0);
-        qreal f_onePercent = 100.f / qreal(f_listFilters->size());
+        qreal f_step = 100.0 / qreal(f_listFilters->size());
         foreach(auto value,*f_listFilters){
+            f_progressBar.setText(f_experCurve->mnemonic() + " " + tr("download") + " " + value.name);
             QString f_path = "scripts/spectrReader/" + value.path;
             if(QDir().exists(f_path)){
                 m_pythonInterpreter.addVariable("param1",value.param1);
@@ -271,12 +270,12 @@ void SpectrReader::applyFilters(){
                 m_pythonInterpreter.addVariable("down",value.down);
                 m_pythonInterpreter.evalFile(f_path);
             }
-            f_progressBar.setValue(f_progressBar.value() + 10);
-            QCoreApplication::processEvents();
+            f_progressBar.setValue(f_progressBar.value() + f_step);
         }
-        //spectrViewer->experimentalSpectr()->updateParam();
+        spectrViewer->experimentalSpectr()->updateParam();
+        f_progressBar.setValue(100);
     }
-    allUpdate();
+    //allUpdate();
 }
 
 void SpectrReader::allUpdate(){

@@ -63,7 +63,7 @@ public slots:
     void sliderWidthChange(int width);
     void insertFilter();
     void rollBackFilters();
-    void applyFilters();
+    void applyAllFilters();
     void apply()override;
     void updateOneWaweWidget(QPoint scenePoint);
     void allUpdate();

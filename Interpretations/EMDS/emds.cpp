@@ -72,7 +72,7 @@ void EMDS::fillingTheBoard(QList<IBlock *> *blocks){
     f_curve->desc()->setParam("draw_type","SPECTRUM");
     f_curve->desc()->setParam("data_step","100(HZ)");
     f_curve->desc()->setParam("data_begin","0(HZ)");
-    f_curve->desc()->setParam("val_range","-120..2000");
+    f_curve->desc()->setParam("val_range","0..4000");
     f_curve->setRecordPoint(m_blockChannels->curves()->last()->recordPoint());
     ShortCut f_shortCut;
     f_shortCut.setName("MID");
