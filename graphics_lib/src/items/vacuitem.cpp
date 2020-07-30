@@ -120,7 +120,7 @@ void inline VAcuItem::drawInterpolationHorizontal(QPainter *per,QRectF visibleRe
 
 void inline VAcuItem::drawInterpolationHorizontalNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag){
     qreal quantityElem = m_curve->sizeOffset();
-    float step = m_dataStepPix;
+    qreal step = m_dataStepPix;
     ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
     qreal f_recordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
     float f_yTop = y_top;
@@ -295,6 +295,8 @@ void VAcuItem::run(){
         QFile(path).remove();
     }
     m_picturePath.clear();
+    if(m_curentPictureWidth < 10)
+        return;
     //loadDrawingParam(m_curentPictureWidth);
     ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
     qreal f_recordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;

@@ -16,22 +16,9 @@
 class AGraphicTrack :  public ObjectOfTheBoard
 {
     Q_OBJECT
-
-public:
-    AGraphicTrack(ATrack *track,BoardForTrack *board);
-    virtual ~AGraphicTrack()override;
-
-    virtual void resize()override{}
-    virtual void resizePictures()override{}
-
-    qreal topValue();
-    qreal bottomValue();
-    virtual void activate(bool activate){Q_UNUSED(activate)}
-    ATrack *trackInfo(){return m_track;}
-    void addIteam(AGraphicItem* item);
-    void clearItems();
-    virtual void updateItemsParam();
 protected:
+    QPointF m_posLeftClick;
+    QTimer m_timerLeftClick;
     QImage *m_infoPixMap,*m_curentHeader,*m_doubleHeader,*m_nameTrack;
     BoardForTrack *m_board;
 
@@ -43,10 +30,26 @@ protected:
     QList<AGraphicItem*> *m_items;
     ATrack *m_track;
 
-    bool m_isDoubleClick,m_isLeftBorderClick, m_isRightBorderClick,
+    bool m_isRightClick,m_isLeftClick,m_isLeftBorderClick, m_isRightBorderClick,
     m_isLeftCurvesClick, m_isRightCurvesClick, m_isLeftHeaderClick,
     m_isRightHeaderClick, m_isOpenCloseClick, m_isOpen;
     QPointF m_prevPoint;
+public:
+    AGraphicTrack(ATrack *track,BoardForTrack *board);
+    virtual ~AGraphicTrack()override;
+
+    virtual void resize()override{}
+    virtual void resizePictures()override{}
+
+    qreal topValue();
+    qreal bottomValue();
+
+    virtual void activate(bool activate){Q_UNUSED(activate)}
+    ATrack *trackInfo(){return m_track;}
+    void addIteam(AGraphicItem* item);
+    void clearItems();
+    virtual void updateItemsParam();
+
 
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*) override{Q_UNUSED(painter)}
     virtual void run()override{}
@@ -63,7 +66,8 @@ protected:
     virtual bool is_CurvesClick(QPointF point){Q_UNUSED(point)return false;}
     virtual bool is_headerClick(QPointF point){Q_UNUSED(point)return false;}
 
-    virtual void  doubleClickHandler(QPointF point){Q_UNUSED(point)}
+    virtual void  clickRightHandler(QPointF point){Q_UNUSED(point)}
+    virtual void  clickLeftHandler(QPointF point){Q_UNUSED(point)}
     virtual void  openCloseClickHandler(QPointF point){Q_UNUSED(point)}
     virtual void  borderRightClickHandler(QPointF point){Q_UNUSED(point)}
     virtual void  borderLeftClickHandler(QPointF point){Q_UNUSED(point)}
@@ -72,7 +76,8 @@ protected:
     virtual void  headerLeftClickHandler(QPointF point){Q_UNUSED(point)}
     virtual void  headerRightClickHandler(QPointF point){Q_UNUSED(point)}
 
-    virtual void  doubleClickMoveHandler(QPointF point){Q_UNUSED(point)}
+    virtual void  moveRightHandler(QPointF point){Q_UNUSED(point)}
+    virtual void  moveLeftHandler(QPointF point){Q_UNUSED(point)}
     virtual void  borderLeftMoveHandler(QPointF point){Q_UNUSED(point)}
     virtual void  borderRightMoveHandler(QPointF point){Q_UNUSED(point)}
     virtual void  curvesLeftMoveHandler(QPointF point){Q_UNUSED(point)}
@@ -80,7 +85,8 @@ protected:
     virtual void  headerLeftMoveHandler(QPointF point){Q_UNUSED(point)}
     virtual void  headerRightMoveHandler(QPointF point){Q_UNUSED(point)}
 
-    virtual void  doubleClickReleaseHandler(QPointF point){Q_UNUSED(point)}
+    virtual void  releaseRightHandler(QPointF point){Q_UNUSED(point)}
+    virtual void  releaseLeftHandler(QPointF point){Q_UNUSED(point)}
     virtual void  borderLeftReleaseHandler(QPointF point){Q_UNUSED(point)}
     virtual void  borderRightReleaseHandler(QPointF point){Q_UNUSED(point)}
     virtual void  curvesLeftReleaseHandler(QPointF point){Q_UNUSED(point)}
@@ -103,6 +109,7 @@ signals:
 public slots:
     virtual void changeBegin(int newBegin){Q_UNUSED(newBegin)}
     void sceneUpdate()override;
+    void timerLeftClick();
 
 };
 

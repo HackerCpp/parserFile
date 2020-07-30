@@ -25,12 +25,13 @@ void AGraphicTrack::init(){
      m_border = nullptr;
      m_isLeftBorderClick = m_isRightBorderClick = m_isLeftCurvesClick
       =  m_isRightCurvesClick = m_isLeftHeaderClick = m_isOpenCloseClick
-      = m_isRightHeaderClick = m_isDoubleClick =false;
+      = m_isRightHeaderClick = m_isRightClick = m_isLeftClick = false;
      m_isOpen = true;
      m_positionOfTheBorder = 0;
      m_boundingRect = QRectF(0,0,2000,2000);
      //connect(this,&AGraphicTrack::finished,this,&AGraphicTrack::sceneUpdate);
      setAcceptDrops(true);
+     connect(&m_timerLeftClick,&QTimer::timeout,this,&AGraphicTrack::timerLeftClick);
 }
 
 AGraphicTrack::AGraphicTrack(ATrack *track,BoardForTrack *board)
@@ -69,6 +70,8 @@ void AGraphicTrack::updateItemsParam(){
                                       //Дополнительная проверка для рисования на диск
     if(!m_items || !m_doublePixMap || m_doublePixMap->width() < 20)
         return;
+    if(m_doublePixMap->isNull())
+        return;
     foreach(auto grItem,*m_items){
         grItem->updateParam(m_doublePixMap->width());
     }
@@ -96,7 +99,8 @@ qreal AGraphicTrack::bottomValue(){
     return f_maximum;
 }
 
-void AGraphicTrack::mousePressEvent(QGraphicsSceneMouseEvent *event){
+void AGraphicTrack::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event){
+    m_timerLeftClick.stop();
     m_prevPoint = event->scenePos();
     if(is_openCloseClick(m_prevPoint)){
         openCloseClickHandler(m_prevPoint);
@@ -107,6 +111,7 @@ void AGraphicTrack::mousePressEvent(QGraphicsSceneMouseEvent *event){
         if(event->button() == Qt::LeftButton){
             if(is_borderClick(m_prevPoint)){
                 borderLeftClickHandler(m_prevPoint);
+
                 m_isLeftBorderClick = true;
             }
             else if(is_headerClick(m_prevPoint)){
@@ -137,8 +142,11 @@ void AGraphicTrack::mousePressEvent(QGraphicsSceneMouseEvent *event){
 
 void AGraphicTrack::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
     QPointF f_curentPoint = event->scenePos();
-    if(m_isDoubleClick){
-        doubleClickMoveHandler(f_curentPoint);
+    if(m_isRightClick){
+       moveRightHandler(f_curentPoint);
+    }
+    else if(m_isLeftClick){
+        moveLeftHandler(f_curentPoint);
     }
     else if(m_isLeftBorderClick){
         borderLeftMoveHandler(f_curentPoint);
@@ -159,10 +167,15 @@ void AGraphicTrack::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
 }
 
 void AGraphicTrack::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
+    m_timerLeftClick.stop();
     QPointF f_curentPoint = event->scenePos();
-    if(m_isDoubleClick){
-        doubleClickReleaseHandler(f_curentPoint);
-        m_isDoubleClick = false;
+    if(m_isRightClick){
+        releaseRightHandler(f_curentPoint);
+        m_isRightClick = false;
+    }
+    else if(m_isLeftClick){
+        releaseLeftHandler(f_curentPoint);
+        m_isLeftClick = false;
     }
     if(m_isLeftBorderClick){
         m_isLeftBorderClick = m_isOpenCloseClick = false;
@@ -191,10 +204,22 @@ void AGraphicTrack::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     //m_isBorderClick = m_isCurvesClick = m_isHeaderClick = m_isOpenCloseClick = false;
 }
 
-void AGraphicTrack::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event){
+void AGraphicTrack::mousePressEvent(QGraphicsSceneMouseEvent *event){
+    if(event->button() == Qt::RightButton){
+        clickRightHandler(event->pos());
+        m_isRightClick = true;
+    }
+    else if(event->button() == Qt::LeftButton){
+        m_posLeftClick = event->pos();
+        m_timerLeftClick.start(200);
+        //clickLeftHandler(event->pos());
 
-    doubleClickHandler(event->pos());
-    m_isDoubleClick = true;
+    }
+}
+void AGraphicTrack::timerLeftClick(){
+    m_timerLeftClick.stop();
+    clickLeftHandler(m_posLeftClick);
+    m_isLeftClick = true;
 }
 
 void AGraphicTrack::sceneUpdate(){

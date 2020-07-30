@@ -1,6 +1,7 @@
 #include "vspectritem.h"
 #include <cmath>
 #include "colorscale.h"
+#include <QPaintDevice>
 
 
 
@@ -277,7 +278,7 @@ void VSpectrItem::loadDrawingParam(int width){
 }
 
 void VSpectrItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
-    if(!currentMainValue())
+    if(!per->isActive() || !currentMainValue())
         return;
     SpecItem* f_spectrItemInfo = dynamic_cast<SpecItem*>(m_itemInfo);
 
@@ -401,6 +402,9 @@ void VSpectrItem::run(){
         QFile(path).remove();
     }
     m_picturePath.clear();
+    if(m_curentPictureWidth < 10){ // Проверка на закрытый трек
+        return;
+    }
     qreal f_top = mainValueMinimum();
     qreal f_bottom = mainValueMaximum();
     int f_stock = 1000;

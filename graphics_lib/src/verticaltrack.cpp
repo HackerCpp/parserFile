@@ -21,7 +21,7 @@ VerticalTrack::VerticalTrack(ATrack *track,BoardForTrack *board)
         return;
     }
     m_selectingArea = nullptr;
-
+    m_legend = new ItemsLegendView(m_items);
     m_curvesMenu = new QMenu(tr("&CurvesMenu"));
     m_curvesMenu->addAction(tr("&Curve settings"),this, SLOT(openSettingsActiveItems()));
     m_curvesMenu->addAction(tr("&Curve edit"),this, SLOT(openEditorActiveItems()));
@@ -47,7 +47,6 @@ VerticalTrack::VerticalTrack(ATrack *track,BoardForTrack *board)
     m_nameTrack->fill(0x0);
     QPainter per(m_nameTrack);
     per.setPen(QPen(QColor(100,100,100,100)));
-
     per.setFont(QFont("Times", 14, QFont::Bold));
     per.drawText(QRect(0,0,m_nameTrack->width(),m_nameTrack->height()),Qt::AlignHCenter|Qt::AlignVCenter,m_track->name());
 
@@ -117,11 +116,7 @@ void VerticalTrack::resizePictures(){
 
     m_infoPixMap = new QImage(f_pictureWidth,30,QImage::Format_ARGB4444_Premultiplied);
     m_infoPixMap->fill(0x0);
-    /*QPainter painterCurent(m_infoPixMap);
-    if(painterCurent.isActive() && !m_infoPixMap->isNull()){
-        painterCurent.setFont(QFont("Times", 10, QFont::Bold));
-        painterCurent.drawText(10,15,"download");
-    }*/
+
     QImage::Format f_format = m_board->formatPicture();
     m_curentPixmap = new QImage(f_pictureWidth,f_pictureHeight,f_format);
     m_curentPixmap->fill(0xffffffff);
@@ -408,6 +403,33 @@ void  VerticalTrack::headerRightReleaseHandler(QPointF point){
     }
 }
 
+void  VerticalTrack::clickLeftHandler(QPointF point){
+    this->m_legend->move(QCursor::pos());
+    this->m_legend->show();
+
+}
+
+void  VerticalTrack::clickRightHandler(QPointF point){
+
+}
+
+void  VerticalTrack::moveLeftHandler(QPointF point){
+    this->m_legend->move(QCursor::pos());
+}
+
+void  VerticalTrack::moveRightHandler(QPointF point){
+    qDebug() << "moveRightHandler" << point;
+}
+
+void  VerticalTrack::releaseLeftHandler(QPointF point){
+    this->m_legend->hide();
+}
+
+void  VerticalTrack::releaseRightHandler(QPointF point){
+    qDebug() << "releaseRightHandler" << point;
+}
+
+
 void VerticalTrack::dragEnterEvent(QGraphicsSceneDragDropEvent *event){
     //qDebug() << "drEnterEvent";
 }
@@ -449,16 +471,16 @@ void VerticalTrack::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QW
     int LeftPos = m_track->begin() * m_board->pixelPerMm();
     int f_rightPos = (m_track->begin() + m_track->width()) * m_board->pixelPerMm();
 
-    if(m_curentPixmap)
+    if(m_curentPixmap && !m_curentPixmap->isNull())
         painter->drawImage(QRect(LeftPos,m_topPositionPicture,m_curentPixmap->width(),m_curentPixmap->height()),*m_curentPixmap);
-    if(m_curentHeader)
+    if(m_curentHeader && !m_curentHeader->isNull())
         painter->drawImage(QRect(LeftPos,m_visibilitySquare.y() + m_board->positionHeader(),m_curentHeader->width(),m_curentHeader->height()),*m_curentHeader);
-    if(m_border)
+    if(m_border && !m_border->isNull())
         painter->drawImage(QRect(m_positionOfTheBorder,m_visibilitySquare.y(),m_border->width(),m_border->height()),*m_border);
-    if(m_infoPixMap){
+    if(m_infoPixMap && !m_infoPixMap->isNull()){
         painter->drawImage(QRect(LeftPos,m_visibilitySquare.y(),m_infoPixMap->width(),m_infoPixMap->height()),*m_infoPixMap);
     }
-    if(m_nameTrack){
+    if(m_nameTrack && !m_nameTrack->isNull()){
         painter->drawImage(QRect(f_rightPos - m_nameTrack->width() - m_border->width() - 5,m_visibilitySquare.y(),m_nameTrack->width(),m_nameTrack->height()),*m_nameTrack);
     }
 }
@@ -474,17 +496,17 @@ void VerticalTrack::run(){
         return;
     if(m_visibilitySquare.x() > boundingRect().x() + boundingRect().width()
     || m_visibilitySquare.x() + m_visibilitySquare.width() < boundingRect().x()){
-        return;
+        return; //Если трек не в зоне видимости рисовать не будем
     }
     //QTime time = QTime::currentTime();
     QPainter painter(m_doublePixMap);
-    QPainter painterCurent(m_infoPixMap);
+    QPainter painterInfo(m_infoPixMap);
     QPainter painterHeader(m_doubleHeader);
-    if(!painter.isActive() || !painterCurent.isActive() || !painterHeader.isActive() )
+    if(!painter.isActive() || !painterInfo.isActive() || !painterHeader.isActive() )
         return;
-    painterCurent.setBrush(QBrush(Qt::white));
-    painterCurent.setFont(QFont("Times", 10, QFont::Bold));
-    painterCurent.drawText(10,15,"download");
+    painterInfo.setBrush(QBrush(Qt::white));
+    painterInfo.setFont(QFont("Times", 10, QFont::Bold));
+    painterInfo.drawText(10,15,"download");
     int f_height = m_doublePixMap->height();
     m_doublePixMap->fill(0xffffff);
     m_doubleHeader->fill(0x0);
@@ -497,7 +519,7 @@ void VerticalTrack::run(){
     else{
         painter.drawLine(QPoint(0,0),QPoint(0,f_height));
     }
-    int f_position = 0;
+    int f_position = 0; // Позиция заголовка для рисования
     foreach(auto item,*m_items){
         if(!item || !item->is_visible())
             continue;

@@ -4,10 +4,12 @@
 #include "rightborder.h"
 #include "selectingarea.h"
 #include <QMenu>
+#include <itemslegendview.h>
 
 class VerticalTrack : public AGraphicTrack
 {
     Q_OBJECT
+    ItemsLegendView *m_legend;
     SelectingArea *m_selectingArea;
     QMenu *m_curvesMenu,*m_trackMenu;
     int m_curentWidth;
@@ -53,6 +55,13 @@ private:
     virtual void  curvesRightReleaseHandler(QPointF point)override;
     virtual void  headerLeftReleaseHandler(QPointF point)override;
     virtual void  headerRightReleaseHandler(QPointF point)override;
+
+    virtual void  clickLeftHandler(QPointF point)override;
+    virtual void  clickRightHandler(QPointF point)override;
+    virtual void  moveLeftHandler(QPointF point)override;
+    virtual void  moveRightHandler(QPointF point)override;
+    virtual void  releaseLeftHandler(QPointF point)override;
+    virtual void  releaseRightHandler(QPointF point)override;
 
     virtual void dragEnterEvent(QGraphicsSceneDragDropEvent *event)override;
     virtual void dragLeaveEvent(QGraphicsSceneDragDropEvent *event)override;

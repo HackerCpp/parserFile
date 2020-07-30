@@ -166,9 +166,21 @@ QByteArray  GFMSaver::getForSaveHeaderBlock(IBlock *block){
         qDebug() << "Не удалось перевести IBlock в HearedBlock";
         return QByteArray();
     }
+    QList<QSharedPointer<HeaderInfo> > *f_listHeaderInfo = headerBlock->infoHeader();
+    QString f_editedInfo;
+    foreach(auto info, *f_listHeaderInfo){
+        if(info->name() == "[EDITED]"){
+            f_editedInfo = info->body();
+            f_listHeaderInfo->removeOne(info);
+            break;
+        }
+    }
+    QDateTime f_dateTime;
+    f_editedInfo +=  "<br>Date : " + f_dateTime.currentDateTime().toString() + "<br>Geology saver version " + VERSION_LIB ;
+    headerBlock->setHeaderInfo(QSharedPointer<HeaderInfo>(new HeaderInfo{"[EDITED]",f_editedInfo}));
     QString f_name = "[HEADER]";
     int f_nameSize = f_name.size() * 2;
-    blockForWrite.append(reinterpret_cast<char*>(&f_nameSize),2);       //Размер названия блока
+    blockForWrite.append(reinterpret_cast<char*>(&f_nameSize),2);    //Размер названия блока
     blockForWrite.append(m_codec->fromUnicode(f_name).mid(2));
 
     QByteArray f_data;

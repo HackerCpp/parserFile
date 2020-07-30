@@ -41,6 +41,7 @@ include(../graphics_lib/graphics.pri)
 
 
 SOURCES += \
+    ../graphics_lib/inc/tools/itemslegendview.cpp \
     src/tabinterpretations.cpp \
     src/graphicscontrolpanel.cpp \
     src/graphicwidget.cpp \
@@ -55,6 +56,7 @@ SOURCES += \
     src/filereader.cpp\
 
 HEADERS += \
+    ../graphics_lib/inc/tools/itemslegendview.h \
     inc/datamodel.h \
     inc/datatreeview.h \
     inc/graphicscontrolpanel.h \
