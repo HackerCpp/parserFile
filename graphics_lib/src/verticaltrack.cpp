@@ -20,6 +20,8 @@ VerticalTrack::VerticalTrack(ATrack *track,BoardForTrack *board)
         qDebug() << "Передан нулевой указатель на трекИнфо, не получается создать трек.";
         return;
     }
+    m_linePosition = 0;
+    m_isDrawLine = false;
     m_selectingArea = nullptr;
     m_legend = new ItemsLegendView(m_items);
     m_curvesMenu = new QMenu(tr("&CurvesMenu"));
@@ -404,8 +406,12 @@ void  VerticalTrack::headerRightReleaseHandler(QPointF point){
 }
 
 void  VerticalTrack::clickLeftHandler(QPointF point){
-    this->m_legend->move(QCursor::pos());
+    m_isDrawLine = true;
+    m_legend->move(QCursor::pos());
+    m_legend->changeScenePoint(point);
     this->m_legend->show();
+    m_linePosition = point.y();
+    update();
 
 }
 
@@ -414,19 +420,24 @@ void  VerticalTrack::clickRightHandler(QPointF point){
 }
 
 void  VerticalTrack::moveLeftHandler(QPointF point){
-    this->m_legend->move(QCursor::pos());
+    m_legend->move(QCursor::pos());
+    m_legend->changeScenePoint(point);
+    m_linePosition = point.y();
+    update();
 }
 
 void  VerticalTrack::moveRightHandler(QPointF point){
-    qDebug() << "moveRightHandler" << point;
+
 }
 
 void  VerticalTrack::releaseLeftHandler(QPointF point){
+    m_isDrawLine = false;
     this->m_legend->hide();
+    update();
 }
 
 void  VerticalTrack::releaseRightHandler(QPointF point){
-    qDebug() << "releaseRightHandler" << point;
+
 }
 
 
@@ -482,6 +493,10 @@ void VerticalTrack::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QW
     }
     if(m_nameTrack && !m_nameTrack->isNull()){
         painter->drawImage(QRect(f_rightPos - m_nameTrack->width() - m_border->width() - 5,m_visibilitySquare.y(),m_nameTrack->width(),m_nameTrack->height()),*m_nameTrack);
+    }
+    if(m_isDrawLine){
+        painter->setPen(QPen(Qt::black,2));
+        painter->drawLine(LeftPos,m_linePosition,LeftPos + boundingRect().width(),m_linePosition);
     }
 }
 

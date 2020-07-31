@@ -5,6 +5,7 @@
 #include "iboard.h"
 #include "verticaltrack.h"
 #include <QGraphicsScene>
+#include "itemslegendview.h"
 
 class VerticalBoard : public AGraphicBoard
 {
@@ -13,7 +14,8 @@ class VerticalBoard : public AGraphicBoard
     bool m_isDrawTime;
     int headerTopOffset;
     QGraphicsScene *m_canvas;
-
+    ItemsLegendView *m_legend;
+    QGraphicsLineItem *m_lineLegend;
 public:
     VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves,DrawSettings *drawSettings);
     VerticalBoard(QMap<QString,ICurve*> *curves,DrawSettings *drawSettings);
@@ -25,6 +27,10 @@ public:
     virtual void redraw()override{emit scrollChanged();}
     void updateItems();
 
+
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
 
 private:
     void init();

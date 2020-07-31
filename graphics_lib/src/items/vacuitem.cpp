@@ -348,19 +348,42 @@ void VAcuItem::drawHeader(QPainter *per,int &position,bool *flag){
     per->restore();
 }
 
-void VAcuItem::updateParam(int pictureWidth){
-    m_recordPointDepth = m_curve->recordPoint();
-    m_isEndThread = true;
-    m_curentPictureWidth = pictureWidth;
-
+void VAcuItem::drawOnTheDisk(){
     if( isRunning ()){
         m_isRedraw = true;
     }
     else{
-        loadDrawingParam(m_curentPictureWidth);
         m_isEndThread = false;
         start();
     }
+}
+
+void VAcuItem::updateParam(int pictureWidth){
+    if(!m_curve || !m_board)
+        return;
+    m_isEndThread = true;
+    m_curentPictureWidth = pictureWidth;
+    loadDrawingParam(m_curentPictureWidth);
+    m_recordPointDepth = m_curve->recordPoint();
+    m_currentMainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
+    m_currentRecordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
+    m_currentRecordPoint = qIsNaN(m_currentRecordPoint) ? 0 : m_currentRecordPoint;
+    m_currentScaleMainValue = m_board->scale();
+    drawOnTheDisk();
+
+}
+
+void VAcuItem::updateParam(){
+    if(!m_curve || !m_board)
+        return;
+    m_isEndThread = true;
+    loadDrawingParam(m_curentPictureWidth);
+    m_recordPointDepth = m_curve->recordPoint();
+    m_currentMainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
+    m_currentRecordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
+    m_currentRecordPoint = qIsNaN(m_currentRecordPoint) ? 0 : m_currentRecordPoint;
+    m_currentScaleMainValue = m_board->scale();
+    drawOnTheDisk();
 }
 
 

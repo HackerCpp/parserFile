@@ -16,8 +16,8 @@ void calculateRainbow(SpecItem *spectrItem,ICurve *curve){
     if(!spectrItem)
         return;
     QString valueRange = curve->desc()->param("val_range");
-    qreal f_minimumValue = valueRange.left(valueRange.indexOf("..")).toDouble();
-    qreal f_maximumValue = valueRange.mid(valueRange.indexOf("..") + 2).toDouble();
+    qreal f_minimumValue = /*curve->minimum();*/ valueRange.left(valueRange.indexOf("..")).toDouble();
+    qreal f_maximumValue = /*curve->maximum();*/valueRange.mid(valueRange.indexOf("..") + 2).toDouble();
 
     if(f_minimumValue > f_maximumValue){
         qreal min = f_maximumValue;

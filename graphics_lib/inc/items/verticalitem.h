@@ -13,7 +13,9 @@ public:
 
 
     void drawHeader(QPainter *per,int &position,bool *flag)override;
+    void drawLegend(QPainter *per,int &position,QPointF point,bool *flag)override;
     bool isClickHeaderArea(QPoint pos)override;
+
 
     //virtual void paint(QPainter *per,QPainter *perHead,QRect rect,bool *flag)override{}
 };

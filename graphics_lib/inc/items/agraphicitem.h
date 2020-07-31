@@ -14,7 +14,8 @@ protected:
     CustomObject *m_drawObject;
     BoardForTrack *m_board;
     bool m_isActive;
-    int m_positionHeaderArea,m_heightHeaderArea;
+    int m_positionHeaderArea,m_heightHeaderArea,m_heightLegend;
+    QFont m_fontLegend;
     qreal m_recordPointDepth;
 
     ICurve *m_currentMainValue;
@@ -31,6 +32,7 @@ public:
     qreal bottomValue();
 
     virtual void drawHeader(QPainter *per,int &position,bool *flag){Q_UNUSED(per) Q_UNUSED(position) Q_UNUSED(flag)}
+    virtual void drawLegend(QPainter *per,int &position,QPointF point,bool *flag){Q_UNUSED(per) Q_UNUSED(position) Q_UNUSED(point) Q_UNUSED(flag)}
     virtual void drawBody(QPainter *per,QRectF visibleRect,bool *flag){Q_UNUSED(per) Q_UNUSED(visibleRect) Q_UNUSED(flag)}
     virtual void paint(QPainter *per,QPainter *perHead,QRectF visibleRect,int &position,bool *flag);
     virtual bool isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per){Q_UNUSED(area) Q_UNUSED(visibleRect) Q_UNUSED(per) return false;}
@@ -39,6 +41,7 @@ public:
 
     virtual void updateParam(int pictureWidth);
     virtual void updateParam(){}
+
     ICurve *curve(){return m_curve;}
     CustomObject *drawObject(){return m_drawObject;}
     ICurve *currentMainValue(){return m_currentMainValue;}
@@ -49,6 +52,7 @@ public:
     bool is_visible(){return m_itemInfo->visible(AItem::BOARD_GRAPH_VIEW);}
 
     bool isActive(){return m_isActive;}
+    int mainIndexFromScene(QPointF point);
     QPair<QString,qreal> mainValueFromScene(QPointF point);
     //Перед использованием данной функции нужно проверить currentMainValue() != nullptr
     //в данной функции эта проверка не производится для быстродействия

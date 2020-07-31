@@ -30,6 +30,21 @@ void VerticalItem::drawHeader(QPainter *per,int &position,bool *flag){
     position += m_heightHeaderArea;
     per->restore();
 }
+void VerticalItem::drawLegend(QPainter *per,int &position,QPointF point,bool *flag){
+    Q_UNUSED(flag)
+    per->save();
+    int f_width = per->device()->width();
+    per->setPen(QPen(color(),2));
+    per->setFont(m_fontLegend);
+    per->setBrush(QBrush(QColor(255,255,255,255)));
+    per->drawRect(1,position,f_width - 2,m_heightLegend);
+    QString f_textMnemonic = m_curve->mnemonic();
+    QString f_textValue = QString::number(m_curve->data(mainIndexFromScene(point) * m_curve->sizeOffset()));
+    per->drawText(QRect(10,position,f_width - 2,m_heightLegend),Qt::AlignLeft|Qt::AlignVCenter,f_textMnemonic);
+    per->drawText(QRect(0,position,f_width - 2,m_heightLegend),Qt::AlignRight|Qt::AlignVCenter,f_textValue);
+    position += m_heightLegend;
+    per->restore();
+}
 
 bool VerticalItem::isClickHeaderArea(QPoint pos){
     if(!m_itemInfo->visible(AItem::BOARD_GRAPH_VIEW)){

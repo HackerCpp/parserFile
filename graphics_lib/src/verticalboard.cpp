@@ -4,6 +4,8 @@
 #include "iteminfocreater.h"
 #include "browsergraphicitems.h"
 #include "ruler.h"
+#include <QDesktopWidget>
+
 
 
 
@@ -11,6 +13,7 @@ VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves,Dra
     :AGraphicBoard(boardInfo,curves,drawSettings)
 {
     init();
+
     if(!m_boardInfo){
         qDebug() << "Передан нулевой указатель boardInfo";
         return;
@@ -81,6 +84,44 @@ void VerticalBoard::updateItems(){
                 }
             }
         }
+        if(m_legend)
+            delete m_legend; m_legend = nullptr;
+        QDesktopWidget desktop;
+        QRect rect = desktop.availableGeometry(desktop.primaryScreen());
+
+        m_legend = new ItemsLegendView(m_items,this);
+        m_legend->move(rect.x() - m_legend->width() - 20,0);
+}
+
+void VerticalBoard::mousePressEvent(QMouseEvent *event){
+    if(event->button() == Qt::RightButton){
+        if(m_legend){
+            m_lineLegend->setLine(0,mapToScene(event->pos()).y(),m_canvas->width(),mapToScene(event->pos()).y());
+            m_lineLegend->show();
+            //m_legend->move(QCursor::pos());
+            m_legend->changeScenePoint(mapToScene(event->pos()));
+            m_legend->show();
+        }
+    }
+    QGraphicsView::mousePressEvent(event);
+}
+void VerticalBoard::mouseMoveEvent(QMouseEvent *event){
+    //if(event->button() == Qt::RightButton){
+        if(m_legend){
+            m_lineLegend->setLine(0,mapToScene(event->pos()).y(),m_canvas->width(),mapToScene(event->pos()).y());
+            //m_legend->move(QCursor::pos());
+            m_legend->changeScenePoint(mapToScene(event->pos()));
+        }
+    //}
+
+    QGraphicsView::mouseMoveEvent(event);
+}
+void VerticalBoard::mouseReleaseEvent(QMouseEvent *event){
+    if(m_legend){
+        m_legend->hide();
+        m_lineLegend->hide();
+    }
+    QGraphicsView::mouseReleaseEvent(event);
 }
 
 void VerticalBoard::distributionOfItemsBetweenTracks(){
@@ -128,8 +169,14 @@ void VerticalBoard::newTrack(){
 }
 
 void VerticalBoard::init(){
-     m_canvas = new QGraphicsScene();
-     setScene(m_canvas);
+    m_legend = nullptr;
+    m_canvas = new QGraphicsScene();
+    setScene(m_canvas);
+    m_lineLegend = new QGraphicsLineItem();
+    m_lineLegend->setPen(QPen(Qt::black,2));
+    m_lineLegend->setZValue(200);
+    m_canvas->addItem(m_lineLegend);
+
 }
 
 void VerticalBoard::resizeEvent(QResizeEvent *event){

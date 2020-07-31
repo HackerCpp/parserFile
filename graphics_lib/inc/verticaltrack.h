@@ -15,6 +15,8 @@ class VerticalTrack : public AGraphicTrack
     int m_curentWidth;
     int m_сurrentСountOfActive = 0;
     QPointF m_ptDragPos;
+    int m_linePosition;
+    bool m_isDrawLine;
 public:
     VerticalTrack(ATrack *track,BoardForTrack *board);
     ~VerticalTrack()override;

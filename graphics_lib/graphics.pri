@@ -16,6 +16,7 @@ LIBS += \
 
 
 SOURCES += \
+    $$PWD/inc/tools/itemslegendview.cpp \
     $$PWD/inc/tools/customprogressbar.cpp \
     $$PWD/src/drawObjects/objectColumn.cpp \
     $$PWD/src/items/customobjectitem.cpp \
@@ -61,6 +62,7 @@ SOURCES += \
     $$PWD/src/tools/qxtspanslider.cpp
 
 HEADERS += \
+    $$PWD/inc/tools/itemslegendview.h \
     $$PWD/inc/tools/customprogressbar.h \
     $$PWD/inc/drawObjects/objectColumn.h \
     $$PWD/inc/drawsettings.h \

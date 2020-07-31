@@ -21,9 +21,12 @@ class VAcuItem : public DrawingThroughADisk , public VerticalItem{
     void drawHeader(QPainter *per,int &position,bool *flag)override;
     void drawBody(QPainter *per,QRectF visibleRect,bool *flag)override;
     void updateParam(int pictureWidth)override;
+    void updateParam()override;
     bool isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per)override;
     void loadDrawingParam(int width) override;
     void run()override;
+
+    void drawOnTheDisk()override;
 
 public:
     VAcuItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board);

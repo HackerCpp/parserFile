@@ -7,6 +7,9 @@ AGraphicItem::AGraphicItem(ICurve *curve,BoardForTrack *board)
     m_isActive = false;
     m_positionHeaderArea = 0;
     m_heightHeaderArea = 20;
+
+    m_fontLegend = QFont("Times", 15, QFont::Bold);
+    m_heightLegend = QFontMetrics(m_fontLegend).height();
     m_recordPointDepth = qIsNaN(curve->recordPoint()) ? 0 : curve->recordPoint();
 }
 
@@ -71,6 +74,21 @@ void AGraphicItem::paint(QPainter *per,QPainter *perHead,QRectF visibleRect,
         drawBody(per,visibleRect,flag);
     }
 }
+
+int AGraphicItem::mainIndexFromScene(QPointF point){
+    /*if(mainValueMinimum() > point.y() || mainValueMaximum() < point.y()){
+        return qQNaN();
+    }*/
+    uint index = 0;
+    for(index = 1; index < currentMainValue()->size() - 1; ++index){
+       if(mainValue(index) > point.y()  && mainValue(index + 1) < point.y() ||
+           mainValue(index) < point.y()  && mainValue(index + 1) > point.y()){
+           return index;// > 2?i - 2 : 0;
+       }
+    }
+    return index;
+}
+
 QPair<QString,qreal> AGraphicItem::mainValueFromScene(QPointF point){
     qreal f_divider = m_board->isDrawTime() ? 600000 :  1000;
     QString f_unit = m_board->isDrawTime() ? "min" : "m";
