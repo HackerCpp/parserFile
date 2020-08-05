@@ -18,6 +18,7 @@ LIBS += \
 SOURCES += \
     $$PWD/inc/tools/itemslegendview.cpp \
     $$PWD/inc/tools/customprogressbar.cpp \
+    $$PWD/inc/tools/modellegenditems.cpp \
     $$PWD/src/drawObjects/objectColumn.cpp \
     $$PWD/src/items/customobjectitem.cpp \
     $$PWD/src/spectrReader/chartvievforonewavewidget.cpp \
@@ -93,6 +94,7 @@ HEADERS += \
     $$PWD/inc/tools/customdelegates.h \
     $$PWD/inc/tools/modelcurveeditor.h \
     $$PWD/inc/tools/modelforgraphicsitems.h \
+    $$PWD/inc/tools/modellegenditems.h \
     $$PWD/inc/tools/selectingarea.h \
     $$PWD/inc/items/vacuitem.h \
     $$PWD/inc/items/vspectritem.h \

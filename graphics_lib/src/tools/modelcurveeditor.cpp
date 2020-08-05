@@ -57,13 +57,13 @@ QVariant ModelCurveEditor::headerData(int section, Qt::Orientation orientation, 
     if (orientation == Qt::Horizontal){
         switch (section) {
         case 0:{
-            return "Time(min)";
+            return tr("Time(min)");
         }
         case 1:{
-            return "Depth(m)";
+            return tr("Depth(m)");
         }
         default:{
-            return "Offset" + QString::number(section - 2);
+            return tr("Offset") + QString::number(section - 2);
         }
         }
     }

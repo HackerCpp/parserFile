@@ -121,20 +121,16 @@ void inline VAcuItem::drawInterpolationHorizontal(QPainter *per,QRectF visibleRe
 void inline VAcuItem::drawInterpolationHorizontalNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag){
     qreal quantityElem = m_curve->sizeOffset();
     qreal step = m_dataStepPix;
-    ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
-    qreal f_recordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
     float f_yTop = y_top;
     float f_height = per->device()->height();
-
     float f_downOffset = f_height;
     uint indexBegin  = 0;
-    qreal f_scaleForMainValue = m_board->scale();
 
-    if(((f_mainValue->minimum() + f_recordPoint) * f_scaleForMainValue) > f_yTop  + f_downOffset - 20 || ((f_mainValue->maximum() + f_recordPoint) * f_scaleForMainValue) < f_yTop){
+    if(mainValueMinimum() > f_yTop  + f_downOffset - 20 || mainValueMaximum() < f_yTop){
         return;
     }
-    for(uint i = 0; i < f_mainValue->size(); ++i){
-       if(((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) > f_yTop && ((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) < f_yTop + f_downOffset - 20){
+    for(uint i = 0; i < currentMainValue()->size(); ++i){
+       if(mainValue(i) > f_yTop && mainValue(i) < f_yTop + f_downOffset - 20){
            indexBegin = i;// > 2?i - 2 : 0;
            break;
        }
@@ -147,21 +143,20 @@ void inline VAcuItem::drawInterpolationHorizontalNoOffset(QPainter *per,int y_to
     QColor color;
     per->setPen(QPen(QColor(0,0,0,0),0));
     uint i;
-    int prevStep = (((f_mainValue->data(indexBegin) + f_recordPoint) * f_scaleForMainValue) - f_yTop);
+    int prevStep = (mainValue(indexBegin) - f_yTop);
 
     //qDebug() << time.elapsed();
     QImage *f_image = dynamic_cast<QImage*>(per->device());
     int indexWidthBegin = -fmin(m_offsetPix,0) / m_dataStepPix;
     int indexWidthEnd = quantityElem - fmax((m_widthPicturePix + m_offsetPix - f_image->width()),0) / m_dataStepPix;
 
-    for(i = indexBegin + 1;i < f_mainValue->size();++i){
+    for(i = indexBegin + 1;i < currentMainValue()->size();++i){
         if(*flag)
             return;
-        if(((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) > f_yTop + f_downOffset - 20 || ((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) < f_yTop){
-           // qDebug() << ((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) << f_yTop + f_downOffset - 20 <<f_yTop;
+        if(mainValue(i) > f_yTop + f_downOffset - 20 || mainValue(i) < f_yTop){
             break;
         }
-        int f_curentIntY = (int)(((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) - f_yTop);
+        int f_curentIntY = (int)(mainValue(i) - f_yTop);
         if(prevStep == f_curentIntY){
             continue;
         }
@@ -194,9 +189,108 @@ void inline VAcuItem::drawInterpolationHorizontalNoOffset(QPainter *per,int y_to
             }
             gradient.insert(j,color);
         }
-        prevStep = (((f_mainValue->data(i) + f_recordPoint) * f_scaleForMainValue) - f_yTop);
+        prevStep = (mainValue(i) - f_yTop);
         QRect f_drawRect = QRect(fmax(m_offsetPix,0),prevStep,(indexWidthEnd - indexWidthBegin) * m_dataStepPix,2 * m_board->pixelPerMm());
         gradient.draw(*f_image,f_drawRect,QPointF(fmax(m_offsetPix,0),0.0),QPointF((indexWidthEnd - indexWidthBegin) * m_dataStepPix + fmax(m_offsetPix,0),0.0),GradientStyle::Linear,70000);
+    }
+}
+
+
+void inline VAcuItem::drawPointsTwoColorsNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag){
+    qreal quantityElem = m_curve->sizeOffset();
+    qreal f_step = m_dataStepPix;
+    float f_yTop = y_top;
+    float f_height = per->device()->height();
+
+    float f_downOffset = f_height;
+    uint indexBegin  = 0;
+
+    if(mainValueMinimum() > f_yTop  + f_downOffset - 20 || mainValueMaximum() < f_yTop){
+        return;
+    }
+    for(uint i = 0; i < currentMainValue()->size(); ++i){
+       if(mainValue(i) > f_yTop && mainValue(i) < f_yTop + f_downOffset - 20){
+           indexBegin = i;// > 2?i - 2 : 0;
+           break;
+       }
+    }
+
+    AcuItem *f_AcuItemInfo = dynamic_cast<AcuItem*>(m_itemInfo);
+
+    QColor color  = QColor(f_AcuItemInfo->transparentColor());
+    per->setPen(QPen(color,4));
+    uint i;
+    int prevStep = (mainValue(indexBegin) - f_yTop);
+
+    QImage *f_image = dynamic_cast<QImage*>(per->device());
+    int indexWidthBegin = -fmin(m_offsetPix,0) / m_dataStepPix;
+    int indexWidthEnd = quantityElem - fmax((m_widthPicturePix + m_offsetPix - f_image->width()),0) / m_dataStepPix;
+    for(i = indexBegin + 1; i < currentMainValue()->size();++i){
+        if(*flag)
+            return;
+        if(mainValue(i) > f_yTop + f_downOffset - 20 || mainValue(i) < f_yTop){
+            break;
+        }
+        qreal f_currentX = m_offsetPix;
+        f_currentX = f_currentX < 0 ? 0 : f_currentX;
+        for(int j = indexWidthBegin; j < indexWidthEnd; ++j){
+            if(*flag)
+                return;
+            if(m_curve->data(i * m_curve->sizeOffset() + j) > 0){
+                per->drawLine(f_currentX - (m_dataStepPix / 2),mainValue(i) - f_yTop,f_currentX + (m_dataStepPix / 2),mainValue(i) - f_yTop);
+                //per->drawPoint(f_currentX,mainValue(i) - f_yTop);
+            }
+            f_currentX += f_step;
+        }
+        prevStep = (mainValue(i) - f_yTop);
+
+    }
+}
+
+void inline VAcuItem::drawWaveNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag){
+    Q_UNUSED(y_bottom)
+    qreal quantityElem = m_curve->sizeOffset();
+    qreal f_step = m_dataStepPix;
+    float f_yTop = y_top;
+    float f_height = per->device()->height();
+
+    float f_downOffset = f_height;
+    uint indexBegin  = 0;
+
+    if(mainValueMinimum() > f_yTop  + f_downOffset - 20 || mainValueMaximum() < f_yTop){
+        return;
+    }
+    for(uint i = 0; i < currentMainValue()->size(); ++i){
+       if(mainValue(i) > f_yTop && mainValue(i) < f_yTop + f_downOffset - 20){
+           indexBegin = i;
+           break;
+       }
+    }
+
+    AcuItem *f_AcuItemInfo = dynamic_cast<AcuItem*>(m_itemInfo);
+    QColor color  = QColor(f_AcuItemInfo->bruchColor());
+    per->setPen(QPen(color,3));
+    qreal f_amplitudeScale = 0.001;
+    QImage *f_image = dynamic_cast<QImage*>(per->device());
+    int indexWidthBegin = -fmin(m_offsetPix,0) / m_dataStepPix;
+    int indexWidthEnd = quantityElem - fmax((m_widthPicturePix + m_offsetPix - f_image->width()),0) / m_dataStepPix;
+    for(uint i = indexBegin + 1; i < currentMainValue()->size();++i){
+        if(*flag)
+            return;
+        if(mainValue(i) > f_yTop + f_downOffset - 20 || mainValue(i) < f_yTop){
+            break;
+        }
+        qreal f_currentX = m_offsetPix;
+        QPoint f_prevPoint = QPoint(f_currentX - (m_dataStepPix / 2),mainValue(i) - f_yTop - (m_curve->data(i * m_curve->sizeOffset() + indexWidthBegin) * f_amplitudeScale));
+        f_currentX = f_currentX < 0 ? 0 : f_currentX;
+        for(int j = indexWidthBegin + 1; j < indexWidthEnd; ++j){
+            if(*flag)
+                return;
+            QPoint f_currentPoint = QPoint(f_currentX - (m_dataStepPix / 2),mainValue(i) - f_yTop - (m_curve->data(i * m_curve->sizeOffset() + j) * f_amplitudeScale));
+            per->drawLine(f_prevPoint,f_currentPoint);
+            f_prevPoint = f_currentPoint;
+            f_currentX += f_step;
+        }
     }
 }
 
@@ -289,6 +383,23 @@ void VAcuItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
 
 void VAcuItem::run(){
     m_updatedParam = true;
+
+    AcuItem* f_acuItem = dynamic_cast<AcuItem*>(m_itemInfo);
+    if(!f_acuItem){
+        qDebug() << "Не удалось преобразовать AItem in AcuItem";
+        return;
+    }
+    void(VAcuItem::*pDrawingFunction)(QPainter *,int ,int ,bool *);
+    if(!f_acuItem->showMode()){
+        pDrawingFunction = &VAcuItem::drawPointsTwoColorsNoOffset;
+    }
+    else if(f_acuItem->showMode() == 1){
+        pDrawingFunction = &VAcuItem::drawInterpolationHorizontalNoOffset;
+    }
+    else if(f_acuItem->showMode() == 2){
+        pDrawingFunction = &VAcuItem::drawWaveNoOffset;
+    }
+
     foreach(auto path,m_picturePath){
         if(!QFile::exists(path) )
             continue;
@@ -313,7 +424,7 @@ void VAcuItem::run(){
         m_curentDrawPersent = (y_top - (f_top - 1000)) * f_onePersent;
         QImage f_image(m_curentPictureWidth,f_heightPictures,QImage::Format_ARGB32);
         QPainter f_painter(&f_image);
-        drawInterpolationHorizontalNoOffset(&f_painter,y_top,y_top + f_heightPictures,&m_isEndThread);
+        (this->*pDrawingFunction)(&f_painter,y_top,y_top + f_heightPictures,&m_isEndThread);
         m_saversMoment = true;
         QString f_namePicture = "temporary/" + m_curve->mnemonic() + QString::number(m_curentPictureWidth) + QString::number(y_top) + ".png";
         f_image.save(f_namePicture,"PNG");

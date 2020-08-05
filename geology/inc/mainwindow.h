@@ -31,5 +31,7 @@ public slots:
     void openEditorPython()override;
     void openInterpretations()override;
     void openConstructor()override;
+
+    void quit(){qDebug() << "quit";}
 };
 #endif // MAINWINDOW_H

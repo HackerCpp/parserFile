@@ -10,7 +10,8 @@ ModelForGraphicsItems::ModelForGraphicsItems(QMap<QString,AGraphicItem *> *items
         m_items->insert(index,item);
         ++index;
     }
-    m_headerList << tr("Visible") << tr("Data") << tr("Device") << tr("Mnemonic") << tr("Track number") << tr("Draw type") << tr("Color") << "" << "" << "" << "";
+    m_headerList << tr("Visible") << tr("Data") << tr("Device") << tr("Mnemonic") << tr("Track number")
+                 << tr("Draw type") << tr("Color") << "" << "" << "" << "";
 }
 
 

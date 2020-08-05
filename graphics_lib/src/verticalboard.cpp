@@ -23,6 +23,7 @@ VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves,Dra
         qDebug() << "Bord:" << m_boardInfo->name() << "вернул нулевой указатель на треки VerticalBoard.cpp ";
         return;
     }
+    m_isShowLegend = false;
     VerticalTrack *f_prevTrack = nullptr;
     //qDebug() << m_boardInfo->name();
     Ruler *f_ruler = new Ruler(this);
@@ -51,6 +52,8 @@ VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves,Dra
     resize();
     //Обновляем параметры всех кривых
     updateItemsParam();
+
+    connect(&m_timerLeftClick,&QTimer::timeout,this,&VerticalBoard::timerLeftClick);
 }
 
 
@@ -58,6 +61,8 @@ VerticalBoard::VerticalBoard(QMap<QString,ICurve*> *curves,DrawSettings *drawSet
     :AGraphicBoard(nullptr,curves,drawSettings){
     init();
 }
+
+
 
 VerticalBoard::VerticalBoard():AGraphicBoard(nullptr,nullptr,nullptr){
     init();
@@ -86,40 +91,55 @@ void VerticalBoard::updateItems(){
         }
         if(m_legend)
             delete m_legend; m_legend = nullptr;
-        QDesktopWidget desktop;
-        QRect rect = desktop.availableGeometry(desktop.primaryScreen());
 
         m_legend = new ItemsLegendView(m_items,this);
-        m_legend->move(rect.x() - m_legend->width() - 20,0);
+        m_legend->move(0,0);
 }
 
 void VerticalBoard::mousePressEvent(QMouseEvent *event){
     if(event->button() == Qt::RightButton){
-        if(m_legend){
-            m_lineLegend->setLine(0,mapToScene(event->pos()).y(),m_canvas->width(),mapToScene(event->pos()).y());
-            m_lineLegend->show();
-            //m_legend->move(QCursor::pos());
-            m_legend->changeScenePoint(mapToScene(event->pos()));
-            m_legend->show();
-        }
+        m_posLeftClick = event->pos();
+        m_timerLeftClick.start(300);
     }
     QGraphicsView::mousePressEvent(event);
 }
+
+void VerticalBoard::timerLeftClick(){
+    m_timerLeftClick.stop();
+    if(m_legend){
+        m_isShowLegend = true;
+        m_beginLineLegend->setLine(0,mapToScene(m_posLeftClick).y(),m_canvas->width(),mapToScene(m_posLeftClick).y());
+        m_beginLineLegend->show();
+        m_currentLineLegend->setLine(0,mapToScene(m_posLeftClick).y(),m_canvas->width(),mapToScene(m_posLeftClick).y());
+        m_currentLineLegend->show();
+        //m_legend->move(QCursor::pos());
+        m_legend->changeScenePoint(mapToScene(m_posLeftClick));
+        m_legend->show();
+    }
+}
+
 void VerticalBoard::mouseMoveEvent(QMouseEvent *event){
     //if(event->button() == Qt::RightButton){
-        if(m_legend){
-            m_lineLegend->setLine(0,mapToScene(event->pos()).y(),m_canvas->width(),mapToScene(event->pos()).y());
-            //m_legend->move(QCursor::pos());
-            m_legend->changeScenePoint(mapToScene(event->pos()));
+        if(m_isShowLegend){
+            if(m_legend){
+                m_currentLineLegend->setLine(0,mapToScene(event->pos()).y(),m_canvas->width(),mapToScene(event->pos()).y());
+                //m_legend->move(QCursor::pos());
+                m_legend->changeScenePoint(mapToScene(event->pos()));
+            }
         }
     //}
 
     QGraphicsView::mouseMoveEvent(event);
 }
 void VerticalBoard::mouseReleaseEvent(QMouseEvent *event){
-    if(m_legend){
-        m_legend->hide();
-        m_lineLegend->hide();
+    m_timerLeftClick.stop();
+    if(m_isShowLegend){
+        m_isShowLegend = false;
+        if(m_legend){
+            m_legend->hide();
+            m_currentLineLegend->hide();
+            m_beginLineLegend->hide();
+        }
     }
     QGraphicsView::mouseReleaseEvent(event);
 }
@@ -172,10 +192,14 @@ void VerticalBoard::init(){
     m_legend = nullptr;
     m_canvas = new QGraphicsScene();
     setScene(m_canvas);
-    m_lineLegend = new QGraphicsLineItem();
-    m_lineLegend->setPen(QPen(Qt::black,2));
-    m_lineLegend->setZValue(200);
-    m_canvas->addItem(m_lineLegend);
+    m_beginLineLegend = new QGraphicsLineItem();
+    m_currentLineLegend = new QGraphicsLineItem();
+    m_beginLineLegend->setPen(QPen(Qt::red,2));
+    m_currentLineLegend->setPen(QPen(Qt::red,2));
+    m_beginLineLegend->setZValue(200);
+    m_currentLineLegend->setZValue(200);
+    m_canvas->addItem(m_beginLineLegend);
+    m_canvas->addItem(m_currentLineLegend);
 
 }
 

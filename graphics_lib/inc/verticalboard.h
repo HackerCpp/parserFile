@@ -15,7 +15,10 @@ class VerticalBoard : public AGraphicBoard
     int headerTopOffset;
     QGraphicsScene *m_canvas;
     ItemsLegendView *m_legend;
-    QGraphicsLineItem *m_lineLegend;
+    bool m_isShowLegend;
+    QGraphicsLineItem *m_beginLineLegend, *m_currentLineLegend;
+    QTimer m_timerLeftClick;
+    QPoint m_posLeftClick;
 public:
     VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves,DrawSettings *drawSettings);
     VerticalBoard(QMap<QString,ICurve*> *curves,DrawSettings *drawSettings);
@@ -39,6 +42,7 @@ private:
     virtual  void distributionOfItemsBetweenTracks()override;
 public slots:
     void scrollChanged();
+    void timerLeftClick();
 
 signals:
     void changingTheVisibilityZone(QRectF visibleArea);

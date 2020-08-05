@@ -3,13 +3,17 @@
 
 #include <QWidget>
 #include "agraphicitem.h"
+#include <QTableView>
+#include "modellegenditems.h"
 
-class ItemsLegendView : public QWidget
+class ItemsLegendView : public QTableView
 {
     Q_OBJECT
 
     QList<AGraphicItem*> *m_items;
-    QImage m_image;
+    //QImage m_image;
+    QPointF m_startingPosition;
+    ModelLegendItems *m_modelItems;
 
     void init();
 public:
@@ -17,7 +21,8 @@ public:
     explicit ItemsLegendView(QMap<QString,AGraphicItem *> *items,QWidget *parent = nullptr);
 
     void changeScenePoint(QPointF point);
-    void paintEvent(QPaintEvent *event)override;
+    void setStartingScenePoint(QPointF point);
+    //void paintEvent(QPaintEvent *event)override;
 signals:
 
 };

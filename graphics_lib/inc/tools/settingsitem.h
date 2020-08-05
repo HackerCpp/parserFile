@@ -10,6 +10,7 @@
 #include <QLabel>
 #include "vlineitem.h"
 #include "vspectritem.h"
+#include "vacuitem.h"
 #include <QColorDialog>
 #include <QSpinBox>
 #include <QTabWidget>
@@ -136,6 +137,28 @@ class SettingsSpectrItem : public SettingsItem{
 public:
     SettingsSpectrItem(AGraphicItem *spectrItem,SelectingArea *selectingArea);
     ~SettingsSpectrItem()override;
+
+    void applySpecificSettings()override;
+public slots:
+    void calculateColor();
+
+};
+
+/*************************Settings for acu item**************************************/
+class SettingsAcuItem : public SettingsItem{
+    Q_OBJECT
+
+    VAcuItem *m_acuItem;
+    QGroupBox *m_selectingDrawingModeGroup;
+    QVBoxLayout *m_selectingDrawingModeLayout;
+    QWidget *m_selectingDrawingModelWidget;
+    QHBoxLayout *m_selectingDrawingModeHLayout;
+    QRadioButton *m_radioTwoColor, *m_radioMulticolor,*m_radioWave;
+    QPushButton *m_btnConfigureDrawingMode;
+
+public:
+    SettingsAcuItem(AGraphicItem *acuItem,SelectingArea *selectingArea);
+    ~SettingsAcuItem()override;
 
     void applySpecificSettings()override;
 public slots:

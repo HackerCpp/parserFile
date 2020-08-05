@@ -13,7 +13,7 @@ public:
 
 
     void drawHeader(QPainter *per,int &position,bool *flag)override;
-    void drawLegend(QPainter *per,int &position,QPointF point,bool *flag)override;
+    void drawLegend(QPainter *per,int &position,QPointF pointStarting,QPointF pointCurrent,bool *flag)override;
     bool isClickHeaderArea(QPoint pos)override;
 
 

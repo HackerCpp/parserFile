@@ -16,6 +16,8 @@ class VAcuItem : public DrawingThroughADisk , public VerticalItem{
 
     void inline drawInterpolationHorizontal(QPainter *per,QRectF visibleRect,bool *flag);
     void inline drawInterpolationHorizontalNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag);
+    void inline drawPointsTwoColorsNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag);
+    void inline drawWaveNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag);
     void drawInterpolationHorForCheckArea(QPainter *per,QRectF visibleRect,bool *flag);
 
     void drawHeader(QPainter *per,int &position,bool *flag)override;

@@ -110,10 +110,10 @@ SettingsItem * SettingsItem::createSettingsItem(AGraphicItem *item,SelectingArea
         case TypeItem::SPEC:{
             return new SettingsSpectrItem(item,selectingArea);
         }
-        /*case TypeItem::ACU:{
-            break;
+        case TypeItem::ACU:{
+            return new SettingsAcuItem(item,selectingArea);
         }
-        case TypeItem::MARK:{
+        /*case TypeItem::MARK:{
             break;
         }*/
         default:{
@@ -326,6 +326,74 @@ void SettingsSpectrItem::calculateColor(){
     else
         m_modelMulticolor->calculateRainbow();
 }
+
+/*************************Settings for acu item**************************************/
+
+SettingsAcuItem::SettingsAcuItem(AGraphicItem *acuItem,SelectingArea *selectingArea)
+: SettingsItem(acuItem,selectingArea){
+    m_acuItem = dynamic_cast<VAcuItem*>(acuItem);
+    m_selectingDrawingModeGroup = new QGroupBox(this);
+    m_selectingDrawingModeLayout = new QVBoxLayout();
+    m_selectingDrawingModelWidget = new QWidget(this);
+    m_selectingDrawingModeHLayout = new QHBoxLayout();
+    m_radioTwoColor = new QRadioButton(tr("Two color"),this);
+    m_radioMulticolor = new QRadioButton(tr("Multicolor"),this);
+    m_radioWave = new QRadioButton(tr("Wave"),this);
+    m_btnConfigureDrawingMode = new QPushButton(tr("Configure"),this);
+
+    m_selectingDrawingModeLayout->addWidget(m_radioTwoColor);
+    m_selectingDrawingModeLayout->addWidget(m_radioMulticolor);
+    m_selectingDrawingModeLayout->addWidget(m_radioWave);
+
+    m_selectingDrawingModelWidget->setLayout(m_selectingDrawingModeLayout);
+
+    m_selectingDrawingModeHLayout->addWidget(m_selectingDrawingModelWidget);
+    m_selectingDrawingModeHLayout->addWidget(m_btnConfigureDrawingMode);
+
+    m_selectingDrawingModeGroup->setLayout(m_selectingDrawingModeHLayout);
+
+    AcuItem* f_acuItem = dynamic_cast<AcuItem*>(m_acuItem->itemInfo());
+    if(!f_acuItem){
+        qDebug() << "Не удалось преобразовать AItem in AcuItem SettingsAcuItem::SettingsAcuItem";
+        return;
+    }
+    uint showMode = f_acuItem->showMode();
+    switch(f_acuItem->showMode()){
+        case 0 : m_radioTwoColor->setChecked(true); break;
+        case 1 : m_radioMulticolor->setChecked(true); break;
+        case 2 : m_radioWave->setChecked(true); break;
+    }
+
+    m_mainVLout->addWidget(m_selectingDrawingModeGroup);
+
+
+}
+
+SettingsAcuItem::~SettingsAcuItem(){
+
+}
+
+void SettingsAcuItem::applySpecificSettings(){
+    AcuItem* f_acuItem = dynamic_cast<AcuItem*>(m_acuItem->itemInfo());
+    if(!f_acuItem){
+        qDebug() << "Не удалось преобразовать AItem in AcuItem SettingsAcuItem::applySpecificSettings()";
+        return;
+    }
+    uint showMode = 0;
+    if(m_radioTwoColor->isChecked())
+        showMode = 0;
+    else if(m_radioMulticolor->isChecked())
+        showMode = 1;
+    else if(m_radioWave->isChecked())
+        showMode = 2;
+    f_acuItem->setShowMode(showMode);
+}
+
+void SettingsAcuItem::calculateColor(){
+
+}
+
+
 
 
 

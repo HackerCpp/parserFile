@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->setLayout(m_mainHorLayout);
     m_flagHideMenu = false;
     m_settings = new QSettings("settings.ini",QSettings::IniFormat);
+    QObject::connect(qApp, SIGNAL(aboutToQuit()),this, SLOT(quit()));
 }
 
 MainWindow::~MainWindow(){

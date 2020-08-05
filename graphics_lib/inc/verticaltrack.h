@@ -10,12 +10,13 @@ class VerticalTrack : public AGraphicTrack
 {
     Q_OBJECT
     ItemsLegendView *m_legend;
+    bool m_isShowLegend;
     SelectingArea *m_selectingArea;
     QMenu *m_curvesMenu,*m_trackMenu;
     int m_curentWidth;
     int m_сurrentСountOfActive = 0;
     QPointF m_ptDragPos;
-    int m_linePosition;
+    int m_startingLinePosition,m_currentLinePosition;
     bool m_isDrawLine;
 public:
     VerticalTrack(ATrack *track,BoardForTrack *board);

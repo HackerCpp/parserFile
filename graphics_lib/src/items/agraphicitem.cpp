@@ -79,6 +79,9 @@ int AGraphicItem::mainIndexFromScene(QPointF point){
     /*if(mainValueMinimum() > point.y() || mainValueMaximum() < point.y()){
         return qQNaN();
     }*/
+    if(!currentMainValue()){
+        return -1;
+    }
     uint index = 0;
     for(index = 1; index < currentMainValue()->size() - 1; ++index){
        if(mainValue(index) > point.y()  && mainValue(index + 1) < point.y() ||
@@ -87,6 +90,51 @@ int AGraphicItem::mainIndexFromScene(QPointF point){
        }
     }
     return index;
+}
+qreal AGraphicItem::valueFromScenePoint(QPointF point){
+    int f_index = mainIndexFromScene(point);
+    if(f_index == -1)
+        return qQNaN();
+    return m_curve->data(f_index);
+}
+
+qreal AGraphicItem::maximumFromScenePoints(QPointF pointBegin,QPointF pointEnd){
+
+    int f_indexBegin = mainIndexFromScene(pointBegin);
+    int f_indexEnd = mainIndexFromScene(pointEnd);
+    if(f_indexEnd == -1 || f_indexBegin == -1)
+        return qQNaN();
+    if(f_indexBegin > f_indexEnd){
+        int f_index = f_indexBegin;
+        f_indexBegin = f_indexEnd;
+        f_indexEnd = f_index;
+    }
+    qreal f_maximum =  -std::numeric_limits<double>::max();
+    //qreal f_minimum = std::numeric_limits<double>::max();
+    for(int index = f_indexBegin * m_curve->sizeOffset(); index <= f_indexEnd * m_curve->sizeOffset(); ++index){
+        f_maximum = std::max(m_curve->data(index),f_maximum);
+        //f_minimum = std::min(m_curve->data(index),f_minimum);
+    }
+    return f_maximum;
+}
+
+qreal AGraphicItem::minimumFromScenePoints(QPointF pointBegin,QPointF pointEnd){
+    int f_indexBegin = mainIndexFromScene(pointBegin);
+    int f_indexEnd = mainIndexFromScene(pointEnd);
+    if(f_indexEnd == -1 || f_indexBegin == -1)
+        return qQNaN();
+    if(f_indexBegin > f_indexEnd){
+        int f_index = f_indexBegin;
+        f_indexBegin = f_indexEnd;
+        f_indexEnd = f_index;
+    }
+    //qreal f_maximum = -std::numeric_limits<double>::max();
+    qreal f_minimum = std::numeric_limits<double>::max();
+    for(int index = f_indexBegin * m_curve->sizeOffset(); index <= f_indexEnd * m_curve->sizeOffset(); ++index){
+        //f_maximum = std::max(m_curve->data(index),f_maximum);
+        f_minimum = std::min(m_curve->data(index),f_minimum);
+    }
+    return f_minimum;
 }
 
 QPair<QString,qreal> AGraphicItem::mainValueFromScene(QPointF point){
