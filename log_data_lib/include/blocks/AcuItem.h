@@ -14,7 +14,9 @@ public:
     AcuItem();
     ~AcuItem();
 
-    void setColor (QString bruchColor, QString transparentColor);
+    //void setColor (QString bruchColor, QString transparentColor);
+    void setBrushColor(QString brushColor){m_brushColor = brushColor;}
+    void setTransparentColor(QString transparentColor){m_transparentColor = transparentColor;}
     void setMulticolor(MulticolorItem multicolor);
     void setShowMode(unsigned int showMode);
     void setLevelCount(int levelCount);

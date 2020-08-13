@@ -14,6 +14,7 @@ public:
 public slots:
     virtual void openFile(){}
     virtual void saveGFM(){}
+    virtual void saveLIS(){}
     virtual void openConsolePython(){}
     virtual void openEditorPython(){}
     virtual void openInterpretations(){}

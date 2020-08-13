@@ -43,8 +43,8 @@ void VerticalItem::drawLegend(QPainter *per,int &position,QPointF pointStarting,
     per->setBrush(QBrush(QColor(255,255,255,255)));
     per->drawRect(1,position,f_width - 2,m_heightLegend);
     QString f_textMnemonic = m_curve->mnemonic();
-    int f_indexStartingMainValue = mainIndexFromScene(pointStarting);
-    int f_indexCurrentMainValue = mainIndexFromScene(pointCurrent);
+    int f_indexStartingMainValue = mainIndexFromScenePoint(pointStarting);
+    int f_indexCurrentMainValue = mainIndexFromScenePoint(pointCurrent);
     if(f_indexStartingMainValue == -1 || f_indexCurrentMainValue == -1){
         per->restore();
         return;

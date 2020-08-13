@@ -107,6 +107,31 @@ QByteArray  GFMSaver::getForSaveDataBlock(IBlock *block){
     return blockForWrite;
 }
 
+QByteArray  GFMSaver::getDesc(Desc *desc){
+    QByteArray f_byteArray;
+    QString f_string = "<desc";
+    QVector<Paraminfo *> *f_parameters = desc->parameters()->vectorParameters();
+    QVector<Paraminfo *> *f_calibrations = desc->calibrations()->vectorParameters();
+    foreach(auto param,*f_parameters){
+        QString f_str = " %1=\"%2\"";
+        f_str = f_str.arg(param->index()).arg(param->value());
+        f_string.append(f_str);
+    }
+    if(!f_calibrations->isEmpty()){
+        f_string.append("><calibration");
+        foreach(auto param,*f_calibrations){
+            QString f_str = " %1=\"%2\"";
+            f_str = f_str.arg(param->index()).arg(param->value());
+            f_string.append(f_str);
+        }
+        f_string.append("/></desc>");
+    }
+    else
+        f_string.append("/>");
+    f_byteArray = f_string.toLocal8Bit();
+    return f_byteArray;
+}
+
 QByteArray GFMSaver::getHeader(DataBlock * dataBlock){
     QByteArray headerParameters;
     QString param = "<PARAMETERS LOG=\"" + dataBlock->nameRecord() + "\">\r\n";
@@ -142,7 +167,7 @@ QByteArray GFMSaver::getHeader(DataBlock * dataBlock){
 
         f_line = f_line.arg(f_offset/*curveAbstract->offset()*/).arg(curveAbstract->sizeOffsetInBytes()).arg(curveAbstract->shortCut().ref())
                 .arg(curveAbstract->mnemonic()).arg(f_dataType).arg(f_recordPoint)
-                .arg(QString(curveAbstract->desc()->forSave()));
+                .arg(QString(getDesc(curveAbstract->desc())));
         f_offset += curveAbstract->sizeOffsetInBytes();
 
         f_blockForWrite = f_line.toLocal8Bit();
@@ -410,9 +435,9 @@ QByteArray GFMSaver::formBlokSave(FormsBlock * formsBlock){
 
                                xmlWriter.writeEndElement();//close multi_color
 
-                                xmlWriter.writeStartElement("bruch_color");
+                                xmlWriter.writeStartElement("brush_color");
                                 xmlWriter.writeAttribute("color",acuItem->bruchColor());
-                                xmlWriter.writeEndElement();//close bruch_color
+                                xmlWriter.writeEndElement();//close brush_color
                                 xmlWriter.writeEndElement();//close style
 
                                 xmlWriter.writeStartElement("begin");

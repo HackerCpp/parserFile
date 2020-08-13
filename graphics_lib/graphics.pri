@@ -16,9 +16,11 @@ LIBS += \
 
 
 SOURCES += \
+    $$PWD/inc/items/twodimensionalarrayitem.cpp \
     $$PWD/inc/tools/itemslegendview.cpp \
     $$PWD/inc/tools/customprogressbar.cpp \
     $$PWD/inc/tools/modellegenditems.cpp \
+    $$PWD/inc/tools/multicolorselection.cpp \
     $$PWD/src/drawObjects/objectColumn.cpp \
     $$PWD/src/items/customobjectitem.cpp \
     $$PWD/src/spectrReader/chartvievforonewavewidget.cpp \
@@ -63,6 +65,7 @@ SOURCES += \
     $$PWD/src/tools/qxtspanslider.cpp
 
 HEADERS += \
+    $$PWD/inc/items/twodimensionalarrayitem.h \
     $$PWD/inc/tools/itemslegendview.h \
     $$PWD/inc/tools/customprogressbar.h \
     $$PWD/inc/drawObjects/objectColumn.h \
@@ -95,6 +98,7 @@ HEADERS += \
     $$PWD/inc/tools/modelcurveeditor.h \
     $$PWD/inc/tools/modelforgraphicsitems.h \
     $$PWD/inc/tools/modellegenditems.h \
+    $$PWD/inc/tools/multicolorselection.h \
     $$PWD/inc/tools/selectingarea.h \
     $$PWD/inc/items/vacuitem.h \
     $$PWD/inc/items/vspectritem.h \

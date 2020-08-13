@@ -19,6 +19,7 @@
 #include <QTableView>
 #include "onewavewidget.h"
 #include "selectingarea.h"
+#include "multicolorselection.h"
 
 /*MAIN CLASS SETTINGS FOR ITEMS*********************************************/
 class SettingsItems : public BaseSettingsWindow{
@@ -120,18 +121,14 @@ class SettingsSpectrItem : public SettingsItem{
     VSpectrItem *m_specItem;
     SpecItem *m_specItemInfo;
     /*style*/
-    QGroupBox *m_styleGrup;
-    QSplitter *m_splitterColor;
-    QVBoxLayout *m_vStyleGroupLayout;
-    QImage * m_image;
-    QLabel *m_labelForImage;
-    QTableView *m_tableViewMulticolor;
-    ModelMulticolor *m_modelMulticolor;
-    QVBoxLayout *m_bthsColorVLayout;
-    QWidget *m_btnsColorWidget;
-    QPushButton *m_btnInsertColor, *m_btnRemoveColor, *m_btnCalculate;
-    QComboBox *m_comboColor;
+    QGroupBox *m_selectingDrawingModeGroup;
+    QVBoxLayout *m_selectingDrawingModeLayout;
+    QWidget *m_selectingDrawingModelWidget;
+    QHBoxLayout *m_selectingDrawingModeHLayout;
+    QRadioButton  *m_radioMulticolor,*m_radioWave;
+    QPushButton *m_btnConfigureDrawingMode;
 
+    MulticolorSelection *m_multicolorSelection;
     OneWaveWidget *m_oneWaveWidget;
 
 public:
@@ -140,7 +137,7 @@ public:
 
     void applySpecificSettings()override;
 public slots:
-    void calculateColor();
+    void configure();
 
 };
 
@@ -155,6 +152,7 @@ class SettingsAcuItem : public SettingsItem{
     QHBoxLayout *m_selectingDrawingModeHLayout;
     QRadioButton *m_radioTwoColor, *m_radioMulticolor,*m_radioWave;
     QPushButton *m_btnConfigureDrawingMode;
+    MulticolorSelection *m_multicolorSelection;
 
 public:
     SettingsAcuItem(AGraphicItem *acuItem,SelectingArea *selectingArea);
@@ -162,7 +160,7 @@ public:
 
     void applySpecificSettings()override;
 public slots:
-    void calculateColor();
+    void configure();
 
 };
 

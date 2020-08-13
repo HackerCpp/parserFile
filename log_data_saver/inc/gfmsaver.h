@@ -20,7 +20,7 @@
 #include <QTextCodec>
 #include "datablock.h"
 
-class SAVER_EXPORT GFMSaver: public ASaverLogData , QThread{
+class SAVER_EXPORT GFMSaver: public ASaverLogData {
     QTextCodec *m_codec;
 public:
     GFMSaver();
@@ -35,6 +35,7 @@ public:
     QByteArray  getForSaveDataBlock(IBlock *block);
     QByteArray  getForSaveFormsBlock(IBlock *block);
     QByteArray  getHeader(DataBlock*dataBlock);
+    QByteArray  getDesc(Desc *desc);
     QByteArray  getForSaveHeaderBlock(IBlock *block);
     QByteArray  getForSaveToolInfoBlock(IBlock *block);
 };

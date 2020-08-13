@@ -3,12 +3,8 @@
 #include "colorscale.h"
 #include <QPaintDevice>
 
-
-
-
-
 VSpectrItem::VSpectrItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
-    :VerticalItem(curve,board)
+    :TwoDimensionalArrayItem(itemInfo,curve,board)
 {
     m_lengthOverlay = 500;
     SpecItem * f_spectrItemInfo = dynamic_cast<SpecItem*>(itemInfo);
@@ -43,17 +39,8 @@ VSpectrItem::VSpectrItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
 
 }
 
-VSpectrItem::~VSpectrItem(){
-    disconnect();
-    blockSignals(true);
-    if(isRunning()){
-        m_isRedraw = false;
-        m_isEndThread = true;
-        wait();
-    }
-}
 VSpectrItem::VSpectrItem(const VSpectrItem &other)
-    :VerticalItem(other){
+    :TwoDimensionalArrayItem(other){
     m_dataStepPix = other.m_dataStepPix;
     m_offsetPix = other.m_offsetPix;
     m_dataStep = other.m_dataStep;
@@ -67,6 +54,17 @@ VSpectrItem::VSpectrItem(const VSpectrItem &other)
         m_itemInfo = nullptr;
     }
 }
+
+VSpectrItem::~VSpectrItem(){
+    disconnect();
+    blockSignals(true);
+    if(isRunning()){
+        m_isRedraw = false;
+        m_isEndThread = true;
+        wait();
+    }
+}
+
 
 void inline VSpectrItem::drawInterpolationVertical(QPainter *per,QRectF visibleRect,bool *flag){
     if(!currentMainValue()  || !per->isActive())
@@ -239,6 +237,53 @@ void inline VSpectrItem::drawInterpolationVerticalNoOffset(QPainter *per,int y_t
     //qDebug() << "end";
 }
 
+void inline VSpectrItem::drawWaveNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag){
+    Q_UNUSED(y_bottom)
+    qreal quantityElem = m_curve->sizeOffset();
+    qreal f_step = m_dataStepPix;
+    float f_yTop = y_top;
+    float f_height = per->device()->height();
+
+    float f_downOffset = f_height;
+    uint indexBegin  = 0;
+
+    if(mainValueMinimum() > f_yTop  + f_downOffset - 20 || mainValueMaximum() < f_yTop){
+        return;
+    }
+    for(uint i = 0; i < currentMainValue()->size(); ++i){
+       if(mainValue(i) > f_yTop && mainValue(i) < f_yTop + f_downOffset - 20){
+           indexBegin = i;
+           break;
+       }
+    }
+
+    SpecItem *f_specItemInfo = dynamic_cast<SpecItem*>(m_itemInfo);
+    QColor color  = QColor(f_specItemInfo->bruchColor());
+    per->setPen(QPen(color,3));
+    qreal f_amplitudeScale = 2;
+    QImage *f_image = dynamic_cast<QImage*>(per->device());
+    int indexWidthBegin = -fmin(m_offsetPix,0) / m_dataStepPix;
+    int indexWidthEnd = quantityElem - fmax((m_widthPicturePix + m_offsetPix - f_image->width()),0) / m_dataStepPix;
+    for(uint i = indexBegin + 1; i < currentMainValue()->size();++i){
+        if(*flag)
+            return;
+        if(mainValue(i) > f_yTop + f_downOffset - 20 || mainValue(i) < f_yTop){
+            break;
+        }
+        qreal f_currentX = m_offsetPix;
+        QPoint f_prevPoint = QPoint(f_currentX - (m_dataStepPix / 2),mainValue(i) - f_yTop - (m_curve->data(i * m_curve->sizeOffset() + indexWidthBegin) * f_amplitudeScale));
+        f_currentX = f_currentX < 0 ? 0 : f_currentX;
+        for(int j = indexWidthBegin + 1; j < indexWidthEnd; ++j){
+            if(*flag)
+                return;
+            QPoint f_currentPoint = QPoint(f_currentX - (m_dataStepPix / 2),mainValue(i) - f_yTop - (m_curve->data(i * m_curve->sizeOffset() + j) * f_amplitudeScale));
+            per->drawLine(f_prevPoint,f_currentPoint);
+            f_prevPoint = f_currentPoint;
+            f_currentX += f_step;
+        }
+    }
+}
+
 void VSpectrItem::loadDrawingParam(int width){
     qreal f_width = width;
     SpecItem* f_spectrItemInfo = dynamic_cast<SpecItem*>(m_itemInfo);
@@ -277,58 +322,6 @@ void VSpectrItem::loadDrawingParam(int width){
     //qDebug() << m_offsetPix << m_widthPicturePix << m_dataStepPix << f_width;
 }
 
-void VSpectrItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
-    if(!per->isActive() || !currentMainValue())
-        return;
-    SpecItem* f_spectrItemInfo = dynamic_cast<SpecItem*>(m_itemInfo);
-
-    if(!f_spectrItemInfo){
-        qDebug() << " VSpectrItem::drawBody Не удалось преобразовать AItem in SpectrItem";
-        return;
-    }
-    /*if(!f_spectrItemInfo->showMode()){
-        drawInterpolationVertical(per,visibleRect,flag);
-    }
-    else if(f_spectrItemInfo->showMode() == 1){
-        drawInterpolationVertical(per,visibleRect,flag);
-    }
-    else if(f_spectrItemInfo->showMode() == 2){
-
-    }*/
-    qreal f_yTop = visibleRect.y();
-    qreal f_height = per->device()->height();
-    qreal f_width = per->device()->width();
-    qreal f_topOffset = m_board->offsetUp();
-
-
-    qreal f_top = mainValueMinimum();
-    qreal f_bottom = mainValueMaximum();
-    int f_stock = 1000;
-    qreal f_dstPicturePosition = visibleRect.y() - f_topOffset; //0
-    QImage f_srcImage;
-    for(int y_top = f_top - f_stock; y_top < f_dstPicturePosition + f_height /*f_bottom + 1000*/; y_top += (M_HEIGHT_PICTURE - f_stock)){
-        if(*flag){
-            return;
-        }
-        if((y_top + M_HEIGHT_PICTURE) < (f_yTop - m_board->offsetUp())){
-            continue;
-        }
-        QString f_fileName = "temporary/" + m_uid + QString::number(y_top) + ".png";
-        if(QFile::exists(f_fileName) && m_picturePath.indexOf(f_fileName) != -1){
-            //while(m_saversMoment){}
-
-            if(!f_srcImage.load(f_fileName,"PNG"))
-                continue;
-            if(f_srcImage.isNull())
-                continue;
-            qreal f_srcPicturePosition =  y_top + m_lengthOverlay;//??
-            int f_drawHeight = f_srcImage.height() - m_lengthOverlay;
-            QRect f_dstRect(0,(f_srcPicturePosition - f_dstPicturePosition),f_width,f_drawHeight);
-            QRect f_srcRect(0,m_lengthOverlay,f_srcImage.width(),f_drawHeight);
-            per->drawImage(f_dstRect,f_srcImage,f_srcRect);
-        }
-    }
-}
 
 void VSpectrItem::drawOneWawe(QPainter *per,int position,bool *flag){
     if(!per->isActive() || !currentMainValue() || !currentMainValue()->size())
@@ -392,43 +385,22 @@ QList<QPointF> VSpectrItem::oneWave(int position,bool *flag){
     return f_returnList;
 }
 
-void VSpectrItem::run(){
-    if(!currentMainValue())
-        return;
-    m_updatedParam = true;
-    foreach(auto path,m_picturePath){
-        if(!QFile::exists(path) )
-            continue;
-        QFile(path).remove();
-    }
-    m_picturePath.clear();
-    if(m_curentPictureWidth < 10){ // Проверка на закрытый трек
+void VSpectrItem::selectOptions(){
+    SpecItem* f_spectrItemInfo = dynamic_cast<SpecItem*>(m_itemInfo);
+
+    if(!f_spectrItemInfo){
+        qDebug() << " VSpectrItem::drawBody Не удалось преобразовать AItem in SpectrItem";
         return;
     }
-    qreal f_top = mainValueMinimum();
-    qreal f_bottom = mainValueMaximum();
-    int f_stock = 1000;
-    int f_heightPictures = M_HEIGHT_PICTURE;
-    m_board->customUpdate();
-    qreal f_onePersent = 100 / ((f_bottom + f_stock) - (f_top - f_stock));
-    for(int y_top = f_top - f_stock; y_top < f_bottom + f_stock; y_top += (f_heightPictures - f_stock)){
-        if(m_isEndThread)
-            return;
-        m_curentDrawPersent = (y_top - (f_top - f_stock)) * f_onePersent;
-        QImage f_image(m_curentPictureWidth,f_heightPictures,QImage::Format_ARGB32);
-        QPainter f_painter(&f_image);
-        drawInterpolationVerticalNoOffset(&f_painter,y_top,y_top + f_heightPictures,&m_isEndThread);
-        QString f_namePicture = "temporary/" + m_uid + QString::number(y_top) + ".png";
-        m_saversMoment = true;
-        f_image.save(f_namePicture,"PNG");
-        while(!QFile::exists(f_namePicture));
-        m_picturePath << f_namePicture;
-        m_saversMoment = false;
+    if(!f_spectrItemInfo->showMode()){
+        pDrawingFunction = &TwoDimensionalArrayItem::drawInterpolationVerticalNoOffset;
+
     }
-    m_curentDrawPersent = 100;
-    m_updatedParam = false;
-    m_board->customUpdate();
-    emit dataHardDiscReady();
+    else if(f_spectrItemInfo->showMode() == 1){
+        pDrawingFunction = &TwoDimensionalArrayItem::drawWaveNoOffset;
+    }
+    else
+        pDrawingFunction = nullptr;
 }
 
 void VSpectrItem::drawOnTheDisk(){

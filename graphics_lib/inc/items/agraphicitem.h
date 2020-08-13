@@ -52,7 +52,7 @@ public:
     bool is_visible(){return m_itemInfo->visible(AItem::BOARD_GRAPH_VIEW);}
 
     bool isActive(){return m_isActive;}
-    int mainIndexFromScene(QPointF point);
+    int mainIndexFromScenePoint(QPointF point);
     qreal valueFromScenePoint(QPointF point);
     qreal maximumFromScenePoints(QPointF pointBegin,QPointF pointEnd);
     qreal minimumFromScenePoints(QPointF pointBegin,QPointF pointEnd);

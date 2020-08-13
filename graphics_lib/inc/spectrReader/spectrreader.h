@@ -29,7 +29,6 @@ class SpectrReader : public BaseCurveReader
 {
     Q_OBJECT
     PythonQtObjectPtr  m_pythonInterpreter;
-    //PythonQtScriptingConsole *m_pythonConsole;
     PythonEditor *m_pyEditor;
     OneWaveWidget *m_oneWaveWidget;
     int m_widht;
@@ -37,6 +36,7 @@ class SpectrReader : public BaseCurveReader
     QSplitter *m_splitterFiltersAndSpectrs, *m_spectrSplitter,*m_baseVSplitter;
     QList<SpectrViewer *> *m_listSpectrViewer;
     QToolBar *m_toolBar;
+
     QSlider *m_sliderWidth;
     QComboBox *m_comboFilters;
     QPushButton *m_btnAddFilter;
@@ -59,7 +59,6 @@ public:
 
 
 public slots:
-    //void scrollChanged();
     void sliderWidthChange(int width);
     void insertFilter();
     void rollBackFilters();
@@ -67,6 +66,7 @@ public slots:
     void apply()override;
     void updateOneWaweWidget(QPoint scenePoint);
     void allUpdate();
+    void changeBordersOfTheFilters(QPoint leftTop,QPoint rightDown);
 };
 
 #endif // SPECTRREADER_H

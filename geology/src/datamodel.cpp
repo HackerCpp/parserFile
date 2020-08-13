@@ -77,6 +77,28 @@ QModelIndex DataModel::index(int row, int column, const QModelIndex &parent)cons
             }
         }
     }
+    else if(dynamic_cast<ICurve*>(static_cast<QObject*>(parent.internalPointer()))){
+        ICurve *f_curve = static_cast<ICurve *>(parent.internalPointer());
+        if(f_curve){
+            return createIndex(row,column,f_curve->desc());
+        }
+    }
+    else if(dynamic_cast<Desc*>(static_cast<QObject*>(parent.internalPointer()))){
+        Desc *f_desc = static_cast<Desc *>(parent.internalPointer());
+        if(f_desc){
+            if(!row)
+                return createIndex(row,column,f_desc->parameters());
+            else if(row == 1)
+                return createIndex(row,column,f_desc->calibrations());
+        }
+    }
+    else if(dynamic_cast<Parameters*>(static_cast<QObject*>(parent.internalPointer()))){
+        Parameters *f_parameters = static_cast<Parameters *>(parent.internalPointer());
+        if(f_parameters){
+            Paraminfo *f_paramInfo = f_parameters->vectorParameters()->at(row);
+            return createIndex(row,column,f_paramInfo);
+        }
+    }
 }
 
 QModelIndex DataModel::parent(const QModelIndex &child)const{
@@ -149,6 +171,71 @@ QModelIndex DataModel::parent(const QModelIndex &child)const{
             }
         }
     }
+    else if(dynamic_cast<Desc *>((QObject*)child.internalPointer())){
+        Desc *f_desc = dynamic_cast<Desc *>((QObject*)child.internalPointer());
+        if(!f_desc)
+            return QModelIndex();
+        foreach(auto logData,*m_logDataVector){
+            QList<IBlock *> *f_blocks = logData->blocks();
+            foreach(auto block,*f_blocks){
+                    DataBlock *f_dataBlock = dynamic_cast<DataBlock *>(block);
+                    if(f_dataBlock){
+                        QList<ICurve *> *f_curves = f_dataBlock->curves();
+                        foreach(auto curve,*f_curves){
+                            if(f_desc == curve->desc()){
+                                return createIndex(f_curves->indexOf(curve),0,curve);
+                            }
+                        }
+                    }
+            }
+        }
+    }
+    else if(dynamic_cast<Parameters *>((QObject*)child.internalPointer())){
+        Parameters *f_parameters = dynamic_cast<Parameters *>((QObject*)child.internalPointer());
+        if(!f_parameters)
+            return QModelIndex();
+        foreach(auto logData,*m_logDataVector){
+            QList<IBlock *> *f_blocks = logData->blocks();
+            foreach(auto block,*f_blocks){
+                    DataBlock *f_dataBlock = dynamic_cast<DataBlock *>(block);
+                    if(f_dataBlock){
+                        QList<ICurve *> *f_curves = f_dataBlock->curves();
+                        foreach(auto curve,*f_curves){
+                            if(f_parameters == curve->desc()->parameters() || f_parameters == curve->desc()->calibrations()){
+                                return createIndex(f_curves->indexOf(curve),0,curve->desc());
+                            }
+                        }
+                    }
+            }
+        }
+    }
+    else if(dynamic_cast<Paraminfo *>((QObject*)child.internalPointer())){
+        Paraminfo *f_paramInfo = dynamic_cast<Paraminfo *>((QObject*)child.internalPointer());
+        if(!f_paramInfo)
+            return QModelIndex();
+        foreach(auto logData,*m_logDataVector){
+            QList<IBlock *> *f_blocks = logData->blocks();
+            foreach(auto block,*f_blocks){
+                DataBlock *f_dataBlock = dynamic_cast<DataBlock *>(block);
+                if(f_dataBlock){
+                    QList<ICurve *> *f_curves = f_dataBlock->curves();
+                    foreach(auto curve,*f_curves){
+                        foreach(auto paramInfo,*curve->desc()->parameters()->vectorParameters() ){
+                            if(f_paramInfo == paramInfo){
+                                return createIndex(curve->desc()->parameters()->vectorParameters()->indexOf(paramInfo),0,curve->desc()->parameters());
+                            }
+                        }
+                        foreach(auto paramInfo,*curve->desc()->calibrations()->vectorParameters()){
+                            if(f_paramInfo == paramInfo){
+                                return createIndex(curve->desc()->calibrations()->vectorParameters()->indexOf(paramInfo),0,curve->desc()->calibrations());
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+    }
 
 
     return QModelIndex();
@@ -203,6 +290,18 @@ int DataModel::rowCount(const QModelIndex &parent )const{
                 return 0;
             }
         }
+    }
+    else if(dynamic_cast<ICurve*>(static_cast<QObject*>(parent.internalPointer()))){
+        return 1;
+    }
+    else if(dynamic_cast<Desc*>(static_cast<QObject*>(parent.internalPointer()))){
+        return 2;
+    }
+    else if(dynamic_cast<Parameters*>(static_cast<QObject*>(parent.internalPointer()))){
+        Parameters *f_parameters = dynamic_cast<Parameters*>(static_cast<QObject*>(parent.internalPointer()));
+        if(!f_parameters)
+            return 0;
+        return f_parameters->vectorParameters()->size();
     }
     return 0;
 }
@@ -264,6 +363,26 @@ QVariant DataModel::data(const QModelIndex &index, int role )const{
             QTextEdit f_textEdit;
             f_textEdit.setHtml(f_header->name() + ":" + f_header->body());
             return  f_textEdit.toPlainText().replace(",","\n").replace("#(null)","the number is not known");
+        }
+        else if(dynamic_cast<Desc*>(static_cast<QObject*>(index.internalPointer()))){
+            return "DESC";
+        }
+        else if(dynamic_cast<Parameters*>(static_cast<QObject*>(index.internalPointer()))){
+            Parameters *f_parameters = dynamic_cast<Parameters *>(static_cast<QObject*>(index.internalPointer()));
+            if(!f_parameters)
+                return QModelIndex();
+            if(f_parameters->type() == Parameters::PARAM)
+                return tr("Parameters");
+            else if(f_parameters->type() == Parameters::CALIB)
+                return tr("Calibrations");
+            else
+                return QModelIndex();
+        }
+        else if(dynamic_cast<Paraminfo*>(static_cast<QObject*>(index.internalPointer()))){
+            Paraminfo *f_paramInfo = dynamic_cast<Paraminfo *>(static_cast<QObject*>(index.internalPointer()));
+            if(!f_paramInfo)
+               return QModelIndex();
+            return f_paramInfo->index() + " : " + f_paramInfo->value();
         }
     }
     else if(role == Qt::ForegroundRole){

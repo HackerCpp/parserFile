@@ -3,6 +3,7 @@
 #include "customdelegates.h"
 #include <QComboBox>
 
+
 /*MAIN CLASS SETTINGS FOR ITEMS*********************************************/
 
 SettingsItems::SettingsItems(){
@@ -258,80 +259,70 @@ SettingsSpectrItem::SettingsSpectrItem(AGraphicItem *spectrItem,SelectingArea *s
         qDebug() << "не удалось преобразовать AGraphicItem в VSpectrItem присоздании окна настроек";
         return;
     }
+    m_multicolorSelection = new MulticolorSelection(m_specItem,m_selectingArea);
     m_specItemInfo = dynamic_cast<SpecItem *>(m_specItem->itemInfo());
     if(!m_specItemInfo){
         qDebug() << "SpecItem вернул не тот itemInfo";
     }
-    m_styleGrup = new QGroupBox;
-    m_styleGrup->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    m_splitterColor = new QSplitter(Qt::Horizontal);
-    m_vStyleGroupLayout = new QVBoxLayout;
 
+    m_selectingDrawingModeGroup = new QGroupBox(this);
+    m_selectingDrawingModeLayout = new QVBoxLayout();
+    m_selectingDrawingModelWidget = new QWidget(this);
+    m_selectingDrawingModeHLayout = new QHBoxLayout();
+    m_radioMulticolor = new QRadioButton(tr("Multicolor"),this);
+    m_radioWave = new QRadioButton(tr("Wave"),this);
+    m_btnConfigureDrawingMode = new QPushButton(tr("Configure"),this);
 
-    m_tableViewMulticolor = new QTableView;
-    m_modelMulticolor = new ModelMulticolor(m_specItemInfo->multiColor());
-    m_tableViewMulticolor->setModel(m_modelMulticolor);
-    m_tableViewMulticolor->setItemDelegateForColumn(1,new ColorDelegate());
-    m_btnInsertColor = new QPushButton(tr("Insert color"));
-    m_btnRemoveColor = new QPushButton(tr("Remove color"));
-    m_btnCalculate = new QPushButton(tr("Calculate"));
-    connect(m_btnInsertColor,&QPushButton::pressed,m_modelMulticolor,&ModelMulticolor::insertColor);
-    connect(m_btnRemoveColor,&QPushButton::pressed,m_modelMulticolor,&ModelMulticolor::removeColor);
-    connect(m_btnCalculate,&QPushButton::pressed,this,&SettingsSpectrItem::calculateColor);
+    m_selectingDrawingModeLayout->addWidget(m_radioMulticolor);
+    m_selectingDrawingModeLayout->addWidget(m_radioWave);
 
-    m_bthsColorVLayout = new QVBoxLayout;
-    m_btnsColorWidget = new QWidget();
-    m_comboColor = new QComboBox();
-    m_comboColor->insertItem(0,tr("Rainbow"));
-    m_comboColor->insertItem(1,tr("HSV"));
+    m_selectingDrawingModelWidget->setLayout(m_selectingDrawingModeLayout);
 
-    m_bthsColorVLayout->addWidget(m_btnInsertColor);
-    m_bthsColorVLayout->addWidget(m_btnRemoveColor);
-    m_bthsColorVLayout->addWidget(m_comboColor);
-    m_bthsColorVLayout->addWidget(m_btnCalculate);
-    m_bthsColorVLayout->addStretch(100);
+    m_selectingDrawingModeHLayout->addWidget(m_selectingDrawingModelWidget);
+    m_selectingDrawingModeHLayout->addWidget(m_btnConfigureDrawingMode);
 
-    m_oneWaveWidget = new OneWaveWidget(m_specItem);
-    if(m_selectingArea)
-        m_oneWaveWidget->update(QPoint(m_selectingArea->top(),m_selectingArea->left()));
-    else
-       m_oneWaveWidget->update(QPoint(0,0));
+    m_selectingDrawingModeGroup->setLayout(m_selectingDrawingModeHLayout);
 
-    //m_vLayout->addWidget(m_labelForImage);
-    m_btnsColorWidget->setLayout(m_bthsColorVLayout);
+    uint showMode = m_specItemInfo->showMode();
+    switch(showMode){
+        case 0 : m_radioMulticolor->setChecked(true); break;
+        case 1 : m_radioWave->setChecked(true); break;
+    }
 
-    m_splitterColor->addWidget(m_tableViewMulticolor);
-    m_splitterColor->addWidget(m_btnsColorWidget);
-    m_splitterColor->addWidget(m_oneWaveWidget);
-    //painter.end();
-    m_vStyleGroupLayout->addWidget(m_splitterColor);
-    m_styleGrup->setLayout(m_vStyleGroupLayout);
-
-    m_mainVLout->addWidget(m_styleGrup);
-    //m_mainVLout->addStretch(100);
+    m_mainVLout->addWidget(m_selectingDrawingModeGroup);
+    connect(m_btnConfigureDrawingMode,&QPushButton::released,this,&SettingsSpectrItem::configure);
 }
 
 SettingsSpectrItem::~SettingsSpectrItem(){
-
+    if(m_multicolorSelection){delete m_multicolorSelection; m_multicolorSelection = nullptr;}
 }
 
 void SettingsSpectrItem::applySpecificSettings(){
-    if(m_modelMulticolor)
-        m_modelMulticolor->apply();
+    uint showMode = 0;
+    if(m_radioMulticolor->isChecked())
+        showMode = 0;
+    else if(m_radioWave->isChecked())
+        showMode = 1;
+    m_specItemInfo->setShowMode(showMode);
+    if(m_multicolorSelection)
+        m_multicolorSelection->apply();
 }
 
-void SettingsSpectrItem::calculateColor(){
-    if(m_comboColor->currentIndex())
-        m_modelMulticolor->calculateHSV();
-    else
-        m_modelMulticolor->calculateRainbow();
+void SettingsSpectrItem::configure(){
+    if(m_radioMulticolor->isChecked()){
+        if(m_multicolorSelection)
+            m_multicolorSelection->show();
+    }
+    else if(m_radioWave->isChecked())
+        ;
 }
-
 /*************************Settings for acu item**************************************/
 
 SettingsAcuItem::SettingsAcuItem(AGraphicItem *acuItem,SelectingArea *selectingArea)
 : SettingsItem(acuItem,selectingArea){
+
     m_acuItem = dynamic_cast<VAcuItem*>(acuItem);
+    m_multicolorSelection = new MulticolorSelection(m_acuItem,m_selectingArea);
     m_selectingDrawingModeGroup = new QGroupBox(this);
     m_selectingDrawingModeLayout = new QVBoxLayout();
     m_selectingDrawingModelWidget = new QWidget(this);
@@ -357,7 +348,7 @@ SettingsAcuItem::SettingsAcuItem(AGraphicItem *acuItem,SelectingArea *selectingA
         qDebug() << "Не удалось преобразовать AItem in AcuItem SettingsAcuItem::SettingsAcuItem";
         return;
     }
-    uint showMode = f_acuItem->showMode();
+
     switch(f_acuItem->showMode()){
         case 0 : m_radioTwoColor->setChecked(true); break;
         case 1 : m_radioMulticolor->setChecked(true); break;
@@ -367,10 +358,12 @@ SettingsAcuItem::SettingsAcuItem(AGraphicItem *acuItem,SelectingArea *selectingA
     m_mainVLout->addWidget(m_selectingDrawingModeGroup);
 
 
+    connect(m_btnConfigureDrawingMode,&QPushButton::released,this,&SettingsAcuItem::configure);
+
 }
 
 SettingsAcuItem::~SettingsAcuItem(){
-
+    if(m_multicolorSelection){delete m_multicolorSelection; m_multicolorSelection = nullptr;}
 }
 
 void SettingsAcuItem::applySpecificSettings(){
@@ -387,10 +380,20 @@ void SettingsAcuItem::applySpecificSettings(){
     else if(m_radioWave->isChecked())
         showMode = 2;
     f_acuItem->setShowMode(showMode);
+    if(m_multicolorSelection)
+        m_multicolorSelection->apply();
 }
 
-void SettingsAcuItem::calculateColor(){
 
+void SettingsAcuItem::configure(){
+    if(m_radioTwoColor->isChecked())
+        ;
+    else if(m_radioMulticolor->isChecked()){
+        if(m_multicolorSelection)
+            m_multicolorSelection->show();
+    }
+    else if(m_radioWave->isChecked())
+        ;
 }
 
 

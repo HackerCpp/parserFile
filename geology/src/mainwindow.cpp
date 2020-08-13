@@ -7,6 +7,7 @@
 #include "tabinterpretations.h"
 
 #include "pythoneditor.h"
+#include <Windows.h>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -91,6 +92,26 @@ void MainWindow::saveGFM(){
     ISaverLogData * gfmSaver = new GFMSaver();
     f_logData->setSaver(gfmSaver);
     f_logData->save();
+}
+
+void MainWindow::saveLIS(){
+    QString f_fileName = QDir().absolutePath()+ "/converters/lisConverter.dll";
+    //f_fileName = "E:/MyQtProgram/parserGfm/ConverterLis/build-lisConverter-Desktop_Qt_5_14_0_MinGW_64_bit-Release/lisConverter.dll";
+
+    qDebug() << f_fileName;
+    QLibrary  lib(f_fileName);
+    qDebug() << lib.load() ;
+    qDebug() << lib.isLoaded();
+
+    //typedef int(*Fu)( char *gfm_filename );
+    typedef int(*Fu)();
+    Fu f_function = (Fu)lib.resolve("f");
+    qDebug() <<  f_function;
+    if(f_function)
+        f_function();
+
+    //qDebug() << lib.resolve("f");
+    //lib.unload();
 }
 
 void MainWindow::openConsolePython(){

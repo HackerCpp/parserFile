@@ -26,9 +26,11 @@ public:
     VSpectrItem *originalSpectr(){return m_originalSpectr;}
     VSpectrItem *experimentalSpectr(){return m_experimentalSpectr;}
     void changePositionOneWave(QPoint position);
+    void changeSelectedArea(QRectF rectSelectedArea);
 
 signals:
     void sig_changePositionOneWave(QPoint position);
+    void sig_changeSelectedArea( QPoint indexLeftTop,QPoint indexRightDown);
 public slots:
     void scrollChanged();
 };

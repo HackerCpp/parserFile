@@ -2,6 +2,7 @@
 #define SPECTRSCENE_H
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsScene>
+#include "selectingarea.h"
 
 
 
@@ -9,7 +10,8 @@
 class SpectrScene : public QGraphicsScene{
     QGraphicsLineItem *m_lineItem;
     QGraphicsTextItem *m_textItem;
-    bool m_isLeftMouseClick;
+    SelectingArea *m_selectingArea;
+    bool m_isLeftMouseClick,m_isRightMouseClick;
 public:
     SpectrScene();
     ~SpectrScene()override{}

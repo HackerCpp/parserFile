@@ -26,6 +26,7 @@ Menu::Menu(PythonQtObjectPtr *pythonContext,QWidget *parent)
     fileMenu->addAction(tr("&Open file"),m_parentWindow, SLOT(openFile()));
     QMenu *saveFileMenu = new QMenu (tr("Save"),this);
     saveFileMenu->addAction (tr("&GFM"),m_parentWindow, SLOT(saveGFM()));
+    saveFileMenu->addAction (tr("&LIS"),m_parentWindow, SLOT(saveLIS()));
     fileMenu->addMenu(saveFileMenu);
     mnuArray->push_back(fileMenu);
     QMenu * interpreterMenu= new QMenu (tr("&Script"),this);

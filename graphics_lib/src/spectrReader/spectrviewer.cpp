@@ -15,8 +15,7 @@ SpectrViewer::SpectrViewer(VSpectrItem *spectrItem,int width){
     else{
         qDebug() << "Не удалось создать копию спектра в редакторе, конструктор копирования вернул nullptr";
     }
-    //m_waveWidget = new OneWaveWidget;
-    //m_waveWidget->show();
+
     setScene(m_scene);
 
     connect(horizontalScrollBar(), &QScrollBar::valueChanged, this, &SpectrViewer::scrollChanged);
@@ -58,14 +57,33 @@ void SpectrViewer::scrollChanged(){
     QRectF f_rectForScene = QRectF(f_rect[0].x(),f_rect[0].y(),f_rect[2].x() - f_rect[0].x(), f_rect[2].y() - f_rect[0].y());
     changeVisibilityZone(f_rectForScene);
 }
+
 void SpectrViewer::resizeEvent(QResizeEvent *event){
     scrollChanged();
 }
 
 void SpectrViewer::changePositionOneWave(QPoint position){
-    //if(!m_waveWidget)
-        //return;
-    //bool f_flag;
-    //m_waveWidget->update(m_experimentalSpectr->oneWave(position.y(),&f_flag));
     emit sig_changePositionOneWave(position);
+}
+
+void SpectrViewer::changeSelectedArea(QRectF rectSelectedArea){
+    QPoint f_leftTop,f_rightBottom;
+    if(rectSelectedArea.width() < 0){
+        f_leftTop.setX(rectSelectedArea.x() + rectSelectedArea.width());
+        f_rightBottom.setX(rectSelectedArea.x());
+    }
+    else{
+        f_leftTop.setX(rectSelectedArea.x());
+        f_rightBottom.setX(rectSelectedArea.x() + rectSelectedArea.width());
+    }
+    if(rectSelectedArea.height() < 0){
+        f_leftTop.setY(rectSelectedArea.y() + rectSelectedArea.height());
+        f_rightBottom.setY(rectSelectedArea.y());
+    }
+    else{
+        f_leftTop.setY(rectSelectedArea.y());
+        f_rightBottom.setY(rectSelectedArea.y() + rectSelectedArea.height());
+    }
+
+    emit sig_changeSelectedArea(m_experimentalSpectr->indexesFromScenePoint(f_leftTop),m_experimentalSpectr->indexesFromScenePoint(f_rightBottom));
 }

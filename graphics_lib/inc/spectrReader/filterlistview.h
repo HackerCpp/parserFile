@@ -9,6 +9,7 @@ public:
     ~FilterListView()override{}
 
     void mouseDoubleClickEvent(QMouseEvent *event) override;
+    void changeBorderFilters(QPoint leftTop,QPoint rightBottom);
 };
 
 #endif // FILTERLISTVIEW_H

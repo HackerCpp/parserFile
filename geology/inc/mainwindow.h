@@ -27,6 +27,7 @@ public:
 public slots:
     void openFile()override;
     void saveGFM()override;
+    void saveLIS() override;
     void openConsolePython()override;
     void openEditorPython()override;
     void openInterpretations()override;

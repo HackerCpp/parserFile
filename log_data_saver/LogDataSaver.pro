@@ -28,11 +28,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/lassaver.cpp \
     src/gfmsaver.cpp
 
 HEADERS += \
     inc/LogDataSaver_global.h \
-    inc/gfmsaver.h
+    inc/gfmsaver.h \
+    inc/lassaver.h
 
 # Default rules for deployment.
 unix {

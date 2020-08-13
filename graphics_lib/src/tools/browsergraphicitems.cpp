@@ -5,6 +5,7 @@
 #include <QStyleOptionButton>
 #include <QPainter>
 #include "customdelegates.h"
+#include <QHeaderView>
 
 
 BrowserGraphicItems::BrowserGraphicItems(IBoard *board,QMap<QString,AGraphicItem *> *items)
@@ -22,6 +23,7 @@ BrowserGraphicItems::BrowserGraphicItems(IBoard *board,QMap<QString,AGraphicItem
     m_prModel = new QSortFilterProxyModel(this);
     m_prModel->setSourceModel(m_model);
     m_tableView = new QTableView;
+    m_tableView->horizontalHeader()->setSectionResizeMode( QHeaderView::ResizeToContents );
     m_tableView->setItemDelegateForColumn(0,f_checkBoxDelegate);
     m_tableView->setItemDelegateForColumn(4,f_trackDelegate);
     m_tableView->setItemDelegateForColumn(6,f_colorDelegate);

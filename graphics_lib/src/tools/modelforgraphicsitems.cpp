@@ -11,7 +11,7 @@ ModelForGraphicsItems::ModelForGraphicsItems(QMap<QString,AGraphicItem *> *items
         ++index;
     }
     m_headerList << tr("Visible") << tr("Data") << tr("Device") << tr("Mnemonic") << tr("Track number")
-                 << tr("Draw type") << tr("Color") << "" << "" << "" << "";
+                 << tr("Draw type") << tr("Color");
 }
 
 

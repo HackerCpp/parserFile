@@ -35,6 +35,9 @@ class FilterListModel : public QAbstractListModel{
     void removeFilter(int index);
     QVector<FilterInfo > *filters(){return m_vectorFilters;}
 
+    void changeBorderFilters(QList<int> listSelectedRows,QPoint leftTop,QPoint rightBottom);
+
+
 };
 
 #endif

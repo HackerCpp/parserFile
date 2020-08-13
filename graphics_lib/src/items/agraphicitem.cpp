@@ -75,11 +75,8 @@ void AGraphicItem::paint(QPainter *per,QPainter *perHead,QRectF visibleRect,
     }
 }
 
-int AGraphicItem::mainIndexFromScene(QPointF point){
-    /*if(mainValueMinimum() > point.y() || mainValueMaximum() < point.y()){
-        return qQNaN();
-    }*/
-    if(!currentMainValue()){
+int AGraphicItem::mainIndexFromScenePoint(QPointF point){
+    if(!currentMainValue() || !currentMainValue()->size()){
         return -1;
     }
     uint index = 0;
@@ -91,8 +88,9 @@ int AGraphicItem::mainIndexFromScene(QPointF point){
     }
     return index;
 }
+
 qreal AGraphicItem::valueFromScenePoint(QPointF point){
-    int f_index = mainIndexFromScene(point);
+    int f_index = mainIndexFromScenePoint(point);
     if(f_index == -1)
         return qQNaN();
     return m_curve->data(f_index);
@@ -100,8 +98,8 @@ qreal AGraphicItem::valueFromScenePoint(QPointF point){
 
 qreal AGraphicItem::maximumFromScenePoints(QPointF pointBegin,QPointF pointEnd){
 
-    int f_indexBegin = mainIndexFromScene(pointBegin);
-    int f_indexEnd = mainIndexFromScene(pointEnd);
+    int f_indexBegin = mainIndexFromScenePoint(pointBegin);
+    int f_indexEnd = mainIndexFromScenePoint(pointEnd);
     if(f_indexEnd == -1 || f_indexBegin == -1)
         return qQNaN();
     if(f_indexBegin > f_indexEnd){
@@ -119,8 +117,8 @@ qreal AGraphicItem::maximumFromScenePoints(QPointF pointBegin,QPointF pointEnd){
 }
 
 qreal AGraphicItem::minimumFromScenePoints(QPointF pointBegin,QPointF pointEnd){
-    int f_indexBegin = mainIndexFromScene(pointBegin);
-    int f_indexEnd = mainIndexFromScene(pointEnd);
+    int f_indexBegin = mainIndexFromScenePoint(pointBegin);
+    int f_indexEnd = mainIndexFromScenePoint(pointEnd);
     if(f_indexEnd == -1 || f_indexBegin == -1)
         return qQNaN();
     if(f_indexBegin > f_indexEnd){
@@ -143,6 +141,7 @@ QPair<QString,qreal> AGraphicItem::mainValueFromScene(QPointF point){
     qreal f_value = point.y() / m_currentScaleMainValue / f_divider;
     return QPair<QString,qreal>(f_unit,f_value);
 }
+
 inline qreal AGraphicItem::mainValue(int index){
     return (m_currentMainValue->data(index) + m_currentRecordPoint) * m_currentScaleMainValue;
 }
@@ -150,6 +149,7 @@ inline qreal AGraphicItem::mainValue(int index){
 inline qreal AGraphicItem::mainValueMinimum(){
      return (m_currentMainValue->minimum() + m_currentRecordPoint) * m_currentScaleMainValue;
 }
+
 inline qreal AGraphicItem::mainValueMaximum(){
      return (m_currentMainValue->maximum() + m_currentRecordPoint) * m_currentScaleMainValue;
 }

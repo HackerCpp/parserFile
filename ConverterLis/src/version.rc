@@ -1,0 +1,48 @@
+#define LIBRARY_FILEVER "1.0.0.19"
+#define LIBRARY_VERSION 1,0,0,19
+
+#ifndef ONLY_HEADER
+#include "winver.h"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION LIBRARY_VERSION
+ PRODUCTVERSION LIBRARY_VERSION
+ FILEFLAGSMASK 0x17L
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "041904b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "ООО ""Геофизмаш""\0"
+            VALUE "FileDescription", "Библиотека экспорта формата GFM в формат LIS"
+            VALUE "FileVersion", LIBRARY_FILEVER
+            VALUE "InternalName", "lis"
+            VALUE "LegalCopyright", "Copyright ООО ""Геофизмаш"" (C) 2014"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "lis.dll"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "Программа Геофизика"
+            VALUE "ProductVersion", LIBRARY_FILEVER
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x419, 1200
+    END
+END
+#endif

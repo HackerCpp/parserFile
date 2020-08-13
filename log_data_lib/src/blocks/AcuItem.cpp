@@ -11,10 +11,10 @@ AcuItem::~AcuItem(){
 
 }
 
-void AcuItem::setColor(QString bruchColor, QString transparentColor){
+/*void AcuItem::setColor(QString bruchColor, QString transparentColor){
     m_brushColor = bruchColor;
     m_transparentColor = transparentColor;
-}
+}*/
 
 void AcuItem::setMulticolor(MulticolorItem multicolor){
     m_multicolor->push_back(multicolor);

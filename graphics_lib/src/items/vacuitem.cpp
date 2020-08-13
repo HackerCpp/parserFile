@@ -3,7 +3,7 @@
 
 
 VAcuItem::VAcuItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
-    :VerticalItem(curve,board)
+    :TwoDimensionalArrayItem(itemInfo,curve,board)
 {
     m_saversMoment = false;
     AcuItem * f_acuitem = dynamic_cast<AcuItem*>(itemInfo);
@@ -329,59 +329,8 @@ void VAcuItem::loadDrawingParam(int width){
     m_dataStepPix = m_widthPicturePix / f_quantityElem;
 }
 
-void VAcuItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
-    if(!per->isActive())
-        return;
-    //if(m_updatedParam)
-        //return;
-    /*AcuItem* f_acuItem = dynamic_cast<AcuItem*>(m_itemInfo);
-    if(!f_acuItem){
-        qDebug() << "Не удалось преобразовать AItem in AcuItem";
-        return;
-    }
-    if(!f_acuItem->showMode()){
-        drawInterpolationHorizontal(per,visibleRect,flag);
-    }
-    else if(f_acuItem->showMode() == 1){
-        drawInterpolationHorizontal(per,visibleRect,flag);
-    }
-    else if(f_acuItem->showMode() == 2){
 
-    }*/
-    qreal f_yTop = visibleRect.y();
-    qreal f_height = per->device()->height();
-    qreal f_width = per->device()->width();
-    qreal f_topOffset = m_board->offsetUp();
-
-    ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
-    qreal f_recordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
-    qreal f_scaleForMainValue = m_board->scale();
-    qreal f_top = (f_mainValue->minimum() + f_recordPoint) * f_scaleForMainValue;
-    qreal f_bottom = (f_mainValue->maximum() + f_recordPoint) * f_scaleForMainValue;
-
-    qreal f_dstPicturePosition = visibleRect.y() - f_topOffset; //0
-    QImage f_srcImage;
-    for(int y_top = f_top - 1000; y_top < f_dstPicturePosition + f_height /*f_bottom + 1000*/; y_top += (M_HEIGHT_PICTURE - 1000)){
-        if(*flag)
-            return;
-        if((y_top + M_HEIGHT_PICTURE) < (f_yTop - m_board->offsetUp()))
-            continue;
-        QString f_fileName = "temporary/" + m_curve->mnemonic() + QString::number(m_curentPictureWidth) + QString::number(y_top) + ".png";
-        while(m_saversMoment){}
-        if(QFile::exists(f_fileName) ){
-            f_srcImage.load(f_fileName,"PNG");
-            if(f_srcImage.isNull())
-                continue;
-            qreal f_srcPicturePosition =  y_top + m_lengthOverlay;//??
-            int f_drawHeight = f_srcImage.height() - m_lengthOverlay;
-            QRect f_dstRect(0,(f_srcPicturePosition - f_dstPicturePosition),f_width,f_drawHeight);
-            QRect f_srcRect(0,m_lengthOverlay,f_srcImage.width(),f_drawHeight);
-            per->drawImage(f_dstRect,f_srcImage,f_srcRect);
-        }
-    }
-}
-
-void VAcuItem::run(){
+/*void VAcuItem::run(){
     m_updatedParam = true;
 
     AcuItem* f_acuItem = dynamic_cast<AcuItem*>(m_itemInfo);
@@ -408,7 +357,6 @@ void VAcuItem::run(){
     m_picturePath.clear();
     if(m_curentPictureWidth < 10)
         return;
-    //loadDrawingParam(m_curentPictureWidth);
     ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
     qreal f_recordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
     qreal f_scaleForMainValue = m_board->scale();
@@ -426,7 +374,7 @@ void VAcuItem::run(){
         QPainter f_painter(&f_image);
         (this->*pDrawingFunction)(&f_painter,y_top,y_top + f_heightPictures,&m_isEndThread);
         m_saversMoment = true;
-        QString f_namePicture = "temporary/" + m_curve->mnemonic() + QString::number(m_curentPictureWidth) + QString::number(y_top) + ".png";
+        QString f_namePicture = "temporary/" + m_uid + QString::number(y_top) + ".png";
         f_image.save(f_namePicture,"PNG");
         while(!QFile::exists(f_namePicture)){}
         m_picturePath << f_namePicture;
@@ -435,28 +383,25 @@ void VAcuItem::run(){
     m_curentDrawPersent = 100;
     m_updatedParam = false;
     m_board->customUpdate();
-}
+}*/
 
-void VAcuItem::drawHeader(QPainter *per,int &position,bool *flag){
-    Q_UNUSED(flag)
-    per->save();
-    m_positionHeaderArea = position;
-
-    int f_width = per->device()->width();
-    if(m_curentDrawPersent != 100){
-        per->setPen(QPen(Qt::black,1));
-        per->setBrush(QBrush(Qt::green));
-        per->drawRect(0,position,((qreal)f_width/100.1) * m_curentDrawPersent,m_heightHeaderArea);
-        per->drawText(QRect(1,position,f_width - 2,m_heightHeaderArea),Qt::AlignLeft|Qt::AlignVCenter,QString::number((int)m_curentDrawPersent) + "%");
+void VAcuItem::selectOptions(){
+    AcuItem* f_acuItem = dynamic_cast<AcuItem*>(m_itemInfo);
+    if(!f_acuItem){
+        qDebug() << "Не удалось преобразовать AItem in AcuItem";
+        pDrawingFunction = nullptr;
+        return;
     }
-    else{
-        per->setBrush(QBrush(QColor(255,255,255,200)));
-        per->drawRect(1,position,f_width - 2,m_heightHeaderArea);
-    }
-    per->drawText(QRect(1,position,f_width - 2,m_heightHeaderArea),Qt::AlignHCenter|Qt::AlignVCenter,m_curve->mnemonic());
 
-    position += m_heightHeaderArea;
-    per->restore();
+    if(!f_acuItem->showMode()){
+        pDrawingFunction = &TwoDimensionalArrayItem::drawPointsTwoColorsNoOffset;
+    }
+    else if(f_acuItem->showMode() == 1){
+        pDrawingFunction = &TwoDimensionalArrayItem::drawInterpolationHorizontalNoOffset;
+    }
+    else if(f_acuItem->showMode() == 2){
+        pDrawingFunction = &TwoDimensionalArrayItem::drawWaveNoOffset;
+    }
 }
 
 void VAcuItem::drawOnTheDisk(){
@@ -497,6 +442,34 @@ void VAcuItem::updateParam(){
     drawOnTheDisk();
 }
 
+QList<QPointF> VAcuItem::oneWave(int position,bool *flag){
+    QList<QPointF> f_returnList;
+    if(!currentMainValue() || !currentMainValue()->size())
+        return f_returnList;
+
+    uint indexBegin  = 0;
+
+    if(mainValueMinimum() > position){
+        indexBegin = 0;
+    }
+    else if(mainValueMaximum() < position){
+        indexBegin = currentMainValue()->size() - 1;
+    }
+    else{
+        for(uint i = 0; i < currentMainValue()->size() - 1; ++i){
+           if(mainValue(i) > position && mainValue(i + 1) < position || mainValue(i) < position && mainValue(i + 1) > position){
+               indexBegin = i;
+               break;
+           }
+        }
+    }
+    uint f_quantityElem = m_curve->sizeOffset();
+    uint f_indexDataBegin = indexBegin * f_quantityElem;
+    for(uint i = 0; i < f_quantityElem; ++i){
+        f_returnList.push_back(QPointF(qreal(i) * m_dataStep,m_curve->data(f_indexDataBegin + i)));
+    }
+    return f_returnList;
+}
 
 
 void VAcuItem::drawInterpolationHorForCheckArea(QPainter *per,QRectF visibleRect,bool *flag){

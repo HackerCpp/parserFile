@@ -84,8 +84,9 @@ void VerticalBoard::updateItems(){
             if(f_itemInfo){
                 if(m_items->find(curveKey) == m_items->end()){ //Если графическое представление для этой кривой не создано на этом борде
                     AGraphicItem *f_graphicItem = ItimsCreater::createItem(f_itemInfo,m_curves->value(curveKey),this,ItimsCreater::VERTICAL);//Создаём
-                    if(f_graphicItem)
+                    if(f_graphicItem){
                         m_items->insert(curveKey,f_graphicItem);//И добавляем
+                    }
                 }
             }
         }

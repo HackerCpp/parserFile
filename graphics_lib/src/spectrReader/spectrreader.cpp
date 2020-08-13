@@ -55,8 +55,6 @@ SpectrReader::SpectrReader(VSpectrItem *spectrItem)
     m_comboFilters = new QComboBox();
     m_pythonInterpreter.addObject("comboFilter",m_comboFilters);
     m_pythonInterpreter.evalFile("scripts/spectrReader/menu.py");
-    //m_pythonConsole  = new PythonQtScriptingConsole(NULL, m_pythonInterpreter);
-    //m_pythonConsole->append("py> from LogData.Curves import*");
     m_pyEditor = new PythonEditor(&m_pythonInterpreter,this);
     m_pyEditor->setWindowFlags(Qt::Window | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint | Qt::CustomizeWindowHint);
     m_pyEditor->show();
@@ -105,6 +103,9 @@ SpectrReader::SpectrReader(VSpectrItem *spectrItem)
     //соединяем сигнал клика мышки по сцене со слотом,
     //для перерисовки виджета графиков одной волны
     connect(m_listSpectrViewer->first(),&SpectrViewer::sig_changePositionOneWave,this,&SpectrReader::updateOneWaweWidget);
+    //соединяем сигнал изменения выделенной области сцены со слотом,
+    //для изменения границ фильтра
+    connect(m_listSpectrViewer->last(),&SpectrViewer::sig_changeSelectedArea,this,&SpectrReader::changeBordersOfTheFilters);
 }
 
 SpectrReader::~SpectrReader(){
@@ -132,7 +133,6 @@ SpectrReader::~SpectrReader(){
     if(m_widgetFilters){delete m_widgetFilters; m_widgetFilters = nullptr;}
     if(m_spectrSplitter){delete m_spectrSplitter; m_spectrSplitter = nullptr;}
 
-    //if(m_pythonConsole){delete m_pythonConsole; m_pythonConsole = nullptr;}
     if(m_oneWaveWidget){delete m_oneWaveWidget; m_oneWaveWidget = nullptr;}
     if(m_splitterFiltersAndSpectrs){delete m_splitterFiltersAndSpectrs; m_splitterFiltersAndSpectrs = nullptr;}
     if(m_toolBar){delete m_toolBar; m_toolBar = nullptr;}
@@ -151,14 +151,7 @@ void SpectrReader::changrVisibilityZone(QRectF visibilityRect){
 
 void SpectrReader::resizeEvent(QResizeEvent *event){
     Q_UNUSED(event)
-    /*QList<QGraphicsItem*> f_items = m_scene->items();
-    foreach(auto item,f_items){
-        GraphicItemForSpectr * f_itemForSpectr = dynamic_cast<GraphicItemForSpectr *>(item);
-        if(f_itemForSpectr){
-            f_itemForSpectr->changeSize(this->width());
-        }
-    }*/
-    //scrollChanged();
+
 }
 
 void SpectrReader::sliderWidthChange(int width){
@@ -198,6 +191,9 @@ void SpectrReader::dropEvent(QDropEvent *event){
         //соединяем сигнал клика мышки по сцене со слотом,
         //для перерисовки виджета графиков одной волны
         connect(m_listSpectrViewer->last(),&SpectrViewer::sig_changePositionOneWave,this,&SpectrReader::updateOneWaweWidget);
+        //соединяем сигнал изменения выделенной области сцены со слотом,
+        //для изменения границ фильтра
+        connect(m_listSpectrViewer->last(),&SpectrViewer::sig_changeSelectedArea,this,&SpectrReader::changeBordersOfTheFilters);
         //Добавляем в контекст интерпретатора кривую
         QString f_curveNameForPython = "C_" + m_listSpectrViewer->last()->experimentalCurve()->mnemonic() + "_" + m_listSpectrViewer->last()->experimentalCurve()->shortCut().device();
         f_curveNameForPython = f_curveNameForPython.remove("[");
@@ -233,7 +229,6 @@ void SpectrReader::rollBackFilters(){
 }
 
 void SpectrReader::applyAllFilters(){
-    qDebug() << "applyFilters";
 
     if(!m_listSpectrViewer || m_listSpectrViewer->isEmpty())
         return;
@@ -275,7 +270,6 @@ void SpectrReader::applyAllFilters(){
         spectrViewer->experimentalSpectr()->updateParam();
         f_progressBar.setValue(100);
     }
-    //allUpdate();
 }
 
 void SpectrReader::allUpdate(){
@@ -309,3 +303,6 @@ void SpectrReader::updateOneWaweWidget(QPoint scenePoint){
     m_oneWaveWidget->update(scenePoint);
 }
 
+void SpectrReader::changeBordersOfTheFilters(QPoint leftTop,QPoint rightDown){
+    m_filterListView->changeBorderFilters(leftTop,rightDown);
+}

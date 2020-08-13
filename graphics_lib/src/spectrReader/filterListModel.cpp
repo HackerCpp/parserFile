@@ -154,4 +154,13 @@ void FilterListModel::removeFilter(int index){
     }
 }
 
+void FilterListModel::changeBorderFilters(QList<int> listSelectedRows,QPoint leftTop,QPoint rightBottom){
+
+    foreach(auto value,listSelectedRows){
+        m_vectorFilters->operator[](value).up = leftTop.y();
+        m_vectorFilters->operator[](value).left = leftTop.x();
+        m_vectorFilters->operator[](value).down = rightBottom.y();
+        m_vectorFilters->operator[](value).right = rightBottom.x();
+    }
+}
 
