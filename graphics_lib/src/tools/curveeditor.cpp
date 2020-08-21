@@ -1,6 +1,7 @@
 #include "curveeditor.h"
 #include "vspectritem.h"
 #include "spectrreader.h"
+#include "acousticsEditor/acousticsEditor.h"
 
 
 
@@ -18,6 +19,11 @@ CurveEditor::CurveEditor(AGraphicItem *graphicItem,QWidget *parent)
         m_curveReader = new SpectrReader(dynamic_cast<VSpectrItem *>(graphicItem));
         m_splitter->addWidget(m_curveReader);
     }
+    else if(dynamic_cast<VAcuItem *>(graphicItem)){
+        m_curveReader = new AcousticsEditor(dynamic_cast<VAcuItem *>(graphicItem));
+        m_splitter->addWidget(m_curveReader);
+    }
+
     setWindowFlags(windowFlags() & ~Qt::WindowStaysOnTopHint);
 }
 

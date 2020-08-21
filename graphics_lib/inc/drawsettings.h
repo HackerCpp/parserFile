@@ -16,8 +16,8 @@ class DrawSettings : public QObject
 
     QSettings *m_settings;
 
-    QVector<int> m_dividersTime;
-    QVector<int> m_dividersDepth;
+    QVector<qreal> m_dividersTime;
+    QVector<qreal> m_dividersDepth;
     QVector<int> m_lengthPicture;
 public:
     enum FormatTime{MSEC_SM_100, SEC_SM_1, SEC_SM_5, SEC_SM_10,

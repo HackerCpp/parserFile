@@ -6,7 +6,6 @@
 class GraphicItemForSpectr : public ObjectOfTheBoard{
     VSpectrItem * m_spectrItem;
     QImage *m_curentHeaderImage;
-    QImage *m_curentOneWaveImage;
 
 public:
     GraphicItemForSpectr(VSpectrItem *spectrItem,int width);
@@ -15,7 +14,6 @@ public:
     virtual QRectF boundingRect()const override;
     void changeVisibilityZone(QRectF visibilityZone);
     void changeSize(int width);
-    void changePositionOneWave(QPoint position);
     void toSetTheLocationOfTheImageAfterDrawing()override;
     void run()override;
 };

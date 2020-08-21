@@ -12,8 +12,6 @@
 #include <QGraphicsView>
 #include <QComboBox>
 #include <QPushButton>
-#include <PythonQt.h>
-#include <PythonQt_QtAll.h>
 #include "filterListModel.h"
 #include "filterlistview.h"
 #include "objectoftheboard.h"
@@ -23,7 +21,6 @@
 #include "Wrapper_python.h"
 #include "spectrviewer.h"
 #include "pythoneditor.h"
-
 
 class SpectrReader : public BaseCurveReader
 {

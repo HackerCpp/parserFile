@@ -67,6 +67,66 @@ bool GFMLoader::gzipDecompress(QByteArray input, QByteArray &output){
 
 
 
+bool ifEqual(qreal one,qreal two,qreal error){
+    if(one < two + error && one > two - error )
+        return true;
+    return false;
+}
+
+void GFMLoader::mergeIdenticalBlocks(){
+    if(!m_blocks || !m_blocks->size()){
+        return;
+    }
+    for(int i = 0; i <  m_blocks->size();++i){
+        IBlock *blockDst = m_blocks->at(i);
+        DataBlock * f_dataBlockDst = dynamic_cast<DataBlock*>(blockDst);
+        if(!f_dataBlockDst)
+            continue;
+
+        foreach(auto blockSrc,*m_blocks){
+            if(!blockDst || !blockSrc)
+                continue;
+            if( blockSrc->name() == IBlock::DATA_BLOCK){
+                DataBlock * f_dataBlockSrc = dynamic_cast<DataBlock*>(blockSrc);
+                if( !f_dataBlockSrc)
+                    continue;
+                if(f_dataBlockDst->moduleMnemonic() == f_dataBlockSrc->moduleMnemonic() &&
+                   blockDst != blockSrc &&
+                   f_dataBlockDst->numberOfVectors() == f_dataBlockSrc->numberOfVectors() &&
+                        ifEqual(f_dataBlockDst->time()->maximum(),f_dataBlockSrc->time()->maximum(),0.001) &&
+                        ifEqual(f_dataBlockDst->depth()->maximum(),f_dataBlockSrc->depth()->maximum(),0.001) &&
+                        ifEqual(f_dataBlockDst->time()->minimum(),f_dataBlockSrc->time()->minimum(),0.001) &&
+                        ifEqual(f_dataBlockDst->depth()->minimum(),f_dataBlockSrc->depth()->minimum(),0.001)){
+                    QList<ICurve *>*f_curves = f_dataBlockSrc->curves();
+                    foreach(auto curve,*f_curves){
+                        QString f_drawType = curve->desc()->param("draw_type");
+                        if( f_drawType == "DEPTH" || f_drawType == "TIME" || f_drawType == "DEPTH_ENCODER")
+                            continue;
+                        curve->setTime(f_dataBlockDst->time());
+                        curve->setDepth(f_dataBlockDst->depth());
+                        f_dataBlockDst->setcurve(curve);
+                        f_dataBlockSrc->removeCurveOne(curve);
+                    }
+                    m_blocks->removeOne(f_dataBlockSrc);
+                    delete f_dataBlockSrc;f_dataBlockSrc = nullptr;
+                }
+            }
+        }
+    }
+    foreach(auto block,*m_blocks){
+        DataBlock * f_dataBlock = dynamic_cast<DataBlock*>(block);
+        if(!f_dataBlock)
+            continue;
+        //Если данных нет удаляем дата блок
+        if(!f_dataBlock->numberOfVectors()){
+            m_blocks->removeOne(f_dataBlock);
+            delete f_dataBlock;f_dataBlock = nullptr;
+            continue;
+        }
+    }
+
+}
+
 struct BlockByte{
     int sizeNameBlock;
     QString nameBlock;
@@ -162,6 +222,7 @@ void GFMLoader::run(){
     }
     delete blocksList;
     byteArrayFile.clear();
+    mergeIdenticalBlocks();
     qDebug() << "end load gfm : " << time.msecsTo( QTime::currentTime() ) << "mS";
     m_isReady = true;
     emit ready();
@@ -255,16 +316,37 @@ void GFMLoader::parserDataBlock(const QByteArray &bodyBlock,IBlock *block){
     dataBlock->setModuleMnemonic(moduleMnemonics);
     findShortCuts(&header,dataBlock);
     findCurves(&header,dataBlock,bodyBlock,indexBeginData);
-    //copyData(bodyBlock,indexBeginData,dataBlock);
     QList<ICurve*> *f_curves = dataBlock->curves();
     ICurve *f_mainTime = nullptr;
     ICurve *f_mainDepth = nullptr;
     foreach(auto curve,*f_curves){
         if(curve->desc()->param("draw_type") == "TIME"){
+            bool ok = false;
+            qreal f_resolution = curve->desc()->param("resolution").replace(",",".").toDouble(&ok);
+            if(ok)
+                curve->setScale(f_resolution);
             f_mainTime = curve;
             dataBlock->setMainTime(curve);
         }
         else if(curve->desc()->param("draw_type") == "DEPTH"){
+            bool okCalib = false;
+            bool okResolution = false;
+            qreal f_calibLength = curve->desc()->calib("length").replace(",",".").toDouble(&okCalib);
+            qreal f_calibCounts = 1;
+            if(okCalib)
+                f_calibCounts = curve->desc()->calib("counts").replace(",",".").toDouble(&okCalib);
+            qreal f_resolution = curve->desc()->param("resolution").replace(",",".").toDouble(&okResolution);
+            if(okCalib){
+                if(okResolution){
+                   qreal f_scale = (f_calibLength / f_calibCounts) * f_resolution;
+                   curve->setScale(f_scale);
+                }
+            }
+            else{
+                if(okResolution)
+                   curve->setScale(f_resolution);
+            }
+
             f_mainDepth = curve;
             dataBlock->setMainDepth(curve);
         }
@@ -691,7 +773,6 @@ void GFMLoader::findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *
     ACurve *curveAbstract =  dynamic_cast<ACurve *>(curve);
     int indexEndOffset = curveLine.indexOf("]",1) - 1;
     uint f_offset = curveLine.mid(1,indexEndOffset).toUInt();
-    //curveAbstract->setOffset(offset);
 
     int indexEndsize = curveLine.indexOf("]",indexEndOffset+2) - 3;
     uint size = curveLine.mid(indexEndOffset+3,indexEndsize - indexEndOffset).toUInt();
@@ -718,8 +799,6 @@ void GFMLoader::findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *
 
     int indexBeginType = curveLine.indexOf(":",indexEndParamMnemon);
     int indexEndType = curveLine.indexOf(" ",indexBeginType + 4);
-    //QString dataType = curveLine.mid(indexBeginType + 2,indexEndType - indexBeginType - 2);
-    //curveAbstract->setDataType(dataType);
 
     int indexEndRecordPoint = indexEndType;
     if(!shortCut.ref().isEmpty()){
@@ -748,20 +827,4 @@ void GFMLoader::findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *
     uint f_dataOffset = f_offset * numberOfVectors;
     curveAbstract->setData(bodyBlock.data() + indexBeginData + f_dataOffset,numberOfVectors);
 }
-
-/*void GFMLoader::copyData(QByteArray bodyBlock,int indexBeginData,DataBlock *dataBlock){
-    uint numberOfVectors = dataBlock->numberOfVectors();
-    QList<ICurve*> *curves = dataBlock->curves();
-    if(!curves){
-        qDebug() << "дата блок вернул нулевой указатель на кривые";
-        return;
-    }
-    foreach (auto curve,*curves){
-        ACurve * f_curve = dynamic_cast<ACurve *>(curve);
-        if(!f_curve)
-            continue;
-        uint offset = f_curve->offset() * numberOfVectors;
-        curve->setData(bodyBlock.data() + indexBeginData + offset,numberOfVectors);
-    }
-}*/
 

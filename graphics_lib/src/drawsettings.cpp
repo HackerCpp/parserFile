@@ -7,9 +7,9 @@
 DrawSettings::DrawSettings()
 {
 
-    m_dividersTime  << 10 << 1000 << 5000 << 10000 << 30000 << 60000 << 300000 << 600000 << 1800000;
-    m_dividersDepth  << 10 << 50 << 100 << 200 << 500 << 1000 << 2000 << 5000 << 10000;
-    m_lengthPicture << 3000 << 16200 << 32500;\
+    m_dividersTime  << 1 << 100 << 500 << 1000 << 3000 << 6000 << 30000 << 60000 << 180000;
+    m_dividersDepth  << 0.01 << 0.05 << 0.1 << 0.2 << 0.500 << 1 << 2 << 5 << 10;
+    m_lengthPicture << 3000 << 16200 << 32500;
 
     QList<QScreen *> f_screens = QApplication::screens();
     m_pixelPerMm = f_screens.at(0)->physicalDotsPerInch()/2.54/10;
@@ -106,13 +106,13 @@ void DrawSettings::setDrawType(int drawType){
 
 
 void DrawSettings::setFormatTime(FormatTime format){
-    setScaleForTime(1.f/qreal(m_dividersTime[format]));
+    setScaleForTime(1.f/m_dividersTime[format]);
     m_settings->setValue("drawSettings/scaleForTime",m_scaleForTime);
 
 }
 
 void DrawSettings::setFormatDepth(FormatDepth format){
-    setScaleForDepth(1.f/qreal(m_dividersDepth[format]));
+    setScaleForDepth(1.f/m_dividersDepth[format]);
     m_settings->setValue("drawSettings/scaleForDepth",m_scaleForDepth);
 
 }

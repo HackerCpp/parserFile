@@ -13,9 +13,7 @@ class GraphicEditor : public QTabWidget, AGraphicEditor{
     AGraphicBoard *m_curentBoard;
     QMap<QString,ICurve*> *m_curves;
     QList<CustomObject *> *m_objects;
-
     FormsBlock *m_forms;
-    //QImage::Format  m_curentImageFormat;
     DrawSettings *m_drawSettings;
 
     void newBoard();

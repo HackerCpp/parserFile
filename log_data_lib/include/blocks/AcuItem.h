@@ -12,9 +12,9 @@ class AcuItem : public AItem{
 public:
 
     AcuItem();
+    AcuItem(const AcuItem &other);
     ~AcuItem();
 
-    //void setColor (QString bruchColor, QString transparentColor);
     void setBrushColor(QString brushColor){m_brushColor = brushColor;}
     void setTransparentColor(QString transparentColor){m_transparentColor = transparentColor;}
     void setMulticolor(MulticolorItem multicolor);

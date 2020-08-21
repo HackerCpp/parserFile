@@ -1,8 +1,8 @@
 QT -= gui
 
 TEMPLATE = lib
-CONFIG += staticlib
-#CONFIG += dynamiclib
+#CONFIG += staticlib
+CONFIG += dynamiclib
 
 
 CONFIG += c++17
@@ -23,6 +23,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    include/curves/linking.cpp \
     src/customObject/customobject.cpp \
     src/customObject/customobjectiteminfo.cpp \
     src/blocks/iteminfocreater.cpp \
@@ -63,6 +64,7 @@ SOURCES += \
 
 
 HEADERS += \
+    include/curves/linking.h \
     include/blocks/ablock.h \
     include/blocks/aboard.h \
     include/blocks/acuItem.h \

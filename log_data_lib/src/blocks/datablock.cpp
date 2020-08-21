@@ -99,6 +99,20 @@ void DataBlock::setcurve(ICurve* curve){
     emit dataUpdate();
 }
 
+bool DataBlock::removeCurveOne(ICurve *curve){
+    if(!m_curves){
+        qDebug() << "евозможно добавить кривую m_curves не определён";
+        return false;
+    }
+    foreach(auto f_curve,*m_curves){
+        if(f_curve == curve){
+            m_curves->removeOne(curve);
+            return true;
+        }
+    }
+    return false;
+    emit dataUpdate();
+}
 
 uint DataBlock::numberOfVectors(){
     return m_numberOfVectors;

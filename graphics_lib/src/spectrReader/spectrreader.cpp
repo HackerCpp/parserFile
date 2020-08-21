@@ -6,7 +6,8 @@
 #include <QPushButton>
 #include <QValidator>
 #include <QGraphicsSceneMouseEvent>
-
+#include <PythonQt.h>
+#include <PythonQt_QtAll.h>
 #include <QDir>
 #include <QGraphicsProxyWidget>
 #include "customprogressbar.h"
@@ -90,7 +91,6 @@ SpectrReader::SpectrReader(VSpectrItem *spectrItem)
     m_baseVSplitter->addWidget(m_toolBar);
     m_baseVSplitter->addWidget(m_splitterFiltersAndSpectrs);
     m_baseVSplitter->addWidget(m_oneWaveWidget);
-    //m_baseVSplitter->addWidget(m_pythonConsole);
     m_vMainLayout->addWidget(m_baseVSplitter);
     setLayout(m_vMainLayout);
 

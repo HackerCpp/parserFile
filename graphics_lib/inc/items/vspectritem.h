@@ -12,7 +12,7 @@ class VSpectrItem : public TwoDimensionalArrayItem{
 public:
     VSpectrItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board);
     VSpectrItem(const VSpectrItem &other);
-    ~VSpectrItem();
+    ~VSpectrItem()override;
 
 private:
     void inline drawInterpolationVertical(QPainter *per,QRectF visibleRect,bool *flag);
@@ -27,7 +27,6 @@ public:
     bool isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per)override;
     void loadDrawingParam(int width)override;
     virtual void drawOnTheDisk()override;
-    //void run()override;
     void selectOptions()override;
     qreal dataStep(){return m_dataStep;}
 

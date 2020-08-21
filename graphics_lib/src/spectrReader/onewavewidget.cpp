@@ -8,7 +8,6 @@ OneWaveWidget::OneWaveWidget(AGraphicItem *item)
     m_items->push_back(QPair<AGraphicItem *, QLineSeries *>(item,new QLineSeries()));
     m_hSplitter = new QSplitter;
     m_sliderAmplitude = new QxtSpanSlider(Qt::Vertical);
-    //m_sliderAmplitude->setHandleMovementMode(QxtSpanSlider::HandleMovementMode::NoOverlapping);
 
 
     m_modelOneWave = new ModelOneWave();
@@ -42,21 +41,21 @@ OneWaveWidget::OneWaveWidget(AGraphicItem *item)
     m_graphicGridLayout = new QGridLayout();
     m_graphicsWidget = new QWidget();
 
-    xAxis = new QValueAxis;                     // Ось X
+    xAxis = new QValueAxis;
     xAxis->setRange(m_sliderFrequency->minimum(), m_sliderFrequency->maximum());
-    xAxis->setTitleText(tr("Lines Hz"));       // Название оси X
-    xAxis->setTitleBrush(Qt::magenta);          // Цвет названия
-    xAxis->setLabelsColor(Qt::magenta);         // Цвет элементов оси
+    xAxis->setTitleText(tr("Lines Hz"));
+    xAxis->setTitleBrush(Qt::magenta);
+    xAxis->setLabelsColor(Qt::magenta);
     xAxis->setTickCount(10);
 
-    yAxis = new QValueAxis;             // Ось Y
-    yAxis->setRange(m_sliderAmplitude->minimum(), m_sliderAmplitude->maximum());           // Диапазон от -20 до +20 Вольт
-    yAxis->setTitleText(tr("Amplitude"));    // Название оси Y
-    yAxis->setTitleBrush(Qt::yellow);   // Цвет названия
-    yAxis->setLabelsColor(Qt::yellow);  // Цвет элементов оси
+    yAxis = new QValueAxis;
+    yAxis->setRange(m_sliderAmplitude->minimum(), m_sliderAmplitude->maximum());
+    yAxis->setTitleText(tr("Amplitude"));
+    yAxis->setTitleBrush(Qt::yellow);
+    yAxis->setLabelsColor(Qt::yellow);
     m_chartView = new ChartViewForOneWaveWidget(m_modelOneWave);
 
-    m_chartView->chart()->setTheme(QChart::ChartThemeDark);    // Установка темы QChartView
+    m_chartView->chart()->setTheme(QChart::ChartThemeDark);
 
     foreach(auto value,*m_items){
         value.second->setName(value.first->curve()->mnemonic());

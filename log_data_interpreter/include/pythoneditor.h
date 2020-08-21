@@ -1,26 +1,26 @@
 #ifndef PYTHONEDITOR_H
 #define PYTHONEDITOR_H
-#include <QWidget>
-#include <QMainWindow>
-#include <Qsci/qsciscintilla.h>
-#include <Qsci/qscilexerpython.h>
-#include <PythonQt.h>
 #include "interpreter_global.h"
-#include <QSplitter>
-#include <QVBoxLayout>
-#include <QTextEdit>
-#include <QCompleter>
-#include "gui/PythonQtScriptingConsole.h"
-#include <QThread>
+#include <QMainWindow>
 
+class PythonQtObjectPtr;
+class PythonQtScriptingConsole;
+class QsciScintilla;
+class QsciLexerPython;
+class QString;
+class QMenu;
+class QToolBar;
+class QAction;
+class QSplitter;
+class QVBoxLayout;
 
 class INTERPRETER_EXPORT PythonEditor : public QMainWindow{
     Q_OBJECT
 
     QsciScintilla *m_textEdit;
-    QsciLexerPython * m_lexPython;
+    QsciLexerPython *m_lexPython;
     QString m_curFile;
-    PythonQtObjectPtr * m_pythonContext;
+    PythonQtObjectPtr *m_pythonContext;
 
     QMenu *m_fileMenu;
     QMenu *m_editMenu;
@@ -33,7 +33,6 @@ class INTERPRETER_EXPORT PythonEditor : public QMainWindow{
     QAction *m_pasteAct;
     QSplitter *m_splitter;
     QVBoxLayout *m_mainVLayout;
-    //QTextEdit *m_outputEditor;
     PythonQtScriptingConsole *m_console;
 
 public:
@@ -43,7 +42,6 @@ public:
 protected:
     void closeEvent(QCloseEvent *event)override;
 
-
 private slots:
     void newFile();
     void open();
@@ -52,11 +50,9 @@ private slots:
     void about();
     void documentWasModified();
     void runScript();
-    //void stdOut(const QString &string);
+
 signals:
     void scriptExecuted();
-
-
 
 private:
     void createActions();

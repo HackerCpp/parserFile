@@ -16,11 +16,20 @@ LIBS += \
 
 
 SOURCES += \
-    $$PWD/inc/items/twodimensionalarrayitem.cpp \
-    $$PWD/inc/tools/itemslegendview.cpp \
-    $$PWD/inc/tools/customprogressbar.cpp \
-    $$PWD/inc/tools/modellegenditems.cpp \
-    $$PWD/inc/tools/multicolorselection.cpp \
+    $$PWD/inc/acousticsEditor/acuscene.cpp \
+    $$PWD/inc/acousticsEditor/acuview.cpp \
+    $$PWD/inc/acousticsEditor/chartviewselectsegment.cpp \
+    $$PWD/inc/acousticsEditor/countingacousticsitem.cpp \
+    $$PWD/inc/acousticsEditor/datacountingacoustics.cpp \
+    $$PWD/inc/acousticsEditor/displayingacoustics.cpp \
+    $$PWD/inc/acousticsEditor/setofcurves.cpp \
+    $$PWD/inc/acousticsEditor/widgetselectwavesegment.cpp \
+    $$PWD/src/acousticsEditor/acousticsEditor.cpp \
+    $$PWD/src/items/twodimensionalarrayitem.cpp \
+    $$PWD/src/tools/itemslegendview.cpp \
+    $$PWD/src/tools/customprogressbar.cpp \
+    $$PWD/src/tools/modellegenditems.cpp \
+    $$PWD/src/tools/multicolorselection.cpp \
     $$PWD/src/drawObjects/objectColumn.cpp \
     $$PWD/src/items/customobjectitem.cpp \
     $$PWD/src/spectrReader/chartvievforonewavewidget.cpp \
@@ -65,6 +74,15 @@ SOURCES += \
     $$PWD/src/tools/qxtspanslider.cpp
 
 HEADERS += \
+    $$PWD/inc/acousticsEditor/acousticsEditor.h \
+    $$PWD/inc/acousticsEditor/acuscene.h \
+    $$PWD/inc/acousticsEditor/acuview.h \
+    $$PWD/inc/acousticsEditor/chartviewselectsegment.h \
+    $$PWD/inc/acousticsEditor/countingacousticsitem.h \
+    $$PWD/inc/acousticsEditor/datacountingacoustics.h \
+    $$PWD/inc/acousticsEditor/displayingacoustics.h \
+    $$PWD/inc/acousticsEditor/setofcurves.h \
+    $$PWD/inc/acousticsEditor/widgetselectwavesegment.h \
     $$PWD/inc/items/twodimensionalarrayitem.h \
     $$PWD/inc/tools/itemslegendview.h \
     $$PWD/inc/tools/customprogressbar.h \

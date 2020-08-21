@@ -3,6 +3,7 @@
 #include "datablock.h"
 #include "formsblock.h"
 #include <stdio.h>
+#include <customprogressbar.h>
 
 
 GraphicEditor::GraphicEditor(QSharedPointer<ILogData> logData,DrawSettings *drawSettings,QWidget *parent)
@@ -125,7 +126,14 @@ void GraphicEditor::refresh(){
 
     int f_count = count() - 1;
     m_curentBoard = nullptr;
+    CustomProgressBar f_progressBar;
+    f_progressBar.show();
+    qreal f_stepPercent = 50.0 / f_count;
+    f_progressBar.setRange(0,99);
+    f_progressBar.setValue(0);
+    f_progressBar.setText(tr("remove"));
     for(int index = f_count; index >= 0;index--){
+        f_progressBar.setValue(f_progressBar.value() + f_stepPercent);
         QWidget *f_widget = widget(index);
         f_widget->hide();
         removeTab(index);
@@ -134,14 +142,17 @@ void GraphicEditor::refresh(){
             f_board->activate(false);
         delete f_widget;//->deleteLater();
     }
+    f_progressBar.setValue(f_progressBar.value() + f_stepPercent);
     if(m_curves){
         m_curves->clear();
     }
 
     //qDebug() << "all deleted";
-
+    f_progressBar.setText(tr("added"));
     addCurves();
+    f_progressBar.setValue(75);
     //qDebug() << "curves added";
     addForms();
     //qDebug() << "forms added";
+    f_progressBar.setValue(100);
 }

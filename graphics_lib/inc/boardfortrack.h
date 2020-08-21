@@ -8,14 +8,10 @@ enum InsertPossition{RIGHT,LEFT};
 class BoardForTrack{
 
 protected:
-    //qreal m_pixelPerMm, m_scalePixelPerMm;
-    //uint m_pictureHeight,m_offsetUp;
+
     qreal m_top;
     qreal m_length;
-    //qreal m_scaleForDepth, m_scaleForTime;
-    //bool m_isDrawTime;
     int m_positionHeader;
-    //QImage::Format m_formatImg;
     DrawSettings *m_drawSettings;
 
 public:

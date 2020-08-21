@@ -18,8 +18,8 @@ class OneWaveWidget : public QWidget
 
     ChartViewForOneWaveWidget *m_chartView;
 
-    QValueAxis *xAxis;  // Ось X
-    QValueAxis *yAxis;  // Ось Y
+    QValueAxis *xAxis;
+    QValueAxis *yAxis;
     QList<QPair<AGraphicItem *, QLineSeries *> > *m_items;
     QSplitter *m_hSplitter;
     QxtSpanSlider *m_sliderAmplitude, *m_sliderFrequency;

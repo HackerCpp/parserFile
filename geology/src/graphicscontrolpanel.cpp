@@ -66,7 +66,7 @@ GraphicsControlPanel::GraphicsControlPanel()
     connect(&m_comboPictureLength,static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),this,&GraphicsControlPanel::changePictureHeight);
     connect(&m_comboPictureFormat,static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),this,&GraphicsControlPanel::changePictureFormat);
     connect(&m_comboScalePixelPerMm,SIGNAL(currentIndexChanged(const QString)),this,SLOT(changeScalePixelPerMm(const QString)));
-    connect(m_btnRefresh,&QPushButton::pressed,this,&GraphicsControlPanel::refresh);
+    connect(m_btnRefresh,&QPushButton::released,this,&GraphicsControlPanel::refresh);
     changeDrawType(m_comboBox.currentIndex());
 }
 
@@ -98,7 +98,7 @@ GraphicsControlPanel::GraphicsControlPanel(DrawSettings::FormatTime formatTime,D
     connect(&m_comboPictureLength,static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),this,&GraphicsControlPanel::changePictureHeight);
     connect(&m_comboPictureFormat,static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),this,&GraphicsControlPanel::changePictureFormat);
     connect(&m_comboScalePixelPerMm,SIGNAL(currentIndexChanged(const QString)),this,SLOT(changeScalePixelPerMm(const QString)));
-    connect(m_btnRefresh,&QPushButton::pressed,this,&GraphicsControlPanel::refresh);
+    connect(m_btnRefresh,&QPushButton::released,this,&GraphicsControlPanel::refresh);
     changeDrawType(m_comboBox.currentIndex());
 
 }

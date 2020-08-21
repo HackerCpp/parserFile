@@ -33,6 +33,8 @@ public:
     void setMainTime(ICurve *time){m_mainTime = time;}
     void setMainDepth(ICurve *depth){m_mainDepth = depth;}
 
+    bool removeCurveOne(ICurve *curve);
+
     uint numberOfVectors();
     QList<ICurve*> *curves();
     QList<ShortCut> *shortCuts();

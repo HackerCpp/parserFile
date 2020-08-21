@@ -20,7 +20,17 @@
 #include <QAbstractItemView>
 #include <QTextBlock>
 #include <QTextCodec>
+#include <PythonQt.h>
+#include "gui/PythonQtScriptingConsole.h"
+#include <Qsci/qsciscintilla.h>
+#include <Qsci/qscilexerpython.h>
 
+#include <QWidget>
+#include <QMainWindow>
+#include <QSplitter>
+#include <QVBoxLayout>
+#include <QTextEdit>
+#include <QCompleter>
 
 
 
@@ -30,15 +40,12 @@ PythonEditor::PythonEditor(PythonQtObjectPtr *pythonContext,QWidget *parent)
     m_textEdit = new QsciScintilla;
     m_textEdit->setFont(f_font);
     m_textEdit->setUtf8(true);
-    //m_textEdit->setText("from LogData.Curves import*");
     m_pythonContext->evalScript("from LogData.Curves import*");
     m_console = new PythonQtScriptingConsole(NULL, *m_pythonContext);
-    //m_outputEditor = new QTextEdit();
 
     m_splitter = new QSplitter(Qt::Vertical,this);
     m_splitter->addWidget(m_textEdit);
     m_splitter->addWidget(m_console);
-    //m_splitter->addWidget(m_outputEditor);
 
     setCentralWidget(m_splitter);
     show();

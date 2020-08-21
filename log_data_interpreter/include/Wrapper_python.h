@@ -1,7 +1,6 @@
 #ifndef WRAPPER_H
 #define WRAPPER_H
 
-
 #include "interpreter_global.h"
 #include "ainterpreterlogdata.h"
 #include "PythonQt.h"
@@ -9,11 +8,7 @@
 #include<PythonQt_QtAll.h>
 #include "gui/PythonQtScriptingConsole.h"
 #include <QMap>
-//class Wrapper_python : public AinterpreterLogData
-//{
-//public:
-//    ICurve* *curve(QString key);
-//};
+
 
 class INTERPRETER_EXPORT WrapperIcurvePython :public QObject{
 Q_OBJECT
@@ -35,9 +30,6 @@ public Q_SLOTS:
      uint sizeOffset(ICurve* o) {return o->sizeOffset();}
      Desc *desc(ICurve* o){return o->desc();}
      QString mnemonic(ICurve* o){return o->mnemonic();}
-    // QMap<QString,ICurve*> *m_curves_p;
-
-
 };
 
 

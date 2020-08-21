@@ -21,13 +21,6 @@ void SpectrScene::mousePressEvent(QGraphicsSceneMouseEvent *event){
         m_lineItem->setLine(0,event->scenePos().y(),width() - 10,event->scenePos().y());
         m_textItem->setPos(event->scenePos().x(),event->scenePos().y() - 40);
         QList<QGraphicsItem*> f_items = items();
-        foreach(auto item,f_items){
-            GraphicItemForSpectr * f_itemForSpectr = dynamic_cast<GraphicItemForSpectr *>(item);
-            if(f_itemForSpectr){
-
-                f_itemForSpectr->changePositionOneWave(QPoint(event->scenePos().x(),event->scenePos().y()));
-            }
-        }
         SpectrViewer *f_viewer = dynamic_cast<SpectrViewer *>(views().first());
         if(f_viewer){
             QPair<QString,qreal> f_mainVAlue = f_viewer->experimentalSpectr()->mainValueFromScene(event->scenePos());
@@ -57,12 +50,6 @@ void SpectrScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
         m_textItem->setPlainText(QString::number(event->scenePos().y()));
 
         QList<QGraphicsItem*> f_items = items();
-        foreach(auto item,f_items){
-            GraphicItemForSpectr * f_itemForSpectr = dynamic_cast<GraphicItemForSpectr *>(item);
-            if(f_itemForSpectr){
-                f_itemForSpectr->changePositionOneWave(QPoint(event->scenePos().x(),event->scenePos().y()));
-            }
-        }
         SpectrViewer *f_viewer = dynamic_cast<SpectrViewer *>(views().first());
         if(f_viewer){
             QPair<QString,qreal> f_mainVAlue = f_viewer->experimentalSpectr()->mainValueFromScene(event->scenePos());

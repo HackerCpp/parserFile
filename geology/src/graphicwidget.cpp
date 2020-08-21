@@ -9,8 +9,6 @@ GraphicWidget::GraphicWidget(QWidget *parent)
 
     m_tabWidget = new QTabWidget(this);
 
-
-    //m_mainVLayout->addStretch(1);
     m_drawSettings = new DrawSettings;
     m_controlPanel = new GraphicsControlPanel(m_drawSettings->curentFormatTime(),m_drawSettings->curentFormatDepth(),
                                               m_drawSettings->curentPictureHeight(),m_drawSettings->formatPicture(),
@@ -27,13 +25,14 @@ GraphicWidget::GraphicWidget(QWidget *parent)
     connect(m_controlPanel,&GraphicsControlPanel::changedScalePixelPerMm,this,&GraphicWidget::changedScalePixelPerMm);
 
     connect(m_tabWidget,&QTabWidget::currentChanged,this,&GraphicWidget::tabChanged);
+    connect(m_controlPanel,&GraphicsControlPanel::refresh,this,&GraphicWidget::refresh);
 
 }
 
 void GraphicWidget::addLogData(QSharedPointer<ILogData> logData){
     GraphicEditor *f_graphicEditor = new GraphicEditor(logData,m_drawSettings);
     m_tabWidget->addTab(f_graphicEditor,logData->name());
-    connect(m_controlPanel,&GraphicsControlPanel::refresh,f_graphicEditor,&GraphicEditor::refresh);
+    //connect(m_controlPanel,&GraphicsControlPanel::refresh,f_graphicEditor,&GraphicEditor::refresh);
     m_tabWidget->setCurrentWidget(f_graphicEditor);
 }
 
@@ -82,4 +81,9 @@ void GraphicWidget::changedPictureFormat(QImage::Format format){
 void GraphicWidget::changedScalePixelPerMm(qreal scalePixelPerMm){
     m_drawSettings->setScalePixelPerMm(scalePixelPerMm);
     settingsHaveChanged();
+}
+void GraphicWidget::refresh(){
+    if(!m_curentEditor)
+        return;
+    m_curentEditor->refresh();
 }

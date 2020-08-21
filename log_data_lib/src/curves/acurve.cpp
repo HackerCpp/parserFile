@@ -6,7 +6,11 @@
 ACurve::ACurve(){
     m_time = m_depth = m_userValue = nullptr;
     m_recordPoint = qQNaN();
-    //m_offset = 1;
+    // if m_scale = 1 and m_offset = 0 use ACurve::rawData
+    // else use ACurve::recalculatedData
+    m_scale = 1;
+    m_offset = 0;
+    dataCountingFunction = &ACurve::rawData;
 }
 
 ACurve::~ACurve(){
@@ -50,11 +54,11 @@ uint ACurve::size(){
 }
 
 qreal ACurve::maximum(){
-    return m_maximum;
+    return (this->*dataCountingFunction)(m_maximum);
 }
 
 qreal ACurve::minimum(){
-    return m_minimum;
+    return (this->*dataCountingFunction)(m_minimum);
 }
 
 Desc *ACurve::desc(){
@@ -76,9 +80,22 @@ void ACurve::setShortCut(ShortCut shortCut){
     m_shortCut.setRef(shortCut.ref());
 }
 
-/*void ACurve::setOffset(uint offset){
+void ACurve::checkingTheDataFunction(){
+    if(m_scale < 1.000001 && m_scale > 0.99999 && m_offset < 0.000001 && m_offset > -0.000001)
+        dataCountingFunction = &ACurve::rawData;
+    else
+        dataCountingFunction = &ACurve::recalculatedData;
+}
+
+void ACurve::setOffset(qreal offset){
     m_offset = offset;
-}*/
+    checkingTheDataFunction();
+}
+
+void ACurve::setScale(qreal scale){
+    m_scale = scale;
+    checkingTheDataFunction();
+}
 
 void ACurve::setSizeOffset(uint sizeOffset){
     m_sizeOffsetInByte = sizeOffset;

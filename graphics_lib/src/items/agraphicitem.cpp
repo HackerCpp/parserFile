@@ -25,7 +25,7 @@ AGraphicItem::AGraphicItem(CustomObject *drawObject,BoardForTrack *board)
 AGraphicItem::AGraphicItem(const AGraphicItem &other){
     if(&other == this)
         return;
-    m_itemInfo = nullptr;
+    m_itemInfo = other.m_itemInfo;
     m_curve = ICurve::curveCreater(*other.m_curve);
     m_board = other.m_board;
     m_isActive = other.m_isActive;
@@ -42,23 +42,20 @@ void AGraphicItem::updateParam(int pictureWidth){
         return;
     m_recordPointDepth = m_curve->recordPoint();
     m_currentMainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
-    m_currentRecordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
+    m_currentRecordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth);
     m_currentRecordPoint = qIsNaN(m_currentRecordPoint) ? 0 : m_currentRecordPoint;
     m_currentScaleMainValue = m_board->scale();
 }
 
 qreal AGraphicItem::topValue(){
     ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() : m_curve->depth();
-    qreal f_recordPoint = m_board->isDrawTime() ? 0 : (qIsNaN(m_curve->recordPoint()) ? 0 : m_curve->recordPoint()) * 1000;
-    //qDebug() << m_curve->mnemonic() << (f_mainValue->minimum() + f_recordPoint) * m_board->scale();
-    //qDebug() << f_mainValue->minimum() << f_recordPoint << (f_mainValue->minimum() + f_recordPoint) * m_board->scale() << m_curve->mnemonic();
+    qreal f_recordPoint = m_board->isDrawTime() ? 0 : (qIsNaN(m_curve->recordPoint()) ? 0 : m_curve->recordPoint());
     return (f_mainValue->minimum() + f_recordPoint) * m_board->scale();
 }
 
 qreal AGraphicItem::bottomValue(){
     ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() : m_curve->depth();
-    qreal f_recordPoint =  m_board->isDrawTime() ? 0 : (qIsNaN(m_curve->recordPoint()) ? 0 : m_curve->recordPoint()) * 1000;
-    //qDebug() << f_mainValue->maximum() << f_recordPoint << (f_mainValue->maximum() + f_recordPoint) * m_board->scale() << m_curve->mnemonic();
+    qreal f_recordPoint =  m_board->isDrawTime() ? 0 : (qIsNaN(m_curve->recordPoint()) ? 0 : m_curve->recordPoint());
     return (f_mainValue->maximum() + f_recordPoint) * m_board->scale();
 }
 

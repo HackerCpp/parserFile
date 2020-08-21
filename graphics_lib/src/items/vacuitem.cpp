@@ -30,6 +30,22 @@ VAcuItem::VAcuItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
     m_updatedParam = true;
 }
 
+VAcuItem::VAcuItem(const VAcuItem &other)
+    :TwoDimensionalArrayItem(other){
+    m_dataStepPix = other.m_dataStepPix;
+    m_offsetPix = other.m_offsetPix;
+    m_dataStep = other.m_dataStep;
+    m_dataBegin = other.m_dataBegin;
+    m_widthPicturePix = other.m_widthPicturePix;
+    AcuItem *f_acuItemInfo = dynamic_cast<AcuItem *>(other.m_itemInfo);
+    if(f_acuItemInfo)
+        m_itemInfo = new AcuItem(*f_acuItemInfo);
+    else{
+        qDebug() << "VAcuItem::VAcuItem copy constructor VAcuItem AcuItem info not found";
+        m_itemInfo = nullptr;
+    }
+}
+
 VAcuItem::~VAcuItem(){
     if(isRunning()){
         m_isRedraw = false;
@@ -238,7 +254,6 @@ void inline VAcuItem::drawPointsTwoColorsNoOffset(QPainter *per,int y_top,int y_
                 return;
             if(m_curve->data(i * m_curve->sizeOffset() + j) > 0){
                 per->drawLine(f_currentX - (m_dataStepPix / 2),mainValue(i) - f_yTop,f_currentX + (m_dataStepPix / 2),mainValue(i) - f_yTop);
-                //per->drawPoint(f_currentX,mainValue(i) - f_yTop);
             }
             f_currentX += f_step;
         }
@@ -330,61 +345,6 @@ void VAcuItem::loadDrawingParam(int width){
 }
 
 
-/*void VAcuItem::run(){
-    m_updatedParam = true;
-
-    AcuItem* f_acuItem = dynamic_cast<AcuItem*>(m_itemInfo);
-    if(!f_acuItem){
-        qDebug() << "Не удалось преобразовать AItem in AcuItem";
-        return;
-    }
-    void(VAcuItem::*pDrawingFunction)(QPainter *,int ,int ,bool *);
-    if(!f_acuItem->showMode()){
-        pDrawingFunction = &VAcuItem::drawPointsTwoColorsNoOffset;
-    }
-    else if(f_acuItem->showMode() == 1){
-        pDrawingFunction = &VAcuItem::drawInterpolationHorizontalNoOffset;
-    }
-    else if(f_acuItem->showMode() == 2){
-        pDrawingFunction = &VAcuItem::drawWaveNoOffset;
-    }
-
-    foreach(auto path,m_picturePath){
-        if(!QFile::exists(path) )
-            continue;
-        QFile(path).remove();
-    }
-    m_picturePath.clear();
-    if(m_curentPictureWidth < 10)
-        return;
-    ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
-    qreal f_recordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
-    qreal f_scaleForMainValue = m_board->scale();
-    qreal f_top = (f_mainValue->minimum() + f_recordPoint) * f_scaleForMainValue;
-    qreal f_bottom = (f_mainValue->maximum() + f_recordPoint) * f_scaleForMainValue;
-    int f_heightPictures = M_HEIGHT_PICTURE;
-
-    m_board->customUpdate();
-    qreal f_onePersent = 100 / ((f_bottom + 1000) - (f_top - 1000));
-    for(int y_top = f_top - 1000; y_top < f_bottom + 1000; y_top += (f_heightPictures - 1000)){
-        if(m_isEndThread)
-            return;
-        m_curentDrawPersent = (y_top - (f_top - 1000)) * f_onePersent;
-        QImage f_image(m_curentPictureWidth,f_heightPictures,QImage::Format_ARGB32);
-        QPainter f_painter(&f_image);
-        (this->*pDrawingFunction)(&f_painter,y_top,y_top + f_heightPictures,&m_isEndThread);
-        m_saversMoment = true;
-        QString f_namePicture = "temporary/" + m_uid + QString::number(y_top) + ".png";
-        f_image.save(f_namePicture,"PNG");
-        while(!QFile::exists(f_namePicture)){}
-        m_picturePath << f_namePicture;
-        m_saversMoment = false;
-    }
-    m_curentDrawPersent = 100;
-    m_updatedParam = false;
-    m_board->customUpdate();
-}*/
-
 void VAcuItem::selectOptions(){
     AcuItem* f_acuItem = dynamic_cast<AcuItem*>(m_itemInfo);
     if(!f_acuItem){
@@ -422,7 +382,7 @@ void VAcuItem::updateParam(int pictureWidth){
     loadDrawingParam(m_curentPictureWidth);
     m_recordPointDepth = m_curve->recordPoint();
     m_currentMainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
-    m_currentRecordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
+    m_currentRecordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth);
     m_currentRecordPoint = qIsNaN(m_currentRecordPoint) ? 0 : m_currentRecordPoint;
     m_currentScaleMainValue = m_board->scale();
     drawOnTheDisk();
@@ -436,7 +396,7 @@ void VAcuItem::updateParam(){
     loadDrawingParam(m_curentPictureWidth);
     m_recordPointDepth = m_curve->recordPoint();
     m_currentMainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
-    m_currentRecordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
+    m_currentRecordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth);
     m_currentRecordPoint = qIsNaN(m_currentRecordPoint) ? 0 : m_currentRecordPoint;
     m_currentScaleMainValue = m_board->scale();
     drawOnTheDisk();

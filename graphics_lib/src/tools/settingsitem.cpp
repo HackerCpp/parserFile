@@ -285,8 +285,8 @@ SettingsSpectrItem::SettingsSpectrItem(AGraphicItem *spectrItem,SelectingArea *s
 
     uint showMode = m_specItemInfo->showMode();
     switch(showMode){
-        case 0 : m_radioMulticolor->setChecked(true); break;
-        case 1 : m_radioWave->setChecked(true); break;
+        case 1 : m_radioMulticolor->setChecked(true); break;
+        case 0 : m_radioWave->setChecked(true); break;
     }
 
     m_mainVLout->addWidget(m_selectingDrawingModeGroup);
@@ -300,9 +300,9 @@ SettingsSpectrItem::~SettingsSpectrItem(){
 void SettingsSpectrItem::applySpecificSettings(){
     uint showMode = 0;
     if(m_radioMulticolor->isChecked())
-        showMode = 0;
-    else if(m_radioWave->isChecked())
         showMode = 1;
+    else if(m_radioWave->isChecked())
+        showMode = 0;
     m_specItemInfo->setShowMode(showMode);
     if(m_multicolorSelection)
         m_multicolorSelection->apply();

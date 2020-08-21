@@ -22,12 +22,12 @@ public:
     QList<QPointF> oneWave(int position,bool *flag);
     bool isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per)override;
     void loadDrawingParam(int width) override;
-    //void run()override;
     void selectOptions()override;
 
     void drawOnTheDisk()override;
 
     VAcuItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board);
+    VAcuItem(const VAcuItem &other);
     ~VAcuItem()override;
 
     qreal dataStep(){return m_dataStep;}

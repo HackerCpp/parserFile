@@ -393,11 +393,11 @@ void VSpectrItem::selectOptions(){
         return;
     }
     if(!f_spectrItemInfo->showMode()){
-        pDrawingFunction = &TwoDimensionalArrayItem::drawInterpolationVerticalNoOffset;
+        pDrawingFunction = &TwoDimensionalArrayItem::drawWaveNoOffset;
 
     }
     else if(f_spectrItemInfo->showMode() == 1){
-        pDrawingFunction = &TwoDimensionalArrayItem::drawWaveNoOffset;
+        pDrawingFunction = &TwoDimensionalArrayItem::drawInterpolationVerticalNoOffset;
     }
     else
         pDrawingFunction = nullptr;
@@ -421,7 +421,7 @@ void VSpectrItem::updateParam(int pictureWidth){
     loadDrawingParam(m_curentPictureWidth);
     m_recordPointDepth = m_curve->recordPoint();
     m_currentMainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
-    m_currentRecordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
+    m_currentRecordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth);
     m_currentRecordPoint = qIsNaN(m_currentRecordPoint) ? 0 : m_currentRecordPoint;
     m_currentScaleMainValue = m_board->scale();
     drawOnTheDisk();
@@ -434,7 +434,7 @@ void VSpectrItem::updateParam(){
     loadDrawingParam(m_curentPictureWidth);
     m_recordPointDepth = m_curve->recordPoint();
     m_currentMainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
-    m_currentRecordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
+    m_currentRecordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth);
     m_currentRecordPoint = qIsNaN(m_currentRecordPoint) ? 0 : m_currentRecordPoint;
     m_currentScaleMainValue = m_board->scale();
     drawOnTheDisk();

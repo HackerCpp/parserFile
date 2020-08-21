@@ -12,11 +12,13 @@ public:
     ICurve();
     virtual ~ICurve();
 
-    virtual qreal data(uint index);
+    virtual inline qreal data(uint index);
     virtual QByteArray data();
     virtual void setData(qreal data);
     virtual void setData(qreal data,uint index);
     virtual void setData(const char *dataPtr,uint numberOfVectors);
+    virtual void setOffset(qreal offset){Q_UNUSED(offset)}
+    virtual void setScale(qreal scale){Q_UNUSED(scale)}
     virtual void setDesc(Desc *desc){Q_UNUSED(desc)}
     virtual void setShortCut(ShortCut shortCut){Q_UNUSED(shortCut)}
     virtual void setMnemonic(QString mnemonic){Q_UNUSED(mnemonic)}

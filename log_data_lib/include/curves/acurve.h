@@ -20,15 +20,16 @@ protected:
     QString m_mnemonic;
     QString m_dataType;
     qreal m_recordPoint;
-    //qreal m_positiveOffset;
-    //uint m_offset;
-    qreal m_scale;
+    qreal m_scale,m_offset; // data * m_scale + m_offset
+    qreal (ACurve::*dataCountingFunction)(qreal data);
 public:
 
     ACurve();
     virtual ~ACurve()override;
 
-    virtual qreal data(uint index)override{Q_UNUSED(index)return 0;}
+    virtual inline qreal data(uint index)override{Q_UNUSED(index) return 0;}
+    virtual inline qreal rawData(qreal data){Q_UNUSED(data) return 0;}
+    virtual inline qreal recalculatedData(qreal data){Q_UNUSED(data) return 0;}
     virtual QByteArray data()override{return 0;}
     virtual void setData(qreal data)override{Q_UNUSED(data)}
     virtual void setData(qreal data,uint index)override{Q_UNUSED(data)Q_UNUSED(index)}
@@ -56,10 +57,12 @@ public:
 
     virtual Desc *desc()override;
     virtual ShortCut shortCut()override;
+    void checkingTheDataFunction();
+    void setOffset(qreal offset)override;
+    void setScale(qreal scale)override;
     virtual QString mnemonic()override;
 
     virtual void setShortCut(ShortCut shortCut)override;
-    /*virtual void setOffset(uint offset);*/
     virtual void setSizeOffset(uint sizeOffset);
     virtual void setMnemonic(QString mnemonic)override;
     virtual void setDataType(QString dataType);
@@ -67,11 +70,6 @@ public:
     virtual void setDesc(Desc *desc)override;
 
     virtual QString dataType();
-
-    //virtual uint offset();
-
-
-
 
 };
 

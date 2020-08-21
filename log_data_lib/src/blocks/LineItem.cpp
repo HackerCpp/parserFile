@@ -11,6 +11,15 @@ LineItem::LineItem()
     m_isDashes = false;
 }
 
+LineItem::LineItem(const LineItem &other)
+    : AItem(other){
+    m_type = LINE;
+    m_color = other.m_color;
+    m_widthLine = other.m_widthLine;
+    m_isDashes = other.m_isDashes;
+    m_paintMode = other.m_paintMode;
+}
+
 LineItem::~LineItem()
 {
 

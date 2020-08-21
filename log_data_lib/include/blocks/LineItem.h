@@ -13,6 +13,7 @@ QString m_paintMode;
 public:
 
 LineItem();
+LineItem(const LineItem &other);
 ~LineItem();
 
 void setColor(QString color, bool isDashes);

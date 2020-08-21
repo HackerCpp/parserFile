@@ -3,16 +3,13 @@
 
 #include "interpreter_global.h"
 #include "ainterpreterlogdata.h"
-#include "PythonQt.h"
-#include <QApplication>
-#include<PythonQt_QtAll.h>
-#include "gui/PythonQtScriptingConsole.h"
-#include "pythoneditor.h"
-#include <QWidget>
 
+class PythonEditor;
+class PythonQtObjectPtr;
+class PythonQtScriptingConsole;
 
 class INTERPRETER_EXPORT InterpreterPython : public AinterpreterLogData{
-    PythonQtObjectPtr  m_mainContext;
+    PythonQtObjectPtr *m_mainContext;
     PythonQtScriptingConsole *m_console;
     PythonEditor *m_pythonEditor;
     void init();

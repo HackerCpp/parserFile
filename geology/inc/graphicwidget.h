@@ -33,6 +33,7 @@ public slots:
     void changedPictureHeight(DrawSettings::LengthPicture format);
     void changedPictureFormat(QImage::Format format);
     void changedScalePixelPerMm(qreal scalePixelPerMm);
+    void refresh();
 };
 
 #endif // GRAPHICWIDGET_H

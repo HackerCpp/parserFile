@@ -13,6 +13,19 @@ VLineItem::VLineItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
 
 }
 
+VLineItem::VLineItem(const VLineItem &other)
+    :VerticalItem(other){
+    m_scale = other.m_scale;
+    m_offsetPix = other.m_offsetPix;
+    LineItem *f_linetemInfo = dynamic_cast<LineItem *>(other.m_itemInfo);
+    if(f_linetemInfo)
+        m_itemInfo = new LineItem(*f_linetemInfo);
+    else{
+        qDebug() << "VAcuItem::VAcuItem copy constructor VAcuItem AcuItem info not found";
+        m_itemInfo = nullptr;
+    }
+}
+
 VLineItem::Transition VLineItem::amountSaturation(uint curentIndex,int width){
     if(width && curentIndex < static_cast<uint>(m_curve->size()) && curentIndex > 0){
         qreal f_cur = ((m_curve->data(curentIndex) * m_scale) + m_offsetPix) / width;
@@ -212,7 +225,7 @@ void VLineItem::updateParam(int pictureWidth){
     loadDrawingParam(pictureWidth);
     m_recordPointDepth = m_curve->recordPoint();
     m_currentMainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
-    m_currentRecordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth) * 1000;
+    m_currentRecordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth);
     m_currentRecordPoint = qIsNaN(m_currentRecordPoint) ? 0 : m_currentRecordPoint;
     m_currentScaleMainValue = m_board->scale();
 }

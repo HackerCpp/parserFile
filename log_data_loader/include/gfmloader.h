@@ -18,8 +18,9 @@ class LOADER_EXPORT GFMLoader : public ALoaderLogData, public QThread{
     QString m_path;
     QTextCodec *m_codec;
 
-    bool gzipCompress(QByteArray input, QByteArray &output, int level);
     bool gzipDecompress(QByteArray input, QByteArray &output);
+
+    void mergeIdenticalBlocks();
 
 public:
     GFMLoader(QString path);
@@ -36,10 +37,7 @@ public:
     void findShortCuts(QByteArray *header,DataBlock *dataBlock);
     void findCurves(QByteArray *header,DataBlock * dataBlock,QByteArray bodyBlock,int indexBeginData);
     void findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *curve,QByteArray bodyBlock,int indexBeginData);
-    //void copyData(QByteArray bodyBlock,int indexBeginData,DataBlock * dataBlock);
     void parserHeaderBlock(const QByteArray &bodyBlock,IBlock *block);
-
-
 
 };
 
