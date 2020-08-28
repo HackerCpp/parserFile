@@ -1,7 +1,7 @@
 #ifndef TABINTERPRETATIONS_H
 #define TABINTERPRETATIONS_H
 
-#include "basesettingswindow.h"
+//#include "basesettingswindow.h"
 #include <QDir>
 #include <QAbstractListModel>
 
@@ -33,7 +33,7 @@ public:
     QString getActiveFilePath();
 };
 /*********************************************************************************************************/
-class TabInterpretations : public BaseSettingsWindow
+/*class TabInterpretations : public BaseSettingsWindow
 {
     bool m_isClose;
     bool m_isApply;
@@ -47,6 +47,6 @@ public:
 public slots:
     void cansel()override;
     void apply()override;
-};
+};*/
 
 #endif // TABINTERPRETATIONS_H

@@ -17,7 +17,6 @@ GraphicEditor::GraphicEditor(QSharedPointer<ILogData> logData,DrawSettings *draw
 void GraphicEditor::addCurves(){
     if(!m_curves)
         return;
-
     foreach(auto block,*m_logData->blocks()){
          if(block->name() == IBlock::DATA_BLOCK){
            DataBlock *f_dataBlock = dynamic_cast<DataBlock*>(block);
@@ -149,10 +148,10 @@ void GraphicEditor::refresh(){
 
     //qDebug() << "all deleted";
     f_progressBar.setText(tr("added"));
-    addCurves();
+    //addCurves();
     f_progressBar.setValue(75);
     //qDebug() << "curves added";
-    addForms();
+    //addForms();
     //qDebug() << "forms added";
     f_progressBar.setValue(100);
 }

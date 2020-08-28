@@ -31,10 +31,10 @@ public:
 protected:
     virtual void selectOptions(){pDrawingFunction = nullptr;}
 public:
-    virtual void inline drawInterpolationHorizontalNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag){Q_UNUSED(per) Q_UNUSED(y_top) Q_UNUSED(y_bottom) Q_UNUSED(flag)}
-    virtual void inline drawInterpolationVerticalNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag){Q_UNUSED(per) Q_UNUSED(y_top) Q_UNUSED(y_bottom) Q_UNUSED(flag)}
-    virtual void inline drawPointsTwoColorsNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag){Q_UNUSED(per) Q_UNUSED(y_top) Q_UNUSED(y_bottom) Q_UNUSED(flag)}
-    virtual void inline drawWaveNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag){Q_UNUSED(per) Q_UNUSED(y_top) Q_UNUSED(y_bottom) Q_UNUSED(flag)}
+    virtual void drawInterpolationHorizontalNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag){Q_UNUSED(per) Q_UNUSED(y_top) Q_UNUSED(y_bottom) Q_UNUSED(flag)}
+    virtual void drawInterpolationVerticalNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag){Q_UNUSED(per) Q_UNUSED(y_top) Q_UNUSED(y_bottom) Q_UNUSED(flag)}
+    virtual void drawPointsTwoColorsNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag){Q_UNUSED(per) Q_UNUSED(y_top) Q_UNUSED(y_bottom) Q_UNUSED(flag)}
+    virtual void drawWaveNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag){Q_UNUSED(per) Q_UNUSED(y_top) Q_UNUSED(y_bottom) Q_UNUSED(flag)}
     // index_x ,index_y
     QPoint indexesFromScenePoint(QPointF point);
 

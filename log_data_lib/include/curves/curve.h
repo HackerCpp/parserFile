@@ -17,10 +17,10 @@ public:
      Curve(const Curve<T> &curve);
     ~Curve()override{}
 
-     virtual inline qreal rawData(qreal data);
-     virtual inline qreal recalculatedData(qreal data);
-     virtual inline qreal data(uint index)override;
-     QByteArray data() override;
+     virtual qreal rawData(qreal data);
+     virtual qreal recalculatedData(qreal data);
+     virtual qreal data(uint index)override;
+     //QByteArray data() override;
      void setData(const char *dataPtr,uint numberOfVectors)override;
      void setData(qreal data,uint index)override;
 
@@ -88,11 +88,11 @@ template<typename T> qreal Curve<T>::recalculatedData(qreal data){
     return data * m_scale + m_offset;
 }
 
-template<typename T> QByteArray Curve<T>::data(){
+/*template<typename T> QByteArray Curve<T>::data(){
     if(m_data)
         return QByteArray((const char*)m_data->data(),static_cast<int>(m_sizeOfType)*m_data->size());
     return QByteArray();
-}
+}*/
 
 template<typename T> qreal Curve<T>::data(uint index){
     if(index >= static_cast<uint>(m_data->size())){

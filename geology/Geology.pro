@@ -2,8 +2,6 @@ QT       += core gui widgets
 
 win32:RC_ICONS += $$PWD/ico/icon.ico
 
-CONFIG += c++11
-
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -14,24 +12,26 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECARTED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
-INCLUDEPATH += inc\
-               ../log_data_lib/include/logData \
-               ../log_data_lib/include/blocks \
-               ../log_data_lib/include/curves \
-               ../log_data_lib/include/externalComponents \
-               ../log_data_lib/include/customObject \
-               ../log_data_loader/include \
-                ../log_data_saver/inc \
+INCLUDEPATH += inc
+               #../log_data_lib/include/logData \
+               #../log_data_lib/include/blocks \
+               #../log_data_lib/include/curves \
+               #../log_data_lib/include/externalComponents \
+               #../log_data_lib/include/customObject \
+               #../log_data_loader/include \
+               #../log_data_saver/inc \
                 #../log_data_interpreter/include \
-                ../geometrologyDB
+                #../geometrologyDB
 
-LIBS += \
-../build/release/LogData.lib \
+#LIBS += \
+#../build/release/LogData.lib \
 #../build/release/LogDataInterpreter.lib \
-../build/release/LogDataLoader.lib \
-../build/release/LogDataSaver.lib \
-../build/release/geometrologyDB.lib
+#../build/release/LogDataLoader.lib \
+#../build/release/LogDataSaver.lib \
+#../build/release/geometrologyDB.lib
 
+include(../log_data_lib/LogData.pro)
+include(../log_data_loader/LogDataLoader.pro)
 include(../graphics_lib/graphics.pri)
 
 

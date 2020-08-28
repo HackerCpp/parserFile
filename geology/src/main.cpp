@@ -3,7 +3,6 @@
 #include <QApplication>
 #include <QDir>
 #include <QMessageBox>
-#include "onewavewidget.h"
 #include <QtQuick/QQuickView>
 
 

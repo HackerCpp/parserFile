@@ -1,6 +1,6 @@
 #include "logdataview.h"
 #include "formsblock.h"
-#include "graphiceditor.h"
+//#include "graphiceditor.h"
 
 LogDataView::LogDataView(QWidget *parent) : QWidget(parent)
 {

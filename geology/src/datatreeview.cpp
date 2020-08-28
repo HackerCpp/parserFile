@@ -8,7 +8,8 @@
 #include "datamodel.h"
 #include <QPainter>
 #include "aboard.h"
-#include "gfmsaver.h"
+#include "formsblock.h"
+//#include "gfmsaver.h"
 
 
 DataTreeView::DataTreeView(QWidget *parent)
@@ -217,9 +218,9 @@ void DataTreeView::newCurve(){
     DataBlock *f_dataBlock = dynamic_cast<DataBlock *>(m_curentBlock);
     if(!f_dataBlock)
         return;
-    NewCurveTab *f_newCurveTab = new NewCurveTab(f_dataBlock);
-    f_newCurveTab->move(QCursor::pos());
-    f_newCurveTab->show();
+    //NewCurveTab *f_newCurveTab = new NewCurveTab(f_dataBlock);
+    //f_newCurveTab->move(QCursor::pos());
+    //f_newCurveTab->show();
 }
 
 void DataTreeView::deleteDataBlock(){
@@ -234,8 +235,8 @@ void DataTreeView::deleteDataBlock(){
 void DataTreeView::saveGFM(){
     if(!m_curentLogData)
         return;
-    ISaverLogData * gfmSaver = new GFMSaver();
-    m_curentLogData->setSaver(gfmSaver);
+    //ISaverLogData * gfmSaver = new GFMSaver();
+    //m_curentLogData->setSaver(gfmSaver);
     m_curentLogData->save();
 }
 

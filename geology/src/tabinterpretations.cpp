@@ -2,7 +2,7 @@
 #include <QTableWidget>
 #include <QTableWidgetItem>
 #include <QLibrary>
-#include "customdelegates.h"
+//#include "customdelegates.h"
 #include <QButtonGroup>
 #include <QCheckBox>
 #include <QDebug>
@@ -118,7 +118,7 @@ QString ModelForTabInterpretation::getActiveFilePath(){
 }
 /***********************************************************************************************/
 
-QString TabInterpretations::getAbsolutePath(QFileInfoList fileInfolist){
+/*QString TabInterpretations::getAbsolutePath(QFileInfoList fileInfolist){
     show();
     if(m_btnApply)
         m_btnApply->hide();
@@ -165,4 +165,4 @@ void TabInterpretations::cansel(){
 
 void TabInterpretations::apply(){
     m_isApply = m_isClose = true;
-}
+}*/

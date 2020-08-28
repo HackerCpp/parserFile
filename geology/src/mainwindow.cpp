@@ -1,26 +1,27 @@
 #include "mainwindow.h"
 #include <QFileDialog>
 #include "filereader.h"
+#include <QEvent>
 #include "gfmloader.h"
-#include "gfmsaver.h"
+//#include "gfmsaver.h"
 #include "tabinterpretations.h"
-#include "geometrologydb.h"
+//#include "geometrologydb.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
     : WindowForMenu(parent)
 {
-    qputenv("PYTHONPATH",QString(QDir().absolutePath() + "/python3/Lib").toLatin1());
+    //qputenv("PYTHONPATH",QString(QDir().absolutePath() + "/python3/Lib").toLatin1());
 
     m_menu = new Menu(this);
     //m_pythonInterpreter.evalFile(QDir().absolutePath() + "/scripts/mainMenu/mainMenu.py");
-    m_menu->installEventFilter(this);
+
 
     m_mainHorLayout = new QHBoxLayout(this);
 
     m_logDataView = new LogDataView(this);
-    m_logDataView->installEventFilter(this);
-    m_logDataView->hide();
+
+    //m_logDataView->hide();
 
     m_mainHorLayout->addWidget(m_menu,100,Qt::AlignTop);
     m_mainHorLayout->addWidget(m_logDataView);
@@ -28,7 +29,12 @@ MainWindow::MainWindow(QWidget *parent)
     this->setLayout(m_mainHorLayout);
     m_flagHideMenu = false;
     m_settings = new QSettings("settings.ini",QSettings::IniFormat);
+
     QObject::connect(qApp, SIGNAL(aboutToQuit()),this, SLOT(quit()));
+
+    m_menu->installEventFilter(this);
+    m_logDataView->installEventFilter(this);
+    setAcceptDrops(true);
 }
 
 MainWindow::~MainWindow(){
@@ -37,6 +43,8 @@ MainWindow::~MainWindow(){
 }
 
 bool MainWindow::eventFilter(QObject *o, QEvent *e){
+    if(!m_menu || !m_logDataView)
+        return false;
     if(e->type() == QEvent::Enter){
         if(o == m_logDataView){
             if(m_flagHideMenu)
@@ -49,6 +57,21 @@ bool MainWindow::eventFilter(QObject *o, QEvent *e){
         }
     }
     return false;
+}
+
+void MainWindow::dragEnterEvent(QDragEnterEvent *event){
+    QFileDialog fileDialog;
+    QString f_openPath = m_settings->value("paths/pathOpenFile").toString();
+    QString filePath = fileDialog.getOpenFileName(this, tr("Open File"),f_openPath,tr("*.forms *.gfm"));
+}
+void MainWindow::dragMoveEvent(QDragMoveEvent *event){
+
+}
+void MainWindow::dragLeaveEvent(QDragLeaveEvent *event){
+
+}
+void MainWindow::dropEvent(QDropEvent *event){
+
 }
 
 void MainWindow::openFile(){
@@ -82,8 +105,8 @@ void MainWindow::saveGFM(){
     ILogData *f_logData = m_logDataView->curentLogData();
     if(!f_logData)
         return;
-    ISaverLogData * gfmSaver = new GFMSaver();
-    f_logData->setSaver(gfmSaver);
+    //ISaverLogData * gfmSaver = new GFMSaver();
+    //f_logData->setSaver(gfmSaver);
     f_logData->save();
 }
 
@@ -134,19 +157,19 @@ void MainWindow::insertCalibrationInTheScript(){
     if(!f_logData)
         return;
     QFileDialog fileDialog;
-    GeometrologyDB f_geometrologyDB;
-    f_geometrologyDB.setTypeDB(GeometrologyDB::SQLITE);
+    //GeometrologyDB f_geometrologyDB;
+    //f_geometrologyDB.setTypeDB(GeometrologyDB::SQLITE);
     QString f_openPath = m_settings->value("paths/pathOpenDB").toString();
     QString filePath = fileDialog.getOpenFileName(this, tr("Open File"),f_openPath,tr("*.db"));
     if(filePath == "")
         return;
     m_settings->setValue("paths/pathOpenDB",filePath);
-    f_geometrologyDB.setNameDB(filePath);
-    if(f_geometrologyDB.connectDB())
-        qDebug() << "connect";
-    else
+    //f_geometrologyDB.setNameDB(filePath);
+    //if(f_geometrologyDB.connectDB())
+        //qDebug() << "connect";
+   // else
         return;
-    f_geometrologyDB.insertCalibrationDataIntoTheInterpreter(f_logData->interpreter());
+    //f_geometrologyDB.insertCalibrationDataIntoTheInterpreter(f_logData->interpreter());
 }
 
 void MainWindow::openInterpretations(){
@@ -160,17 +183,17 @@ void MainWindow::openInterpretations(){
     foreach(auto file,f_fileList)
         if(file.suffix() != "dll")
             f_fileList.removeOne(file);
-    QString f_path = TabInterpretations().getAbsolutePath(f_fileList);
-    if(f_path == nullptr)
-        return;
-    QLibrary  lib(f_path);
-    lib.load();
+    //QString f_path = TabInterpretations().getAbsolutePath(f_fileList);
+    //if(f_path == nullptr)
+        //return;
+    //QLibrary  lib(f_path);
+    //lib.load();
     typedef ILogData *(*FIlogData)(ILogData *);
-    FIlogData interpr = (FIlogData)(lib.resolve("interpretation"));
-    if(interpr){
-        QSharedPointer<ILogData> f_logData(interpr(f_urentLogdata));
-        m_logDataView->addLogData(f_logData);
-    }
+    //FIlogData interpr = (FIlogData)(lib.resolve("interpretation"));
+    //if(interpr){
+        //QSharedPointer<ILogData> f_logData(interpr(f_urentLogdata));
+        //m_logDataView->addLogData(f_logData);
+    //}
 }
 
 void MainWindow::openConstructor(){

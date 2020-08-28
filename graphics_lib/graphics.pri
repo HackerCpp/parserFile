@@ -1,11 +1,9 @@
 QT += core gui xml charts
-
-CONFIG += c++11
 INCLUDEPATH += $$PWD $$PWD/inc $$PWD/inc/items $$PWD/inc/tools \
-$$PWD/inc/spectrReader $$PWD/inc/drawObjects $$PWD/../QScintilla/Qt4Qt5
+$$PWD/inc/spectrReader $$PWD/inc/drawObjects
 #$$PWD/../log_data_interpreter/include
 
-LIBS += ../build/release/LogData.lib
+#LIBS += ../build/release/LogData.lib
 
 
 SOURCES += \
@@ -124,8 +122,6 @@ HEADERS += \
     $$PWD/inc/ruler.h\
     $$PWD/inc/tools/qxtspanslider.h \
     $$PWD/inc/tools/qxtspanslider_p.h
-
-DISTFILES +=
 
 RESOURCES += \
     $$PWD/grres.qrc

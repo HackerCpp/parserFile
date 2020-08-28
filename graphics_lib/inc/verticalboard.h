@@ -7,8 +7,7 @@
 #include <QGraphicsScene>
 #include "itemslegendview.h"
 
-class VerticalBoard : public AGraphicBoard
-{
+class VerticalBoard : public AGraphicBoard{
     Q_OBJECT
 
     bool m_isDrawTime;

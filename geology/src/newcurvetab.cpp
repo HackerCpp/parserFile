@@ -18,7 +18,7 @@ PairWidget::~PairWidget(){
 
 
 
-NewCurveTab::NewCurveTab(DataBlock *dataBlock)
+/*NewCurveTab::NewCurveTab(DataBlock *dataBlock)
 {
     m_curve = nullptr;
 
@@ -79,4 +79,4 @@ void NewCurveTab::apply(){
     m_curve->setDepth(m_dataBlock->depth());
     m_curve->setMnemonic(m_lineMnemonic->text());
     m_dataBlock->setcurve(m_curve);
-}
+}*/

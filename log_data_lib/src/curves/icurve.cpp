@@ -13,9 +13,6 @@ qreal ICurve::data(uint index){
     Q_UNUSED(index)
     return 0;
 }
-QByteArray ICurve::data(){
-    return QByteArray();
-}
 
 void ICurve::setData(qreal data){
     Q_UNUSED(data)

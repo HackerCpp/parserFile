@@ -1,6 +1,5 @@
 #ifndef IGRAPHICEDITOR_H
 #define IGRAPHICEDITOR_H
-#include "icurve.h"
 #include "formsblock.h"
 #include "logdata.h"
 class IGraphicEditor

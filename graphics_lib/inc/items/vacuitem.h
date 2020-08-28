@@ -9,14 +9,14 @@
 class VAcuItem : public TwoDimensionalArrayItem{
     Q_OBJECT
 
-
+public:
     void inline drawInterpolationHorizontal(QPainter *per,QRectF visibleRect,bool *flag);
-    void inline drawInterpolationHorizontalNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag)override;
-    void inline drawPointsTwoColorsNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag)override;
-    void inline drawWaveNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag)override;
+    void  drawInterpolationHorizontalNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag)override;
+    void  drawPointsTwoColorsNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag)override;
+    void  drawWaveNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag)override;
     void drawInterpolationHorForCheckArea(QPainter *per,QRectF visibleRect,bool *flag);
 
-public:
+
     void updateParam(int pictureWidth)override;
     void updateParam()override;
     QList<QPointF> oneWave(int position,bool *flag);

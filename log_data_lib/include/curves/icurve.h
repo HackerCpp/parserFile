@@ -4,6 +4,7 @@
 
 #include "desc.h"
 #include "shortcut.h"
+#include <QByteArray>
 
 class ICurve : public QObject{
     Q_OBJECT
@@ -12,8 +13,8 @@ public:
     ICurve();
     virtual ~ICurve();
 
-    virtual inline qreal data(uint index);
-    virtual QByteArray data();
+    virtual qreal data(uint index);
+    //virtual QByteArray data(){return QByteArray();}
     virtual void setData(qreal data);
     virtual void setData(qreal data,uint index);
     virtual void setData(const char *dataPtr,uint numberOfVectors);

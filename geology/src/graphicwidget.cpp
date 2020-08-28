@@ -32,7 +32,7 @@ GraphicWidget::GraphicWidget(QWidget *parent)
 void GraphicWidget::addLogData(QSharedPointer<ILogData> logData){
     GraphicEditor *f_graphicEditor = new GraphicEditor(logData,m_drawSettings);
     m_tabWidget->addTab(f_graphicEditor,logData->name());
-    //connect(m_controlPanel,&GraphicsControlPanel::refresh,f_graphicEditor,&GraphicEditor::refresh);
+    connect(m_controlPanel,&GraphicsControlPanel::refresh,f_graphicEditor,&GraphicEditor::refresh);
     m_tabWidget->setCurrentWidget(f_graphicEditor);
 }
 

@@ -1,24 +1,17 @@
-QT -= gui
 
-TEMPLATE = lib
-DEFINES += LOADER_LIBRARY
+INCLUDEPATH += $$PWD/include \
+$$PWD/../log_data_lib/include/externalComponents \
+$$PWD/../log_data_lib/include/blocks \
+$$PWD/../log_data_saver/inc \
+$$PWD/../log_data_lib/include/curves
 
-CONFIG += c++17
-
-INCLUDEPATH += include \
-../log_data_lib/include/externalComponents \
-../log_data_lib/include/blocks \
-../log_data_saver/inc \
-../log_data_lib/include/curves
-
-LIBS += ../build/release/LogData.lib
+#LIBS += ../build/release/LogData.lib
 
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
-DEFINES += QT_DEPRECATED_WARNINGS
 
 # You can also make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -26,13 +19,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    src/addCurve.cpp \
-    src/gfmloader.cpp
+    $$PWD/src/gfmloader.cpp
 
 HEADERS += \
-    include/addCurve.h \
-    include/gfmloader.h \
-    include/loader_global.h
+    $$PWD/include/gfmloader.h \
+    $$PWD/include/loader_global.h
 
 # Default rules for deployment.
 unix {

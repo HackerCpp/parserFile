@@ -27,10 +27,10 @@ public:
     ACurve();
     virtual ~ACurve()override;
 
-    virtual inline qreal data(uint index)override{Q_UNUSED(index) return 0;}
-    virtual inline qreal rawData(qreal data){Q_UNUSED(data) return 0;}
+    virtual  qreal data(uint index)override{Q_UNUSED(index) return 0;}
+    virtual  qreal rawData(qreal data){Q_UNUSED(data) return 0;}
     virtual inline qreal recalculatedData(qreal data){Q_UNUSED(data) return 0;}
-    virtual QByteArray data()override{return 0;}
+    //virtual QByteArray data()override{return 0;}
     virtual void setData(qreal data)override{Q_UNUSED(data)}
     virtual void setData(qreal data,uint index)override{Q_UNUSED(data)Q_UNUSED(index)}
     virtual void setData(const char *dataPtr,uint numberOfVectors)override{Q_UNUSED(dataPtr)Q_UNUSED(numberOfVectors)}

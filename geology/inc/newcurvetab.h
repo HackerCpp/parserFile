@@ -1,7 +1,7 @@
 #ifndef NEWCURVETAB_H
 #define NEWCURVETAB_H
 
-#include "basesettingswindow.h"
+//#include "basesettingswindow.h"
 #include "datablock.h"
 #include <QComboBox>
 #include "curve.h"
@@ -20,7 +20,7 @@ public:
 
 };
 
-class NewCurveTab : public BaseSettingsWindow
+/*class NewCurveTab : public BaseSettingsWindow
 {
     DataBlock *m_dataBlock;
     QComboBox *m_comboDrawType,*m_comboShortCuts;
@@ -35,6 +35,6 @@ public:
     ~NewCurveTab();
 
     void apply();
-};
+};*/
 
 #endif // NEWCURVETAB_H

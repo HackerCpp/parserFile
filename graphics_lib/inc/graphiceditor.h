@@ -7,6 +7,7 @@
 #include "verticalboard.h"
 #include "drawsettings.h"
 #include "customobject.h"
+#include "icurve.h"
 
 class GraphicEditor : public QTabWidget, AGraphicEditor{
     Q_OBJECT
