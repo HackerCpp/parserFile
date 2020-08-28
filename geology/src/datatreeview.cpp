@@ -5,7 +5,6 @@
 #include "icurve.h"
 #include <QDrag>
 #include <QApplication>
-#include "interpreterpython.h"
 #include "datamodel.h"
 #include <QPainter>
 #include "aboard.h"
@@ -244,8 +243,8 @@ void DataTreeView::openPythonConsole(){
     if(!m_curentLogData)
         return;
     if(!m_curentLogData->isInterpreter()){
-        IInterpreterLogData *f_interpreter = dynamic_cast<IInterpreterLogData *>(new InterpreterPython());
-        m_curentLogData->setInterpreter(f_interpreter);
+        //IInterpreterLogData *f_interpreter = dynamic_cast<IInterpreterLogData *>(new InterpreterPython());
+        //m_curentLogData->setInterpreter(f_interpreter);
     }
     m_curentLogData->openInterpreterConsole();
 }
@@ -254,8 +253,8 @@ void DataTreeView::openPythonScript(){
     if(!m_curentLogData)
         return;
     if(!m_curentLogData->isInterpreter()){
-        IInterpreterLogData *f_interpreter = dynamic_cast<IInterpreterLogData *>(new InterpreterPython());
-        m_curentLogData->setInterpreter(f_interpreter);
+        //IInterpreterLogData *f_interpreter = dynamic_cast<IInterpreterLogData *>(new InterpreterPython());
+        //m_curentLogData->setInterpreter(f_interpreter);
     }
     m_curentLogData->openInterpreterScript();
 }
@@ -264,8 +263,8 @@ void DataTreeView::openPythonEditor(){
     if(!m_curentLogData)
         return;
     if(!m_curentLogData->isInterpreter()){
-        IInterpreterLogData *f_interpreter = dynamic_cast<IInterpreterLogData *>(new InterpreterPython());
-        m_curentLogData->setInterpreter(f_interpreter);
+        //IInterpreterLogData *f_interpreter = dynamic_cast<IInterpreterLogData *>(new InterpreterPython());
+        //m_curentLogData->setInterpreter(f_interpreter);
     }
     m_curentLogData->openInterpreterEditor();
 }

@@ -9,8 +9,8 @@
 #include <QDir>
 #include <QGraphicsProxyWidget>
 #include "customprogressbar.h"
-#include "pythoneditor.h"
-#include "interpreterpython.h"
+//#include "pythoneditor.h"
+//#include "interpreterpython.h"
 
 
 
@@ -19,8 +19,8 @@ SpectrReader::SpectrReader(VSpectrItem *spectrItem)
 {
     if(!spectrItem)
         return;
-    m_pythonInterpreter = new InterpreterPython();
-    m_pyEditor = new PythonEditor(m_pythonInterpreter);
+    //m_pythonInterpreter = new InterpreterPython();
+    //m_pyEditor = new PythonEditor(m_pythonInterpreter);
     setAcceptDrops(true);
     m_widht = 100;
     m_vMainLayout = new QVBoxLayout();
@@ -45,15 +45,15 @@ SpectrReader::SpectrReader(VSpectrItem *spectrItem)
         f_curveNameForPython = f_curveNameForPython.remove("-");
         f_curveNameForPython = f_curveNameForPython.remove("/");
         //if(!m_pythonInterpreter->getVariable(f_curveNameForPython).isValid())
-            m_pythonInterpreter->addObject(f_curveNameForPython, value->experimentalCurve());
+            //m_pythonInterpreter->addObject(f_curveNameForPython, value->experimentalCurve());
     }
 
     m_toolBar = new QToolBar();
     m_comboFilters = new QComboBox();
-    m_pythonInterpreter->addObject("comboFilter",m_comboFilters);
+    /*m_pythonInterpreter->addObject("comboFilter",m_comboFilters);
     m_pythonInterpreter->executeScriptFromFile("scripts/spectrReader/menu.py");
     m_pyEditor->setWindowFlags(Qt::Window | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint | Qt::CustomizeWindowHint);
-    m_pyEditor->show();
+    m_pyEditor->show();*/
     m_btnAddFilter = new QPushButton("add");
     m_toolBar->addWidget(m_sliderWidth);
     m_toolBar->addWidget(m_comboFilters);
@@ -93,7 +93,7 @@ SpectrReader::SpectrReader(VSpectrItem *spectrItem)
     connect(m_btnAddFilter, &QPushButton::pressed, this, &SpectrReader::insertFilter);
     connect(m_btnApplyFilters, &QPushButton::released, this, &SpectrReader::applyAllFilters);
     connect(m_btnRollBack, &QPushButton::released, this, &SpectrReader::rollBackFilters);
-    connect(m_pyEditor,&PythonEditor::scriptExecuted,this,&SpectrReader::allUpdate);
+    //connect(m_pyEditor,&PythonEditor::scriptExecuted,this,&SpectrReader::allUpdate);
 
     //соединяем сигнал клика мышки по сцене со слотом,
     //для перерисовки виджета графиков одной волны
@@ -198,7 +198,7 @@ void SpectrReader::dropEvent(QDropEvent *event){
         f_curveNameForPython = f_curveNameForPython.remove("-");
         f_curveNameForPython = f_curveNameForPython.remove("/");
         //if(!m_pythonInterpreter.getVariable(f_curveNameForPython).isValid())
-            m_pythonInterpreter->addObject(f_curveNameForPython, m_listSpectrViewer->last()->experimentalCurve());
+            //m_pythonInterpreter->addObject(f_curveNameForPython, m_listSpectrViewer->last()->experimentalCurve());
     }
 }
 
@@ -241,7 +241,7 @@ void SpectrReader::applyAllFilters(){
             f_experCurve->setData(f_originalCurve->data(i),i);
         }
 
-        m_pythonInterpreter->addObject("curve",f_experCurve);
+        //m_pythonInterpreter->addObject("curve",f_experCurve);
         QVector<FilterInfo > *f_listFilters = m_filterListModel->filters();
         if(!f_listFilters)
             return;
@@ -251,14 +251,14 @@ void SpectrReader::applyAllFilters(){
             f_progressBar.setText(f_experCurve->mnemonic() + " " + tr("download") + " " + value.name);
             QString f_path = "scripts/spectrReader/" + value.path;
             if(QDir().exists(f_path)){
-                m_pythonInterpreter->addVariable("param1",value.param1);
-                m_pythonInterpreter->addVariable("param2",value.param2);
-                m_pythonInterpreter->addVariable("param3",value.param3);
-                m_pythonInterpreter->addVariable("left",value.left);
-                m_pythonInterpreter->addVariable("right",value.right);
-                m_pythonInterpreter->addVariable("up",value.up);
-                m_pythonInterpreter->addVariable("down",value.down);
-                m_pythonInterpreter->executeScriptFromFile(f_path);
+                //m_pythonInterpreter->addVariable("param1",value.param1);
+                //m_pythonInterpreter->addVariable("param2",value.param2);
+                //m_pythonInterpreter->addVariable("param3",value.param3);
+                //m_pythonInterpreter->addVariable("left",value.left);
+                //m_pythonInterpreter->addVariable("right",value.right);
+                //m_pythonInterpreter->addVariable("up",value.up);
+                //m_pythonInterpreter->addVariable("down",value.down);
+                //m_pythonInterpreter->executeScriptFromFile(f_path);
             }
             f_progressBar.setValue(f_progressBar.value() + f_step);
         }

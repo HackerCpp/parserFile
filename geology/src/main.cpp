@@ -4,7 +4,6 @@
 #include <QDir>
 #include <QMessageBox>
 #include "onewavewidget.h"
-#include "pythoneditor.h"
 #include <QtQuick/QQuickView>
 
 

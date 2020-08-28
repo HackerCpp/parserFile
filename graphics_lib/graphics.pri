@@ -2,8 +2,8 @@ QT += core gui xml charts
 
 CONFIG += c++11
 INCLUDEPATH += $$PWD $$PWD/inc $$PWD/inc/items $$PWD/inc/tools \
-$$PWD/inc/spectrReader $$PWD/inc/drawObjects $$PWD/../QScintilla/Qt4Qt5\
-$$PWD/../log_data_interpreter/include
+$$PWD/inc/spectrReader $$PWD/inc/drawObjects $$PWD/../QScintilla/Qt4Qt5
+#$$PWD/../log_data_interpreter/include
 
 LIBS += ../build/release/LogData.lib
 

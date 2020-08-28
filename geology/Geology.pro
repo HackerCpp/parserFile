@@ -22,12 +22,12 @@ INCLUDEPATH += inc\
                ../log_data_lib/include/customObject \
                ../log_data_loader/include \
                 ../log_data_saver/inc \
-                ../log_data_interpreter/include \
+                #../log_data_interpreter/include \
                 ../geometrologyDB
 
 LIBS += \
 ../build/release/LogData.lib \
-../build/release/LogDataInterpreter.lib \
+#../build/release/LogDataInterpreter.lib \
 ../build/release/LogDataLoader.lib \
 ../build/release/LogDataSaver.lib \
 ../build/release/geometrologyDB.lib

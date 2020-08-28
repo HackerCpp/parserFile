@@ -20,14 +20,14 @@
 #include "onewavewidget.h"
 #include "spectrviewer.h"
 
-class IInterpreterLogData;
-class PythonEditor;
+//class IInterpreterLogData;
+//class PythonEditor;
 
 class SpectrReader : public BaseCurveReader
 {
     Q_OBJECT
-    IInterpreterLogData * m_pythonInterpreter;
-    PythonEditor *m_pyEditor;
+    //IInterpreterLogData * m_pythonInterpreter;
+    //PythonEditor *m_pyEditor;
     OneWaveWidget *m_oneWaveWidget;
     int m_widht;
     QVBoxLayout *m_vMainLayout;

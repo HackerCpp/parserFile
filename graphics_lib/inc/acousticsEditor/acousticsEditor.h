@@ -14,14 +14,14 @@
 #include "setofcurves.h"
 #include <QPushButton>
 
-class IInterpreterLogData;
-class PythonEditor;
+//class IInterpreterLogData;
+//class PythonEditor;
 /*********************************************************/
 class AcousticsEditor : public BaseCurveReader{
     Q_OBJECT
 
-    IInterpreterLogData * m_pythonInterpreter;
-    PythonEditor *m_pyEditor;
+    //IInterpreterLogData * m_pythonInterpreter;
+    //PythonEditor *m_pyEditor;
     QPointer<QVBoxLayout> m_mainVLayout;
     QPointer<QSplitter> m_splitter;
     DataCountingAcoustics *m_dataCountingOriginal,*m_dataCountingExperimental;

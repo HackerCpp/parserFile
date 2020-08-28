@@ -3,7 +3,6 @@
 #include "filereader.h"
 #include "gfmloader.h"
 #include "gfmsaver.h"
-#include "interpreterpython.h"
 #include "tabinterpretations.h"
 #include "geometrologydb.h"
 
@@ -113,8 +112,8 @@ void MainWindow::openConsolePython(){
     if(!f_logData)
         return;
     if(!f_logData->isInterpreter()){
-        IInterpreterLogData *f_interpreter = dynamic_cast<IInterpreterLogData *>(new InterpreterPython());
-        f_logData->setInterpreter(f_interpreter);
+        //IInterpreterLogData *f_interpreter = dynamic_cast<IInterpreterLogData *>(new InterpreterPython());
+        //f_logData->setInterpreter(f_interpreter);
     }
     f_logData->openInterpreterConsole();
 }
@@ -124,8 +123,8 @@ void MainWindow::openEditorPython(){
     if(!f_logData)
         return;
     if(!f_logData->isInterpreter()){
-        IInterpreterLogData *f_interpreter = dynamic_cast<IInterpreterLogData *>(new InterpreterPython());
-        f_logData->setInterpreter(f_interpreter);
+        //IInterpreterLogData *f_interpreter = dynamic_cast<IInterpreterLogData *>(new InterpreterPython());
+        //f_logData->setInterpreter(f_interpreter);
     }
     f_logData->openInterpreterEditor();
 }
