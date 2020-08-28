@@ -39,6 +39,8 @@ public:
 
     void apply()override;
 
+    void updateDataPython();
+
 public slots:
     void calculate();
     void cancelCalculate();

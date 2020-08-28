@@ -5,20 +5,16 @@
 #include "gfmsaver.h"
 #include "interpreterpython.h"
 #include "tabinterpretations.h"
-
-#include "pythoneditor.h"
-#include <Windows.h>
+#include "geometrologydb.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
     : WindowForMenu(parent)
 {
     qputenv("PYTHONPATH",QString(QDir().absolutePath() + "/python3/Lib").toLatin1());
-    PythonQt::init(PythonQt::IgnoreSiteModule | PythonQt::RedirectStdOut,"LogData");
-    PythonQt_QtAll::init();
-    m_pythonInterpreter = PythonQt::self()->getMainModule();
-    //PythonEditor *f_editor = new PythonEditor(&m_pythonInterpreter,this);
-    //f_editor->show();
+    //PythonQt::init(PythonQt::IgnoreSiteModule | PythonQt::RedirectStdOut,"LogData");
+    //PythonQt_QtAll::init();
+    //m_pythonInterpreter = PythonQt::self()->getMainModule();
     m_menu = new Menu(&m_pythonInterpreter,this);
     m_pythonInterpreter.evalFile(QDir().absolutePath() + "/scripts/mainMenu/mainMenu.py");
     m_menu->installEventFilter(this);
@@ -136,6 +132,26 @@ void MainWindow::openEditorPython(){
     f_logData->openInterpreterEditor();
 }
 
+void MainWindow::insertCalibrationInTheScript(){
+    ILogData *f_logData = m_logDataView->curentLogData();
+    if(!f_logData)
+        return;
+    QFileDialog fileDialog;
+    GeometrologyDB f_geometrologyDB;
+    f_geometrologyDB.setTypeDB(GeometrologyDB::SQLITE);
+    QString f_openPath = m_settings->value("paths/pathOpenDB").toString();
+    QString filePath = fileDialog.getOpenFileName(this, tr("Open File"),f_openPath,tr("*.db"));
+    if(filePath == "")
+        return;
+    m_settings->setValue("paths/pathOpenDB",filePath);
+    f_geometrologyDB.setNameDB(filePath);
+    if(f_geometrologyDB.connectDB())
+        qDebug() << "connect";
+    else
+        return;
+    f_geometrologyDB.insertCalibrationDataIntoTheInterpreter(f_logData->interpreter());
+}
+
 void MainWindow::openInterpretations(){
     ILogData *f_urentLogdata = m_logDataView->curentLogData();
     if(!f_urentLogdata)
@@ -152,10 +168,7 @@ void MainWindow::openInterpretations(){
         return;
     QLibrary  lib(f_path);
     lib.load();
-    //typedef QString (*FString)();
     typedef ILogData *(*FIlogData)(ILogData *);
-    //FString version = (FString)(lib.resolve("version"));
-    //FString name = (FString)(lib.resolve("name"));
     FIlogData interpr = (FIlogData)(lib.resolve("interpretation"));
     if(interpr){
         QSharedPointer<ILogData> f_logData(interpr(f_urentLogdata));

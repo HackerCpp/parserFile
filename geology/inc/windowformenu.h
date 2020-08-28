@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <PythonQt.h>
 #include <PythonQt_QtAll.h>
+#include <QOpenGLWidget>
 
 class WindowForMenu : public QWidget
 {
@@ -17,6 +18,7 @@ public slots:
     virtual void saveLIS(){}
     virtual void openConsolePython(){}
     virtual void openEditorPython(){}
+    virtual void insertCalibrationInTheScript(){}
     virtual void openInterpretations(){}
     virtual void openConstructor(){}
 };

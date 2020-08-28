@@ -6,6 +6,7 @@
 #include "logdataview.h"
 
 
+
 class MainWindow : public WindowForMenu
 {
     Q_OBJECT
@@ -30,6 +31,7 @@ public slots:
     void saveLIS() override;
     void openConsolePython()override;
     void openEditorPython()override;
+    void insertCalibrationInTheScript()override;
     void openInterpretations()override;
     void openConstructor()override;
 

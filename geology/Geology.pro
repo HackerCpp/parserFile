@@ -1,6 +1,4 @@
-QT       += core gui
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT       += core gui widgets
 
 win32:RC_ICONS += $$PWD/ico/icon.ico
 
@@ -25,15 +23,18 @@ INCLUDEPATH += inc\
                ../log_data_loader/include \
                 ../log_data_saver/inc \
                 ../log_data_interpreter/include \
-                ../PythonQT3.2/src \
-                ../PythonQT3.2/extensions/PythonQt_QtAll \
-                ../python3\python3_x64-windows\include\python3.7
+                ../geometrologyDB
+                #../PythonQT3.2/src \
+                #../PythonQT3.2/extensions/PythonQt_QtAll \
+                #../python3\python3_x64-windows\include\python3.7 \
+
 
 LIBS += \
 ../build/release/LogData.lib \
 ../build/release/LogDataInterpreter.lib \
 ../build/release/LogDataLoader.lib \
 ../build/release/LogDataSaver.lib \
+../build/release/geometrologyDB.lib \
 ../python3/python3_x64-windows/lib/python37.lib \
 
 include(../graphics_lib/graphics.pri)

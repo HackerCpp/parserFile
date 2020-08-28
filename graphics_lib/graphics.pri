@@ -1,14 +1,14 @@
-QT += core gui widgets opengl xml charts
+QT += core gui widgets xml charts
 
 CONFIG += c++11
 INCLUDEPATH += $$PWD $$PWD/inc $$PWD/inc/items $$PWD/inc/tools \
 $$PWD/inc/spectrReader $$PWD/inc/drawObjects $$PWD/../QScintilla/Qt4Qt5
 
 LIBS += \
-        ../build/release/LogData.lib \
-        ../PythonQT3.2/build/lib/PythonQt-Qt5-Python373.lib \
-        ../PythonQT3.2/build/lib/PythonQt_QtAll-Qt5-Python373.lib\
-        ../python3/python3_x64-windows/lib/python37.lib
+        ../build/release/LogData.lib
+        #../PythonQT3.2/build/lib/PythonQt-Qt5-Python373.lib \
+        #../PythonQT3.2/build/lib/PythonQt_QtAll-Qt5-Python373.lib\
+        #../python3/python3_x64-windows/lib/python37.lib
         #../QScintilla/build/release/qscintilla2_qt5.lib \
 #../build/release/LogDataInterpreter.lib \
 #../build/release/LogDataLoader.lib \

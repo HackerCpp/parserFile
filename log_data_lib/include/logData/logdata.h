@@ -7,9 +7,7 @@
 
 
 class LogData : public ALogData{
-    ILoaderLogData *m_loader;
-    ISaverLogData *m_saver;
-    IInterpreterLogData *m_interpreter;
+
     QList<IBlock *> *m_blocks;
     QString m_name;
 

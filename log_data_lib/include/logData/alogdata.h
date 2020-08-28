@@ -8,6 +8,9 @@
 class ALogData : public ILogData{
 
 protected:
+    ILoaderLogData *m_loader;
+    ISaverLogData *m_saver;
+    IInterpreterLogData *m_interpreter;
     bool m_isReady;
 public:
     ALogData();
@@ -33,9 +36,9 @@ public:
 
     virtual void addBlock(IBlock *block)override{Q_UNUSED(block)}
 
-    //virtual QMap<QString,ICurve*> *curves()override;
     virtual QList<IBlock *> *blocks()override;
     virtual QString name()override{ return QString();}
+    IInterpreterLogData *interpreter()override{return m_interpreter;}
 
 
 

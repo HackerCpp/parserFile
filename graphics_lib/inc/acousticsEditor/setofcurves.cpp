@@ -1,4 +1,5 @@
 #include "setofcurves.h"
+#include <QDoubleValidator>
 
 DataCountingAcoustics *ReseptionCurve::m_dataCounting;
 ReseptionCurve::ReseptionCurve(QString labelText,TypeItem reseptionType,
@@ -84,6 +85,8 @@ SetOfCurves::SetOfCurves(DataCountingAcoustics *dataCounting){
 
     m_labelBase = new QLabel(tr("Base"),this);
     m_baseLineEdit = new QLineEdit(this);
+    m_baseLineEdit->setValidator(new QDoubleValidator());
+    m_baseLineEdit->setText("0,4");
 
     ReseptionCurve::setDataCountindAcoustic(dataCounting);
 
@@ -132,6 +135,6 @@ SetOfCurves::~SetOfCurves(){
 }
 
 qreal SetOfCurves::base(){
-    return m_baseLineEdit->text().toDouble();
+    return m_baseLineEdit->text().replace(",",".").toDouble();
 }
 /*************************************************************/

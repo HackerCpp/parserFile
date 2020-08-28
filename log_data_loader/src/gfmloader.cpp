@@ -14,6 +14,7 @@
 #include "headerblock.h"
 #include "addCurve.h"
 #include "specItem.h"
+#include <QtCore/QtEndian>
 
 bool GFMLoader::gzipDecompress(QByteArray input, QByteArray &output){
     output.clear();
@@ -134,14 +135,57 @@ struct BlockByte{
     QByteArray bodyBlock;
 };
 
+QByteArray swap16(QByteArray ba){
+    QByteArray f_ba(2,Qt::Uninitialized);
+    if(ba.size() < 2)
+        return f_ba;
+    f_ba[0] = ba[1];
+    f_ba[1] = ba[0];
+    return f_ba;
+}
+
+void findBlocksByteFEFF(QByteArray byteArrayFile,QList<BlockByte> *blocksList){
+     for(int position = 0;position < byteArrayFile.size(); ++position){
+         QTextCodec *codec = QTextCodec::codecForName("UTF-16BE");
+        int indexBeginBlock = byteArrayFile.indexOf(codec->fromUnicode("[").remove(0,2),position);
+        int indexEndBlock = byteArrayFile.indexOf(codec->fromUnicode("]").remove(0,2),position) + 1;
+        if(indexBeginBlock == -1 || indexEndBlock == -1)
+            return;
+        ushort sizeNameBlock = *reinterpret_cast<ushort*>(byteArrayFile.mid(indexBeginBlock - 2,2).data());
+        if(sizeNameBlock != (indexEndBlock - indexBeginBlock + 1))
+            continue;
+        else{
+            BlockByte block;
+            block.sizeNameBlock = sizeNameBlock;
+            block.nameBlock = codec->toUnicode(byteArrayFile.mid(indexBeginBlock,sizeNameBlock));
+            qint16 right = *reinterpret_cast<ushort*>(byteArrayFile.mid(indexEndBlock + 1,2).data());
+            qint16 left = *reinterpret_cast<ushort*>(byteArrayFile.mid(indexEndBlock + 3,2).data());
+            int sizeDataBlock = (quint32)(left << 16) | right;
+            block.sizeBodyBlock = sizeDataBlock;
+
+            if(sizeDataBlock > INT_MAX/2){
+                block.bodyBlock = byteArrayFile.mid(indexEndBlock + 9);
+                blocksList->push_back(block);
+                return;
+            }
+            else{
+                block.bodyBlock = byteArrayFile.mid(indexEndBlock + 9,static_cast<int>(sizeDataBlock - 8));
+            }
+            blocksList->push_back(block);
+            position += block.sizeNameBlock + block.sizeBodyBlock + 6;
+        }
+     }
+}
+
+
 void findBlocksByteFFFE(QByteArray byteArrayFile,QList<BlockByte> *blocksList,int position){
     int indexBeginBlock = byteArrayFile.indexOf("[",position);
     int indexEndBlock = byteArrayFile.indexOf("]",position) + 1;
     if(indexBeginBlock == -1 || indexEndBlock == -1)
         return;
-    int sizeNameBlock = *byteArrayFile.mid(indexBeginBlock - 2,2).data();
+    ushort sizeNameBlock = *reinterpret_cast<ushort*>(byteArrayFile.mid(indexBeginBlock - 2,2).data());
     if(sizeNameBlock != (indexEndBlock - indexBeginBlock + 1))
-        findBlocksByteFFFE(byteArrayFile,blocksList,indexEndBlock+1);
+        findBlocksByteFFFE(byteArrayFile,blocksList,indexEndBlock + 1);
     else{
         BlockByte block;
         uint sizeDataBlock = *reinterpret_cast<uint*>(byteArrayFile.mid(indexEndBlock + 1, 4).data());
@@ -190,9 +234,14 @@ void GFMLoader::run(){
     QString bom = byteArrayFile.mid(0,2).toHex();
     QList<BlockByte> *blocksList = new QList<BlockByte>;
     if(bom == "fffe"){
-        m_codec = QTextCodec::codecForMib(1015);
+        m_codec = QTextCodec::codecForName("UTF-16LE");
         findBlocksByteFFFE(byteArrayFile,blocksList,0);
     }
+    else if(bom == "feff"){
+        m_codec = QTextCodec::codecForName("UTF-16BE");
+        findBlocksByteFEFF(byteArrayFile,blocksList);
+    }
+    qDebug() << blocksList->size();
     if(blocksList->isEmpty())
         return;
 
@@ -381,7 +430,7 @@ qreal convertUnitOfGFM(QString value, QString unit){     //изменение е
     else if(unit == "PIX" || unit == "MM")
         f_result = value.toDouble();
     else
-        qDebug() << "Неизвестная величина gfmLoader.cpp " << unit;
+        qDebug() << "Неизвестная величина gfmLoader.cpp " << value << unit;
     return f_result;
 }
 
@@ -794,8 +843,9 @@ void GFMLoader::findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *
 
     int indexBeginParamMnemon = curveLine.indexOf(":",indexShortCutEnd);
     int indexEndParamMnemon =   curveLine.indexOf(":",indexBeginParamMnemon + 1);
-    QString mnemonics = curveLine.mid(indexBeginParamMnemon+1,indexEndParamMnemon - indexBeginParamMnemon - 2);
-    curveAbstract->setMnemonic(mnemonics);
+    QByteArray mnemonics = curveLine.mid(indexBeginParamMnemon+1,indexEndParamMnemon - indexBeginParamMnemon - 2);
+
+    curveAbstract->setMnemonic(QTextCodec::codecForName("Windows-1251")->toUnicode(mnemonics));
 
     int indexBeginType = curveLine.indexOf(":",indexEndParamMnemon);
     int indexEndType = curveLine.indexOf(" ",indexBeginType + 4);
@@ -803,7 +853,7 @@ void GFMLoader::findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *
     int indexEndRecordPoint = indexEndType;
     if(!shortCut.ref().isEmpty()){
         int indexBeginRecordPoint = curveLine.indexOf(":",indexEndType);
-        indexEndRecordPoint = curveLine.indexOf(" ",indexBeginRecordPoint + 3);
+        indexEndRecordPoint = curveLine.indexOf(")",indexBeginRecordPoint + 3);
         QString recordPoint = curveLine.mid(indexBeginRecordPoint + 2,indexEndRecordPoint - indexBeginRecordPoint - 2).replace(",",".");
         bool ok;
         qreal f_recordPointValue = recordPoint.left(recordPoint.indexOf("(")).toDouble(&ok);

@@ -71,9 +71,9 @@ QVariant ModelMulticolor::headerData(int section, Qt::Orientation orientation, i
 
 Qt::ItemFlags ModelMulticolor::flags(const QModelIndex &index) const {
     if (!index.isValid())
-        return false;
+        return Qt::NoItemFlags;
     if (index.row() >= m_listMulticolor->size())
-        return false;
+        return Qt::NoItemFlags;
     int column = index.column();
     switch (column){
         case 0:{
@@ -89,9 +89,9 @@ Qt::ItemFlags ModelMulticolor::flags(const QModelIndex &index) const {
 
 bool ModelMulticolor::setData(const QModelIndex &index, const QVariant &value, int role){
     if (!index.isValid())
-        return false;
+        return Qt::NoItemFlags;
     if (index.row() >= m_listMulticolor->size())
-        return false;
+        return Qt::NoItemFlags;
     int column = index.column();
     if (role == Qt::EditRole){
         switch (column){

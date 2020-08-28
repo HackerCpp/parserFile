@@ -95,7 +95,7 @@ template<typename T> QByteArray Curve<T>::data(){
 }
 
 template<typename T> qreal Curve<T>::data(uint index){
-    if(index >= m_data->size()){
+    if(index >= static_cast<uint>(m_data->size())){
         qDebug() << "index превысил размер массива вернули 0";
         return 0;
     }

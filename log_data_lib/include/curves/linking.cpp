@@ -18,7 +18,7 @@ ICurve *Linking::createTime(uint timeBegin_min,uint timeEnd_min,qreal step_sec){
     ICurve *f_curve = new Curve<uint>(f_timeSize,1);
     uint f_data_mSec = timeBegin_min * 1000;//mSec
     uint f_step_mSec = static_cast<uint>(step_sec * 1000);//mSec
-    for(uint i = 0; i < f_timeSize; ++i , f_data_mSec += f_step_mSec){
+    for(int i = 0; i < f_timeSize; ++i , f_data_mSec += f_step_mSec){
         f_curve->setData(f_data_mSec,i);
     }
 
@@ -43,7 +43,7 @@ ICurve *Linking::createDepth(int depthBegin_m,int depthEnd_m,qreal step_m){
     ICurve *f_curve = new Curve<int>(f_depthSize,1);
     int f_data_mm = depthBegin_m * 1000;//mm
     uint f_step_mm = static_cast<uint>(step_m * 1000);//mm
-    for(uint i = 0; i < f_depthSize; ++i ,f_data_mm += f_step_mm){
+    for(int i = 0; i < f_depthSize; ++i ,f_data_mm += f_step_mm){
         f_curve->setData(f_data_mm,i);
     }
 

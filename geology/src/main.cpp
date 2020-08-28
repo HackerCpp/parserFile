@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include "onewavewidget.h"
 #include "pythoneditor.h"
+#include <QtQuick/QQuickView>
 
 
 int main(int argc, char *argv[])
@@ -15,6 +16,8 @@ int main(int argc, char *argv[])
     qtLanguageTranslator.load(f_translatePath);
     qApp->installTranslator(&qtLanguageTranslator);
     MainWindow w;
+
+
     QCoreApplication::setOrganizationName("GFM");
     QCoreApplication::setApplicationName("Geology");
     QFile file(":/css/darkVC.css");

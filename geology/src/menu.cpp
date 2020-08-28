@@ -34,6 +34,7 @@ Menu::Menu(PythonQtObjectPtr *pythonContext,QWidget *parent)
     QMenu *pythonMenu = new QMenu (tr("Python"),this);
     pythonMenu->addAction (tr("&OpenConsole"),m_parentWindow, SLOT(openConsolePython()));
     pythonMenu->addAction (tr("&OpenEditor"),m_parentWindow, SLOT(openEditorPython()));
+    pythonMenu->addAction (tr("&AddDataCalib"),m_parentWindow, SLOT(insertCalibrationInTheScript()));
     interpreterMenu->addMenu(pythonMenu);
     mnuArray->push_back(interpreterMenu);
     foreach(auto mnu, *mnuArray){

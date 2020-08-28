@@ -111,8 +111,8 @@ QVariant ModelLegendItems::headerData(int section, Qt::Orientation orientation, 
 
 Qt::ItemFlags ModelLegendItems::flags(const QModelIndex &index) const {
     if (!index.isValid())
-        return false;
+        return Qt::NoItemFlags;
     if (index.row() >= m_visibleItems.size())
-        return false;
+        return Qt::NoItemFlags;
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemNeverHasChildren;
 }

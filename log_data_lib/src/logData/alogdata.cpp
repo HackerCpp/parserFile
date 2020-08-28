@@ -2,8 +2,10 @@
 
 
 
-ALogData::ALogData(){
-    m_isReady = false;
+ALogData::ALogData()
+    :   m_loader(nullptr), m_saver(nullptr),
+        m_interpreter(nullptr),m_isReady(false){
+
 }
 
 ALogData::~ALogData(){
@@ -26,10 +28,6 @@ bool ALogData::setInterpreter(IInterpreterLogData *interpreter){
     Q_UNUSED(interpreter)
     return false;
 }
-
-/*QMap<QString,ICurve*> *ALogData::curves(){
-   return nullptr;
-}*/
 
 QList<IBlock *> *ALogData::blocks(){
    return nullptr;
