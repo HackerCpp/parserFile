@@ -2,9 +2,6 @@
 #define WINDOWFORMENU_H
 
 #include <QWidget>
-#include <PythonQt.h>
-#include <PythonQt_QtAll.h>
-#include <QOpenGLWidget>
 
 class WindowForMenu : public QWidget
 {

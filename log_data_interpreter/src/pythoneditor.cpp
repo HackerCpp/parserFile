@@ -31,6 +31,7 @@
 #include <QVBoxLayout>
 #include <QTextEdit>
 #include <QCompleter>
+#include "iinterpreterlogdata.h"
 
 
 
@@ -111,6 +112,10 @@ PythonEditor::PythonEditor(PythonQtObjectPtr *pythonContext,QWidget *parent)
     //connect(PythonQt::self(), SIGNAL(pythonStdOut(const QString&)), this, SLOT(stdOut(const QString&)));
     //connect(PythonQt::self(), SIGNAL(pythonStdErr(const QString&)), this, SLOT(stdOut(const QString&)));
     m_textEdit->setLexer(m_lexPython); // задаем python лексер нашему редактору
+}
+
+PythonEditor::PythonEditor(IInterpreterLogData *interpreter){
+
 }
 
 void PythonEditor::closeEvent(QCloseEvent *event){

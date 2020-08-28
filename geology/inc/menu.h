@@ -19,7 +19,7 @@ class Menu : public QWidget{
     QVBoxLayout * layoutForMenu;
 
 public:
-    explicit Menu(PythonQtObjectPtr *pythonContext,QWidget *parent = nullptr);
+    explicit Menu(QWidget *parent = nullptr);
     ~Menu();
 signals:
     void applyStyle();

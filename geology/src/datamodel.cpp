@@ -464,7 +464,7 @@ QVariant DataModel::data(const QModelIndex &index, int role )const{
 
 Qt::ItemFlags DataModel::flags(const QModelIndex &index) const {
     if (!index.isValid())
-        return false;
+        return Qt::NoItemFlags;
     int column = index.column();
     switch (column){
          case 0:{

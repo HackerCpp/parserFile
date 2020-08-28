@@ -72,9 +72,9 @@ QVariant ModelForTabInterpretation::headerData(int section, Qt::Orientation orie
 
 Qt::ItemFlags ModelForTabInterpretation::flags(const QModelIndex &index) const {
     if (!index.isValid())
-        return false;
+        return Qt::NoItemFlags;
     if (index.row() >= m_listInterpretation->size())
-        return false;
+        return Qt::NoItemFlags;
     int column = index.column();
     switch (column){
          case 0:{

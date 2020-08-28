@@ -2,6 +2,7 @@
 #include <QPainter>
 #include "QGraphicsSceneMouseEvent"
 #include <QGraphicsScene>
+#include <cmath>
 
 Ruler::Ruler(BoardForTrack *board):
     m_board(board){

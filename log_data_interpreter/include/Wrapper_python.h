@@ -3,11 +3,7 @@
 
 #include "interpreter_global.h"
 #include "ainterpreterlogdata.h"
-#include "PythonQt.h"
-#include <QApplication>
-#include<PythonQt_QtAll.h>
-#include "gui/PythonQtScriptingConsole.h"
-#include <QMap>
+#include <icurve.h>
 
 
 class INTERPRETER_EXPORT WrapperIcurvePython :public QObject{

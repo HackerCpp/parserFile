@@ -77,9 +77,9 @@ QVariant FilterListModel::headerData(int section, Qt::Orientation orientation, i
 
 Qt::ItemFlags FilterListModel::flags(const QModelIndex &index) const {
     if (!index.isValid())
-        return false;
+        return Qt::NoItemFlags;
     if (index.row() >= m_vectorFilters->size())
-        return false;
+        return Qt::NoItemFlags;
     int column = index.column();
     switch (column){
          case 0:{

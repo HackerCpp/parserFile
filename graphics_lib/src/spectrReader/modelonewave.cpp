@@ -76,9 +76,9 @@ QVariant ModelOneWave::headerData(int section, Qt::Orientation orientation, int 
 
 Qt::ItemFlags ModelOneWave::flags(const QModelIndex &index) const {
     if (!index.isValid())
-        return false;
+        return Qt::NoItemFlags;
     if (index.row() >= m_listVaweInfo->size())
-        return false;
+        return Qt::NoItemFlags;
     int column = index.column();
     switch (column){
         case 0:{

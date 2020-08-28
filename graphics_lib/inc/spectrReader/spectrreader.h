@@ -18,14 +18,15 @@
 #include <QRadioButton>
 #include "basecurvereader.h"
 #include "onewavewidget.h"
-#include "Wrapper_python.h"
 #include "spectrviewer.h"
-#include "pythoneditor.h"
+
+class IInterpreterLogData;
+class PythonEditor;
 
 class SpectrReader : public BaseCurveReader
 {
     Q_OBJECT
-    PythonQtObjectPtr  m_pythonInterpreter;
+    IInterpreterLogData * m_pythonInterpreter;
     PythonEditor *m_pyEditor;
     OneWaveWidget *m_oneWaveWidget;
     int m_widht;

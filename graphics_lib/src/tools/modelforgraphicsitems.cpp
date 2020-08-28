@@ -80,9 +80,9 @@ QVariant ModelForGraphicsItems::headerData(int section, Qt::Orientation orientat
 
 Qt::ItemFlags ModelForGraphicsItems::flags(const QModelIndex &index) const {
     if (!index.isValid())
-        return false;
+        return Qt::NoItemFlags;
     if (index.row() >= m_items->size())
-        return false;
+        return Qt::NoItemFlags;
     int column = index.column();
     switch (column){
          case 0:{

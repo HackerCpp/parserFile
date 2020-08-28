@@ -12,11 +12,9 @@ MainWindow::MainWindow(QWidget *parent)
     : WindowForMenu(parent)
 {
     qputenv("PYTHONPATH",QString(QDir().absolutePath() + "/python3/Lib").toLatin1());
-    //PythonQt::init(PythonQt::IgnoreSiteModule | PythonQt::RedirectStdOut,"LogData");
-    //PythonQt_QtAll::init();
-    //m_pythonInterpreter = PythonQt::self()->getMainModule();
-    m_menu = new Menu(&m_pythonInterpreter,this);
-    m_pythonInterpreter.evalFile(QDir().absolutePath() + "/scripts/mainMenu/mainMenu.py");
+
+    m_menu = new Menu(this);
+    //m_pythonInterpreter.evalFile(QDir().absolutePath() + "/scripts/mainMenu/mainMenu.py");
     m_menu->installEventFilter(this);
 
     m_mainHorLayout = new QHBoxLayout(this);

@@ -13,6 +13,7 @@ class QToolBar;
 class QAction;
 class QSplitter;
 class QVBoxLayout;
+class IInterpreterLogData;
 
 class INTERPRETER_EXPORT PythonEditor : public QMainWindow{
     Q_OBJECT
@@ -37,6 +38,7 @@ class INTERPRETER_EXPORT PythonEditor : public QMainWindow{
 
 public:
     PythonEditor(PythonQtObjectPtr *pythonContext,QWidget *parent = nullptr);
+    PythonEditor(IInterpreterLogData *interpreter);
     ~PythonEditor()override{}
 
 protected:

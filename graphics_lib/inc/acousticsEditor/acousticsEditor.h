@@ -13,15 +13,14 @@
 #include "displayingacoustics.h"
 #include "setofcurves.h"
 #include <QPushButton>
-#include "Wrapper_python.h"
-#include "pythoneditor.h"
 
-
+class IInterpreterLogData;
+class PythonEditor;
 /*********************************************************/
 class AcousticsEditor : public BaseCurveReader{
     Q_OBJECT
 
-    PythonQtObjectPtr  m_pythonInterpreter;
+    IInterpreterLogData * m_pythonInterpreter;
     PythonEditor *m_pyEditor;
     QPointer<QVBoxLayout> m_mainVLayout;
     QPointer<QSplitter> m_splitter;

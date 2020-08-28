@@ -11,8 +11,6 @@ class MainWindow : public WindowForMenu
 {
     Q_OBJECT
 
-
-    PythonQtObjectPtr m_pythonInterpreter;
     Menu *m_menu;
     QHBoxLayout *m_mainHorLayout;
     LogDataView *m_logDataView;

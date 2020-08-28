@@ -1,10 +1,14 @@
 #include "acousticsEditor/acousticsEditor.h"
 #include <QDragEnterEvent>
 #include "vlineItem.h"
+#include "pythoneditor.h"
+#include "interpreterpython.h"
 
 AcousticsEditor::AcousticsEditor(VAcuItem *acuItem){
     m_dataCountingOriginal = new DataCountingAcoustics;
     m_dataCountingExperimental = new DataCountingAcoustics;
+
+    m_pythonInterpreter = new InterpreterPython();
     if(acuItem->curve()->mnemonic().indexOf("2") != -1){
         m_dataCountingOriginal->setAcuItemTwo(acuItem);
         m_dataCountingExperimental->setAcuItemTwo(new VAcuItem(*acuItem));
@@ -14,12 +18,6 @@ AcousticsEditor::AcousticsEditor(VAcuItem *acuItem){
         m_dataCountingExperimental->setAcuItemOne(new VAcuItem(*acuItem));
     }
 
-    PythonQt::init(PythonQt::IgnoreSiteModule | PythonQt::RedirectStdOut,"LogData");
-    PythonQt_QtAll::init();
-    PythonQt::self()->registerCPPClass("ICurve","","Curves",PythonQtCreateObject<WrapperIcurvePython>);
-    m_pythonInterpreter = PythonQt::self()->getMainModule();
-    m_pythonInterpreter.evalScript("from LogData.Curves import*");
-    m_pythonInterpreter.evalScript("from LogData import*");
 
     m_pyNameList << "acu1" << "acu2" << "t1" << "t2" << "delta_t"
                  << "a1_adcu" << "a2_adcu" << "a1_db" << "a2_db" << "alpha_db_m";
@@ -27,10 +25,10 @@ AcousticsEditor::AcousticsEditor(VAcuItem *acuItem){
         AGraphicItem *f_item = m_dataCountingExperimental->item((DataCountingAcoustics::AcuTypeItem)i);
         if(!f_item)
             continue;
-        m_pythonInterpreter.addObject(m_pyNameList[i],f_item->curve());
+        m_pythonInterpreter->addObject(m_pyNameList[i],f_item->curve());
     }
 
-    m_pyEditor = new PythonEditor(&m_pythonInterpreter,this);
+    m_pyEditor = new PythonEditor(m_pythonInterpreter);
     m_pyEditor->setWindowFlags(Qt::Window | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint | Qt::CustomizeWindowHint);
     m_pyEditor->show();
     m_mainVLayout = QPointer<QVBoxLayout>(new QVBoxLayout);
@@ -103,7 +101,7 @@ void AcousticsEditor::updateDataPython(){
         AGraphicItem *f_item = m_dataCountingExperimental->item((DataCountingAcoustics::AcuTypeItem)i);
         if(!f_item)
             continue;
-        m_pythonInterpreter.addObject(m_pyNameList[i],f_item->curve());
+        m_pythonInterpreter->addObject(m_pyNameList[i],f_item->curve());
     }
 }
 
@@ -119,14 +117,14 @@ void AcousticsEditor::cancelCalculate(){
 }
 
 void AcousticsEditor::calculate(){
-    m_pythonInterpreter.addVariable("left_band_acu1",m_displayAcoustics->leftAndRightBandAcuOne().first);
-    m_pythonInterpreter.addVariable("right_band_acu1",m_displayAcoustics->leftAndRightBandAcuOne().second);
-    m_pythonInterpreter.addVariable("left_band_acu2",m_displayAcoustics->leftAndRightBandAcuTwo().first);
-    m_pythonInterpreter.addVariable("right_band_acu2",m_displayAcoustics->leftAndRightBandAcuTwo().second);
-    m_pythonInterpreter.addVariable("amp_acu1",m_displayAcoustics->ampAcuOne());
-    m_pythonInterpreter.addVariable("amp_acu2",m_displayAcoustics->ampAcuTwo());
-    m_pythonInterpreter.addVariable("base",m_setOfCurves->base());
-    m_pythonInterpreter.evalFile("scripts/acousticEditor/calcAcu.py");
+    m_pythonInterpreter->addVariable("left_band_acu1",m_displayAcoustics->leftAndRightBandAcuOne().first);
+    m_pythonInterpreter->addVariable("right_band_acu1",m_displayAcoustics->leftAndRightBandAcuOne().second);
+    m_pythonInterpreter->addVariable("left_band_acu2",m_displayAcoustics->leftAndRightBandAcuTwo().first);
+    m_pythonInterpreter->addVariable("right_band_acu2",m_displayAcoustics->leftAndRightBandAcuTwo().second);
+    m_pythonInterpreter->addVariable("amp_acu1",m_displayAcoustics->ampAcuOne());
+    m_pythonInterpreter->addVariable("amp_acu2",m_displayAcoustics->ampAcuTwo());
+    m_pythonInterpreter->addVariable("base",m_setOfCurves->base());
+    m_pythonInterpreter->executeScriptFromFile("scripts/acousticEditor/calcAcu.py");
     for(int i = 0; i < DataCountingAcoustics::MAXIMUM;++i){
         AGraphicItem *src_item = m_dataCountingExperimental->item((DataCountingAcoustics::AcuTypeItem)i);
         if(!src_item )
@@ -155,7 +153,7 @@ void AcousticsEditor::dataChange(){
         if(f_item)
             f_item->updateParam(m_displayAcoustics->width());
         m_dataCountingExperimental->setItem(f_item,static_cast<DataCountingAcoustics::AcuTypeItem>(type));
-        m_pythonInterpreter.addObject(m_pyNameList[type],f_item->curve());
+        m_pythonInterpreter->addObject(m_pyNameList[type],f_item->curve());
     }
 }
 

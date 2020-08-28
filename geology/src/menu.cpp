@@ -1,7 +1,7 @@
 #include "inc/menu.h"
 #include <QCoreApplication>
 
-Menu::Menu(PythonQtObjectPtr *pythonContext,QWidget *parent)
+Menu::Menu(QWidget *parent)
     : QWidget(parent){
 
     m_parentWindow = dynamic_cast<WindowForMenu *>(parent);
@@ -41,7 +41,7 @@ Menu::Menu(PythonQtObjectPtr *pythonContext,QWidget *parent)
         QMenuBar *bar = new QMenuBar();
         bar->addMenu(mnu);
         mnuBarArray->push_back(bar);
-        pythonContext->addObject(mnu->objectName(),mnu);
+        //pythonContext->addObject(mnu->objectName(),mnu);
     }
     foreach(auto mnuBar, *mnuBarArray){
         this->layoutForMenu->addWidget(mnuBar);
