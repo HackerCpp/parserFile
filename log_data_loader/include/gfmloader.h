@@ -17,10 +17,19 @@
 class LOADER_EXPORT GFMLoader : public ALoaderLogData, public QThread{
     QString m_path;
     QTextCodec *m_codec;
+    struct BlockByte{
+        int sizeNameBlock;
+        QString nameBlock;
+        uint sizeBodyBlock;
+        QByteArray bodyBlock;
+    };
 
     bool gzipDecompress(QByteArray input, QByteArray &output);
 
     void mergeIdenticalBlocks();
+
+    void findBlocksByteFEFF(QByteArray byteArrayFile,QList<BlockByte> *blocksList);
+    void findBlocksByteFFFE(QByteArray byteArrayFile,QList<BlockByte> *blocksList,int position);
 
 public:
     GFMLoader(QString path);

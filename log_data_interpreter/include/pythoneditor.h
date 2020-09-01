@@ -3,7 +3,6 @@
 #include "interpreter_global.h"
 #include <QMainWindow>
 
-class PythonQtObjectPtr;
 class PythonQtScriptingConsole;
 class QsciScintilla;
 class QsciLexerPython;
@@ -14,6 +13,7 @@ class QAction;
 class QSplitter;
 class QVBoxLayout;
 class IInterpreterLogData;
+class InterpreterPython;
 
 class INTERPRETER_EXPORT PythonEditor : public QMainWindow{
     Q_OBJECT
@@ -21,7 +21,7 @@ class INTERPRETER_EXPORT PythonEditor : public QMainWindow{
     QsciScintilla *m_textEdit;
     QsciLexerPython *m_lexPython;
     QString m_curFile;
-    PythonQtObjectPtr *m_pythonContext;
+    InterpreterPython *m_intPython;
 
     QMenu *m_fileMenu;
     QMenu *m_editMenu;
@@ -34,11 +34,9 @@ class INTERPRETER_EXPORT PythonEditor : public QMainWindow{
     QAction *m_pasteAct;
     QSplitter *m_splitter;
     QVBoxLayout *m_mainVLayout;
-    PythonQtScriptingConsole *m_console;
 
 public:
-    PythonEditor(PythonQtObjectPtr *pythonContext,QWidget *parent = nullptr);
-    PythonEditor(IInterpreterLogData *interpreter);
+    PythonEditor(IInterpreterLogData *interpreter,QWidget *parent = nullptr);
     ~PythonEditor()override{}
 
 protected:

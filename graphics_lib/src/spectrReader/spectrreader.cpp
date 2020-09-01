@@ -20,7 +20,7 @@ SpectrReader::SpectrReader(VSpectrItem *spectrItem)
     if(!spectrItem)
         return;
     m_pythonInterpreter = new InterpreterPython();
-    m_pyEditor = new PythonEditor(m_pythonInterpreter);
+    m_pyEditor = new PythonEditor(m_pythonInterpreter,this);
     setAcceptDrops(true);
     m_widht = 100;
     m_vMainLayout = new QVBoxLayout();

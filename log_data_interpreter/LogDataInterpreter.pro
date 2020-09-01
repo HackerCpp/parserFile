@@ -1,9 +1,8 @@
-CONFIG+=qt
 TEMPLATE = lib
 DEFINES += INTERPRETER_LIBRARY
 CONFIG += c++11
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets core
 
 INCLUDEPATH += include \
 ../log_data_lib/include/externalComponents\

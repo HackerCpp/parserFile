@@ -128,12 +128,7 @@ void GFMLoader::mergeIdenticalBlocks(){
 
 }
 
-struct BlockByte{
-    int sizeNameBlock;
-    QString nameBlock;
-    uint sizeBodyBlock;
-    QByteArray bodyBlock;
-};
+
 
 QByteArray swap16(QByteArray ba){
     QByteArray f_ba(2,Qt::Uninitialized);
@@ -144,11 +139,10 @@ QByteArray swap16(QByteArray ba){
     return f_ba;
 }
 
-void findBlocksByteFEFF(QByteArray byteArrayFile,QList<BlockByte> *blocksList){
+void GFMLoader::findBlocksByteFEFF(QByteArray byteArrayFile,QList<BlockByte> *blocksList){
      for(int position = 0;position < byteArrayFile.size(); ++position){
-         QTextCodec *codec = QTextCodec::codecForName("UTF-16BE");
-        int indexBeginBlock = byteArrayFile.indexOf(codec->fromUnicode("[").remove(0,2),position);
-        int indexEndBlock = byteArrayFile.indexOf(codec->fromUnicode("]").remove(0,2),position) + 1;
+        int indexBeginBlock = byteArrayFile.indexOf(m_codec->fromUnicode("[").remove(0,2),position);
+        int indexEndBlock = byteArrayFile.indexOf(m_codec->fromUnicode("]").remove(0,2),position) + 1;
         if(indexBeginBlock == -1 || indexEndBlock == -1)
             return;
         ushort sizeNameBlock = *reinterpret_cast<ushort*>(byteArrayFile.mid(indexBeginBlock - 2,2).data());
@@ -157,12 +151,12 @@ void findBlocksByteFEFF(QByteArray byteArrayFile,QList<BlockByte> *blocksList){
         else{
             BlockByte block;
             block.sizeNameBlock = sizeNameBlock;
-            block.nameBlock = codec->toUnicode(byteArrayFile.mid(indexBeginBlock,sizeNameBlock));
-            qint16 right = *reinterpret_cast<ushort*>(byteArrayFile.mid(indexEndBlock + 1,2).data());
+            block.nameBlock = m_codec->toUnicode(byteArrayFile.mid(indexBeginBlock,sizeNameBlock));
+            /*qint16 right = *reinterpret_cast<ushort*>(byteArrayFile.mid(indexEndBlock + 1,2).data());
             qint16 left = *reinterpret_cast<ushort*>(byteArrayFile.mid(indexEndBlock + 3,2).data());
-            int sizeDataBlock = (quint32)(left << 16) | right;
+            int sizeDataBlock = (quint32)(left << 16) | right;*/
+            int sizeDataBlock = *reinterpret_cast<uint*>(byteArrayFile.mid(indexEndBlock + 1, 4).data());
             block.sizeBodyBlock = sizeDataBlock;
-
             if(sizeDataBlock > INT_MAX/2){
                 block.bodyBlock = byteArrayFile.mid(indexEndBlock + 9);
                 blocksList->push_back(block);
@@ -178,7 +172,7 @@ void findBlocksByteFEFF(QByteArray byteArrayFile,QList<BlockByte> *blocksList){
 }
 
 
-void findBlocksByteFFFE(QByteArray byteArrayFile,QList<BlockByte> *blocksList,int position){
+void GFMLoader::findBlocksByteFFFE(QByteArray byteArrayFile,QList<BlockByte> *blocksList,int position){
     int indexBeginBlock = byteArrayFile.indexOf("[",position);
     int indexEndBlock = byteArrayFile.indexOf("]",position) + 1;
     if(indexBeginBlock == -1 || indexEndBlock == -1)
@@ -241,7 +235,6 @@ void GFMLoader::run(){
         m_codec = QTextCodec::codecForName("UTF-16BE");
         findBlocksByteFEFF(byteArrayFile,blocksList);
     }
-    qDebug() << blocksList->size();
     if(blocksList->isEmpty())
         return;
 
@@ -312,14 +305,14 @@ void GFMLoader::parserHeaderBlock(const QByteArray &bodyBlock,IBlock *block){
           return;
         }
         QSharedPointer<HeaderInfo> f_info(new HeaderInfo());
-        nameHeader = body.mid(IndexBeginName,IndexEndName-IndexBeginName+1);
+        nameHeader = body.mid(IndexBeginName,IndexEndName - IndexBeginName + 1);
         f_info->setName(nameHeader);
         body = body.mid(IndexEndName+1, body.size() - IndexEndName);
         IndexBeginName = body.indexOf(beginName);
         int IndexLineOff = body.indexOf(endLine);
         bodyHeader = body.mid(0,IndexBeginName);
         f_info->setBody(bodyHeader);
-        body = body.mid(IndexLineOff+2, body.size() - IndexLineOff);
+        body = body.mid(IndexLineOff + 2, body.size() - IndexLineOff);
         hearedBlock->setHeaderInfo(f_info);
     }
 }
@@ -338,7 +331,6 @@ void GFMLoader::parserDataBlock(const QByteArray &bodyBlock,IBlock *block){
     int endHeaderIndex = bodyBlock.indexOf(m_codec->fromUnicode(endHeader).mid(4));
 
     QByteArray header = bodyBlock.mid(beginHeaderIndex - 2,endHeaderIndex - beginHeaderIndex + endHeader.size() * 2);
-
 
     int beginPluginsIndex = bodyBlock.indexOf(m_codec->fromUnicode(beginPlugin).mid(4),endHeaderIndex + endHeader.size() * 2);
     int endPluginsIndex = bodyBlock.indexOf(m_codec->fromUnicode(endPlugins).mid(4), endHeaderIndex + endHeader.size() * 2);
@@ -361,7 +353,7 @@ void GFMLoader::parserDataBlock(const QByteArray &bodyBlock,IBlock *block){
     QString nameRecord = m_codec->toUnicode(header.mid(indexBeginName - 4,indexEndName - indexBeginName + 4));
     dataBlock->setNameRecord(nameRecord);
     int indexEndmoduleMnem = header.indexOf(m_codec->fromUnicode(moduleMnemEndMarc).mid(4),indexEndName);
-    QString moduleMnemonics = m_codec->toUnicode(header.mid(indexEndName+2,indexEndmoduleMnem - indexEndName - 4));
+    QString moduleMnemonics = m_codec->toUnicode(header.mid(indexEndName + 2,indexEndmoduleMnem - indexEndName - 4));
     dataBlock->setModuleMnemonic(moduleMnemonics);
     findShortCuts(&header,dataBlock);
     findCurves(&header,dataBlock,bodyBlock,indexBeginData);
@@ -823,7 +815,7 @@ void GFMLoader::findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *
     int indexEndOffset = curveLine.indexOf("]",1) - 1;
     uint f_offset = curveLine.mid(1,indexEndOffset).toUInt();
 
-    int indexEndsize = curveLine.indexOf("]",indexEndOffset+2) - 3;
+    int indexEndsize = curveLine.indexOf("]",indexEndOffset + 2) - 3;
     uint size = curveLine.mid(indexEndOffset+3,indexEndsize - indexEndOffset).toUInt();
     curveAbstract->setSizeOffset(size);
 
@@ -843,10 +835,9 @@ void GFMLoader::findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *
 
     int indexBeginParamMnemon = curveLine.indexOf(":",indexShortCutEnd);
     int indexEndParamMnemon =   curveLine.indexOf(":",indexBeginParamMnemon + 1);
-    QByteArray mnemonics = curveLine.mid(indexBeginParamMnemon+1,indexEndParamMnemon - indexBeginParamMnemon - 2);
+    QByteArray mnemonics = curveLine.mid(indexBeginParamMnemon + 1,indexEndParamMnemon - indexBeginParamMnemon - 2);
 
     curveAbstract->setMnemonic(QTextCodec::codecForName("Windows-1251")->toUnicode(mnemonics));
-
     int indexBeginType = curveLine.indexOf(":",indexEndParamMnemon);
     int indexEndType = curveLine.indexOf(" ",indexBeginType + 4);
 

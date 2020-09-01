@@ -24,7 +24,6 @@
 #include "gui/PythonQtScriptingConsole.h"
 #include <Qsci/qsciscintilla.h>
 #include <Qsci/qscilexerpython.h>
-
 #include <QWidget>
 #include <QMainWindow>
 #include <QSplitter>
@@ -32,90 +31,84 @@
 #include <QTextEdit>
 #include <QCompleter>
 #include "iinterpreterlogdata.h"
+#include "interpreterpython.h"
 
+PythonEditor::PythonEditor(IInterpreterLogData *interpreter,QWidget *parent)
+    : QMainWindow(parent){
+        QFont f_font("DejaVu Sans",15);
+        m_textEdit = new QsciScintilla;
+        m_textEdit->setFont(f_font);
+        m_textEdit->setUtf8(true);
+        m_intPython = dynamic_cast<InterpreterPython * >(interpreter);
 
+        m_splitter = new QSplitter(Qt::Vertical,this);
+        m_splitter->addWidget(m_textEdit);
+        m_splitter->addWidget(m_intPython->console());
 
-PythonEditor::PythonEditor(PythonQtObjectPtr *pythonContext,QWidget *parent)
-    : QMainWindow(parent), m_pythonContext(pythonContext){
-    QFont f_font("DejaVu Sans",15);
-    m_textEdit = new QsciScintilla;
-    m_textEdit->setFont(f_font);
-    m_textEdit->setUtf8(true);
-    m_pythonContext->evalScript("from LogData.Curves import*");
-    m_console = new PythonQtScriptingConsole(NULL, *m_pythonContext);
+        setCentralWidget(m_splitter);
+        show();
+        createActions();
+        createMenus();
+        createToolBars();
+        createStatusBar();
+        readSettings();
 
-    m_splitter = new QSplitter(Qt::Vertical,this);
-    m_splitter->addWidget(m_textEdit);
-    m_splitter->addWidget(m_console);
+        connect(m_textEdit, SIGNAL(textChanged()),this, SLOT(documentWasModified()));
 
-    setCentralWidget(m_splitter);
-    show();
-    createActions();
-    createMenus();
-    createToolBars();
-    createStatusBar();
-    readSettings();
+        setCurrentFile("");
+        m_lexPython = new QsciLexerPython(this); // создаем лексер (схему подсветки)
+        m_lexPython->setColor(QColor(303,255,204), QsciLexerPython::Comment);
+        m_lexPython->setFont(f_font, QsciLexerPython::Comment);
+        m_lexPython->setColor(QColor(Qt::black), QsciLexerPython::Default);
+        m_lexPython->setFont(f_font, QsciLexerPython::Default);
+        m_lexPython->setColor(QColor(204,0,187), QsciLexerPython::Number);
+        m_lexPython->setFont(f_font, QsciLexerPython::Number);
+        m_lexPython->setColor(QColor(Qt::green), QsciLexerPython::DoubleQuotedString);
+        m_lexPython->setFont(f_font, QsciLexerPython::DoubleQuotedString);
+        m_lexPython->setColor(QColor(Qt::green), QsciLexerPython::SingleQuotedString);
+        m_lexPython->setFont(f_font, QsciLexerPython::SingleQuotedString);
+        m_lexPython->setColor(QColor(8,18,200), QsciLexerPython::Keyword);
+        m_lexPython->setFont(f_font, QsciLexerPython::Keyword);
+        m_lexPython->setColor(QColor(Qt::green), QsciLexerPython::TripleSingleQuotedString);
+        m_lexPython->setFont(f_font, QsciLexerPython::TripleSingleQuotedString);
+        m_lexPython->setColor(QColor(Qt::green), QsciLexerPython::TripleDoubleQuotedString);
+        m_lexPython->setFont(f_font, QsciLexerPython::TripleDoubleQuotedString);
+        m_lexPython->setColor(QColor(8,18,200), QsciLexerPython::ClassName);
+        m_lexPython->setFont(f_font, QsciLexerPython::ClassName);
+        m_lexPython->setColor(QColor(8,129,204), QsciLexerPython::FunctionMethodName);
+        m_lexPython->setFont(f_font, QsciLexerPython::FunctionMethodName);
+        m_lexPython->setColor(QColor(Qt::black), QsciLexerPython::Operator);
+        m_lexPython->setFont(f_font, QsciLexerPython::Operator);
+        m_lexPython->setColor(QColor(303,255,204), QsciLexerPython::CommentBlock);
+        m_lexPython->setFont(f_font, QsciLexerPython::CommentBlock);
+        m_lexPython->setColor(QColor(Qt::green), QsciLexerPython::UnclosedString);
+        m_lexPython->setPaper(QColor(Qt::white),QsciLexerPython::UnclosedString);
+        m_lexPython->setFont(f_font, QsciLexerPython::UnclosedString);
 
-    connect(m_textEdit, SIGNAL(textChanged()),this, SLOT(documentWasModified()));
+        m_lexPython->setColor(QColor(Qt::green), QsciLexerPython::DoubleQuotedFString);
+        m_lexPython->setPaper(QColor(Qt::white),QsciLexerPython::DoubleQuotedFString);
+        m_lexPython->setFont(f_font, QsciLexerPython::DoubleQuotedFString);
+        m_lexPython->setColor(QColor(Qt::green), QsciLexerPython::TripleDoubleQuotedFString);
+        m_lexPython->setPaper(QColor(Qt::white),QsciLexerPython::TripleDoubleQuotedFString);
+        m_lexPython->setFont(f_font, QsciLexerPython::TripleDoubleQuotedFString);
+        m_lexPython->setColor(QColor(Qt::green), QsciLexerPython::TripleSingleQuotedFString);
+        m_lexPython->setPaper(QColor(Qt::white),QsciLexerPython::TripleSingleQuotedFString);
+        m_lexPython->setFont(f_font, QsciLexerPython::TripleSingleQuotedFString);
+        m_lexPython->setColor(QColor(Qt::green), QsciLexerPython::SingleQuotedFString);
+        m_lexPython->setPaper(QColor(Qt::white),QsciLexerPython::SingleQuotedFString);
+        m_lexPython->setFont(f_font, QsciLexerPython::SingleQuotedFString);
 
-    setCurrentFile("");
-    m_lexPython = new QsciLexerPython(this); // создаем лексер (схему подсветки)
-    m_lexPython->setColor(QColor(303,255,204), QsciLexerPython::Comment);
-    m_lexPython->setFont(f_font, QsciLexerPython::Comment);
-    m_lexPython->setColor(QColor(Qt::black), QsciLexerPython::Default);
-    m_lexPython->setFont(f_font, QsciLexerPython::Default);
-    m_lexPython->setColor(QColor(204,0,187), QsciLexerPython::Number);
-    m_lexPython->setFont(f_font, QsciLexerPython::Number);
-    m_lexPython->setColor(QColor(Qt::green), QsciLexerPython::DoubleQuotedString);
-    m_lexPython->setFont(f_font, QsciLexerPython::DoubleQuotedString);
-    m_lexPython->setColor(QColor(Qt::green), QsciLexerPython::SingleQuotedString);
-    m_lexPython->setFont(f_font, QsciLexerPython::SingleQuotedString);
-    m_lexPython->setColor(QColor(8,18,200), QsciLexerPython::Keyword);
-    m_lexPython->setFont(f_font, QsciLexerPython::Keyword);
-    m_lexPython->setColor(QColor(Qt::green), QsciLexerPython::TripleSingleQuotedString);
-    m_lexPython->setFont(f_font, QsciLexerPython::TripleSingleQuotedString);
-    m_lexPython->setColor(QColor(Qt::green), QsciLexerPython::TripleDoubleQuotedString);
-    m_lexPython->setFont(f_font, QsciLexerPython::TripleDoubleQuotedString);
-    m_lexPython->setColor(QColor(8,18,200), QsciLexerPython::ClassName);
-    m_lexPython->setFont(f_font, QsciLexerPython::ClassName);
-    m_lexPython->setColor(QColor(8,129,204), QsciLexerPython::FunctionMethodName);
-    m_lexPython->setFont(f_font, QsciLexerPython::FunctionMethodName);
-    m_lexPython->setColor(QColor(Qt::black), QsciLexerPython::Operator);
-    m_lexPython->setFont(f_font, QsciLexerPython::Operator);
-    m_lexPython->setColor(QColor(303,255,204), QsciLexerPython::CommentBlock);
-    m_lexPython->setFont(f_font, QsciLexerPython::CommentBlock);
-    m_lexPython->setColor(QColor(Qt::green), QsciLexerPython::UnclosedString);
-    m_lexPython->setPaper(QColor(Qt::white),QsciLexerPython::UnclosedString);
-    m_lexPython->setFont(f_font, QsciLexerPython::UnclosedString);
+        m_lexPython->setColor(QColor(Qt::black), QsciLexerPython::Identifier);
+        m_lexPython->setPaper(QColor(Qt::white),QsciLexerPython::Identifier);
+        m_lexPython->setFont(f_font, QsciLexerPython::Identifier);
+        /* A highlighted identifier.  These are defined by keyword set
+         2.  Reimplement keywords() to define keyword set 2.
+        HighlightedIdentifier = 14,
+        Decorator = 15;*/
 
-    m_lexPython->setColor(QColor(Qt::green), QsciLexerPython::DoubleQuotedFString);
-    m_lexPython->setPaper(QColor(Qt::white),QsciLexerPython::DoubleQuotedFString);
-    m_lexPython->setFont(f_font, QsciLexerPython::DoubleQuotedFString);
-    m_lexPython->setColor(QColor(Qt::green), QsciLexerPython::TripleDoubleQuotedFString);
-    m_lexPython->setPaper(QColor(Qt::white),QsciLexerPython::TripleDoubleQuotedFString);
-    m_lexPython->setFont(f_font, QsciLexerPython::TripleDoubleQuotedFString);
-    m_lexPython->setColor(QColor(Qt::green), QsciLexerPython::TripleSingleQuotedFString);
-    m_lexPython->setPaper(QColor(Qt::white),QsciLexerPython::TripleSingleQuotedFString);
-    m_lexPython->setFont(f_font, QsciLexerPython::TripleSingleQuotedFString);
-    m_lexPython->setColor(QColor(Qt::green), QsciLexerPython::SingleQuotedFString);
-    m_lexPython->setPaper(QColor(Qt::white),QsciLexerPython::SingleQuotedFString);
-    m_lexPython->setFont(f_font, QsciLexerPython::SingleQuotedFString);
-
-    m_lexPython->setColor(QColor(Qt::black), QsciLexerPython::Identifier);
-    m_lexPython->setPaper(QColor(Qt::white),QsciLexerPython::Identifier);
-    m_lexPython->setFont(f_font, QsciLexerPython::Identifier);
-    /* A highlighted identifier.  These are defined by keyword set
-     2.  Reimplement keywords() to define keyword set 2.
-    HighlightedIdentifier = 14,
-    Decorator = 15;*/
-
-    //connect(PythonQt::self(), SIGNAL(pythonStdOut(const QString&)), this, SLOT(stdOut(const QString&)));
-    //connect(PythonQt::self(), SIGNAL(pythonStdErr(const QString&)), this, SLOT(stdOut(const QString&)));
-    m_textEdit->setLexer(m_lexPython); // задаем python лексер нашему редактору
-}
-
-PythonEditor::PythonEditor(IInterpreterLogData *interpreter){
-
+        //connect(PythonQt::self(), SIGNAL(pythonStdOut(const QString&)), this, SLOT(stdOut(const QString&)));
+        //connect(PythonQt::self(), SIGNAL(pythonStdErr(const QString&)), this, SLOT(stdOut(const QString&)));
+        m_textEdit->setLexer(m_lexPython); // задаем python лексер нашему редактору
 }
 
 void PythonEditor::closeEvent(QCloseEvent *event){
@@ -318,9 +311,9 @@ QString PythonEditor::strippedName(const QString &fullFileName){
 }
 
 void PythonEditor::runScript(){
-    if(!m_pythonContext)
+    if(!m_intPython)
         return;
-    m_pythonContext->evalScript(m_textEdit->text());
+    m_intPython->executeScriptFromString(m_textEdit->text());
 
     emit scriptExecuted();
 }

@@ -1,6 +1,6 @@
 QT += gui widgets
 
-DEFINES +=   VERSION_LIB=\\\"0.0.2\\\"
+DEFINES +=   VERSION_LIB=\\\"0.0.3\\\"
 
 TEMPLATE = lib
 DEFINES += SAVER_LIBRARY

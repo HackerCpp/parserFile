@@ -1,0 +1,415 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}{\f2\fnil Consolas;}{\f3\fnil\fcharset204 Consolas;}{\f4\fnil\fcharset0 Consolas;}}
+{\colortbl ;\red0\green0\blue255;\red0\green128\blue0;\red155\green0\blue211;\red255\green0\blue0;}
+{\*\generator Riched20 6.2.9200}\viewkind4\uc1 
+\pard\fi710\sl276\slmult1\tx592\b\f0\fs22\lang1033\par
+
+\pard\fi710\sl240\slmult1\tx592\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5 \'e1\'e0\'e7\'fb \'e4\'e0\'ed\'ed\'fb\'f5 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ee\'ea \'e4\'eb\'ff \'c3\'e5\'ee\'ec\'e5\'f2\'f0\'ee\'eb\'ee\'e3\'e8\'e8-05. \par
+\b0\par
+\'c1\'e0\'e7\'e0 \'e4\'e0\'ed\'ed\'fb\'f5 \b\f0\lang1033 GMLog.db\b0 . \f1\lang1049\'c2\'f1\'e5\'e3\'e4\'e0 \'f0\'e0\'f1\'ef\'ee\'eb\'e0\'e3\'e0\'e5\'f2\'f1\'ff \'e2 \'ef\'ee\'e4\'ef\'e0\'ef\'ea\'e5 \b\f0\lang1033 Base\b0  \f1\lang1049\'ea\'ee\'f0\'ed\'e5\'e2\'ee\'e9 \'e4\'e8\'f0\'e5\'ea\'f2\'ee\'f0\'e8\'e8. \f0\lang1033\par
+\f1\lang1049\'d1\'ee\'e7\'e4\'e0\'ed\'e0 \'e2 \'f1\'f0\'e5\'e4\'e5 \f0\lang1033 SQLite\f1\lang1049 .\par
+\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5 \'f1\'f0\'e5\'e4\'fb : {\f0\lang1033{\field{\*\fldinst{HYPERLINK https://www.sqlite.org/index.html }}{\fldrslt{https://www.sqlite.org/index.html\ul0\cf0}}}}\f0\fs22\lang1033  \par
+\f1\lang1049\par
+\b\'d1\'f2\'f0\'f3\'ea\'f2\'f3\'f0\'e0 \'e1\'e0\'e7\'fb \'e4\'e0\'ed\'ed\'fb\'f5. \par
+\par
+\b0\'c1\'e0\'e7\'e0 \'e4\'e0\'ed\'ed\'fb\'f5 \'f1\'ee\'e4\'e5\'f0\'e6\'e8\'f2 \'f8\'e5\'f1\'f2\'fc \'f2\'e0\'e1\'eb\'e8\'f6: \f0\lang1033 CalibrSet, Channel, Device, Operator, Owner, System.\par
+\par
+\f1\lang1049\'d2\'e0\'e1\'eb\'e8\'f6\'fb \'ed\'e5 \'f1\'e2\'ff\'e7\'e0\'ed\'fb \'ed\'e5\'ef\'ee\'f1\'f0\'e5\'e4\'f1\'f2\'e2\'e5\'ed\'ed\'ee, \'ed\'ee \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'ff \'ef\'ee\'eb\'e5\'e9 \'e2 \'ee\'e4\'ed\'e8\'f5 \'f2\'e0\'e1\'eb\'e8\'f6\'e0\'f5 \'e8\'f1\'ef\'ee\'eb\'fc\'e7\'f3\'fe\'f2\'f1\'ff \'e2 \'e4\'f0\'f3\'e3\'e8\'f5 \'f2\'e0\'e1\'eb\'e8\'f6\'e0\'f5 - \'fd\'f2\'e8 \'ef\'ee\'eb\'ff \'e8\'ec\'e5\'fe\'f2 \'ee\'e4\'e8\'ed\'e0\'ea\'ee\'e2\'fb\'e5 \'ed\'e0\'e7\'e2\'e0\'ed\'e8\'ff. \f0\lang1033\par
+\par
+\f1\lang1049\'d1\'f2\'f0\'f3\'ea\'f2\'f3\'f0\'e0 \'f2\'e0\'e1\'eb\'e8\'f6:\par
+\par
+\b\f0\lang1033 1. \f1\lang1049\'d2\'e0\'e1\'eb\'e8\'f6\'e0 \'ea\'e0\'ed\'e0\'eb\'ee\'e2 (\'ea\'e0\'eb\'e8\'e1\'f0\'f3\'e5\'ec\'fb\'f5 \'ef\'e0\'f0\'e0\'ec\'e5\'f2\'f0\'ee\'e2)\par
+\b0\par
+CREATE TABLE Channel (\par
+    ChannelID   INTEGER PRIMARY KEY\par
+                        UNIQUE,\par
+    ChannelName TEXT,\par
+    DevName     TEXT,\par
+    Comment     TEXT,\par
+    SetupData   BLOB,\par
+    SynID       INTEGER,\par
+    SynStat     INTEGER,\par
+    SynDB       INTEGER\par
+);\par
+\par
+\f0\lang1033 ChannelID - \f1\lang1049\'f3\'ed\'e8\'ea\'e0\'eb\'fc\'ed\'fb\'e9 \f0\lang1033 ID \f1\lang1049\'e7\'e0\'ef\'e8\'f1\'e8. \par
+\f0\lang1033 ChannelName - \f1\lang1049\'ed\'e0\'e7\'e2\'e0\'ed\'e8\'e5 \'ea\'e0\'ed\'e0\'eb\'e0 (\'ef\'e0\'f0\'e0\'ec\'e5\'f2\'f0\'e0)\par
+\f0\lang1033 DevName - \f1\lang1049\'ed\'e0\'e7\'e2\'e0\'ed\'e8\'e5 \'f2\'e8\'ef\'e0 \'ef\'f0\'e8\'e1\'ee\'f0\'e0, \'e2 \'ea\'ee\'f2\'ee\'f0\'ee\'ec \'ea\'e0\'eb\'e8\'e1\'f0\'f3\'e5\'f2\'f1\'ff \'e4\'e0\'ed\'ed\'fb\'e9 \'ea\'e0\'ed\'e0\'eb\par
+\f0\lang1033 Comment - \f1\lang1049\'ea\'ee\'ec\'ec\'e5\'ed\'f2\'e0\'f0\'e8\'e9 \'ef\'ee\'eb\'fc\'e7\'ee\'e2\'e0\'f2\'e5\'eb\'ff\par
+\f0\lang1033 SetupData - \f1\lang1049\'e1\'e0\'e9\'f2\'ee\'e2\'fb\'e9 \'ec\'e0\'f1\'f1\'e8\'e2, \'ea\'ee\'f2\'ee\'f0\'fb\'e9 \'f1\'ee\'e4\'e5\'f0\'e6\'e8\'f2 \'ed\'e0\'f1\'f2\'f0\'ee\'e9\'ea\'e8 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'e8 \'e4\'e0\'ed\'ed\'ee\'e3\'ee \'ea\'e0\'ed\'e0\'eb\'e0\par
+\f0\lang1033 SynID - \f1\lang1049\'e8\'e4\'e5\'ed\'f2\'e8\'f4\'e8\'ea\'e0\'f2\'ee\'f0 \'e2\'f0\'e5\'ec\'e5\'ed\'e8 \'ef\'ee\'f1\'eb\'e5\'e4\'ed\'e5\'e9 \'f1\'e8\'ed\'f5\'f0\'ee\'ed\'e8\'e7\'e0\'f6\'e8\'e8\par
+\f0\lang1033 SynStat - \f1\lang1049\'f1\'f2\'e0\'f2\'f3\'f1 \'e7\'e0\'ef\'e8\'f1\'e8 \'ef\'ee\'f1\'eb\'e5 \'ef\'ee\'f1\'eb\'e5\'e4\'ed\'e5\'e9 \'f1\'e8\'ed\'f5\'f0\'ee\'ed\'e8\'e7\'e0\'f6\'e8\'e8\par
+\f0\lang1033 SynDB - \f1\lang1049\'e8\'e4\'e5\'ed\'f2\'e8\'f4\'e8\'ea\'e0\'f2\'ee\'f0 (\'ed\'ee\'ec\'e5\'f0) \'e1\'e0\'e7\'fb \'e4\'e0\'ed\'ed\'fb\'f5, \'f1 \'ea\'ee\'f2\'ee\'f0\'ee\'e9 \'ef\'f0\'ee\'e8\'e7\'e2\'ee\'e4\'e8\'eb\'e0\'f1\'fc \'ef\'ee\'f1\'eb\'e5\'e4\'ed\'ff\'ff \'f1\'e8\'ed\'f5\'f0\'ee\'ed\'e8\'e7\'e0\'f6\'e8\'e8\par
+\par
+\par
+\b 2. \'d2\'e0\'e1\'eb\'e8\'f6\'e0 \'ef\'f0\'e8\'e1\'ee\'f0\'ee\'e2. \par
+\b0\par
+CREATE TABLE Device (\par
+    DeviceID INTEGER PRIMARY KEY\par
+                     UNIQUE,\par
+    DevName  TEXT,\par
+    SerialNo TEXT,\par
+    OwnerID  INTEGER,\par
+    Comment  TEXT,\par
+    SynID    INTEGER,\par
+    SynStat  INTEGER,\par
+    SynDB    INTEGER\par
+);\par
+\par
+\f0\lang1033 DeviceID - \f1\lang1049\'f3\'ed\'e8\'ea\'e0\'eb\'fc\'ed\'fb\'e9 \f0\lang1033 ID \f1\lang1049\'e7\'e0\'ef\'e8\'f1\'e8\par
+\f0\lang1033 DevName - \f1\lang1049\'ed\'e0\'e7\'e2\'e0\'ed\'e8\'e5 \'f2\'e8\'ef\'e0 \'ef\'f0\'e8\'e1\'ee\'f0\'e0,\par
+\f0\lang1033 SerialNo - \f1\lang1049\'f1\'e5\'f0\'e8\'e9\'ed\'fb\'e9 \'ed\'ee\'ec\'e5\'f0 \'ef\'f0\'e8\'e1\'ee\'f0\'e0\par
+\f0\lang1033 OwnerID - ID \f1\lang1049\'e7\'e0\'ef\'e8\'f1\'e8 \'e2\'eb\'e0\'e4\'e5\'eb\'fc\'f6\'e0\par
+\f0\lang1033 Comment - \f1\lang1049\'ea\'ee\'ec\'ec\'e5\'ed\'f2\'e0\'f0\'e8\'e9 \'ef\'ee\'eb\'fc\'e7\'ee\'e2\'e0\'f2\'e5\'eb\'ff\par
+\f0\lang1033 SynID, SynStat, SynDB - \f1\lang1049\'f1\'ec.\'e2\'fb\'f8\'e5.\par
+\par
+\par
+\b 3. \'d2\'e0\'e1\'eb\'e8\'f6\'e0 \'e2\'eb\'e0\'e4\'e5\'eb\'fc\'f6\'e5\'e2.\par
+\b0\par
+CREATE TABLE Owner (\par
+    OwnerID   INTEGER PRIMARY KEY\par
+                      UNIQUE,\par
+    OwnerName TEXT,\par
+    Comment   TEXT,\par
+    SynID     INTEGER,\par
+    SynStat   INTEGER,\par
+    SynDB     INTEGER\par
+);\par
+\par
+\f0\lang1033 OwnerID - \f1\lang1049\'f3\'ed\'e8\'ea\'e0\'eb\'fc\'ed\'fb\'e9 \f0\lang1033 ID \f1\lang1049\'e7\'e0\'ef\'e8\'f1\'e8\par
+\f0\lang1033 OwnerName - \f1\lang1049\'ed\'e0\'e7\'e2\'e0\'ed\'e8\'e5 \'e2\'eb\'e0\'e4\'e5\'eb\'fc\'f6\'e0. \par
+\f0\lang1033 Comment - \f1\lang1049\'ea\'ee\'ec\'ec\'e5\'ed\'f2\'e0\'f0\'e8\'e9 \'ef\'ee\'eb\'fc\'e7\'ee\'e2\'e0\'f2\'e5\'eb\'ff\par
+\f0\lang1033 SynID, SynStat, SynDB - \f1\lang1049\'f1\'ec.\'e2\'fb\'f8\'e5.\par
+\par
+\b\par
+4. \'d2\'e0\'e1\'eb\'e8\'f6\'e0 \'ee\'ef\'e5\'f0\'e0\'f2\'ee\'f0\'ee\'e2. \par
+\b0\par
+CREATE TABLE Operator (\par
+    OperatorID   INTEGER PRIMARY KEY\par
+                         UNIQUE,\par
+    OperatorName TEXT,\par
+    Comment      TEXT,\par
+    SynID        INTEGER,\par
+    SynStat      INTEGER,\par
+    SynDB        INTEGER\par
+);\par
+\par
+\f0\lang1033 OperatorID - \f1\lang1049\'f3\'ed\'e8\'ea\'e0\'eb\'fc\'ed\'fb\'e9 \f0\lang1033 ID \f1\lang1049\'e7\'e0\'ef\'e8\'f1\'e8\par
+\f0\lang1033 OperatorName - \f1\lang1049\'e8\'ec\'ff \'ee\'ef\'e5\'f0\'e0\'f2\'ee\'f0\'e0 \par
+\f0\lang1033 Comment - \f1\lang1049\'ea\'ee\'ec\'ec\'e5\'ed\'f2\'e0\'f0\'e8\'e9 \'ef\'ee\'eb\'fc\'e7\'ee\'e2\'e0\'f2\'e5\'eb\'ff\par
+\f0\lang1033 SynID, SynStat, SynDB - \f1\lang1049\'f1\'ec.\'e2\'fb\'f8\'e5.\par
+\f0\lang1033\par
+\par
+\b\f1\lang1049 5. \'d2\'e0\'e1\'eb\'e8\'f6\'e0 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ee\'ea (\'ee\'f1\'ed\'ee\'e2\'ed\'e0\'ff).\par
+\b0\par
+CREATE TABLE CalibrSet (\par
+    ProtocolID     INTEGER  UNIQUE\par
+                            PRIMARY KEY,\par
+    DeviceID       INTEGER,\par
+    ChannelID      INTEGER,\par
+    ChannelName    TEXT,\par
+    OperatorID     INTEGER,\par
+    CalibrDate     DATETIME,\par
+    NextCalibrDate DATETIME,\par
+    NextCalibrId   INTEGER,\par
+    State          INTEGER,\par
+    MethodName     TEXT,\par
+    Comment        TEXT,\par
+    CalibrData     BLOB,\par
+    SynID          INTEGER,\par
+    SynStat        INTEGER,\par
+    SynDB          INTEGER\par
+);\par
+\par
+\f0\lang1033 ProtocolID \f1\lang1049 - \'f3\'ed\'e8\'ea\'e0\'eb\'fc\'ed\'fb\'e9 \f0\lang1033 ID \f1\lang1049\'e7\'e0\'ef\'e8\'f1\'e8\par
+\f0\lang1033 DeviceID - ID \f1\lang1049\'ef\'f0\'e8\'e1\'ee\'f0\'e0\par
+\f0\lang1033 ChannelID - ID \f1\lang1049\'ea\'e0\'eb\'e8\'e1\'f0\'f3\'e5\'ec\'ee\'e3\'ee \'ea\'e0\'ed\'e0\'eb\'e0\par
+\f0\lang1033 ChannelName - \f1\lang1049\'ed\'e0\'e7\'e2\'e0\'ed\'e8\'e5 \'ea\'e0\'eb\'e8\'e1\'f0\'f3\'e5\'ec\'ee\'e3\'ee \'ea\'e0\'ed\'e0\'eb\'e0\par
+\f0\lang1033 OperatorID - ID \f1\lang1049\'ee\'ef\'e5\'f0\'e0\'f2\'ee\'f0\'e0\par
+\f0\lang1033 CalibrDate - \f1\lang1049\'e4\'e0\'f2\'e0 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'e8\par
+\f0\lang1033 NextCalibrDate - \f1\lang1049\'e4\'e0\'f2\'e0 \'f1\'eb\'e5\'e4\'f3\'fe\'f9\'e5\'e9 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'e8\par
+\f0\lang1033 State - \f1\lang1049\'f1\'ee\'f1\'f2\'ee\'ff\'ed\'e8\'e5 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'e8\par
+\f0\lang1033 MethodName - \f1\lang1049\'ed\'e0\'e7\'e2\'e0\'ed\'e8\'e5 \'e2\'fb\'e1\'f0\'e0\'ed\'ed\'ee\'e9 \'ec\'e5\'f2\'ee\'e4\'e8\'ea\'e8 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'e8\par
+\f0\lang1033 Comment - \f1\lang1049\'ea\'ee\'ec\'ec\'e5\'ed\'f2\'e0\'f0\'e8\'e9 \'ef\'ee\'eb\'fc\'e7\'ee\'e2\'e0\'f2\'e5\'eb\'ff\par
+\f0\lang1033 CalibrData - \f1\lang1049\'e1\'e0\'e9\'f2\'ee\'e2\'fb\'e9 \'ec\'e0\'f1\'f1\'e8\'e2, \'ea\'ee\'f2\'ee\'f0\'fb\'e9 \'f1\'ee\'e4\'e5\'f0\'e6\'e8\'f2 \'e4\'e0\'ed\'ed\'fb\'e5 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'e8\par
+\f0\lang1033 SynID, SynStat, SynDB - \f1\lang1049\'f1\'ec.\'e2\'fb\'f8\'e5.\par
+\par
+\par
+\b 6. \'d1\'e8\'f1\'f2\'e5\'ec\'ed\'e0\'ff \'f2\'e0\'e1\'eb\'e8\'f6\'e0\par
+\b0\par
+CREATE TABLE System (\par
+    SystemID INTEGER PRIMARY KEY\par
+                     UNIQUE,\par
+    SysData  INTEGER,\par
+    SysTime  INTEGER,\par
+    SysFlag  BOOL\par
+);\par
+\par
+\f0\lang1033 SystemID - \f1\lang1049\'f1\'eb\'f3\'e6\'e5\'e1\'ed\'fb\'e9 \'e8\'e4\'e5\'ed\'f2\'e8\'f4\'e8\'ea\'e0\'f2\'ee\'f0 \'e7\'e0\'ef\'e8\'f1\'e8. \'c2 \'e7\'e0\'e2\'e8\'f1\'e8\'ec\'ee\'f1\'f2\'e8 \'ee\'f2 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'ff:\par
+= 1. \'c2 \'fd\'f2\'ee\'ec \'f1\'eb\'f3\'f7\'e0\'e5, \'e2 \f0\lang1033 SysData \f1\lang1049\'f1\'ee\'e4\'e5\'f0\'e6\'e8\'f2\'f1\'ff \'f2\'e8\'ef \'e1\'e0\'e7\'fb \'e4\'e0\'ed\'ed\'fb\'f5, \'e0 \'e2 \f0\lang1033 SysTime \f1\lang1049\'e2\'f0\'e5\'ec\'ff \'f1\'ee\'e7\'e4\'e0\'ed\'e8\'ff \'e1\'e0\'e7\'fb \'e4\'e0\'ed\'ed\'fb\'f5\par
+= 2. \'c2 \'fd\'f2\'ee\'ec \'f1\'eb\'f3\'f7\'e0\'e5, \'e2 \f0\lang1033 SysData \f1\lang1049\'f1\'ee\'e4\'e5\'f0\'e6\'e8\'f2\'f1\'ff \'ed\'ee\'ec\'e5\'f0 \'e1\'e0\'e7\'fb \'e4\'e0\'ed\'ed\'fb\'f5, \'e0 \'e2 \f0\lang1033 SysTime - \f1\lang1049\'f2\'e0\'ea\'e6\'e5 \'e2\'f0\'e5\'ec\'ff \'f1\'ee\'e7\'e4\'e0\'ed\'e8\'ff \'e1\'e0\'e7\'fb.\par
+= 3. \'c2 \'fd\'f2\'ee\'ec \'f1\'eb\'f3\'f7\'e0\'e5, \'e2 \f0\lang1033 SysData \f1\lang1049\'f1\'ee\'e4\'e5\'f0\'e6\'e8\'f2\'f1\'ff \'ed\'ee\'ec\'e5\'f0 \'e1\'e0\'e7\'fb, \'f1 \'ea\'ee\'f2\'ee\'f0\'ee\'e9 \'ef\'f0\'ee\'e8\'e7\'e2\'ee\'e4\'e8\'eb\'e0\'f1\'fc \'ef\'ee\'f1\'eb\'e5\'e4\'ed\'ff\'ff \'f1\'e8\'ed\'f5\'f0\'ee\'ed\'e8\'e7\'e0\'f6\'e8\'ff, \'e0 \'e2 \f0\lang1033 SysTime - \f1\lang1049\'e2\'f0\'e5\'ec\'ff \'fd\'f2\'ee\'e9 \'ef\'ee\'f1\'eb\'e5\'e4\'ed\'e5\'e9 \'f1\'e8\'ed\'f5\'f0\'ee\'ed\'e8\'e7\'e0\'f6\'e8\'e8.\par
+= \f0\lang1033 N. \f1\lang1049\'c2 \'fd\'f2\'ee\'ec \'f1\'eb\'f3\'f7\'e0\'e5, \f0\lang1033 N \f1\lang1049\'e8 \f0\lang1033 SysData \f1\lang1049\'ef\'ee\'ea\'e0\'e7\'fb\'e2\'e0\'fe\'f2 \'ed\'ee\'ec\'e5\'f0 \'e1\'e0\'e7\'fb, \'f1 \'ea\'ee\'f2\'ee\'f0\'ee\'e9 \'f5\'ee\'f2\'ff \'e1\'fb \'ee\'e4\'ed\'e0\'e6\'e4\'fb \'ef\'f0\'ee\'e2\'ee\'e4\'e8\'eb\'e0\'f1\'fc \'f1\'e8\'ed\'f5\'f0\'ee\'ed\'e8\'e7\'e0\'f6\'e8\'ff, \'e0 \'e2 \f0\lang1033 SysTime - \f1\lang1049\'e2\'f0\'e5\'ec\'ff \'ef\'ee\'f1\'eb\'e5\'e4\'ed\'e5\'e9 \'f1\'e8\'ed\'f5\'f0\'ee\'ed\'e8\'e7\'e0\'f6\'e8\'e8 \'f1 \'fd\'f2\'ee\'e9 \'e1\'e0\'e7\'ee\'e9. \par
+\par
+\'d2\'e8\'ef \'e1\'e0\'e7\'fb \'e4\'e0\'ed\'ed\'fb\'f5: 2 - \'ee\'f1\'ed\'ee\'e2\'ed\'e0\'ff, 3 - \'eb\'ee\'ea\'e0\'eb\'fc\'ed\'e0\'ff. \par
+\par
+\par
+\b\'c7\'ed\'e0\'f7\'e5\'ed\'e8\'ff, \'ea\'ee\'f2\'ee\'f0\'fb\'e5 \'f1\'ee\'e4\'e5\'f0\'e6\'e0\'f2\'f1\'ff \'e2 \'ef\'ee\'eb\'ff\'f5. \par
+\par
+\b0\'d1\'ee\'e1\'f1\'f2\'e2\'e5\'ed\'ed\'ee \'f1\'ee\'e4\'e5\'f0\'e6\'e0\'ed\'e8\'e5 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'e8 \'f5\'f0\'e0\'ed\'e8\'f2\'f1\'ff \'e2 \'e1\'e0\'e9\'f2\'ee\'e2\'ee\'ec \'ec\'e0\'f1\'f1\'e8\'e2\'e5. \par
+\par
+\'c2\'f1\'e5 \'ee\'f1\'f2\'e0\'eb\'fc\'ed\'fb\'e5 \'ef\'ee\'eb\'ff \'ff\'e2\'eb\'ff\'fe\'f2\'f1\'ff \'eb\'e8\'e1\'ee \'f1\'eb\'f3\'e6\'e5\'e1\'ed\'fb\'ec\'e8, \'eb\'e8\'e1\'ee \'e2\'f1\'ef\'ee\'ec\'ee\'e3\'e0\'f2\'e5\'eb\'fc\'ed\'ee-\'e8\'ed\'f4\'ee\'f0\'ec\'e0\'f6\'e8\'ee\'ed\'ed\'fb\'ec\'e8, \'f7\'f2\'ee\'e1\'fb \'ed\'e5 \'eb\'e5\'e7\'f2\'fc \'ea\'e0\'e6\'e4\'fb\'e9 \'f0\'e0\'e7 \'e2 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'f3. \'c1\'ee\'eb\'fc\'f8\'e8\'ed\'f1\'f2\'e2\'ee \'e8\'e7 \'ed\'e8\'f5 \'ef\'f0\'ee\'f1\'f2\'ee \'f1\'ee\'e4\'e5\'f0\'e6\'e0\'f2 \'f2\'e5\'ea\'f1\'f2\'ee\'e2\'f3\'fe \'e8\'ed\'f4\'ee\'f0\'ec\'e0\'f6\'e8\'fe. \par
+\par
+\'d2\'e5\'ea\'f1\'f2 \'e2 \'f2\'e5\'ea\'f1\'f2\'ee\'e2\'fb\'f5 \'ef\'ee\'eb\'ff\'f5 \'f1\'ee\'e4\'e5\'f0\'e6\'e8\'f2\'f1\'ff \'e2 \'f4\'ee\'f0\'ec\'e0\'f2\'e5 \f0\lang1033 UTF-8. \f1\lang1049\'c2 \'ed\'e0\'f7\'e0\'eb\'e5 \'ea\'e0\'e6\'e4\'ee\'e3\'ee \'f2\'e5\'ea\'f1\'f2\'e0 \'f0\'e0\'f1\'ef\'ee\'eb\'ee\'e6\'e5\'ed\'fb \'f2\'f0\'e8 \'f1\'eb\'f3\'e6\'e5\'e1\'ed\'fb\'f5 \'e1\'e0\'e9\'f2\'e0 - \'ec\'e0\'f0\'ea\'e5\'f0 \'ea\'ee\'e4\'e8\'f0\'ee\'e2\'ea\'e8 "EF BB BF"\par
+\par
+\'c2\'e0\'e6\'ed\'fb\'ec \'ff\'e2\'eb\'ff\'e5\'f2\'f1\'ff \'f1\'eb\'f3\'e6\'e5\'e1\'ed\'ee\'e5 \'ef\'ee\'eb\'e5 \f0\lang1033 SynStat. \f1\lang1049\'c7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \f0\lang1033 SynStat = 4 \f1\lang1049\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \f0\lang1033 DEL, \f1\lang1049\'f2\'ee \'e5\'f1\'f2\'fc, \'e4\'e0\'ed\'ed\'e0\'ff \'e7\'e0\'ef\'e8\'f1\'fc \'e1\'fb\'eb\'e0 \'f3\'e4\'e0\'eb\'e5\'ed\'e0 \'ef\'ee\'eb\'fc\'e7\'ee\'e2\'e0\'f2\'e5\'eb\'e5\'ec \'e8 \'e1\'ee\'eb\'fc\'f8\'e5 \'ed\'e5 \'ff\'e2\'eb\'ff\'e5\'f2\'f1\'ff \'e4\'e5\'e9\'f1\'f2\'e2\'e8\'f2\'e5\'eb\'fc\'ed\'ee\'e9.\par
+\par
+\'c4\'e0\'f2\'e0 \'f2\'e5\'ea\'f3\'f9\'e5\'e9 \'e8 \'ef\'ee\'f1\'eb\'e5\'e4\'f3\'fe\'f9\'e5\'e9 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'e8 \'e2 \'ef\'ee\'eb\'ff\'f5 \f0\lang1033 CalibrDate \f1\lang1049\'e8 \f0\lang1033 NextCalibrDate \f1\lang1049\'e7\'e0\'ef\'e8\'f1\'fb\'e2\'e0\'e5\'f2\'f1\'ff \'e2 \'e2\'e8\'e4\'e5\par
+\i\par
+2020-03-18 16:24:51\par
+\i0\par
+\par
+\'cf\'ee\'eb\'e5 \f0\lang1033 INTEGER \f1\lang1049\'e2 \'ee\'ef\'e8\'f1\'e0\'ed\'e8\'e8 \'f2\'e0\'e1\'eb\'e8\'f6 \'e2\'fb\'f8\'e5, \'e2 \'f2\'e8\'ef\'e0\'f5 \f0\lang1033 C++ \f1\lang1049\'f1\'ee\'e4\'e5\'f0\'e6\'e8\'f2 \'f2\'e8\'ef \b\f0\lang1033 long\f1\lang1049  \f0\lang1033 long \b0\f1\lang1049 (8 \'e1\'e0\'e9\'f2\'ed\'ee\'e5 \'f6\'e5\'eb\'ee\'e5 \'f7\'e8\'f1\'eb\'ee)\par
+\par
+\'c2\'f1\'e5 \'f3\'ed\'e8\'ea\'e0\'eb\'fc\'ed\'fb\'e5 \'e8\'e4\'e5\'ed\'f2\'e8\'f4\'e8\'ea\'e0\'f2\'ee\'f0\'fb \'e7\'e0\'ef\'e8\'f1\'e5\'e9 \f0\lang1033 (ID)\f1\lang1049 , \'e0 \'f2\'e0\'ea\'e6\'e5 \'e2\'f0\'e5\'ec\'ff \'f1\'ee\'e7\'e4\'e0\'ed\'e8\'ff \'e8\'eb\'e8 \'f1\'e8\'ed\'f5\'f0\'ee\'ed\'e8\'e7\'e0\'f6\'e8\'e8 \'e1\'e0\'e7\'fb \'e4\'e0\'ed\'ed\'fb\'f5,\f0\lang1033  \f1\lang1049\'f1\'ee\'e7\'e4\'e0\'fe\'f2\'f1\'ff \'e8\'e7 \'f2\'e5\'ea\'f3\'f9\'e5\'e3\'ee \'e2\'f0\'e5\'ec\'e5\'ed\'e8 (\'ed\'e0 \'ec\'ee\'ec\'e5\'ed\'f2 \'f1\'ee\'e7\'e4\'e0\'ed\'e8\'ff \'e8\'eb\'e8 \'e8\'e7\'ec\'e5\'ed\'e5\'ed\'e8\'ff \'e7\'e0\'ef\'e8\'f1\'e8), \'ef\'ee \'f1\'eb\'e5\'e4\'f3\'fe\'f9\'e5\'ec\'f3 \'e0\'eb\'e3\'ee\'f0\'e8\'f2\'ec\'f3 (\'ef\'ee\'eb\'f3\'f7\'e0\'e5\'ec \f0\lang1033 GetCurrentTime\f1\lang1049 , \'f3\'ec\'ed\'ee\'e6\'e0\'e5\'ec \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'ed\'e0 \'ec\'e8\'eb\'eb\'e8\'e0\'f0\'e4 \'e8 \'ef\'f0\'e8\'e2\'ee\'e4\'e8\'ec \'ea \'f6\'e5\'eb\'ee\'ec\'f3):\par
+\par
+\cf1\f2 long\cf0  \cf1 long\cf0  CSQLiteBase::CreateIDTime()\par
+\{\par
+\tab\cf1 long\cf0  \cf1 long\cf0  id;\par
+\tab\cf1 double\cf0  time, day, part;\par
+\tab COleDateTime timeNow;\par
+\cf2 ///--- \f3\'f2\'e5\'ea\'f3\'f9\'e5\'e5 \'e2\'f0\'e5\'ec\'ff \'e2 \'e2\'e8\'e4\'e5 \'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'e0 \'e4\'ed\'e5\'e9 \'ef\'eb\'fe\'f1 \'e4\'f0\'ee\'e1\'ed\'e0\'ff \'f7\'e0\'f1\'f2\'fc \'e4\'ed\'ff\cf0\par
+\cf2 ///--- \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'f0\'e0\'e2\'ed\'ee \'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'f3 \'e4\'ed\'e5\'e9, \'ef\'f0\'ee\'f8\'e5\'e4\'f8\'e8\'f5 \'f1 30 \'e4\'e5\'ea\'e0\'e1\'f0\'ff 1899 \'e3\'ee\'e4\'e0. \cf0\par
+\tab timeNow = COleDateTime::GetCurrentTime();\par
+\tab time = timeNow.m_dt;\par
+\cf2 ///--- \'e4\'e5\'eb\'e8\'ec \'ed\'e0 \'f6\'e5\'eb\'f3\'fe \'e8 \'e4\'f0\'ee\'e1\'ed\'f3\'fe \'f7\'e0\'f1\'f2\'e8\cf0\par
+\tab part = modf(time, &day);\par
+\cf2 ///--- \'ef\'e5\'f0\'e5\'e2\'ee\'e4\'e8\'ec \'e2 8-\'e1\'e0\'e9\'f2\'ed\'ee\'e5 \'f6\'e5\'eb\'ee\'f7\'e8\'f1\'eb\'e5\'ed\'ed\'ee\'e5 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'e8\'e4\'e5\'ed\'f2\'e8\'f4\'e8\'ea\'e0\'f2\'ee\'f0\'e0\cf0\par
+\cf2 ///--- \'f3\'ec\'ed\'ee\'e6\'e5\'ed\'e8\'e5 \'ed\'e0 \'ec\'e8\'eb\'eb\'e8\'e0\'f0\'e4 \'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2, \'f7\'f2\'ee \'ee\'f2\'eb\'e8\'f7\'e8\'e5 \'ed\'e0 1 \'f1\'ee\'ee\'f2\'e2\'e5\'f2\'f1\'f2\'e2\'f3\'e5\'f2 \'f0\'e0\'e7\'ed\'e8\'f6\'e5 \'e2 86 \'ec\'e8\'ea\'f0\'ee\'f1\'e5\'ea\'f3\'ed\'e4.\cf0\par
+\cf2 ///--- \'f2\'e0\'ea\'e8\'ec \'ee\'e1\'f0\'e0\'e7\'ee\'ec, \'f2\'e5\'ea\'f3\'f9\'e5\'e5 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'e8\'e4\'e5\'ed\'f2\'e8\'f4\'e8\'ea\'e0\'f2\'ee\'f0\'e0 - \'ef\'ee\'f0\'ff\'e4\'ea\'e0 42 850 000 000 000. \cf0\par
+\cf2 ///--- \'ec\'e0\'ea\'f1\'e8\'ec\'e0\'eb\'fc\'ed\'ee\'e5 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 - \'ef\'ee\'f0\'ff\'e4\'ea\'e0 1e19, \'f5\'e2\'e0\'f2\'e8\'f2 \'e4\'ee \'e1\'e5\'f1\'ea\'ee\'ed\'e5\'f7\'ed\'ee\'f1\'f2\'e8  \cf0\par
+\tab id = (\cf1 long\cf0  \cf1 long\cf0 )day;\par
+\tab id *= 1e9;\par
+\tab part *= 1e9;\par
+\tab id += (\cf1 long\cf0  \cf1 long\cf0 )floor(part);\par
+\par
+\tab\cf1 return\cf0  id;\par
+\}\par
+\f1\par
+\'cd\'e0 \'ed\'e0\'f1\'f2\'ee\'ff\'f9\'e8\'e9 \'ec\'ee\'ec\'e5\'ed\'f2 \'e8\'e4\'e5\'ed\'f2\'e8\'f4\'e8\'ea\'e0\'f2\'ee\'f0\'fb \'e1\'f3\'e4\'f3\'f2 \'e8\'ec\'e5\'f2\'fc \'e2\'e8\'e4 \'f2\'e8\'ef\'e0  \i 44054460405092\i0\par
+\par
+\par
+\b\'d1\'f2\'f0\'f3\'ea\'f2\'f3\'f0\'e0 \'e1\'e0\'e9\'f2\'ee\'e2\'ee\'e3\'ee \'ec\'e0\'f1\'f1\'e8\'e2\'e0\b0 . \par
+\par
+\'c7\'e0\'ef\'e8\'f1\'fc \'f1 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'ee\'e9 \f0\lang1033 CalibrData \f1\lang1049\'e8 \'e7\'e0\'ef\'e8\'f1\'fc \'f1 \'ed\'e0\'f1\'f2\'f0\'ee\'e9\'ea\'e0\'ec\'e8 \f0\lang1033 SetupData \f1\lang1049\'e4\'eb\'ff \'ea\'e0\'e6\'e4\'ee\'e9 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'e8 \'e8\'ec\'e5\'fe\'f2 \'ee\'e4\'e8\'ed\'e0\'ea\'ee\'e2\'f3\'fe \'f1\'f2\'f0\'f3\'ea\'f2\'f3\'f0\'f3.\par
+\par
+\'c2\'ed\'e8\'ec\'e0\'ed\'e8\'e5! \'d1\'f2\'f0\'f3\'ea\'f2\'f3\'f0\'e0 \'ed\'e5 \'ef\'ee\'f1\'f2\'ee\'ff\'ed\'ed\'e0. \'ce\'ed\'e0 \'ec\'ee\'e6\'e5\'f2 \'e8\'e7\'ec\'e5\'ed\'ff\'f2\'fc\'f1\'ff \'e2 \'e7\'e0\'e2\'e8\'f1\'e8\'ec\'ee\'f1\'f2\'e8 \'ee\'f2 \'f2\'e8\'ef\'e0 \'e8 \'e2\'e8\'e4\'e0 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'e8. \par
+\par
+\'d2\'e8\'ef\'fb \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'e8 \'ed\'e0 \'ed\'e0\'f1\'f2\'ee\'ff\'f9\'e8\'e9 \'f1\'eb\'e5\'e4\'f3\'fe\'f9\'e8\'e5:\par
+0 - \'ed\'e5 \'e7\'e0\'e4\'e0\'ed\'ee, \par
+1 - \'f1\'f2\'e0\'ed\'e4\'e0\'f0\'f2\'ed\'e0\'ff, \par
+2 - \'ef\'e0\'f0\'e0\'ec\'e5\'f2\'f0\'e8\'f7\'e5\'f1\'ea\'e0\'ff, \par
+3 - \'ec\'ed\'ee\'e3\'ee\'e7\'ee\'ed\'e4\'ee\'e2\'e0\'ff, \par
+4 - \'e8\'ed\'ea\'eb\'e8\'ed\'ee\'ec\'e5\'f2\'f0\'e8\'f7\'e5\'f1\'ea\'e0\'ff, \par
+16 - \'e0\'ea\'f3\'f1\'f2\'e8\'f7\'e5\'f1\'ea\'e0\'ff. \par
+\par
+\par
+\'ce\'e1\'f9\'e0\'ff \'f1\'f5\'e5\'ec\'e0 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ee\'f7\'ed\'ee\'e9 \'e7\'e0\'ef\'e8\'f1\'e8: \par
+\par
+\f0\lang1033 WORD Version;   // \f1\lang1049\'e2\'e5\'f0\'f1\'e8\'ff \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ee\'f7\'ed\'ee\'e9 \'e7\'e0\'ef\'e8\'f1\'e8\f0\lang1033\par
+WORD CalibrSize;  // \f1\lang1049\'f0\'e0\'e7\'ec\'e5\'f0 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ee\'f7\'ed\'ee\'e9 \'e7\'e0\'ef\'e8\'f1\'e8 \'e2 \'e1\'e0\'e9\'f2\'e0\'f5\par
+\f0\lang1033 INT CalibrType // \f1\lang1049\'f2\'e8\'ef \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'e8\f0\lang1033  \f1\lang1049\par
+\'dd\'eb\'e5\'ec\'e5\'ed\'f2 1\par
+\'dd\'eb\'e5\'ec\'e5\'ed\'f2 2\par
+...\par
+\'dd\'eb\'e5\'ec\'e5\'ed\'f2 \f0\lang1033 N\par
+\par
+\par
+\par
+\f1\lang1049\'d0\'e0\'e7\'ec\'e5\'f0 \'e8 \'f1\'ee\'e4\'e5\'f0\'e6\'e0\'ed\'e8\'e5 \'ea\'e0\'e6\'e4\'ee\'e3\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e7\'e0\'e2\'e8\'f1\'e8\'f2 \'ee\'f2 \'f2\'e8\'ef\'e0 \'f1\'ee\'e4\'e5\'f0\'e6\'e0\'f9\'e8\'f5\'f1\'ff \'e2 \'ed\'e5\'ec \'e4\'e0\'ed\'ed\'fb\'f5. \par
+\par
+\f0\lang1033 WORD : \f1\lang1049 2 \'e1\'e0\'e9\'f2\'e0\par
+\f0\lang1033 unsigned short data;\f1\lang1049\par
+\par
+\f0\lang1033 INT : \f1\lang1049 4 \'e1\'e0\'e9\'f2\'e0. \f0\lang1033\par
+int data;\f1\lang1049\par
+\f0\lang1033\par
+FLOAT :\f1\lang1049  4 \'e1\'e0\'e9\'f2\'e0\f0\lang1033\par
+float data;\f1\lang1049\par
+\par
+\f0\lang1033 DOUBLE : \f1\lang1049 8 \'e1\'e0\'e9\'f2\f0\lang1033\par
+double data;\f1\lang1049\par
+\f0\lang1033\par
+CSTRING : \f1\lang1049 4 + \f0\lang1033 N*2\par
+int N;\f1\lang1049    \f0\lang1033 // \f1\lang1049\'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'f1\'e8\'ec\'e2\'ee\'eb\'ee\'e2\par
+\'f1\'f2\'f0\'ee\'ea\'e0 \'e4\'eb\'e8\'ed\'ee\'e9 \f0\lang1033 N*2\f1\lang1049  \'e1\'e0\'e9\'f2. \par
+\par
+\'c5\'f1\'eb\'e8 \'e2 \f0\lang1033 CString \f1\lang1049\'ef\'f3\'f1\'f2\'e0\'ff \'f1\'f2\'f0\'ee\'ea\'e0 (\'ed\'e5\'f2 \'e4\'e0\'ed\'ed\'fb\'f5), \'f2\'ee \f0\lang1033 N = 0\f1\lang1049 , \'e8 \'f0\'e0\'e7\'ec\'e5\'f0 \'ef\'ee\'eb\'ff 4 \'e1\'e0\'e9\'f2\'e0. \f0\lang1033\par
+\f1\lang1049\par
+\'ec\'e0\'f1\'f1\'e8\'e2 \f0\lang1033 FLOAT\f1\lang1049 :\f0\lang1033  4 + N*4\f1\lang1049\par
+\f0\lang1033 int N;\par
+float data[N];\f1\lang1049\par
+\par
+\'ec\'e0\'f1\'f1\'e8\'e2 \f0\lang1033 DOUBLE: 4 + N*8\par
+int N;\par
+double data[N];\par
+\par
+\f1\lang1049\par
+\par
+\par
+\par
+\par
+\par
+\par
+\b\'d1\'ef\'e8\'f1\'ee\'ea \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'ee\'e2 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ee\'f7\'ed\'ee\'e9 \'e7\'e0\'ef\'e8\'f1\'e8:\par
+\b0\f3\fs18\par
+\par
+\f4\lang1033 WORD Version;   \tab\tab // \f3\lang1049\'e2\'e5\'f0\'f1\'e8\'ff \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ee\'f7\'ed\'ee\'e9 \'e7\'e0\'ef\'e8\'f1\'e8\f4\lang1033\par
+WORD CalibrSize;  \tab\tab // \f3\lang1049\'f0\'e0\'e7\'ec\'e5\'f0 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ee\'f7\'ed\'ee\'e9 \'e7\'e0\'ef\'e8\'f1\'e8 \'e2 \'e1\'e0\'e9\'f2\'e0\'f5\par
+\f4\lang1033 Int CalibrType; \tab\tab // \f3\lang1049\'f2\'e8\'ef \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'e8\f4\lang1033  \par
+\f3\lang1049\par
+\f4\lang1033 Int m_Flags;\tab\tab\tab // \f3\lang1049\'f4\'eb\'e0\'e3\'e8\par
+\f4\lang1033 CString m_sInfo;\tab\tab // \f3\lang1049\'f0\'e5\'e7\'e5\'f0\'e2\'ed\'ee\'e5 \'ef\'ee\'eb\'e5\par
+\par
+\f4\lang1033 CString m_DevName; \tab\tab // \f3\lang1049\'ed\'e0\'e7\'e2\'e0\'ed\'e8\'e5 \'ef\'f0\'e8\'e1\'ee\'f0\'e0\par
+\f4\lang1033 CString m_Serial;\tab\tab // \f3\lang1049\'ed\'ee\'ec\'e5\'f0 \'ef\'f0\'e8\'e1\'ee\'f0\'e0\par
+\f4\lang1033 CString m_DevMade;\tab\tab // \f3\lang1049\'e8\'e7\'e3\'ee\'f2\'ee\'e2\'e8\'f2\'e5\'eb\'fc \'ef\'f0\'e8\'e1\'ee\'f0\'e0\par
+\f4\lang1033 CString m_ClbrFileName;\tab // \f3\lang1049\'ed\'e0\'e7\'e2\'e0\'ed\'e8\'e5 \'e4\'f0\'e0\'e9\'e2\'e5\'f0\'e0 \'c3\'e5\'ee\'f4\'e8\'e7\'e8\'ea\'e8-05, \'f7\'e5\'f0\'e5\'e7 \'ea\'ee\'f2\'ee\'f0\'fb\'e9 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'e0\'eb\'e8\par
+\'d1\f4\lang1033 String m_ParamName;\tab\tab // \f3\lang1049\'ed\'e0\'e7\'e2\'e0\'ed\'e8\'e5 \'ea\'e0\'eb\'e8\'e1\'f0\'f3\'e5\'ec\'ee\'e3\'ee \'ef\'e0\'f0\'e0\'ec\'e5\'f2\'f0\'e0\f4\lang1033  \f3\lang1049\par
+\tab\tab\f4\lang1033\par
+CString m_ToolName;\f3\lang1049\tab\tab\f4\lang1033 // \f3\lang1049\'ed\'e0\'e7\'e2\'e0\'ed\'e8\'e5 \'e4\'e0\'f2\'f7\'e8\'ea\'e0\f4\lang1033\tab\f3\lang1049\tab\tab\f4\lang1033\tab\par
+CString m_ToolMade;\tab\tab // \f3\lang1049\'e8\'e7\'e3\'ee\'f2\'ee\'e2\'e8\'f2\'e5\'eb\'fc\f4\lang1033\par
+CString m_ToolModel;\f3\lang1049\tab\tab\f4\lang1033 // \f3\lang1049\'ec\'ee\'e4\'e5\'eb\'fc\f4\lang1033\par
+CString m_ToolRange;\f3\lang1049\tab\tab\f4\lang1033 // \f3\lang1049\'e4\'e8\'e0\'ef\'e0\'e7\'ee\'ed\f4\lang1033\par
+CString m_ToolResol;\tab\tab //\f3\lang1049  \'f0\'e0\'e7\'f0\'e5\'f8\'e5\'ed\'e8\'e5\f4\lang1033\par
+CString m_ToolAcc;\tab\tab //\f3\lang1049  \'f2\'ee\'f7\'ed\'ee\'f1\'f2\'fc\f4\lang1033\par
+CString m_ToolAdd;\tab\tab //\f3\lang1049  \'e4\'ee\'ef\'ee\'eb\'ed\'e8\'f2\'e5\'eb\'fc\'ed\'e0\'ff \'e8\'ed\'f4\'ee\'f0\'ec\'e0\'f6\'e8\'ff\f4\lang1033\par
+\par
+CString m_CDevInco;\f3\lang1049\tab\tab\f4\lang1033 // \f3\lang1049\'ed\'e0\'e7\'e2\'e0\'ed\'e8\'e5 \'f3\'f1\'f2\'e0\'ed\'ee\'e2\'ea\'e8\f4\lang1033\par
+CString m_CDevMade;\tab\tab //\f3\lang1049  \'e8\'e7\'e3\'ee\'f2\'ee\'e2\'e8\'f2\'e5\'eb\'fc\f4\lang1033\par
+CString m_CDevModel;\tab\tab //\f3\lang1049  \'ec\'ee\'e4\'e5\'eb\'fc\f4\lang1033\par
+CString m_CDevRange;\tab\tab //\f3\lang1049  \'e4\'e8\'e0\'ef\'e0\'e7\'ee\'ed\f4\lang1033\par
+CString m_CDevResol;\tab\tab //\f3\lang1049  \'f0\'e0\'e7\'f0\'e5\'f8\'e5\'ed\'e8\'e5\f4\lang1033\par
+CString m_CDevAcc;\tab\tab //\f3\lang1049  \'f2\'ee\'f7\'ed\'ee\'f1\'f2\'fc\f4\lang1033\par
+CString m_CDevAdd;\tab\tab //\f3\lang1049  \'e4\'ee\'ef\'ee\'eb\'ed\'e8\'f2\'e5\'eb\'fc\'ed\'e0\'ff \'e8\'ed\'f4\'ee\'f0\'ec\'e0\'f6\'e8\'ff\par
+\par
+\f4\lang1033 CString m_CalibrInfo;\tab\tab // \f3\lang1049\'ee\'ef\'e8\'f1\'e0\'ed\'e8\'e5 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'e8\f4\lang1033\par
+CString m_MethodSelectedName;// \f3\lang1049\'ed\'e0\'e7\'e2\'e0\'ed\'e8\'e5 \'e2\'fb\'e1\'f0\'e0\'ed\'ed\'ee\'e9 \'ec\'e5\'f2\'ee\'e4\'e8\'ea\'e8 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'e8\par
+\f4\lang1033 CString m_ExtCalibrInfo;\f3\lang1049\tab\f4\lang1033 // \f3\lang1049\'e4\'ee\'ef\'ee\'eb\'ed\'e8\'f2\'e5\'eb\'fc\'ed\'e0\'ff \'e8\'ed\'f4\'ee\'f0\'ec\'e0\'f6\'e8\'ff \'ef\'ee \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'e5\f4\lang1033\par
+\cf3 int m_MethodSelectedID;\f3\lang1049\tab\f4\lang1033 //\f3\lang1049  \'e8\'e4\'e5\'ed\'f2\'e8\'f4\'e8\'ea\'e0\'f2\'ee\'f0 \'e2\'fb\'e1\'f0\'e0\'ed\'ed\'ee\'e9 \'ec\'e5\'f2\'ee\'e4\'e8\'ea\'e8 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'e8\f4\lang1033\par
+\cf0\par
+\cf4 CString m_DefIn1;\f3\lang1049\tab\tab\f4\lang1033 // \f3\lang1049\'ed\'e0\'e7\'e2\'e0\'ed\'e8\'ff \'e2\'f5\'ee\'e4\'ed\'fb\'f5 \'ea\'e0\'ed\'e0\'eb\'ee\'e2 \'ef\'ee \'f3\'ec\'ee\'eb\'f7\'e0\'ed\'e8\'fe\f4\lang1033\par
+CString m_DefIn2;\par
+CString m_DefIn3;\f3\lang1049  \f4\lang1033\par
+CString m_DefOut1;\f3\lang1049\tab\tab\f4\lang1033 // \f3\lang1049\'ed\'e0\'e7\'e2\'e0\'ed\'e8\'ff \'e2\'fb\'f5\'ee\'e4\'ed\'fb\'f5 \'ea\'e0\'ed\'e0\'eb\'ee\'e2 \'ef\'ee \'f3\'ec\'ee\'eb\'f7\'e0\'ed\'e8\'fe\f4\lang1033\par
+CString m_DefOut2;\par
+CString m_DefOut3;\par
+\cf0\par
+int m_ValidTime;\tab\tab // \f3\lang1049\'f1\'f0\'ee\'ea \'e3\'ee\'e4\'ed\'ee\'f1\'f2\'e8 (\'e2 \'ec\'e5\'f1\'ff\'f6\'e0\'f5)\par
+\f4\lang1033 CString m_Unit;\tab\tab // \f3\lang1049\'e5\'e4\'e8\'ed\'e8\'f6\'e0 \'e8\'e7\'ec\'e5\'f0\'e5\'ed\'e8\'ff \'ea\'e0\'eb\'e8\'e1\'f0\'f3\'e5\'ec\'ee\'e3\'ee \'ef\'e0\'f0\'e0\'ec\'e5\'f2\'f0\'e0\par
+\f4\lang1033\par
+float m_Tolerance;\tab\tab // \f3\lang1049\'ec\'e0\'ea\'f1\'e8\'ec\'e0\'eb\'fc\'ed\'ee \'e4\'ee\'ef\'f3\'f1\'f2\'e8\'ec\'e0\'ff \'ef\'ee\'e3\'f0\'e5\'f8\'ed\'ee\'f1\'f2\'fc\par
+\f4\lang1033 int m_TolType;\tab\tab\tab // \f3\lang1049\'f2\'e8\'ef \'ef\'ee\'e3\'f0\'e5\'f8\'ed\'ee\'f1\'f2\'e8 (0 - \'e0\'e1\'f1\'ee\'eb\'fe\'f2\'ed\'e0\'ff, 1 - \'ee\'f2\'ed\'ee\'f1\'e8\'f2\'e5\'eb\'fc\'ed\'e0\'ff, 2 - \'ef\'f0\'e8\'e2\'e5\'e4\'e5\'ed\'ed\'e0\'ff)\par
+\f4\lang1033 float m_SetTolerance[8];\tab // \f3\lang1049\'f0\'e5\'e7\'e5\'f0\'e2 \'e4\'eb\'ff \'e8\'ed\'f4\'ee\'f0\'ec\'e0\'f6\'e8\'e8 \'ef\'ee \'ef\'ee\'e3\'f0\'e5\'f8\'ed\'ee\'f1\'f2\'ff\'ec\par
+\f4\lang1033 float m_Priv;\tab\tab\tab // \f3\lang1049\'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'e4\'eb\'ff \'ef\'f0\'e8\'e2\'e5\'e4\'e5\'ed\'ed\'ee\'e9 \'ef\'ee\'e3\'f0\'e5\'f8\'ed\'ee\'f1\'f2\'e8 (\'ea \'f7\'e5\'ec\'f3 \'ef\'f0\'e8\'e2\'ee\'e4\'e8\'f2\'f1\'ff)\par
+\par
+\f4\lang1033 BYTE m_FormulaChan;\tab\tab // \f3\lang1049\'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'e2\'f5\'ee\'e4\'ed\'fb\'f5 \'ea\'e0\'ed\'e0\'eb\'ee\'e2 \'e2\'fb\'e1\'f0\'e0\'ed\'ed\'ee\'e9 \'ec\'e5\'f2\'ee\'e4\'e8\'ea\'e8\par
+\f4\lang1033\par
+int m_CoeffsCnt;\tab\tab // \f3\lang1049\'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'ea\'ee\'fd\'f4\'f4\'e8\'f6\'e8\'e5\'ed\'f2\'ee\'e2 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'e8\par
+\f4\lang1033 int m_SamplesCnt;\tab\tab // \f3\lang1049\'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'ea\'ee\'ed\'f2\'f0\'ee\'eb\'fc\'ed\'fb\'f5 \'f2\'ee\'f7\'e5\'ea \'ee\'f1\'ed\'ee\'e2\'ed\'ee\'e3\'ee \'e2\'f5\'ee\'e4\'ed\'ee\'e3\'ee \'ea\'e0\'ed\'e0\'eb\'e0\par
+\f4\lang1033 int m_SamplesCnt2;\tab\tab // \f3\lang1049\'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'ea\'ee\'ed\'f2\'f0\'ee\'eb\'fc\'ed\'fb\'f5 \'f2\'ee\'f7\'e5\'ea \'e4\'ee\'ef\'ee\'eb\'ed\'e8\'f2\'e5\'eb\'fc\'ed\'ee\'e3\'ee \'e2\'f5\'ee\'e4\'ed\'ee\'e3\'ee \'ea\'e0\'ed\'e0\'eb\'e0\par
+\f4\lang1033 int m_ZondCnt;\tab\tab\tab // \f3\lang1049\'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'e7\'ee\'ed\'e4\'ee\'e2 (\'e4\'eb\'ff \'ec\'ed\'ee\'e3\'ee\'e7\'ee\'ed\'e4\'ee\'e2\'ee\'e9 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'e8)\par
+\f4\lang1033 int m_WaveSize;\tab\tab // \f3\lang1049\'f0\'e0\'e7\'ec\'e5\'f0 \'e2\'ee\'eb\'ed\'ee\'e2\'ee\'e9 \'ea\'e0\'f0\'f2\'e8\'ed\'fb (\'e4\'eb\'ff \'e0\'ea\'f3\'f1\'f2\'e8\'f7\'e5\'f1\'ea\'ee\'e9 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'e8)\par
+\par
+\f4\lang1033\tab float m_Tunes[17];\tab\tab // \f3\lang1049\'e4\'ee\'ef\'ee\'eb\'ed\'e8\'f2\'e5\'eb\'fc\'ed\'fb\'e5 \'ed\'e0\'f1\'f2\'f0\'ee\'e9\'ea\'e8 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'e8\par
+\par
+\f4\lang1033 int m_Status;\tab\tab\tab // \f3\lang1049\'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'e8 (0 - \'ed\'e5 \'e3\'ee\'e4\'e5\'ed, 1 - \'e3\'ee\'e4\'e5\'ed, 2 - \'ed\'e5 \'e7\'e0\'e2\'e5\'f0\'f8\'e5\'ed\'e0)\par
+\par
+\f4\lang1033 double m_CtrlPoints[][];\tab // \f3\lang1049\'ec\'e0\'f1\'f1\'e8\'e2 \'ea\'ee\'ed\'f2\'f0\'ee\'eb\'fc\'ed\'fb\'f5 \'f2\'ee\'f7\'e5\'ea \'ef\'ee \'f2\'f0\'e5\'ec \'e2\'f5\'ee\'e4\'ed\'fb\'ec \'ea\'e0\'ed\'e0\'eb\'e0\'ec\par
+\f4\lang1033 double m_CtrlData[][];\tab\f3\lang1049\tab\f4\lang1033 // \f3\lang1049\'ec\'e0\'f1\'f1\'e8\'e2 \'e8\'e7\'ec\'e5\'f0\'e5\'ed\'ed\'fb\'f5 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e9 \par
+\f4\lang1033 double m_CalcData[][];\f3\lang1049\tab\f4\lang1033\tab // \f3\lang1049\'ec\'e0\'f1\'f1\'e8\'e2 \'e0\'ef\'ef\'f0\'ee\'ea\'f1\'e8\'ec\'e8\'f0\'ee\'e2\'e0\'ed\'ed\'fb\'f5 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e9 \par
+\f4\lang1033 double m_CalibrTolerance[][];\tab // \f3\lang1049\'ec\'e0\'f1\'f1\'e8\'e2 \'ef\'ee\'e3\'f0\'e5\'f8\'ed\'ee\'f1\'f2\'e5\'e9\par
+\f4\lang1033 float m_CalcTolerance[][];\tab // \f3\lang1049\'ec\'e0\'f1\'f1\'e8\'e2 \'ee\'e1\'f9\'e8\'f5 \'ef\'ee\'e3\'f0\'e5\'f8\'ed\'ee\'f1\'f2\'e5\'e9\par
+\par
+***** \'c4\'eb\'ff \'f0\'e0\'e7\'ed\'fb\'f5 \'f2\'e8\'ef\'ee\'e2 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ee\'ea \'f0\'e0\'e7\'ec\'e5\'f0 \'e8 \'f0\'e0\'e7\'ec\'e5\'f0\'ed\'ee\'f1\'f2\'fc \'fd\'f2\'e8\'f5 \'ec\'e0\'f1\'f1\'e8\'e2\'ee\'e2 \'ee\'f2\'eb\'e8\'f7\'e0\'fe\'f2\'f1\'ff *****\par
+\par
+\f4\lang1033 a) \f3\lang1049\'f1\'f2\'e0\'ed\'e4\'e0\'f0\'f2\'ed\'e0\'ff\f4\lang1033  (type\f3\lang1049  = 1) \'e8\'eb\'e8 \'e8\'ed\'ea\'eb\'e8\'ed\'ee\'ec\'e5\'f2\'f0\'e8\'f7\'e5\'f1\'ea\'e0\'ff (\f4\lang1033 type = 4)\f3\lang1049\par
+\par
+\f4\lang1033 size = m_SamplesCnt;\f3\lang1049\par
+\par
+\f4\lang1033 double m_CtrlPoints[size][3];\tab\f3\lang1049\par
+\f4\lang1033 double m_CtrlData[size][3];\par
+double m_CalcData[size][3];\tab\par
+double m_CalibrTolerance[size][8];\tab\par
+float m_CalcTolerance[8];\par
+\tab m_Reserve1[size];\par
+m_Reserve2[size];\f3\lang1049\par
+\par
+\'e1) \'ef\'e0\'f0\'e0\'ec\'e5\'f2\'f0\'e8\'f7\'e5\'f1\'ea\'e0\'ff (\f4\lang1033 type = 2)\par
+\par
+size = m_SamplesCnt * m_SamplesCnt2;\f3\lang1049\par
+\par
+\f4\lang1033 double m_CtrlPoints[size][3];\tab\f3\lang1049\par
+\f4\lang1033 double m_CtrlData[size][3];\par
+double m_CalcData[size][3];\tab\par
+double m_CalibrTolerance[size][8];\tab\par
+float m_CalcTolerance[8];\par
+\tab m_Reserve1[size];\par
+m_Reserve2[size];\f3\lang1049\par
+\par
+\'e2) \'ec\'ed\'ee\'e3\'ee\'e7\'ee\'ed\'e4\'ee\'e2\'e0\'ff (\f4\lang1033 type == 3)\par
+\f3\lang1049\par
+\f4\lang1033 size = m_SamplesCnt * m_ZondsCnt;\f3\lang1049\par
+\par
+\f4\lang1033 double m_CtrlPoints[m_SamplesCnt][3];\tab\f3\lang1049\par
+\f4\lang1033 double m_CtrlData[size][3];\par
+double m_CalcData[size][3];\tab\par
+double m_CalibrTolerance[size][8];\tab\par
+float m_CalcTolerance[m_ZondsCnt+1][4];\par
+m_Reserve1[size];\par
+m_Reserve2[size];\f3\lang1049\par
+\f4\lang1033\par
+\f3\lang1049\'e3) \'e0\'ea\'f3\'f1\'f2\'e8\'f7\'e5\'f1\'ea\'e0\'ff (\f4\lang1033 type = 16)\par
+\par
+double m_CtrlPoints[3];\tab\f3\lang1049\par
+\f4\lang1033 double m_CtrlData[3];\par
+double m_CalcData[0];\tab\par
+double m_CalibrTolerance[4];\tab\par
+float m_CalcTolerance[8];\par
+m_Reserve1[\f3\lang1049 3\f4\lang1033 ];\par
+m_Reserve2[\f3\lang1049 3\f4\lang1033 ];\par
+\par
+***** \f3\lang1049\'ef\'f0\'ee\'e4\'ee\'eb\'e6\'e0\'e5\'f2\'f1\'ff \'ee\'ef\'e8\'f1\'e0\'ed\'e8\'e5 \'f1\'f2\'f0\'f3\'ea\'f2\'f3\'f0\'fb \f4\lang1033 *****\par
+\par
+int m_SaveTime; \tab\tab\tab // \f3\lang1049\'e2\'f0\'e5\'ec\'ff \'ed\'e0\'ea\'ee\'ef\'eb\'e5\'ed\'e8\'ff\par
+\f4\lang1033 double m_K[__max(m_CoeffCnt, 9)];\tab // \f3\lang1049\'e7\'ed\'e0\'f7\'e5\'ed\'e8\'ff \'f0\'e0\'f1\'f1\'f7\'e8\'f2\'e0\'ed\'ed\'fb\'f5 \'ea\'ee\'fd\'f4\'f4\'e8\'f6\'e8\'e5\'ed\'f2\'ee\'e2 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'e8\par
+\f4\lang1033 CString m_sK[16];\tab\tab\tab // \f3\lang1049\'ed\'e0\'e7\'e2\'e0\'ed\'e8\'ff \'ea\'ee\'fd\'f4\'f4\'e8\'f6\'e8\'e5\'ed\'f2\'ee\'e2 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'e8 (\f4\lang1033 A,B,C \f3\lang1049\'e8 \'f2.\'ef.)\par
+\'d1\f4\lang1033 String\f3\lang1049  \f4\lang1033 m_MethodSelected;\tab\tab // \f3\lang1049\'f4\'ee\'f0\'ec\'f3\'eb\'e0 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'e8 \'e2 \'f2\'e5\'ea\'f1\'f2\'ee\'e2\'ee\'ec \'e2\'e8\'e4\'e5\par
+\f4\lang1033 CString m_ParamSelected1;\tab\tab // \f3\lang1049\'ed\'e0\'e7\'e2\'e0\'ed\'e8\'e5 \'e2\'f5\'ee\'e4\'ed\'ee\'e3\'ee \'ea\'e0\'ed\'e0\'eb\'e0\f4\lang1033\par
+CString m_ParamSelected\f3\lang1049 2\f4\lang1033 ;\tab\tab // \f3\lang1049\'ed\'e0\'e7\'e2\'e0\'ed\'e8\'e5 \'e2\'f5\'ee\'e4\'ed\'ee\'e3\'ee \'ea\'e0\'ed\'e0\'eb\'e0\f4\lang1033\par
+CString m_ParamSelected\f3\lang1049 3\f4\lang1033 ;\tab\tab // \f3\lang1049\'ed\'e0\'e7\'e2\'e0\'ed\'e8\'e5 \'e2\'f5\'ee\'e4\'ed\'ee\'e3\'ee \'ea\'e0\'ed\'e0\'eb\'e0\par
+\f4\lang1033 int m_ChanX\f3\lang1049 1\f4\lang1033 ;\tab\tab\tab\tab // \f3\lang1049\'ed\'ee\'ec\'e5\'f0 \'e2\'f5\'ee\'e4\'ed\'ee\'e3\'ee \'ea\'e0\'ed\'e0\'eb\'e0\par
+\f4\lang1033 int m_ChanX2;\tab\tab\tab\tab // \f3\lang1049\'ed\'ee\'ec\'e5\'f0 \'e2\'f5\'ee\'e4\'ed\'ee\'e3\'ee \'ea\'e0\'ed\'e0\'eb\'e0\par
+\f4\lang1033 int m_ChanX3;\tab\tab\tab\tab // \f3\lang1049\'ed\'ee\'ec\'e5\'f0 \'e2\'f5\'ee\'e4\'ed\'ee\'e3\'ee \'ea\'e0\'ed\'e0\'eb\'e0\par
+\f4\lang1033 int m_nExPoints;\tab\tab\tab // \f3\lang1049\'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'ee\'f1\'ee\'e1\'fb\'f5 \'ea\'ee\'ed\'f2\'f0\'ee\'eb\'fc\'ed\'fb\'f5 \'f2\'ee\'f7\'e5\'ea\par
+\f4\lang1033 CString m_sExPoints[16];\tab\tab // \f3\lang1049\'ed\'e0\'e7\'e2\'e0\'ed\'e8\'ff \'ee\'f1\'ee\'e1\'fb\'f5 \'ea\'ee\'ed\'f2\'f0\'ee\'eb\'fc\'ed\'fb\'f5 \'f2\'ee\'f7\'e5\'ea\par
+\par
+\f4\lang1033 double m_Reserve1[];\tab\tab\tab // \f3\lang1049\'f0\'e5\'e7\'e5\'f0\'e2\'ed\'fb\'e9 \'ec\'e0\'f1\'f1\'e8\'e2\f4\lang1033  \f3\lang1049\'e4\'eb\'ff \'ef\'e5\'f0\'e5\'e4\'e0\'f7\'e8 \'e4\'e0\'ed\'ed\'fb\'f5 \'e2 \'ec\'e5\'f2\'ee\'e4\'e8\'ea\'f3\par
+\f4\lang1033 double m_Reserve2[];\tab\tab\tab // \f3\lang1049\'f0\'e5\'e7\'e5\'f0\'e2\'ed\'fb\'e9 \'ec\'e0\'f1\'f1\'e8\'e2 \'e4\'eb\'ff \'ef\'e5\'f0\'e5\'e4\'e0\'f7\'e8 \'e4\'e0\'ed\'ed\'fb\'f5 \'e8\'e7 \'ec\'e5\'f2\'ee\'e4\'e8\'ea\'e8\par
+\cf4\f4\lang1033 CString m_sK[16];\tab\tab\tab // \f3\lang1049\'f0\'e5\'e7\'e5\'f0\'e2\'ed\'fb\'e5 \'f1\'eb\'ee\'f2\'fb \'e4\'eb\'ff \'ed\'e0\'e7\'e2\'e0\'ed\'e8\'e9 \'ea\'ee\'fd\'f4\'f4\'e8\'f6\'e8\'e5\'ed\'f2\'ee\'e2 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'e8\par
+\'d1\f4\lang1033 String m_sStorage[32];\tab\tab // \f3\lang1049\'f0\'e5\'e7\'e5\'f0\'e2\'ed\'fb\'e9 \'ec\'e0\'f1\'f1\'e8\'e2\par
+\f4\lang1033 double\tab m_gStorage[32];\tab\tab // \f3\lang1049\'f0\'e5\'e7\'e5\'f0\'e2\'ed\'fb\'e9 \'ec\'e0\'f1\'f1\'e8\'e2\f4\lang1033\par
+\cf0\f3\lang1049\par
+\par
+\b\'ca\'ee\'ed\'e5\'f6 \'f1\'f2\'f0\'f3\'ea\'f2\'f3\'f0\'fb. \par
+\par
+\b0\'c2 \'f1\'ef\'e8\'f1\'ea\'e5 \cf4\'ea\'f0\'e0\'f1\'ed\'fb\'ec\cf0  \'f6\'e2\'e5\'f2\'ee\'ec \'e2\'fb\'e4\'e5\'eb\'e5\'ed\'fb \'ef\'ee\'eb\'ff, \'ea\'ee\'f2\'ee\'f0\'fb\'e5 \'e2\'ea\'eb\'fe\'f7\'e5\'ed\'fb \'e2 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'f3, \'f2\'ee\'eb\'fc\'ea\'ee \'ed\'e0\'f7\'e8\'ed\'e0\'ff \'f1 \'e2\'e5\'f0\'f1\'e8\'e8 1.7 (\f4\lang1033 version >\f3\lang1049 = 107)\par
+\'c2 \'f1\'ef\'e8\'f1\'ea\'e5 \cf3\'f1\'e8\'f0\'e5\'ed\'e5\'e2\'fb\'ec\cf0  \'f6\'e2\'e5\'f2\'ee\'ec \'e2\'fb\'e4\'e5\'eb\'e5\'ed\'ee \'ef\'ee\'eb\'e5, \'ea\'ee\'f2\'ee\'f0\'ee\'e5 \'e2\'ea\'eb\'fe\'f7\'e5\'ed\'ee \'e2 \'ea\'e0\'eb\'e8\'e1\'f0\'ee\'e2\'ea\'f3, \'f2\'ee\'eb\'fc\'ea\'ee \'ed\'e0\'f7\'e8\'ed\'e0\'ff \'f1 \'e2\'e5\'f0\'f1\'e8\'e8 1.6 (\f4\lang1033 version >= 106)\par
+\par
+\par
+\f3\lang1049\par
+\par
+\par
+\par
+\par
+}
+ 

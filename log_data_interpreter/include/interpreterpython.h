@@ -22,7 +22,15 @@ public:
     bool openScript()override;
     bool openEditor()override;
 
+    bool addObject(const QString &name, QObject *object)override;
+    bool addVariable(const QString &name, const QVariant &v)override;
     void dataUpdate()override;
+
+    bool executeScriptFromFile(const QString& filename)override;
+    bool executeScriptFromString(const QString& script)override;
+
+    PythonQtObjectPtr *context(){return m_mainContext;}
+    PythonQtScriptingConsole *console(){return m_console;}
 };
 
 #endif // INTERPRETER_H

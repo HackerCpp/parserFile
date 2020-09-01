@@ -3,6 +3,7 @@
 #include <QSqlQueryModel>
 #include <QTableView>
 #include <QHeaderView>
+#include "calibserialization.h"
 
 GeometrologyDB::GeometrologyDB()
 {
@@ -33,16 +34,6 @@ void GeometrologyDB::disconnectDB(){
     m_db->close();
 }
 
-void parser(QByteArray array){
-    qDebug() << (ushort)array.data();
-    qDebug() << (ushort)array.data()[2] << array.size();
-    qDebug() << (int)array.data()[4];
-    qDebug() << (int)array.data()[8];
-    qDebug() << (int)array.data()[12];
-
-    qDebug() << (int)array.data()[16];
-}
-
 void GeometrologyDB::insertCalibrationDataIntoTheInterpreter(IInterpreterLogData *interpreter){
     QSqlQueryModel *model = new QSqlQueryModel;
     model->setQuery(QString("SELECT Device.DevName AS '%1',\
@@ -65,7 +56,9 @@ void GeometrologyDB::insertCalibrationDataIntoTheInterpreter(IInterpreterLogData
     view->horizontalHeader()->setSectionResizeMode( QHeaderView::ResizeToContents );
     view->hideColumn(8);
     view->show();
-    //parser(model->data(model->index(46,8)).toByteArray());
+    CalibrSerialization f_serialization;
+    QByteArray f_byteArray = model->data(model->index(50,8)).toByteArray();
+    f_serialization.readAll(f_byteArray);
 }
 
 

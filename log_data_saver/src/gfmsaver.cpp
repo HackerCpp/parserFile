@@ -134,14 +134,14 @@ QByteArray  GFMSaver::getDesc(Desc *desc){
 
 QByteArray GFMSaver::getHeader(DataBlock * dataBlock){
     QByteArray headerParameters;
-    QString param = "<PARAMETERS LOG=\"" + dataBlock->nameRecord() + "\">\r\n";
+    QByteArray param = ("<PARAMETERS LOG=\"" + dataBlock->nameRecord() + "\">\r\n").toLatin1();
     QList<ShortCut> *f_shortCut = dataBlock->shortCuts();
     foreach(auto value,*f_shortCut){
         QString f_str = "<SHORTCUT REF=\"{%1}\" NAME=\"%2\"/>\r\n";
         f_str = f_str.arg(value.ref()).arg(value.name());
         param.append(f_str);
     }
-
+    param = m_codec->fromUnicode(param).mid(2);
     QList<ICurve*> *f_curves = dataBlock->curves();
     int f_offset = 0;
     foreach(auto curve,*f_curves){
@@ -154,27 +154,27 @@ QByteArray GFMSaver::getHeader(DataBlock * dataBlock){
         QString f_line;
 
         QString f_recordPoint = "";
+        f_line = "[%1][%2]  {%3}:";
+        f_line = f_line.arg(QString::number(f_offset),QString::number(curveAbstract->sizeOffsetInBytes()),
+                            curveAbstract->shortCut().ref());
+        param.append(m_codec->fromUnicode(f_line.toLocal8Bit()).mid(2));
+        param.append(m_codec->fromUnicode(curveAbstract->mnemonic()).mid(2));
         if(qIsNaN(curveAbstract->recordPoint())){
-            f_line = "[%1][%2]  {%3}:%4 : %5%6 %7\r\n";
+            f_line = " : %1%2 %3\r\n";
         }
         else{
-            f_line = "[%1][%2]  {%3}:%4 : %5 : %6 %7\r\n";
+            f_line = " : %1 : %2 %3\r\n";
             f_recordPoint = QString::number(curveAbstract->recordPoint()) + "(M)";
         }
         QString f_dataType = curveAbstract->dataType();
         if(curveAbstract->sizeOffset() > 1)
             f_dataType += ("[" + QString::number(curveAbstract->sizeOffset()) + "]");
-
-        f_line = f_line.arg(f_offset/*curveAbstract->offset()*/).arg(curveAbstract->sizeOffsetInBytes()).arg(curveAbstract->shortCut().ref())
-                .arg(curveAbstract->mnemonic()).arg(f_dataType).arg(f_recordPoint)
-                .arg(QString(getDesc(curveAbstract->desc())));
+        f_line = f_line.arg(f_dataType,f_recordPoint,QString(getDesc(curveAbstract->desc())));
         f_offset += curveAbstract->sizeOffsetInBytes();
-
-        f_blockForWrite = f_line.toLocal8Bit();
-        param.append(f_blockForWrite);
+        param.append(m_codec->fromUnicode(f_line.toLocal8Bit()).mid(2));
     }
-    param.append("</PARAMETERS>\r\n");
-    headerParameters.append(m_codec->fromUnicode(param).mid(2));
+    param.append(m_codec->fromUnicode("</PARAMETERS>\r\n").mid(2));
+    headerParameters.append(param);
     return headerParameters;
 }
 

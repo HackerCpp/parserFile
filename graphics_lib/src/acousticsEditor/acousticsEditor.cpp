@@ -28,7 +28,7 @@ AcousticsEditor::AcousticsEditor(VAcuItem *acuItem){
         m_pythonInterpreter->addObject(m_pyNameList[i],f_item->curve());
     }
 
-    m_pyEditor = new PythonEditor(m_pythonInterpreter);
+    m_pyEditor = new PythonEditor(m_pythonInterpreter,this);
     m_pyEditor->setWindowFlags(Qt::Window | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint | Qt::CustomizeWindowHint);
     m_pyEditor->show();
     m_mainVLayout = QPointer<QVBoxLayout>(new QVBoxLayout);

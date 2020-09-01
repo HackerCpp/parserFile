@@ -1,4 +1,4 @@
-#include "interpreterPython.h"
+#include "interpreterpython.h"
 #include <QApplication>
 #include "QWidget"
 #include <PythonQt.h>
@@ -17,9 +17,11 @@ InterpreterPython::InterpreterPython()
     PythonQt_QtAll::init();
     PythonQt::self()->registerCPPClass("ICurve","","Curves",PythonQtCreateObject<WrapperIcurvePython>);
 
-    m_mainContext = nullptr;
-    m_console = nullptr;
 
+    static PythonQtObjectPtr f_pt = PythonQt::self()->getMainModule();
+    m_mainContext = &f_pt;
+    m_mainContext->evalScript("from LogData.Curves import*");
+    m_console = new PythonQtScriptingConsole(NULL, *m_mainContext);
 }
 
 InterpreterPython::~InterpreterPython(){
@@ -28,12 +30,6 @@ InterpreterPython::~InterpreterPython(){
 }
 
 void InterpreterPython::init(){
-    if(!m_mainContext){
-        static PythonQtObjectPtr f_pt = PythonQt::self()->getMainModule();
-        m_mainContext = &f_pt;
-        m_mainContext->evalScript("from LogData.Curves import*");
-        m_console = new PythonQtScriptingConsole(NULL, *m_mainContext);
-    }
     if(!m_blocks)
         return;
     foreach(auto block,*m_blocks){
@@ -72,11 +68,31 @@ bool InterpreterPython::openScript(){
 bool InterpreterPython::openEditor(){
     init();
     if(!m_pythonEditor)
-        m_pythonEditor = new PythonEditor(m_mainContext);
+        m_pythonEditor = new PythonEditor(this,nullptr);
     m_pythonEditor->show();
+    return true;
+}
+
+bool InterpreterPython::addObject(const QString &name, QObject *object){
+    m_mainContext->addObject(name, object);
+    return true;
+}
+
+bool InterpreterPython::addVariable(const QString &name, const QVariant &v){
+    m_mainContext->addVariable(name, v);
     return true;
 }
 
 void InterpreterPython::dataUpdate(){
    init();
+}
+
+bool InterpreterPython::executeScriptFromFile(const QString& filename){
+    m_mainContext->evalFile(filename);
+    return true;
+}
+
+bool InterpreterPython::executeScriptFromString(const QString& script){
+    m_mainContext->evalScript(script);
+    return true;
 }

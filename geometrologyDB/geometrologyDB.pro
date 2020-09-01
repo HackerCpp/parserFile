@@ -19,9 +19,11 @@ INCLUDEPATH += ../log_data_lib/include/externalComponents
 LIBS += ../build/release/LogData.lib
 
 SOURCES += \
+    calibserialization.cpp \
     geometrologydb.cpp
 
 HEADERS += \
+    calibserialization.h \
     geometrologyDB_global.h \
     geometrologydb.h
 
