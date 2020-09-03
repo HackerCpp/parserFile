@@ -26,12 +26,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    include/lasloader.cpp \
     src/addCurve.cpp \
     src/gfmloader.cpp
 
 HEADERS += \
     include/addCurve.h \
     include/gfmloader.h \
+    include/lasloader.h \
     include/loader_global.h
 
 # Default rules for deployment.

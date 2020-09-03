@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 
     QCoreApplication::setOrganizationName("GFM");
     QCoreApplication::setApplicationName("Geology");
-    QFile file(":/css/darkVC.css");
+    QFile file(":/css/dark.css");
     if(file.isOpen()){
         qDebug() << "file style.css open";
     }

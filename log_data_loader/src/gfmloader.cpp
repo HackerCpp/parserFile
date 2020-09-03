@@ -129,16 +129,6 @@ void GFMLoader::mergeIdenticalBlocks(){
 }
 
 
-
-QByteArray swap16(QByteArray ba){
-    QByteArray f_ba(2,Qt::Uninitialized);
-    if(ba.size() < 2)
-        return f_ba;
-    f_ba[0] = ba[1];
-    f_ba[1] = ba[0];
-    return f_ba;
-}
-
 void GFMLoader::findBlocksByteFEFF(QByteArray byteArrayFile,QList<BlockByte> *blocksList){
      for(int position = 0;position < byteArrayFile.size(); ++position){
         int indexBeginBlock = byteArrayFile.indexOf(m_codec->fromUnicode("[").remove(0,2),position);

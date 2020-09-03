@@ -2,6 +2,7 @@
 #include <QFileDialog>
 #include "filereader.h"
 #include "gfmloader.h"
+#include "lasloader.h"
 #include "gfmsaver.h"
 #include "interpreterpython.h"
 #include "tabinterpretations.h"
@@ -55,7 +56,7 @@ bool MainWindow::eventFilter(QObject *o, QEvent *e){
 void MainWindow::openFile(){
     QFileDialog fileDialog;
     QString f_openPath = m_settings->value("paths/pathOpenFile").toString();
-    QString filePath = fileDialog.getOpenFileName(this, tr("Open File"),f_openPath,tr("*.forms *.gfm"));
+    QString filePath = fileDialog.getOpenFileName(this, tr("Open File"),f_openPath,tr("*.forms *.gfm *.las"));
     if(filePath == "")
         return;
     m_settings->setValue("paths/pathOpenFile",filePath);
@@ -64,6 +65,9 @@ void MainWindow::openFile(){
     QSharedPointer<ILogData> f_logData = nullptr;
     if(f_file.getType() == ".gfm" || f_file.getType() == ".forms"){
         f_loader = new GFMLoader(filePath);
+    }
+    else if(f_file.getType() == ".las" || f_file.getType() == ".LAS"){
+        f_loader = new LasLoader(filePath);
     }
     else{
         return;
@@ -135,19 +139,19 @@ void MainWindow::insertCalibrationInTheScript(){
     if(!f_logData)
         return;
     QFileDialog fileDialog;
-    GeometrologyDB f_geometrologyDB;
-    f_geometrologyDB.setTypeDB(GeometrologyDB::SQLITE);
+    GeometrologyDB *f_geometrologyDB = new GeometrologyDB();
+    f_geometrologyDB->setTypeDB(GeometrologyDB::SQLITE);
     QString f_openPath = m_settings->value("paths/pathOpenDB").toString();
     QString filePath = fileDialog.getOpenFileName(this, tr("Open File"),f_openPath,tr("*.db"));
     if(filePath == "")
         return;
     m_settings->setValue("paths/pathOpenDB",filePath);
-    f_geometrologyDB.setNameDB(filePath);
-    if(f_geometrologyDB.connectDB())
+    f_geometrologyDB->setNameDB(filePath);
+    if(f_geometrologyDB->connectDB())
         qDebug() << "connect";
     else
         return;
-    f_geometrologyDB.insertCalibrationDataIntoTheInterpreter(f_logData->interpreter());
+    f_geometrologyDB->setInterpreterInterpreter(f_logData->interpreter());
 }
 
 void MainWindow::openInterpretations(){

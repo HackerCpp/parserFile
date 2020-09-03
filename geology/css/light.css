@@ -1,0 +1,237 @@
+/* QSS Qt Stylesheets Collection.
+* Created in 2013 by Khromathyon Software.
+* QSS Theme: Visual Studio(R) 2012 Dark Theme.
+* License: WTFPL
+*/
+QMainWindow {
+  background-color:#f1f1f1;
+  color:#2d2d30;
+}
+
+
+QMenuBar {
+  background-color:#f1f1f1;
+  text-transform: uppercase;
+  color:#2d2d30;
+}
+
+QMenuBar::item:selected{
+  background-color:#bbbc85;
+}
+
+QMenu {
+  border:0.5px solid #333337;
+  color:#2d2d30;
+}
+
+QMenu::item:selected {
+  background-color:#bbbc85;
+  border-color:#d1b736;
+
+}
+
+QMenu::item {
+  background-color:#f1f1f1;
+  border-color:#d1b736;
+       padding: 2px 25px 2px 20px;
+
+}
+
+QMenu::separator{
+  background-color:#bbbc85;
+  spacing:2px;
+}
+
+QTabBar::tab {
+  background-color:#f1f1f1;
+  border: 1px solid transparent;
+  color:#2d2d30;
+  padding:5px;
+
+}
+
+QTabBar::tab:hover{
+  background-color:#d1b736;
+
+}
+
+QTabBar::tab:selected{
+  background-color:#bbbc85;
+}
+
+QTabWidget::pane {
+  border-top: 2px solid #d1b736;
+  background-color:#2d2d30;
+}
+
+QDockWidget {
+    background: #f1f1f1;
+    color:#2d2d30;
+}
+
+QDockWidget::active {
+  border: 1px solid #d1b736;
+}
+
+QDockWidget::title {
+  color:#2d2d30;
+  background:#bbbc85;
+}
+
+QComboBox {
+  border-style:none;
+  background-color:#f1f1f1;
+  color:#2d2d30;
+  border-style:none;
+}
+
+QComboBox:on {
+  background-color:#bbbc85;
+}
+
+QComboBox:down-arrow {
+  border-style:none;
+  border-left: 1px solid #d1b736;
+}
+
+QComboBox:drop-down {
+  border-style:none;
+  background-color:#bbbc85;
+}
+
+QComboBox:item:hover {
+  background-color:#bbbc85;
+  border-style:none;
+}
+
+
+QScrollBar{
+  background:#f1f1f1;
+  border-style:none;
+}
+
+QScrollbar::horizontal{
+     height: 15px;
+     margin: 0px 20px 0 20px;
+}
+
+QScrollBar:handle {
+  border-style:none;
+  background:#bbbc85;
+  margin: inherited;
+
+}
+
+QPushButton {
+  border-style:none;
+  border-bottom:1px solid #d1b736;
+  color:#2d2d30;
+  background:#f1f1f1;
+  padding:5px;
+}
+
+QPushButton::pressed {
+  border: 1px solid #d1b736;
+  background:#d1b736;
+
+}
+
+QToolButton {
+  border-style:none;
+  background:#f1f1f1;
+  color:#2d2d30;
+}
+
+QToolButton:pressed {
+  border: 1px solid #d1b736;
+  background:#d1b736;
+}
+
+QLabel {
+  color:#2d2d30;
+}
+
+QLineEdit {
+  border: 1px solid #d1b736;
+  background-color:#f1f1f1;
+  color:#2d2d30;
+  selection-background-color:#d1b736;
+
+}
+QLineEdit:selected {
+  border-color:#d1b736;
+}
+
+
+QToolBar {
+  background:#f1f1f1;
+  border-style:none;
+}
+
+QToolBox{
+  background:#f1f1f1;
+}
+
+QToolBox::tab{
+  background: #bbbc85;
+  color:#2d2d30;
+  border-style:none;
+  border-bottom-style: solid;
+  border-bottom: 2px solid #d1b736;
+}
+
+QToolBox::tab:selected {
+  border:1px solid #d1b736;
+}
+
+QWidget{
+  background:#f1f1f1;
+  color:#2d2d30;
+}
+
+QHeaderView::section{
+    background:#f1f1f1;
+    color:#2d2d30;
+    border-style:none;
+    border-bottom-style: solid;
+    border-bottom: 2px solid #d1b736;
+}
+
+QTreeView {
+  background-color:#f1f1f1;
+  border-style:none;
+}
+
+QTreeView::item:selected
+{
+  background:#d1b736;
+}
+
+QTreeView::item:selected:active {
+  background: #bbbc85;
+}
+
+QTreeView::item:selected {
+  background: #d1b736;
+}
+
+QListView {
+  background-color:#f1f1f1;
+  border-style:none;
+}
+QSplitter::handle {
+    /*border:1px solid #007acc;*/
+    background: #bbbc85;
+}
+
+QSplitter::handle:horizontal {
+    width: 1px;
+}
+
+QSplitter::handle:vertical {
+    height: 1px;
+}
+
+QSplitter::handle:pressed {
+    background: #d1b736;
+}
