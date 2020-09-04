@@ -7,7 +7,7 @@
 
 
 GraphicEditor::GraphicEditor(QSharedPointer<ILogData> logData,DrawSettings *drawSettings,QWidget *parent)
-    : QTabWidget(parent),AGraphicEditor(logData),m_drawSettings(drawSettings){
+    : QTabWidget(parent),AGraphicEditor(logData),m_drawSettings(drawSettings),m_forms(nullptr){
     this->setStyleSheet("QGraphicsView{background-color:white;}");
     m_curves = new QMap<QString,ICurve*>;
     addCurves();
@@ -72,9 +72,9 @@ void GraphicEditor::addForms(){
     m_curentBoard = f_board;
     if(m_curentBoard)
         m_curentBoard->activate(true);
-
-    addTab(new QWidget(),"+");
     connect(this,&QTabWidget::currentChanged,this,&GraphicEditor::changeBoard);
+    addTab(new QWidget(),"+");
+
 }
 
 void GraphicEditor::activate(bool active){
@@ -88,6 +88,9 @@ GraphicEditor::~GraphicEditor(){
 }
 
 void GraphicEditor::newBoard(){
+    if(!m_forms){
+        m_forms = dynamic_cast<FormsBlock*>(IBlock::blockCreater(IBlock::FORMS_BLOCK));
+    }
     ABoard* f_newBoard = new ABoard();
     f_newBoard->setName("noName");
     ATrack * f_track = new ATrack();

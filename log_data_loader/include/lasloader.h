@@ -4,6 +4,8 @@
 #include <aloaderlogdata.h>
 #include <QThread>
 #include <QHash>
+#include <curve.h>
+#include <datablock.h>
 
 class LOADER_EXPORT LasLoader : public ALoaderLogData, public QThread
 {
@@ -18,8 +20,10 @@ class LOADER_EXPORT LasLoader : public ALoaderLogData, public QThread
 
     void findBlocks(const QByteArray &data,QList<BlockLas> *blocksLas);
     QString version(QList<BlockLas> *blocksLas);
-    void parser20(QList<BlockLas> *blocksLas);
-    void createCurves20(QList<BlockLas> *blocksLas);
+    void parser20(const QList<BlockLas> &blocksLas);
+    void findCurve(ICurve *curve,const QString &curveLine);
+    void createCurves20(DataBlock *dataBlock,const QList<BlockLas> &blocksLas);
+    void fillCurves20(DataBlock *dataBlock,const QList<BlockLas> &blocksLas);
 
 public:
     LasLoader(QString path);

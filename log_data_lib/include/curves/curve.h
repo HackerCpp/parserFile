@@ -10,8 +10,11 @@ class Curve : public ACurve{
 public:
      Curve(){
          updateDataType();
+         m_data = new QVector<T>();
          m_sizeOfType = sizeof(T);
          m_minimum = m_maximum =  0;
+         m_time = m_depth = nullptr;
+         m_sizeOffsetInByte = 1 * m_sizeOfType;
      }
      Curve(int size,int offset);
      Curve(const Curve<T> &curve);
@@ -21,6 +24,7 @@ public:
      virtual inline qreal recalculatedData(qreal data);
      virtual inline qreal data(uint index)override;
      QByteArray data() override;
+     void setData(qreal data)override;
      void setData(const char *dataPtr,uint numberOfVectors)override;
      void setData(qreal data,uint index)override;
 
@@ -102,6 +106,9 @@ template<typename T> qreal Curve<T>::data(uint index){
     return (this->*dataCountingFunction)(m_data->at(index));
 }
 
+template<typename T> void Curve<T>::setData(qreal data){
+    m_data->push_back(data);
+}
 
 template<typename T> void Curve<T>::setData(qreal data,uint index){
     if(static_cast<int>(index) > m_data->size()){
