@@ -49,12 +49,16 @@ void AGraphicItem::updateParam(int pictureWidth){
 
 qreal AGraphicItem::topValue(){
     ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() : m_curve->depth();
+    if(!f_mainValue)
+        return 0;
     qreal f_recordPoint = m_board->isDrawTime() ? 0 : (qIsNaN(m_curve->recordPoint()) ? 0 : m_curve->recordPoint());
     return (f_mainValue->minimum() + f_recordPoint) * m_board->scale();
 }
 
 qreal AGraphicItem::bottomValue(){
     ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() : m_curve->depth();
+    if(!f_mainValue)
+        return 0;
     qreal f_recordPoint =  m_board->isDrawTime() ? 0 : (qIsNaN(m_curve->recordPoint()) ? 0 : m_curve->recordPoint());
     return (f_mainValue->maximum() + f_recordPoint) * m_board->scale();
 }

@@ -8,11 +8,10 @@ class Curve : public ACurve{
      QVector<T> *m_data;
      void updateDataType();
 public:
-     Curve(){
+     Curve():ACurve(){
          updateDataType();
          m_data = new QVector<T>();
          m_sizeOfType = sizeof(T);
-         m_minimum = m_maximum =  0;
          m_time = m_depth = nullptr;
          m_sizeOffsetInByte = 1 * m_sizeOfType;
      }
@@ -30,6 +29,9 @@ public:
 
      uint size()override;
      uint sizeOffset()override;
+
+     qreal minData(){return static_cast<qreal>(*std::min_element(m_data->begin(),m_data->end()));}
+     qreal maxData(){return static_cast<qreal>(*std::max_element(m_data->begin(),m_data->end()));}
 };
 
 template<typename T> void Curve<T>::updateDataType(){
@@ -54,20 +56,17 @@ template<typename T> void Curve<T>::updateDataType(){
     else if(std::is_same<T, int64_t>::value)
         m_dataType = "INT64";
 }
-template<typename T> Curve<T>::Curve(int size,int offset){
+template<typename T> Curve<T>::Curve(int size,int offset):ACurve(){
     updateDataType();
     int f_size = size * offset;
     m_data = new QVector<T>(f_size);
     m_sizeOfType = sizeof(T);
     m_sizeOffsetInByte = offset * m_sizeOfType;
-    m_minimum = m_maximum = 0;
 }
 template<typename T> Curve<T>::Curve(const Curve<T> &curve){
     m_data = new QVector<T>;
     m_sizeOfType = sizeof(T);
     m_sizeOffsetInByte = curve.m_sizeOffsetInByte;
-    m_minimum = curve.m_minimum;
-    m_maximum = curve.m_maximum;
 
     m_time = curve.m_time;
     m_depth = curve.m_depth;
@@ -119,12 +118,10 @@ template<typename T> void Curve<T>::setData(qreal data,uint index){
 }
 
 template<typename T> void Curve<T>::setData(const char *dataPtr,uint numberOfVectors){
-    uint dataSize = numberOfVectors * (m_sizeOffsetInByte/m_sizeOfType);
+    uint dataSize = numberOfVectors * (m_sizeOffsetInByte / m_sizeOfType);
     uint dataSizeInBytes = numberOfVectors * m_sizeOffsetInByte;
     m_data = new QVector<T>(dataSize);
     memcpy(m_data->data(),dataPtr,dataSizeInBytes);
-    m_minimum = static_cast<qreal>(*std::min_element(m_data->begin(),m_data->end()));
-    m_maximum = static_cast<qreal>(*std::max_element(m_data->begin(),m_data->end()));
 }
 
 template<typename T> uint Curve<T>::size(){

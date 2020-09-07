@@ -142,9 +142,6 @@ void GFMLoader::findBlocksByteFEFF(QByteArray byteArrayFile,QList<BlockByte> *bl
             BlockByte block;
             block.sizeNameBlock = sizeNameBlock;
             block.nameBlock = m_codec->toUnicode(byteArrayFile.mid(indexBeginBlock,sizeNameBlock));
-            /*qint16 right = *reinterpret_cast<ushort*>(byteArrayFile.mid(indexEndBlock + 1,2).data());
-            qint16 left = *reinterpret_cast<ushort*>(byteArrayFile.mid(indexEndBlock + 3,2).data());
-            int sizeDataBlock = (quint32)(left << 16) | right;*/
             int sizeDataBlock = *reinterpret_cast<uint*>(byteArrayFile.mid(indexEndBlock + 1, 4).data());
             block.sizeBodyBlock = sizeDataBlock;
             if(sizeDataBlock > INT_MAX/2){
@@ -328,13 +325,13 @@ void GFMLoader::parserDataBlock(const QByteArray &bodyBlock,IBlock *block){
     uint numberOfVectors = 0;
     if(beginPluginsIndex == -1){
         indexBeginData = endHeaderIndex + endHeader.size() * 2 + 6;
-        numberOfVectors = *reinterpret_cast<uint*>(bodyBlock.mid(endHeaderIndex+endHeader.size() * 2 + 2,4).data());
+        numberOfVectors = *reinterpret_cast<uint*>(bodyBlock.mid(endHeaderIndex + endHeader.size() * 2 + 2, 4).data());
     }
     else{
         indexBeginData = endPluginsIndex + endPlugins.size() * 2 + 6;
         QString plugins = m_codec->toUnicode(bodyBlock.mid(beginPluginsIndex - 2,endPluginsIndex - beginPluginsIndex + endPlugins.size() * 2));
         dataBlock->setPlugins(plugins);
-        numberOfVectors = *reinterpret_cast<uint*>(bodyBlock.mid(endPluginsIndex+endPlugins.size() * 2 + 2,4).data());
+        numberOfVectors = *reinterpret_cast<uint*>(bodyBlock.mid(endPluginsIndex+endPlugins.size() * 2 + 2, 4).data());
     }
     dataBlock->setNumberOfVectors(numberOfVectors);
     QByteArray nameStartMark = "NAME=\"",moduleMnemEndMarc = "\"/>";
@@ -826,7 +823,6 @@ void GFMLoader::findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *
     int indexBeginParamMnemon = curveLine.indexOf(":",indexShortCutEnd);
     int indexEndParamMnemon =   curveLine.indexOf(":",indexBeginParamMnemon + 1);
     QByteArray mnemonics = curveLine.mid(indexBeginParamMnemon + 1,indexEndParamMnemon - indexBeginParamMnemon - 2);
-
     curveAbstract->setMnemonic(QTextCodec::codecForName("Windows-1251")->toUnicode(mnemonics));
     int indexBeginType = curveLine.indexOf(":",indexEndParamMnemon);
     int indexEndType = curveLine.indexOf(" ",indexBeginType + 4);

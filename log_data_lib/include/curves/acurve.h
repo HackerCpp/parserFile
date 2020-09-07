@@ -14,7 +14,6 @@ protected:
     ShortCut m_shortCut;
 
     qreal m_resolution;
-    qreal m_maximum,m_minimum;
     uint m_sizeOffsetInByte;
     uint m_sizeOfType;
     QString m_mnemonic;
@@ -22,6 +21,8 @@ protected:
     qreal m_recordPoint;
     qreal m_scale,m_offset; // data * m_scale + m_offset
     qreal (ACurve::*dataCountingFunction)(qreal data);
+    virtual qreal minData(){return 0;}
+    virtual qreal maxData(){return 0;}
 public:
 
     ACurve();

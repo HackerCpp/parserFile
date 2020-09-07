@@ -54,11 +54,11 @@ uint ACurve::size(){
 }
 
 qreal ACurve::maximum(){
-    return (this->*dataCountingFunction)(m_maximum);
+    return (this->*dataCountingFunction)(maxData());
 }
 
 qreal ACurve::minimum(){
-    return (this->*dataCountingFunction)(m_minimum);
+    return (this->*dataCountingFunction)(minData());
 }
 
 Desc *ACurve::desc(){

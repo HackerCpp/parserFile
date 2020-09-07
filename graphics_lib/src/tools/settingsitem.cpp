@@ -178,12 +178,12 @@ void SettingsItem::applyBaseSettings(){
     if(!f_itemInfo)
         return;
     f_itemInfo->setBegin(!m_leftBorderSettings->indexActive(),
-                                 m_leftBorderSettings->value("Left Border").toDouble() * 10,
-                                 m_leftBorderSettings->value("Zero offset").toDouble() * 10);
+                                 m_leftBorderSettings->value("Left Border").replace(",",".").toDouble() * 10,
+                                 m_leftBorderSettings->value("Zero offset").replace(",",".").toDouble() * 10);
     f_itemInfo->setEnd(!m_rightBorderSettings->indexActive(),
-                                 m_rightBorderSettings->value("Right Border").toDouble(),
-                                 1/(m_rightBorderSettings->value("Scale").toDouble()/10));
-    m_item->curve()->setRecordPoint(m_editRecordPoint->text().toDouble());
+                                 m_rightBorderSettings->value("Right Border").replace(",",".").toDouble(),
+                                 1/(m_rightBorderSettings->value("Scale").replace(",",".").toDouble()/10));
+    m_item->curve()->setRecordPoint(m_editRecordPoint->text().replace(",",".").toDouble());
 }
 
 void SettingsItem::apply(){

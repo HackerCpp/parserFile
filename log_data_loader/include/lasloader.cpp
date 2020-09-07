@@ -70,6 +70,8 @@ void LasLoader::parser20(const QList<BlockLas> &blocksLas){
     DataBlock *f_dataBlock = dynamic_cast<DataBlock *>(IBlock::blockCreater(IBlock::DATA_BLOCK));
     createCurves20(f_dataBlock,blocksLas);
     fillCurves20(f_dataBlock,blocksLas);
+    f_dataBlock->setNumberOfVectors(f_dataBlock->curves()->first()->size());
+    m_blocks->push_back(f_dataBlock);
 }
 
 void LasLoader::findCurve(ICurve *curve,const QString &curveLine){
@@ -79,28 +81,54 @@ void LasLoader::findCurve(ICurve *curve,const QString &curveLine){
 
 void LasLoader::createCurves20(DataBlock *dataBlock,const QList<BlockLas> &blocksLas){
     ShortCut f_shortcut;
-    f_shortcut.setRef("{1}");
-    f_shortcut.setName("2019_04_02_11-00-38.DEVICE[]");
+    QDateTime f_dateTime;
+    f_shortcut.setRef("1");
+    QString f_dt = f_dateTime.currentDateTime().toString("dd.MM.yyyy_hh:mm:ss.z").replace(":","-").replace(".","_");
+    f_dt = f_dt.left(f_dt.size() - 4);
+    f_shortcut.setName(f_dt + "." + "LAS[]");
+    ShortCut f_timeDepth;
+    f_timeDepth.setRef("");
     dataBlock->addShortCut(f_shortcut);
     if(!dataBlock)
         return;
+    ICurve *f_depth,*f_time;
+    f_depth = f_time = nullptr;
     foreach(auto blockLas,blocksLas){
         if(blockLas.typeBlockLas == C){
             QStringList resultStrings = QString(blockLas.bodyBlockLas).split('\n');
+
             foreach(auto string,resultStrings){
                 if(string.mid(0,1) == "#" || string.isEmpty())
                     continue;
                 ICurve * f_curve = new Curve<qreal>();
                 Desc *f_desc = new Desc();
                 f_curve->setDesc(f_desc);
-                f_curve->desc()->setParam("draw_type","LINE");
+
                 f_curve->setShortCut(dataBlock->shortCuts()->first());
                 findCurve(f_curve,string);
+                if(f_curve->mnemonic().indexOf("DEPT") != -1){
+                    f_curve->desc()->setParam("draw_type","DEPTH");
+                    f_curve->setShortCut(f_timeDepth);
+                    f_depth = f_curve;
+                }
+                else if(f_curve->mnemonic() == "TIME"){
+                    f_curve->desc()->setParam("draw_type","TIME");
+                    f_curve->setShortCut(f_timeDepth);
+                    f_time = f_curve;
+                }
+                else
+                    f_curve->desc()->setParam("draw_type","LINE");
                 dataBlock->setcurve(f_curve);
+                dataBlock->setMainTime(f_time);
+                dataBlock->setMainDepth(f_depth);
             }
         }
     }
-    m_blocks->push_back(dataBlock);
+    foreach(auto curve,*dataBlock->curves()){
+        curve->setDepth(f_depth);
+        curve->setTime(f_time);
+    }
+
 }
 
 void LasLoader::fillCurves20(DataBlock *dataBlock,const QList<BlockLas> &blocksLas){
@@ -140,6 +168,8 @@ void LasLoader::run(){
     byteArrayFile.resize(0);
     QString f_version = version(blocksList);
     if(f_version == "2.0")
+        parser20(*blocksList);
+    else if(f_version.indexOf("1.2") != -1)
         parser20(*blocksList);
 
     qDebug() << "end load las : " << time.msecsTo( QTime::currentTime() ) << "mS";

@@ -73,6 +73,8 @@ void NewCurveTab::apply(){
     m_curve->desc()->setParam("draw_type",m_comboDrawType->currentText());
     ShortCut f_shortCut;
     f_shortCut.setName(m_comboShortCuts->currentText());
+    QDateTime f_dateTime;
+    QString f_dt = f_dateTime.currentDateTime().toString("dd.MM.yyyy_hh:mm:ss.z").replace(":","-").replace(".","-");
     f_shortCut.setRef(m_comboShortCuts->currentData().toString());
     m_curve->setShortCut(f_shortCut);
     m_curve->setTime(m_dataBlock->time());

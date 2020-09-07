@@ -7,7 +7,7 @@
 
 
 GraphicEditor::GraphicEditor(QSharedPointer<ILogData> logData,DrawSettings *drawSettings,QWidget *parent)
-    : QTabWidget(parent),AGraphicEditor(logData),m_drawSettings(drawSettings),m_forms(nullptr){
+    : QTabWidget(parent),AGraphicEditor(logData),m_forms(nullptr),m_drawSettings(drawSettings){
     this->setStyleSheet("QGraphicsView{background-color:white;}");
     m_curves = new QMap<QString,ICurve*>;
     addCurves();
@@ -90,6 +90,7 @@ GraphicEditor::~GraphicEditor(){
 void GraphicEditor::newBoard(){
     if(!m_forms){
         m_forms = dynamic_cast<FormsBlock*>(IBlock::blockCreater(IBlock::FORMS_BLOCK));
+        m_logData->blocks()->push_front(m_forms);
     }
     ABoard* f_newBoard = new ABoard();
     f_newBoard->setName("noName");
