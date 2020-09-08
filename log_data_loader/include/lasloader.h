@@ -24,6 +24,7 @@ class LOADER_EXPORT LasLoader : public ALoaderLogData, public QThread
     void findCurve(ICurve *curve,const QString &curveLine);
     void createCurves20(DataBlock *dataBlock,const QList<BlockLas> &blocksLas);
     void fillCurves20(DataBlock *dataBlock,const QList<BlockLas> &blocksLas);
+    void findHeader20(const QList<BlockLas> &blocksLas);
 
 public:
     LasLoader(QString path);

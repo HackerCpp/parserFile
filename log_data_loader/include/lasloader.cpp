@@ -5,6 +5,7 @@
 #include <QTextCodec>
 #include <datablock.h>
 #include <curve.h>
+#include <headerblock.h>
 
 LasLoader::LasLoader(QString path)
     : m_path(path){
@@ -72,6 +73,7 @@ void LasLoader::parser20(const QList<BlockLas> &blocksLas){
     fillCurves20(f_dataBlock,blocksLas);
     f_dataBlock->setNumberOfVectors(f_dataBlock->curves()->first()->size());
     m_blocks->push_back(f_dataBlock);
+    findHeader20(blocksLas);
 }
 
 void LasLoader::findCurve(ICurve *curve,const QString &curveLine){
@@ -136,7 +138,13 @@ void LasLoader::fillCurves20(DataBlock *dataBlock,const QList<BlockLas> &blocksL
     foreach(auto blockLas,blocksLas){
         if(blockLas.typeBlockLas == A){
             QString f_data = blockLas.bodyBlockLas.replace("\n"," ").replace("\r"," ");
-            QStringList f_dataList = f_data.split(' ');
+            QStringList f_dataList;
+            if(f_data.indexOf(",") != -1){
+                f_dataList = f_data.split(',');
+            }
+            else{
+                f_dataList = f_data.split(' ');
+            }
             bool ok = false;
             foreach(auto data,f_dataList){
                 if(data.isEmpty())
@@ -155,6 +163,26 @@ void LasLoader::fillCurves20(DataBlock *dataBlock,const QList<BlockLas> &blocksL
     }
 }
 
+void LasLoader::findHeader20(const QList<BlockLas> &blocksLas){
+    IBlock *f_block = IBlock::blockCreater(IBlock::HEADER_BLOCK);
+    HearedBlock *f_header = dynamic_cast<HearedBlock*>(f_block);
+    foreach(auto blockLas,blocksLas){
+        if(blockLas.typeBlockLas == W || blockLas.typeBlockLas == P){
+            QStringList f_lineList = QString(blockLas.bodyBlockLas).split('\n');
+            foreach(auto line,f_lineList){
+                if(line.mid(0,1) == "#" || line.isEmpty())
+                    continue;
+                int f_indexEndMnemonic = line.indexOf(" ",line.indexOf("."));
+                QString f_name = line.mid(0,f_indexEndMnemonic).replace(" ","").replace(".","(") + ")";
+                QString f_nameComment = line.mid(f_indexEndMnemonic);
+                QStringList f_list = f_nameComment.split(":");
+                f_header->setHeaderInfo(QSharedPointer<HeaderInfo>(new HeaderInfo(f_name,f_list[0],f_list[1].replace("\r",""))));
+            }
+        }
+    }
+    m_blocks->push_front(f_block);
+}
+
 void LasLoader::run(){
     m_isReady = false;
     QTime time = QTime::currentTime();
@@ -171,11 +199,15 @@ void LasLoader::run(){
         parser20(*blocksList);
     else if(f_version.indexOf("1.2") != -1)
         parser20(*blocksList);
+    //else if(f_version.indexOf("3.0") != -1)
+        //parser20(*blocksList);
+    else{
+        qDebug() << "Файл las версии " << f_version << " не поддерживается.";
+    }
 
     qDebug() << "end load las : " << time.msecsTo( QTime::currentTime() ) << "mS";
     m_isReady = true;
     emit ready();
-
 }
 
 
