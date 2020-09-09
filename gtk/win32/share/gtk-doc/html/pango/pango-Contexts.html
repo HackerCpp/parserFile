@@ -1,0 +1,1188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Contexts: Pango Reference Manual</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.2">
+<link rel="home" href="index.html" title="Pango Reference Manual">
+<link rel="up" href="lowlevel.html" title="Low Level Functionality">
+<link rel="prev" href="lowlevel.html" title="Low Level Functionality">
+<link rel="next" href="pango-Tab-Stops.html" title="Tab Stops">
+<meta name="generator" content="GTK-Doc V1.32 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="5"><tr valign="middle">
+<td width="100%" align="left" class="shortcuts"></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
+<td><a accesskey="u" href="lowlevel.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="lowlevel.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="pango-Tab-Stops.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+</tr></table>
+<div class="refentry">
+<a name="pango-Contexts"></a><div class="titlepage"></div>
+
+<div class="refnamediv">
+<h2><span class="refentrytitle"><a name="pango-Contexts.top_of_page"></a>Contexts</span></h2>
+<p>
+Contexts
+ — Global context object
+</p>
+</div>
+
+<div class="refsect1">
+<a name="pango-Contexts.functions"></a><h2>Functions</h2>
+
+<div class="informaltable">
+<table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="functions_proto_type">
+<col class="functions_proto_name">
+</colgroup>
+<tbody>
+<tr>
+<td class="function_type">
+<a class="link" href="pango-Contexts.html#PangoContext"><span class="returnvalue">PangoContext</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="pango-Contexts.html#pango-context-new" title="pango_context_new ()">pango_context_new</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href=""><span class="returnvalue">void</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="pango-Contexts.html#pango-context-changed" title="pango_context_changed ()">pango_context_changed</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href=""><span class="returnvalue">guint</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="pango-Contexts.html#pango-context-get-serial" title="pango_context_get_serial ()">pango_context_get_serial</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href=""><span class="returnvalue">void</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="pango-Contexts.html#pango-context-set-font-map" title="pango_context_set_font_map ()">pango_context_set_font_map</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href="pango-Fonts.html#PangoFontMap"><span class="returnvalue">PangoFontMap</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="pango-Contexts.html#pango-context-get-font-map" title="pango_context_get_font_map ()">pango_context_get_font_map</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href="pango-Fonts.html#PangoFontDescription"><span class="returnvalue">PangoFontDescription</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="pango-Contexts.html#pango-context-get-font-description" title="pango_context_get_font_description ()">pango_context_get_font_description</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href=""><span class="returnvalue">void</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="pango-Contexts.html#pango-context-set-font-description" title="pango_context_set_font_description ()">pango_context_set_font_description</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href="pango-Scripts-and-Languages.html#PangoLanguage"><span class="returnvalue">PangoLanguage</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="pango-Contexts.html#pango-context-get-language" title="pango_context_get_language ()">pango_context_get_language</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href=""><span class="returnvalue">void</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="pango-Contexts.html#pango-context-set-language" title="pango_context_set_language ()">pango_context_set_language</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href="pango-Bidirectional-Text.html#PangoDirection" title="enum PangoDirection"><span class="returnvalue">PangoDirection</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="pango-Contexts.html#pango-context-get-base-dir" title="pango_context_get_base_dir ()">pango_context_get_base_dir</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href=""><span class="returnvalue">void</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="pango-Contexts.html#pango-context-set-base-dir" title="pango_context_set_base_dir ()">pango_context_set_base_dir</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href="pango-Vertical-Text.html#PangoGravity" title="enum PangoGravity"><span class="returnvalue">PangoGravity</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="pango-Contexts.html#pango-context-get-base-gravity" title="pango_context_get_base_gravity ()">pango_context_get_base_gravity</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href=""><span class="returnvalue">void</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="pango-Contexts.html#pango-context-set-base-gravity" title="pango_context_set_base_gravity ()">pango_context_set_base_gravity</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href="pango-Vertical-Text.html#PangoGravity" title="enum PangoGravity"><span class="returnvalue">PangoGravity</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="pango-Contexts.html#pango-context-get-gravity" title="pango_context_get_gravity ()">pango_context_get_gravity</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href="pango-Vertical-Text.html#PangoGravityHint" title="enum PangoGravityHint"><span class="returnvalue">PangoGravityHint</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="pango-Contexts.html#pango-context-get-gravity-hint" title="pango_context_get_gravity_hint ()">pango_context_get_gravity_hint</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href=""><span class="returnvalue">void</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="pango-Contexts.html#pango-context-set-gravity-hint" title="pango_context_set_gravity_hint ()">pango_context_set_gravity_hint</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">const <a class="link" href="pango-Glyph-Storage.html#PangoMatrix"><span class="returnvalue">PangoMatrix</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="pango-Contexts.html#pango-context-get-matrix" title="pango_context_get_matrix ()">pango_context_get_matrix</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href=""><span class="returnvalue">void</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="pango-Contexts.html#pango-context-set-matrix" title="pango_context_set_matrix ()">pango_context_set_matrix</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href=""><span class="returnvalue">gboolean</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="pango-Contexts.html#pango-context-get-round-glyph-positions" title="pango_context_get_round_glyph_positions ()">pango_context_get_round_glyph_positions</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href=""><span class="returnvalue">void</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="pango-Contexts.html#pango-context-set-round-glyph-positions" title="pango_context_set_round_glyph_positions ()">pango_context_set_round_glyph_positions</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href="pango-Fonts.html#PangoFont"><span class="returnvalue">PangoFont</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="pango-Contexts.html#pango-context-load-font" title="pango_context_load_font ()">pango_context_load_font</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href="pango-Fonts.html#PangoFontset"><span class="returnvalue">PangoFontset</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="pango-Contexts.html#pango-context-load-fontset" title="pango_context_load_fontset ()">pango_context_load_fontset</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href="pango-Fonts.html#PangoFontMetrics"><span class="returnvalue">PangoFontMetrics</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="pango-Contexts.html#pango-context-get-metrics" title="pango_context_get_metrics ()">pango_context_get_metrics</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href=""><span class="returnvalue">void</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="pango-Contexts.html#pango-context-list-families" title="pango_context_list_families ()">pango_context_list_families</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<a name="PangoContext"></a><div class="refsect1">
+<a name="pango-Contexts.other"></a><h2>Types and Values</h2>
+
+<div class="informaltable">
+<table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="other_proto_type">
+<col class="other_proto_name">
+</colgroup>
+<tbody><tr>
+<td class="datatype_keyword"> </td>
+<td class="function_name"><a class="link" href="pango-Contexts.html#PangoContext-struct" title="PangoContext">PangoContext</a></td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<div class="refsect1">
+<a name="pango-Contexts.object-hierarchy"></a><h2>Object Hierarchy</h2>
+
+<pre class="screen">    <a class="link" href="">GObject</a>
+    <span class="lineart">╰──</span> PangoContext
+</pre>
+</div>
+
+
+<div class="refsect1">
+<a name="pango-Contexts.description"></a><h2>Description</h2>
+
+<p>The <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> structure stores global information
+influencing Pango's operation, such as the fontmap used
+to look up fonts, and default values such as the default
+language, default gravity, or default font.</p>
+
+</div>
+<div class="refsect1">
+<a name="pango-Contexts.functions_details"></a><h2>Functions</h2>
+
+<div class="refsect2">
+<a name="pango-context-new"></a><h3>pango_context_new ()</h3>
+
+<a class="indexterm" name="id-1.4.2.8.2.2"></a>
+<pre class="programlisting"><a class="link" href="pango-Contexts.html#PangoContext"><span class="returnvalue">PangoContext</span></a> *
+pango_context_new (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>Creates a new <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> initialized to default values.</p>
+<p>This function is not particularly useful as it should always
+be followed by a <a class="link" href="pango-Contexts.html#pango-context-set-font-map" title="pango_context_set_font_map ()"><code class="function">pango_context_set_font_map()</code></a> call, and the
+function <a class="link" href="pango-Fonts.html#pango-font-map-create-context" title="pango_font_map_create_context ()"><code class="function">pango_font_map_create_context()</code></a> does these two steps
+together and hence users are recommended to use that.</p>
+<p>If you are using Pango as part of a higher-level system,
+that system may have it's own way of create a <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a>.
+For instance, the GTK+ toolkit has, among others,
+<a class="link" href=""><code class="function">gdk_pango_context_get_for_screen()</code></a>, and
+<a class="link" href=""><code class="function">gtk_widget_get_pango_context()</code></a>.  Use those instead.</p>
+<div class="refsect3">
+<a name="pango-context-new.returns"></a><h4>Returns</h4>
+
+<p> the newly allocated <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a>, which should
+be freed with <a class="link" href=""><code class="function">g_object_unref()</code></a>.</p>
+</div>
+</div>
+<div class="refsect2">
+<a name="pango-context-changed"></a><h3>pango_context_changed ()</h3>
+
+<a class="indexterm" name="id-1.4.2.8.3.2"></a>
+<pre class="programlisting"><a class="link" href=""><span class="returnvalue">void</span></a>
+pango_context_changed (<em class="parameter"><code><a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> *context</code></em>);</pre>
+<p>Forces a change in the context, which will cause any <a class="link" href="pango-Layout-Objects.html#PangoLayout"><span class="type">PangoLayout</span></a>
+using this context to re-layout.</p>
+<p>This function is only useful when implementing a new backend
+for Pango, something applications won't do. Backends should
+call this function if they have attached extra data to the context
+and such data is changed.</p>
+<div class="refsect3">
+<a name="pango-context-changed.parameters"></a><h4>Parameters</h4>
+
+<div class="informaltable">
+<table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>context</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<p class="since">Since: <a class="link" href="api-index-1-32-4.html#api-index-1.32.4">1.32.4</a></p>
+</div>
+<div class="refsect2">
+<a name="pango-context-get-serial"></a><h3>pango_context_get_serial ()</h3>
+
+<a class="indexterm" name="id-1.4.2.8.4.2"></a>
+<pre class="programlisting"><a class="link" href=""><span class="returnvalue">guint</span></a>
+pango_context_get_serial (<em class="parameter"><code><a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> *context</code></em>);</pre>
+<p>Returns the current serial number of <em class="parameter"><code>context</code></em>
+.  The serial number is
+initialized to an small number larger than zero when a new context
+is created and is increased whenever the context is changed using any
+of the setter functions, or the <a class="link" href="pango-Fonts.html#PangoFontMap"><span class="type">PangoFontMap</span></a> it uses to find fonts has
+changed. The serial may wrap, but will never have the value 0. Since it
+can wrap, never compare it with "less than", always use "not equals".</p>
+<p>This can be used to automatically detect changes to a <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a>, and
+is only useful when implementing objects that need update when their
+<a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> changes, like <a class="link" href="pango-Layout-Objects.html#PangoLayout"><span class="type">PangoLayout</span></a>.</p>
+<div class="refsect3">
+<a name="pango-context-get-serial.parameters"></a><h4>Parameters</h4>
+
+<div class="informaltable">
+<table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>context</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<div class="refsect3">
+<a name="pango-context-get-serial.returns"></a><h4>Returns</h4>
+
+<p> The current serial number of <em class="parameter"><code>context</code></em>
+.</p>
+</div>
+<p class="since">Since: <a class="link" href="api-index-1-32-4.html#api-index-1.32.4">1.32.4</a></p>
+</div>
+<div class="refsect2">
+<a name="pango-context-set-font-map"></a><h3>pango_context_set_font_map ()</h3>
+
+<a class="indexterm" name="id-1.4.2.8.5.2"></a>
+<pre class="programlisting"><a class="link" href=""><span class="returnvalue">void</span></a>
+pango_context_set_font_map (<em class="parameter"><code><a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> *context</code></em>,
+                            <em class="parameter"><code><a class="link" href="pango-Fonts.html#PangoFontMap"><span class="type">PangoFontMap</span></a> *font_map</code></em>);</pre>
+<p>Sets the font map to be searched when fonts are looked-up in this context.
+This is only for internal use by Pango backends, a <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> obtained
+via one of the recommended methods should already have a suitable font map.</p>
+<div class="refsect3">
+<a name="pango-context-set-font-map.parameters"></a><h4>Parameters</h4>
+
+<div class="informaltable">
+<table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>context</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>font_map</p></td>
+<td class="parameter_description"><p>the <a class="link" href="pango-Fonts.html#PangoFontMap"><span class="type">PangoFontMap</span></a> to set.</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="refsect2">
+<a name="pango-context-get-font-map"></a><h3>pango_context_get_font_map ()</h3>
+
+<a class="indexterm" name="id-1.4.2.8.6.2"></a>
+<pre class="programlisting"><a class="link" href="pango-Fonts.html#PangoFontMap"><span class="returnvalue">PangoFontMap</span></a> *
+pango_context_get_font_map (<em class="parameter"><code><a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> *context</code></em>);</pre>
+<p>Gets the <a class="link" href="pango-Fonts.html#PangoFontMap"><span class="type">PangoFontMap</span></a> used to look up fonts for this context.</p>
+<div class="refsect3">
+<a name="pango-context-get-font-map.parameters"></a><h4>Parameters</h4>
+
+<div class="informaltable">
+<table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>context</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<div class="refsect3">
+<a name="pango-context-get-font-map.returns"></a><h4>Returns</h4>
+
+<p>the font map for the <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a>.
+This value is owned by Pango and should not be unreferenced. </p>
+<p><span class="annotation">[<acronym class="acronym">transfer none</acronym>]</span></p>
+</div>
+<p class="since">Since: <a class="link" href="api-index-1-6.html#api-index-1.6">1.6</a></p>
+</div>
+<div class="refsect2">
+<a name="pango-context-get-font-description"></a><h3>pango_context_get_font_description ()</h3>
+
+<a class="indexterm" name="id-1.4.2.8.7.2"></a>
+<pre class="programlisting"><a class="link" href="pango-Fonts.html#PangoFontDescription"><span class="returnvalue">PangoFontDescription</span></a> *
+pango_context_get_font_description (<em class="parameter"><code><a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> *context</code></em>);</pre>
+<p>Retrieve the default font description for the context.</p>
+<div class="refsect3">
+<a name="pango-context-get-font-description.parameters"></a><h4>Parameters</h4>
+
+<div class="informaltable">
+<table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>context</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<div class="refsect3">
+<a name="pango-context-get-font-description.returns"></a><h4>Returns</h4>
+
+<p>a pointer to the context's default font
+description. This value must not be modified or freed. </p>
+<p><span class="annotation">[<acronym class="acronym">transfer none</acronym>]</span></p>
+</div>
+</div>
+<div class="refsect2">
+<a name="pango-context-set-font-description"></a><h3>pango_context_set_font_description ()</h3>
+
+<a class="indexterm" name="id-1.4.2.8.8.2"></a>
+<pre class="programlisting"><a class="link" href=""><span class="returnvalue">void</span></a>
+pango_context_set_font_description (<em class="parameter"><code><a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> *context</code></em>,
+                                    <em class="parameter"><code>const <a class="link" href="pango-Fonts.html#PangoFontDescription"><span class="type">PangoFontDescription</span></a> *desc</code></em>);</pre>
+<p>Set the default font description for the context</p>
+<div class="refsect3">
+<a name="pango-context-set-font-description.parameters"></a><h4>Parameters</h4>
+
+<div class="informaltable">
+<table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>context</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>desc</p></td>
+<td class="parameter_description"><p>the new pango font description</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="refsect2">
+<a name="pango-context-get-language"></a><h3>pango_context_get_language ()</h3>
+
+<a class="indexterm" name="id-1.4.2.8.9.2"></a>
+<pre class="programlisting"><a class="link" href="pango-Scripts-and-Languages.html#PangoLanguage"><span class="returnvalue">PangoLanguage</span></a> *
+pango_context_get_language (<em class="parameter"><code><a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> *context</code></em>);</pre>
+<p>Retrieves the global language tag for the context.</p>
+<div class="refsect3">
+<a name="pango-context-get-language.parameters"></a><h4>Parameters</h4>
+
+<div class="informaltable">
+<table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>context</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<div class="refsect3">
+<a name="pango-context-get-language.returns"></a><h4>Returns</h4>
+
+<p> the global language tag.</p>
+</div>
+</div>
+<div class="refsect2">
+<a name="pango-context-set-language"></a><h3>pango_context_set_language ()</h3>
+
+<a class="indexterm" name="id-1.4.2.8.10.2"></a>
+<pre class="programlisting"><a class="link" href=""><span class="returnvalue">void</span></a>
+pango_context_set_language (<em class="parameter"><code><a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> *context</code></em>,
+                            <em class="parameter"><code><a class="link" href="pango-Scripts-and-Languages.html#PangoLanguage"><span class="type">PangoLanguage</span></a> *language</code></em>);</pre>
+<p>Sets the global language tag for the context.  The default language
+for the locale of the running process can be found using
+<a class="link" href="pango-Scripts-and-Languages.html#pango-language-get-default" title="pango_language_get_default ()"><code class="function">pango_language_get_default()</code></a>.</p>
+<div class="refsect3">
+<a name="pango-context-set-language.parameters"></a><h4>Parameters</h4>
+
+<div class="informaltable">
+<table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>context</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>language</p></td>
+<td class="parameter_description"><p>the new language tag.</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="refsect2">
+<a name="pango-context-get-base-dir"></a><h3>pango_context_get_base_dir ()</h3>
+
+<a class="indexterm" name="id-1.4.2.8.11.2"></a>
+<pre class="programlisting"><a class="link" href="pango-Bidirectional-Text.html#PangoDirection" title="enum PangoDirection"><span class="returnvalue">PangoDirection</span></a>
+pango_context_get_base_dir (<em class="parameter"><code><a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> *context</code></em>);</pre>
+<p>Retrieves the base direction for the context. See
+<a class="link" href="pango-Contexts.html#pango-context-set-base-dir" title="pango_context_set_base_dir ()"><code class="function">pango_context_set_base_dir()</code></a>.</p>
+<div class="refsect3">
+<a name="pango-context-get-base-dir.parameters"></a><h4>Parameters</h4>
+
+<div class="informaltable">
+<table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>context</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<div class="refsect3">
+<a name="pango-context-get-base-dir.returns"></a><h4>Returns</h4>
+
+<p> the base direction for the context.</p>
+</div>
+</div>
+<div class="refsect2">
+<a name="pango-context-set-base-dir"></a><h3>pango_context_set_base_dir ()</h3>
+
+<a class="indexterm" name="id-1.4.2.8.12.2"></a>
+<pre class="programlisting"><a class="link" href=""><span class="returnvalue">void</span></a>
+pango_context_set_base_dir (<em class="parameter"><code><a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> *context</code></em>,
+                            <em class="parameter"><code><a class="link" href="pango-Bidirectional-Text.html#PangoDirection" title="enum PangoDirection"><span class="type">PangoDirection</span></a> direction</code></em>);</pre>
+<p>Sets the base direction for the context.</p>
+<p>The base direction is used in applying the Unicode bidirectional
+algorithm; if the <em class="parameter"><code>direction</code></em>
+ is <a class="link" href="pango-Bidirectional-Text.html#PANGO-DIRECTION-LTR:CAPS"><code class="literal">PANGO_DIRECTION_LTR</code></a> or
+<a class="link" href="pango-Bidirectional-Text.html#PANGO-DIRECTION-RTL:CAPS"><code class="literal">PANGO_DIRECTION_RTL</code></a>, then the value will be used as the paragraph
+direction in the Unicode bidirectional algorithm.  A value of
+<a class="link" href="pango-Bidirectional-Text.html#PANGO-DIRECTION-WEAK-LTR:CAPS"><code class="literal">PANGO_DIRECTION_WEAK_LTR</code></a> or <a class="link" href="pango-Bidirectional-Text.html#PANGO-DIRECTION-WEAK-RTL:CAPS"><code class="literal">PANGO_DIRECTION_WEAK_RTL</code></a> is used only
+for paragraphs that do not contain any strong characters themselves.</p>
+<div class="refsect3">
+<a name="pango-context-set-base-dir.parameters"></a><h4>Parameters</h4>
+
+<div class="informaltable">
+<table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>context</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>direction</p></td>
+<td class="parameter_description"><p>the new base direction</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="refsect2">
+<a name="pango-context-get-base-gravity"></a><h3>pango_context_get_base_gravity ()</h3>
+
+<a class="indexterm" name="id-1.4.2.8.13.2"></a>
+<pre class="programlisting"><a class="link" href="pango-Vertical-Text.html#PangoGravity" title="enum PangoGravity"><span class="returnvalue">PangoGravity</span></a>
+pango_context_get_base_gravity (<em class="parameter"><code><a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> *context</code></em>);</pre>
+<p>Retrieves the base gravity for the context. See
+<a class="link" href="pango-Contexts.html#pango-context-set-base-gravity" title="pango_context_set_base_gravity ()"><code class="function">pango_context_set_base_gravity()</code></a>.</p>
+<div class="refsect3">
+<a name="pango-context-get-base-gravity.parameters"></a><h4>Parameters</h4>
+
+<div class="informaltable">
+<table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>context</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<div class="refsect3">
+<a name="pango-context-get-base-gravity.returns"></a><h4>Returns</h4>
+
+<p> the base gravity for the context.</p>
+</div>
+<p class="since">Since: <a class="link" href="api-index-1-16.html#api-index-1.16">1.16</a></p>
+</div>
+<div class="refsect2">
+<a name="pango-context-set-base-gravity"></a><h3>pango_context_set_base_gravity ()</h3>
+
+<a class="indexterm" name="id-1.4.2.8.14.2"></a>
+<pre class="programlisting"><a class="link" href=""><span class="returnvalue">void</span></a>
+pango_context_set_base_gravity (<em class="parameter"><code><a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> *context</code></em>,
+                                <em class="parameter"><code><a class="link" href="pango-Vertical-Text.html#PangoGravity" title="enum PangoGravity"><span class="type">PangoGravity</span></a> gravity</code></em>);</pre>
+<p>Sets the base gravity for the context.</p>
+<p>The base gravity is used in laying vertical text out.</p>
+<div class="refsect3">
+<a name="pango-context-set-base-gravity.parameters"></a><h4>Parameters</h4>
+
+<div class="informaltable">
+<table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>context</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>gravity</p></td>
+<td class="parameter_description"><p>the new base gravity</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p class="since">Since: <a class="link" href="api-index-1-16.html#api-index-1.16">1.16</a></p>
+</div>
+<div class="refsect2">
+<a name="pango-context-get-gravity"></a><h3>pango_context_get_gravity ()</h3>
+
+<a class="indexterm" name="id-1.4.2.8.15.2"></a>
+<pre class="programlisting"><a class="link" href="pango-Vertical-Text.html#PangoGravity" title="enum PangoGravity"><span class="returnvalue">PangoGravity</span></a>
+pango_context_get_gravity (<em class="parameter"><code><a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> *context</code></em>);</pre>
+<p>Retrieves the gravity for the context. This is similar to
+<a class="link" href="pango-Contexts.html#pango-context-get-base-gravity" title="pango_context_get_base_gravity ()"><code class="function">pango_context_get_base_gravity()</code></a>, except for when the base gravity
+is <a class="link" href="pango-Vertical-Text.html#PANGO-GRAVITY-AUTO:CAPS"><code class="literal">PANGO_GRAVITY_AUTO</code></a> for which <a class="link" href="pango-Vertical-Text.html#pango-gravity-get-for-matrix" title="pango_gravity_get_for_matrix ()"><code class="function">pango_gravity_get_for_matrix()</code></a> is used
+to return the gravity from the current context matrix.</p>
+<div class="refsect3">
+<a name="pango-context-get-gravity.parameters"></a><h4>Parameters</h4>
+
+<div class="informaltable">
+<table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>context</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<div class="refsect3">
+<a name="pango-context-get-gravity.returns"></a><h4>Returns</h4>
+
+<p> the resolved gravity for the context.</p>
+</div>
+<p class="since">Since: <a class="link" href="api-index-1-16.html#api-index-1.16">1.16</a></p>
+</div>
+<div class="refsect2">
+<a name="pango-context-get-gravity-hint"></a><h3>pango_context_get_gravity_hint ()</h3>
+
+<a class="indexterm" name="id-1.4.2.8.16.2"></a>
+<pre class="programlisting"><a class="link" href="pango-Vertical-Text.html#PangoGravityHint" title="enum PangoGravityHint"><span class="returnvalue">PangoGravityHint</span></a>
+pango_context_get_gravity_hint (<em class="parameter"><code><a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> *context</code></em>);</pre>
+<p>Retrieves the gravity hint for the context. See
+<a class="link" href="pango-Contexts.html#pango-context-set-gravity-hint" title="pango_context_set_gravity_hint ()"><code class="function">pango_context_set_gravity_hint()</code></a> for details.</p>
+<div class="refsect3">
+<a name="pango-context-get-gravity-hint.parameters"></a><h4>Parameters</h4>
+
+<div class="informaltable">
+<table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>context</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<div class="refsect3">
+<a name="pango-context-get-gravity-hint.returns"></a><h4>Returns</h4>
+
+<p> the gravity hint for the context.</p>
+</div>
+<p class="since">Since: <a class="link" href="api-index-1-16.html#api-index-1.16">1.16</a></p>
+</div>
+<div class="refsect2">
+<a name="pango-context-set-gravity-hint"></a><h3>pango_context_set_gravity_hint ()</h3>
+
+<a class="indexterm" name="id-1.4.2.8.17.2"></a>
+<pre class="programlisting"><a class="link" href=""><span class="returnvalue">void</span></a>
+pango_context_set_gravity_hint (<em class="parameter"><code><a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> *context</code></em>,
+                                <em class="parameter"><code><a class="link" href="pango-Vertical-Text.html#PangoGravityHint" title="enum PangoGravityHint"><span class="type">PangoGravityHint</span></a> hint</code></em>);</pre>
+<p>Sets the gravity hint for the context.</p>
+<p>The gravity hint is used in laying vertical text out, and is only relevant
+if gravity of the context as returned by <a class="link" href="pango-Contexts.html#pango-context-get-gravity" title="pango_context_get_gravity ()"><code class="function">pango_context_get_gravity()</code></a>
+is set <a class="link" href="pango-Vertical-Text.html#PANGO-GRAVITY-EAST:CAPS"><code class="literal">PANGO_GRAVITY_EAST</code></a> or <a class="link" href="pango-Vertical-Text.html#PANGO-GRAVITY-WEST:CAPS"><code class="literal">PANGO_GRAVITY_WEST</code></a>.</p>
+<div class="refsect3">
+<a name="pango-context-set-gravity-hint.parameters"></a><h4>Parameters</h4>
+
+<div class="informaltable">
+<table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>context</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>hint</p></td>
+<td class="parameter_description"><p>the new gravity hint</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p class="since">Since: <a class="link" href="api-index-1-16.html#api-index-1.16">1.16</a></p>
+</div>
+<div class="refsect2">
+<a name="pango-context-get-matrix"></a><h3>pango_context_get_matrix ()</h3>
+
+<a class="indexterm" name="id-1.4.2.8.18.2"></a>
+<pre class="programlisting">const <a class="link" href="pango-Glyph-Storage.html#PangoMatrix"><span class="returnvalue">PangoMatrix</span></a> *
+pango_context_get_matrix (<em class="parameter"><code><a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> *context</code></em>);</pre>
+<p>Gets the transformation matrix that will be applied when
+rendering with this context. See <a class="link" href="pango-Contexts.html#pango-context-set-matrix" title="pango_context_set_matrix ()"><code class="function">pango_context_set_matrix()</code></a>.</p>
+<div class="refsect3">
+<a name="pango-context-get-matrix.parameters"></a><h4>Parameters</h4>
+
+<div class="informaltable">
+<table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>context</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<div class="refsect3">
+<a name="pango-context-get-matrix.returns"></a><h4>Returns</h4>
+
+<p>the matrix, or <a class="link" href=""><code class="literal">NULL</code></a> if no matrix has
+been set (which is the same as the identity matrix). The returned
+matrix is owned by Pango and must not be modified or freed. </p>
+<p><span class="annotation">[<acronym class="acronym">nullable</acronym>]</span></p>
+</div>
+<p class="since">Since: <a class="link" href="api-index-1-6.html#api-index-1.6">1.6</a></p>
+</div>
+<div class="refsect2">
+<a name="pango-context-set-matrix"></a><h3>pango_context_set_matrix ()</h3>
+
+<a class="indexterm" name="id-1.4.2.8.19.2"></a>
+<pre class="programlisting"><a class="link" href=""><span class="returnvalue">void</span></a>
+pango_context_set_matrix (<em class="parameter"><code><a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> *context</code></em>,
+                          <em class="parameter"><code>const <a class="link" href="pango-Glyph-Storage.html#PangoMatrix"><span class="type">PangoMatrix</span></a> *matrix</code></em>);</pre>
+<p>Sets the transformation matrix that will be applied when rendering
+with this context. Note that reported metrics are in the user space
+coordinates before the application of the matrix, not device-space
+coordinates after the application of the matrix. So, they don't scale
+with the matrix, though they may change slightly for different
+matrices, depending on how the text is fit to the pixel grid.</p>
+<div class="refsect3">
+<a name="pango-context-set-matrix.parameters"></a><h4>Parameters</h4>
+
+<div class="informaltable">
+<table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>context</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>matrix</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Glyph-Storage.html#PangoMatrix"><span class="type">PangoMatrix</span></a>, or <a class="link" href=""><code class="literal">NULL</code></a> to unset any existing
+matrix. (No matrix set is the same as setting the identity matrix.). </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym class="acronym">allow-none</acronym>]</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p class="since">Since: <a class="link" href="api-index-1-6.html#api-index-1.6">1.6</a></p>
+</div>
+<div class="refsect2">
+<a name="pango-context-get-round-glyph-positions"></a><h3>pango_context_get_round_glyph_positions ()</h3>
+
+<a class="indexterm" name="id-1.4.2.8.20.2"></a>
+<pre class="programlisting"><a class="link" href=""><span class="returnvalue">gboolean</span></a>
+pango_context_get_round_glyph_positions
+                               (<em class="parameter"><code><a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> *context</code></em>);</pre>
+<p>Returns whether font rendering with this context should
+round glyph positions and widths.</p>
+<div class="refsect3">
+<a name="pango-context-get-round-glyph-positions.parameters"></a><h4>Parameters</h4>
+
+<div class="informaltable">
+<table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>context</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<p class="since">Since: <a class="link" href="api-index-1-44.html#api-index-1.44">1.44</a></p>
+</div>
+<div class="refsect2">
+<a name="pango-context-set-round-glyph-positions"></a><h3>pango_context_set_round_glyph_positions ()</h3>
+
+<a class="indexterm" name="id-1.4.2.8.21.2"></a>
+<pre class="programlisting"><a class="link" href=""><span class="returnvalue">void</span></a>
+pango_context_set_round_glyph_positions
+                               (<em class="parameter"><code><a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> *context</code></em>,
+                                <em class="parameter"><code><a class="link" href=""><span class="type">gboolean</span></a> round_positions</code></em>);</pre>
+<p>Sets whether font rendering with this context should
+round glyph positions and widths to integral positions,
+in device units.</p>
+<p>This is useful when the renderer can't handle subpixel
+positioning of glyphs.</p>
+<p>The default value is to round glyph positions, to remain
+compatible with previous Pango behavior.</p>
+<div class="refsect3">
+<a name="pango-context-set-round-glyph-positions.parameters"></a><h4>Parameters</h4>
+
+<div class="informaltable">
+<table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>context</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>round_positions</p></td>
+<td class="parameter_description"><p>whether to round glyph positions</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p class="since">Since: <a class="link" href="api-index-1-44.html#api-index-1.44">1.44</a></p>
+</div>
+<div class="refsect2">
+<a name="pango-context-load-font"></a><h3>pango_context_load_font ()</h3>
+
+<a class="indexterm" name="id-1.4.2.8.22.2"></a>
+<pre class="programlisting"><a class="link" href="pango-Fonts.html#PangoFont"><span class="returnvalue">PangoFont</span></a> *
+pango_context_load_font (<em class="parameter"><code><a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> *context</code></em>,
+                         <em class="parameter"><code>const <a class="link" href="pango-Fonts.html#PangoFontDescription"><span class="type">PangoFontDescription</span></a> *desc</code></em>);</pre>
+<p>Loads the font in one of the fontmaps in the context
+that is the closest match for <em class="parameter"><code>desc</code></em>
+.</p>
+<div class="refsect3">
+<a name="pango-context-load-font.parameters"></a><h4>Parameters</h4>
+
+<div class="informaltable">
+<table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>context</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>desc</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Fonts.html#PangoFontDescription"><span class="type">PangoFontDescription</span></a> describing the font to load</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="refsect3">
+<a name="pango-context-load-font.returns"></a><h4>Returns</h4>
+
+<p>the newly allocated <a class="link" href="pango-Fonts.html#PangoFont"><span class="type">PangoFont</span></a>
+that was loaded, or <a class="link" href=""><code class="literal">NULL</code></a> if no font matched. </p>
+<p><span class="annotation">[<acronym class="acronym">transfer full</acronym>][<acronym class="acronym">nullable</acronym>]</span></p>
+</div>
+</div>
+<div class="refsect2">
+<a name="pango-context-load-fontset"></a><h3>pango_context_load_fontset ()</h3>
+
+<a class="indexterm" name="id-1.4.2.8.23.2"></a>
+<pre class="programlisting"><a class="link" href="pango-Fonts.html#PangoFontset"><span class="returnvalue">PangoFontset</span></a> *
+pango_context_load_fontset (<em class="parameter"><code><a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> *context</code></em>,
+                            <em class="parameter"><code>const <a class="link" href="pango-Fonts.html#PangoFontDescription"><span class="type">PangoFontDescription</span></a> *desc</code></em>,
+                            <em class="parameter"><code><a class="link" href="pango-Scripts-and-Languages.html#PangoLanguage"><span class="type">PangoLanguage</span></a> *language</code></em>);</pre>
+<p>Load a set of fonts in the context that can be used to render
+a font matching <em class="parameter"><code>desc</code></em>
+.</p>
+<div class="refsect3">
+<a name="pango-context-load-fontset.parameters"></a><h4>Parameters</h4>
+
+<div class="informaltable">
+<table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>context</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>desc</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Fonts.html#PangoFontDescription"><span class="type">PangoFontDescription</span></a> describing the fonts to load</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>language</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Scripts-and-Languages.html#PangoLanguage"><span class="type">PangoLanguage</span></a> the fonts will be used for</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="refsect3">
+<a name="pango-context-load-fontset.returns"></a><h4>Returns</h4>
+
+<p>the newly allocated
+<a class="link" href="pango-Fonts.html#PangoFontset"><span class="type">PangoFontset</span></a> loaded, or <a class="link" href=""><code class="literal">NULL</code></a> if no font matched. </p>
+<p><span class="annotation">[<acronym class="acronym">transfer full</acronym>][<acronym class="acronym">nullable</acronym>]</span></p>
+</div>
+</div>
+<div class="refsect2">
+<a name="pango-context-get-metrics"></a><h3>pango_context_get_metrics ()</h3>
+
+<a class="indexterm" name="id-1.4.2.8.24.2"></a>
+<pre class="programlisting"><a class="link" href="pango-Fonts.html#PangoFontMetrics"><span class="returnvalue">PangoFontMetrics</span></a> *
+pango_context_get_metrics (<em class="parameter"><code><a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> *context</code></em>,
+                           <em class="parameter"><code>const <a class="link" href="pango-Fonts.html#PangoFontDescription"><span class="type">PangoFontDescription</span></a> *desc</code></em>,
+                           <em class="parameter"><code><a class="link" href="pango-Scripts-and-Languages.html#PangoLanguage"><span class="type">PangoLanguage</span></a> *language</code></em>);</pre>
+<p>Get overall metric information for a particular font
+description.  Since the metrics may be substantially different for
+different scripts, a language tag can be provided to indicate that
+the metrics should be retrieved that correspond to the script(s)
+used by that language.</p>
+<p>The <a class="link" href="pango-Fonts.html#PangoFontDescription"><span class="type">PangoFontDescription</span></a> is interpreted in the same way as
+by <a class="link" href="pango-Text-Processing.html#pango-itemize" title="pango_itemize ()"><code class="function">pango_itemize()</code></a>, and the family name may be a comma separated
+list of figures. If characters from multiple of these families
+would be used to render the string, then the returned fonts would
+be a composite of the metrics for the fonts loaded for the
+individual families.</p>
+<div class="refsect3">
+<a name="pango-context-get-metrics.parameters"></a><h4>Parameters</h4>
+
+<div class="informaltable">
+<table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>context</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>desc</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Fonts.html#PangoFontDescription"><span class="type">PangoFontDescription</span></a> structure.  <a class="link" href=""><code class="literal">NULL</code></a> means that the
+font description from the context will be used. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym class="acronym">allow-none</acronym>]</span></td>
+</tr>
+<tr>
+<td class="parameter_name"><p>language</p></td>
+<td class="parameter_description"><p>language tag used to determine which script to get
+the metrics for. <a class="link" href=""><code class="literal">NULL</code></a> means that the language tag from the context
+will be used. If no language tag is set on the context, metrics
+for the default language (as determined by <a class="link" href="pango-Scripts-and-Languages.html#pango-language-get-default" title="pango_language_get_default ()"><code class="function">pango_language_get_default()</code></a>)
+will be returned. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym class="acronym">allow-none</acronym>]</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="refsect3">
+<a name="pango-context-get-metrics.returns"></a><h4>Returns</h4>
+
+<p> a <a class="link" href="pango-Fonts.html#PangoFontMetrics"><span class="type">PangoFontMetrics</span></a> object. The caller must call <a class="link" href="pango-Fonts.html#pango-font-metrics-unref" title="pango_font_metrics_unref ()"><code class="function">pango_font_metrics_unref()</code></a>
+when finished using the object.</p>
+</div>
+</div>
+<div class="refsect2">
+<a name="pango-context-list-families"></a><h3>pango_context_list_families ()</h3>
+
+<a class="indexterm" name="id-1.4.2.8.25.2"></a>
+<pre class="programlisting"><a class="link" href=""><span class="returnvalue">void</span></a>
+pango_context_list_families (<em class="parameter"><code><a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> *context</code></em>,
+                             <em class="parameter"><code><a class="link" href="pango-Fonts.html#PangoFontFamily"><span class="type">PangoFontFamily</span></a> ***families</code></em>,
+                             <em class="parameter"><code><a class="link" href=""><span class="type">int</span></a> *n_families</code></em>);</pre>
+<p>List all families for a context.</p>
+<div class="refsect3">
+<a name="pango-context-list-families.parameters"></a><h4>Parameters</h4>
+
+<div class="informaltable">
+<table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>context</p></td>
+<td class="parameter_description"><p>a <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>families</p></td>
+<td class="parameter_description"><p>location to store a pointer to
+an array of <a class="link" href="pango-Fonts.html#PangoFontFamily"><span class="type">PangoFontFamily</span></a> *. This array should be freed
+with <a class="link" href=""><code class="function">g_free()</code></a>. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym class="acronym">out</acronym>][<acronym class="acronym">array</acronym> length=n_families][<acronym class="acronym">transfer container</acronym>]</span></td>
+</tr>
+<tr>
+<td class="parameter_name"><p>n_families</p></td>
+<td class="parameter_description"><p>location to store the number of elements in <em class="parameter"><code>descs</code></em>
+. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym class="acronym">out</acronym>]</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+</div>
+<div class="refsect1">
+<a name="pango-Contexts.other_details"></a><h2>Types and Values</h2>
+
+<div class="refsect2">
+<a name="PangoContext-struct"></a><h3>PangoContext</h3>
+
+<a class="indexterm" name="id-1.4.2.9.2.2"></a>
+<pre class="programlisting">typedef struct _PangoContext PangoContext;</pre>
+<p>The <a class="link" href="pango-Contexts.html#PangoContext"><span class="type">PangoContext</span></a> structure stores global information
+used to control the itemization process.</p>
+</div>
+
+</div>
+
+</div>
+<div class="footer">
+<hr>Generated by GTK-Doc V1.32</div>
+</body>
+</html>
