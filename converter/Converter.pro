@@ -36,11 +36,36 @@ LIBS += ../../gtk/win32/bin\libgtk-3-0.dll \
                 ../../gtk/win32/bin/libxml2-2.dll
 
 SOURCES += \
+    baseconverter.cpp \
+    converter.cpp \
+    geoconverter.cpp \
+    getfunction.c \
+    gfmconverter.cpp \
+    gtkthread.cpp \
+    kedrrc.c \
+    lasconverter.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    prog_dir.c \
+    string-transform.c \
+    unicode.c \
+    units_scale.c
 
 HEADERS += \
-    mainwindow.h
+    baseconverter.h \
+    basic_types.h \
+    common.h \
+    converter.h \
+    geoconverter.h \
+    getfunction.h \
+    gfmconverter.h \
+    gtkthread.h \
+    lasconverter.h \
+    mainwindow.h \
+    string-transform.h \
+    unicode.h \
+    units_scale.h \
+    utils.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
