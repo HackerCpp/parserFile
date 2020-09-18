@@ -22,6 +22,9 @@ protected:
     volatile qreal m_currentRecordPoint;
     volatile qreal m_currentScaleMainValue;
 
+    int m_modeCountedDepth;
+    qreal k_a,k_b,k_c;
+
 public:
     AGraphicItem(ICurve *curve,BoardForTrack *board);
     AGraphicItem(CustomObject *drawObject,BoardForTrack *board);
@@ -38,6 +41,7 @@ public:
     virtual bool isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per){Q_UNUSED(area) Q_UNUSED(visibleRect) Q_UNUSED(per) return false;}
     virtual bool isClickHeaderArea(QPoint pos){Q_UNUSED(pos)return false;}
     virtual void setActive(bool active){m_isActive = active;}
+    virtual void setDepthCoeff(QVector<qreal> f_coeffs);
 
     virtual void updateParam(int pictureWidth);
     virtual void updateParam(){}

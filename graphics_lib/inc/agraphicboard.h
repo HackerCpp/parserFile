@@ -36,7 +36,7 @@ public:
     void updateItemsParam();
     void openCurveSettings()override;
 
-private:
+protected:
     virtual void mousePressEvent(QMouseEvent *event)override;
     virtual void mouseMoveEvent(QMouseEvent *event)override;
     virtual void mouseReleaseEvent(QMouseEvent *event)override;

@@ -13,6 +13,7 @@ public:
     ~Paraminfo(){}
     QString index(){return m_index;}
     QString value(){return m_value;}
+    void setValue(QString value){m_value = value;}
 };
 /*****************************************************************/
 class Parameters : public QObject{
@@ -42,8 +43,6 @@ class Desc : public QObject{
     Q_OBJECT
     Parameters *m_parameters;
     Parameters *m_calibration;
-    //QHash<QString,QString> *m_parameters;
-    //QHash<QString,QString> *m_calibration;
 public:
     Desc(QByteArray desc);
     Desc();

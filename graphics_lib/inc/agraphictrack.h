@@ -17,10 +17,14 @@ class AGraphicTrack :  public ObjectOfTheBoard
 {
     Q_OBJECT
 protected:
+    enum TrackMode{NORMAL_MODE,CURVE_SHIFT_MODE};
+
     QPointF m_posLeftClick;
     QTimer m_timerLeftClick;
     QImage *m_infoPixMap,*m_curentHeader,*m_doubleHeader,*m_nameTrack;
     BoardForTrack *m_board;
+    TrackMode m_mode;
+    QWidget m_parent;
 
     QRectF m_boundingRect;
     int m_heightHeader;
@@ -30,9 +34,14 @@ protected:
     QList<AGraphicItem*> *m_items;
     ATrack *m_track;
 
+    //Normal mode
     bool m_isRightClick,m_isLeftClick,m_isLeftBorderClick, m_isRightBorderClick,
     m_isLeftCurvesClick, m_isRightCurvesClick, m_isLeftHeaderClick,
     m_isRightHeaderClick, m_isOpenCloseClick, m_isOpen;
+
+    //Curve shift mode
+    bool m_isLinePress;
+
     QPointF m_prevPoint;
 public:
     AGraphicTrack(ATrack *track,BoardForTrack *board);
@@ -56,11 +65,8 @@ public:
     virtual QRectF boundingRect()const override{return m_boundingRect;}
     virtual void swapPixMap()override;
 
-
-    //virtual void toSetTheLocationOfTheImageAfterDrawing()override{}
-
     void init();
-
+    //Normal mode
     virtual bool is_openCloseClick(QPointF point){Q_UNUSED(point)return false;}
     virtual bool is_borderClick(QPointF point){Q_UNUSED(point)return false;}
     virtual bool is_CurvesClick(QPointF point){Q_UNUSED(point)return false;}
@@ -94,10 +100,27 @@ public:
     virtual void  headerLeftReleaseHandler(QPointF point){Q_UNUSED(point)}
     virtual void  headerRightReleaseHandler(QPointF point){Q_UNUSED(point)}
 
-    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event)override;
-    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event)override;
-    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event)override;
-    virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)override;
+    //Curve shift mode
+    virtual void setLineCurveShift(QPointF point){Q_UNUSED(point)}
+    virtual bool is_lineCurveShift(QPointF point){Q_UNUSED(point) return false;}
+    virtual void lineCurveShiftPresHandler(QPointF point){Q_UNUSED(point)}
+    virtual void lineCurveShiftMoveHandler(QPointF point){Q_UNUSED(point)}
+    virtual void lineCurveShiftReleaseHandler(QPointF point){Q_UNUSED(point)}
+
+    void mousePressEvent(QGraphicsSceneMouseEvent *event)override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event)override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event)override;
+    void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)override;
+
+    void mousePressEventNormalMode(QGraphicsSceneMouseEvent *event);
+    void mouseMoveEventNormalMode(QGraphicsSceneMouseEvent *event);
+    void mouseReleaseEventNormalMode(QGraphicsSceneMouseEvent *event);
+    void mouseDoubleClickEventNormalMode(QGraphicsSceneMouseEvent *event);
+
+    void mousePressEventCurveShiftMode(QGraphicsSceneMouseEvent *event);
+    void mouseMoveEventCurveShiftMode(QGraphicsSceneMouseEvent *event);
+    void mouseReleaseEventCurveShiftMode(QGraphicsSceneMouseEvent *event);
+    void mouseDoubleClickEventCurveShiftMode(QGraphicsSceneMouseEvent *event);
 
 
     virtual void dragEnterEvent(QGraphicsSceneDragDropEvent *event)override{Q_UNUSED(event)}

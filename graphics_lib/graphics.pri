@@ -1,7 +1,7 @@
 QT += core gui xml charts
 
 CONFIG += c++11
-INCLUDEPATH += $$PWD $$PWD/inc $$PWD/inc/items $$PWD/inc/tools \
+INCLUDEPATH += $$PWD $$PWD/inc $$PWD/inc/items $$PWD/inc/tools $$PWD/inc/acousticsEditor\
 $$PWD/inc/spectrReader $$PWD/inc/drawObjects $$PWD/../QScintilla/Qt4Qt5\
 $$PWD/../log_data_interpreter/include
 
@@ -9,14 +9,16 @@ LIBS += ../build/release/LogData.lib
 
 
 SOURCES += \
-    $$PWD/inc/acousticsEditor/acuscene.cpp \
-    $$PWD/inc/acousticsEditor/acuview.cpp \
-    $$PWD/inc/acousticsEditor/chartviewselectsegment.cpp \
-    $$PWD/inc/acousticsEditor/countingacousticsitem.cpp \
-    $$PWD/inc/acousticsEditor/datacountingacoustics.cpp \
-    $$PWD/inc/acousticsEditor/displayingacoustics.cpp \
-    $$PWD/inc/acousticsEditor/setofcurves.cpp \
-    $$PWD/inc/acousticsEditor/widgetselectwavesegment.cpp \
+    $$PWD/inc/canvas.cpp \
+    $$PWD/inc/tools/curveshifttool.cpp \
+    $$PWD/src/acousticsEditor/acuscene.cpp \
+    $$PWD/src/acousticsEditor/acuview.cpp \
+    $$PWD/src/acousticsEditor/chartviewselectsegment.cpp \
+    $$PWD/src/acousticsEditor/countingacousticsitem.cpp \
+    $$PWD/src/acousticsEditor/datacountingacoustics.cpp \
+    $$PWD/src/acousticsEditor/displayingacoustics.cpp \
+    $$PWD/src/acousticsEditor/setofcurves.cpp \
+    $$PWD/src/acousticsEditor/widgetselectwavesegment.cpp \
     $$PWD/src/acousticsEditor/acousticsEditor.cpp \
     $$PWD/src/items/twodimensionalarrayitem.cpp \
     $$PWD/src/tools/itemslegendview.cpp \
@@ -76,7 +78,9 @@ HEADERS += \
     $$PWD/inc/acousticsEditor/displayingacoustics.h \
     $$PWD/inc/acousticsEditor/setofcurves.h \
     $$PWD/inc/acousticsEditor/widgetselectwavesegment.h \
+    $$PWD/inc/canvas.h \
     $$PWD/inc/items/twodimensionalarrayitem.h \
+    $$PWD/inc/tools/curveshifttool.h \
     $$PWD/inc/tools/itemslegendview.h \
     $$PWD/inc/tools/customprogressbar.h \
     $$PWD/inc/drawObjects/objectColumn.h \

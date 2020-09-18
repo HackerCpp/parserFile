@@ -129,7 +129,6 @@ void VerticalBoard::mouseMoveEvent(QMouseEvent *event){
             }
         }
     //}
-
     QGraphicsView::mouseMoveEvent(event);
 }
 void VerticalBoard::mouseReleaseEvent(QMouseEvent *event){
@@ -191,8 +190,9 @@ void VerticalBoard::newTrack(){
 
 void VerticalBoard::init(){
     m_legend = nullptr;
-    m_canvas = new QGraphicsScene();
+    m_canvas = new Canvas();
     setScene(m_canvas);
+    setMouseTracking(true);
     m_beginLineLegend = new QGraphicsLineItem();
     m_currentLineLegend = new QGraphicsLineItem();
     m_beginLineLegend->setPen(QPen(Qt::red,2));
@@ -308,12 +308,12 @@ void VerticalBoard::insertNewTrack(int curentTrackNumber,InsertPossition positio
 }
 
 void inline VerticalBoard::scrollChanged(){
-    QPolygonF f_rect = mapToScene(QRect(x(),y(),width(),height()));
+    QPolygonF f_rect = mapToScene(QRect(0,0,width(),height()));
     if(f_rect.isEmpty()){
         qDebug() << "нулевой размер у борда, сигнал трэкам не может быть отправлен" << m_boardInfo->name();
         return;
     }
-    QRectF f_rectForScene = QRectF(f_rect[0].x(),f_rect[0].y(),f_rect[2].x() - f_rect[0].x(), f_rect[2].y() - f_rect[0].y());
+    QRectF f_rectForScene = QRectF(f_rect[0],f_rect[2]);
     changingTheVisibilityZone(f_rectForScene);
 }
 

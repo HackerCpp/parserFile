@@ -12,18 +12,11 @@ void Parameters::init(){
 Parameters::Parameters(QByteArray parameters,Type type)
     : m_type(type){
     init();
-    for(int pos = 0;pos < parameters.size();){
-        int f_indexEqually = parameters.indexOf("=",pos);
-        if(f_indexEqually == -1)
-            return;
-        QString index = parameters.mid(pos,f_indexEqually - pos);
-        int f_indexEndParam = parameters.indexOf("\"",f_indexEqually + 3);
-        if(f_indexEndParam == -1)
-            return;
-        QString value = parameters.mid(f_indexEqually + 2,f_indexEndParam - f_indexEqually - 2);
-        pos = f_indexEqually + value.size() + 4;
-        m_mapParameters->insert(index,value);
-        m_vectorParameters->push_back(new Paraminfo(index,value));
+    QStringList f_stringList = QString(parameters).split(' ');
+    foreach(auto value,f_stringList){
+        QStringList param = value.split('=');
+        if(param.size() == 2)
+            insert(param[0],param[1].remove('"').remove('/'));
     }
 }
 
@@ -41,8 +34,22 @@ Parameters::~Parameters(){
 }
 
 void Parameters::insert(QString index,QString value){
-    m_mapParameters->insert(index,value);
-    m_vectorParameters->push_back(new Paraminfo(index,value));
+    if(m_mapParameters->value(index,"noIndex") != "noIndex"){
+        m_mapParameters->remove(index);
+        //foreach(auto paramInfo,*m_vectorParameters){
+        for(int i = 0; i < m_vectorParameters->size(); ++i){
+            if(m_vectorParameters->operator[](i)->index() == index){
+                m_vectorParameters->operator[](i)->setValue(value);
+                break;
+            }
+        }
+        m_mapParameters->insert(index,value);
+    }
+    else{
+        m_mapParameters->insert(index,value);
+        m_vectorParameters->push_back(new Paraminfo(index,value));
+    }
+
 }
 
 
@@ -50,8 +57,6 @@ void Parameters::insert(QString index,QString value){
 
 Desc::Desc(QByteArray desc)
     : m_parameters(nullptr),m_calibration(nullptr){
-    //m_parameters = new QHash<QString,QString>;
-    //m_calibration = new QHash<QString,QString>;
     if(desc.isEmpty())
         return;
     int f_indexBeginDesc = desc.indexOf("<desc ") + QString("<desc ").size();
@@ -66,12 +71,11 @@ Desc::Desc(QByteArray desc)
         f_calibration = desc.mid(f_indexBeginCalib,f_indexEndCalib - f_indexBeginCalib);
     }
     if(!f_parameters.isEmpty())
-        //parserParameters(f_parameters,m_parameters);
         m_parameters = new Parameters(f_parameters,Parameters::PARAM);
     else
         m_parameters = new Parameters(Parameters::PARAM);
+
     if(!f_calibration.isEmpty())
-        //parserParameters(f_calibration,m_calibration);
         m_calibration = new Parameters(f_calibration,Parameters::CALIB);
     else
         m_calibration = new Parameters(Parameters::CALIB);
@@ -79,8 +83,6 @@ Desc::Desc(QByteArray desc)
 }
 
 Desc::Desc(){
-    //m_parameters = new QHash<QString,QString>;
-    //m_calibration = new QHash<QString,QString>;
     m_parameters = new Parameters(Parameters::PARAM);
     m_calibration = new Parameters(Parameters::CALIB);
 }

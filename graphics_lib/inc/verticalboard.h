@@ -6,6 +6,7 @@
 #include "verticaltrack.h"
 #include <QGraphicsScene>
 #include "itemslegendview.h"
+#include "canvas.h"
 
 class VerticalBoard : public AGraphicBoard
 {
@@ -13,7 +14,7 @@ class VerticalBoard : public AGraphicBoard
 
     bool m_isDrawTime;
     int headerTopOffset;
-    QGraphicsScene *m_canvas;
+    Canvas *m_canvas;
     ItemsLegendView *m_legend;
     bool m_isShowLegend;
     QGraphicsLineItem *m_beginLineLegend, *m_currentLineLegend;

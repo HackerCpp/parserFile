@@ -14,8 +14,10 @@ DrawingThroughADisk::DrawingThroughADisk(){
 
 DrawingThroughADisk::~DrawingThroughADisk(){
     m_saversMoment = false;
-    if(isRunning())
+    if(isRunning()){
         terminate();
+        wait();
+    }
     foreach(auto path,m_picturePath){
         if(!QFile::exists(path) )
             continue;

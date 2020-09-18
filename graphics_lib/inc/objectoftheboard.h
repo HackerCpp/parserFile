@@ -4,6 +4,7 @@
 #include <QDebug>
 #include <QThread>
 #include <QDragEnterEvent>
+#include <QGraphicsSceneMouseEvent>
 
 class ObjectOfTheBoard : public QThread,public QGraphicsItem
 {
@@ -24,6 +25,7 @@ public:
     virtual void resize(){}
     virtual void resizePictures(){}
     virtual void swapPixMap();
+    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override{QGraphicsItem::mouseMoveEvent(event);}
 public slots:
     void changingTheVisibilityZone(QRectF newVisibilityZone);
 };

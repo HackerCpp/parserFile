@@ -6,7 +6,6 @@ AGraphicBoard::AGraphicBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves,Dra
     : BoardForTrack(drawSettings),m_curves(curves),m_boardInfo(boardInfo){
     m_items = new QMap<QString,AGraphicItem *>;
     m_minimumSize = 2000;
-
 }
 
 AGraphicBoard::~AGraphicBoard(){

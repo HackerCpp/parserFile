@@ -17,7 +17,6 @@ protected:
     qreal m_widthPicturePix;
     void(TwoDimensionalArrayItem::*pDrawingFunction)(QPainter *,int ,int ,bool *);
 
-
 public:
     TwoDimensionalArrayItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board);
     TwoDimensionalArrayItem(const TwoDimensionalArrayItem &other);

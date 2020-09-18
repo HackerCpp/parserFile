@@ -141,20 +141,48 @@ SettingsItem::SettingsItem(AGraphicItem *item,SelectingArea *selectingArea):
     m_rightBorderSettings->setValue("Right Border",QString::number(m_item->itemInfo()->endValue()));
     m_rightBorderSettings->setValue("Scale",QString::number((1/m_item->itemInfo()->scale()) * 10));
 
-    m_labelRecordPoint = new QLabel(tr("Record point"));
-    m_editRecordPoint = new QLineEdit;
-    m_recordPointLayout = new QHBoxLayout();
-    m_groupBox = new QGroupBox;
+    m_labelRecordPoint = new QLabel(tr("Record point"),this);
+    m_labelDepthOffset = new QLabel(tr("Depth offset"),this);
+    m_labelTimeOffset = new QLabel(tr("Time offset"),this);
+    m_labelDepthScale = new QLabel(tr("Depth scale"),this);
+    m_labelTimeScale = new QLabel(tr("Time scale"),this);
+
+
+    m_editRecordPoint = new QLineEdit(this);
+    m_editDepthOffset = new QLineEdit(this);
+    m_editTimeOffset = new QLineEdit(this);
+    m_editDepthScale = new QLineEdit(this);
+    m_editTimeScale = new QLineEdit(this);
+
+
+    m_recordPointLayout = new QGridLayout();
+    m_recordPointGroupBox = new QGroupBox(this);
     m_editRecordPoint->setValidator( new QDoubleValidator(-1000000000, 1000000000, 9, m_editRecordPoint) );
-    m_recordPointLayout->addWidget(m_labelRecordPoint);
-    m_recordPointLayout->addWidget(m_editRecordPoint);
-    m_groupBox->setLayout(m_recordPointLayout);
+    m_editDepthOffset->setValidator( new QDoubleValidator(-1000000000, 1000000000, 9, m_editRecordPoint) );
+    m_editTimeOffset->setValidator( new QDoubleValidator(-1000000000, 1000000000, 9, m_editRecordPoint) );
+    m_editDepthScale->setValidator( new QDoubleValidator(-1000000000, 1000000000, 9, m_editRecordPoint) );
+    m_editTimeScale->setValidator( new QDoubleValidator(-1000000000, 1000000000, 9, m_editRecordPoint) );
+    m_recordPointLayout->addWidget(m_labelRecordPoint,0,0);
+    m_recordPointLayout->addWidget(m_editRecordPoint,0,1);
+    m_recordPointLayout->addWidget(m_labelDepthOffset,1,0);
+    m_recordPointLayout->addWidget(m_editDepthOffset,1,1);
+    m_recordPointLayout->addWidget(m_labelTimeOffset,2,0);
+    m_recordPointLayout->addWidget(m_editTimeOffset,2,1);
+    m_recordPointLayout->addWidget(m_labelDepthScale,3,0);
+    m_recordPointLayout->addWidget(m_editDepthScale,3,1);
+    m_recordPointLayout->addWidget(m_labelTimeScale,4,0);
+    m_recordPointLayout->addWidget(m_editTimeScale,4,1);
+    m_recordPointGroupBox->setLayout(m_recordPointLayout);
     m_editRecordPoint->setText(QString::number(m_item->curve()->recordPoint()));
+    m_editDepthOffset->setText(m_item->curve()->desc()->param("depth_offset"));
+    m_editTimeOffset->setText(m_item->curve()->desc()->param("time_offset"));
+    m_editDepthScale->setText(m_item->curve()->desc()->param("depth_scale"));
+    m_editTimeScale->setText(m_item->curve()->desc()->param("time_scale"));
 
 
     m_mainVLout->addWidget(m_leftBorderSettings);
     m_mainVLout->addWidget(m_rightBorderSettings);
-    m_mainVLout->addWidget(m_groupBox);
+    m_mainVLout->addWidget(m_recordPointGroupBox);
     this->setLayout(m_mainVLout);
     m_mainVLout->setMargin(2);
     show();
@@ -164,10 +192,7 @@ SettingsItem::~SettingsItem(){
     if(m_leftBorderSettings){delete m_leftBorderSettings;m_leftBorderSettings = nullptr;}
     if(m_rightBorderSettings){delete m_rightBorderSettings;m_rightBorderSettings = nullptr;}
     if(m_mainVLout){delete m_mainVLout;m_mainVLout = nullptr;}
-    if(m_labelRecordPoint){delete m_labelRecordPoint;m_labelRecordPoint = nullptr;}
-    if(m_editRecordPoint){delete m_editRecordPoint;m_editRecordPoint = nullptr;}
     if(m_recordPointLayout){delete m_recordPointLayout;m_recordPointLayout = nullptr;}
-    if(m_groupBox){delete m_groupBox;m_groupBox = nullptr;}
 
 }
 
@@ -184,6 +209,10 @@ void SettingsItem::applyBaseSettings(){
                                  m_rightBorderSettings->value("Right Border").replace(",",".").toDouble(),
                                  1/(m_rightBorderSettings->value("Scale").replace(",",".").toDouble()/10));
     m_item->curve()->setRecordPoint(m_editRecordPoint->text().replace(",",".").toDouble());
+    m_item->curve()->desc()->setParam("depth_offset",m_editDepthOffset->text());
+    m_item->curve()->desc()->setParam("time_offset",m_editTimeOffset->text());
+    m_item->curve()->desc()->setParam("depth_scale",m_editDepthScale->text());
+    m_item->curve()->desc()->setParam("time_scale",m_editTimeScale->text());
 }
 
 void SettingsItem::apply(){

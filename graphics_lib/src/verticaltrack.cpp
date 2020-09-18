@@ -10,6 +10,7 @@
 #include <QPainter>
 #include <QGraphicsSceneDragDropEvent>
 #include <QGraphicsView>
+#include <QMessageBox>
 
 VerticalTrack::VerticalTrack(ATrack *track,BoardForTrack *board)
     : AGraphicTrack(track,board)
@@ -20,15 +21,22 @@ VerticalTrack::VerticalTrack(ATrack *track,BoardForTrack *board)
         qDebug() << "Передан нулевой указатель на трекИнфо, не получается создать трек.";
         return;
     }
+    //Legend
     m_startingLinePosition = m_currentLinePosition = 0;
     m_isDrawLine = false;
-    m_selectingArea = nullptr;
-
     m_legend = new ItemsLegendView(m_items);
     m_isShowLegend = false;
+    //
+    m_selectingArea = nullptr;
+    //Shift mode
+    m_shiftTool = QPointer<CurveShiftTool>(new CurveShiftTool());
+    connect(m_shiftTool,&CurveShiftTool::apply,this,&VerticalTrack::setNormalMode);
+
+    //Menu
     m_curvesMenu = new QMenu(tr("&CurvesMenu"));
     m_curvesMenu->addAction(tr("&Curve settings"),this, SLOT(openSettingsActiveItems()));
     m_curvesMenu->addAction(tr("&Curve edit"),this, SLOT(openEditorActiveItems()));
+    m_curvesMenu->addAction(tr("&Curve shift"),this, SLOT(curveShift()));
     m_curvesMenu->setMaximumSize(1000,1000);
 
     m_trackMenu = new QMenu(tr("&TrackMenu"));
@@ -38,6 +46,8 @@ VerticalTrack::VerticalTrack(ATrack *track,BoardForTrack *board)
     m_trackMenu->addAction(tr("&Delete a track"),this, SLOT(deleteTrack()));
     m_trackMenu->addAction(tr("&Open curve browser"),this, SLOT(openCurveBrowser()));
     m_trackMenu->addAction(tr("&Save Picture"),this, SLOT(savePicture()));
+    m_trackMenu->addAction(tr("&Curve shift"),this, SLOT(curveShift()));
+
     m_border = new RightBorder();
     qreal f_pixelPerMm = m_board->pixelPerMm();
     int f_topY = m_board->top();
@@ -53,7 +63,6 @@ VerticalTrack::VerticalTrack(ATrack *track,BoardForTrack *board)
     per.setPen(QPen(QColor(100,100,100,100)));
     per.setFont(QFont("Times", 14, QFont::Bold));
     per.drawText(QRect(0,0,m_nameTrack->width(),m_nameTrack->height()),Qt::AlignHCenter|Qt::AlignVCenter,m_track->name());
-
     m_boundingRect = QRectF(m_track->begin() * f_pixelPerMm,f_topY,m_track->width() * f_pixelPerMm,f_lengthY);
     updateItemsParam();
 }
@@ -303,7 +312,6 @@ void  VerticalTrack::headerRightClickHandler(QPointF point){
     QPoint f_pointInHeaderPicture = QPoint(point.x() - (m_track->begin() * m_board->pixelPerMm()),point.y() - m_visibilitySquare.y() - m_board->positionHeader());
     bool isActive = false;
     m_сurrentСountOfActive = 0;
-    qDebug() << f_pointInHeaderPicture;
     foreach(auto grItem, *m_items){
         isActive = grItem->isClickHeaderArea(f_pointInHeaderPicture);
         grItem->setActive(isActive);
@@ -481,6 +489,47 @@ void VerticalTrack::dropEvent(QGraphicsSceneDragDropEvent *event){
 
 }
 
+//Curve shift mode
+void VerticalTrack::setLineCurveShift(QPointF point){
+    if(m_curveShiftLinesPosition.size() >= 3 || m_board->isDrawTime())
+        return;
+    m_curveShiftLinesPosition.push_back(point.y() / m_board->scale());
+    m_shiftTool->addPosition(point.y() / m_board->scale());
+    update();
+}
+
+bool VerticalTrack::is_lineCurveShift(QPointF point){
+    foreach(auto linePos,m_curveShiftLinesPosition){
+        if(linePos * m_board->scale() < point.y() + 4 && linePos * m_board->scale() > point.y() - 4){
+            m_currentIndexPressed = m_curveShiftLinesPosition.indexOf(linePos);
+            return true;
+        }
+    }
+    return false;
+}
+
+void VerticalTrack::lineCurveShiftPresHandler(QPointF point){
+
+}
+
+void VerticalTrack::lineCurveShiftMoveHandler(QPointF point){
+    m_curveShiftLinesPosition[m_currentIndexPressed] = point.y()  / m_board->scale();
+    m_shiftTool->changePosition(m_curveShiftLinesPosition[m_currentIndexPressed],m_currentIndexPressed);
+    update();
+}
+
+void VerticalTrack::lineCurveShiftReleaseHandler(QPointF point){
+    foreach(auto item,*m_items){
+        if(!item || !item->is_visible())
+            continue;
+        if(item->isActive()){
+            item->setDepthCoeff(m_shiftTool->coeffs());
+            item->updateParam(m_doublePixMap->width());
+            redraw();
+        }
+    }
+}
+
 void VerticalTrack::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*){
     if(painter->device()->width() < 20)
         return;
@@ -506,6 +555,13 @@ void VerticalTrack::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QW
         painter->setPen(QPen(Qt::green,3));
         painter->drawLine(LeftPos,m_startingLinePosition,LeftPos + boundingRect().width(),m_startingLinePosition);
         painter->drawLine(LeftPos,m_currentLinePosition,LeftPos + boundingRect().width(),m_currentLinePosition);
+    }
+    if(m_mode == CURVE_SHIFT_MODE){
+        painter->setPen(QPen(Qt::blue,3,Qt::DashLine));
+        foreach(auto position,m_curveShiftLinesPosition){
+            qreal f_position = position * m_board->scale();
+            painter->drawLine(LeftPos,f_position,LeftPos + boundingRect().width(),f_position);
+        }
     }
 }
 
@@ -606,6 +662,12 @@ void  VerticalTrack::swapImageBody(){
     toSetTheLocationOfTheImageAfterDrawing();
 }
 
+void VerticalTrack::setNormalMode(){
+    m_mode = NORMAL_MODE;
+    m_curveShiftLinesPosition.clear();
+    m_shiftTool->clear();
+}
+
 void VerticalTrack::changeBegin(int newBegin){
     qreal f_pixelPerMm = m_board->pixelPerMm();
     int f_topY = m_board->top();
@@ -672,15 +734,31 @@ void VerticalTrack::openEditorActiveItems(){
     }
 }
 
+void VerticalTrack::curveShift(){
+    if(m_board->isDrawTime()){
+        QMessageBox::warning(&m_parent, tr("warning"),tr("switch the rendering mode to depth"));
+    }
+    else{
+        foreach(auto item,*m_items){
+            if(item->isActive() && item->is_visible()){
+                item->curve()->desc()->setParam("shift_depth","0");
+                item->updateParam(m_doublePixMap->width());
+            }
+        }
+        redraw();
+        m_mode = CURVE_SHIFT_MODE;
+        if(m_shiftTool)
+            m_shiftTool->show();
+    }
+}
+
 void VerticalTrack::savePicture(){
     QString puti_save;
     QImage image(scene()->views().first()->sceneRect().width(), scene()->views().first()->sceneRect().height(), QImage::Format_ARGB32_Premultiplied);
     image.fill(QColor(Qt::white).rgb());
     QPainter painter(&image);
-    qDebug() << scene() << scene()->views().first()->sceneRect();
     QRect picture(0,0,scene()->views().first()->sceneRect().width(),scene()->views().first()->sceneRect().height());
     scene()->render(&painter,picture,scene()->views().first()->sceneRect());
     painter.end();
     image.save("ff.jpg","jpg",100);
-
 }

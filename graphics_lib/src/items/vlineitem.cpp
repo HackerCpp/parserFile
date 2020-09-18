@@ -222,6 +222,34 @@ bool VLineItem::isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per)
 void VLineItem::updateParam(int pictureWidth){
     if(!m_curve || !m_board)
         return;
+    if(!m_board->isDrawTime()){
+        bool oka,okb,okc;
+        oka = okb = okc = true;
+        QString f_param = m_curve->desc()->param("shift_depth");
+        QStringList f_list = f_param.split(":");
+        m_modeCountedDepth = f_list[0].toInt();
+        if(m_modeCountedDepth == 3){
+            k_a = f_list[3].toDouble(&oka);
+            k_b = f_list[2].toDouble(&okb);
+            k_c = f_list[1].toDouble(&okc);
+        }
+        else if(m_modeCountedDepth == 2){
+            k_a = f_list[2].toDouble(&oka);
+            k_b = f_list[1].toDouble(&okb);
+        }
+        else if(m_modeCountedDepth == 1){
+            k_b = f_list[1].toDouble(&okb);
+        }
+        if(!oka || !okb || !okc)
+            m_modeCountedDepth = 0;
+    }
+    else
+        m_modeCountedDepth = 0;
+    /*bool ok;
+    qreal f_scale = m_board->isDrawTime() ? m_curve->desc()->param("time_scale").replace(",",".").toDouble(&ok) :  m_curve->desc()->param("depth_scale").replace(",",".").toDouble(&ok);
+    if(!ok || f_scale == 0)
+        f_scale = 1;
+    qreal f_offset = m_board->isDrawTime() ? m_curve->desc()->param("time_offset").replace(",",".").toDouble() :  m_curve->desc()->param("depth_offset").replace(",",".").toDouble();*/
     loadDrawingParam(pictureWidth);
     m_recordPointDepth = m_curve->recordPoint();
     m_currentMainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();

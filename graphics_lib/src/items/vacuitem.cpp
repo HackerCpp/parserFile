@@ -47,6 +47,8 @@ VAcuItem::VAcuItem(const VAcuItem &other)
 }
 
 VAcuItem::~VAcuItem(){
+    disconnect();
+    blockSignals(true);
     if(isRunning()){
         m_isRedraw = false;
         m_isEndThread = true;
@@ -375,24 +377,19 @@ void VAcuItem::drawOnTheDisk(){
 }
 
 void VAcuItem::updateParam(int pictureWidth){
-    if(!m_curve || !m_board)
-        return;
-    m_isEndThread = true;
     m_curentPictureWidth = pictureWidth;
-    loadDrawingParam(m_curentPictureWidth);
-    m_recordPointDepth = m_curve->recordPoint();
-    m_currentMainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
-    m_currentRecordPoint  = (m_board->isDrawTime() ? 0 : m_recordPointDepth);
-    m_currentRecordPoint = qIsNaN(m_currentRecordPoint) ? 0 : m_currentRecordPoint;
-    m_currentScaleMainValue = m_board->scale();
-    drawOnTheDisk();
-
+    updateParam();
 }
 
 void VAcuItem::updateParam(){
     if(!m_curve || !m_board)
         return;
     m_isEndThread = true;
+    /*bool ok;
+    qreal f_scale = m_board->isDrawTime() ? m_curve->desc()->param("time_scale").toDouble(&ok) :  m_curve->desc()->param("depth_scale").toDouble(&ok);
+    if(!ok)
+        f_scale = 1;
+    qreal f_offset = m_board->isDrawTime() ? m_curve->desc()->param("time_offset").toDouble() :  m_curve->desc()->param("depth_offset").toDouble();*/
     loadDrawingParam(m_curentPictureWidth);
     m_recordPointDepth = m_curve->recordPoint();
     m_currentMainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();

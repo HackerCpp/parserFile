@@ -74,10 +74,10 @@ protected:
     AGraphicItem *m_item;
     QVBoxLayout *m_mainVLout;
     Selection *m_leftBorderSettings,*m_rightBorderSettings;
-    QLabel *m_labelRecordPoint;
-    QLineEdit *m_editRecordPoint;
-    QHBoxLayout *m_recordPointLayout;
-    QGroupBox *m_groupBox;
+    QLabel *m_labelRecordPoint,*m_labelDepthOffset,*m_labelTimeOffset,*m_labelDepthScale,*m_labelTimeScale;
+    QLineEdit *m_editRecordPoint,*m_editDepthOffset,*m_editTimeOffset,*m_editDepthScale,*m_editTimeScale;
+    QGridLayout *m_recordPointLayout;
+    QGroupBox *m_recordPointGroupBox;
     SelectingArea *m_selectingArea;
 
     virtual void applyBaseSettings();
