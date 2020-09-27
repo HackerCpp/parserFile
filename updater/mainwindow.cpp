@@ -13,6 +13,7 @@
 #include <QStringList>
 #include <QtZlib/zlib.h>
 
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
       m_centralWidget(new QWidget(this)),
@@ -31,16 +32,14 @@ MainWindow::MainWindow(QWidget *parent)
     m_moduleMenu->addAction(tr("&Add module"), this, SLOT(addModule()));
     m_moduleMenu->addAction(tr("&Add file"), this, SLOT(addFile()));
     m_centralWidget->setLayout(m_mainVLayout);
+    m_treView = new QTreeView(this);
+    m_model = new ModulesModel();
+    m_treView->setModel(m_model);
+    m_mainVLayout->addWidget(m_treView);
 
 
-    /*QString entry1("release/");
 
-    ZipArchive z1("E:\\MyQtProgram\\parserGfm\\updater\\build\\test.zip");
-
-    z1.open(ZipArchive::WRITE);
-    //z1.addEntry(entry1.toStdString());
-    z1.addFile("release/bz2.dll","release/bz2.dll");
-    z1.close();
+    /*
     z1.open(ZipArchive::READ_ONLY);
     z1.getEntries();
     z1.close();
@@ -69,18 +68,18 @@ bool isOneMoreTwo(QString versionOne,QString versionTwo){
 }
 
 QString MainWindow::maximumVersion(Module &module){
-    if(!module.s_versions.size())
+    if(!module.m_versions->size())
         return "";
-    if(module.s_versions.size() == 1)
-        return module.s_versions[0];
+    if(module.m_versions->size() == 1)
+        return module.m_versions->operator[](0)->version();
     int i = 0;
 
-    for(int j = 1; j < module.s_versions.size();++j){
-        if(isOneMoreTwo(module.s_versions[j], module.s_versions[i])){
+    for(int j = 1; j < module.m_versions->size();++j){
+        if(isOneMoreTwo(module.m_versions->operator[](j)->version(), module.m_versions->operator[](i)->version())){
           i = j;
         }
     }
-    return module.s_versions[i];
+    return module.m_versions->operator[](i)->version();
 }
 QString MainWindow::nextVersion(Module &module){
     QString f_currentMaximumVersion = maximumVersion(module);
@@ -103,57 +102,95 @@ QString MainWindow::nextVersion(Module &module){
     return f_newVersion;
 }
 
-void MainWindow::createProject(){
-    QString f_path, f_name;
-    ProjectPathNameWidget::getNameAndPath(f_name,f_path);
-    if(f_name == "" && f_path == "")
-        return;
-    m_moduleMenu->setEnabled(true);
-    QFile f_file(f_path +"/" + f_name + "_loader.xml");
+void MainWindow::createProjectFile(){
+    QFile f_file(m_currentPath +"/" + m_projectName + "_loader.xml");
     f_file.open(QIODevice::WriteOnly);
     QXmlStreamWriter xmlWriter(&f_file);
     xmlWriter.setAutoFormatting(true);
     xmlWriter.writeStartDocument();
     xmlWriter.writeStartElement("project");
-    xmlWriter.writeAttribute("name", f_name);
-    xmlWriter.writeStartElement("path");
-    xmlWriter.writeAttribute("path", f_path);
-    xmlWriter.writeEndElement();
+
+
+    xmlWriter.writeAttribute("path",m_currentPath);
+    xmlWriter.writeAttribute("name",m_projectName);
+    for(int i = 0;i < m_modules.size();++i){
+        xmlWriter.writeStartElement("module");
+        xmlWriter.writeAttribute("name", m_modules.operator[](i)->m_name);
+        xmlWriter.writeAttribute("dir", m_modules.operator[](i)->m_dir);
+        //foreach(auto version,m_modules.operator[](i)->m_versions){
+        for(int j = 0; j < m_modules.operator[](i)->m_versions->size();++j){
+            xmlWriter.writeStartElement("info");
+            xmlWriter.writeAttribute("version", m_modules.operator[](i)->m_versions->operator[](j)->version());
+            xmlWriter.writeEndElement();
+        }
+        xmlWriter.writeEndElement();
+    }
+
     xmlWriter.writeEndElement();
     f_file.close();
-    QDir().mkdir(f_path + "/modules");
+}
+
+void MainWindow::createProject(){
+    QString f_path, f_name;
+    ProjectPathNameWidget::getNameAndPath(f_name,f_path);
+    if(f_name == "" && f_path == "")
+        return;
+    m_modules.clear();
     m_currentPath = f_path;
     m_projectName = f_name;
-    //QFileSystemModel *f_fileModel = new QFileSystemModel(this);
-    //f_fileModel->setRootPath(f_dirPath);
-    //QTreeView *f_fileView = new QTreeView(this);
-    //f_fileView->setModel(f_fileModel);
-    //f_fileView->setRootIndex(f_fileModel->index(f_dirPath));
-    //m_mainVLayout->addWidget(f_fileView);
+    m_moduleMenu->setEnabled(true);
+    createProjectFile();
+    QDir().mkdir(f_path + "/modules");
+    m_model->setModules(&m_modules);
+    m_treView->update(0,0,width(),height());
+    update(0,0,width(),height());
+}
 
+Module *MainWindow::module(QString name){
+    Module *f_module = nullptr;
+    for(int i = 0;i < m_modules.size();++i){
+        if(m_modules[i]->m_name == name){
+            f_module = m_modules[i];
+            break;
+        }
+    }
+    return f_module;
 }
 
 void MainWindow::openProject(){
     QString f_filePath = QFileDialog::getOpenFileName(this,tr("Select the project file"),"","*_loader.xml");
     QFile f_fileProject(f_filePath);
+    m_currentPath = QFileInfo(f_filePath).path();
+    QString f_fileName = QFileInfo(f_filePath).fileName();
+    m_projectName = f_fileName.left(f_fileName.indexOf("_loader.xml"));
     if(!f_fileProject.open(QIODevice::ReadOnly))
         return;
+    m_modules.clear();
+    m_moduleMenu->setEnabled(true);
     QByteArray xml = f_fileProject.readAll();
     QXmlStreamReader xmlReader(xml);
 
+    Module *f_module = nullptr;
     while(!xmlReader.atEnd() && !xmlReader.hasError()){
         QXmlStreamReader::TokenType token = xmlReader.readNext();
         QXmlStreamAttributes attributes = xmlReader.attributes();
-        qDebug() << xmlReader.name() << xmlReader.error() <<xmlReader.errorString();
-        if((xmlReader.name() == "module" || xmlReader.name() == "file") && token == QXmlStreamReader::StartElement){
-            qDebug() << xmlReader.name() << attributes.value("name").toString() << attributes.value("version").toString();
+        if(xmlReader.name() == "module" && token == QXmlStreamReader::StartElement){
+            f_module = new Module(attributes.value("name").toString(),attributes.value("dir").toString(),new QVector<VersionInfo *>);
         }
-        /*else if(xmlReader.name() == "board" && token == QXmlStreamReader::StartElement){
-            f_board = new Board();
-            f_board->setName(attributes.value("name").toString());
-            findBoard(&xmlReader,f_board,formsBlock);
-        }*/
+        else if(xmlReader.name() == "module" && token == QXmlStreamReader::EndElement){
+            if(!f_module)
+                continue;
+            m_modules.push_back(f_module);
+        }
+        else if(xmlReader.name() == "info" && token == QXmlStreamReader::StartElement){
+            if(!f_module)
+                continue;
+            f_module->m_versions->push_back(new VersionInfo(attributes.value("version").toString()));
+        }
     }
+    m_model->setModules(&m_modules);
+    m_treView->update(0,0,width(),height());
+    resize(width() + 1,height() + 1);
 }
 
 QStringList recursiveFind(QString directory){
@@ -172,10 +209,10 @@ void MainWindow::addModule(){
         return;
     QString f_version,f_versionDefault,f_dir,f_dirDefault;
     QString f_name = f_dirPath.split("/").last();
-    Module &f_currentModule = m_modules[f_name];
-    if(f_currentModule.s_dir != ""){
-        f_dirDefault = f_currentModule.s_dir;
-        f_versionDefault = nextVersion(f_currentModule);
+    Module *f_currentModule = module(f_name);
+    if(f_currentModule){
+        f_dirDefault = f_currentModule->m_dir;
+        f_versionDefault = nextVersion(*f_currentModule);
     }
     else{
         f_dirDefault = "root/";
@@ -184,20 +221,20 @@ void MainWindow::addModule(){
     ProjectPathNameWidget::getVersionAndDir(f_version,f_dir,f_versionDefault,f_dirDefault);
     if(f_version == "" || f_dir == "")
         return;
-    if(f_currentModule.s_dir == ""){
-        static QVector<QString> f_vectorVersions;
-        f_vectorVersions.push_back(f_version);
-        m_modules.insert(f_name,Module{f_name,f_dir,f_vectorVersions});
+    if(!f_currentModule){
+        QVector<VersionInfo *> *f_vectorVersions = new  QVector<VersionInfo*>;
+        f_vectorVersions->push_back(new VersionInfo(f_version));
+        m_modules.push_back(new Module(f_name,f_dir,f_vectorVersions));
     }
     else{
-        f_currentModule.s_versions.push_back(f_version);
+        f_currentModule->m_versions->push_back(new VersionInfo(f_version));
     }
 
     QStringList f_list = recursiveFind(f_dirPath);
 
-
     ZipArchive z1(QString(m_currentPath + "/modules/" + f_name + "_" + f_version + ".zip").toStdString());
-    z1.open(ZipArchive::WRITE);
+    if(!z1.open(ZipArchive::WRITE))
+        qDebug() << "Не  удалось открыть архив для записи";
     QString f_beginDir = f_dirPath + "/";
     CustomProgressBar f_bar;
     qreal f_unitPercent = 100.0 / qreal(f_list.size());
@@ -206,7 +243,7 @@ void MainWindow::addModule(){
     f_bar.setValue(f_currentPersent);
     foreach(auto file,f_list){
         f_bar.setText(file);
-        z1.addFile(file.remove(f_beginDir).toStdString(),file.toStdString());
+        z1.addFile(QString(f_dir + file.remove(f_beginDir)).remove("root/").toStdString(),file.toStdString());
         f_currentPersent += f_unitPercent;
         f_bar.setValue(f_currentPersent);
     }
@@ -214,18 +251,10 @@ void MainWindow::addModule(){
     z1.close();
     f_bar.hide();
 
-    QFile file(m_currentPath +"/" + m_projectName + "_loader.xml");
-    if (!file.open(QIODevice::Append))
-        return;
+    createProjectFile();
+    m_model->update();
+    resize(width() + 1,height() + 1);
 
-    QXmlStreamWriter xmlWriter(&file);
-    xmlWriter.setAutoFormatting(true);
-    xmlWriter.writeStartElement("module");
-    xmlWriter.writeAttribute("name", f_name);
-    xmlWriter.writeAttribute("version", f_version);
-    xmlWriter.writeAttribute("dir", f_dir);
-    xmlWriter.writeEndElement();
-    file.close();
     /*z1.open(ZipArchive::READ_ONLY);
     z1.getEntries();
     z1.close();*/
@@ -281,10 +310,10 @@ void MainWindow::addFile(){
         return;
     QString f_version,f_versionDefault,f_dir,f_dirDefault;
     QString f_name = f_filePath.split("/").last();
-    Module &f_currentModule = m_modules[f_name];
-    if(f_currentModule.s_dir != ""){
-        f_dirDefault = f_currentModule.s_dir;
-        f_versionDefault = nextVersion(f_currentModule);
+    Module *f_currentModule = module(f_name);
+    if(f_currentModule){
+        f_dirDefault = f_currentModule->m_dir;
+        f_versionDefault = nextVersion(*f_currentModule);
     }
     else{
         f_dirDefault = "root/";
@@ -293,36 +322,23 @@ void MainWindow::addFile(){
     ProjectPathNameWidget::getVersionAndDir(f_version,f_dir,f_versionDefault,f_dirDefault);
     if(f_version == "" || f_dir == "")
         return;
-    if(f_currentModule.s_dir == ""){
-        static QVector<QString> f_vectorVersions;
-        f_vectorVersions.push_back(f_version);
-        m_modules.insert(f_name,Module{f_name,f_dir,f_vectorVersions});
+    if(!f_currentModule){
+        QVector<VersionInfo *> *f_vectorVersions = new QVector<VersionInfo *>;
+        f_vectorVersions->push_back(new VersionInfo(f_version));
+        m_modules.push_back(new Module(f_name,f_dir,f_vectorVersions));
     }
     else{
-        f_currentModule.s_versions.push_back(f_version);
+        f_currentModule->m_versions->push_back(new VersionInfo(f_version));
     }
-    QFile f_file(f_filePath);
-    if(!f_file.open(QIODevice::ReadOnly))
-        return;
-    QByteArray file_compress;
-    gzipCompress(f_file.readAll(),file_compress,2);
-    f_file.close();
-    QFile f_compressFile(m_currentPath + "/modules/" + f_name + "_" + f_version + ".bin");
-    if(!f_compressFile.open(QIODevice::WriteOnly))
-        return;
-    f_compressFile.write(file_compress);
-    f_compressFile.close();
-    QFile file(m_currentPath +"/" + m_projectName + "_loader.xml");
-    if (!file.open(QIODevice::Append))
-        return;
 
-    QXmlStreamWriter xmlWriter(&file);
-    xmlWriter.setAutoFormatting(true);
-    xmlWriter.writeStartElement("file");
-    xmlWriter.writeAttribute("name", f_name);
-    xmlWriter.writeAttribute("version", f_version);
-    xmlWriter.writeAttribute("dir", f_dir);
-    xmlWriter.writeEndElement();
-    file.close();
+    ZipArchive z1(QString(m_currentPath + "/modules/" + f_name + "_" + f_version + ".zip").toStdString());
+    z1.open(ZipArchive::WRITE);
+    QString f_beginDir = f_dir.remove("root/") + QFileInfo(f_filePath).fileName();
+    z1.addFile(f_beginDir.toStdString(),f_filePath.toStdString());
+
+    z1.close();
+    createProjectFile();
+    m_model->update();
+    resize(width() + 1,height() + 1);
 }
 

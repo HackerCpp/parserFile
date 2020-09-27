@@ -60,11 +60,15 @@ void ProjectPathNameWidget::checkNameAndPath(){
 }
 
 void ProjectPathNameWidget::checkVersionAndDir(){
-    if(m_name != "" && m_name != "!" && m_path.indexOf("root") == 0){
+    if(m_name != "" && m_name != "!" && m_path.indexOf("root") == 0 && m_path.right(1) == "/" ){
         m_isReady = true;
     }
     else{
-        if(m_path.indexOf("root") != 0){
+        if(m_path.right(1) != "/"){
+           m_pathLine->setText(m_pathLine->text() + "/");
+           m_pathLine->setStyleSheet("color : red;");
+        }
+        if(m_path.indexOf("root") != 0 ){
             m_pathLine->setText(m_pathLine->text() + "!");
             m_pathLine->setStyleSheet("color : red;");
         }
