@@ -13,6 +13,7 @@
 #include <QStringList>
 #include <QtZlib/zlib.h>
 
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
       m_centralWidget(new QWidget(this)),
@@ -82,6 +83,7 @@ QString MainWindow::maximumVersion(Module &module){
     }
     return module.s_versions[i];
 }
+
 QString MainWindow::nextVersion(Module &module){
     QString f_currentMaximumVersion = maximumVersion(module);
     QStringList f_versions = f_currentMaximumVersion.split(".");
