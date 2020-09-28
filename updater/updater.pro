@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -23,14 +23,22 @@ LIBS += ../zip/libzip_x64-windows/lib/zip.lib \
 
 SOURCES += \
     customprogressbar.cpp \
+    loader.cpp \
     main.cpp \
     mainwindow.cpp \
-    projectpathnamewidget.cpp
+    module.cpp \
+    modulesmodel.cpp \
+    projectpathnamewidget.cpp \
+    unpacker.cpp
 
 HEADERS += \
     customprogressbar.h \
+    loader.h \
     mainwindow.h \
-    projectpathnamewidget.h
+    module.h \
+    modulesmodel.h \
+    projectpathnamewidget.h \
+    unpacker.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -9,7 +9,6 @@
 
 class DataModel : public  QAbstractItemModel
 {
-
     QVector<QSharedPointer<ILogData> > *m_logDataVector;
     ILogData *m_curentLogData;
 
