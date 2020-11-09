@@ -28,6 +28,7 @@ VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves,Dra
     //qDebug() << m_boardInfo->name();
     Ruler *f_ruler = new Ruler(this);
     connect(this,&VerticalBoard::changingTheVisibilityZone,f_ruler,&ObjectOfTheBoard::changingTheVisibilityZone);
+    connect(this,&VerticalBoard::needToRedraw,f_ruler,&ObjectOfTheBoard::needToRedraw);
 
     m_canvas->addItem(f_ruler);
     foreach(auto trackInfo,*tracksInfo){
@@ -36,6 +37,7 @@ VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves,Dra
        if(!f_track)
            continue;
        connect(this,&VerticalBoard::changingTheVisibilityZone,f_track,&ObjectOfTheBoard::changingTheVisibilityZone);
+       connect(this,&VerticalBoard::needToRedraw,f_track,&ObjectOfTheBoard::needToRedraw);
        m_canvas->addItem(f_track);
        if(f_prevTrack){
            connect(f_prevTrack,&VerticalTrack::changedPositionBorder,f_track,&VerticalTrack::changeBegin);
@@ -166,6 +168,10 @@ void VerticalBoard::distributionOfItemsBetweenTracks(){
         }
 
     }
+}
+
+void VerticalBoard::redraw(){
+    emit needToRedraw();
 }
 
 VerticalBoard::~VerticalBoard(){
@@ -307,13 +313,13 @@ void VerticalBoard::insertNewTrack(int curentTrackNumber,InsertPossition positio
     redraw();
 }
 
-void inline VerticalBoard::scrollChanged(){
+void VerticalBoard::scrollChanged(){
     QPolygonF f_rect = mapToScene(QRect(0,0,width(),height()));
     if(f_rect.isEmpty()){
         qDebug() << "нулевой размер у борда, сигнал трэкам не может быть отправлен" << m_boardInfo->name();
         return;
     }
     QRectF f_rectForScene = QRectF(f_rect[0],f_rect[2]);
-    changingTheVisibilityZone(f_rectForScene);
+    emit changingTheVisibilityZone(f_rectForScene);
 }
 

@@ -11,7 +11,6 @@
 #include <QXmlStreamWriter>
 #include <customprogressbar.h>
 #include <QStringList>
-#include <QtZlib/zlib.h>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -36,71 +35,12 @@ MainWindow::MainWindow(QWidget *parent)
     m_model = new ModulesModel();
     m_treView->setModel(m_model);
     m_mainVLayout->addWidget(m_treView);
-
-
-
-    /*
-    z1.open(ZipArchive::READ_ONLY);
-    z1.getEntries();
-    z1.close();
-    z1.unlink();*/
-
 }
 
 MainWindow::~MainWindow()
 {
 
 
-}
-
-bool isOneMoreTwo(QString versionOne,QString versionTwo){
-    QStringList f_listOne = versionOne.split(".");
-    QStringList f_listTwo = versionTwo.split(".");
-    if(f_listOne.size() > f_listTwo.size())
-        return true;
-    else if(f_listOne.size() < f_listTwo.size())
-        return false;
-    for(int i = 0; i < f_listOne.size(); i++){
-        if(f_listOne[i].toInt() > f_listTwo[i].toInt())
-            return true;
-    }
-    return false;
-}
-
-QString MainWindow::maximumVersion(Module &module){
-    if(!module.m_versions->size())
-        return "";
-    if(module.m_versions->size() == 1)
-        return module.m_versions->operator[](0)->version();
-    int i = 0;
-
-    for(int j = 1; j < module.m_versions->size();++j){
-        if(isOneMoreTwo(module.m_versions->operator[](j)->version(), module.m_versions->operator[](i)->version())){
-          i = j;
-        }
-    }
-    return module.m_versions->operator[](i)->version();
-}
-
-QString MainWindow::nextVersion(Module &module){
-    QString f_currentMaximumVersion = maximumVersion(module);
-    QStringList f_versions = f_currentMaximumVersion.split(".");
-    QStringList f_newVersions = f_versions;
-    for(int i = f_versions.size() - 1;i >= 0;--i){
-        if(f_versions[i].toInt() >= 99 && i != 0){
-            f_newVersions[i] = "0";
-        }
-        else{
-            f_newVersions[i] = QString::number(f_versions[i].toInt() + 1);
-            break;
-        }
-    }
-    QString f_newVersion;
-    foreach(auto version,f_newVersions){
-        f_newVersion += "." + version;
-    }
-    f_newVersion = f_newVersion.mid(1);
-    return f_newVersion;
 }
 
 void MainWindow::createProjectFile(){
@@ -118,7 +58,6 @@ void MainWindow::createProjectFile(){
         xmlWriter.writeStartElement("module");
         xmlWriter.writeAttribute("name", m_modules.operator[](i)->m_name);
         xmlWriter.writeAttribute("dir", m_modules.operator[](i)->m_dir);
-        //foreach(auto version,m_modules.operator[](i)->m_versions){
         for(int j = 0; j < m_modules.operator[](i)->m_versions->size();++j){
             xmlWriter.writeStartElement("info");
             xmlWriter.writeAttribute("version", m_modules.operator[](i)->m_versions->operator[](j)->version());
@@ -194,11 +133,13 @@ void MainWindow::openProject(){
     resize(width() + 1,height() + 1);
 }
 
-QStringList recursiveFind(QString directory){
+QStringList recursiveFind(QString directory,QDir::Filter filter){
     QStringList list;
-    QDirIterator iterator (directory, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
+    QDirIterator iterator (directory, filter, QDirIterator::Subdirectories);
     while(iterator.hasNext()){
         iterator.next();
+        if(iterator.fileInfo().fileName() == "." || iterator.fileInfo().fileName() == "..")
+            continue;
         list  << iterator.fileInfo().absoluteFilePath();
     }
     return list;
@@ -209,11 +150,11 @@ void MainWindow::addModule(){
     if(!QDir().exists(f_dirPath))
         return;
     QString f_version,f_versionDefault,f_dir,f_dirDefault;
-    QString f_name = f_dirPath.split("/").last();
+    QString f_name = f_dirPath.split("/").last().remove("_");
     Module *f_currentModule = module(f_name);
     if(f_currentModule){
         f_dirDefault = f_currentModule->m_dir;
-        f_versionDefault = nextVersion(*f_currentModule);
+        f_versionDefault = f_currentModule->nextVersion();
     }
     else{
         f_dirDefault = "root/";
@@ -230,21 +171,23 @@ void MainWindow::addModule(){
     else{
         f_currentModule->m_versions->push_back(new VersionInfo(f_version));
     }
-
-    QStringList f_list = recursiveFind(f_dirPath);
-
     ZipArchive z1(QString(m_currentPath + "/modules/" + f_name + "_" + f_version + ".zip").toStdString());
     if(!z1.open(ZipArchive::WRITE))
         qDebug() << "Не  удалось открыть архив для записи";
     QString f_beginDir = f_dirPath + "/";
+    QStringList f_dirs = recursiveFind(f_dirPath,QDir::Dirs);
+    foreach(auto dir,f_dirs){
+        z1.addEntry(QString(f_dir.remove("root/") + QString(dir  + "/").remove(f_beginDir)).toStdString());
+    }
+    QStringList f_files = recursiveFind(f_dirPath,QDir::Files);
     CustomProgressBar f_bar;
-    qreal f_unitPercent = 100.0 / qreal(f_list.size());
+    qreal f_unitPercent = 100.0 / qreal(f_files.size());
     qreal f_currentPersent = 0;
     f_bar.setRange(0,100);
     f_bar.setValue(f_currentPersent);
-    foreach(auto file,f_list){
+    foreach(auto file,f_files){
         f_bar.setText(file);
-        z1.addFile(QString(f_dir + file.remove(f_beginDir)).remove("root/").toStdString(),file.toStdString());
+        z1.addFile(QString(f_dir.remove("root/") + file.remove(f_beginDir)).toStdString(),file.toStdString());
         f_currentPersent += f_unitPercent;
         f_bar.setValue(f_currentPersent);
     }
@@ -255,54 +198,6 @@ void MainWindow::addModule(){
     createProjectFile();
     m_model->update();
     resize(width() + 1,height() + 1);
-
-    /*z1.open(ZipArchive::READ_ONLY);
-    z1.getEntries();
-    z1.close();*/
-}
-
-bool gzipCompress(QByteArray input, QByteArray &output, int level){
-    output.clear();
-    if(input.length()){
-        int flush = 0;
-        z_stream strm;
-        strm.zalloc = Z_NULL;
-        strm.zfree = Z_NULL;
-        strm.opaque = Z_NULL;
-        strm.avail_in = 0;
-        strm.next_in = Z_NULL;
-        int ret = deflateInit2(&strm, qMax(-1, qMin(9, level)), Z_DEFLATED, 31, 8, Z_DEFAULT_STRATEGY);
-        if (ret != Z_OK)
-            return(false);
-        output.clear();
-        char *input_data = input.data();
-        int input_data_left = input.length();
-        do {
-            int chunk_size = qMin(32768, input_data_left);
-            strm.next_in = (unsigned char*)input_data;
-            strm.avail_in = chunk_size;
-            input_data += chunk_size;
-            input_data_left -= chunk_size;
-            flush = (input_data_left <= 0 ? Z_FINISH : Z_NO_FLUSH);
-            do {
-                char out[32768];
-                strm.next_out = (unsigned char*)out;
-                strm.avail_out = 32768;
-                ret = deflate(&strm, flush);
-                if(ret == Z_STREAM_ERROR){
-                    deflateEnd(&strm);
-                    return(false);
-                }
-                int have = (32768 - strm.avail_out);
-                if(have > 0)
-                    output.append((char*)out, have);
-            } while (strm.avail_out == 0);
-        } while (flush != Z_FINISH);
-        (void)deflateEnd(&strm);
-        return(ret == Z_STREAM_END);
-    }
-    else
-        return(true);
 }
 
 void MainWindow::addFile(){
@@ -310,11 +205,11 @@ void MainWindow::addFile(){
     if(!QFile().exists(f_filePath))
         return;
     QString f_version,f_versionDefault,f_dir,f_dirDefault;
-    QString f_name = f_filePath.split("/").last();
+    QString f_name = f_filePath.split("/").last().remove("_");
     Module *f_currentModule = module(f_name);
     if(f_currentModule){
         f_dirDefault = f_currentModule->m_dir;
-        f_versionDefault = nextVersion(*f_currentModule);
+        f_versionDefault = f_currentModule->nextVersion();
     }
     else{
         f_dirDefault = "root/";

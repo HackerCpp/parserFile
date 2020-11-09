@@ -1,0 +1,8 @@
+Package: python3
+Version: 3.8.3
+Depends: libffi, openssl
+Architecture: x64-windows
+Multi-Arch: same
+Abi: ca6e61f086568c14bb7fb90764adee81ebad3e21
+Description: The Python programming language as an embeddable library
+Type: Port

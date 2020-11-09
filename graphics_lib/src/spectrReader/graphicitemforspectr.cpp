@@ -67,8 +67,9 @@ void GraphicItemForSpectr::changeVisibilityZone(QRectF visibilityZone){
 void GraphicItemForSpectr::changeSize(int width){
     m_endRedraw = true;
     bool flag = false;
-    m_spectrItem->updateParam(width - 50);
     wait();
+    m_spectrItem->updateParam(width - 50);
+
     if(m_curentPixmap){delete m_curentPixmap; m_curentPixmap = nullptr;}
     m_curentPixmap = new QImage(width - 50,m_spectrItem->board()->pictureHeight(),m_spectrItem->board()->formatPicture());
 

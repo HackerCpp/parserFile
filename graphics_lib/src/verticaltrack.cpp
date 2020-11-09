@@ -574,10 +574,10 @@ void VerticalTrack::run(){
         return;
     if(m_doublePixMap->isNull() || m_infoPixMap->isNull() || m_doubleHeader->isNull())
         return;
-    if(m_visibilitySquare.x() > boundingRect().x() + boundingRect().width()
+    /*if(m_visibilitySquare.x() > boundingRect().x() + boundingRect().width()
     || m_visibilitySquare.x() + m_visibilitySquare.width() < boundingRect().x()){
         return; //Если трек не в зоне видимости рисовать не будем
-    }
+    }*/
     //QTime time = QTime::currentTime();
     QPainter painter(m_doublePixMap);
     QPainter painterInfo(m_infoPixMap);
@@ -609,7 +609,6 @@ void VerticalTrack::run(){
             m_infoPixMap->fill(0x0);
             return;
         }
-
     }
     swapImageHeader();
     foreach(auto item,*m_items){
@@ -620,22 +619,10 @@ void VerticalTrack::run(){
             m_infoPixMap->fill(0x0);
             return;
         }
-
      }
-    /*foreach(auto item,*m_items){
-        if(item){
-            item->paint(&painter,&painterHeader,m_visibilitySquare,f_position,&m_endRedraw);
-        }
-        if(m_endRedraw){
-            m_infoPixMap->fill(0x0);
-            return;
-        }
-    }*/
     m_infoPixMap->fill(0x0);
     m_heightHeader = f_position;
     swapImageBody();
-    //swapPixMap();
-    //qDebug() << time.msecsTo(QTime::currentTime());
 }
 
 void  VerticalTrack::swapImageHeader(){

@@ -18,6 +18,7 @@ public slots:
     virtual void insertCalibrationInTheScript(){}
     virtual void openInterpretations(){}
     virtual void openConstructor(){}
+    virtual void update(){}
 };
 
 #endif // WINDOWFORMENU_H

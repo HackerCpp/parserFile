@@ -7,12 +7,17 @@
 #include "interpreterpython.h"
 #include "tabinterpretations.h"
 #include "geometrologydb.h"
+#include <QProcess>
+#include <QMessageBox>
+#include "specfiledialog.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
     : WindowForMenu(parent)
 {
-    qputenv("PYTHONPATH",QString(QDir().absolutePath() + "/python3/Lib").toLatin1());
+    qputenv("PYTHONPATH",QString(QDir().absolutePath() + "/python3/Lib;" +
+                                 QDir().absolutePath() + "/python3/Lib/site-packages;" +
+                                 QDir().absolutePath() + "/python3/DLLs;").toLatin1());
 
     m_menu = new Menu(this);
     //m_pythonInterpreter.evalFile(QDir().absolutePath() + "/scripts/mainMenu/mainMenu.py");
@@ -54,9 +59,9 @@ bool MainWindow::eventFilter(QObject *o, QEvent *e){
 }
 
 void MainWindow::openFile(){
-    QFileDialog fileDialog;
+    SpecFileDialog fileDialog;
     QString f_openPath = m_settings->value("paths/pathOpenFile").toString();
-    QString filePath = fileDialog.getOpenFileName(this, tr("Open File"),f_openPath,tr("*.forms *.gfm *.las"));
+    QString filePath = fileDialog.specGetOpenFileName(this, tr("Open File"),f_openPath,tr("*.forms *.gfm *.las"));
     if(filePath == "")
         return;
     m_settings->setValue("paths/pathOpenFile",filePath);
@@ -176,4 +181,35 @@ void MainWindow::openInterpretations(){
 
 void MainWindow::openConstructor(){
 
+}
+
+void MainWindow::update(){
+    if (QMessageBox::Yes == QMessageBox::question(this, tr("Update?"),
+                              tr("The program will close and start updating, and all unsaved data will be lost. Update?"),
+                              QMessageBox::Yes|QMessageBox::No)){
+        QProcess f_process;
+        QStringList f_arguments;
+        f_arguments << "http://www.gfm.ru/kedr_files/x64/geology_loader.xml" << ".//"  ;
+        f_process.start("updater/updater.exe",f_arguments);
+        disconnect(qApp, SIGNAL(aboutToQuit()),this, SLOT(quit()));
+        qApp->quit();
+        //exit(0);
+    }
+}
+
+void MainWindow::quit(){
+    if (QMessageBox::Yes == QMessageBox::question(this, tr("Close?"),
+                              tr("The app will close and all unsaved data will be lost. Close?"),
+                              QMessageBox::Yes|QMessageBox::No)){
+        disconnect(qApp, SIGNAL(aboutToQuit()),this, SLOT(quit()));
+        qApp->quit();//exit(0);
+    }
+    else
+        qApp->exec();
+}
+
+void MainWindow::closeEvent (QCloseEvent *event)
+{
+    event->ignore();
+    qApp->quit();
 }

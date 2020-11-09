@@ -1,0 +1,8 @@
+Package: libzippp
+Version: 3.1-1.6.1
+Depends: libzip, zlib
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 6997dd73fa124c0d6819c285cdeb576f94065246
+Description: Simple basic C++ wrapper around the libzip library. It is meant to be a portable and easy-to-use library for ZIP handling
+Type: Port

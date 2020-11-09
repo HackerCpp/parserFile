@@ -1,15 +1,18 @@
 #include "loader.h"
 #include <QFileInfo>
 
+
 Loader::Loader(QObject *parent) : QObject(parent)
 {
     manager = new QNetworkAccessManager();
-
+    m_loading.hide();
+    m_loading.setText(tr("loading"));
     connect(manager, &QNetworkAccessManager::finished, this, &Loader::onResult);
 }
 
 void Loader::getData(QString url)
 {
+    m_loading.show();
     m_currentUrl = url;
     QUrl f_url(url); // URL, к которому будем получать данные
     QNetworkRequest request;    // Отправляемый запрос
@@ -19,11 +22,13 @@ void Loader::getData(QString url)
 
 void Loader::onResult(QNetworkReply *reply)
 {
+    m_loading.hide();
     // Если в процесе получения данных произошла ошибка
     if(reply->error()){
         // Сообщаем об этом и показываем информацию об ошибках
         qDebug() << "ERROR";
         qDebug() << reply->errorString();
+        emit error(reply->errorString());
     } else {
         // В противном случае создаём объект для работы с файлом
         QFile *file = new QFile(QFileInfo(m_currentUrl).fileName());
@@ -31,8 +36,8 @@ void Loader::onResult(QNetworkReply *reply)
         if(file->open(QFile::WriteOnly)){
             file->write(reply->readAll());  // ... и записываем всю информацию со страницы в файл
             file->close();                  // закрываем файл
-        qDebug() << "Downloading is completed";
-        emit onReady(); // Посылаем сигнал о завершении получения файла
+            qDebug() << "Downloading is completed";
+            emit onReady(QFileInfo(m_currentUrl).fileName()); // Посылаем сигнал о завершении получения файла
         }
     }
 }

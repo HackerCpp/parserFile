@@ -55,7 +55,8 @@ qreal AGraphicItem::topValue(){
     if(!f_mainValue)
         return 0;
     qreal f_recordPoint = m_board->isDrawTime() ? 0 : (qIsNaN(m_curve->recordPoint()) ? 0 : m_curve->recordPoint());
-    return (f_mainValue->minimum() + f_recordPoint) * m_board->scale();
+    qreal f_result = (f_mainValue->minimum() + f_recordPoint) * m_board->scale();
+    return f_result;
 }
 
 qreal AGraphicItem::bottomValue(){
@@ -63,7 +64,8 @@ qreal AGraphicItem::bottomValue(){
     if(!f_mainValue)
         return 0;
     qreal f_recordPoint =  m_board->isDrawTime() ? 0 : (qIsNaN(m_curve->recordPoint()) ? 0 : m_curve->recordPoint());
-    return (f_mainValue->maximum() + f_recordPoint) * m_board->scale();
+    qreal f_result = (f_mainValue->maximum() + f_recordPoint) * m_board->scale();
+    return f_result;
 }
 
 void AGraphicItem::setDepthCoeff(QVector<qreal> f_coeffs){
@@ -91,21 +93,34 @@ int AGraphicItem::mainIndexFromScenePoint(QPointF point){
     if(!currentMainValue() || !currentMainValue()->size()){
         return -1;
     }
-    uint index = 0;
-    for(index = 1; index < currentMainValue()->size() - 1; ++index){
-       if(mainValue(index) > point.y()  && mainValue(index + 1) < point.y() ||
-           mainValue(index) < point.y()  && mainValue(index + 1) > point.y()){
-           return index;// > 2?i - 2 : 0;
-       }
+    int f_mainSize = currentMainValue()->size();
+    if(mainValue(0) < mainValue(f_mainSize - 1)){
+        for(uint index = 0; index < currentMainValue()->size() - 1; ++index){
+           if(mainValue(index) <= point.y()  && mainValue(index + 1) >= point.y()){
+               return index;
+           }
+        }
+        return point.y() <= mainValue(0) ? 0 : f_mainSize + 1;
     }
-    return index;
+    else{
+        for(uint index  = f_mainSize - 1; index > 0; --index){
+           if(mainValue(index) <= point.y()  && mainValue(index - 1) >= point.y()){
+               qreal f_aver = (mainValue(index - 1) +  mainValue(index)) / 2;
+               return point.y() < f_aver ? index : index - 1;
+           }
+        }
+        return point.y() >= mainValue(0) ? 0 : f_mainSize - 1;
+    }
+
 }
 
 qreal AGraphicItem::valueFromScenePoint(QPointF point){
     int f_index = mainIndexFromScenePoint(point);
     if(f_index == -1)
         return qQNaN();
-    return m_curve->data(f_index);
+    m_curve->load();
+    qreal f_result = m_curve->data(f_index);
+    return f_result;
 }
 
 qreal AGraphicItem::maximumFromScenePoints(QPointF pointBegin,QPointF pointEnd){
@@ -119,15 +134,16 @@ qreal AGraphicItem::maximumFromScenePoints(QPointF pointBegin,QPointF pointEnd){
         f_indexBegin = f_indexEnd;
         f_indexEnd = f_index;
     }
-
+    m_curve->load();
     qreal f_maximum =  -std::numeric_limits<double>::max();
     for(int index = f_indexBegin * m_curve->sizeOffset(); index <= f_indexEnd * m_curve->sizeOffset(); ++index)
         f_maximum = std::max(m_curve->data(index),f_maximum);
-
+    m_curve->unload();
     return f_maximum;
 }
 
 qreal AGraphicItem::minimumFromScenePoints(QPointF pointBegin,QPointF pointEnd){
+
     int f_indexBegin = mainIndexFromScenePoint(pointBegin);
     int f_indexEnd = mainIndexFromScenePoint(pointEnd);
     if(f_indexEnd == -1 || f_indexBegin == -1)
@@ -138,11 +154,11 @@ qreal AGraphicItem::minimumFromScenePoints(QPointF pointBegin,QPointF pointEnd){
         f_indexBegin = f_indexEnd;
         f_indexEnd = f_index;
     }
-
+    m_curve->load();
     qreal f_minimum = std::numeric_limits<double>::max();
     for(int index = f_indexBegin * m_curve->sizeOffset(); index <= f_indexEnd * m_curve->sizeOffset(); ++index)
         f_minimum = std::min(m_curve->data(index),f_minimum);
-
+    m_curve->unload();
     return f_minimum;
 }
 

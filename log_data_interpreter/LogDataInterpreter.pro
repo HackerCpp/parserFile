@@ -10,12 +10,12 @@ INCLUDEPATH += include \
 ../log_data_lib/include/blocks \
 ../PythonQT3.2/src \
 ../PythonQT3.2/extensions/PythonQt_QtAll \
-../python3/python3_x64-windows/include/python3.7\
+../python3/python38_x64-windows/include/python3.8\
 ../QScintilla/Qt4Qt5
 
-LIBS += ../PythonQT3.2/build/lib/PythonQt-Qt5-Python373.lib \
-        ../PythonQT3.2/build/lib/PythonQt_QtAll-Qt5-Python373.lib\
-        ../python3/python3_x64-windows/lib/python37.lib \
+LIBS += ../PythonQT3.2/build/lib/PythonQt-Qt5-Python383.lib \
+        ../PythonQT3.2/build/lib/PythonQt_QtAll-Qt5-Python383.lib\
+        ../python3/python38_x64-windows/lib/python38.lib \
         ../build/release/LogData.lib\
         ../QScintilla/build/release/qscintilla2_qt5.lib
 # The following define makes your compiler emit warnings if you use

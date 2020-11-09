@@ -76,7 +76,7 @@ DrawSettings::~DrawSettings(){
 }
 
 DrawSettings::FormatTime DrawSettings::curentFormatTime(){
-    int f_divider = static_cast<int>(1/m_scaleForTime);
+    int f_divider = static_cast<int>(1 / m_scaleForTime);
     int f_index = m_dividersTime.indexOf(f_divider);
     if(f_index == -1)
         f_index = m_dividersTime.indexOf(f_divider + 1);
@@ -86,7 +86,7 @@ DrawSettings::FormatTime DrawSettings::curentFormatTime(){
 }
 
 DrawSettings::FormatDepth DrawSettings::curentFormatDepth(){
-    int f_divider = static_cast<int>(1/m_scaleForDepth);
+    int f_divider = static_cast<int>(1 / m_scaleForDepth);
     int f_index = m_dividersDepth.indexOf(f_divider);
     if(f_index == -1)
         f_index = m_dividersDepth.indexOf(f_divider + 1);

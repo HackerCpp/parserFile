@@ -47,7 +47,6 @@ void TwoDimensionalArrayItem::drawBody(QPainter *per,QRectF visibleRect,bool *fl
     qreal f_width = per->device()->width();
     qreal f_topOffset = m_board->offsetUp();
 
-
     qreal f_top = mainValueMinimum();
     qreal f_bottom = mainValueMaximum();
     int f_stock = 1000;
@@ -77,7 +76,7 @@ void TwoDimensionalArrayItem::drawBody(QPainter *per,QRectF visibleRect,bool *fl
 }
 
 void TwoDimensionalArrayItem::run(){
-    if(!currentMainValue())
+    if(!currentMainValue() || !m_curve)
         return;
     m_updatedParam = true;
     foreach(auto path,m_picturePath){
@@ -96,11 +95,15 @@ void TwoDimensionalArrayItem::run(){
     qreal f_bottom = mainValueMaximum();
     int f_stock = 1000;
     int f_heightPictures = M_HEIGHT_PICTURE;
-    m_board->customUpdate();
+    //m_board->customUpdate();
+
+    m_curve->load();
     qreal f_onePersent = 100 / ((f_bottom + f_stock) - (f_top - f_stock));
     for(int y_top = f_top - f_stock; y_top < f_bottom + f_stock; y_top += (f_heightPictures - f_stock)){
-        if(m_isEndThread)
+        if(m_isEndThread){
+            m_curve->unload();
             return;
+        }
         m_curentDrawPersent = (y_top - (f_top - f_stock)) * f_onePersent;
         QImage f_image(m_curentPictureWidth,f_heightPictures,QImage::Format_ARGB32);
         QPainter f_painter(&f_image);
@@ -112,6 +115,7 @@ void TwoDimensionalArrayItem::run(){
         m_picturePath << f_namePicture;
         m_saversMoment = false;
     }
+    m_curve->unload();
     m_curentDrawPersent = 100;
     m_updatedParam = false;
     m_board->customUpdate();

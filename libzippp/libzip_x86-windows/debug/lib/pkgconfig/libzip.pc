@@ -1,0 +1,15 @@
+prefix=E:/vcpkg/packages/libzip_x86-windows/debug
+exec_prefix=${prefix}
+bindir=${exec_prefix}/bin
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+zipcmp=${exec_prefix}/bin/zipcmp
+
+Name: libzip
+Description: library for handling zip archives
+Version: 1.7.1
+Libs:  -L${libdir} -lzip
+Libs.private:  -l$<$<NOT:$<CONFIG:DEBUG>>:E:/vcpkg/installed/x86-windows/lib/zlib.lib> -l$<$<CONFIG:DEBUG>:E:/vcpkg/installed/x86-windows/debug/lib/zlibd.lib> -l$<$<NOT:$<CONFIG:DEBUG>>:E:/vcpkg/installed/x86-windows/lib/bz2.lib> -l$<$<CONFIG:DEBUG>:E:/vcpkg/installed/x86-windows/debug/lib/bz2d.lib> -lbcrypt -ladvapi32
+Cflags: -I${includedir}
+

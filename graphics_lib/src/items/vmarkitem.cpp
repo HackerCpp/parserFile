@@ -25,7 +25,7 @@ void VMarkItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
         qDebug() << "m_itemInfo не переводится в m_markItem не получается нарисовать";
         return;
     }
-
+    m_curve->load();
     qreal f_width = per->device()->width();
     int f_height = per->device()->height();
     QColor f_color = QColor(f_markItemInfo->color());
@@ -68,6 +68,7 @@ void VMarkItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
             break;
         }
     }
+    m_curve->unload();
 }
 
 void VMarkItem::drawHeader(QPainter *per,int &position,bool *flag){

@@ -20,6 +20,7 @@ protected:
     virtual void sceneUpdate();
     virtual void toSetTheLocationOfTheImageAfterDrawing();
 public:
+
     ObjectOfTheBoard();
     virtual ~ObjectOfTheBoard()override;
     virtual void resize(){}
@@ -28,6 +29,7 @@ public:
     virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override{QGraphicsItem::mouseMoveEvent(event);}
 public slots:
     void changingTheVisibilityZone(QRectF newVisibilityZone);
+    void needToRedraw();
 };
 
 #endif // OBJECTOFTHEBOARD_H

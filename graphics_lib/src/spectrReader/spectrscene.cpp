@@ -71,7 +71,7 @@ void SpectrScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     if(event->button() == Qt::LeftButton)
         m_isLeftMouseClick = false;
     else if(event->button() == Qt::RightButton){
-        m_selectingArea->hide();
+        //m_selectingArea->hide();
         m_isRightMouseClick = false;
     }
     update();

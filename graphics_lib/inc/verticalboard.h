@@ -28,7 +28,7 @@ public:
 
     void newTrack()override;
     bool addCurve(ICurve *curve,int indexTab);
-    virtual void redraw()override{emit scrollChanged();}
+    virtual void redraw()override;
     void updateItems();
 
 
@@ -47,6 +47,7 @@ public slots:
 
 signals:
     void changingTheVisibilityZone(QRectF visibleArea);
+    void needToRedraw();
 
 };
 

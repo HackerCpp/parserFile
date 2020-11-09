@@ -11,6 +11,7 @@ LIBS += ../build/release/LogData.lib
 SOURCES += \
     $$PWD/inc/canvas.cpp \
     $$PWD/inc/tools/curveshifttool.cpp \
+    $$PWD/inc/tools/specfiledialog.cpp \
     $$PWD/src/acousticsEditor/acuscene.cpp \
     $$PWD/src/acousticsEditor/acuview.cpp \
     $$PWD/src/acousticsEditor/chartviewselectsegment.cpp \
@@ -122,6 +123,7 @@ HEADERS += \
     $$PWD/inc/objectoftheboard.h \
     $$PWD/inc/rightborder.h \
     $$PWD/inc/tools/settingsitem.h \
+    $$PWD/inc/tools/specfiledialog.h \
     $$PWD/inc/verticalboard.h \
     $$PWD/inc/items/verticalitem.h \
     $$PWD/inc/verticaltrack.h \

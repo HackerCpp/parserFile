@@ -20,6 +20,8 @@ protected:
     QString m_dataType;
     qreal m_recordPoint;
     qreal m_scale,m_offset; // data * m_scale + m_offset
+    QString m_uid;
+    uint m_numberOfUsers;
     qreal (ACurve::*dataCountingFunction)(qreal data);
     virtual qreal minData(){return 0;}
     virtual qreal maxData(){return 0;}
@@ -54,8 +56,6 @@ public:
     virtual qreal minimum()override;
     virtual qreal recordPoint()override{return m_recordPoint;}
 
-
-
     virtual Desc *desc()override;
     virtual ShortCut shortCut()override;
     void checkingTheDataFunction();
@@ -71,6 +71,9 @@ public:
     virtual void setDesc(Desc *desc)override;
 
     virtual QString dataType();
+
+    virtual void load()override{}
+    virtual void unload()override{}
 
 };
 

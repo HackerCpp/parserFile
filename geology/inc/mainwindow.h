@@ -32,7 +32,10 @@ public slots:
     void insertCalibrationInTheScript()override;
     void openInterpretations()override;
     void openConstructor()override;
+    void update()override;
 
-    void quit(){qDebug() << "quit";}
+    void quit();
+
+    void closeEvent (QCloseEvent *event) override;
 };
 #endif // MAINWINDOW_H

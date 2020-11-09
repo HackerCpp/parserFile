@@ -26,6 +26,11 @@ signals:
 public slots:
     void hideLeft();
     void showRight();
+    void applyDarkStyle();
+    void applyLightStyle();
+    void applyRusLang();
+    void applyEngLang();
+
 
 
 };

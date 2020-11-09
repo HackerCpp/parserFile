@@ -5,7 +5,7 @@
 class Unpacker{
     Unpacker(){}
 public:
-    static void unpack(QString file,QString where);
+    static bool unpack(QString file,QString where,bool isDeleted);
 };
 
 #endif // UNPACKER_H

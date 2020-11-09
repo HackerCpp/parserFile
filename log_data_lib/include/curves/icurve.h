@@ -41,6 +41,9 @@ public:
     virtual QString mnemonic();
     virtual qreal recordPoint(){return 0;}
 
+    virtual void load(){}
+    virtual void unload(){}
+
     static ICurve * curveCreater(const ICurve &curve);
 };
 

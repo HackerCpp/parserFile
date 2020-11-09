@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project path="E:/MyQtProgram/parserGfm/updater/build/debug" name="geo">
+    <module name="geology" dir="root/">
+        <info version="0.0.1"/>
+        <info version="0.0.2"/>
+        <info version="0.0.3"/>
+        <info version="0.0.56"/>
+        <info version="0.0.57"/>
+        <info version="0.0.58"/>
+    </module>
+    <module name="median_filter.py" dir="root/scripts/acuEditor/">
+        <info version="0.0.1"/>
+        <info version="0.0.2"/>
+        <info version="0.0.3"/>
+    </module>
+    <module name="scripts" dir="root/">
+        <info version="0.0.1"/>
+    </module>
+</project>

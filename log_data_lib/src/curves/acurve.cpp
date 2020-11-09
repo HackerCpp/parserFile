@@ -8,6 +8,8 @@ ACurve::ACurve(){
     m_recordPoint = qQNaN();
     // if m_scale = 1 and m_offset = 0 use ACurve::rawData
     // else use ACurve::recalculatedData
+    m_uid = QUuid().createUuid().toString();
+    m_numberOfUsers = 0;
     m_scale = 1;
     m_offset = 0;
     dataCountingFunction = &ACurve::rawData;
@@ -113,9 +115,7 @@ void ACurve::setDesc(Desc *desc){
     m_desc = desc;
 }
 
-/*uint ACurve::offset(){
-    return m_offset;
-}*/
+
 
 
 

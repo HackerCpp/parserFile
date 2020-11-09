@@ -29,8 +29,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 private:
-    QString maximumVersion(Module &module);
-    QString nextVersion(Module &module);
+    //QString maximumVersion(Module &module);
+    //QString nextVersion(Module &module);
     void createProjectFile();
     Module *module(QString name);
 

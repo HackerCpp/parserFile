@@ -49,7 +49,7 @@ void VLineItem::loadDrawingParam(int width){
     qreal f_pixelPerMM = m_board->pixelPerMm();
     qreal f_pixelPerUnit;
     if(!f_lineItemInfo->isBeginValue()){
-        m_offsetPix = (f_lineItemInfo->zeroOffset()/10) * m_board->pixelPerMm();
+        m_offsetPix = (f_lineItemInfo->zeroOffset()/10) * f_pixelPerMM;
         if(f_lineItemInfo->isEndValue()){
             qreal rightBorderUnit = f_lineItemInfo->endValue();
             f_pixelPerUnit = (width -  m_offsetPix) / rightBorderUnit;
@@ -83,15 +83,16 @@ void VLineItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
         qDebug() << "Нулевой указатель mCurve";
         return;
     }
+
     LineItem *f_lineItemInfo = dynamic_cast<LineItem*>(m_itemInfo);
     if(!f_lineItemInfo){
         qDebug() << "m_itemInfo не переводится в m_lineItem не получается нарисовать";
         return;
     }
-    QColor f_color = QColor(f_lineItemInfo->color());
-    QPen f_pen(f_color);
-    int f_widthLine = m_isActive ? f_lineItemInfo->widthLine() + 4 : f_lineItemInfo->widthLine();
-    f_pen.setWidth(f_widthLine);
+    m_curve->load();
+    QPen f_pen(QColor(f_lineItemInfo->color()),
+               (m_isActive ? f_lineItemInfo->widthLine() + 4 : f_lineItemInfo->widthLine()));
+
     per->setPen(f_pen);
     int f_width = per->device()->width();
     int f_height = per->device()->height();
@@ -100,51 +101,49 @@ void VLineItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
     int f_downOffset = f_height - f_topOffset;
     int indexBegin  = 0;
 
-    //loadDrawingParam(f_width);
     if(mainValueMinimum() > f_yTop  + f_downOffset || mainValueMaximum() < f_yTop - f_topOffset){
+        m_curve->unload();
         return;
     }
+
     for(uint i = 0; i < currentMainValue()->size(); ++i){
        if(mainValue(i) > f_yTop - f_topOffset && mainValue(i) < f_yTop + f_downOffset){
-           indexBegin = i;// > 2?i - 2 : 0;
+           indexBegin = i;
            break;
        }
     }
     uint i = 0;
-    uint prevIndex = 0;
     if(currentMainValue()->size() > m_curve->size()){
-        qDebug() << "size mainValue > m_curve" << currentMainValue()->size() << m_curve->size() ;
+        qDebug() << "size mainValue > m_curve  VLineItem::drawBody" << currentMainValue()->size() << m_curve->size() ;
+        m_curve->unload();
         return;
     }
 
     QPointF prevPoint = QPointF(pixelX(indexBegin,f_width),mainValue(indexBegin) - f_yTop + f_topOffset - 1);
     for(i = indexBegin + 1;i < currentMainValue()->size(); ++i){
-        if(*flag)
+        if(*flag){
+            m_curve->unload();
             return;
+        }
         VLineItem::Transition f_transition = amountSaturation(i,f_width);
         if(f_transition == RIGHT_TRANSITION ){
             per->drawLine(prevPoint,QPointF(f_width,mainValue(i) - f_yTop + f_topOffset));
             per->drawLine(QPointF(0,mainValue(i) - f_yTop + f_topOffset),QPointF(pixelX(i,f_width),mainValue(i) - f_yTop + f_topOffset));
-
-            //per->drawText(QPointF(50,(f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset),QString::number(f_mainValue->data(i)));
         }
         else if(f_transition == LEFT_TRANSITION){
             per->drawLine(prevPoint,QPointF(0,mainValue(i) - f_yTop + f_topOffset));
             per->drawLine(QPointF(f_width,mainValue(i) - f_yTop + f_topOffset),QPointF(pixelX(i,f_width),mainValue(i) - f_yTop + f_topOffset));
-            //per->drawText(QPointF(50,(f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset),QString::number(f_mainValue->data(i)));
         }
         else{
             per->drawLine(prevPoint,QPointF(pixelX(i,f_width),mainValue(i) - f_yTop + f_topOffset));
-           // per->drawText(QPointF(50,(f_mainValue->data(i) * f_scaleForMainValue) - f_yTop + f_topOffset),QString::number(f_mainValue->data(i)));
-
         }
 
         prevPoint = QPointF(pixelX(i,f_width),(mainValue(i) - f_yTop) + f_topOffset);
-        prevIndex = i;
         if(mainValue(i) > f_yTop + f_downOffset || mainValue(i) < f_yTop - f_topOffset){
             break;
         }
     }
+    m_curve->unload();
 }
 
 QColor VLineItem::color(){
@@ -167,9 +166,8 @@ void VLineItem::drawHeader(QPainter *per,int &position,bool *flag){
         qDebug() << "m_itemInfo не переводится в m_lineItem не получается нарисовать";
         return;
     }
-    QColor f_color = f_lineItemInfo->color();
-    int f_widthLine = m_isActive ? f_lineItemInfo->widthLine() + 4 : f_lineItemInfo->widthLine();
-    per->setPen(QPen(f_color,f_widthLine));
+    per->setPen(QPen(QColor(f_lineItemInfo->color()),
+                     m_isActive ? f_lineItemInfo->widthLine() + 4 : f_lineItemInfo->widthLine()));
     int f_fontSize = m_isActive ? 14 : 10;
     per->setFont(QFont("Times", f_fontSize, QFont::Bold));
     int f_width = per->device()->width();
@@ -189,7 +187,8 @@ qreal VLineItem::operator[](int index){
 
 qreal VLineItem::pixelX(int index,int width){
     if(index < m_curve->size()){
-        qreal f_value = fmod((m_curve->data(index) * m_scale) + m_offsetPix,width);
+        qreal f_value = fmod(m_curve->data(index) * m_scale + m_offsetPix,width);
+        //return f_value;
         return f_value > 0 ? f_value : width + f_value;
     }
     else
