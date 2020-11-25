@@ -59,6 +59,7 @@ template<typename T> void Curve<T>::updateDataType(){
     else if(std::is_same<T, int64_t>::value)
         m_dataType = "INT64";
 }
+
 template<typename T> Curve<T>::Curve(int size,int offset):ACurve(){
     updateDataType();
     int f_size = size * offset;
@@ -66,6 +67,7 @@ template<typename T> Curve<T>::Curve(int size,int offset):ACurve(){
     m_sizeOfType = sizeof(T);
     m_sizeOffsetInByte = offset * m_sizeOfType;
 }
+
 template<typename T> Curve<T>::Curve(const Curve<T> &curve){
     m_data = new QVector<T>;
     m_sizeOfType = sizeof(T);
@@ -142,7 +144,7 @@ template<typename T> uint Curve<T>::sizeOffset(){
 }
 
 template<typename T> void Curve<T>::load(){
-    if(!m_data)
+    /*if(!m_data)
         return;
     if(m_desc->param("draw_type") == "TIME" || m_desc->param("draw_type") == "DEPTH")
         return;
@@ -159,11 +161,11 @@ template<typename T> void Curve<T>::load(){
             qDebug() << "Не получается загрузить данные файл " << QDir().currentPath() + "/temporary/" + m_uid + ".bin" << "не может быть открыт";
         }
     }
-    ++m_numberOfUsers;
+    ++m_numberOfUsers;*/
 }
 
 template<typename T> void Curve<T>::unload(){
-    if(!m_data)
+    /*if(!m_data)
         return;
     if(m_desc->param("draw_type") == "TIME" || m_desc->param("draw_type") == "DEPTH")
         return;
@@ -178,7 +180,7 @@ template<typename T> void Curve<T>::unload(){
         f_file.close();
         QVector<T>().swap(*m_data);
         Q_ASSERT(m_data->capacity() == 0);
-    }
+    }*/
 }
 
 #endif // CURVE_H

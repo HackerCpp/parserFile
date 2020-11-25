@@ -187,10 +187,10 @@ void MainWindow::update(){
     if (QMessageBox::Yes == QMessageBox::question(this, tr("Update?"),
                               tr("The program will close and start updating, and all unsaved data will be lost. Update?"),
                               QMessageBox::Yes|QMessageBox::No)){
-        QProcess f_process;
+        QProcess *f_process = new QProcess();
         QStringList f_arguments;
         f_arguments << "http://www.gfm.ru/kedr_files/x64/geology_loader.xml" << ".//"  ;
-        f_process.start("updater/updater.exe",f_arguments);
+        f_process->start("updater/updater.exe",f_arguments);
         disconnect(qApp, SIGNAL(aboutToQuit()),this, SLOT(quit()));
         qApp->quit();
         //exit(0);

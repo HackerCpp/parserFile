@@ -14,8 +14,11 @@ DrawingThroughADisk::DrawingThroughADisk(){
 
 DrawingThroughADisk::~DrawingThroughADisk(){
     m_saversMoment = false;
+    disconnect();
+    blockSignals(true);
     if(isRunning()){
-        terminate();
+        m_isRedraw = false;
+        m_isEndThread = true;
         wait();
     }
     foreach(auto path,m_picturePath){
