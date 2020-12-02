@@ -12,7 +12,7 @@ class GtkThread;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-    GtkThread *m_gtkThread;
+    //GtkThread *m_gtkThread;
     QSplitter *m_horizontalSplitter;
     QFileDialog *m_fileDialog;
     Converter *m_converter;

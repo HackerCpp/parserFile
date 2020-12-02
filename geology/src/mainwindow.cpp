@@ -3,24 +3,26 @@
 #include "filereader.h"
 #include "gfmloader.h"
 #include "lasloader.h"
+#include "lisloader.h"
 #include "gfmsaver.h"
+#include "lassaver.h"
+#include "lissaver.h"
 #include "interpreterpython.h"
 #include "tabinterpretations.h"
 #include "geometrologydb.h"
 #include <QProcess>
 #include <QMessageBox>
 #include "specfiledialog.h"
+#include "geoloader.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
-    : WindowForMenu(parent)
-{
+    : WindowForMenu(parent){
     qputenv("PYTHONPATH",QString(QDir().absolutePath() + "/python3/Lib;" +
                                  QDir().absolutePath() + "/python3/Lib/site-packages;" +
                                  QDir().absolutePath() + "/python3/DLLs;").toLatin1());
 
     m_menu = new Menu(this);
-    //m_pythonInterpreter.evalFile(QDir().absolutePath() + "/scripts/mainMenu/mainMenu.py");
     m_menu->installEventFilter(this);
 
     m_mainHorLayout = new QHBoxLayout(this);
@@ -59,9 +61,10 @@ bool MainWindow::eventFilter(QObject *o, QEvent *e){
 }
 
 void MainWindow::openFile(){
-    SpecFileDialog fileDialog;
+    //SpecFileDialog fileDialog;
     QString f_openPath = m_settings->value("paths/pathOpenFile").toString();
-    QString filePath = fileDialog.specGetOpenFileName(this, tr("Open File"),f_openPath,tr("*.forms *.gfm *.las"));
+    //QString filePath = fileDialog.specGetOpenFileName(this, tr("Open File"),f_openPath,tr("*.forms *.gfm *.las *.lis"));
+    QString filePath = QFileDialog().getOpenFileName(this, tr("Open File"),f_openPath,tr("*.forms *.gfm *.las *.geo *.lis"));
     if(filePath == "")
         return;
     m_settings->setValue("paths/pathOpenFile",filePath);
@@ -73,6 +76,12 @@ void MainWindow::openFile(){
     }
     else if(f_file.getType() == ".las" || f_file.getType() == ".LAS"){
         f_loader = new LasLoader(filePath);
+    }
+    /*else if(f_file.getType() == ".lis" || f_file.getType() == ".LIS"){
+        f_loader = new LisLoader(filePath);
+    }*/
+    else if(f_file.getType() == ".geo"){
+        f_loader = new GeoLoader(filePath);
     }
     else{
         return;
@@ -88,29 +97,34 @@ void MainWindow::openFile(){
     }
 }
 
-void MainWindow::saveGFM(){
+void MainWindow::saveFile(ISaverLogData *saver){
     ILogData *f_logData = m_logDataView->curentLogData();
     if(!f_logData)
         return;
-    ISaverLogData * gfmSaver = new GFMSaver();
-    f_logData->setSaver(gfmSaver);
+    f_logData->setSaver(saver);
     f_logData->save();
+    connect(saver,SIGNAL(ready(QString)),this,SLOT(fileExists(QString)));
+}
+
+void MainWindow::saveGFM(){
+    saveFile(new GFMSaver());
 }
 
 void MainWindow::saveLIS(){
-    QString f_fileName = QDir().absolutePath()+ "/converters/lisConverter.dll";
-    //f_fileName = "E:/MyQtProgram/parserGfm/ConverterLis/build-lisConverter-Desktop_Qt_5_14_0_MinGW_64_bit-Release/lisConverter.dll";
+    saveFile(new LisSaver());
+}
 
-    QLibrary  lib(f_fileName);
+void MainWindow::saveLAS(){
+    saveFile(new LASSaver());
+}
 
-    //typedef int(*Fu)( char *gfm_filename );
-    typedef int(*Fu)();
-    Fu f_function = (Fu)lib.resolve("f");
-    if(f_function)
-        f_function();
+void MainWindow::fileExists(QString filePath){
+    if(filePath.isEmpty()){
+        QMessageBox::warning(this, tr("Error"),tr("Failed to save the file "));
+        return;
+    }
+    QMessageBox::information(this, tr("File exists"),tr("File exists ") + filePath);
 
-    //qDebug() << lib.resolve("f");
-    //lib.unload();
 }
 
 void MainWindow::openConsolePython(){

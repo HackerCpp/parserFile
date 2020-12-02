@@ -1,0 +1,1 @@
+start ConverterGTK.exe C:\2019_04_02_11-00-38(гк лм сти 100м).gfm las

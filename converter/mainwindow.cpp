@@ -1,4 +1,3 @@
-#include "gtkthread.h"
 #include "mainwindow.h"
 #include <QApplication>
 #include <QDebug>
@@ -7,7 +6,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    m_gtkThread = new GtkThread();
+    //m_gtkThread = new GtkThread();
     m_horizontalSplitter = new QSplitter(Qt::Horizontal);
     m_fileDialog = new QFileDialog(this);
     m_converter = new Converter();
@@ -23,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
 }
 
 MainWindow::~MainWindow(){
-    if(m_gtkThread){delete m_gtkThread; m_gtkThread = nullptr;}
+    //if(m_gtkThread){delete m_gtkThread; m_gtkThread = nullptr;}
 }
 
 

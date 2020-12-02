@@ -19,5 +19,5 @@ void GeoConverter::convert(){
     if(m_rbtnGfm->isChecked()){
         m_gtkThread.convert_geo_to_gfm(m_fileName);
     }
-
 }
+

@@ -12,7 +12,6 @@
 #include "markItem.h"
 #include "AcuItem.h"
 #include "headerblock.h"
-#include "addCurve.h"
 #include "specItem.h"
 #include <QtCore/QtEndian>
 
@@ -443,7 +442,7 @@ void findItemLine(QXmlStreamReader *xmlReader,ABoard *board,LineItem *lineItem){
             lineItem->setPaintMode(attributes.value("mode").toString());
         }
         else if(xmlReader->name() == "style" && token == QXmlStreamReader::StartElement){
-                QString f_color = attributes.value("color").toString();
+                QString f_color = attributes.value("color").toString().replace("#00","#ff");
                 lineItem->setColor(f_color,attributes.value("dashes").toInt());
         }
         else if(xmlReader->name() == "width" && token == QXmlStreamReader::StartElement){
@@ -481,7 +480,7 @@ void findItemMark(QXmlStreamReader *xmlReader,ABoard *board,markItem *markItem){
         QXmlStreamReader::TokenType token = xmlReader->readNext();
         QXmlStreamAttributes attributes = xmlReader->attributes();
         if(xmlReader->name() == "style" && token == QXmlStreamReader::StartElement){
-            markItem->setColor(attributes.value("color").toString(),attributes.value("dashes").toInt());
+            markItem->setColor(attributes.value("color").toString().replace("#00","#ff"),attributes.value("dashes").toInt());
         }
         else if(xmlReader->name() == "width" && token == QXmlStreamReader::StartElement){
             markItem->setWidth(attributes.value("value").toDouble());
@@ -786,7 +785,7 @@ void GFMLoader::findCurves(QByteArray *header,DataBlock * dataBlock,QByteArray b
             curves->push_back(new Curve<int16_t>);
         else if(value.indexOf("FLOAT32") != -1)
             curves->push_back(new Curve<float_t>);
-        else if(value.indexOf("DOUBLE64") != -1)
+        else if(value.indexOf("DOUBLE64") != -1 || value.indexOf("FLOAT64") != -1)
             curves->push_back(new Curve<double>);
         else if(value.indexOf("UINT64") != -1)
             curves->push_back(new Curve<uint64_t>);

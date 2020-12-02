@@ -23,8 +23,10 @@ AcousticsEditor::AcousticsEditor(VAcuItem *acuItem){
                  << "a1_adcu" << "a2_adcu" << "a1_db" << "a2_db" << "alpha_db_m";
     for(int i = 0; i < DataCountingAcoustics::MAXIMUM; ++i){
         AGraphicItem *f_item = m_dataCountingExperimental->item((DataCountingAcoustics::AcuTypeItem)i);
-        if(!f_item)
+        if(!f_item){
+            m_pythonInterpreter->addObject(m_pyNameList[i],nullptr);
             continue;
+        }
         m_pythonInterpreter->addObject(m_pyNameList[i],f_item->curve());
     }
 
@@ -99,8 +101,10 @@ void AcousticsEditor::apply(){
 void AcousticsEditor::updateDataPython(){
     for(int i = 0; i < DataCountingAcoustics::MAXIMUM;++i){
         AGraphicItem *f_item = m_dataCountingExperimental->item((DataCountingAcoustics::AcuTypeItem)i);
-        if(!f_item)
+        if(!f_item){
+            m_pythonInterpreter->addObject(m_pyNameList[i],nullptr);
             continue;
+        }
         m_pythonInterpreter->addObject(m_pyNameList[i],f_item->curve());
     }
 }

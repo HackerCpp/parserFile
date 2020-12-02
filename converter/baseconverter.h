@@ -18,6 +18,7 @@ public:
     virtual ~BaseConverter();
 
     virtual void convert(){}
+
     void setFileName(QString fileName);
     void fillWithButtons();
 };

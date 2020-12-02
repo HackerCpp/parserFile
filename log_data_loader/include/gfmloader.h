@@ -4,7 +4,6 @@
 #include "loader_global.h"
 #include <aloaderlogdata.h>
 #include <QString>
-#include <QThread>
 #include <QTextCodec>
 #include "headerblock.h"
 #include "toolinfoblock.h"
@@ -14,7 +13,7 @@
 #include "curve.h"
 #include "aboard.h"
 
-class LOADER_EXPORT GFMLoader : public ALoaderLogData, public QThread{
+class LOADER_EXPORT GFMLoader : public ALoaderLogData{
     QString m_path;
     QTextCodec *m_codec;
     struct BlockByte{

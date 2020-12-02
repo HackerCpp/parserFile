@@ -4,8 +4,9 @@
 #include "iblock.h"
 #include <QList>
 #include <QObject>
+#include <QThread>
 
-class ILoaderLogData : public QObject{
+class ILoaderLogData : public QThread{
     Q_OBJECT
 public:
     ILoaderLogData();

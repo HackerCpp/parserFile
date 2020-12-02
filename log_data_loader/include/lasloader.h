@@ -2,12 +2,11 @@
 #define LASLOADER_H
 #include "loader_global.h"
 #include <aloaderlogdata.h>
-#include <QThread>
 #include <QHash>
 #include <curve.h>
 #include <datablock.h>
 
-class LOADER_EXPORT LasLoader : public ALoaderLogData, public QThread
+class LOADER_EXPORT LasLoader : public ALoaderLogData
 {
     QTextCodec *m_codec;
     QString m_path;

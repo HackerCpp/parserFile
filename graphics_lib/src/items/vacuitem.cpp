@@ -13,8 +13,10 @@ VAcuItem::VAcuItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
         qDebug() << "Не удалось преобразовать AItemInfo в AcuItemInfo" << itemInfo->name();
     }
     bool ok = true;
-    QString f_dataStep = m_curve->desc()->param("data_step");
+    QString f_dataStep = m_curve->desc()->param("data_step").replace(",",".");
+    qDebug() << f_dataStep;
     m_dataStep =  f_dataStep.left(f_dataStep.indexOf("(")).toDouble(&ok);
+
     if(!ok){
         qDebug() << "Не удалось преобразовать data_step в акустике";
         m_dataStep = 2;

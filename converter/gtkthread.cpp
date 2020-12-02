@@ -21,6 +21,7 @@ GtkThread::GtkThread(){
 
 GtkThread::~GtkThread(){
     terminate();
+    gtk_main_quit();
 }
 
 void GtkThread::run(){
@@ -49,24 +50,36 @@ void GtkThread::convert_gfm_to_las(QString fileName){
 void GtkThread::runDllExport(QString pathDll,QString filePath){
     m_fImport =  nullptr;
     m_fInit = nullptr;
-    terminate();
-    wait();
+    //terminate();
+    //wait();
     QLibrary  lib(pathDll);
     m_fImport = (FuImport)lib.resolve("export");
     m_fInit = (FInit)lib.resolve("init");
     m_fileName = filePath;
-    start();
+
+    if(m_fInit)
+        m_fInit(get_function);
+    if(m_fImport)
+        m_fImport((const char *)QTextCodec::codecForName("UTF-8")->fromUnicode(m_fileName).data());
+    //start();
+    qDebug() << "convert end";
 }
 
 void GtkThread::runDllImport(QString pathDll,QString filePath){
     m_fImport =  nullptr;
     m_fInit = nullptr;
-    terminate();
-    wait();
+    //terminate();
+    //wait();
     QLibrary  lib(pathDll);
     m_fImport = (FuImport)lib.resolve("import");
     m_fInit = (FInit)lib.resolve("init");
     m_fileName = filePath;
-    start();
+
+    if(m_fInit)
+        m_fInit(get_function);
+    if(m_fImport)
+        m_fImport((const char *)QTextCodec::codecForName("UTF-8")->fromUnicode(m_fileName).data());
+    //start();
+    qDebug() << "convert end";
 }
 

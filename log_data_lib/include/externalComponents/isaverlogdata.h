@@ -17,7 +17,7 @@ public:
     virtual bool setBlocks(QList<IBlock *> *blocks);
 
 signals:
-    void ready();
+    void ready(QString fileName);
 };
 
 #endif // ISAVERLOGDATA_H

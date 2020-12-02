@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kedr-bin>
+  <units>
+    <unit name="PIX" scale="2.1928571428571428571428571428571"/>
+    <unit name="CMM" scale="0.1"/>
+    <unit name="DMM" scale="1"/>
+    <unit name="MM" scale="10"/>
+    <unit name="CM" scale="100"/>
+    <unit name="M" scale="10000"/>
+    <unit name="FT" scale="3048"/>
+    <unit name="FOOT" scale="3048"/>
+    <unit name="IN" scale="254"/>
+    <unit name="INCH" scale="254"/>
+    <unit name="MSEC" scale="1"/>
+    <unit name="MKSEC" scale="0.001"/>
+    <unit name="USEC" scale="0.001"/>
+    <unit name="SEC" scale="1000"/>
+    <unit name="MIN" scale="60000"/>
+    <unit name="HR" scale="3600000"/>
+    <unit name="GRAM" scale="0.001"/>
+    <unit name="KG" scale="1"/>
+    <unit name="TONNE" scale="1000"/>
+    <unit name="LB" scale="0.45359237"/>
+  </units>
+</kedr-bin>

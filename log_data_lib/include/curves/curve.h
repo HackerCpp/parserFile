@@ -53,7 +53,7 @@ template<typename T> void Curve<T>::updateDataType(){
     else if(std::is_same<T, float_t>::value)
         m_dataType = "FLOAT32";
     else if(std::is_same<T, double>::value)
-        m_dataType = "DOUBLE64";
+        m_dataType = "FLOAT64";
     else if(std::is_same<T, uint64_t>::value)
         m_dataType = "UINT64";
     else if(std::is_same<T, int64_t>::value)

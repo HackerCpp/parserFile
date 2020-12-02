@@ -35,7 +35,7 @@ void ReseptionCurve::dragEnterEvent(QDragEnterEvent *event){
     if(f_grItem){
         f_grItem->itemInfo()->setVisible(AItem::BOARD_GRAPH_VIEW,true);
         if(f_grItem->itemInfo()->type() == m_reseptionType){
-            return event->setAccepted(m_dataCounting->isValidItem(f_grItem));
+            return event->setAccepted(true);//event->setAccepted(m_dataCounting->isValidItem(f_grItem));
         }
     }
     return event->setAccepted(false);
@@ -63,6 +63,7 @@ void ReseptionCurve::dropEvent(QDropEvent *event){
         return event->setAccepted(false);
     }
     AGraphicItem *f_grItem = dynamic_cast<AGraphicItem *>(f_grItemReinterpret);
+
     if(f_grItem){
         if(f_grItem->itemInfo()->type() == m_reseptionType){
             m_lineEdit->setText(f_grItem->curve()->mnemonic());

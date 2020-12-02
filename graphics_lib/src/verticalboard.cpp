@@ -6,9 +6,6 @@
 #include "ruler.h"
 #include <QDesktopWidget>
 
-
-
-
 VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves,DrawSettings *drawSettings)
     :AGraphicBoard(boardInfo,curves,drawSettings)
 {

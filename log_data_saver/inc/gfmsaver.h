@@ -27,6 +27,7 @@ public:
     ~GFMSaver()override;
 
     bool save()override;
+    bool save(QString fileName);
     bool isReady()override;
 
     QByteArray formBlokSave(FormsBlock* formsBlock);

@@ -22,11 +22,12 @@ void ObjectOfTheBoard::changingTheVisibilityZone(QRectF newVisibilityZone){
         return;
     QGraphicsItem::prepareGeometryChange();
     m_visibilitySquare = newVisibilityZone;
-    if(m_visibilitySquare.y() + m_visibilitySquare.height()
+    /*if(m_visibilitySquare.y() + m_visibilitySquare.height()
             > m_topPositionPicture  + m_curentPixmap->height() ||
             m_visibilitySquare.y() < m_topPositionPicture){
         redraw();
-    }
+    }*/
+    redraw();
 }
 
 void ObjectOfTheBoard::needToRedraw(){

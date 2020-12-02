@@ -36,8 +36,10 @@ void LogDataView::addLogData(QSharedPointer<ILogData> logData){
 
 void LogDataView::lastDataReady(){
     QSharedPointer<ILogData> f_curentLogData = m_logDataList->last();
-    if(!f_curentLogData)
+    if(!f_curentLogData.data()){
+        m_logDataList->removeLast();
         return;
+    }
     m_dataModel->addLogData(f_curentLogData);
     m_graphicWidget->addLogData(f_curentLogData);
 }

@@ -9,6 +9,8 @@
 #include "baseconverter.h"
 #include "QMap"
 
+class GtkThread;
+
 class Converter : public QWidget
 {
     Q_OBJECT

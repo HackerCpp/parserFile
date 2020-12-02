@@ -22,11 +22,13 @@ public:
     ~MainWindow()override;
 
     bool eventFilter(QObject *o, QEvent *e)override;
-
+    void saveFile(ISaverLogData *saver);
 public slots:
     void openFile()override;
     void saveGFM()override;
     void saveLIS() override;
+    void saveLAS() override;
+    void fileExists(QString filePath);
     void openConsolePython()override;
     void openEditorPython()override;
     void insertCalibrationInTheScript()override;

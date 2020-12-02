@@ -23,13 +23,15 @@
 #include "specItem.h"
 
 GFMSaver::GFMSaver(){
-
+    m_isReady = false;
 }
 
 GFMSaver::~GFMSaver(){
 
 }
+
 bool GFMSaver::save(){
+    m_isReady = false;
     if(!m_blocks){
         qDebug() << "Нечего сохранять,добавьте данные";
     }
@@ -55,12 +57,39 @@ bool GFMSaver::save(){
     fileGFM->close();
     delete fileGFM;
     fileGFM = nullptr;
+    m_isReady = true;
+    return true;
+}
+
+bool GFMSaver::save(QString fileName){
+    m_isReady = false;
+    QFile *fileGFM = new QFile(fileName);
+    m_codec = QTextCodec::codecForMib(1015);
+    fileGFM->open(QIODevice::WriteOnly);// | QIODevice::Append);
+    fileGFM->write(m_codec->fromUnicode("GFM"));
+    fileGFM->write(m_codec->fromUnicode("\r\n").mid(2));
+
+    foreach(auto block,*m_blocks){
+        if(block->name() == IBlock::DATA_BLOCK)
+            fileGFM->write(getForSaveDataBlock(block));
+        else if(block->name() == IBlock::FORMS_BLOCK)
+           fileGFM->write(getForSaveFormsBlock(block));
+        else if(block->name() == IBlock::HEADER_BLOCK)
+            fileGFM->write(getForSaveHeaderBlock(block));
+        else if(block->name() == IBlock::TOOLINFO_BLOCK)
+            fileGFM->write(getForSaveToolInfoBlock(block));
+    }
+    fileGFM->close();
+    delete fileGFM;
+    fileGFM = nullptr;
+    m_isReady = true;
+    emit ready(fileName);
     return true;
 }
 
 
 bool GFMSaver::isReady(){
-    return false;
+    return m_isReady;
 }
 
 

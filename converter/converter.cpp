@@ -3,6 +3,7 @@
 #include "geoconverter.h"
 #include "lasconverter.h"
 #include <QDebug>
+#include "gtkthread.h"
 
 
 Converter::Converter()

@@ -7,7 +7,6 @@ extern"C"{
 #include "QLibrary"
 using namespace Qt;
 
-typedef struct _GtkWidget GtkWidget;
 typedef char *(*FuImport)(const char *name);
 typedef void* (*FInit)(GetFunction f);
 class GtkThread : public QThread
