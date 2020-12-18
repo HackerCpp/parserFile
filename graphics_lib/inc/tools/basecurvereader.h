@@ -8,6 +8,7 @@ public:
     BaseCurveReader();
     virtual ~BaseCurveReader(){}
     virtual void apply(){}
+    virtual void changePosition(int newPosition){}
 };
 
 #endif // BASECURVEREADER_H

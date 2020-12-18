@@ -25,6 +25,7 @@ public:
     void saveFile(ISaverLogData *saver);
 public slots:
     void openFile()override;
+    void addFromFile()override;
     void saveGFM()override;
     void saveLIS() override;
     void saveLAS() override;

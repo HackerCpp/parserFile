@@ -25,8 +25,8 @@ SpectrViewer::SpectrViewer(VSpectrItem *spectrItem,int width){
 SpectrViewer::~SpectrViewer(){
     if(m_scene){delete m_scene; m_scene = nullptr;}
     ICurve * f_curve = m_experimentalSpectr->curve();
+    if(m_experimentalSpectr){m_experimentalSpectr->deleteLater();m_experimentalSpectr = nullptr;}
     if(f_curve){delete f_curve; f_curve = nullptr;}
-    if(m_experimentalSpectr){delete m_experimentalSpectr; m_experimentalSpectr = nullptr;}
     if(m_radioBtnIsActive){delete m_radioBtnIsActive; m_radioBtnIsActive = nullptr;}
 }
 

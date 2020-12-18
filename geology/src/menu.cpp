@@ -37,6 +37,7 @@ Menu::Menu(QWidget *parent)
     saveFileMenu->addAction (tr("&LIS"),m_parentWindow, SLOT(saveLIS()));
     saveFileMenu->addAction (tr("&LAS"),m_parentWindow, SLOT(saveLAS()));
     fileMenu->addMenu(saveFileMenu);
+    fileMenu->addAction(tr("&Add from file"),m_parentWindow, SLOT(addFromFile()));
     mnuArray->push_back(fileMenu);
     QMenu * interpreterMenu= new QMenu (tr("&Script"),this);
     interpreterMenu->setObjectName("Script");
@@ -52,19 +53,21 @@ Menu::Menu(QWidget *parent)
         mnuBarArray->push_back(bar);
     }
     foreach(auto mnuBar, *mnuBarArray){
-        this->layoutForMenu->addWidget(mnuBar);
+        this->layoutForMenu->addWidget(mnuBar,0,Qt::AlignTop);
     }
-    layoutForMenu->addStretch(1000);
+    //layoutForMenu->addStretch(1000);
+    layoutForMenu->setMargin(0);
     this->setLayout(this->layoutForMenu);
-    this->setMaximumWidth(120);
-    this->setMaximumHeight(40 * mnuBarArray->size());
+    this->setMaximumWidth(sizeHint().width() + 2);
+    //this->setMaximumHeight(40 * mnuBarArray->size());
+
 }
 
 void Menu::hideLeft(){
-    this->setMaximumWidth(30);
+    //this->setMaximumWidth(30);
 }
 void Menu::showRight(){
-    this->setMaximumWidth(120);
+    this->setMaximumWidth(sizeHint().width());
 }
 
 void Menu::applyDarkStyle(){
@@ -126,4 +129,11 @@ Menu::~Menu(){
     this->mnuBarArray = nullptr;
     delete this->layoutForMenu;
     this->layoutForMenu = nullptr;
+}
+
+void Menu::changeEvent(QEvent *event)
+{
+    // В случае получения события изменения языка приложения
+    if (event->type() == QEvent::LanguageChange) {
+    }
 }

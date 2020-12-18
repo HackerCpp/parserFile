@@ -16,6 +16,9 @@ void Loader::getData(QString url)
     m_currentUrl = url;
     QUrl f_url(url); // URL, к которому будем получать данные
     QNetworkRequest request;    // Отправляемый запрос
+    request.setAttribute(QNetworkRequest::CacheLoadControlAttribute, false);
+    request.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
+    request.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::AlwaysNetwork);
     request.setUrl(f_url);        // Устанавлвиваем URL в запрос
     manager->get(request);      // Выполняем запрос
 }

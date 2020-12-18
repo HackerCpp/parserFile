@@ -4,14 +4,34 @@
 #include "formsblock.h"
 #include <stdio.h>
 #include <customprogressbar.h>
-
+#include <QInputDialog>
 
 GraphicEditor::GraphicEditor(QSharedPointer<ILogData> logData,DrawSettings *drawSettings,QWidget *parent)
     : QTabWidget(parent),AGraphicEditor(logData),m_forms(nullptr),m_drawSettings(drawSettings){
     this->setStyleSheet("QGraphicsView{background-color:white;}");
     m_curves = new QMap<QString,ICurve*>;
+    m_lastTabClicked = -1;
+    m_tabMenu = QPointer(new QMenu(tr("&Forms menu")));
+    m_tabMenu->addAction(tr("&Rename board"),this, SLOT(renameBoard()));
+    m_tabMenu->addAction(tr("&Delete board"),this, SLOT(deleteBoard()));
+    m_tabMenu->setMaximumSize(1000,1000);
     addCurves();
     addForms();
+    tabBar()->installEventFilter(this); // установка фильтра обработки событий
+    connect(this,&QTabWidget::tabBarClicked,this,&GraphicEditor::setCurrentIndexClick);
+}
+
+bool GraphicEditor::eventFilter(QObject *watched, QEvent *event){
+    if (event->type() == QEvent::ContextMenu) {
+        if(m_lastTabClicked == -1)
+            return QObject::eventFilter(watched, event);
+        m_tabMenu->move(cursor().pos());
+        m_tabMenu->show();
+    }
+    else if(event->type() == QEvent::MouseButtonRelease){
+        m_tabMenu->hide();
+    }
+    return QObject::eventFilter(watched, event); // обработка события по-умолчанию
 }
 
 void GraphicEditor::addCurves(){
@@ -68,8 +88,7 @@ void GraphicEditor::addForms(){
         }
     }
 
-    AGraphicBoard *f_board = dynamic_cast<AGraphicBoard *>(currentWidget());
-    m_curentBoard = f_board;
+    m_curentBoard = dynamic_cast<AGraphicBoard *>(currentWidget());
     if(m_curentBoard)
         m_curentBoard->activate(true);
     connect(this,&QTabWidget::currentChanged,this,&GraphicEditor::changeBoard);
@@ -109,6 +128,10 @@ void GraphicEditor::newBoard(){
     m_curentBoard->insertNewTrack(1,InsertPossition::LEFT);
 }
 
+void GraphicEditor::setCurrentIndexClick(int index){
+    m_lastTabClicked = index;
+}
+
 void GraphicEditor::changeBoard(int index){
     if(tabText(index) == "+"){
         newBoard();
@@ -127,7 +150,7 @@ void GraphicEditor::changeBoard(int index){
 
 void GraphicEditor::refresh(){
     disconnect(this,&QTabWidget::currentChanged,this,&GraphicEditor::changeBoard);
-
+    blockSignals(true);
     int f_count = count() - 1;
     m_curentBoard = nullptr;
     CustomProgressBar f_progressBar;
@@ -142,21 +165,47 @@ void GraphicEditor::refresh(){
         f_widget->hide();
         removeTab(index);
         VerticalBoard *f_board = dynamic_cast<VerticalBoard *>(f_widget);
-        if(f_board)
+        if(f_board){
             f_board->activate(false);
-        delete f_widget;//->deleteLater();
+            //delete f_board;//->deleteLater();
+        }
+        f_widget->deleteLater();
     }
     f_progressBar.setValue(f_progressBar.value() + f_stepPercent);
     if(m_curves){
         m_curves->clear();
     }
-
-    //qDebug() << "all deleted";
     f_progressBar.setText(tr("added"));
     addCurves();
     f_progressBar.setValue(75);
-    //qDebug() << "curves added";
     addForms();
-    //qDebug() << "forms added";
     f_progressBar.setValue(100);
+    blockSignals(false);
+}
+
+void GraphicEditor::renameBoard(){
+    AGraphicBoard *f_board = dynamic_cast<AGraphicBoard *>(widget(m_lastTabClicked));
+    if(!f_board)
+        return;
+
+    bool bOk;
+    QString f_name = QInputDialog::getText( 0, tr("Rename"),tr("New name:"),QLineEdit::Normal,
+                                         f_board->boardInfo()->name(),&bOk);
+    if (!bOk)
+        return;
+
+    tabBar()->setTabText(m_lastTabClicked,f_name);
+    f_board->boardInfo()->setName(f_name);
+
+}
+
+void GraphicEditor::deleteBoard(){
+    AGraphicBoard *f_board = dynamic_cast<AGraphicBoard *>(widget(m_lastTabClicked));
+    if(!f_board)
+        return;
+    m_forms->boards()->removeOne(dynamic_cast<ABoard *>(f_board->boardInfo()));
+    f_board->hide();
+    removeTab(m_lastTabClicked);
+    f_board->activate(false);
+    delete f_board;f_board = nullptr;
 }

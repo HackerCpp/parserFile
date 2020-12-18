@@ -12,7 +12,8 @@ class VSpectrItem : public TwoDimensionalArrayItem{
 public:
     VSpectrItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board);
     VSpectrItem(const VSpectrItem &other);
-    ~VSpectrItem()override;
+    ~VSpectrItem()override{};
+    void deleteLater()override;
 
 private:
     void inline drawInterpolationVertical(QPainter *per,QRectF visibleRect,bool *flag);

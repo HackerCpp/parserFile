@@ -1,6 +1,7 @@
 #include "ainterpreterlogdata.h"
 
-AinterpreterLogData::AinterpreterLogData(){
+AinterpreterLogData::AinterpreterLogData()
+    :m_blocks(nullptr){
 
 }
 

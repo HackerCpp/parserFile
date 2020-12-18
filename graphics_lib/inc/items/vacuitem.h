@@ -28,7 +28,8 @@ public:
 
     VAcuItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board);
     VAcuItem(const VAcuItem &other);
-    ~VAcuItem()override;
+    ~VAcuItem()override{}
+    void deleteLater()override;
 
     qreal dataStep(){return m_dataStep;}
 

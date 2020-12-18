@@ -48,14 +48,23 @@ VAcuItem::VAcuItem(const VAcuItem &other)
     }
 }
 
-VAcuItem::~VAcuItem(){
+void VAcuItem::deleteLater(){
     disconnect();
     blockSignals(true);
     if(isRunning()){
         m_isRedraw = false;
         m_isEndThread = true;
+        terminate();
         wait();
     }
+    m_saversMoment = false;
+    foreach(auto path,m_picturePath){
+        if(!QFile::exists(path) )
+            continue;
+        QFile(path).remove();
+    }
+    m_picturePath.clear();
+    delete this;
 }
 
 
@@ -357,14 +366,15 @@ void VAcuItem::selectOptions(){
         return;
     }
 
-    if(!f_acuItem->showMode()){
-        pDrawingFunction = &TwoDimensionalArrayItem::drawPointsTwoColorsNoOffset;
-    }
-    else if(f_acuItem->showMode() == 1){
+
+    if(f_acuItem->showMode() == 1){
         pDrawingFunction = &TwoDimensionalArrayItem::drawInterpolationHorizontalNoOffset;
     }
     else if(f_acuItem->showMode() == 2){
         pDrawingFunction = &TwoDimensionalArrayItem::drawWaveNoOffset;
+    }
+    else{
+        pDrawingFunction = &TwoDimensionalArrayItem::drawPointsTwoColorsNoOffset;
     }
 }
 
@@ -449,8 +459,6 @@ void VAcuItem::drawInterpolationHorForCheckArea(QPainter *per,QRectF visibleRect
            break;
        }
     }
-    AcuItem *f_AcuItemInfo = dynamic_cast<AcuItem*>(m_itemInfo);
-    QList<MulticolorItem> *f_multicolor = f_AcuItemInfo->multiColor();
     uint i;
     //QTime time;
     //time.start();

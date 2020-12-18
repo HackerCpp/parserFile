@@ -36,9 +36,6 @@ AGraphicItem::AGraphicItem(const AGraphicItem &other){
     m_recordPointDepth = other.m_recordPointDepth;
 }
 
-AGraphicItem::~AGraphicItem(){
-}
-
 void AGraphicItem::updateParam(int pictureWidth){
     Q_UNUSED(pictureWidth)
     if(!m_curve || !m_board)

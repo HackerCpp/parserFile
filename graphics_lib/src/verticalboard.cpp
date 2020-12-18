@@ -5,6 +5,7 @@
 #include "browsergraphicitems.h"
 #include "ruler.h"
 #include <QDesktopWidget>
+#include "acousticsEditor/acousticsEditor.h"
 
 VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves,DrawSettings *drawSettings)
     :AGraphicBoard(boardInfo,curves,drawSettings)
@@ -94,12 +95,51 @@ void VerticalBoard::updateItems(){
 
         m_legend = new ItemsLegendView(m_items,this);
         m_legend->move(0,0);
+
+        CurvesForCalc f_curves;
+        foreach(auto item,m_items->values()){
+            if(item->itemInfo()->type() == TypeItem::ACU){
+                if(item->curve()->mnemonic().indexOf("1") != -1)
+                    f_curves.m_acuOne = dynamic_cast<VAcuItem *>(item);
+                else if(item->curve()->mnemonic().indexOf("2") != -1)
+                    f_curves.m_acuTwo = dynamic_cast<VAcuItem *>(item);
+            }
+            else if(item->curve()->mnemonic() == "T1(mkSec)")
+                f_curves.m_t1 = dynamic_cast<VLineItem *>(item);
+            else if(item->curve()->mnemonic() == "T2(mkSec)")
+                f_curves.m_t2 = dynamic_cast<VLineItem *>(item);
+            else if(item->curve()->mnemonic() == "DT(mkSec)")
+                f_curves.m_dt = dynamic_cast<VLineItem *>(item);
+            else if(item->curve()->mnemonic() == "A1(ADCU)")
+                f_curves.m_a1_adcu = dynamic_cast<VLineItem *>(item);
+            else if(item->curve()->mnemonic() == "A2(ADCU)")
+                f_curves.m_a2_adcu = dynamic_cast<VLineItem *>(item);
+            else if(item->curve()->mnemonic() == "A1(DB)")
+                f_curves.m_a1_db = dynamic_cast<VLineItem *>(item);
+            else if(item->curve()->mnemonic() == "A2(DB)")
+                f_curves.m_a2_db = dynamic_cast<VLineItem *>(item);
+            else if(item->curve()->mnemonic() == "Alpha(DB/M)")
+                f_curves.m_alpha = dynamic_cast<VLineItem *>(item);
+        }
+
+        if(f_curves.m_dt && f_curves.m_t1 && f_curves.m_t2 && f_curves.m_a1_db
+                && f_curves.m_a2_db && f_curves.m_alpha && f_curves.m_acuOne
+                && f_curves.m_acuTwo && f_curves.m_a1_adcu  && f_curves.m_a2_adcu
+                && f_curves.m_acuOne->is_visible() && f_curves.m_acuTwo->is_visible()){
+            if(m_standartWidgets){
+                m_standartWidgets->push_back(new AcousticsEditor(f_curves));
+                //m_standartWidgets->first()->show();
+            }
+        }
 }
 
 void VerticalBoard::mousePressEvent(QMouseEvent *event){
     if(event->button() == Qt::RightButton){
         m_posLeftClick = event->pos();
         m_timerLeftClick.start(300);
+    }
+    else if(event->button() == Qt::LeftButton){
+        m_isStandartWidget = true;
     }
     QGraphicsView::mousePressEvent(event);
 }
@@ -127,6 +167,12 @@ void VerticalBoard::mouseMoveEvent(QMouseEvent *event){
                 m_legend->changeScenePoint(mapToScene(event->pos()));
             }
         }
+        if(m_isStandartWidget){
+            for(auto &widget : *m_standartWidgets){
+                widget->changePosition(mapToScene(event->pos()));
+            }
+        }
+
     //}
     QGraphicsView::mouseMoveEvent(event);
 }
@@ -140,6 +186,7 @@ void VerticalBoard::mouseReleaseEvent(QMouseEvent *event){
             m_beginLineLegend->hide();
         }
     }
+    m_isStandartWidget = false;
     QGraphicsView::mouseReleaseEvent(event);
 }
 
@@ -174,7 +221,7 @@ void VerticalBoard::redraw(){
 VerticalBoard::~VerticalBoard(){
     if(m_items){
         foreach(auto graphicItem,*m_items){
-            if(graphicItem){delete graphicItem; graphicItem = nullptr;}
+            if(graphicItem){graphicItem->deleteLater(); graphicItem = nullptr;}
         }
         delete m_items; m_items = nullptr;
     }
@@ -204,7 +251,6 @@ void VerticalBoard::init(){
     m_currentLineLegend->setZValue(200);
     m_canvas->addItem(m_beginLineLegend);
     m_canvas->addItem(m_currentLineLegend);
-
 }
 
 void VerticalBoard::resizeEvent(QResizeEvent *event){

@@ -11,6 +11,7 @@ public:
     ~WindowForMenu();
 public slots:
     virtual void openFile(){}
+    virtual void addFromFile(){}
     virtual void saveGFM(){}
     virtual void saveLIS(){}
     virtual void saveLAS(){}

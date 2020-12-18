@@ -77,7 +77,7 @@ public:
     virtual void setTypeItem(TypeItem type){m_type = type;}
     virtual void setNumberOfTrack(int numberOfTrack){m_numberOfTrack = numberOfTrack;}
 
-
+    static AItem * itemCreater(const AItem &item);
 };
 
 

@@ -55,14 +55,23 @@ VSpectrItem::VSpectrItem(const VSpectrItem &other)
     }
 }
 
-VSpectrItem::~VSpectrItem(){
+void VSpectrItem::deleteLater(){
     disconnect();
     blockSignals(true);
     if(isRunning()){
         m_isRedraw = false;
         m_isEndThread = true;
+        terminate();
         wait();
     }
+    m_saversMoment = false;
+    foreach(auto path,m_picturePath){
+        if(!QFile::exists(path) )
+            continue;
+        QFile(path).remove();
+    }
+    m_picturePath.clear();
+    delete this;
 }
 
 

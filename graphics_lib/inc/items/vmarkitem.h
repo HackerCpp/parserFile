@@ -10,6 +10,7 @@ class VMarkItem : public VerticalItem{
 public:
     VMarkItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board);
     ~VMarkItem(){}
+    void deleteLater()override{delete this;}
 
     QColor color()override;
     void setColor(QColor color)override;

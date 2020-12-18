@@ -27,7 +27,6 @@ ChartViewSelectSegment::ChartViewSelectSegment(QWidget *parent)
         scene()->addItem(m_verticalLineLeft);
         scene()->addItem(m_verticalLineRight);
         scene()->addItem(m_horizontalLine);
-
     }
 
 }

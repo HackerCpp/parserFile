@@ -5,7 +5,7 @@
 #include "modelonewave.h"
 
 using namespace QtCharts;
-class QChartViewPrivate;
+
 class ChartViewSelectSegment : public QChartView
 {
     Q_OBJECT

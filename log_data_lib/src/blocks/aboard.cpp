@@ -12,7 +12,7 @@ ABoard::ABoard(const ABoard &object){
     m_items = new QMap<QString, AItem*>;
     m_name = object.m_name;
     foreach(auto item,object.m_items->values()){
-        m_items->insert(m_items->key(item),item);
+        m_items->insert(object.m_items->key(item),AItem::itemCreater(*item));
     }
     foreach(auto track,*object.m_tracks){
         m_tracks->push_back(new ATrack(*track));

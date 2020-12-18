@@ -53,7 +53,10 @@ void GraphicsControlPanel::init(){
     m_hLayout->addWidget(&m_comboPictureFormat);
     m_hLayout->addWidget(&m_comboScalePixelPerMm);
     m_hLayout->addWidget(m_btnRefresh);
-    m_hLayout->addStretch(100);
+    //m_hLayout->addStretch(10);
+    m_hLayout->setDirection(QBoxLayout::LeftToRight);
+    m_hLayout->setMargin(0);
+
     setLayout(m_hLayout);
 }
 

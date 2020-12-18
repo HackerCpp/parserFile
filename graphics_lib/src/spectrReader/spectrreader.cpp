@@ -24,6 +24,7 @@ SpectrReader::SpectrReader(VSpectrItem *spectrItem)
     setAcceptDrops(true);
     m_widht = 100;
     m_vMainLayout = new QVBoxLayout();
+    m_vMainLayout->setMargin(0);
     m_splitterFiltersAndSpectrs = new QSplitter ();
 
     m_spectrSplitter = new QSplitter();

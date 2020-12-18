@@ -7,7 +7,7 @@ DisplayingAcoustics::DisplayingAcoustics(DataCountingAcoustics *dataCounting)
     : m_dataAcoustic(dataCounting)
 {
     m_acuView = QPointer<AcuView>(new AcuView(dataCounting));
-    m_widgetSelectingWaveSegment = QPointer<WidgetSelectWaveSegment>(new WidgetSelectWaveSegment(m_dataAcoustic));
+    //m_widgetSelectingWaveSegment = QPointer<WidgetSelectWaveSegment>(new WidgetSelectWaveSegment(m_dataAcoustic));
     m_vMainSplitter = new QSplitter(Qt::Vertical);
     m_sliderWidth = new QSlider(Qt::Horizontal,this);
     m_sliderWidth->setRange(100,10000);

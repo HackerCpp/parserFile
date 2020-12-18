@@ -4,14 +4,17 @@
 <context>
     <name>AcousticsEditor</name>
     <message>
-        <location filename="../graphics_lib/src/acousticsEditor/acousticsEditor.cpp" line="44"/>
         <source>Calculate</source>
-        <translation type="unfinished">Рассчитать</translation>
+        <translation type="obsolete">Рассчитать</translation>
     </message>
     <message>
-        <location filename="../graphics_lib/src/acousticsEditor/acousticsEditor.cpp" line="45"/>
         <source>Cansel</source>
-        <translation type="unfinished">Выйти</translation>
+        <translation type="obsolete">Выйти</translation>
+    </message>
+    <message>
+        <location filename="../graphics_lib/src/acousticsEditor/acousticsEditor.cpp" line="21"/>
+        <source>Apply</source>
+        <translation>Применить</translation>
     </message>
 </context>
 <context>
@@ -37,32 +40,32 @@
     <message>
         <location filename="../graphics_lib/src/tools/browsergraphicitems.cpp" line="35"/>
         <source>Visible</source>
-        <translation type="unfinished">Отображать</translation>
+        <translation>Отображать</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/tools/browsergraphicitems.cpp" line="52"/>
         <source>Date</source>
-        <translation type="unfinished">Дата</translation>
+        <translation>Дата</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/tools/browsergraphicitems.cpp" line="53"/>
         <source>Device</source>
-        <translation type="unfinished">Прибор</translation>
+        <translation>Прибор</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/tools/browsergraphicitems.cpp" line="54"/>
         <source>Track</source>
-        <translation type="unfinished">Трэк</translation>
+        <translation>Трэк</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/tools/browsergraphicitems.cpp" line="55"/>
         <source>Draw type</source>
-        <translation type="unfinished">Тип отрисовки</translation>
+        <translation>Тип отрисовки</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/tools/browsergraphicitems.cpp" line="56"/>
         <source>Color</source>
-        <translation type="unfinished">Цвет</translation>
+        <translation>Цвет</translation>
     </message>
 </context>
 <context>
@@ -70,27 +73,35 @@
     <message>
         <location filename="../graphics_lib/src/spectrReader/chartvievforonewavewidget.cpp" line="27"/>
         <source>Difference: </source>
-        <translation>Разница:</translation>
+        <translation>Разница: </translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/spectrReader/chartvievforonewavewidget.cpp" line="28"/>
         <source>Band: </source>
-        <translation>Полоса:</translation>
+        <translation>Полоса: </translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/spectrReader/chartvievforonewavewidget.cpp" line="29"/>
         <source>Frequency: </source>
-        <translation>Частота Гц:</translation>
+        <translation>Частота Гц: </translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/spectrReader/chartvievforonewavewidget.cpp" line="30"/>
         <source>Amp max: </source>
-        <translation>Амп.макс:</translation>
+        <translation>Амп.макс: </translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/spectrReader/chartvievforonewavewidget.cpp" line="31"/>
         <source>Amp min: </source>
-        <translation>Амп.мин:</translation>
+        <translation>Амп.мин: </translation>
+    </message>
+</context>
+<context>
+    <name>ChoosingAPath</name>
+    <message>
+        <location filename="../graphics_lib/inc/tools/specfiledialog.cpp" line="14"/>
+        <source>Current path: </source>
+        <translation>Текущий путь: </translation>
     </message>
 </context>
 <context>
@@ -98,7 +109,7 @@
     <message>
         <location filename="../graphics_lib/inc/tools/curveshifttool.cpp" line="10"/>
         <source>ok</source>
-        <translation type="unfinished">Ок</translation>
+        <translation>Ок</translation>
     </message>
 </context>
 <context>
@@ -106,12 +117,12 @@
     <message>
         <location filename="src/datamodel.cpp" line="375"/>
         <source>Parameters</source>
-        <translation type="unfinished">Параметры</translation>
+        <translation>Параметры</translation>
     </message>
     <message>
         <location filename="src/datamodel.cpp" line="377"/>
         <source>Calibrations</source>
-        <translation type="unfinished">Калибровки</translation>
+        <translation>Калибровки</translation>
     </message>
 </context>
 <context>
@@ -162,12 +173,12 @@
     <message>
         <location filename="../graphics_lib/src/graphiceditor.cpp" line="138"/>
         <source>remove</source>
-        <translation type="unfinished">Удаление</translation>
+        <translation>Удаление</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/graphiceditor.cpp" line="155"/>
         <source>added</source>
-        <translation type="unfinished">Вставлен</translation>
+        <translation>Вставлен</translation>
     </message>
 </context>
 <context>
@@ -180,62 +191,62 @@
     <message>
         <location filename="src/graphicscontrolpanel.cpp" line="8"/>
         <source>0.1 sec/cm</source>
-        <translation type="unfinished"></translation>
+        <translation>0.1 сек/см</translation>
     </message>
     <message>
         <location filename="src/graphicscontrolpanel.cpp" line="9"/>
         <source>1 sec/cm</source>
-        <translation type="unfinished"></translation>
+        <translation>1 сек/см</translation>
     </message>
     <message>
         <location filename="src/graphicscontrolpanel.cpp" line="10"/>
         <source>5 sec/cm</source>
-        <translation type="unfinished"></translation>
+        <translation>5 сек/см</translation>
     </message>
     <message>
         <location filename="src/graphicscontrolpanel.cpp" line="11"/>
         <source>10 sec/cm</source>
-        <translation type="unfinished"></translation>
+        <translation>10 сек/см</translation>
     </message>
     <message>
         <location filename="src/graphicscontrolpanel.cpp" line="12"/>
         <source>30 sec/cm</source>
-        <translation type="unfinished"></translation>
+        <translation>30 сек/см</translation>
     </message>
     <message>
         <location filename="src/graphicscontrolpanel.cpp" line="13"/>
         <source>1 min/cm</source>
-        <translation type="unfinished"></translation>
+        <translation>1 мин/см</translation>
     </message>
     <message>
         <location filename="src/graphicscontrolpanel.cpp" line="14"/>
         <source>5 min/cm</source>
-        <translation type="unfinished"></translation>
+        <translation>5 мин/см</translation>
     </message>
     <message>
         <location filename="src/graphicscontrolpanel.cpp" line="15"/>
         <source>10 min/cm</source>
-        <translation type="unfinished"></translation>
+        <translation>10 мин/см</translation>
     </message>
     <message>
         <location filename="src/graphicscontrolpanel.cpp" line="16"/>
         <source>30 min/cm</source>
-        <translation type="unfinished"></translation>
+        <translation>30 мин/см</translation>
     </message>
     <message>
         <location filename="src/graphicscontrolpanel.cpp" line="29"/>
         <source>MIN Picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Минимальная картинка</translation>
     </message>
     <message>
         <location filename="src/graphicscontrolpanel.cpp" line="30"/>
         <source>AVR Picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Средняя картинка</translation>
     </message>
     <message>
         <location filename="src/graphicscontrolpanel.cpp" line="31"/>
         <source>MAX Picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Максимальная кртинка</translation>
     </message>
     <message>
         <location filename="src/graphicscontrolpanel.cpp" line="33"/>
@@ -261,20 +272,60 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="src/mainwindow.cpp" line="61"/>
-        <location filename="src/mainwindow.cpp" line="143"/>
+        <location filename="src/mainwindow.cpp" line="67"/>
+        <location filename="src/mainwindow.cpp" line="160"/>
         <source>Open File</source>
         <translation>Открыть файл</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="61"/>
-        <source>*.forms *.gfm *.las</source>
-        <translation type="unfinished"></translation>
+        <location filename="src/mainwindow.cpp" line="67"/>
+        <source>*.forms *.gfm *.las *.geo *.lis</source>
+        <translation></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="143"/>
+        <location filename="src/mainwindow.cpp" line="123"/>
+        <source>Error</source>
+        <translation>Ошибка</translation>
+    </message>
+    <message>
+        <location filename="src/mainwindow.cpp" line="123"/>
+        <source>Failed to save the file </source>
+        <translation>Ошибка сохранения файла </translation>
+    </message>
+    <message>
+        <location filename="src/mainwindow.cpp" line="126"/>
+        <source>File exists</source>
+        <translation>Файл создан</translation>
+    </message>
+    <message>
+        <location filename="src/mainwindow.cpp" line="126"/>
+        <source>File exists </source>
+        <translation>Файл создан </translation>
+    </message>
+    <message>
+        <location filename="src/mainwindow.cpp" line="201"/>
+        <source>Update?</source>
+        <translation>Обновить приложение?</translation>
+    </message>
+    <message>
+        <location filename="src/mainwindow.cpp" line="202"/>
+        <source>The program will close and start updating, and all unsaved data will be lost. Update?</source>
+        <translation>Приложение закроется и все несохраненные данные будут потеряны! Обновить приложение?</translation>
+    </message>
+    <message>
+        <location filename="src/mainwindow.cpp" line="215"/>
+        <source>Close?</source>
+        <translation>Закрыть ?</translation>
+    </message>
+    <message>
+        <location filename="src/mainwindow.cpp" line="216"/>
+        <source>The app will close and all unsaved data will be lost. Close?</source>
+        <translation>Приложение закроется и все несохраненные данные будут потеряны! Закрыть?</translation>
+    </message>
+    <message>
+        <location filename="src/mainwindow.cpp" line="160"/>
         <source>*.db</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -292,37 +343,37 @@
         <location filename="src/menu.cpp" line="16"/>
         <source>Style</source>
         <oldsource>&amp;ApplyStyle</oldsource>
-        <translation type="unfinished">Применить стиль</translation>
+        <translation>Применить стиль</translation>
     </message>
     <message>
         <location filename="src/menu.cpp" line="17"/>
         <source>Dark</source>
-        <translation type="unfinished">Тёмный</translation>
+        <translation>Тёмный</translation>
     </message>
     <message>
         <location filename="src/menu.cpp" line="18"/>
         <source>Light</source>
-        <translation type="unfinished">Светлый</translation>
+        <translation>Светлый</translation>
     </message>
     <message>
         <location filename="src/menu.cpp" line="21"/>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Язык</translation>
     </message>
     <message>
         <location filename="src/menu.cpp" line="22"/>
         <source>Russian</source>
-        <translation type="unfinished"></translation>
+        <translation>Русский</translation>
     </message>
     <message>
         <location filename="src/menu.cpp" line="23"/>
         <source>English</source>
-        <translation type="unfinished"></translation>
+        <translation>Англиский</translation>
     </message>
     <message>
         <location filename="src/menu.cpp" line="25"/>
         <source>Update</source>
-        <translation type="unfinished">Обновить</translation>
+        <translation>Обновить</translation>
     </message>
     <message>
         <location filename="src/menu.cpp" line="27"/>
@@ -360,29 +411,39 @@
         <translation>GFM Файл</translation>
     </message>
     <message>
-        <location filename="src/menu.cpp" line="40"/>
+        <location filename="src/menu.cpp" line="37"/>
+        <source>&amp;LIS</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="src/menu.cpp" line="38"/>
+        <source>&amp;LAS</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="src/menu.cpp" line="41"/>
         <source>&amp;Script</source>
         <translation>Скрипты</translation>
     </message>
     <message>
-        <location filename="src/menu.cpp" line="42"/>
+        <location filename="src/menu.cpp" line="43"/>
         <source>Python</source>
         <translation>Python</translation>
     </message>
     <message>
-        <location filename="src/menu.cpp" line="43"/>
+        <location filename="src/menu.cpp" line="44"/>
         <source>&amp;OpenConsole</source>
         <translation>Открыть консоль</translation>
     </message>
     <message>
-        <location filename="src/menu.cpp" line="44"/>
+        <location filename="src/menu.cpp" line="45"/>
         <source>&amp;OpenEditor</source>
         <translation>Открыть редактор</translation>
     </message>
     <message>
-        <location filename="src/menu.cpp" line="45"/>
+        <location filename="src/menu.cpp" line="46"/>
         <source>&amp;AddDataCalib</source>
-        <translation type="unfinished">Добавить калибровки</translation>
+        <translation>Добавить калибровки</translation>
     </message>
 </context>
 <context>
@@ -390,17 +451,17 @@
     <message>
         <location filename="../graphics_lib/src/tools/modelcurveeditor.cpp" line="60"/>
         <source>Time(min)</source>
-        <translation type="unfinished">Время</translation>
+        <translation>Время(мин)</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/tools/modelcurveeditor.cpp" line="63"/>
         <source>Depth(m)</source>
-        <translation type="unfinished">Глубина</translation>
+        <translation>Глубина(м)</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/tools/modelcurveeditor.cpp" line="66"/>
         <source>Offset</source>
-        <translation type="unfinished">Смещение</translation>
+        <translation>Смещение</translation>
     </message>
 </context>
 <context>
@@ -408,7 +469,7 @@
     <message>
         <location filename="../graphics_lib/src/tools/modelforgraphicsitems.cpp" line="13"/>
         <source>Visible</source>
-        <translation>Показывать </translation>
+        <translation>Показывать</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/tools/modelforgraphicsitems.cpp" line="13"/>
@@ -446,17 +507,17 @@
     <message>
         <location filename="src/tabinterpretations.cpp" line="17"/>
         <source>Active</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать</translation>
     </message>
     <message>
         <location filename="src/tabinterpretations.cpp" line="17"/>
         <source>Name</source>
-        <translation type="unfinished">Название</translation>
+        <translation>Название</translation>
     </message>
     <message>
         <location filename="src/tabinterpretations.cpp" line="17"/>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Версия</translation>
     </message>
 </context>
 <context>
@@ -464,37 +525,37 @@
     <message>
         <location filename="../graphics_lib/src/tools/modellegenditems.cpp" line="6"/>
         <source>mnemonic</source>
-        <translation type="unfinished"></translation>
+        <translation>мнемоника</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/tools/modellegenditems.cpp" line="6"/>
         <source>begin</source>
-        <translation type="unfinished"></translation>
+        <translation>Начальное</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/tools/modellegenditems.cpp" line="6"/>
         <source>end</source>
-        <translation type="unfinished"></translation>
+        <translation>Текущее</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/tools/modellegenditems.cpp" line="6"/>
         <source>begin - end</source>
-        <translation type="unfinished"></translation>
+        <translation>Начальное - Текущее</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/tools/modellegenditems.cpp" line="6"/>
         <source>maximum</source>
-        <translation type="unfinished"></translation>
+        <translation>максимум</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/tools/modellegenditems.cpp" line="6"/>
         <source>minimum</source>
-        <translation type="unfinished"></translation>
+        <translation>минимум</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/tools/modellegenditems.cpp" line="6"/>
         <source>max - min</source>
-        <translation type="unfinished"></translation>
+        <translation>макс - мин</translation>
     </message>
 </context>
 <context>
@@ -550,7 +611,7 @@
     <message>
         <location filename="../graphics_lib/src/spectrReader/modelonewave.cpp" line="9"/>
         <source>Amplitude</source>
-        <translation>Амплитуда </translation>
+        <translation>Амплитуда</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/spectrReader/modelonewave.cpp" line="10"/>
@@ -563,27 +624,27 @@
     <message>
         <location filename="../graphics_lib/src/tools/multicolorselection.cpp" line="30"/>
         <source>Insert color</source>
-        <translation type="unfinished">Добавить цвет</translation>
+        <translation>Добавить цвет</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/tools/multicolorselection.cpp" line="31"/>
         <source>Remove color</source>
-        <translation type="unfinished">Удалить цвет</translation>
+        <translation>Удалить цвет</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/tools/multicolorselection.cpp" line="32"/>
         <source>Calculate</source>
-        <translation type="unfinished">Рассчитать</translation>
+        <translation>Рассчитать</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/tools/multicolorselection.cpp" line="40"/>
         <source>Rainbow</source>
-        <translation type="unfinished">Цвета радуги</translation>
+        <translation>Цвета радуги</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/tools/multicolorselection.cpp" line="41"/>
         <source>HSV</source>
-        <translation type="unfinished">Формат HSV</translation>
+        <translation>Формат HSV</translation>
     </message>
 </context>
 <context>
@@ -596,65 +657,7 @@
     <message>
         <location filename="../graphics_lib/src/spectrReader/onewavewidget.cpp" line="53"/>
         <source>Amplitude</source>
-        <translation>Амплитуда </translation>
-    </message>
-</context>
-<context>
-    <name>SetOfCurves</name>
-    <message>
-        <location filename="../graphics_lib/src/acousticsEditor/setofcurves.cpp" line="86"/>
-        <source>Base</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../graphics_lib/src/acousticsEditor/setofcurves.cpp" line="94"/>
-        <source>Acoustics 1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../graphics_lib/src/acousticsEditor/setofcurves.cpp" line="94"/>
-        <source>Acoustics 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../graphics_lib/src/acousticsEditor/setofcurves.cpp" line="94"/>
-        <source>T1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../graphics_lib/src/acousticsEditor/setofcurves.cpp" line="94"/>
-        <source>T2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../graphics_lib/src/acousticsEditor/setofcurves.cpp" line="94"/>
-        <source>DT</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../graphics_lib/src/acousticsEditor/setofcurves.cpp" line="95"/>
-        <source>Amplitude 1 (ADCU)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../graphics_lib/src/acousticsEditor/setofcurves.cpp" line="95"/>
-        <source>Amplitude 2 (ADCU)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../graphics_lib/src/acousticsEditor/setofcurves.cpp" line="95"/>
-        <source>Amplitude 1 (DB)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../graphics_lib/src/acousticsEditor/setofcurves.cpp" line="96"/>
-        <source>Amplitude 2 (DB)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../graphics_lib/src/acousticsEditor/setofcurves.cpp" line="96"/>
-        <source>Alpha (DB/M)</source>
-        <translation type="unfinished"></translation>
+        <translation>Амплитуда</translation>
     </message>
 </context>
 <context>
@@ -662,22 +665,22 @@
     <message>
         <location filename="../graphics_lib/src/tools/settingsitem.cpp" line="359"/>
         <source>Two color</source>
-        <translation type="unfinished">Два цвета</translation>
+        <translation>Два цвета</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/tools/settingsitem.cpp" line="360"/>
         <source>Multicolor</source>
-        <translation type="unfinished">Мультиколор</translation>
+        <translation>Мультиколор</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/tools/settingsitem.cpp" line="361"/>
         <source>Wave</source>
-        <translation type="unfinished">Волна</translation>
+        <translation>Волна</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/tools/settingsitem.cpp" line="362"/>
         <source>Configure</source>
-        <translation type="unfinished">Настроить</translation>
+        <translation>Настроить</translation>
     </message>
 </context>
 <context>
@@ -710,22 +713,22 @@
     <message>
         <location filename="../graphics_lib/src/tools/settingsitem.cpp" line="145"/>
         <source>Depth offset</source>
-        <translation type="unfinished"></translation>
+        <translation>Сдвиг глубины</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/tools/settingsitem.cpp" line="146"/>
         <source>Time offset</source>
-        <translation type="unfinished"></translation>
+        <translation>Сдвиг по времени</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/tools/settingsitem.cpp" line="147"/>
         <source>Depth scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Множитель глубины</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/tools/settingsitem.cpp" line="148"/>
         <source>Time scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Множитель по времени</translation>
     </message>
 </context>
 <context>
@@ -771,17 +774,17 @@
     <message>
         <location filename="../graphics_lib/src/tools/settingsitem.cpp" line="301"/>
         <source>Multicolor</source>
-        <translation type="unfinished">Мультиколор</translation>
+        <translation>Мультиколор</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/tools/settingsitem.cpp" line="302"/>
         <source>Wave</source>
-        <translation type="unfinished">Волна</translation>
+        <translation>Волна</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/tools/settingsitem.cpp" line="303"/>
         <source>Configure</source>
-        <translation type="unfinished">Настроить</translation>
+        <translation>Настроить</translation>
     </message>
 </context>
 <context>
@@ -799,7 +802,7 @@
     <message>
         <location filename="../graphics_lib/src/spectrReader/spectrreader.cpp" line="251"/>
         <source>download</source>
-        <translation type="unfinished">загрузка</translation>
+        <translation>загрузка</translation>
     </message>
 </context>
 <context>
@@ -815,7 +818,7 @@
     <message>
         <location filename="../graphics_lib/src/items/twodimensionalarrayitem.cpp" line="29"/>
         <source>downloads</source>
-        <translation type="unfinished">Загрузка</translation>
+        <translation>Загрузка</translation>
     </message>
 </context>
 <context>
@@ -839,7 +842,7 @@
         <location filename="../graphics_lib/src/verticaltrack.cpp" line="39"/>
         <location filename="../graphics_lib/src/verticaltrack.cpp" line="49"/>
         <source>&amp;Curve shift</source>
-        <translation type="unfinished">Сдвинуть</translation>
+        <translation>Сдвинуть</translation>
     </message>
     <message>
         <location filename="../graphics_lib/src/verticaltrack.cpp" line="42"/>
@@ -877,39 +880,31 @@
         <translation>Сохранить картинку</translation>
     </message>
     <message>
-        <location filename="../graphics_lib/src/verticaltrack.cpp" line="739"/>
+        <location filename="../graphics_lib/src/verticaltrack.cpp" line="722"/>
         <source>warning</source>
-        <translation type="unfinished">Предупреждение</translation>
+        <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="../graphics_lib/src/verticaltrack.cpp" line="739"/>
+        <location filename="../graphics_lib/src/verticaltrack.cpp" line="722"/>
         <source>switch the rendering mode to depth</source>
-        <translation type="unfinished">Выберите отрисовку по глубине</translation>
+        <translation>Выберите отрисовку по глубине</translation>
     </message>
 </context>
 <context>
     <name>WidgetSelectWaveSegment</name>
     <message>
-        <location filename="../graphics_lib/src/acousticsEditor/widgetselectwavesegment.cpp" line="50"/>
-        <location filename="../graphics_lib/src/acousticsEditor/widgetselectwavesegment.cpp" line="56"/>
         <source>Lines Hz</source>
-        <translation type="unfinished">Частота Hz</translation>
+        <translation type="obsolete">Частота Hz</translation>
     </message>
     <message>
-        <location filename="../graphics_lib/src/acousticsEditor/widgetselectwavesegment.cpp" line="63"/>
-        <location filename="../graphics_lib/src/acousticsEditor/widgetselectwavesegment.cpp" line="69"/>
+        <location filename="../graphics_lib/src/acousticsEditor/widgetselectwavesegment.cpp" line="52"/>
+        <source>mkSec</source>
+        <translation>мкС</translation>
+    </message>
+    <message>
+        <location filename="../graphics_lib/src/acousticsEditor/widgetselectwavesegment.cpp" line="59"/>
         <source>Amplitude</source>
-        <translation type="unfinished">Амплитуда</translation>
-    </message>
-    <message>
-        <location filename="../graphics_lib/src/acousticsEditor/widgetselectwavesegment.cpp" line="73"/>
-        <source>Acu 1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../graphics_lib/src/acousticsEditor/widgetselectwavesegment.cpp" line="74"/>
-        <source>Acu 2</source>
-        <translation></translation>
+        <translation>Амплитуда</translation>
     </message>
 </context>
 </TS>

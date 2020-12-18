@@ -113,6 +113,7 @@ AItem *ItemInfoCreater::CreateItemInfo(ICurve *curve){
             QString f_valueRange = QString::number(curve->minimum()) + ".." + QString::number(curve->maximum());
             curve->desc()->setParam("val_range",f_valueRange);
         }
+        f_acuItem->setShowMode(0);
         calculateColorAcuStandart(f_acuItem,curve);
         f_acuItem->setBrushColor(colors[qrand() % 4]);
         f_acuItem->setTransparentColor(colors[qrand() % 4]);

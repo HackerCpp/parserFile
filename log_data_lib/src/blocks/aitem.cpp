@@ -1,4 +1,8 @@
 #include "aitem.h"
+#include "LineItem.h"
+#include "AcuItem.h"
+#include "markItem.h"
+#include "specItem.h"
 
 AItem::AItem(){
     m_numberOfTrack = 1;
@@ -89,5 +93,32 @@ void AItem::setName(QString name, QString visible){
 void AItem::setVisible(VisibleView what,bool value){
     if(what > VisibleView::VIEW_NUM && what < VisibleView::MAXIMIM)
         m_visible[what] = value;
+}
+
+AItem *AItem::itemCreater(const AItem &item){
+    AItem &f_item = const_cast<AItem &>(item);
+    AItem *f_returnItem = nullptr;
+    TypeItem f_type = f_item.type();
+    switch (f_type){
+        case LINE:{
+            f_returnItem = new LineItem(dynamic_cast<LineItem &>(f_item));
+            break;
+        }
+        case ACU:{
+            f_returnItem = new AcuItem(dynamic_cast<AcuItem &>(f_item));
+            break;
+        }
+        case MARK:{
+            f_returnItem = new markItem(dynamic_cast<markItem &>(f_item));
+            break;
+        }
+        case SPEC:{
+            f_returnItem = new SpecItem(dynamic_cast<SpecItem &>(f_item));
+            break;
+        }
+        default:
+            break;
+    }
+    return f_returnItem;
 }
 

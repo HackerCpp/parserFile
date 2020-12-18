@@ -20,10 +20,10 @@ public:
     DisplayingAcoustics(DataCountingAcoustics *dataCounting);
     ~DisplayingAcoustics(){}
 
-    QPair<int,int> leftAndRightBandAcuOne(){return m_widgetSelectingWaveSegment->leftAndRightBandAcuOne();}
-    QPair<int,int> leftAndRightBandAcuTwo(){return m_widgetSelectingWaveSegment->leftAndRightBandAcuTwo();}
-    qreal ampAcuOne(){return m_widgetSelectingWaveSegment->ampAcuOne();}
-    qreal ampAcuTwo(){return m_widgetSelectingWaveSegment->ampAcuTwo();}
+    //QPair<int,int> leftAndRightBandAcuOne(){return m_widgetSelectingWaveSegment->leftAndRightBandAcuOne();}
+    //QPair<int,int> leftAndRightBandAcuTwo(){return m_widgetSelectingWaveSegment->leftAndRightBandAcuTwo();}
+    //qreal ampAcuOne(){return m_widgetSelectingWaveSegment->ampAcuOne();}
+    //qreal ampAcuTwo(){return m_widgetSelectingWaveSegment->ampAcuTwo();}
     int currentWidth(){return m_sliderWidth->value();}
 
 

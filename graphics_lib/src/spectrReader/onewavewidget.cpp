@@ -38,7 +38,9 @@ OneWaveWidget::OneWaveWidget(AGraphicItem *item)
     m_sliderFrequency->setSpan(m_sliderFrequency->minimum(),m_sliderFrequency->maximum());
 
     m_vLayout = new QVBoxLayout;
+    m_vLayout->setMargin(0);
     m_graphicGridLayout = new QGridLayout();
+    m_graphicGridLayout->setMargin(0);
     m_graphicsWidget = new QWidget();
 
     xAxis = new QValueAxis;

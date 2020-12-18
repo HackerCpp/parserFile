@@ -1,137 +1,111 @@
 #include "widgetselectwavesegment.h"
-#include "vacuitem.h"
 
-WidgetSelectWaveSegment::WidgetSelectWaveSegment(DataCountingAcoustics *dataAcu)
-    : m_dataAcu(dataAcu){
+
+WidgetSelectWaveSegment::WidgetSelectWaveSegment(QVector<VAcuItem *> acuItems)
+    :m_acuItems(acuItems){
     m_hSplitter = new QSplitter;
     m_sliderAmplitude = new QxtSpanSlider(Qt::Vertical);
-    m_chartViewOne = new ChartViewSelectSegment(this);
-    m_chartViewTwo = new ChartViewSelectSegment(this);
-    m_oneSeries = new QLineSeries(this);
-    m_twoSeries = new QLineSeries(this);
-    m_chartViewOne->installEventFilter(this);
-    m_chartViewTwo->installEventFilter(this);
+    m_chartViews = new QVector<ChartViewSelectSegment *>;
+    m_series = new QVector<QLineSeries *>;
+    m_sliderMicroSec = new QVector<QxtSpanSlider *>;
 
-    m_chartViewOne->chart()->setTheme(QChart::ChartThemeDark);
-    m_chartViewTwo->chart()->setTheme(QChart::ChartThemeDark);
-    VAcuItem *f_acuItem = nullptr;
-    if(m_dataAcu->item(DataCountingAcoustics::ACU_ONE)){
-        f_acuItem = dynamic_cast<VAcuItem *>(m_dataAcu->item(DataCountingAcoustics::ACU_ONE));
-    }
-    else if(m_dataAcu->item(DataCountingAcoustics::ACU_TWO)){
-        f_acuItem = dynamic_cast<VAcuItem *>(m_dataAcu->item(DataCountingAcoustics::ACU_TWO));
-    }
-    if(!f_acuItem)
-        return;
+    m_vLayout = new QVBoxLayout;
+    m_vLayout->setMargin(0);
 
-    QString valueRange = f_acuItem->curve()->desc()->param("val_range");
+    m_graphicsWidgets = new QVector<QWidget *>;
+    m_vLayouts = new QVector<QVBoxLayout *>;
+
+    xAxis = new QVector<QValueAxis *>;
+    yAxis = new QVector<QValueAxis *>;
+
+    m_hSplitter->addWidget(m_sliderAmplitude);
+
+    QString valueRange = m_acuItems.last()->curve()->desc()->param("val_range");
     int f_minimum = valueRange.left(valueRange.indexOf("..")).toDouble();
     int f_maximum = valueRange.mid(valueRange.indexOf("..") + 2).toDouble();
     m_sliderAmplitude->setRange(f_minimum,f_maximum);
     m_sliderAmplitude->setSpan(m_sliderAmplitude->minimum(),m_sliderAmplitude->maximum());
 
-    m_sliderFrequencyOne = new QxtSpanSlider(Qt::Horizontal);
-    m_sliderFrequencyTwo = new QxtSpanSlider(Qt::Horizontal);
-    qreal f_dataStep  = f_acuItem->dataStep();
-
-    m_sliderFrequencyOne->setRange(-1,f_acuItem->curve()->sizeOffset() * f_dataStep + 1);
-    m_sliderFrequencyOne->setSpan(m_sliderFrequencyOne->minimum(),m_sliderFrequencyOne->maximum());
-    m_sliderFrequencyTwo->setRange(-1,f_acuItem->curve()->sizeOffset() * f_dataStep + 1);
-    m_sliderFrequencyTwo->setSpan(m_sliderFrequencyTwo->minimum(),m_sliderFrequencyTwo->maximum());
-
-    m_vLayout = new QVBoxLayout;
-    m_graphicsWidgetOne = new QWidget();
-    m_graphicsWidgetTwo = new QWidget();
-    m_vLayoutOne = QPointer<QVBoxLayout>(new QVBoxLayout);
-    m_vLayoutTwo = QPointer<QVBoxLayout>(new QVBoxLayout);
-
-    xAxisOne = new QValueAxis;
-    xAxisOne->setRange(m_sliderFrequencyOne->minimum(), m_sliderFrequencyOne->maximum());
-    xAxisOne->setTitleText(tr("Lines Hz"));
-    xAxisOne->setTitleBrush(Qt::magenta);
-    xAxisOne->setLabelsColor(Qt::magenta);
-    xAxisOne->setTickCount(10);
-    xAxisTwo = new QValueAxis;
-    xAxisTwo->setRange(m_sliderFrequencyTwo->minimum(), m_sliderFrequencyTwo->maximum());
-    xAxisTwo->setTitleText(tr("Lines Hz"));
-    xAxisTwo->setTitleBrush(Qt::magenta);
-    xAxisTwo->setLabelsColor(Qt::magenta);
-    xAxisTwo->setTickCount(10);
-
-    yAxisOne = new QValueAxis;
-    yAxisOne->setRange(m_sliderAmplitude->minimum(), m_sliderAmplitude->maximum());
-    yAxisOne->setTitleText(tr("Amplitude"));
-    yAxisOne->setTitleBrush(Qt::yellow);
-    yAxisOne->setLabelsColor(Qt::yellow);
-
-    yAxisTwo = new QValueAxis;
-    yAxisTwo->setRange(m_sliderAmplitude->minimum(), m_sliderAmplitude->maximum());
-    yAxisTwo->setTitleText(tr("Amplitude"));
-    yAxisTwo->setTitleBrush(Qt::yellow);
-    yAxisTwo->setLabelsColor(Qt::yellow);
-
-    m_oneSeries->setName(tr("Acu 1"));
-    m_twoSeries->setName(tr("Acu 2"));
-    m_oneSeries->setPen(QPen(Qt::red,2));
-    m_twoSeries->setPen(QPen(Qt::red,2));
 
 
+    foreach(auto acuItem,m_acuItems){
+        m_chartViews->push_back(new ChartViewSelectSegment(this));
+        m_chartViews->last()->installEventFilter(this);
+        m_chartViews->last()->chart()->setTheme(QChart::ChartThemeDark);
+        //m_chartViews->last()->chart()->setTheme(QChart::ChartThemeLight);
+        m_series->push_back(new QLineSeries(this));
 
-    m_chartViewOne->chart()->addSeries(m_oneSeries);
-    m_chartViewOne->chart()->setAxisX(xAxisOne, m_oneSeries);
-    m_chartViewOne->chart()->setAxisY(yAxisOne, m_oneSeries);
+        m_series->last()->setName(acuItem->curve()->mnemonic());
+        AcuItem *f_itemInfo = dynamic_cast<AcuItem *>(acuItem->itemInfo());
+        if(f_itemInfo)
+            m_series->last()->setPen(QPen(QColor(f_itemInfo->transparentColor()),2));
+        else
+            m_series->last()->setPen(QPen(Qt::green,2));
 
-    m_chartViewTwo->chart()->addSeries(m_twoSeries);
-    m_chartViewTwo->chart()->setAxisX(xAxisTwo, m_twoSeries);
-    m_chartViewTwo->chart()->setAxisY(yAxisTwo, m_twoSeries);
+        m_sliderMicroSec->push_back(new QxtSpanSlider(Qt::Horizontal));
+        qreal f_dataStep  = acuItem->dataStep();
+        m_sliderMicroSec->last()->setRange(-10,acuItem->curve()->sizeOffset() * f_dataStep + 10);
+        m_sliderMicroSec->last()->setSpan(m_sliderMicroSec->last()->minimum(),m_sliderMicroSec->last()->maximum());
 
-    m_vLayoutOne->addWidget(m_chartViewOne);
-    m_vLayoutOne->addWidget(m_sliderFrequencyOne);
-    m_vLayoutTwo->addWidget(m_chartViewTwo);
-    m_vLayoutTwo->addWidget(m_sliderFrequencyTwo);
-    m_graphicsWidgetOne->setLayout(m_vLayoutOne);
-    m_graphicsWidgetTwo->setLayout(m_vLayoutTwo);
+        m_graphicsWidgets->push_back(new QWidget());
+        m_vLayouts->push_back(new QVBoxLayout);
+        m_vLayouts->last()->setMargin(0);
 
-    m_hSplitter->addWidget(m_sliderAmplitude);
-    m_hSplitter->addWidget(m_graphicsWidgetOne);
-    m_hSplitter->addWidget(m_graphicsWidgetTwo);
+        QValueAxis *f_xAxis = new QValueAxis;
+        xAxis->push_back(f_xAxis);
+        xAxis->last()->setRange(m_sliderMicroSec->last()->minimum(),m_sliderMicroSec->last()->maximum());
+        xAxis->last()->setTitleText(tr("mkSec"));
+        xAxis->last()->setTitleBrush(Qt::magenta);
+        xAxis->last()->setLabelsColor(Qt::magenta);
+        xAxis->last()->setTickCount(6);
 
+        yAxis->push_back(new QValueAxis);
+        yAxis->last()->setRange(m_sliderAmplitude->minimum(), m_sliderAmplitude->maximum());
+        yAxis->last()->setTitleText(tr("Amplitude"));
+        yAxis->last()->setTitleBrush(Qt::yellow);
+        yAxis->last()->setLabelsColor(Qt::yellow);
+        yAxis->last()->setTickCount(10);
+
+        m_chartViews->last()->chart()->addSeries(m_series->last());
+        m_chartViews->last()->chart()->setAxisX(xAxis->last(), m_series->last());
+        m_chartViews->last()->chart()->setAxisY(yAxis->last(), m_series->last());
+
+        m_vLayouts->last()->addWidget(m_chartViews->last());
+        m_vLayouts->last()->addWidget(m_sliderMicroSec->last());
+        m_graphicsWidgets->last()->setLayout(m_vLayouts->last());
+        m_hSplitter->addWidget(m_graphicsWidgets->last());
+
+        connect(m_sliderMicroSec->last(),&QxtSpanSlider::spanChanged,[=](int min,int max){f_xAxis->setRange(min,max);chartResize();});
+    }
 
     m_vLayout->addWidget(m_hSplitter);
-
     setLayout(m_vLayout);
 
     connect(m_sliderAmplitude,&QxtSpanSlider::spanChanged,this,&WidgetSelectWaveSegment::changeVerticalCoord);
-    connect(m_sliderFrequencyOne,&QxtSpanSlider::spanChanged,this,&WidgetSelectWaveSegment::changeHorizontalCoordOne);
-    connect(m_sliderFrequencyTwo,&QxtSpanSlider::spanChanged,this,&WidgetSelectWaveSegment::changeHorizontalCoordTwo);
 }
 
 bool WidgetSelectWaveSegment::eventFilter(QObject *object, QEvent *event)
 {
-    if (object == m_chartViewOne || object == m_chartViewTwo && event->type() == QEvent::Resize) {
-            chartResize();
-            return false;
+    foreach(auto chart,*m_chartViews){
+        if (object == chart && event->type() == QEvent::Resize) {
+                chartResize();
+                return false;
+        }
     }
+
     return false;
 }
 
 void WidgetSelectWaveSegment::update(QPoint scenePoint){ //Добавляет точки из SpectrItem по координатам на сцене
     bool f_flag = false;
-    VAcuItem *f_acu = dynamic_cast<VAcuItem *>(m_dataAcu->item(DataCountingAcoustics::ACU_ONE));
-    if(f_acu){
-        m_oneSeries->replace(f_acu->oneWave(scenePoint.y(),&f_flag));
-    }
-    f_acu = dynamic_cast<VAcuItem *>(m_dataAcu->item(DataCountingAcoustics::ACU_TWO));
-    if(f_acu){
-        m_twoSeries->replace(f_acu->oneWave(scenePoint.y(),&f_flag));
+    for(int i = 0;i < m_acuItems.size();++i){
+        m_series->operator[](i)->replace(m_acuItems[i]->oneWave(scenePoint.y(),&f_flag));
     }
 }
 
 void WidgetSelectWaveSegment::chartResize(){
-    if(m_chartViewOne)
-        m_chartViewOne->resize();
-    if(m_chartViewTwo)
-        m_chartViewTwo->resize();
+    foreach(auto chart,*m_chartViews)
+        chart->resize();
 }
 
 void WidgetSelectWaveSegment::wheelEvent(QWheelEvent *event){
@@ -169,26 +143,21 @@ QPair<int,int> leftAndRightBand(ChartViewSelectSegment *m_chartView,QLineSeries 
     return QPair<int,int>(f_leftBand,f_rightBand);
 }
 
-QPair<int,int> WidgetSelectWaveSegment::leftAndRightBandAcuOne(){
-    return leftAndRightBand(m_chartViewOne,m_oneSeries);
+QPair<int,int> WidgetSelectWaveSegment::leftAndRightBandAcu(int index){
+    if(index >= m_chartViews->size())
+        return QPair<int,int>(0,0);
+    return leftAndRightBand(m_chartViews->operator[](index),m_series->operator[](index));
 }
 
-QPair<int,int> WidgetSelectWaveSegment::leftAndRightBandAcuTwo(){
-    return leftAndRightBand(m_chartViewTwo,m_twoSeries);
+qreal WidgetSelectWaveSegment::ampAcu(int index){
+    if(index >= m_chartViews->size())
+        return 0;
+    return m_chartViews->operator[](index)->ampLine();
 }
 
 void WidgetSelectWaveSegment::changeVerticalCoord(int downValue ,int upValue){
-    yAxisOne->setRange(downValue, upValue);
-    yAxisTwo->setRange(downValue, upValue);
-    chartResize();
-}
-
-void WidgetSelectWaveSegment::changeHorizontalCoordOne(int downValue ,int upValue){
-    xAxisOne->setRange(downValue,upValue);
-    chartResize();
-}
-
-void WidgetSelectWaveSegment::changeHorizontalCoordTwo(int downValue ,int upValue){
-    xAxisTwo->setRange(downValue,upValue);
+    foreach(auto y,*yAxis){
+        y->setRange(downValue, upValue);
+    }
     chartResize();
 }

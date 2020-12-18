@@ -10,13 +10,22 @@ QMainWindow {
 
 
 QMenuBar {
-  background-color:#2d2d30;
+  /*background-color:#2d2d30;
   text-transform: uppercase;
+  color:#f1f1f1;*/
+  border-style:none;
+  border-bottom:2px solid #007acc;
   color:#f1f1f1;
+  background:#3e3e42;
+  padding:1px;
 }
 
 QMenuBar::item:selected{
-  background-color:#3e3e40;
+  /*background-color:#3e3e40;*/
+  border-style:none;
+  border-bottom:1px solid #11f743;
+  color:#f1f1f1;
+  padding:5px;
 }
 
 QMenu {
@@ -46,7 +55,7 @@ QTabBar::tab {
   background-color:#2d2d30;
   border: 1px solid transparent;
   color:#f1f1f1;
-  padding:5px;
+  padding: 2px;
 
 }
 
@@ -60,7 +69,7 @@ QTabBar::tab:selected{
 }
 
 QTabWidget::pane {
-  border-top: 2px solid #007acc;
+  border-top: 1px solid #007acc;
   background-color:#2d2d30;
 }
 
@@ -100,20 +109,32 @@ QComboBox:drop-down {
 
 
 QScrollBar{
-  background:#3e3e42;
+  background:#007acc;
   border-style:none;
+
 }
 
-QScrollbar::horizontal{
-     height: 15px;
+/*QScrollbar:horizontal{
+
      margin: 0px 20px 0 20px;
+}*/
+QScrollBar:horizontal {
+    height: 10px;
+    margin: 0px 10px 0px 10px;
+}
+QScrollBar:vertical {
+    width: 10px;
+    margin: 10px 0px 10px 0px;
+}
+
+QScrollBar::handle:pressed {
+    background: #11f743;
 }
 
 QScrollBar:handle {
   border-style:none;
-  background:#9d9d9d;
+  background:#007acc;
   margin: inherited;
-
 }
 
 QPushButton {
@@ -180,7 +201,10 @@ QToolBox::tab:selected {
 
 QWidget{
   background:#2d2d30;
+  background-origin: #2d2d30;
+  background-clip: #2d2d30;
   color:#f1f1f1;
+  font: 12pt/10pt sans-serif;
 }
 
 QHeaderView::section{

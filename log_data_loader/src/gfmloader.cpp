@@ -77,9 +77,29 @@ void GFMLoader::mergeIdenticalBlocks(){
     if(!m_blocks || !m_blocks->size()){
         return;
     }
+    FormsBlock *f_formsBlock = nullptr;
+    FormsBlock *f_formsSrc = nullptr;
+    foreach(auto block,*m_blocks){
+        if( block->name() == IBlock::FORMS_BLOCK){
+            if(f_formsBlock == nullptr){
+                f_formsBlock = dynamic_cast<FormsBlock*>(block);
+            }
+            else{
+                f_formsSrc = dynamic_cast<FormsBlock*>(block);
+                if(!f_formsSrc | !f_formsBlock )
+                    continue;
+                foreach(auto board,*f_formsSrc->boards()){
+                    f_formsBlock->addBoard(board);
+                }
+                m_blocks->removeOne(block);
+                delete block;
+            }
+        }
+    }
     for(int i = 0; i <  m_blocks->size();++i){
         IBlock *blockDst = m_blocks->at(i);
-        DataBlock * f_dataBlockDst = dynamic_cast<DataBlock*>(blockDst);
+        DataBlock *f_dataBlockDst = dynamic_cast<DataBlock*>(blockDst);
+
         if(!f_dataBlockDst)
             continue;
 

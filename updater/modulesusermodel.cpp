@@ -1,4 +1,5 @@
 #include "modulesusermodel.h"
+#include "QDebug"
 
 
 ModulesUserModel::ModulesUserModel()
@@ -85,8 +86,10 @@ bool ModulesUserModel::setData(const QModelIndex &index, const QVariant &value, 
         }
         if (dynamic_cast<Module*>(static_cast<QObject*>(index.internalPointer()))){
             Module *f_module = static_cast<Module *>(index.internalPointer());
-            if(!f_column)
-                return f_module->m_isInstalled = value.toBool();
+            if(!f_column){
+                f_module->m_isInstalled = !f_module->m_isInstalled;
+                return true;
+            }
         }
     }
 }
@@ -96,7 +99,7 @@ Qt::ItemFlags ModulesUserModel::flags(const QModelIndex &index) const {
         return Qt::NoItemFlags;
     int f_column = index.column();
     if(!f_column)
-        return Qt::ItemIsEnabled  | Qt::ItemIsUserCheckable ;
+        return Qt::ItemIsEnabled  | Qt::ItemIsUserCheckable;
     else
         return Qt::ItemIsEnabled;
 }

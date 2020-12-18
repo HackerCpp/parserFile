@@ -21,7 +21,7 @@ protected:
 
 public:
     DrawingThroughADisk();
-    virtual ~DrawingThroughADisk()override;
+    virtual ~DrawingThroughADisk()override{}
 
     virtual void loadDrawingParam(int width){Q_UNUSED(width)}
     virtual void drawOnTheDisk(){}

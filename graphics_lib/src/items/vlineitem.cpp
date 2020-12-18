@@ -28,10 +28,11 @@ VLineItem::VLineItem(const VLineItem &other)
 
 VLineItem::Transition VLineItem::amountSaturation(uint curentIndex,int width){
     if(width && curentIndex < static_cast<uint>(m_curve->size()) && curentIndex > 0){
+
         qreal f_cur = ((m_curve->data(curentIndex) * m_scale) + m_offsetPix) / width;
         qreal f_prev = ((m_curve->data(curentIndex - 1) * m_scale) + m_offsetPix) / width;
-        f_cur += (f_cur > 0 ? 1 : -1);
-        f_prev += (f_prev > 0 ? 1 : -1);
+        f_cur += (f_cur >= 0 ? 1 : -1);
+        f_prev += (f_prev >= 0 ? 1 : -1);
         if((int)f_cur > (int)f_prev)
             return RIGHT_TRANSITION;
         else if((int)f_cur < (int)f_prev)
@@ -189,7 +190,7 @@ qreal VLineItem::pixelX(int index,int width){
     if(index < m_curve->size()){
         qreal f_value = fmod(m_curve->data(index) * m_scale + m_offsetPix,width);
         //return f_value;
-        return f_value > 0 ? f_value : width + f_value;
+        return f_value >= 0 ? f_value : width + f_value;
     }
     else
         return 0;

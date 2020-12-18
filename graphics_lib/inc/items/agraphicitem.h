@@ -29,7 +29,8 @@ public:
     AGraphicItem(ICurve *curve,BoardForTrack *board);
     AGraphicItem(CustomObject *drawObject,BoardForTrack *board);
     AGraphicItem(const AGraphicItem &other);
-    virtual ~AGraphicItem();
+    virtual ~AGraphicItem(){}
+    virtual void deleteLater(){}
 
     qreal topValue();
     qreal bottomValue();

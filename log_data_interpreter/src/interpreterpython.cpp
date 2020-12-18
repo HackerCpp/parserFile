@@ -15,17 +15,16 @@ InterpreterPython::InterpreterPython()
 : m_pythonEditor(nullptr){
     PythonQt::init(PythonQt::IgnoreSiteModule | PythonQt::RedirectStdOut,"LogData");
     PythonQt_QtAll::init();
+
     PythonQt::self()->registerCPPClass("ICurve","","Curves",PythonQtCreateObject<WrapperIcurvePython>);
 
-
-    static PythonQtObjectPtr f_pt = PythonQt::self()->getMainModule();
-    m_mainContext = &f_pt;
+    m_mainContext = new PythonQtObjectPtr(PythonQt::self()->createUniqueModule());
     m_mainContext->evalScript("from LogData.Curves import*");
     m_console = new PythonQtScriptingConsole(NULL, *m_mainContext);
 }
 
 InterpreterPython::~InterpreterPython(){
-    if(m_mainContext){delete m_mainContext;m_mainContext = nullptr;}
+    //if(m_mainContext){delete m_mainContext;m_mainContext = nullptr;}
     if(m_console){delete m_console;m_console = nullptr;}
 }
 

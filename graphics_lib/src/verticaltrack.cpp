@@ -68,6 +68,8 @@ VerticalTrack::VerticalTrack(ATrack *track,BoardForTrack *board)
 }
 
 VerticalTrack::~VerticalTrack(){
+    disconnect();
+    blockSignals(true);
     deleteAllPictures();
     if(m_nameTrack){delete m_nameTrack; m_nameTrack = nullptr;}
     //if(m_selectingArea){delete m_selectingArea; m_selectingArea = nullptr;} Удаляется при удалении сцены
@@ -88,8 +90,8 @@ void VerticalTrack::resize(){
 void VerticalTrack::deleteAllPictures(){
     m_endRedraw = true;
     m_needToRedraw = false;
-    wait();
     //terminate();
+    wait();
     if(m_curentPixmap){delete m_curentPixmap;m_curentPixmap = nullptr;}
     if(m_doublePixMap){delete m_doublePixMap;m_doublePixMap = nullptr;}
     if(m_curentHeader){delete m_curentHeader;m_curentHeader = nullptr;}
@@ -181,22 +183,18 @@ void VerticalTrack::setActiveSelectingArea(){
 
 void VerticalTrack::startDrag(QPointF point){
     QMimeData *f_mimeData = nullptr;
-
     QPoint f_pointInHeaderPicture = QPoint(point.x() - (m_track->begin() * m_board->pixelPerMm()),point.y() - m_visibilitySquare.y() - m_board->positionHeader());
     QImage *f_image = new QImage(200,100,QImage::Format_ARGB32);
     bool flag = false;
     int position = 0;
-    //QTextStream *f_stream = new QTextStream()
     foreach(auto grItem, *m_items){
         if(grItem->isClickHeaderArea(f_pointInHeaderPicture)){
             f_image->fill(0x0);
             grItem->drawHeader(new QPainter(f_image),position,&flag);
             f_mimeData = new QMimeData;
-            //f_mimeData->setText(QString::number(reinterpret_cast<long long>(grItem)));
             f_mimeData->setData("item",QString::number(reinterpret_cast<long long>(grItem)).toLocal8Bit());
             f_mimeData->setData("items",QString::number(reinterpret_cast<long long>(m_items)).toLocal8Bit());
             grItem->itemInfo()->setVisible(AItem::BOARD_GRAPH_VIEW,false);
-            //m_items->removeOne(grItem);
             break;
         }
     }

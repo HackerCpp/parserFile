@@ -12,23 +12,6 @@ DrawingThroughADisk::DrawingThroughADisk(){
     connect(this,&QThread::finished,this,&DrawingThroughADisk::endThreadHandler);
 }
 
-DrawingThroughADisk::~DrawingThroughADisk(){
-    m_saversMoment = false;
-    disconnect();
-    blockSignals(true);
-    if(isRunning()){
-        m_isRedraw = false;
-        m_isEndThread = true;
-        wait();
-    }
-    foreach(auto path,m_picturePath){
-        if(!QFile::exists(path) )
-            continue;
-        QFile(path).remove();
-    }
-    m_picturePath.clear();
-}
-
 void DrawingThroughADisk::endThreadHandler(){
     if(m_isRedraw){
         m_isRedraw = false;

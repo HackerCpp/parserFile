@@ -16,6 +16,7 @@ GraphicWidget::GraphicWidget(QWidget *parent)
 
     m_mainVLayout->addWidget(m_controlPanel);
     m_mainVLayout->addWidget(m_tabWidget);
+    m_mainVLayout->setMargin(0);
     setLayout(m_mainVLayout);
     connect(m_controlPanel,&GraphicsControlPanel::changedDrawType,this,&GraphicWidget::changedDrawType);
     connect(m_controlPanel,&GraphicsControlPanel::changedFormatTime,this,&GraphicWidget::changedFormatTime);

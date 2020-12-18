@@ -24,6 +24,7 @@ public:
     VLineItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board);
     VLineItem(const VLineItem &other);
     ~VLineItem()override{}
+    void deleteLater()override{delete this;}
 
     void updateParam(int pictureWidth)override;
 

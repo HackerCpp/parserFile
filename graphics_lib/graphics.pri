@@ -10,15 +10,10 @@ LIBS += ../build/release/LogData.lib
 
 SOURCES += \
     $$PWD/inc/canvas.cpp \
+    $$PWD/inc/tools/basestandartwidget.cpp \
     $$PWD/inc/tools/curveshifttool.cpp \
     $$PWD/inc/tools/specfiledialog.cpp \
-    $$PWD/src/acousticsEditor/acuscene.cpp \
-    $$PWD/src/acousticsEditor/acuview.cpp \
     $$PWD/src/acousticsEditor/chartviewselectsegment.cpp \
-    $$PWD/src/acousticsEditor/countingacousticsitem.cpp \
-    $$PWD/src/acousticsEditor/datacountingacoustics.cpp \
-    $$PWD/src/acousticsEditor/displayingacoustics.cpp \
-    $$PWD/src/acousticsEditor/setofcurves.cpp \
     $$PWD/src/acousticsEditor/widgetselectwavesegment.cpp \
     $$PWD/src/acousticsEditor/acousticsEditor.cpp \
     $$PWD/src/items/twodimensionalarrayitem.cpp \
@@ -71,16 +66,12 @@ SOURCES += \
 
 HEADERS += \
     $$PWD/inc/acousticsEditor/acousticsEditor.h \
-    $$PWD/inc/acousticsEditor/acuscene.h \
-    $$PWD/inc/acousticsEditor/acuview.h \
     $$PWD/inc/acousticsEditor/chartviewselectsegment.h \
-    $$PWD/inc/acousticsEditor/countingacousticsitem.h \
-    $$PWD/inc/acousticsEditor/datacountingacoustics.h \
     $$PWD/inc/acousticsEditor/displayingacoustics.h \
-    $$PWD/inc/acousticsEditor/setofcurves.h \
     $$PWD/inc/acousticsEditor/widgetselectwavesegment.h \
     $$PWD/inc/canvas.h \
     $$PWD/inc/items/twodimensionalarrayitem.h \
+    $$PWD/inc/tools/basestandartwidget.h \
     $$PWD/inc/tools/curveshifttool.h \
     $$PWD/inc/tools/itemslegendview.h \
     $$PWD/inc/tools/customprogressbar.h \

@@ -11,7 +11,7 @@
 #include <QXmlStreamWriter>
 #include <customprogressbar.h>
 #include <QStringList>
-
+#include <QResource>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),

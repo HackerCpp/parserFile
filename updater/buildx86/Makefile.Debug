@@ -1787,7 +1787,9 @@ debug\mainwindow.obj: ..\mainwindow.cpp ..\mainwindow.h \
 		C:\Qt\5.15.0\msvc2019\include\QtWidgets\QProgressBar \
 		C:\Qt\5.15.0\msvc2019\include\QtWidgets\qprogressbar.h \
 		C:\Qt\5.15.0\msvc2019\include\QtCore\QCoreApplication \
-		C:\Qt\5.15.0\msvc2019\include\QtCore\QStringList
+		C:\Qt\5.15.0\msvc2019\include\QtCore\QStringList \
+		C:\Qt\5.15.0\msvc2019\include\QtCore\QResource \
+		C:\Qt\5.15.0\msvc2019\include\QtCore\qresource.h
 
 debug\module.obj: ..\module.cpp ..\module.h \
 		C:\Qt\5.15.0\msvc2019\include\QtCore\QString \
@@ -2040,7 +2042,8 @@ debug\modulesusermodel.obj: ..\modulesusermodel.cpp ..\modulesusermodel.h \
 		..\module.h \
 		C:\Qt\5.15.0\msvc2019\include\QtCore\QString \
 		C:\Qt\5.15.0\msvc2019\include\QtCore\QObject \
-		C:\Qt\5.15.0\msvc2019\include\QtCore\QStringList
+		C:\Qt\5.15.0\msvc2019\include\QtCore\QStringList \
+		C:\Qt\5.15.0\msvc2019\include\QtCore\QDebug
 
 debug\projectpathnamewidget.obj: ..\projectpathnamewidget.cpp ..\projectpathnamewidget.h \
 		C:\Qt\5.15.0\msvc2019\include\QtWidgets\QWidget \

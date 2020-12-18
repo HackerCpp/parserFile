@@ -5,6 +5,7 @@
 #include "boardfortrack.h"
 #include <QMap>
 #include "iboard.h"
+#include "basestandartwidget.h"
 
 class AGraphicBoard : public QGraphicsView,public BoardForTrack
 {
@@ -16,6 +17,8 @@ protected:
     QMap<QString,AGraphicItem *> *m_items;
     QMap<QString,ICurve*> *m_curves;
     IBoard *m_boardInfo;
+    QVector<BaseStandartWidget *> *m_standartWidgets;
+    bool m_isStandartWidget;
 
 public:
 
@@ -35,6 +38,7 @@ public:
     virtual void distributionOfItemsBetweenTracks(){}
     void updateItemsParam();
     void openCurveSettings()override;
+    IBoard *boardInfo(){return m_boardInfo;}
 
 protected:
     virtual void mousePressEvent(QMouseEvent *event)override;

@@ -43,9 +43,6 @@ AGraphicTrack::AGraphicTrack(ATrack *track,BoardForTrack *board)
 }
 
 AGraphicTrack::~AGraphicTrack(){
-    m_endRedraw = true;
-    m_needToRedraw = false;
-    wait();
     if(m_items){
         m_items->clear();
         delete m_items;m_items = nullptr;

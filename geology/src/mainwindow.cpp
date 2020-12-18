@@ -31,8 +31,9 @@ MainWindow::MainWindow(QWidget *parent)
     m_logDataView->installEventFilter(this);
     m_logDataView->hide();
 
-    m_mainHorLayout->addWidget(m_menu,100,Qt::AlignTop);
+    m_mainHorLayout->addWidget(m_menu,0,Qt::AlignTop);
     m_mainHorLayout->addWidget(m_logDataView);
+    m_mainHorLayout->setMargin(0);
 
     this->setLayout(m_mainHorLayout);
     m_flagHideMenu = false;
@@ -94,6 +95,38 @@ void MainWindow::openFile(){
         f_logData->setLoader(f_loader);
         f_logData->load();
         m_flagHideMenu = true;
+    }
+}
+
+void MainWindow::addFromFile(){
+    QString f_openPath = m_settings->value("paths/pathOpenFile").toString();
+    QString filePath = QFileDialog().getOpenFileName(this, tr("Open File"),f_openPath,tr("*.forms *.gfm *.las *.geo *.lis"));
+    if(filePath == "")
+        return;
+    m_settings->setValue("paths/pathOpenFile",filePath);
+    FileReader f_file(filePath);
+    ILoaderLogData * f_loader = nullptr;
+    if(f_file.getType() == ".gfm" || f_file.getType() == ".forms"){
+        f_loader = new GFMLoader(filePath);
+    }
+    else if(f_file.getType() == ".las" || f_file.getType() == ".LAS"){
+        f_loader = new LasLoader(filePath);
+    }
+    /*else if(f_file.getType() == ".lis" || f_file.getType() == ".LIS"){
+        f_loader = new LisLoader(filePath);
+    }*/
+    else if(f_file.getType() == ".geo"){
+        f_loader = new GeoLoader(filePath);
+    }
+    else{
+        return;
+    }
+    if(f_loader){
+        ILogData *  f_logData = m_logDataView->curentLogData();
+        if(f_logData){
+            f_logData->setLoader(f_loader);
+            f_logData->load();
+        }
     }
 }
 

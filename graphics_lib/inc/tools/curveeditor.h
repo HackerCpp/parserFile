@@ -9,8 +9,6 @@
 
 class CurveEditor : public BaseSettingsWindow
 {
-    ModelCurveEditor *m_modelCurveEditor;
-    QTableView *m_table;
     BaseCurveReader *m_curveReader;
     QSplitter *m_splitter;
 public:

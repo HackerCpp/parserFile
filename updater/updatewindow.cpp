@@ -36,17 +36,20 @@ bool UpdateWindow::loadArhives(){
 }
 
 void UpdateWindow::createXML(){
-    QFile f_fileCurrent(m_pathWhereToUnpack + projectName + ".xml");
+    //QFile f_fileCurrent(m_pathWhereToUnpack + projectName + ".xml");
+    QFile f_fileCurrent(projectName + "Loaded" + ".xml");
     f_fileCurrent.open(QIODevice::WriteOnly);
     QXmlStreamWriter xmlWriter(&f_fileCurrent);
     xmlWriter.setAutoFormatting(true);
     xmlWriter.writeStartDocument();
     xmlWriter.writeStartElement("project");
     for(int i = 0;i < m_modules.size();++i){
-        xmlWriter.writeStartElement("module");
-        xmlWriter.writeAttribute("name", m_modules.operator[](i)->m_name);
-        xmlWriter.writeAttribute("version", m_modules.operator[](i)->m_currentVersion->version());
-        xmlWriter.writeEndElement();
+        if(m_modules.operator[](i)->m_isInstalled){
+            xmlWriter.writeStartElement("module");
+            xmlWriter.writeAttribute("name", m_modules.operator[](i)->m_name);
+            xmlWriter.writeAttribute("version", m_modules.operator[](i)->m_currentVersion->version());
+            xmlWriter.writeEndElement();
+        }
     }
     xmlWriter.writeEndElement();
     f_fileCurrent.close();
@@ -104,7 +107,8 @@ void UpdateWindow::processingXML(QString filePath){
     }
     if(!QDir().exists(QFileInfo(m_pathWhereToUnpack).path()))
         QDir().mkdir(QFileInfo(m_pathWhereToUnpack).path());
-    QFile f_fileCurrent(m_pathWhereToUnpack + projectName + ".xml");
+    //QFile f_fileCurrent(m_pathWhereToUnpack + projectName + ".xml");
+    QFile f_fileCurrent(projectName + "Loaded" + ".xml");
     if(!f_fileCurrent.open(QIODevice::ReadWrite))
             return;
     QByteArray f_currentXML = f_fileCurrent.readAll();
@@ -134,8 +138,8 @@ void UpdateWindow::processingXML(QString filePath){
 
 void UpdateWindow::processingZIP(QString filePath){
     QString f_fileName = QFileInfo(filePath).fileName();
-    QString f_name = f_fileName.left(f_fileName.indexOf("_"));
-    QString f_version = f_fileName.mid(f_fileName.indexOf("_") + 1).remove(".zip");
+    QString f_name = f_fileName.left(f_fileName.lastIndexOf("_"));
+    QString f_version = f_fileName.mid(f_fileName.lastIndexOf("_") + 1).remove(".zip");
     Unpacker::unpack(filePath,m_pathWhereToUnpack,true);
     for(int i = 0; i < m_modules.size(); ++i){
         if(m_modules.operator[](i)->m_name == f_name){

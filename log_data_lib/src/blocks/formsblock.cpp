@@ -11,6 +11,7 @@ FormsBlock::FormsBlock(const FormsBlock &other){
     foreach(auto board,*other.m_boards){
         m_boards->push_back(new ABoard(*board));
     }
+
 }
 
 FormsBlock::~FormsBlock(){

@@ -21,6 +21,8 @@ class Menu : public QWidget{
 public:
     explicit Menu(QWidget *parent = nullptr);
     ~Menu();
+
+    void changeEvent(QEvent *event);
 signals:
     void applyStyle();
 public slots:

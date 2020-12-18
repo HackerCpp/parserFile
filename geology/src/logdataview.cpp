@@ -15,6 +15,7 @@ LogDataView::LogDataView(QWidget *parent) : QWidget(parent)
     m_splitter->addWidget(m_dataTreeView);
     m_splitter->addWidget(m_graphicWidget);
     m_mainHorLayout->addWidget(m_splitter);
+    m_mainHorLayout->setMargin(0);
 
     this->setLayout(m_mainHorLayout);
 }
@@ -36,6 +37,7 @@ void LogDataView::addLogData(QSharedPointer<ILogData> logData){
 
 void LogDataView::lastDataReady(){
     QSharedPointer<ILogData> f_curentLogData = m_logDataList->last();
+    disconnect(f_curentLogData.data(),&ILogData::ready,this,&LogDataView::lastDataReady);
     if(!f_curentLogData.data()){
         m_logDataList->removeLast();
         return;

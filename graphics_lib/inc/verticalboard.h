@@ -8,6 +8,7 @@
 #include "itemslegendview.h"
 #include "canvas.h"
 
+
 class VerticalBoard : public AGraphicBoard
 {
     Q_OBJECT
@@ -20,6 +21,7 @@ class VerticalBoard : public AGraphicBoard
     QGraphicsLineItem *m_beginLineLegend, *m_currentLineLegend;
     QTimer m_timerLeftClick;
     QPoint m_posLeftClick;
+
 public:
     VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves,DrawSettings *drawSettings);
     VerticalBoard(QMap<QString,ICurve*> *curves,DrawSettings *drawSettings);

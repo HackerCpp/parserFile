@@ -30,12 +30,11 @@ LogData &LogData::operator=(const LogData &logData){
     m_saver = nullptr;
     m_interpreter = nullptr;
     m_blocks = new QList<IBlock *>;
-    ILogData &f_logdata = const_cast<LogData &>(logData);
-    QList<IBlock *> *f_blocks = f_logdata.blocks();
-    foreach(auto block,*f_blocks){
-        m_blocks->push_back(block);
+    m_name = logData.m_name;
+    foreach(auto block,*logData.m_blocks){
+        m_blocks->push_back(IBlock::blockCreater(*block));
     }
-    m_name = f_logdata.name();
+    m_isReady = true;
     return *this;
 }
 

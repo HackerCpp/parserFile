@@ -6,16 +6,18 @@ AGraphicBoard::AGraphicBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves,Dra
     : BoardForTrack(drawSettings),m_curves(curves),m_boardInfo(boardInfo){
     m_items = new QMap<QString,AGraphicItem *>;
     m_minimumSize = 2000;
+
+    m_isStandartWidget = false;
+    m_standartWidgets = new QVector<BaseStandartWidget *>;
 }
 
 AGraphicBoard::~AGraphicBoard(){
-    if(m_items){
-        foreach(auto item,*m_items){
-           if(item){delete item;item = nullptr;}
+    if(m_standartWidgets){
+        for(auto widget : *m_standartWidgets){
+            if(widget){delete widget; widget = nullptr;}
         }
-        delete m_items;m_items = nullptr;
+        delete m_standartWidgets; m_standartWidgets = nullptr;
     }
-
    if(m_curves){m_curves = nullptr;}
     m_boardInfo = nullptr;
 }
@@ -74,6 +76,10 @@ void AGraphicBoard::activate(bool activate){
            f_track->activate(activate);
         }
     }
+    if(m_standartWidgets)
+        for(auto widget : *m_standartWidgets)
+            if(widget)
+                activate ? widget->show() : widget->hide();
     resize();
 }
 

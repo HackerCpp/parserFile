@@ -27,6 +27,8 @@ int main(int argc, char *argv[])
         f_logs.close();
         f_mainWidget = new UpdateWindow(argv[1],argv[2]);
     }
+    //f_mainWidget = new UpdateWindow("http://www.gfm.ru/kedr_files/GMLog05/GMLog05_loader.xml","debug");
     f_mainWidget->show();
+
     return a.exec();
 }

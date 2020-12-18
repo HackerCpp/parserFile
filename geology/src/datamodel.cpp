@@ -455,8 +455,8 @@ QVariant DataModel::data(const QModelIndex &index, int role )const{
         return QVariant();
     }
     else if(role == Qt::FontRole){
-           return QFont("Times", 10, QFont::Bold);
-        //return QVariant();
+           //return QFont("Times", 10, QFont::Bold);
+        return QVariant();
     }
     else
         return QVariant();
