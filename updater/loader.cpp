@@ -5,14 +5,11 @@
 Loader::Loader(QObject *parent) : QObject(parent)
 {
     manager = new QNetworkAccessManager();
-    m_loading.hide();
-    m_loading.setText(tr("loading"));
     connect(manager, &QNetworkAccessManager::finished, this, &Loader::onResult);
 }
 
 void Loader::getData(QString url)
 {
-    m_loading.show();
     m_currentUrl = url;
     QUrl f_url(url); // URL, к которому будем получать данные
     QNetworkRequest request;    // Отправляемый запрос
@@ -25,7 +22,6 @@ void Loader::getData(QString url)
 
 void Loader::onResult(QNetworkReply *reply)
 {
-    m_loading.hide();
     // Если в процесе получения данных произошла ошибка
     if(reply->error()){
         // Сообщаем об этом и показываем информацию об ошибках

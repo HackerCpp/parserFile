@@ -9,10 +9,10 @@ LIBS += ../build/release/LogData.lib
 
 
 SOURCES += \
-    $$PWD/inc/canvas.cpp \
-    $$PWD/inc/tools/basestandartwidget.cpp \
-    $$PWD/inc/tools/curveshifttool.cpp \
-    $$PWD/inc/tools/specfiledialog.cpp \
+    $$PWD/src/canvas.cpp \
+    $$PWD/src/tools/basestandartwidget.cpp \
+    $$PWD/src/tools/curveshifttool.cpp \
+    $$PWD/src/tools/specfiledialog.cpp \
     $$PWD/src/acousticsEditor/chartviewselectsegment.cpp \
     $$PWD/src/acousticsEditor/widgetselectwavesegment.cpp \
     $$PWD/src/acousticsEditor/acousticsEditor.cpp \

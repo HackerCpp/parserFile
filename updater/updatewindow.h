@@ -7,6 +7,7 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include "loader.h"
+#include "infiniteloading.h"
 
 class UpdateWindow : public QWidget
 {
@@ -20,6 +21,7 @@ class UpdateWindow : public QWidget
     QPushButton *m_buttonUpdate;
     QVBoxLayout *m_mainLayout;
     Loader *m_loader;
+    InfiniteLoading m_loading;
 public:
     UpdateWindow(QString url,QString whereToUnpack);
     ~UpdateWindow(){}

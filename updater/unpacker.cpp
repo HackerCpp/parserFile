@@ -1,19 +1,29 @@
 #include "unpacker.h"
-#include <libzippp/libzippp.h>
 #include <QDir>
 #include <vector>
 #include <QVector>
 #include <QDebug>
 #include <QByteArray>
 #include <QFile>
+#include <QFileInfo>
 #include "customprogressbar.h"
+
+#ifdef USE_LIBZIP
+#include <libzippp.h>
 
 using namespace  libzippp;
 using namespace  std;
+#else
+#include "private\qzipreader_p.h"
+#include "private\qzipwriter_p.h"
+#endif
+
+
 
 bool Unpacker::unpack(QString file,QString where,bool isDeleted){
+#ifdef USE_LIBZIP
     ZipArchive z1(file.toStdString());
-    if(!z1.open(ZipArchive::READ_ONLY))
+    if(!z1.open(ZipArchive::ReadOnly))
         return false;
 
     QVector<ZipEntry>f_entries =  QVector<ZipEntry>::fromStdVector( z1.getEntries());
@@ -44,6 +54,43 @@ bool Unpacker::unpack(QString file,QString where,bool isDeleted){
     f_bar.hide();
     if(isDeleted)
         z1.unlink();
+#else
+    QZipReader zip_r(file);
+    if (!zip_r.exists())
+        return false;
+    QVector<QZipReader::FileInfo> f_entries =  zip_r.fileInfoList();
+    QDir().mkdir(where);
+
+    CustomProgressBar f_bar;
+    qreal f_unitPercent = 100.0 / qreal(f_entries.size());
+    qreal f_currentPercent = 0;
+    f_bar.setRange(0,100);
+    f_bar.setValue(f_currentPercent);
+
+    foreach(auto entry,f_entries){
+        f_bar.setText(QString::fromStdString(entry.filePath.toStdString()));
+        QString f_filePath = where + "/" + entry.filePath;
+        if(entry.isDir)
+            QDir().mkdir(f_filePath);
+        else{
+            QByteArray f_byteArray = zip_r.fileData(entry.filePath);
+            QFile f_file(f_filePath);
+            if(!f_file.open(QIODevice::WriteOnly)){
+                continue;
+            }
+            f_file.write(f_byteArray);
+            f_file.close();
+        }
+        f_currentPercent += f_unitPercent;
+        f_bar.setValue(f_currentPercent);
+    }
+    f_bar.setText("close");
+    f_bar.hide();
+    //zip_r.extractAll(where);
+    zip_r.close();
+    if(isDeleted)
+        QFile::remove(file);
+#endif
     return true;
 }
 

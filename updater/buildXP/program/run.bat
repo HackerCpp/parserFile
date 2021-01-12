@@ -1,0 +1,1 @@
+start updater.exe http://www.gfm.ru/kedr_files/x64/geology_loader.xml "../"

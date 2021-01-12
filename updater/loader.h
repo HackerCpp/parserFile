@@ -8,13 +8,12 @@
 #include <QFile>
 #include <QUrl>
 #include <QDebug>
-#include "infiniteloading.h"
+
 
 class Loader : public QObject
 {
     Q_OBJECT
     QString m_currentUrl;
-    InfiniteLoading m_loading;
 public:
     explicit Loader(QObject *parent = 0);
 

@@ -2,7 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "libzippp/libzippp.h"
 #include <QPointer>
 #include <QVBoxLayout>
 #include <QPushButton>
@@ -11,13 +10,9 @@
 #include <modulesmodel.h>
 #include <QTreeView>
 
-using namespace std;
-using namespace libzippp;
-
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-
     QVector<Module*> m_modules;
     QWidget *m_centralWidget;
     QPointer<QVBoxLayout> m_mainVLayout;

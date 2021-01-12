@@ -1,7 +1,0 @@
-Package: zlib
-Version: 1.2.11-6
-Architecture: x64-windows
-Multi-Arch: same
-Abi: 2e7b3d36b9de9bb8d4f25bf5d7dc500838685ce0
-Description: A compression library
-Type: Port

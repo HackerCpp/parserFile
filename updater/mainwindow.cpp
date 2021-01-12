@@ -9,9 +9,19 @@
 #include <QFile>
 #include "projectpathnamewidget.h"
 #include <QXmlStreamWriter>
-#include <customprogressbar.h>
 #include <QStringList>
 #include <QResource>
+
+#ifdef USE_LIBZIP
+#include <customprogressbar.h>
+#include <libzippp.h>
+
+using namespace  libzippp;
+using namespace  std;
+#else
+#include "private\qzipreader_p.h"
+#include "private\qzipwriter_p.h"
+#endif
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -37,11 +47,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_mainVLayout->addWidget(m_treView);
 }
 
-MainWindow::~MainWindow()
-{
-
-
-}
+MainWindow::~MainWindow(){}
 
 void MainWindow::createProjectFile(){
     QFile f_file(m_currentPath +"/" + m_projectName + "_loader.xml");
@@ -171,8 +177,10 @@ void MainWindow::addModule(){
     else{
         f_currentModule->m_versions->push_back(new VersionInfo(f_version));
     }
+
+#ifdef USE_LIBZIP
     ZipArchive z1(QString(m_currentPath + "/modules/" + f_name + "_" + f_version + ".zip").toStdString());
-    if(!z1.open(ZipArchive::WRITE))
+    if(!z1.open(ZipArchive::Write))
         qDebug() << "Не  удалось открыть архив для записи";
     QString f_beginDir = f_dirPath + "/";
     QStringList f_dirs = recursiveFind(f_dirPath,QDir::Dirs);
@@ -194,7 +202,30 @@ void MainWindow::addModule(){
     f_bar.setText("close");
     z1.close();
     f_bar.hide();
+#else
+    // Рекурсивная архивация директории
+    QZipWriter zip(QString(m_currentPath + "/modules/" + f_name + "_" + f_version + ".zip"));
+    if (zip.status() != QZipWriter::NoError)
+        qDebug () << "Ошибка";
+    zip.setCompressionPolicy(QZipWriter::AutoCompress);
 
+    QString path = f_dirPath + "/"; // в данном случае завершающий '/' очень важен
+    QDirIterator it(path, QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot,QDirIterator::Subdirectories);
+    while (it.hasNext()) {
+        QString file_path = it.next();
+        if (it.fileInfo().isDir()) {
+            zip.setCreationPermissions(QFile::permissions(file_path));
+            zip.addDirectory(file_path.remove(path));
+        } else if (it.fileInfo().isFile()) {
+            QFile file(file_path);
+            if (!file.open(QIODevice::ReadOnly))
+                continue;
+            zip.setCreationPermissions(QFile::permissions(file_path));
+            zip.addFile(file_path.remove(path), file.readAll());
+        }
+    }
+    zip.close();
+#endif
     createProjectFile();
     m_model->update();
     resize(width() + 1,height() + 1);
@@ -226,13 +257,25 @@ void MainWindow::addFile(){
     else{
         f_currentModule->m_versions->push_back(new VersionInfo(f_version));
     }
-
+#ifdef USE_LIBZIP
     ZipArchive z1(QString(m_currentPath + "/modules/" + f_name + "_" + f_version + ".zip").toStdString());
-    z1.open(ZipArchive::WRITE);
+    z1.open(ZipArchive::Write);
     QString f_beginDir = f_dir.remove("root/") + QFileInfo(f_filePath).fileName();
     z1.addFile(f_beginDir.toStdString(),f_filePath.toStdString());
-
     z1.close();
+#else
+    QZipWriter zip(QString(m_currentPath + "/modules/" + f_name + "_" + f_version + ".zip")) ;
+    if (zip.status() != QZipWriter::NoError)
+        return;
+    zip.setCompressionPolicy(QZipWriter::AutoCompress);
+    QString file_name = f_dir.remove("root/") + QFileInfo(f_filePath).fileName();
+    QFile file(f_filePath);
+    if (!file.open(QIODevice::ReadOnly))
+         return;
+    zip.setCreationPermissions(QFile::permissions(f_filePath));
+    zip.addFile(file_name, file.readAll());
+    zip.close();
+#endif
     createProjectFile();
     m_model->update();
     resize(width() + 1,height() + 1);

@@ -9,6 +9,8 @@
 UpdateWindow::UpdateWindow(QString url,QString whereToUnpack)
     : m_currentUrl(url),m_pathWhereToUnpack(whereToUnpack)
 {
+    m_loading.hide();
+    m_loading.setText(tr("loading"));
     m_model = new ModulesUserModel();
     m_treView = new QTreeView(this);
     m_buttonUpdate = new QPushButton(tr("Update"));
@@ -73,6 +75,8 @@ void UpdateWindow::updateStart(){
     if(!loadArhives()){
         QMessageBox::information(this, tr("Information"),tr("All packages are loaded"));
     }
+    else
+        m_loading.show();
 }
 
 void UpdateWindow::processingXML(QString filePath){
@@ -150,6 +154,7 @@ void UpdateWindow::processingZIP(QString filePath){
     }
     createXML();
     if(!loadArhives()){
+        m_loading.hide();
         m_buttonUpdate->setEnabled(true);
         QMessageBox::information(this, tr("Information"),tr("All packages are loaded"));
     }
