@@ -21,6 +21,7 @@ public:
     virtual bool addObject(const QString &name, QObject *object)override{Q_UNUSED(name) Q_UNUSED(object) return false;}
     virtual bool addVariable(const QString &name, const QVariant &v)override{Q_UNUSED(name) Q_UNUSED(v) return false;}
     virtual void dataUpdate()override{}
+    virtual InterpreterEditor *editor()override{return nullptr;}
 
     virtual bool executeScriptFromFile(const QString& filename)override{Q_UNUSED(filename) return false;}
     virtual bool executeScriptFromString(const QString& script)override{Q_UNUSED(script) return false;}

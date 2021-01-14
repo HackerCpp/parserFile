@@ -5,11 +5,13 @@
 #include "unpacker.h"
 #include "updatewindow.h"
 #include "infiniteloading.h"
+#include <QDir>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     QWidget *f_mainWidget;
+    //Unpacker::unpack(QDir().currentPath() + "//python3.zip", QDir().currentPath(),false);
     if(argc == 1){
        f_mainWidget = new MainWindow();
     }

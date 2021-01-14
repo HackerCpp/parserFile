@@ -15,7 +15,6 @@
 #include "basestandartwidget.h"
 
 class IInterpreterLogData;
-class PythonEditor;
 /*********************************************************/
 struct CurvesForCalc{
   VAcuItem *m_acuOne = nullptr;

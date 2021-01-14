@@ -1,6 +1,7 @@
 #ifndef IINTERPRETERLOGDATA_H
 #define IINTERPRETERLOGDATA_H
 #include <QObject>
+#include "interpretereditor.h"
 
 class IBlock;
 
@@ -18,6 +19,8 @@ public:
     virtual bool addObject(const QString &name, QObject *object){Q_UNUSED(name) Q_UNUSED(object) return false;}
     virtual bool addVariable(const QString &name, const QVariant &v){Q_UNUSED(name) Q_UNUSED(v) return false;}
     virtual void dataUpdate(){}
+    virtual InterpreterEditor *editor(){return nullptr;}
+    virtual bool addLibrary(QString nameLibrary){Q_UNUSED(nameLibrary) return false;}
 
     virtual bool executeScriptFromFile(const QString& filename){Q_UNUSED(filename) return false;}
     virtual bool executeScriptFromString(const QString& script){Q_UNUSED(script) return false;}

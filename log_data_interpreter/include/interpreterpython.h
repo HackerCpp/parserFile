@@ -8,7 +8,8 @@ class PythonEditor;
 class PythonQtObjectPtr;
 class PythonQtScriptingConsole;
 
-class INTERPRETER_EXPORT InterpreterPython : public AinterpreterLogData{
+class InterpreterPython : public QObject,public AinterpreterLogData{
+    Q_OBJECT
     PythonQtObjectPtr *m_mainContext;
     PythonQtScriptingConsole *m_console;
     PythonEditor *m_pythonEditor;
@@ -25,6 +26,8 @@ public:
     bool addObject(const QString &name, QObject *object)override;
     bool addVariable(const QString &name, const QVariant &v)override;
     void dataUpdate()override;
+    InterpreterEditor *editor()override;
+    bool addLibrary(QString nameLibrary)override;
 
     bool executeScriptFromFile(const QString& filename)override;
     bool executeScriptFromString(const QString& script)override;

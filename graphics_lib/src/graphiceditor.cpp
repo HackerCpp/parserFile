@@ -11,7 +11,7 @@ GraphicEditor::GraphicEditor(QSharedPointer<ILogData> logData,DrawSettings *draw
     this->setStyleSheet("QGraphicsView{background-color:white;}");
     m_curves = new QMap<QString,ICurve*>;
     m_lastTabClicked = -1;
-    m_tabMenu = QPointer(new QMenu(tr("&Forms menu")));
+    m_tabMenu = QPointer<QMenu>(new QMenu(tr("&Forms menu")));
     m_tabMenu->addAction(tr("&Rename board"),this, SLOT(renameBoard()));
     m_tabMenu->addAction(tr("&Delete board"),this, SLOT(deleteBoard()));
     m_tabMenu->setMaximumSize(1000,1000);

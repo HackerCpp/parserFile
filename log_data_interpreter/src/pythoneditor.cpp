@@ -34,7 +34,7 @@
 #include "interpreterpython.h"
 
 PythonEditor::PythonEditor(IInterpreterLogData *interpreter,QWidget *parent)
-    : QMainWindow(parent){
+    : InterpreterEditor(parent){
         QFont f_font("DejaVu Sans",15);
         m_textEdit = new QsciScintilla;
         m_textEdit->setFont(f_font);
@@ -44,6 +44,7 @@ PythonEditor::PythonEditor(IInterpreterLogData *interpreter,QWidget *parent)
         m_splitter = new QSplitter(Qt::Vertical,this);
         m_splitter->addWidget(m_textEdit);
         m_splitter->addWidget(m_intPython->console());
+        m_intPython->console()->show();
 
         setCentralWidget(m_splitter);
         show();

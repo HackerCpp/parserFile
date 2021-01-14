@@ -24,13 +24,23 @@ INCLUDEPATH += inc\
                 ../log_data_saver/inc \
                 ../log_data_interpreter/include \
                 ../geometrologyDB
+contains(QMAKE_HOST.arch, x86_64):{
+    LIBS += \
+    ../build/release/LogData.lib \
+    ../build/release/LogDataInterpreter.lib \
+    ../build/release/LogDataLoader.lib \
+    ../build/release/LogDataSaver.lib \
+    ../build/release/geometrologyDB.lib
+}
+!contains(QMAKE_HOST.arch, x86_64):{
+    LIBS += \
+    ../build86/release/LogData.dll \
+    ../build86/release/LogDataInterpreter.dll \
+    ../build86/release/LogDataLoader.dll \
+    ../build86/release/LogDataSaver.dll
+    DEFINES += USING_X86
+}
 
-LIBS += \
-../build/release/LogData.lib \
-../build/release/LogDataInterpreter.lib \
-../build/release/LogDataLoader.lib \
-../build/release/LogDataSaver.lib \
-../build/release/geometrologyDB.lib
 
 include(../graphics_lib/graphics.pri)
 

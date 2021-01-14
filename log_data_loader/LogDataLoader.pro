@@ -11,7 +11,14 @@ INCLUDEPATH += include \
 ../log_data_saver/inc \
 ../log_data_lib/include/curves
 
-LIBS += ../build/release/LogData.lib
+contains(QMAKE_HOST.arch, x86_64):{
+    LIBS += ../build/release/LogData.lib
+}
+!contains(QMAKE_HOST.arch, x86_64):{
+    LIBS += ../build86/release/LogData.dll \
+    ../build86/release/zlib1.dll
+    DEFINES += USING_X86
+}
 
 
 # The following define makes your compiler emit warnings if you use

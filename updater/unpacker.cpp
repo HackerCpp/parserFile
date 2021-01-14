@@ -7,6 +7,7 @@
 #include <QFile>
 #include <QFileInfo>
 #include "customprogressbar.h"
+#include "QFileInfo"
 
 #ifdef USE_LIBZIP
 #include <libzippp.h>
@@ -70,13 +71,17 @@ bool Unpacker::unpack(QString file,QString where,bool isDeleted){
     foreach(auto entry,f_entries){
         f_bar.setText(QString::fromStdString(entry.filePath.toStdString()));
         QString f_filePath = where + "/" + entry.filePath;
-        if(entry.isDir)
+        if(entry.isDir){
             QDir().mkdir(f_filePath);
+        }
         else{
             QByteArray f_byteArray = zip_r.fileData(entry.filePath);
             QFile f_file(f_filePath);
             if(!f_file.open(QIODevice::WriteOnly)){
-                continue;
+                QDir().mkdir(QFileInfo(f_file).dir().path() + "//");
+                if(!f_file.open(QIODevice::WriteOnly)){
+                    continue;
+                }
             }
             f_file.write(f_byteArray);
             f_file.close();

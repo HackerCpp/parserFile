@@ -4,6 +4,7 @@
 
 #include "ablock.h"
 #include "aboard.h"
+#include <QSharedPointer>
 
 class HeaderInfo : public QObject{
     QString m_name;

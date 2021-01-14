@@ -172,11 +172,11 @@ void VerticalTrack::setActiveSelectingArea(){
     int f_height = m_selectingArea->bottom() - m_selectingArea->top();
     QRectF area(f_x,f_y,f_width,f_height);
     bool isActive = false;
-    m_сurrentСountOfActive = 0;
+    m_currentCountOfActive = 0;
     foreach(auto item, *m_items){
         isActive = item->isLocatedInTheArea(area,m_visibilitySquare,&painter);
         item->setActive(isActive);
-        m_сurrentСountOfActive += isActive ? 1 : 0;
+        m_currentCountOfActive += isActive ? 1 : 0;
     }
     redraw();
 }
@@ -309,11 +309,11 @@ void  VerticalTrack::headerLeftClickHandler(QPointF point){
 void  VerticalTrack::headerRightClickHandler(QPointF point){
     QPoint f_pointInHeaderPicture = QPoint(point.x() - (m_track->begin() * m_board->pixelPerMm()),point.y() - m_visibilitySquare.y() - m_board->positionHeader());
     bool isActive = false;
-    m_сurrentСountOfActive = 0;
+    m_currentCountOfActive = 0;
     foreach(auto grItem, *m_items){
         isActive = grItem->isClickHeaderArea(f_pointInHeaderPicture);
         grItem->setActive(isActive);
-        m_сurrentСountOfActive += isActive;
+        m_currentCountOfActive += isActive;
     }
     redraw();
 }
@@ -390,7 +390,7 @@ void  VerticalTrack::curvesLeftReleaseHandler(QPointF point){
     m_selectingArea->hide();
     scene()->update();
     setActiveSelectingArea();
-    if(m_сurrentСountOfActive){
+    if(m_currentCountOfActive){
         m_curvesMenu->move(QCursor::pos());
         m_curvesMenu->show();
     }
@@ -407,7 +407,7 @@ void  VerticalTrack::headerLeftReleaseHandler(QPointF point){
 }
 void  VerticalTrack::headerRightReleaseHandler(QPointF point){
     Q_UNUSED(point)
-    if(m_сurrentСountOfActive){
+    if(m_currentCountOfActive){
         m_curvesMenu->move(QCursor::pos());
         m_curvesMenu->show();
     }

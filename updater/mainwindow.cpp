@@ -215,13 +215,13 @@ void MainWindow::addModule(){
         QString file_path = it.next();
         if (it.fileInfo().isDir()) {
             zip.setCreationPermissions(QFile::permissions(file_path));
-            zip.addDirectory(file_path.remove(path));
+            zip.addDirectory(f_dir.remove("root/") + file_path.remove(path));
         } else if (it.fileInfo().isFile()) {
             QFile file(file_path);
             if (!file.open(QIODevice::ReadOnly))
                 continue;
             zip.setCreationPermissions(QFile::permissions(file_path));
-            zip.addFile(file_path.remove(path), file.readAll());
+            zip.addFile(f_dir.remove("root/") + file_path.remove(path), file.readAll());
         }
     }
     zip.close();
@@ -273,7 +273,7 @@ void MainWindow::addFile(){
     if (!file.open(QIODevice::ReadOnly))
          return;
     zip.setCreationPermissions(QFile::permissions(f_filePath));
-    zip.addFile(file_name, file.readAll());
+    zip.addFile(f_dir.remove("root/") + file_name, file.readAll());
     zip.close();
 #endif
     createProjectFile();

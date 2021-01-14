@@ -1,8 +1,8 @@
 QT -= gui
 
 TEMPLATE = lib
-CONFIG += staticlib
-#CONFIG += dynamiclib
+#CONFIG += staticlib
+CONFIG += dynamiclib
 
 
 CONFIG += c++17
@@ -24,6 +24,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     include/curves/linking.cpp \
+    include/externalComponents/interpretereditor.cpp \
     src/customObject/customobject.cpp \
     src/customObject/customobjectiteminfo.cpp \
     src/blocks/iteminfocreater.cpp \
@@ -94,6 +95,7 @@ HEADERS += \
     include/externalComponents/aloaderlogdata.h \
     include/externalComponents/asaverlogdata.h \
     include/externalComponents/iinterpreterlogdata.h \
+    include/externalComponents/interpretereditor.h \
     include/externalComponents/isaverlogdata.h \
     include/logData/alogdata.h \
     include/curves/icurve.h \
@@ -108,3 +110,5 @@ unix {
     target.path = /usr/lib
 }
 !isEmpty(target.path): INSTALLS += target
+
+QT += widgets

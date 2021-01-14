@@ -68,7 +68,7 @@ void VAcuItem::deleteLater(){
 }
 
 
-void inline VAcuItem::drawInterpolationHorizontal(QPainter *per,QRectF visibleRect,bool *flag){
+void VAcuItem::drawInterpolationHorizontal(QPainter *per,QRectF visibleRect,bool *flag){
     qreal quantityElem = m_curve->sizeOffset();
     float step = m_dataStepPix;
     ICurve *f_mainValue = m_board->isDrawTime() ? m_curve->time() :  m_curve->depth();
@@ -147,7 +147,7 @@ void inline VAcuItem::drawInterpolationHorizontal(QPainter *per,QRectF visibleRe
     }
 }
 
-void inline VAcuItem::drawInterpolationHorizontalNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag){
+void VAcuItem::drawInterpolationHorizontalNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag){
     qreal quantityElem = m_curve->sizeOffset();
     qreal step = m_dataStepPix;
     float f_yTop = y_top;
@@ -225,7 +225,7 @@ void inline VAcuItem::drawInterpolationHorizontalNoOffset(QPainter *per,int y_to
 }
 
 
-void inline VAcuItem::drawPointsTwoColorsNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag){
+void VAcuItem::drawPointsTwoColorsNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag){
     qreal quantityElem = m_curve->sizeOffset();
     qreal f_step = m_dataStepPix;
     float f_yTop = y_top;
@@ -275,7 +275,7 @@ void inline VAcuItem::drawPointsTwoColorsNoOffset(QPainter *per,int y_top,int y_
     }
 }
 
-void inline VAcuItem::drawWaveNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag){
+void VAcuItem::drawWaveNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag){
     Q_UNUSED(y_bottom)
     qreal quantityElem = m_curve->sizeOffset();
     qreal f_step = m_dataStepPix;

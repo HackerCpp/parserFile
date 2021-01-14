@@ -14,7 +14,7 @@ class VerticalTrack : public AGraphicTrack
     SelectingArea *m_selectingArea;
     QMenu *m_curvesMenu,*m_trackMenu;
     int m_curentWidth;
-    int m_сurrentСountOfActive = 0;
+    int m_currentCountOfActive = 0;
     QPointF m_ptDragPos;
     //Legend
     ItemsLegendView *m_legend;

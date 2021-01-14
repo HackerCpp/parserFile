@@ -37,8 +37,6 @@ void SettingsItems::apply(){
     emit changeSettings();
 }
 
-
-
 /*******************************************************************************/
 Selection::Selection(QStringList name,int activeIndex){
     m_btnGroup = new QButtonGroup;
@@ -65,7 +63,8 @@ Selection::Selection(QStringList name,int activeIndex){
     this->setLayout(m_mainLout);
     //setMaximumSize(300,100);
     //setMinimumSize(300,100);
-    connect(m_btnGroup,QOverload<int,bool>::of(&QButtonGroup::buttonToggled),this,&Selection::bthToggle);
+    connect(m_btnGroup,static_cast<void (QButtonGroup::*)(int,bool)>(&QButtonGroup::buttonToggled),this,&Selection::bthToggle);
+    //connect(m_btnGroup,QOverload<int,bool>::of(&QButtonGroup::buttonToggled),this,&Selection::bthToggle);
 }
 
 bool Selection::setValue(QString param,QString value){
@@ -256,7 +255,8 @@ SettingsLineItem::SettingsLineItem(AGraphicItem *lineItem,SelectingArea *selecti
     m_mainVLout->addStretch(100);
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
     connect(m_btnSelectColor,&QPushButton::pressed,this,&SettingsLineItem::changeColor);
-    connect(m_spinBoxWidthLine,QOverload<int>::of(&QSpinBox::valueChanged),this,&SettingsLineItem::changeWidthLine);
+    //connect(m_spinBoxWidthLine,QOverload<int>::of(&QSpinBox::valueChanged),this,&SettingsLineItem::changeWidthLine);
+    connect(m_spinBoxWidthLine,static_cast<void (QSpinBox::*)(int) >(&QSpinBox::valueChanged),this,&SettingsLineItem::changeWidthLine);
 }
 
 SettingsLineItem::~SettingsLineItem(){

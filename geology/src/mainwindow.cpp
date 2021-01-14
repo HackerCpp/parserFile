@@ -7,20 +7,21 @@
 #include "gfmsaver.h"
 #include "lassaver.h"
 #include "lissaver.h"
-#include "interpreterpython.h"
 #include "tabinterpretations.h"
 #include "geometrologydb.h"
 #include <QProcess>
 #include <QMessageBox>
 #include "specfiledialog.h"
 #include "geoloader.h"
-
+#include "interpretercreater.h"
+#include <QInputDialog>
 
 MainWindow::MainWindow(QWidget *parent)
     : WindowForMenu(parent){
     qputenv("PYTHONPATH",QString(QDir().absolutePath() + "/python3/Lib;" +
                                  QDir().absolutePath() + "/python3/Lib/site-packages;" +
-                                 QDir().absolutePath() + "/python3/DLLs;").toLatin1());
+                                 QDir().absolutePath() + "/python3/DLLs;" +
+                                 QDir().absolutePath() + "/python3;").toLatin1());
 
     m_menu = new Menu(this);
     m_menu->installEventFilter(this);
@@ -71,7 +72,6 @@ void MainWindow::openFile(){
     m_settings->setValue("paths/pathOpenFile",filePath);
     FileReader f_file(filePath);
     ILoaderLogData * f_loader = nullptr;
-    QSharedPointer<ILogData> f_logData = nullptr;
     if(f_file.getType() == ".gfm" || f_file.getType() == ".forms"){
         f_loader = new GFMLoader(filePath);
     }
@@ -89,7 +89,7 @@ void MainWindow::openFile(){
     }
     m_logDataView->show();
     if(f_loader){
-        f_logData = ILogData::createLogData();
+        QSharedPointer<ILogData> f_logData = ILogData::createLogData();
         f_logData->setName(filePath);
         m_logDataView->addLogData(f_logData);
         f_logData->setLoader(f_loader);
@@ -165,7 +165,7 @@ void MainWindow::openConsolePython(){
     if(!f_logData)
         return;
     if(!f_logData->isInterpreter()){
-        IInterpreterLogData *f_interpreter = dynamic_cast<IInterpreterLogData *>(new InterpreterPython());
+        IInterpreterLogData *f_interpreter = InterpreterCreater::create();
         f_logData->setInterpreter(f_interpreter);
     }
     f_logData->openInterpreterConsole();
@@ -176,7 +176,7 @@ void MainWindow::openEditorPython(){
     if(!f_logData)
         return;
     if(!f_logData->isInterpreter()){
-        IInterpreterLogData *f_interpreter = dynamic_cast<IInterpreterLogData *>(new InterpreterPython());
+        IInterpreterLogData *f_interpreter = InterpreterCreater::create();
         f_logData->setInterpreter(f_interpreter);
     }
     f_logData->openInterpreterEditor();
@@ -200,6 +200,12 @@ void MainWindow::insertCalibrationInTheScript(){
     else
         return;
     f_geometrologyDB->setInterpreterInterpreter(f_logData->interpreter());
+}
+
+void MainWindow::addLibraryPython(){
+    bool bOk;
+    QString f_name = QInputDialog::getText( 0, tr("Download python library"),tr("Lybrary name:"),QLineEdit::Normal,"",&bOk);
+    InterpreterCreater::create()->addLibrary(f_name);
 }
 
 void MainWindow::openInterpretations(){
@@ -234,10 +240,10 @@ void MainWindow::update(){
     if (QMessageBox::Yes == QMessageBox::question(this, tr("Update?"),
                               tr("The program will close and start updating, and all unsaved data will be lost. Update?"),
                               QMessageBox::Yes|QMessageBox::No)){
-        QProcess *f_process = new QProcess();
+        QProcess f_process;
         QStringList f_arguments;
         f_arguments << "http://www.gfm.ru/kedr_files/x64/geology_loader.xml" << ".//"  ;
-        f_process->start("updater/updater.exe",f_arguments);
+        f_process.startDetached(QDir().currentPath() + "/updater/updater.exe",f_arguments);
         disconnect(qApp, SIGNAL(aboutToQuit()),this, SLOT(quit()));
         qApp->quit();
         //exit(0);
@@ -255,8 +261,7 @@ void MainWindow::quit(){
         qApp->exec();
 }
 
-void MainWindow::closeEvent (QCloseEvent *event)
-{
+void MainWindow::closeEvent (QCloseEvent *event){
     event->ignore();
     qApp->quit();
 }

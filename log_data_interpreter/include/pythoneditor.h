@@ -1,7 +1,7 @@
 #ifndef PYTHONEDITOR_H
 #define PYTHONEDITOR_H
-#include "interpreter_global.h"
 #include <QMainWindow>
+#include "interpretereditor.h"
 
 class PythonQtScriptingConsole;
 class QsciScintilla;
@@ -15,7 +15,7 @@ class QVBoxLayout;
 class IInterpreterLogData;
 class InterpreterPython;
 
-class INTERPRETER_EXPORT PythonEditor : public QMainWindow{
+class PythonEditor : public InterpreterEditor{
     Q_OBJECT
 
     QsciScintilla *m_textEdit;

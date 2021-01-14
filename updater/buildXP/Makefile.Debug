@@ -1385,7 +1385,10 @@ debug/main.o: ../main.cpp ../mainwindow.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qplugin.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qjsonobject.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qjsonvalue.h \
-		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qfactoryinterface.h
+		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qfactoryinterface.h \
+		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QDir \
+		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qdir.h \
+		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qfileinfo.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/main.o ../main.cpp
 
 debug/mainwindow.o: ../mainwindow.cpp ../mainwindow.h \

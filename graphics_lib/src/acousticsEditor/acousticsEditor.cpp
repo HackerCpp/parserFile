@@ -1,14 +1,16 @@
 #include "acousticsEditor/acousticsEditor.h"
 #include <QDragEnterEvent>
 #include "vlineItem.h"
-#include "pythoneditor.h"
-#include "interpreterpython.h"
 #include <QDoubleValidator>
+#include "interpretercreater.h"
+#include "iinterpreterlogdata.h"
 
 AcousticsEditor::AcousticsEditor(CurvesForCalc curves)
     : m_curves(curves){
     setAttribute(Qt::WA_DeleteOnClose);
-    m_pythonInterpreter = new InterpreterPython();
+    m_pythonInterpreter = InterpreterCreater::create();
+    if(!m_pythonInterpreter)
+        return;
     QVector<VAcuItem *> f_acuItems;
     f_acuItems.push_back(m_curves.m_acuOne);
     f_acuItems.push_back(m_curves.m_acuTwo);

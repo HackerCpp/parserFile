@@ -9,18 +9,19 @@
 #include <QDir>
 #include <QGraphicsProxyWidget>
 #include "customprogressbar.h"
-#include "pythoneditor.h"
-#include "interpreterpython.h"
-
-
+#include "interpretercreater.h"
+#include "iinterpreterlogdata.h"
 
 /***************************BASE READER**********************************/
 SpectrReader::SpectrReader(VSpectrItem *spectrItem)
 {
     if(!spectrItem)
         return;
-    m_pythonInterpreter = new InterpreterPython();
-    m_pyEditor = new PythonEditor(m_pythonInterpreter,this);
+    m_pythonInterpreter = InterpreterCreater::create();
+    if(!m_pythonInterpreter)
+        return;
+    m_pyEditor = m_pythonInterpreter->editor();
+    m_pyEditor->setParent(this);
     setAcceptDrops(true);
     m_widht = 100;
     m_vMainLayout = new QVBoxLayout();
@@ -94,7 +95,7 @@ SpectrReader::SpectrReader(VSpectrItem *spectrItem)
     connect(m_btnAddFilter, &QPushButton::pressed, this, &SpectrReader::insertFilter);
     connect(m_btnApplyFilters, &QPushButton::released, this, &SpectrReader::applyAllFilters);
     connect(m_btnRollBack, &QPushButton::released, this, &SpectrReader::rollBackFilters);
-    connect(m_pyEditor,&PythonEditor::scriptExecuted,this,&SpectrReader::allUpdate);
+    connect(m_pyEditor,&InterpreterEditor::scriptExecuted,this,&SpectrReader::allUpdate);
 
     //соединяем сигнал клика мышки по сцене со слотом,
     //для перерисовки виджета графиков одной волны

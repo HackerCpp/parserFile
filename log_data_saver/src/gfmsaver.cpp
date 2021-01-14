@@ -5,7 +5,6 @@
 #include <QDebug>
 #include <QIODevice>
 #include <shortcut.h>
-#include <QtZlib/zlib.h>
 #include <QXmlStreamReader>
 #include "board.h"
 #include "track.h"

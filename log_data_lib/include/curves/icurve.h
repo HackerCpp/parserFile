@@ -9,11 +9,11 @@ class ICurve : public QObject{
     Q_OBJECT
 
 public:
-    ICurve();
-    virtual ~ICurve();
+    ICurve(){}
+    virtual ~ICurve(){}
 
-    virtual inline qreal data(uint index);
-    virtual QByteArray data();
+    virtual inline qreal data(uint index){Q_UNUSED(index)return 0;}
+    virtual QByteArray data(){return QByteArray();}
     virtual void setData(qreal data);
     virtual void setData(qreal data,uint index);
     virtual void setData(const char *dataPtr,uint numberOfVectors);

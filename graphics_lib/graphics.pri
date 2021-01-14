@@ -1,11 +1,20 @@
-QT += core gui xml charts
-
+QT += core gui xml
 CONFIG += c++11
-INCLUDEPATH += $$PWD $$PWD/inc $$PWD/inc/items $$PWD/inc/tools $$PWD/inc/acousticsEditor\
-$$PWD/inc/spectrReader $$PWD/inc/drawObjects $$PWD/../QScintilla/Qt4Qt5\
+INCLUDEPATH += $$PWD $$PWD/inc $$PWD/inc/items \
+$$PWD/inc/tools $$PWD/inc/acousticsEditor\
+$$PWD/inc/spectrReader $$PWD/inc/drawObjects \
 $$PWD/../log_data_interpreter/include
 
-LIBS += ../build/release/LogData.lib
+contains(QMAKE_HOST.arch, x86_64):{
+    QT += charts
+    LIBS += ../build/release/LogData.lib
+}
+!contains(QMAKE_HOST.arch, x86_64):{
+    INCLUDEPATH += $$PWD/../build86/QtCharts
+
+    LIBS += ../build86/release/LogData.dll \
+    ../build86/release/Qt5Charts.dll
+}
 
 
 SOURCES += \
@@ -13,9 +22,6 @@ SOURCES += \
     $$PWD/src/tools/basestandartwidget.cpp \
     $$PWD/src/tools/curveshifttool.cpp \
     $$PWD/src/tools/specfiledialog.cpp \
-    $$PWD/src/acousticsEditor/chartviewselectsegment.cpp \
-    $$PWD/src/acousticsEditor/widgetselectwavesegment.cpp \
-    $$PWD/src/acousticsEditor/acousticsEditor.cpp \
     $$PWD/src/items/twodimensionalarrayitem.cpp \
     $$PWD/src/tools/itemslegendview.cpp \
     $$PWD/src/tools/customprogressbar.cpp \
@@ -23,18 +29,8 @@ SOURCES += \
     $$PWD/src/tools/multicolorselection.cpp \
     $$PWD/src/drawObjects/objectColumn.cpp \
     $$PWD/src/items/customobjectitem.cpp \
-    $$PWD/src/spectrReader/chartvievforonewavewidget.cpp \
-    $$PWD/src/spectrReader/modelmulticolor.cpp \
-    $$PWD/src/spectrReader/modelonewave.cpp \
-    $$PWD/src/spectrReader/graphicitemforspectr.cpp \
-    $$PWD/src/spectrReader/spectrscene.cpp \
-    $$PWD/src/spectrReader/spectrviewer.cpp \
-    $$PWD/src/spectrReader/spectrreader.cpp \
     $$PWD/src/drawsettings.cpp \
-    $$PWD/src/spectrReader/filterlistview.cpp \
-    $$PWD/src/spectrReader/onewavewidget.cpp \
     $$PWD/src/tools/basecurvereader.cpp \
-    $$PWD/src/spectrReader/filterListModel.cpp \
     $$PWD/src/items/drawingthroughadisk.cpp \
     $$PWD/src/tools/colorscale.cpp \
     $$PWD/src/tools/basesettingswindow.cpp \
@@ -62,13 +58,22 @@ SOURCES += \
     $$PWD/src/agraphicboard.cpp \
     $$PWD/src/graphiceditor.cpp \
     $$PWD/src/igraphiceditor.cpp \
-    $$PWD/src/tools/qxtspanslider.cpp
+    $$PWD/src/tools/qxtspanslider.cpp \
+    $$PWD/src/spectrReader/chartvievforonewavewidget.cpp \
+    $$PWD/src/spectrReader/modelmulticolor.cpp \
+    $$PWD/src/spectrReader/modelonewave.cpp \
+    $$PWD/src/spectrReader/graphicitemforspectr.cpp \
+    $$PWD/src/spectrReader/spectrscene.cpp \
+    $$PWD/src/spectrReader/spectrviewer.cpp \
+    $$PWD/src/spectrReader/spectrreader.cpp \
+    $$PWD/src/spectrReader/filterlistview.cpp \
+    $$PWD/src/spectrReader/onewavewidget.cpp \
+    $$PWD/src/acousticsEditor/chartviewselectsegment.cpp \
+    $$PWD/src/acousticsEditor/widgetselectwavesegment.cpp \
+    $$PWD/src/acousticsEditor/acousticsEditor.cpp\
+    $$PWD/src/spectrReader/filterListModel.cpp
 
 HEADERS += \
-    $$PWD/inc/acousticsEditor/acousticsEditor.h \
-    $$PWD/inc/acousticsEditor/chartviewselectsegment.h \
-    $$PWD/inc/acousticsEditor/displayingacoustics.h \
-    $$PWD/inc/acousticsEditor/widgetselectwavesegment.h \
     $$PWD/inc/canvas.h \
     $$PWD/inc/items/twodimensionalarrayitem.h \
     $$PWD/inc/tools/basestandartwidget.h \
@@ -78,16 +83,6 @@ HEADERS += \
     $$PWD/inc/drawObjects/objectColumn.h \
     $$PWD/inc/drawsettings.h \
     $$PWD/inc/items/customobjectitem.h \
-    $$PWD/inc/spectrReader/chartvievforonewavewidget.h \
-    $$PWD/inc/spectrReader/filterListModel.h \
-    $$PWD/inc/spectrReader/modelmulticolor.h \
-    $$PWD/inc/spectrReader/modelonewave.h \
-    $$PWD/inc/spectrReader/spectrreader.h \
-    $$PWD/inc/spectrReader/filterlistview.h \
-    $$PWD/inc/spectrReader/graphicitemforspectr.h \
-    $$PWD/inc/spectrReader/onewavewidget.h \
-    $$PWD/inc/spectrReader/spectrscene.h \
-    $$PWD/inc/spectrReader/spectrviewer.h \
     $$PWD/inc/agraphicboard.h \
     $$PWD/inc/items/agraphicitem.h \
     $$PWD/inc/agraphictrack.h \
@@ -120,9 +115,21 @@ HEADERS += \
     $$PWD/inc/verticaltrack.h \
     $$PWD/inc/ruler.h\
     $$PWD/inc/tools/qxtspanslider.h \
-    $$PWD/inc/tools/qxtspanslider_p.h
-
-DISTFILES +=
+    $$PWD/inc/tools/qxtspanslider_p.h \
+    $$PWD/inc/spectrReader/chartvievforonewavewidget.h \
+    $$PWD/inc/spectrReader/filterListModel.h \
+    $$PWD/inc/spectrReader/modelmulticolor.h \
+    $$PWD/inc/spectrReader/modelonewave.h \
+    $$PWD/inc/spectrReader/spectrreader.h \
+    $$PWD/inc/spectrReader/filterlistview.h \
+    $$PWD/inc/spectrReader/graphicitemforspectr.h \
+    $$PWD/inc/spectrReader/onewavewidget.h \
+    $$PWD/inc/spectrReader/spectrscene.h \
+    $$PWD/inc/spectrReader/spectrviewer.h \
+    $$PWD/inc/acousticsEditor/acousticsEditor.h \
+    $$PWD/inc/acousticsEditor/chartviewselectsegment.h \
+    $$PWD/inc/acousticsEditor/displayingacoustics.h \
+    $$PWD/inc/acousticsEditor/widgetselectwavesegment.h
 
 RESOURCES += \
     $$PWD/grres.qrc

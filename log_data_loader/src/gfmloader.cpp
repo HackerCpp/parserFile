@@ -3,7 +3,13 @@
 #include <QFile>
 #include <QIODevice>
 #include <shortcut.h>
+
+#ifdef USING_X86
+#include <zlib.h>
+#else
 #include <QtZlib/zlib.h>
+#endif
+
 #include <QXmlStreamReader>
 #include "board.h"
 #include "track.h"

@@ -33,6 +33,7 @@ public slots:
     void openConsolePython()override;
     void openEditorPython()override;
     void insertCalibrationInTheScript()override;
+    void addLibraryPython()override;
     void openInterpretations()override;
     void openConstructor()override;
     void update()override;

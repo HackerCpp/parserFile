@@ -9,13 +9,18 @@
 #include "gui/PythonQtScriptingConsole.h"
 #include "pythoneditor.h"
 #include <QWidget>
+#include <QFile>
 
 
 InterpreterPython::InterpreterPython()
 : m_pythonEditor(nullptr){
+    qputenv("PYTHONPATH",QString(QDir().absolutePath() + "/python3/Lib;" +
+                                 QDir().absolutePath() + "/python3/Lib/site-packages;" +
+                                 QDir().absolutePath() + "/python3/DLLs;" +
+                                 QDir().absolutePath() + "/python3;" +
+                                 QDir().absolutePath() + "/python3/Scripts;").toLatin1());
     PythonQt::init(PythonQt::IgnoreSiteModule | PythonQt::RedirectStdOut,"LogData");
     PythonQt_QtAll::init();
-
     PythonQt::self()->registerCPPClass("ICurve","","Curves",PythonQtCreateObject<WrapperIcurvePython>);
 
     m_mainContext = new PythonQtObjectPtr(PythonQt::self()->createUniqueModule());
@@ -84,6 +89,25 @@ bool InterpreterPython::addVariable(const QString &name, const QVariant &v){
 
 void InterpreterPython::dataUpdate(){
    init();
+}
+
+InterpreterEditor *InterpreterPython::editor(){
+    init();
+    if(!m_pythonEditor)
+        m_pythonEditor = new PythonEditor(this,nullptr);
+    return m_pythonEditor;
+}
+
+bool InterpreterPython::addLibrary(QString nameLibrary){
+    QProcess *f_process = new QProcess();
+    QFile file(QDir().currentPath() + "/python3/lastCommand.bat");
+    file.open(QIODevice::WriteOnly);
+    file.write(QString("start " + QDir().currentPath() + "\\python3\\python.exe -m pip install " +
+    nameLibrary).toLatin1());
+    file.close();
+    f_process->startDetached(QDir().currentPath() + "/python3/lastCommand.bat");
+    connect(f_process,&QProcess::readyReadStandardOutput,[=](){qDebug() << f_process->readAllStandardOutput();});
+    return true;
 }
 
 bool InterpreterPython::executeScriptFromFile(const QString& filename){

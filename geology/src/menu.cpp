@@ -32,20 +32,25 @@ Menu::Menu(QWidget *parent)
     QMenu * fileMenu= new QMenu (tr("&File"),this);
     fileMenu->setObjectName("File");
     fileMenu->addAction(tr("&Open file"),m_parentWindow, SLOT(openFile()));
+
     QMenu *saveFileMenu = new QMenu (tr("Save"),this);
     saveFileMenu->addAction (tr("&GFM"),m_parentWindow, SLOT(saveGFM()));
     saveFileMenu->addAction (tr("&LIS"),m_parentWindow, SLOT(saveLIS()));
     saveFileMenu->addAction (tr("&LAS"),m_parentWindow, SLOT(saveLAS()));
     fileMenu->addMenu(saveFileMenu);
+
     fileMenu->addAction(tr("&Add from file"),m_parentWindow, SLOT(addFromFile()));
     mnuArray->push_back(fileMenu);
+
     QMenu * interpreterMenu= new QMenu (tr("&Script"),this);
     interpreterMenu->setObjectName("Script");
     QMenu *pythonMenu = new QMenu (tr("Python"),this);
     pythonMenu->addAction (tr("&OpenConsole"),m_parentWindow, SLOT(openConsolePython()));
     pythonMenu->addAction (tr("&OpenEditor"),m_parentWindow, SLOT(openEditorPython()));
     pythonMenu->addAction (tr("&AddDataCalib"),m_parentWindow, SLOT(insertCalibrationInTheScript()));
+    pythonMenu->addAction (tr("AddLibrary"),m_parentWindow, SLOT(addLibraryPython()));
     interpreterMenu->addMenu(pythonMenu);
+
     mnuArray->push_back(interpreterMenu);
     foreach(auto mnu, *mnuArray){
         QMenuBar *bar = new QMenuBar(this);
