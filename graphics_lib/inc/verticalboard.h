@@ -7,6 +7,8 @@
 #include <QGraphicsScene>
 #include "itemslegendview.h"
 #include "canvas.h"
+#include "ldlabel.h"
+#include "setlabelsforboard.h"
 
 
 class VerticalBoard : public AGraphicBoard
@@ -21,9 +23,10 @@ class VerticalBoard : public AGraphicBoard
     QGraphicsLineItem *m_beginLineLegend, *m_currentLineLegend;
     QTimer m_timerLeftClick;
     QPoint m_posLeftClick;
+    SetLabelsForBoard *m_ldLabels;
 
 public:
-    VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves,DrawSettings *drawSettings);
+    VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves,DrawSettings *drawSettings,SetLabelsForBoard *ldLabels);
     VerticalBoard(QMap<QString,ICurve*> *curves,DrawSettings *drawSettings);
     VerticalBoard();
     virtual ~VerticalBoard()override;
@@ -32,6 +35,7 @@ public:
     bool addCurve(ICurve *curve,int indexTab);
     virtual void redraw()override;
     void updateItems();
+    LDLabelItem *addLabel(LDLabel *label)override;
 
 
     void mousePressEvent(QMouseEvent *event) override;

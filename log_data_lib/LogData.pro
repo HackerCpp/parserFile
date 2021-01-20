@@ -23,8 +23,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    include/curves/linking.cpp \
-    include/externalComponents/interpretereditor.cpp \
+    include/blocks/labelblock.cpp \
+    include/blocks/ldlabel.cpp \
+    include/blocks/setlabelsforboard.cpp \
+    src/curves/linking.cpp \
+    src/externalComponents/interpretereditor.cpp \
     src/customObject/customobject.cpp \
     src/customObject/customobjectiteminfo.cpp \
     src/blocks/iteminfocreater.cpp \
@@ -65,6 +68,9 @@ SOURCES += \
 
 
 HEADERS += \
+    include/blocks/labelblock.h \
+    include/blocks/ldlabel.h \
+    include/blocks/setlabelsforboard.h \
     include/curves/linking.h \
     include/blocks/ablock.h \
     include/blocks/aboard.h \

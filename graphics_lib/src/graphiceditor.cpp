@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <customprogressbar.h>
 #include <QInputDialog>
+#include <labelblock.h>
+#include "setlabelsforboard.h"
 
 GraphicEditor::GraphicEditor(QSharedPointer<ILogData> logData,DrawSettings *drawSettings,QWidget *parent)
     : QTabWidget(parent),AGraphicEditor(logData),m_forms(nullptr),m_drawSettings(drawSettings){
@@ -67,20 +69,35 @@ void GraphicEditor::addForms(){
         return;
     disconnect(this,&QTabWidget::currentChanged,this,&GraphicEditor::changeBoard);
     QList<ABoard*> *f_boards = nullptr;
+    LabelBlock *f_labelsBlock = nullptr;
 
     foreach(auto block,*m_logData->blocks()){
         if(block->name() == IBlock::FORMS_BLOCK){
             m_forms = dynamic_cast<FormsBlock *>(block);
-            f_boards = m_forms->boards();
-            if(!f_boards){
-                qDebug() << "FormsBlock Вернул нулевой указатель на борды";
-                return;
-            }
         }
+        else if(block->name() == IBlock::LABELS_BLOCK){
+            f_labelsBlock = dynamic_cast<LabelBlock *>(block);
+        }
+    }
+    if(!f_labelsBlock)
+        f_labelsBlock = new LabelBlock;
+    m_logData->addBlock(f_labelsBlock);
+
+    f_boards = m_forms->boards();
+    if(!f_boards){
+        qDebug() << "FormsBlock Вернул нулевой указатель на борды";
+        return;
     }
     if(f_boards){
         foreach(auto boardInfo,*f_boards){
-            AGraphicBoard *f_grBoard = new VerticalBoard(boardInfo,m_curves,m_drawSettings);
+            SetLabelsForBoard *f_setLabels = nullptr;
+            if(f_labelsBlock)
+                f_setLabels = f_labelsBlock->labels(boardInfo->name());
+            if(!f_setLabels){
+                f_setLabels = new SetLabelsForBoard(boardInfo->name());
+                f_labelsBlock->addSetLabels(f_setLabels);
+            }
+            AGraphicBoard *f_grBoard = new VerticalBoard(boardInfo,m_curves,m_drawSettings,f_setLabels);
             addTab(f_grBoard,boardInfo->name());
             if(boardInfo->name() == m_forms->activeName()){
                 setCurrentWidget(f_grBoard);
@@ -121,7 +138,7 @@ void GraphicEditor::newBoard(){
     f_track->setIsGreed(true);
     f_newBoard->setTrack(f_track);
     m_forms->boards()->push_back(f_newBoard);
-    AGraphicBoard *f_grBoard = new VerticalBoard(f_newBoard,m_curves,m_drawSettings);
+    AGraphicBoard *f_grBoard = new VerticalBoard(f_newBoard,m_curves,m_drawSettings,nullptr);
     m_curentBoard = f_grBoard;
     insertTab(count() - 1,f_grBoard,f_newBoard->name());
     setCurrentWidget(m_curentBoard);

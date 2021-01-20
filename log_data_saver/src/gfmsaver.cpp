@@ -13,6 +13,7 @@
 #include "markItem.h"
 #include "acuItem.h"
 #include "datablock.h"
+#include "labelblock.h"
 #include "toolinfoblock.h"
 #include"acurve.h"
 #include "formsblock.h"
@@ -20,6 +21,8 @@
 #include "headerblock.h"
 #include <QFileDialog>
 #include "specItem.h"
+#include "ldlabel.h"
+
 
 GFMSaver::GFMSaver(){
     m_isReady = false;
@@ -44,7 +47,7 @@ bool GFMSaver::save(){
     fileGFM->write(m_codec->fromUnicode("\r\n").mid(2));
 
     foreach(auto block,*m_blocks){
-        if(block->name() == IBlock::DATA_BLOCK)
+        /*if(block->name() == IBlock::DATA_BLOCK)
             fileGFM->write(getForSaveDataBlock(block));
         else if(block->name() == IBlock::FORMS_BLOCK)
            fileGFM->write(getForSaveFormsBlock(block));
@@ -52,6 +55,8 @@ bool GFMSaver::save(){
             fileGFM->write(getForSaveHeaderBlock(block));
         else if(block->name() == IBlock::TOOLINFO_BLOCK)
             fileGFM->write(getForSaveToolInfoBlock(block));
+        else*/ if(block->name() == IBlock::LABELS_BLOCK)
+            fileGFM->write(getForSaveLabelsBlock(block));
     }
     fileGFM->close();
     delete fileGFM;
@@ -77,6 +82,8 @@ bool GFMSaver::save(QString fileName){
             fileGFM->write(getForSaveHeaderBlock(block));
         else if(block->name() == IBlock::TOOLINFO_BLOCK)
             fileGFM->write(getForSaveToolInfoBlock(block));
+        else if(block->name() == IBlock::LABELS_BLOCK)
+            fileGFM->write(getForSaveLabelsBlock(block));
     }
     fileGFM->close();
     delete fileGFM;
@@ -579,4 +586,43 @@ QByteArray GFMSaver::formBlokSave(FormsBlock * formsBlock){
            gzipCompress(xml,forms,2);
            return forms;
 
+}
+
+QByteArray  GFMSaver::getForSaveLabelsBlock(IBlock *block){
+    LabelBlock *f_labelsBlock = dynamic_cast<LabelBlock *>(block);
+    QTextCodec *f_codec = QTextCodec::codecForMib(1015);
+    QByteArray blockForWrite;
+    QString f_name = "[LABELS]";
+    int f_nameSize = f_name.size() * 2;
+    blockForWrite.append(reinterpret_cast<char*>(&f_nameSize),2);     //Размер названия блока
+    blockForWrite.append(f_codec->fromUnicode(f_name).mid(2));
+
+    QByteArray f_data;
+    QDataStream f_stream(&f_data,QIODevice::WriteOnly);
+    foreach(QList<LDLabel *> *value,f_labelsBlock->labels().values()){
+        qDebug() <<  f_labelsBlock->labels().key(value);
+        f_stream << f_labelsBlock->labels().key(value);
+        foreach(LDLabel *label,*value){
+            qDebug() <<label->text();
+            f_stream << label->size();
+            f_stream << label->text();
+            f_stream << label->depth();
+            f_stream << label->time();
+            f_stream << label->trackNumber();
+            f_stream << label->boardName();
+            f_stream << label->leftIndent();
+        }
+    }
+    qDebug() << f_data << "data";
+
+    int f_dataBlockSize = f_data.size() + 8;
+    if(f_dataBlockSize % 2){
+        ++f_dataBlockSize;
+        f_data.append('0');
+    }
+    blockForWrite.append(reinterpret_cast<char*>(&f_dataBlockSize),4);
+    blockForWrite.append(f_codec->fromUnicode("\r\n").mid(2));
+    blockForWrite.append(f_data);
+    blockForWrite.append(f_codec->fromUnicode("\r\n").mid(2));
+    return blockForWrite;
 }

@@ -12,7 +12,7 @@ class IBlock : public QObject{
 
 public:
     enum TypeBlock {NO_BLOCK,DATA_BLOCK, FORMS_BLOCK,
-                    TOOLINFO_BLOCK, HEADER_BLOCK};
+                    TOOLINFO_BLOCK, HEADER_BLOCK,LABELS_BLOCK};
 
 public:
     IBlock();

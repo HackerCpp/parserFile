@@ -3,7 +3,10 @@
 #include <QColor>
 #include "formsblock.h"
 #include "headerblock.h"
+#include "labelblock.h"
 #include "QTextEdit"
+#include "setlabelsforboard.h"
+#include "ldlabel.h"
 
 
 DataModel::DataModel(){
@@ -72,6 +75,13 @@ QModelIndex DataModel::index(int row, int column, const QModelIndex &parent)cons
                 }
                 break;
             }
+            case IBlock::LABELS_BLOCK:{
+                LabelBlock *f_labelsBlock = dynamic_cast<LabelBlock *>(f_block);
+                if(f_labelsBlock){
+                    return createIndex(row,column,f_labelsBlock->labels()->at(row));
+                }
+                break;
+            }
             default:{
                 return QModelIndex();
             }
@@ -97,6 +107,13 @@ QModelIndex DataModel::index(int row, int column, const QModelIndex &parent)cons
         if(f_parameters){
             Paraminfo *f_paramInfo = f_parameters->vectorParameters()->at(row);
             return createIndex(row,column,f_paramInfo);
+        }
+    }
+    else if(dynamic_cast<SetLabelsForBoard*>(static_cast<QObject*>(parent.internalPointer()))){
+        SetLabelsForBoard *f_setLabels = static_cast<SetLabelsForBoard *>(parent.internalPointer());
+        if(f_setLabels){
+            LDLabel *f_label = f_setLabels->labels()->at(row);
+            return createIndex(row,column,f_label);
         }
     }
 }
@@ -236,7 +253,31 @@ QModelIndex DataModel::parent(const QModelIndex &child)const{
             }
         }
     }
-
+    else if(dynamic_cast<SetLabelsForBoard *>((QObject*)child.internalPointer())){
+        //SetLabelsForBoard *f_setLabel = dynamic_cast<SetLabelsForBoard *>((QObject*)child.internalPointer());
+        foreach(auto logData,*m_logDataVector){
+            QList<IBlock *> *f_blocks = logData->blocks();
+            foreach(auto block,*f_blocks){
+                LabelBlock *f_labelBlock = dynamic_cast<LabelBlock *>(block);
+                if(f_labelBlock){
+                    return createIndex(f_blocks->indexOf(block),0,block);
+                }
+            }
+        }
+    }
+    else if(dynamic_cast<LDLabel *>((QObject*)child.internalPointer())){
+        LDLabel *f_label = dynamic_cast<LDLabel *>((QObject*)child.internalPointer());
+        foreach(auto logData,*m_logDataVector){
+            QList<IBlock *> *f_blocks = logData->blocks();
+            foreach(auto block,*f_blocks){
+                LabelBlock *f_labelBlock = dynamic_cast<LabelBlock *>(block);
+                if(f_labelBlock){
+                    SetLabelsForBoard *f_setLabel = f_labelBlock->labels(f_label->boardName());
+                    return createIndex(f_labelBlock->labels()->indexOf(f_setLabel),0,f_setLabel);
+                }
+            }
+        }
+    }
 
     return QModelIndex();
 }
@@ -286,6 +327,13 @@ int DataModel::rowCount(const QModelIndex &parent )const{
                 }
                 break;
             }
+            case IBlock::LABELS_BLOCK:{
+                LabelBlock *f_LabelBlock = dynamic_cast<LabelBlock *>(f_block);
+                if(f_LabelBlock){
+                    return f_LabelBlock->labels()->size();
+                }
+                break;
+            }
             default:{
                 return 0;
             }
@@ -302,6 +350,12 @@ int DataModel::rowCount(const QModelIndex &parent )const{
         if(!f_parameters)
             return 0;
         return f_parameters->vectorParameters()->size();
+    }
+    else if(dynamic_cast<SetLabelsForBoard*>(static_cast<QObject*>(parent.internalPointer()))){
+        SetLabelsForBoard *f_setLabels = dynamic_cast<SetLabelsForBoard*>(static_cast<QObject*>(parent.internalPointer()));
+        if(!f_setLabels)
+            return 0;
+        return f_setLabels->labels()->size();
     }
     return 0;
 }
@@ -345,6 +399,9 @@ QVariant DataModel::data(const QModelIndex &index, int role )const{
                 case IBlock::HEADER_BLOCK:{
                     return "HEADER";
                 }
+                case IBlock::LABELS_BLOCK:{
+                    return "LABELS";
+                }
                 default:{
                     return QModelIndex();
                 }
@@ -384,6 +441,15 @@ QVariant DataModel::data(const QModelIndex &index, int role )const{
                return QModelIndex();
             return f_paramInfo->index() + " : " + f_paramInfo->value();
         }
+        else if(dynamic_cast<SetLabelsForBoard *>((QObject*)index.internalPointer())){
+            SetLabelsForBoard *f_setLabels = dynamic_cast<SetLabelsForBoard *>(static_cast<QObject*>(index.internalPointer()));
+            return f_setLabels->nameBoard() + "(" + QString::number(f_setLabels->labels()->size()) + ")";
+        }
+        else if(dynamic_cast<LDLabel *>((QObject*)index.internalPointer())){
+            LDLabel *f_label = dynamic_cast<LDLabel *>(static_cast<QObject*>(index.internalPointer()));
+            return f_label->text();
+        }
+
     }
     else if(role == Qt::ForegroundRole){
            //return QColor(Qt::black);

@@ -7,16 +7,18 @@
 #include "iboard.h"
 #include "basestandartwidget.h"
 
+class LabelBlock;
+
 class AGraphicBoard : public QGraphicsView,public BoardForTrack
 {
     Q_OBJECT
-
 
     int m_minimumSize;
 protected:
     QMap<QString,AGraphicItem *> *m_items;
     QMap<QString,ICurve*> *m_curves;
     IBoard *m_boardInfo;
+
     QVector<BaseStandartWidget *> *m_standartWidgets;
     bool m_isStandartWidget;
 
@@ -31,6 +33,7 @@ public:
     virtual void newTrack(){}
     void customUpdate()override{redraw();}
 
+    QString name()override{return m_boardInfo->name();}
     virtual void resize()override;
     virtual void resizePicture();
     virtual void redraw(){}

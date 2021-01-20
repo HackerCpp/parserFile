@@ -17,7 +17,7 @@ class AGraphicTrack :  public ObjectOfTheBoard
 {
     Q_OBJECT
 protected:
-    enum TrackMode{NORMAL_MODE,CURVE_SHIFT_MODE};
+    enum TrackMode{NORMAL_MODE,CURVE_SHIFT_MODE,DRAW_LABEL_MODE};
 
     QPointF m_posLeftClick;
     QTimer m_timerLeftClick;
@@ -37,7 +37,10 @@ protected:
     //Normal mode
     bool m_isRightClick,m_isLeftClick,m_isLeftBorderClick, m_isRightBorderClick,
     m_isLeftCurvesClick, m_isRightCurvesClick, m_isLeftHeaderClick,
-    m_isRightHeaderClick, m_isOpenCloseClick, m_isOpen;
+    m_isRightHeaderClick, m_isOpenCloseClick, m_isOpen,
+    m_isClickAddLabel;
+    QPointF m_prevLabelPoint;
+    LDLabelItem *m_lastLabelItem;
 
     //Curve shift mode
     bool m_isLinePress;
@@ -107,6 +110,17 @@ public:
     virtual void lineCurveShiftMoveHandler(QPointF point){Q_UNUSED(point)}
     virtual void lineCurveShiftReleaseHandler(QPointF point){Q_UNUSED(point)}
 
+    void mousePressEventCurveShiftMode(QGraphicsSceneMouseEvent *event);
+    void mouseMoveEventCurveShiftMode(QGraphicsSceneMouseEvent *event);
+    void mouseReleaseEventCurveShiftMode(QGraphicsSceneMouseEvent *event);
+    void mouseDoubleClickEventCurveShiftMode(QGraphicsSceneMouseEvent *event);
+
+    //Draw label mode
+    void mousePressEventDrawLabelMode(QGraphicsSceneMouseEvent *event);
+    void mouseMoveEventDrawLabelMode(QGraphicsSceneMouseEvent *event);
+    void mouseReleaseEventDrawLabelMode(QGraphicsSceneMouseEvent *event);
+
+
     void mousePressEvent(QGraphicsSceneMouseEvent *event)override;
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event)override;
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event)override;
@@ -117,10 +131,7 @@ public:
     void mouseReleaseEventNormalMode(QGraphicsSceneMouseEvent *event);
     void mouseDoubleClickEventNormalMode(QGraphicsSceneMouseEvent *event);
 
-    void mousePressEventCurveShiftMode(QGraphicsSceneMouseEvent *event);
-    void mouseMoveEventCurveShiftMode(QGraphicsSceneMouseEvent *event);
-    void mouseReleaseEventCurveShiftMode(QGraphicsSceneMouseEvent *event);
-    void mouseDoubleClickEventCurveShiftMode(QGraphicsSceneMouseEvent *event);
+
 
 
     virtual void dragEnterEvent(QGraphicsSceneDragDropEvent *event)override{Q_UNUSED(event)}

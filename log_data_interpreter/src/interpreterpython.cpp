@@ -10,6 +10,7 @@
 #include "pythoneditor.h"
 #include <QWidget>
 #include <QFile>
+#include "translaterrustoing.h"
 
 
 InterpreterPython::InterpreterPython()
@@ -36,12 +37,13 @@ InterpreterPython::~InterpreterPython(){
 void InterpreterPython::init(){
     if(!m_blocks)
         return;
+    TranslaterRusToIng f_translater;
     foreach(auto block,*m_blocks){
         DataBlock *f_block = dynamic_cast<DataBlock *>(block);
         if(!f_block)
             continue;
         foreach(auto curve,*f_block->curves()){
-            QString f_curveNameForPython = "C_" + curve->mnemonic() + "_" + curve->shortCut().device();
+            QString f_curveNameForPython = "C_" + curve->mnemonic() + "_" + curve->shortCut().device() + curve->shortCut().dateTime();
             f_curveNameForPython = f_curveNameForPython.remove("[");
             f_curveNameForPython = f_curveNameForPython.remove("]");
             f_curveNameForPython = f_curveNameForPython.remove("(");
@@ -49,7 +51,7 @@ void InterpreterPython::init(){
             f_curveNameForPython = f_curveNameForPython.remove("-");
             f_curveNameForPython = f_curveNameForPython.remove("/");
             if(!m_mainContext->getVariable(f_curveNameForPython).isValid())
-                m_mainContext->addObject(f_curveNameForPython, curve);
+                m_mainContext->addObject(f_translater.translate(f_curveNameForPython), curve);
         }
 
     }
@@ -102,10 +104,10 @@ bool InterpreterPython::addLibrary(QString nameLibrary){
     QProcess *f_process = new QProcess();
     QFile file(QDir().currentPath() + "/python3/lastCommand.bat");
     file.open(QIODevice::WriteOnly);
-    file.write(QString("start " + QDir().currentPath() + "\\python3\\python.exe -m pip install " +
+    file.write(QString("start " + QDir().currentPath() + "/python3/python.exe -m pip install " +
     nameLibrary).toLatin1());
     file.close();
-    f_process->startDetached(QDir().currentPath() + "/python3/lastCommand.bat");
+    f_process->startDetached(QDir().currentPath() + "/python3/lastCommand.bat",QStringList());
     connect(f_process,&QProcess::readyReadStandardOutput,[=](){qDebug() << f_process->readAllStandardOutput();});
     return true;
 }

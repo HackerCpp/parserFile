@@ -18,6 +18,7 @@ contains(QMAKE_HOST.arch, x86_64):{
 
 
 SOURCES += \
+    $$PWD/inc/items/labelitem.cpp \
     $$PWD/src/canvas.cpp \
     $$PWD/src/tools/basestandartwidget.cpp \
     $$PWD/src/tools/curveshifttool.cpp \
@@ -75,6 +76,7 @@ SOURCES += \
 
 HEADERS += \
     $$PWD/inc/canvas.h \
+    $$PWD/inc/items/labelitem.h \
     $$PWD/inc/items/twodimensionalarrayitem.h \
     $$PWD/inc/tools/basestandartwidget.h \
     $$PWD/inc/tools/curveshifttool.h \

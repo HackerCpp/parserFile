@@ -241,9 +241,8 @@ void MainWindow::update(){
                               tr("The program will close and start updating, and all unsaved data will be lost. Update?"),
                               QMessageBox::Yes|QMessageBox::No)){
         QProcess f_process;
-        QStringList f_arguments;
-        f_arguments << "http://www.gfm.ru/kedr_files/x64/geology_loader.xml" << ".//"  ;
-        f_process.startDetached(QDir().currentPath() + "/updater/updater.exe",f_arguments);
+        f_process.startDetached(QDir().currentPath() + "/updater/updater.exe",
+                                QStringList() << "http://www.gfm.ru/kedr_files/x64/geology_loader.xml" << ".//" );
         disconnect(qApp, SIGNAL(aboutToQuit()),this, SLOT(quit()));
         qApp->quit();
         //exit(0);

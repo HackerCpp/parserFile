@@ -3,8 +3,11 @@
 #include <qvariant.h>
 #include <QImage>
 #include "drawsettings.h"
+#include "ldlabel.h"
 
+class LDLabelItem;
 enum InsertPossition{RIGHT,LEFT};
+
 class BoardForTrack{
 
 protected:
@@ -28,6 +31,10 @@ public:
     bool isDrawTime(){return m_drawSettings->isDrawTime();}
     QImage::Format formatPicture(){return m_drawSettings->formatPicture();}
     qreal scale(){return m_drawSettings->scale();}
+    qreal scaleTime(){return m_drawSettings->scaleTime();}
+    qreal scaleDepth(){return m_drawSettings->scaleDepth();}
+    virtual QString name(){return "name";}
+    virtual LDLabelItem *addLabel(LDLabel *label){Q_UNUSED(label)return nullptr;}
 
     int top(){return m_top;}
     uint length(){return m_length;}

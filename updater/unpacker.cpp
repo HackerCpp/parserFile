@@ -69,23 +69,25 @@ bool Unpacker::unpack(QString file,QString where,bool isDeleted){
     f_bar.setValue(f_currentPercent);
 
     foreach(auto entry,f_entries){
-        f_bar.setText(QString::fromStdString(entry.filePath.toStdString()));
+        f_bar.setText(entry.filePath);
         QString f_filePath = where + "/" + entry.filePath;
         if(entry.isDir){
-            QDir().mkdir(f_filePath);
+            QDir().mkpath(f_filePath);
+            continue;
         }
-        else{
-            QByteArray f_byteArray = zip_r.fileData(entry.filePath);
-            QFile f_file(f_filePath);
-            if(!f_file.open(QIODevice::WriteOnly)){
-                QDir().mkdir(QFileInfo(f_file).dir().path() + "//");
-                if(!f_file.open(QIODevice::WriteOnly)){
-                    continue;
-                }
+        QByteArray f_byteArray = zip_r.fileData(entry.filePath);
+        QFile f_file(f_filePath);
+        if(!f_file.open(QIODevice::WriteOnly)){
+            QFile f_logs("logUpdater.txt");
+            if(f_logs.open(QIODevice::Append)){
+                f_logs.write((f_filePath + "\n").toLocal8Bit());
+                qDebug() << "no open file" << f_filePath;
             }
-            f_file.write(f_byteArray);
-            f_file.close();
+            f_logs.close();
         }
+        f_file.write(f_byteArray);
+        f_file.close();
+
         f_currentPercent += f_unitPercent;
         f_bar.setValue(f_currentPercent);
     }

@@ -37,10 +37,12 @@ contains(DEFINES,MINI_VERSION):{
 }
 
 HEADERS += \
-    include/interpretercreater.h
+    include/interpretercreater.h \
+    translaterrustoing.h
 
 SOURCES += \
-    include/interpretercreater.cpp
+    include/interpretercreater.cpp \
+    translaterrustoing.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings

@@ -17,15 +17,16 @@ int main(int argc, char *argv[])
         if(file != "\\." && file != "\\..")
             QFile(QDir().currentPath() + "\\temporary\\" + file).remove();
     }
-    if(QDir().exists("updaterNew")){
-        QProcess f_process;
-        QStringList f_arguments;
-        f_process.start("updaterNew/updater.exe",f_arguments);
+    QString f_currrDir = QDir().currentPath();
+    if(QDir().exists(f_currrDir + "/updaterNew")){
+        /*QProcess f_process;
+        f_process.start(f_currrDir + "/updaterNew/updater.exe",QStringList());
         if(f_process.waitForStarted()){
-            f_process.close();
-            QDir("updater").removeRecursively();
-            QDir().rename("updaterNew","updater");
-        }
+            qDebug() << "start";
+            f_process.close();*/
+            QDir(f_currrDir + "/updater").removeRecursively();
+            QDir().rename(f_currrDir + "/updaterNew",f_currrDir + "/updater");
+        //}
     }
     MainWindow w;
 

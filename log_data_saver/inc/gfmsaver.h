@@ -24,6 +24,8 @@
 #include <QTextCodec>
 #include "datablock.h"
 
+class LabelBlock;
+
 class SAVER_EXPORT GFMSaver: public ASaverLogData {
     QTextCodec *m_codec;
 public:
@@ -43,6 +45,7 @@ public:
     QByteArray  getDesc(Desc *desc);
     QByteArray  getForSaveHeaderBlock(IBlock *block);
     QByteArray  getForSaveToolInfoBlock(IBlock *block);
+    QByteArray  getForSaveLabelsBlock(IBlock *block);
 };
 
 #endif // GFMSAVER_H

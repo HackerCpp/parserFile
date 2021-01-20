@@ -6,9 +6,10 @@
 #include "ruler.h"
 #include <QDesktopWidget>
 #include "acousticsEditor/acousticsEditor.h"
+#include "labelitem.h"
 
-VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves,DrawSettings *drawSettings)
-    :AGraphicBoard(boardInfo,curves,drawSettings)
+VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves,DrawSettings *drawSettings,SetLabelsForBoard *ldLabels)
+    :AGraphicBoard(boardInfo,curves,drawSettings),m_ldLabels(ldLabels)
 {
     init();
 
@@ -23,14 +24,12 @@ VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves,Dra
     }
     m_isShowLegend = false;
     VerticalTrack *f_prevTrack = nullptr;
-    //qDebug() << m_boardInfo->name();
     Ruler *f_ruler = new Ruler(this);
     connect(this,&VerticalBoard::changingTheVisibilityZone,f_ruler,&ObjectOfTheBoard::changingTheVisibilityZone);
     connect(this,&VerticalBoard::needToRedraw,f_ruler,&ObjectOfTheBoard::needToRedraw);
 
     m_canvas->addItem(f_ruler);
     foreach(auto trackInfo,*tracksInfo){
-        //qDebug() << trackInfo->name() << trackInfo->begin() << trackInfo->width();
        VerticalTrack *f_track  = new VerticalTrack(trackInfo,this);
        if(!f_track)
            continue;
@@ -42,6 +41,13 @@ VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves,Dra
        }
        f_prevTrack = f_track;
     }
+    /*LDLabel *m_ldLabel = new LDLabel(1640,1.03,1,this->boardInfo()->name(),"Text Metki");
+    m_ldLabels->labels()->push_back(m_ldLabel);*/
+    foreach(auto label,*m_ldLabels->labels()){
+        LDLabelItem *f_lblItem = new LDLabelItem(this,label);
+        m_canvas->addItem(f_lblItem);
+    }
+
     connect(horizontalScrollBar(), &QScrollBar::valueChanged, this, &VerticalBoard::scrollChanged);
     connect(verticalScrollBar(), &QScrollBar::valueChanged, this, &VerticalBoard::scrollChanged);
     //Создаём графические кривые. Если нет информации для кривой создаём.
@@ -73,64 +79,84 @@ void VerticalBoard::updateItems(){
     if(!m_curves || !m_boardInfo)
         return;
     //Создаём кривые, если нет itemInfo для них создаём и itemInfo
-        QMap<QString,AItem*> *itemsInfo = m_boardInfo->items();
-        foreach(auto curveKey,m_curves->keys()){
-            AItem *f_itemInfo = itemsInfo->value(curveKey);
-            if(!f_itemInfo){
-                f_itemInfo = ItemInfoCreater::CreateItemInfo(m_curves->value(curveKey));
-                if(f_itemInfo)
-                    itemsInfo->insert(curveKey,f_itemInfo);
-            }
-            if(f_itemInfo){
-                if(m_items->find(curveKey) == m_items->end()){ //Если графическое представление для этой кривой не создано на этом борде
-                    AGraphicItem *f_graphicItem = ItimsCreater::createItem(f_itemInfo,m_curves->value(curveKey),this,ItimsCreater::VERTICAL);//Создаём
-                    if(f_graphicItem){
-                        m_items->insert(curveKey,f_graphicItem);//И добавляем
-                    }
+    QMap<QString,AItem*> *itemsInfo = m_boardInfo->items();
+    foreach(auto curveKey,m_curves->keys()){
+        AItem *f_itemInfo = itemsInfo->value(curveKey);
+        if(!f_itemInfo){
+            f_itemInfo = ItemInfoCreater::CreateItemInfo(m_curves->value(curveKey));
+            if(f_itemInfo)
+                itemsInfo->insert(curveKey,f_itemInfo);
+        }
+        if(f_itemInfo){
+            if(m_items->find(curveKey) == m_items->end()){ //Если графическое представление для этой кривой не создано на этом борде
+                AGraphicItem *f_graphicItem = ItimsCreater::createItem(f_itemInfo,m_curves->value(curveKey),this,ItimsCreater::VERTICAL);//Создаём
+                if(f_graphicItem){
+                    m_items->insert(curveKey,f_graphicItem);//И добавляем
                 }
             }
         }
-        if(m_legend)
-            delete m_legend; m_legend = nullptr;
+    }
+    //Создаём
 
-        m_legend = new ItemsLegendView(m_items,this);
-        m_legend->move(0,0);
+    if(m_legend)
+        delete m_legend; m_legend = nullptr;
 
-        CurvesForCalc f_curves;
-        foreach(auto item,m_items->values()){
-            if(item->itemInfo()->type() == TypeItem::ACU){
-                if(item->curve()->mnemonic().indexOf("1") != -1)
-                    f_curves.m_acuOne = dynamic_cast<VAcuItem *>(item);
-                else if(item->curve()->mnemonic().indexOf("2") != -1)
-                    f_curves.m_acuTwo = dynamic_cast<VAcuItem *>(item);
-            }
-            else if(item->curve()->mnemonic() == "T1(mkSec)")
-                f_curves.m_t1 = dynamic_cast<VLineItem *>(item);
-            else if(item->curve()->mnemonic() == "T2(mkSec)")
-                f_curves.m_t2 = dynamic_cast<VLineItem *>(item);
-            else if(item->curve()->mnemonic() == "DT(mkSec)")
-                f_curves.m_dt = dynamic_cast<VLineItem *>(item);
-            else if(item->curve()->mnemonic() == "A1(ADCU)")
-                f_curves.m_a1_adcu = dynamic_cast<VLineItem *>(item);
-            else if(item->curve()->mnemonic() == "A2(ADCU)")
-                f_curves.m_a2_adcu = dynamic_cast<VLineItem *>(item);
-            else if(item->curve()->mnemonic() == "A1(DB)")
-                f_curves.m_a1_db = dynamic_cast<VLineItem *>(item);
-            else if(item->curve()->mnemonic() == "A2(DB)")
-                f_curves.m_a2_db = dynamic_cast<VLineItem *>(item);
-            else if(item->curve()->mnemonic() == "Alpha(DB/M)")
-                f_curves.m_alpha = dynamic_cast<VLineItem *>(item);
+    m_legend = new ItemsLegendView(m_items,this);
+    m_legend->move(0,0);
+
+//Add Stadart widget*************************************
+    CurvesForCalc f_curves;
+    foreach(auto item,m_items->values()){
+        if(item->itemInfo()->type() == TypeItem::ACU){
+            if(item->curve()->mnemonic().indexOf("1") != -1)
+                f_curves.m_acuOne = dynamic_cast<VAcuItem *>(item);
+            else if(item->curve()->mnemonic().indexOf("2") != -1)
+                f_curves.m_acuTwo = dynamic_cast<VAcuItem *>(item);
         }
+        else if(item->curve()->mnemonic() == "T1(mkSec)")
+            f_curves.m_t1 = dynamic_cast<VLineItem *>(item);
+        else if(item->curve()->mnemonic() == "T2(mkSec)")
+            f_curves.m_t2 = dynamic_cast<VLineItem *>(item);
+        else if(item->curve()->mnemonic() == "DT(mkSec)")
+            f_curves.m_dt = dynamic_cast<VLineItem *>(item);
+        else if(item->curve()->mnemonic() == "A1(ADCU)")
+            f_curves.m_a1_adcu = dynamic_cast<VLineItem *>(item);
+        else if(item->curve()->mnemonic() == "A2(ADCU)")
+            f_curves.m_a2_adcu = dynamic_cast<VLineItem *>(item);
+        else if(item->curve()->mnemonic() == "A1(DB)")
+            f_curves.m_a1_db = dynamic_cast<VLineItem *>(item);
+        else if(item->curve()->mnemonic() == "A2(DB)")
+            f_curves.m_a2_db = dynamic_cast<VLineItem *>(item);
+        else if(item->curve()->mnemonic() == "Alpha(DB/M)")
+            f_curves.m_alpha = dynamic_cast<VLineItem *>(item);
+    }
 
-        if(f_curves.m_dt && f_curves.m_t1 && f_curves.m_t2 && f_curves.m_a1_db
-                && f_curves.m_a2_db && f_curves.m_alpha && f_curves.m_acuOne
-                && f_curves.m_acuTwo && f_curves.m_a1_adcu  && f_curves.m_a2_adcu
-                && f_curves.m_acuOne->is_visible() && f_curves.m_acuTwo->is_visible()){
-            if(m_standartWidgets){
-                m_standartWidgets->push_back(new AcousticsEditor(f_curves));
-                //m_standartWidgets->first()->show();
+    if(f_curves.m_dt && f_curves.m_t1 && f_curves.m_t2 && f_curves.m_a1_db
+            && f_curves.m_a2_db && f_curves.m_alpha && f_curves.m_acuOne
+            && f_curves.m_acuTwo && f_curves.m_a1_adcu  && f_curves.m_a2_adcu
+            && f_curves.m_acuOne->is_visible() && f_curves.m_acuTwo->is_visible()){
+        if(m_standartWidgets){
+            m_standartWidgets->push_back(new AcousticsEditor(f_curves));
+            //m_standartWidgets->first()->show();
+        }
+    }
+}
+
+LDLabelItem * VerticalBoard::addLabel(LDLabel *label){
+    QList<QGraphicsItem *> f_tracks = items();
+    m_ldLabels->addLabel(label);
+    LDLabelItem *f_ldlItem = new LDLabelItem(this,label);
+    m_canvas->addItem(f_ldlItem);
+    foreach(auto track, f_tracks){
+        VerticalTrack *f_track = dynamic_cast<VerticalTrack *>(track);
+        if(f_track){
+            if(f_track->trackInfo()->number() == f_ldlItem->ldLabel()->trackNumber()){
+                f_ldlItem->addParentTrack(f_track);
+                break;
             }
         }
+    }
+    return f_ldlItem;
 }
 
 void VerticalBoard::mousePressEvent(QMouseEvent *event){
@@ -192,6 +218,7 @@ void VerticalBoard::mouseReleaseEvent(QMouseEvent *event){
 
 void VerticalBoard::distributionOfItemsBetweenTracks(){
     QList<QGraphicsItem *> f_tracks = items();
+    QList<QGraphicsItem *> f_ldlItem = items();
     //убираеm из треков все кривые
     foreach(auto track, f_tracks){
         VerticalTrack *f_track = dynamic_cast<VerticalTrack *>(track);
@@ -206,6 +233,20 @@ void VerticalBoard::distributionOfItemsBetweenTracks(){
             if(f_track){
                 if(f_track->trackInfo()->number() == item->itemInfo()->numberOfTrack()){
                     f_track->addIteam(item);
+                    break;
+                }
+            }
+        }
+    }
+
+    foreach(auto item,f_ldlItem){
+        LDLabelItem *f_ldlItem = dynamic_cast<LDLabelItem *>(item);
+        if(!f_ldlItem)continue;
+        foreach(auto track, f_tracks){
+            VerticalTrack *f_track = dynamic_cast<VerticalTrack *>(track);
+            if(f_track){
+                if(f_track->trackInfo()->number() == f_ldlItem->ldLabel()->trackNumber()){
+                    f_ldlItem->addParentTrack(f_track);
                     break;
                 }
             }

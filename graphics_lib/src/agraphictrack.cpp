@@ -2,7 +2,8 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsScene>
 #include <QEvent>
-
+#include "ldlabel.h"
+#include "labelitem.h"
 
 
 void AGraphicTrack::swapPixMap(){
@@ -21,7 +22,7 @@ void AGraphicTrack::swapPixMap(){
 }
 
 void AGraphicTrack::init(){
-    m_mode = NORMAL_MODE;
+    m_mode = DRAW_LABEL_MODE;//NORMAL_MODE;
     setFlags(ItemClipsToShape | ItemClipsChildrenToShape |ItemIgnoresTransformations);
     m_items = new QList<AGraphicItem*>;
     m_visibilitySquare.setRect(0,0,2000,2000);
@@ -29,7 +30,7 @@ void AGraphicTrack::init(){
     m_isLeftBorderClick = m_isRightBorderClick = m_isLeftCurvesClick
     =  m_isRightCurvesClick = m_isLeftHeaderClick = m_isOpenCloseClick
     = m_isRightHeaderClick = m_isRightClick = m_isLeftClick = false;
-    m_isLinePress = false;
+    m_isLinePress = m_isClickAddLabel = false;
     m_isOpen = true;
     m_positionOfTheBorder = 0;
     m_boundingRect = QRectF(0,0,2000,2000);
@@ -109,6 +110,10 @@ void AGraphicTrack::mousePressEvent(QGraphicsSceneMouseEvent *event){
         case CURVE_SHIFT_MODE:
             mousePressEventCurveShiftMode(event);
             break;
+        case DRAW_LABEL_MODE:
+            mousePressEventDrawLabelMode(event);
+            break;
+
     }
 }
 
@@ -119,6 +124,9 @@ void AGraphicTrack::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
             break;
         case CURVE_SHIFT_MODE:
             mouseMoveEventCurveShiftMode(event);
+            break;
+        case DRAW_LABEL_MODE:
+            mouseMoveEventDrawLabelMode(event);
             break;
     }
     QGraphicsItem::mouseMoveEvent(event);
@@ -131,6 +139,9 @@ void AGraphicTrack::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
             break;
         case CURVE_SHIFT_MODE:
             mouseReleaseEventCurveShiftMode(event);
+            break;
+        case DRAW_LABEL_MODE:
+            mouseReleaseEventDrawLabelMode(event);
             break;
     }
 }
@@ -322,4 +333,33 @@ void AGraphicTrack::sceneUpdate(){
     }
     else
         scene()->update();
+}
+
+
+//Draw label mode
+void AGraphicTrack::mousePressEventDrawLabelMode(QGraphicsSceneMouseEvent *event){
+    qreal f_depth = event->pos().y() / m_board->scaleDepth();
+    qreal f_time = (event->pos().y() / m_board->scaleTime()) / 60000;
+    int f_xIndent = event->pos().x() - this->boundingRect().x();
+    LDLabel *m_ldLabel = new LDLabel(f_depth,f_time,m_track->number(),m_board->name(),">>>text>>>",f_xIndent);
+    m_ldLabel->setSize(QSize(10,10));
+    m_lastLabelItem = m_board->addLabel(m_ldLabel);
+    m_prevLabelPoint = event->scenePos();
+    m_isClickAddLabel = true;
+
+}
+
+void AGraphicTrack::mouseMoveEventDrawLabelMode(QGraphicsSceneMouseEvent *event){
+    if(m_isClickAddLabel){
+
+        QPointF f_delta = m_prevLabelPoint - event->scenePos();
+        m_lastLabelItem->setSize(QSize(m_lastLabelItem->size().width() - f_delta.x(),m_lastLabelItem->size().height() + f_delta.y()));
+        m_prevLabelPoint = event->scenePos();
+        sceneUpdate();
+    }
+
+}
+
+void AGraphicTrack::mouseReleaseEventDrawLabelMode(QGraphicsSceneMouseEvent *event){
+    m_isClickAddLabel = false;
 }

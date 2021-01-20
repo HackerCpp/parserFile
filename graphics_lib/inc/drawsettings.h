@@ -48,6 +48,8 @@ public:
     bool isDrawTime(){return m_isDrawTime;}
     QImage::Format formatPicture(){return m_formatImg;}
     qreal scale(){return (m_isDrawTime ? m_scaleForTime : m_scaleForDepth) * pixelPerMm();}
+    qreal scaleTime(){return m_scaleForTime * pixelPerMm();}
+    qreal scaleDepth(){return m_scaleForDepth * pixelPerMm();}
 public slots:
     virtual void setFormatTime(FormatTime format);
     virtual void setFormatDepth(FormatDepth format);
