@@ -12,6 +12,8 @@ public:
     SetLabelsForBoard(QString nameBoard);
 
     void addLabel(LDLabel *label){m_labels->push_back(label);}
+    void setBoardName(QString boardName);
+    void deleteLabel(LDLabel *label){m_labels->removeOne(label);}
 
     QString nameBoard(){return m_nameBoard;}
     QList<LDLabel *> *labels(){return m_labels;}

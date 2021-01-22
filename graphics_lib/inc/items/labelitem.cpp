@@ -15,19 +15,39 @@ LDLabelItem::LDLabelItem(BoardForTrack *board,LDLabel *label,AGraphicTrack *trac
     m_isPress = false;
     m_font = QFont("Times", 15);
     m_isActive = true;
-    m_textRect = QRect(lineRect().right() + (lineRect().width() < 0 ? -textSize().width() : 0),
-                                    lineRect().bottom() + (lineRect().height() < 0 ? -textSize().height() : 0),
-                                    textSize().width(),textSize().height());
+    updateParam();
     setFlag(QGraphicsItem::ItemIsFocusable,true);
     setFocus(Qt::MouseFocusReason);
+    m_itemMenu = new QMenu();
+    m_itemMenu->addAction(tr("delete Label"),this,&LDLabelItem::removeThis);
+    m_itemMenu->hide();
+
+}
+
+LDLabelItem::~LDLabelItem(){
+    if(m_itemMenu){delete m_itemMenu; m_itemMenu = nullptr;}
+}
+
+void LDLabelItem::removeThis(){
+    m_trackParent->deleteLabelItem(this);
+}
+
+void LDLabelItem::addParentTrack(AGraphicTrack *trackParent){
+    m_trackParent = trackParent;
+    QGraphicsItem::prepareGeometryChange();
+    updateParam();
+    update();
 
 }
 
 QRectF LDLabelItem::boundingRect()const{
+    if(m_board->isDrawTime() != m_label->isDarawTime())
+        return QRectF();
+
     QRect f_textR = m_textRect.normalized();
-    qreal f_y = m_board->scale() * (m_board->isDrawTime() ?  (m_label->time() * 60000) : m_label->depth());
-    qreal f_xBegin = (m_trackParent ? m_trackParent->boundingRect().x() : 0) +  m_label->leftIndent();
-    QRect f_lineR = QRect(f_xBegin,f_y,m_label->size().width(),-m_label->size().height()).normalized();
+    qreal f_y = m_board->scale() * (m_board->isDrawTime() ?  (m_label->timeOrDepth()) : m_label->timeOrDepth());
+    qreal f_xBegin = (m_trackParent ? m_trackParent->boundingRect().x() : 0) +  (m_label->leftIndent() * m_board->pixelPerMm());
+    QRect f_lineR = QRect(f_xBegin,f_y,m_sizePixels.width(),-m_sizePixels.height()).normalized();
     if(m_textRect.isEmpty())
         return f_lineR;
     int left = f_textR.left() < f_lineR.left() ? f_textR.left() : f_lineR.left();
@@ -40,10 +60,13 @@ QRectF LDLabelItem::boundingRect()const{
 
 
 void LDLabelItem::paint(QPainter *painter, const QStyleOptionGraphicsItem* option, QWidget* wid){
+    Q_UNUSED(option)
+    Q_UNUSED(wid)
+    updateParam();
     painter->setFont(m_font);
 
-    painter->setPen(QPen(Qt::blue,2));
-    painter->setBrush(QBrush(QColor(115,49,221,220)));
+    painter->setPen(QPen(Qt::blue,2,Qt::DotLine));
+    painter->setBrush(QBrush(QColor(m_label->backgroundColor())));
 
     QRect f_rectForText = textRect();
 
@@ -51,10 +74,10 @@ void LDLabelItem::paint(QPainter *painter, const QStyleOptionGraphicsItem* optio
     painter->drawLine(lineRect().topLeft(),lineRect().bottomRight());
     painter->drawLine(lineRect().topLeft(),lineRect().topRight());
 
-    painter->setPen(QPen(Qt::white,2));
+    painter->setPen(QPen(QColor(m_label->color()),2,Qt::DotLine));
     painter->drawText(f_rectForText,m_label->text(),QTextOption(Qt::AlignHCenter | Qt::AlignVCenter));
-    painter->setPen(QPen(Qt::red,1,Qt::DotLine));
 
+    //painter->setPen(QPen(Qt::red,1,Qt::DotLine));
     //painter->setBrush(QBrush(QColor(115,49,221,10)));
     //painter->drawRect(boundingRect());
 }
@@ -67,11 +90,11 @@ void LDLabelItem::run(){
 
 }
 
-void LDLabelItem::setSize(QSize size){
+void LDLabelItem::setSize(QSizeF size){
+    QGraphicsItem::prepareGeometryChange();
     m_label->setSize(size);
-    m_textRect = QRect(lineRect().right() + (lineRect().width() < 0 ? -textSize().width() : 0),
-                                    lineRect().bottom() + (lineRect().height() < 0 ? -textSize().height() : 0),
-                                    textSize().width(),textSize().height());
+    updateParam();
+    update();
 }
 
 QSize LDLabelItem::textSize(){
@@ -87,20 +110,32 @@ QRect LDLabelItem::textRect() const {
 }
 
 QRect LDLabelItem::lineRect(){
-    qreal f_y = m_board->scale() * (m_board->isDrawTime() ?  (m_label->time() * 60000) : m_label->depth());
-    qreal f_xBegin = (m_trackParent ? m_trackParent->boundingRect().x() : 0) +  m_label->leftIndent();
-    return QRect(f_xBegin,f_y,m_label->size().width(),-m_label->size().height());
+    if(m_board->isDrawTime() != m_label->isDarawTime())
+        return QRect();
+    qreal f_y = m_board->scale() * (m_board->isDrawTime() ?  (m_label->timeOrDepth()) : m_label->timeOrDepth());
+    qreal f_xBegin = (m_trackParent ? m_trackParent->boundingRect().x() : 0) +  (m_label->leftIndent() * m_board->pixelPerMm());
+    QRect f_lineR = QRect(f_xBegin,f_y,m_sizePixels.width(),-m_sizePixels.height());
+}
+
+void LDLabelItem::updateParam(){
+    m_sizePixels = QSizeF(m_label->size().width() * m_board->pixelPerMm(),m_label->size().height() * m_board->pixelPerMm());
+    m_textRect = QRect(lineRect().right() + (lineRect().width() < 0 ? -textSize().width() : 0),
+                                    lineRect().bottom() + (lineRect().height() < 0 ? -textSize().height() : 0),
+                                    textSize().width(),textSize().height());
 }
 
 void LDLabelItem::mousePressEvent(QGraphicsSceneMouseEvent *event){
-    m_isPress = m_isActive = true;
-    m_prevPoint = event->scenePos();
+    if(event->button() == Qt::LeftButton){
+        m_isPress = m_isActive = true;
+        m_prevPoint = event->scenePos();
+    }
+
 }
 
 void LDLabelItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
     if(m_isPress){
         QGraphicsItem::prepareGeometryChange();
-        m_label->setLeftIndent(m_label->leftIndent() - (m_prevPoint - event->scenePos()).x());
+        m_label->setLeftIndent(m_label->leftIndent() - (m_prevPoint - event->scenePos()).x() / m_board->pixelPerMm());
         m_textRect = QRect(lineRect().right() + (lineRect().width() < 0 ? -textSize().width() : 0),
                                         lineRect().bottom() + (lineRect().height() < 0 ? -textSize().height() : 0),
                                         textSize().width(),textSize().height());
@@ -112,6 +147,10 @@ void LDLabelItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
 
 void LDLabelItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     m_isPress = false;
+    if(event->button() == Qt::RightButton){
+        m_itemMenu->move(QCursor::pos());
+        m_itemMenu->show();
+    }
 }
 
 void LDLabelItem::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event){
@@ -132,7 +171,6 @@ void LDLabelItem::keyPressEvent(QKeyEvent *event){
         m_label->text().push_back("\n");
     }
     else{
-        qDebug() << event->text();
         m_label->text().push_back(event->text());
     }
     QGraphicsItem::prepareGeometryChange();

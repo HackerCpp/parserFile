@@ -8,32 +8,38 @@ class LDLabel : public QObject
 {
     Q_OBJECT
 
-    qreal m_depth;
-    qreal m_time;
-    QSize m_size;
+    bool m_isDrawTime;
+    qreal m_timeOrDepth;
+    QSizeF m_size;
     QString m_text;
     int m_track;
     QString m_boardName;
-    int m_leftIndent;
+    qreal m_leftIndent;
+    QString m_color;
+    QString m_backgroundColor;
 public:
-    LDLabel(qreal depth = 0,qreal time = 0,int track = -1,
+    LDLabel(qreal timeOrDepth = 0,bool isdrawTime = true,int track = -1,
             QString boardName = "",QString text = "",int leftIndent = 0);
     ~LDLabel(){}
 
-    void setSize(QSize size){m_size = size;}
+    void setSize(QSizeF size){m_size = size;}
     void setText(QString text){m_text = text;}
     void appendText(QString text){m_text.append(text);}
     void setTrackNumber(int trackNumber){m_track = trackNumber;}
     void setboardName(QString boardName){m_boardName = boardName;}
-    void setLeftIndent(int leftIndent){m_leftIndent = leftIndent;}
+    void setLeftIndent(qreal leftIndent){m_leftIndent = leftIndent;}
+    void setColor(QString color){m_color = color;}
+    void setBackgraundColor(QString backgroundColor){m_backgroundColor = backgroundColor;}
 
-    const QSize size(){return m_size;}
+    const QSizeF size(){return m_size;}
     QString &text(){return m_text;}
-    qreal depth(){return m_depth;}
-    qreal time(){return m_time;}
+    qreal timeOrDepth(){return m_timeOrDepth;}
     int trackNumber(){return m_track;}
+    bool isDarawTime(){return m_isDrawTime;}
     QString boardName(){return m_boardName;}
-    int leftIndent(){return m_leftIndent;}
+    qreal leftIndent(){return m_leftIndent;}
+    QString color(){return m_color;}
+    QString backgroundColor(){return m_backgroundColor;}
 
 };
 

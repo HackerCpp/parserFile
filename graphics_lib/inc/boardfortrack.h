@@ -36,6 +36,8 @@ public:
     virtual QString name(){return "name";}
     virtual LDLabelItem *addLabel(LDLabel *label){Q_UNUSED(label)return nullptr;}
 
+    virtual void deleteLabelItem(LDLabelItem * labelitem){Q_UNUSED(labelitem)}
+
     int top(){return m_top;}
     uint length(){return m_length;}
     int positionHeader(){return m_positionHeader;}

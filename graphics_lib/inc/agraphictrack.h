@@ -11,19 +11,17 @@
 #include <QTabWidget>
 #include <QDragEnterEvent>
 
-
+enum TrackMode{NORMAL_MODE,DRAW_LABEL_MODE,CURVE_SHIFT_MODE};
 
 class AGraphicTrack :  public ObjectOfTheBoard
 {
     Q_OBJECT
 protected:
-    enum TrackMode{NORMAL_MODE,CURVE_SHIFT_MODE,DRAW_LABEL_MODE};
-
     QPointF m_posLeftClick;
     QTimer m_timerLeftClick;
     QImage *m_infoPixMap,*m_curentHeader,*m_doubleHeader,*m_nameTrack;
     BoardForTrack *m_board;
-    TrackMode m_mode;
+
     QWidget m_parent;
 
     QRectF m_boundingRect;
@@ -46,6 +44,7 @@ protected:
     bool m_isLinePress;
 
     QPointF m_prevPoint;
+    TrackMode m_mode;
 public:
     AGraphicTrack(ATrack *track,BoardForTrack *board);
     virtual ~AGraphicTrack()override;
@@ -56,17 +55,20 @@ public:
     qreal topValue();
     qreal bottomValue();
 
+
     virtual void activate(bool activate){Q_UNUSED(activate)}
     ATrack *trackInfo(){return m_track;}
     void addIteam(AGraphicItem* item);
     void clearItems();
     virtual void updateItemsParam();
+    void changeMode(TrackMode mode){m_mode = mode;}
 
 
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*) override{Q_UNUSED(painter)}
     virtual void run()override{}
     virtual QRectF boundingRect()const override{return m_boundingRect;}
     virtual void swapPixMap()override;
+    void deleteLabelItem(LDLabelItem * labelitem);
 
     void init();
     //Normal mode

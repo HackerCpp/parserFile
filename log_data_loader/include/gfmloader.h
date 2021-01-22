@@ -46,6 +46,7 @@ public:
     void findCurves(QByteArray *header,DataBlock * dataBlock,QByteArray bodyBlock,int indexBeginData);
     void findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *curve,QByteArray bodyBlock,int indexBeginData);
     void parserHeaderBlock(const QByteArray &bodyBlock,IBlock *block);
+    void parserLabelsBlock(const QByteArray &bodyBlock,IBlock *block);
 
 };
 

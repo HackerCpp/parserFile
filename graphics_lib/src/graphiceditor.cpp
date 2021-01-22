@@ -16,7 +16,7 @@ GraphicEditor::GraphicEditor(QSharedPointer<ILogData> logData,DrawSettings *draw
     m_tabMenu = QPointer<QMenu>(new QMenu(tr("&Forms menu")));
     m_tabMenu->addAction(tr("&Rename board"),this, SLOT(renameBoard()));
     m_tabMenu->addAction(tr("&Delete board"),this, SLOT(deleteBoard()));
-    m_tabMenu->setMaximumSize(1000,1000);
+    //m_tabMenu->setMaximumSize(1000,1000);
     addCurves();
     addForms();
     tabBar()->installEventFilter(this); // установка фильтра обработки событий
@@ -79,9 +79,10 @@ void GraphicEditor::addForms(){
             f_labelsBlock = dynamic_cast<LabelBlock *>(block);
         }
     }
-    if(!f_labelsBlock)
+    if(!f_labelsBlock){
         f_labelsBlock = new LabelBlock;
-    m_logData->addBlock(f_labelsBlock);
+        m_logData->addBlock(f_labelsBlock);
+    }
 
     f_boards = m_forms->boards();
     if(!f_boards){
@@ -138,7 +139,16 @@ void GraphicEditor::newBoard(){
     f_track->setIsGreed(true);
     f_newBoard->setTrack(f_track);
     m_forms->boards()->push_back(f_newBoard);
-    AGraphicBoard *f_grBoard = new VerticalBoard(f_newBoard,m_curves,m_drawSettings,nullptr);
+    SetLabelsForBoard *f_setLabels = new SetLabelsForBoard(f_newBoard->name());
+    LabelBlock *f_labelsBlock = nullptr;
+    foreach(auto block,*m_logData->blocks()){
+        if(block->name() == IBlock::LABELS_BLOCK){
+            f_labelsBlock = dynamic_cast<LabelBlock *>(block);
+        }
+    }
+    if(f_labelsBlock)
+        f_labelsBlock->addSetLabels(f_setLabels);
+    AGraphicBoard *f_grBoard = new VerticalBoard(f_newBoard,m_curves,m_drawSettings,f_setLabels);
     m_curentBoard = f_grBoard;
     insertTab(count() - 1,f_grBoard,f_newBoard->name());
     setCurrentWidget(m_curentBoard);
@@ -204,13 +214,22 @@ void GraphicEditor::renameBoard(){
     AGraphicBoard *f_board = dynamic_cast<AGraphicBoard *>(widget(m_lastTabClicked));
     if(!f_board)
         return;
-
+    SetLabelsForBoard *f_setLabels = nullptr;
+    LabelBlock *f_labelsBlock = nullptr;
+    foreach(auto block,*m_logData->blocks()){
+        if(block->name() == IBlock::LABELS_BLOCK){
+            f_labelsBlock = dynamic_cast<LabelBlock *>(block);
+        }
+    }
+    if(f_labelsBlock)
+        f_setLabels = f_labelsBlock->labels(f_board->boardInfo()->name());
     bool bOk;
     QString f_name = QInputDialog::getText( 0, tr("Rename"),tr("New name:"),QLineEdit::Normal,
                                          f_board->boardInfo()->name(),&bOk);
     if (!bOk)
         return;
 
+    f_setLabels->setBoardName(f_name);
     tabBar()->setTabText(m_lastTabClicked,f_name);
     f_board->boardInfo()->setName(f_name);
 
@@ -225,4 +244,13 @@ void GraphicEditor::deleteBoard(){
     removeTab(m_lastTabClicked);
     f_board->activate(false);
     delete f_board;f_board = nullptr;
+}
+
+void GraphicEditor::changeMode(int id){
+    for(int index = 0; index < count();++index){
+        AGraphicBoard *f_board = dynamic_cast<AGraphicBoard *>( widget(index));
+        if(!f_board)
+            return;
+        f_board->changeMode(id);
+    }
 }

@@ -36,6 +36,7 @@ public:
     virtual void redraw()override;
     void updateItems();
     LDLabelItem *addLabel(LDLabel *label)override;
+    void deleteLabelItem(LDLabelItem * labelitem)override;
 
 
     void mousePressEvent(QMouseEvent *event) override;

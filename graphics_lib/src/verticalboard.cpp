@@ -41,11 +41,11 @@ VerticalBoard::VerticalBoard(IBoard *boardInfo,QMap<QString,ICurve*> *curves,Dra
        }
        f_prevTrack = f_track;
     }
-    /*LDLabel *m_ldLabel = new LDLabel(1640,1.03,1,this->boardInfo()->name(),"Text Metki");
-    m_ldLabels->labels()->push_back(m_ldLabel);*/
-    foreach(auto label,*m_ldLabels->labels()){
-        LDLabelItem *f_lblItem = new LDLabelItem(this,label);
-        m_canvas->addItem(f_lblItem);
+    if(m_ldLabels){
+        foreach(auto label,*m_ldLabels->labels()){
+            LDLabelItem *f_lblItem = new LDLabelItem(this,label);
+            m_canvas->addItem(f_lblItem);
+        }
     }
 
     connect(horizontalScrollBar(), &QScrollBar::valueChanged, this, &VerticalBoard::scrollChanged);
@@ -143,20 +143,16 @@ void VerticalBoard::updateItems(){
 }
 
 LDLabelItem * VerticalBoard::addLabel(LDLabel *label){
-    QList<QGraphicsItem *> f_tracks = items();
+    //QList<QGraphicsItem *> f_tracks = items();
     m_ldLabels->addLabel(label);
     LDLabelItem *f_ldlItem = new LDLabelItem(this,label);
     m_canvas->addItem(f_ldlItem);
-    foreach(auto track, f_tracks){
-        VerticalTrack *f_track = dynamic_cast<VerticalTrack *>(track);
-        if(f_track){
-            if(f_track->trackInfo()->number() == f_ldlItem->ldLabel()->trackNumber()){
-                f_ldlItem->addParentTrack(f_track);
-                break;
-            }
-        }
-    }
     return f_ldlItem;
+}
+
+void VerticalBoard::deleteLabelItem(LDLabelItem * labelitem){
+    m_canvas->removeItem(labelitem);
+    m_ldLabels->deleteLabel(labelitem->ldLabel());
 }
 
 void VerticalBoard::mousePressEvent(QMouseEvent *event){
@@ -251,7 +247,6 @@ void VerticalBoard::distributionOfItemsBetweenTracks(){
                 }
             }
         }
-
     }
 }
 

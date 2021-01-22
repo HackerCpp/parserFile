@@ -99,19 +99,30 @@ void AGraphicBoard::openCurveSettings(){
     f_curveBrowser->show();
 }
 
+void AGraphicBoard::changeMode(int id){
+    QList<QGraphicsItem *> f_items = this->items();
+    foreach(auto item, f_items){
+        AGraphicTrack *f_track = dynamic_cast<AGraphicTrack *>(item);
+        if(f_track){
+           f_track->changeMode((TrackMode)id);
+        }
+    }
+
+}
+
 void AGraphicBoard::mousePressEvent(QMouseEvent *event){
      QGraphicsView::mousePressEvent(event);
  }
 
- void AGraphicBoard::mouseMoveEvent(QMouseEvent *event){
+void AGraphicBoard::mouseMoveEvent(QMouseEvent *event){
      QGraphicsView::mouseMoveEvent(event);
  }
 
- void AGraphicBoard::mouseReleaseEvent(QMouseEvent *event){
+void AGraphicBoard::mouseReleaseEvent(QMouseEvent *event){
      QGraphicsView::mouseReleaseEvent(event);
  }
 
- void AGraphicBoard::curveUpdate(){
+void AGraphicBoard::curveUpdate(){
      distributionOfItemsBetweenTracks();
      updateItemsParam();
      redraw();

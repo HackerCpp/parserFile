@@ -145,10 +145,9 @@ QPushButton {
   padding:5px;
 }
 
-QPushButton::pressed {
+QPushButton:pressed , QPushButton:open{
   border: 1px solid #007acc;
   background:#3e3e42;
-
 }
 
 QToolButton {

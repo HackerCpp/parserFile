@@ -40,6 +40,7 @@ public slots:
 
     void renameBoard();
     void deleteBoard();
+    void changeMode(int id);
 
 };
 

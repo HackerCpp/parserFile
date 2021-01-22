@@ -18,6 +18,8 @@
 #include "markItem.h"
 #include "AcuItem.h"
 #include "headerblock.h"
+#include "labelblock.h"
+#include "ldlabel.h"
 #include "specItem.h"
 #include <QtCore/QtEndian>
 
@@ -265,6 +267,9 @@ void GFMLoader::run(){
         else if(name == "[DATA_BLOCK]"){
             f_type = IBlock::DATA_BLOCK;
         }
+        else if(name == "[LABELS]"){
+            f_type = IBlock::LABELS_BLOCK;
+        }
         if(f_type == IBlock::NO_BLOCK)
             continue;
         IBlock *f_block = IBlock::blockCreater(f_type);
@@ -277,7 +282,7 @@ void GFMLoader::run(){
     delete blocksList;
     byteArrayFile.clear();
     mergeIdenticalBlocks();
-    qDebug() << "end load gfm : " << time.msecsTo( QTime::currentTime() ) << "mS";
+    //qDebug() << "end load gfm : " << time.msecsTo( QTime::currentTime() ) << "mS";
     m_isReady = true;
     emit ready();
 }
@@ -292,6 +297,8 @@ void GFMLoader::parser(const QByteArray &bodyBlock,IBlock *block){
         parserHeaderBlock(bodyBlock,block);
     else if(block->name() == IBlock::TOOLINFO_BLOCK)
         parserToolInfoBlock(bodyBlock,block);
+    else if(block->name() == IBlock::LABELS_BLOCK)
+        parserLabelsBlock(bodyBlock,block);
     else
         parserUnknownBlock(bodyBlock,block);
 }
@@ -738,7 +745,7 @@ void GFMLoader::parserFormsBlock(const QByteArray &bodyBlock,IBlock *block){
     file.write(output);
     file.close();
 
-    qDebug() << "end load forms : " << time.msecsTo( QTime::currentTime() ) << "mS";
+    //qDebug() << "end load forms : " << time.msecsTo( QTime::currentTime() ) << "mS";
 }
 
 void GFMLoader::parserUnknownBlock(const QByteArray &bodyBlock,IBlock *block){
@@ -878,5 +885,47 @@ void GFMLoader::findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *
     uint numberOfVectors = dataBlock->numberOfVectors();
     uint f_dataOffset = f_offset * numberOfVectors;
     curveAbstract->setData(bodyBlock.data() + indexBeginData + f_dataOffset,numberOfVectors);
+}
+
+void GFMLoader::parserLabelsBlock(const QByteArray &bodyBlock,IBlock *block){
+    LabelBlock * f_labelsBlock = dynamic_cast<LabelBlock *>(block);
+    if(!f_labelsBlock){
+        qDebug() <<  "не удалось преобразовать IBlock в LabelBlock. Парсер Label блока";
+        return;
+    }
+    QByteArray xml;
+    gzipDecompress(bodyBlock,xml);
+    QXmlStreamReader xmlReader(xml);
+    SetLabelsForBoard *f_setLabels = nullptr;
+    while(!xmlReader.atEnd() && !xmlReader.hasError()){
+        QXmlStreamReader::TokenType token = xmlReader.readNext();
+        QXmlStreamAttributes attributes = xmlReader.attributes();
+        if(xmlReader.name() == "board" && token == QXmlStreamReader::StartElement){
+            f_setLabels = new SetLabelsForBoard(attributes.value("name").toString());
+            f_labelsBlock->addSetLabels(f_setLabels);
+        }
+        else if(xmlReader.name() == "label" && token == QXmlStreamReader::StartElement){
+            qreal f_timeOrDepth = attributes.value("time_or_depth").toDouble();
+            bool f_isDrawTime = attributes.value("is_draw_time").toDouble();
+            int f_track = attributes.value("track").toInt();
+            QString f_text = attributes.value("text").toString();
+            qreal f_leftIndent = attributes.value("left_indent").toDouble();
+            LDLabel *f_label = new LDLabel(f_timeOrDepth,f_isDrawTime,f_track,f_setLabels->nameBoard(),f_text,f_leftIndent);
+            f_label->setSize(QSizeF(attributes.value("width").toDouble(),
+                                    attributes.value("height").toDouble()
+                                    )
+                             );
+            f_label->setColor(attributes.value("color").toString());
+            f_label->setBackgraundColor(attributes.value("background_color").toString());
+            f_setLabels->addLabel(f_label);
+        }
+    }
+
+    QFile file("labels.txt");
+    file.open(QIODevice::WriteOnly);
+    QByteArray output;
+    gzipDecompress(bodyBlock,output);
+    file.write(output);
+    file.close();
 }
 

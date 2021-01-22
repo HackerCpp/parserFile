@@ -7,6 +7,7 @@
 #include "logdata.h"
 #include "drawsettings.h"
 #include "graphiceditor.h"
+#include "selectingmodepanel.h"
 
 class GraphicWidget : public QWidget
 {
@@ -14,6 +15,7 @@ class GraphicWidget : public QWidget
 
     QVBoxLayout *m_mainVLayout;
     GraphicsControlPanel *m_controlPanel;
+    SelectingModePanel *m_selectingModePanel;
     QTabWidget *m_tabWidget;
     GraphicEditor *m_curentEditor;
     DrawSettings *m_drawSettings;

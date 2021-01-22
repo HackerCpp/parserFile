@@ -47,7 +47,7 @@ bool GFMSaver::save(){
     fileGFM->write(m_codec->fromUnicode("\r\n").mid(2));
 
     foreach(auto block,*m_blocks){
-        /*if(block->name() == IBlock::DATA_BLOCK)
+        if(block->name() == IBlock::DATA_BLOCK)
             fileGFM->write(getForSaveDataBlock(block));
         else if(block->name() == IBlock::FORMS_BLOCK)
            fileGFM->write(getForSaveFormsBlock(block));
@@ -55,7 +55,7 @@ bool GFMSaver::save(){
             fileGFM->write(getForSaveHeaderBlock(block));
         else if(block->name() == IBlock::TOOLINFO_BLOCK)
             fileGFM->write(getForSaveToolInfoBlock(block));
-        else*/ if(block->name() == IBlock::LABELS_BLOCK)
+        else if(block->name() == IBlock::LABELS_BLOCK)
             fileGFM->write(getForSaveLabelsBlock(block));
     }
     fileGFM->close();
@@ -598,31 +598,43 @@ QByteArray  GFMSaver::getForSaveLabelsBlock(IBlock *block){
     blockForWrite.append(f_codec->fromUnicode(f_name).mid(2));
 
     QByteArray f_data;
-    QDataStream f_stream(&f_data,QIODevice::WriteOnly);
-    foreach(QList<LDLabel *> *value,f_labelsBlock->labels().values()){
-        qDebug() <<  f_labelsBlock->labels().key(value);
-        f_stream << f_labelsBlock->labels().key(value);
-        foreach(LDLabel *label,*value){
-            qDebug() <<label->text();
-            f_stream << label->size();
-            f_stream << label->text();
-            f_stream << label->depth();
-            f_stream << label->time();
-            f_stream << label->trackNumber();
-            f_stream << label->boardName();
-            f_stream << label->leftIndent();
-        }
-    }
-    qDebug() << f_data << "data";
+    QXmlStreamWriter xmlWriter(&f_data);
 
-    int f_dataBlockSize = f_data.size() + 8;
+    xmlWriter.setAutoFormatting(true);  // Устанавливаем автоформатирование текста
+    xmlWriter.writeStartDocument();     // Запускаем запись в документ
+    xmlWriter.writeStartElement("Labels");
+    foreach(auto set,*f_labelsBlock->labels()){
+        xmlWriter.writeStartElement("board");
+        xmlWriter.writeAttribute("name", set->nameBoard());
+        foreach(auto label,*set->labels()){
+            xmlWriter.writeStartElement("label");
+            xmlWriter.writeAttribute("text", label->text());
+            xmlWriter.writeAttribute("is_draw_time", QString::number(label->isDarawTime()));
+            xmlWriter.writeAttribute("time_or_depth", QString::number(label->timeOrDepth())/* + (label->isDarawTime()?"(mS)" : "(M)")*/);
+            xmlWriter.writeAttribute("width", QString::number(label->size().width()));
+            xmlWriter.writeAttribute("height", QString::number(label->size().height()));
+            xmlWriter.writeAttribute("track", QString::number(label->trackNumber()));
+            xmlWriter.writeAttribute("left_indent", QString::number(label->leftIndent()));
+            xmlWriter.writeAttribute("color", label->color());
+            xmlWriter.writeAttribute("background_color", label->backgroundColor());
+            xmlWriter.writeEndElement();
+        }
+        xmlWriter.writeEndElement();
+    }
+
+    xmlWriter.writeEndElement();
+    xmlWriter.writeEndDocument();
+
+    QByteArray f_dataCompress;
+    gzipCompress(f_data,f_dataCompress,2);
+    int f_dataBlockSize = f_dataCompress.size() + 8;
     if(f_dataBlockSize % 2){
         ++f_dataBlockSize;
         f_data.append('0');
     }
     blockForWrite.append(reinterpret_cast<char*>(&f_dataBlockSize),4);
     blockForWrite.append(f_codec->fromUnicode("\r\n").mid(2));
-    blockForWrite.append(f_data);
+    blockForWrite.append(f_dataCompress);
     blockForWrite.append(f_codec->fromUnicode("\r\n").mid(2));
     return blockForWrite;
 }

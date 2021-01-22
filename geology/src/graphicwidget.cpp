@@ -13,8 +13,10 @@ GraphicWidget::GraphicWidget(QWidget *parent)
     m_controlPanel = new GraphicsControlPanel(m_drawSettings->curentFormatTime(),m_drawSettings->curentFormatDepth(),
                                               m_drawSettings->curentPictureHeight(),m_drawSettings->formatPicture(),
                                               m_drawSettings->curentScalePixelPerMm(),m_drawSettings->isDrawTime());
+    m_selectingModePanel = new SelectingModePanel(this);
 
     m_mainVLayout->addWidget(m_controlPanel);
+    m_mainVLayout->addWidget(m_selectingModePanel);
     m_mainVLayout->addWidget(m_tabWidget);
     m_mainVLayout->setMargin(0);
     setLayout(m_mainVLayout);
@@ -32,6 +34,7 @@ GraphicWidget::GraphicWidget(QWidget *parent)
 
 void GraphicWidget::addLogData(QSharedPointer<ILogData> logData){
     GraphicEditor *f_graphicEditor = new GraphicEditor(logData,m_drawSettings);
+    connect(m_selectingModePanel,&SelectingModePanel::changeMode,f_graphicEditor, &GraphicEditor::changeMode);
     m_tabWidget->addTab(f_graphicEditor,logData->name());
     //connect(m_controlPanel,&GraphicsControlPanel::refresh,f_graphicEditor,&GraphicEditor::refresh);
     m_tabWidget->setCurrentWidget(f_graphicEditor);
@@ -88,3 +91,4 @@ void GraphicWidget::refresh(){
         return;
     m_curentEditor->refresh();
 }
+

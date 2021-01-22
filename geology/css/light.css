@@ -130,7 +130,7 @@ QPushButton {
   padding:5px;
 }
 
-QPushButton::pressed {
+QPushButton::pressed , QPushButton:open{
   border: 1px solid #d1b736;
   background:#d1b736;
 

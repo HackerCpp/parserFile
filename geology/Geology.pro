@@ -47,6 +47,7 @@ include(../graphics_lib/graphics.pri)
 
 
 SOURCES += \
+    inc/selectingmodepanel.cpp \
     src/tabinterpretations.cpp \
     src/graphicscontrolpanel.cpp \
     src/graphicwidget.cpp \
@@ -69,6 +70,7 @@ HEADERS += \
     inc/mainwindow.h \
     inc/menu.h \
     inc/newcurvetab.h \
+    inc/selectingmodepanel.h \
     inc/tabinterpretations.h \
     inc/windowformenu.h \
     inc/filereader.h \

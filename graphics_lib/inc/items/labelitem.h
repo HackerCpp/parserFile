@@ -4,8 +4,10 @@
 #include "ldlabel.h"
 #include "boardfortrack.h"
 #include "agraphictrack.h"
+#include <QMenu>
 
 class LDLabelItem : public ObjectOfTheBoard{
+    Q_OBJECT
     LDLabel *m_label;
     BoardForTrack *m_board;
     AGraphicTrack *m_trackParent;
@@ -14,23 +16,27 @@ class LDLabelItem : public ObjectOfTheBoard{
     QPointF m_prevPoint;
     QFont m_font;
     QRect m_textRect;
+    QSizeF m_sizePixels;
+    QMenu *m_itemMenu;
 public:
     LDLabelItem(BoardForTrack *board,LDLabel *label,AGraphicTrack *trackParent = nullptr);
-    ~LDLabelItem(){}
+    ~LDLabelItem();
 
-    void addParentTrack(AGraphicTrack *trackParent){m_trackParent = trackParent;}
+    void addParentTrack(AGraphicTrack *trackParent);
     LDLabel *ldLabel(){return m_label;}
     QRectF boundingRect()const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*)override;
     void toSetTheLocationOfTheImageAfterDrawing()override;
     void run() override;
 
-    QSize size(){return m_label->size();}
-    void setSize(QSize size);
+    QSizeF size(){return m_label->size();}
+    void setSize(QSizeF size);
 
     QSize textSize();
     QRect textRect() const;
     QRect lineRect();
+
+    void updateParam();
 
     void mousePressEvent(QGraphicsSceneMouseEvent *event)override;
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event)override;
@@ -38,6 +44,8 @@ public:
     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)override;
 
     void keyPressEvent(QKeyEvent *event)override;
+public slots:
+    void removeThis();
 };
 
 #endif // LABELITEM_H

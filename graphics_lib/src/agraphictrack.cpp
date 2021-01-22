@@ -22,7 +22,7 @@ void AGraphicTrack::swapPixMap(){
 }
 
 void AGraphicTrack::init(){
-    m_mode = DRAW_LABEL_MODE;//NORMAL_MODE;
+    m_mode = NORMAL_MODE;//NORMAL_MODE;
     setFlags(ItemClipsToShape | ItemClipsChildrenToShape |ItemIgnoresTransformations);
     m_items = new QList<AGraphicItem*>;
     m_visibilitySquare.setRect(0,0,2000,2000);
@@ -66,6 +66,10 @@ void AGraphicTrack::addIteam(AGraphicItem* item){
 void AGraphicTrack::clearItems(){
     if(m_items)
         m_items->clear();
+}
+
+void AGraphicTrack::deleteLabelItem(LDLabelItem * labelitem){
+    m_board->deleteLabelItem(labelitem);
 }
 
 void AGraphicTrack::updateItemsParam(){
@@ -338,12 +342,12 @@ void AGraphicTrack::sceneUpdate(){
 
 //Draw label mode
 void AGraphicTrack::mousePressEventDrawLabelMode(QGraphicsSceneMouseEvent *event){
-    qreal f_depth = event->pos().y() / m_board->scaleDepth();
-    qreal f_time = (event->pos().y() / m_board->scaleTime()) / 60000;
-    int f_xIndent = event->pos().x() - this->boundingRect().x();
-    LDLabel *m_ldLabel = new LDLabel(f_depth,f_time,m_track->number(),m_board->name(),">>>text>>>",f_xIndent);
-    m_ldLabel->setSize(QSize(10,10));
+    qreal f_deptOrTime = (event->pos().y() / m_board->scale());
+    int f_xIndent = (event->pos().x() - this->boundingRect().x()) / m_board->pixelPerMm();
+    LDLabel *m_ldLabel = new LDLabel(f_deptOrTime,m_board->isDrawTime(),m_track->number(),m_board->name()," ",f_xIndent);
+    m_ldLabel->setSize(QSizeF(0.1,0.1));
     m_lastLabelItem = m_board->addLabel(m_ldLabel);
+    m_lastLabelItem->addParentTrack(this);
     m_prevLabelPoint = event->scenePos();
     m_isClickAddLabel = true;
 
@@ -353,7 +357,10 @@ void AGraphicTrack::mouseMoveEventDrawLabelMode(QGraphicsSceneMouseEvent *event)
     if(m_isClickAddLabel){
 
         QPointF f_delta = m_prevLabelPoint - event->scenePos();
-        m_lastLabelItem->setSize(QSize(m_lastLabelItem->size().width() - f_delta.x(),m_lastLabelItem->size().height() + f_delta.y()));
+        m_lastLabelItem->setSize(QSizeF(m_lastLabelItem->size().width() - (f_delta.x() / m_board->pixelPerMm()),
+                                        m_lastLabelItem->size().height() + (f_delta.y() / m_board->pixelPerMm())
+                                        )
+                                 );
         m_prevLabelPoint = event->scenePos();
         sceneUpdate();
     }

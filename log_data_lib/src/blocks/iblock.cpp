@@ -4,6 +4,7 @@
 #include "formsblock.h"
 #include "headerblock.h"
 #include "toolinfoblock.h"
+#include "labelblock.h"
 
 IBlock::IBlock(){}
 IBlock::~IBlock(){}
@@ -41,6 +42,10 @@ IBlock *IBlock::blockCreater(IBlock::TypeBlock type){
             f_block = new HearedBlock();
             break;
         }
+        case LABELS_BLOCK:{
+            f_block = new LabelBlock();
+            break;
+        }
     }
     return f_block;
 }
@@ -67,6 +72,10 @@ IBlock *IBlock::blockCreater(const IBlock &block){
         }
         case HEADER_BLOCK:{
             f_returnBlock = new HearedBlock(dynamic_cast<HearedBlock &>(f_block));
+            break;
+        }
+        case LABELS_BLOCK:{
+            f_returnBlock = new LabelBlock(dynamic_cast<LabelBlock &>(f_block));
             break;
         }
     }
