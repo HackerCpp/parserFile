@@ -1,4 +1,4 @@
-QT       += core gui widgets
+QT += core gui widgets
 
 win32:RC_ICONS += $$PWD/ico/icon.ico
 

@@ -6,6 +6,7 @@
 #include "modulesusermodel.h"
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QPointer>
 #include "loader.h"
 #include "infiniteloading.h"
 
@@ -22,11 +23,17 @@ class UpdateWindow : public QWidget
     QVBoxLayout *m_mainLayout;
     Loader *m_loader;
     InfiniteLoading m_loading;
+    QString m_programAfterUpdate;
+
+    void init();
+    void createGui();
 public:
     UpdateWindow(QString url,QString whereToUnpack);
-    ~UpdateWindow(){}
+    UpdateWindow(QString url,QString whereToUnpack,QString programAfterUpdate);
+    ~UpdateWindow();
     bool loadArhives();
     void createXML();
+    void startProgramAfterUpdate();
 
 public slots:
     void processingFileAfterUploading(QString fileName);

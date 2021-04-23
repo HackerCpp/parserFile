@@ -67,10 +67,10 @@ void DataTreeView::startCustomDrag(QPointF point){
     }
 
     if(f_mimeData){
-            QDrag *f_drag = new QDrag(this);
-            f_drag->setMimeData(f_mimeData);
-            f_drag->setPixmap(QPixmap::fromImage(*f_image));
-            f_drag->exec();
+        QDrag *f_drag = new QDrag(this);
+        f_drag->setMimeData(f_mimeData);
+        f_drag->setPixmap(QPixmap::fromImage(*f_image));
+        f_drag->exec();
     }
 }
 
@@ -119,8 +119,8 @@ void DataTreeView::mouseMoveEvent(QMouseEvent *event){
 }
 
 void DataTreeView::dragEnterEvent(QDragEnterEvent *event){
-    QPoint point = event->pos();
-    bool ok;
+    //QPoint point = event->pos();
+    //bool ok;
     //QObject *f_mousePositionObject = static_cast<QObject *>(indexAt(QPoint(point.x(),point.y())).internalPointer());
     //QObject* f_dragObject = reinterpret_cast<QObject*>(event->mimeData()->text().toLongLong(&ok));
     QStringList f_format = event->mimeData()->formats();
@@ -134,7 +134,7 @@ void DataTreeView::dragEnterEvent(QDragEnterEvent *event){
 
 void DataTreeView::dragMoveEvent(QDragMoveEvent *event){
     QPoint point = event->pos();
-    bool ok;
+    //bool ok;
     QObject *f_mousePositionObject = static_cast<QObject *>(indexAt(QPoint(point.x(),point.y())).internalPointer());
     //QObject* f_dragObject = reinterpret_cast<QObject*>(event->mimeData()->text().toLongLong(&ok));
     QStringList f_format = event->mimeData()->formats();
@@ -154,6 +154,7 @@ void DataTreeView::dragMoveEvent(QDragMoveEvent *event){
 }
 
 void DataTreeView::dragLeaveEvent(QDragLeaveEvent *event){
+    Q_UNUSED(event)
     //qDebug() << "dragLeaveEvent";
 }
 
@@ -170,12 +171,12 @@ void DataTreeView::dropEvent(QDropEvent *event){
         DataModel *f_model = dynamic_cast<DataModel *>(model());
         if(!f_model || !f_logData)
             return;
-        QVector<QSharedPointer<ILogData> > *f_vectorLogData = f_model->logDataVector();
+        QVector<std::shared_ptr<ILogData> > *f_vectorLogData = f_model->logDataVector();
         foreach(auto logData,*f_vectorLogData){
-            if(f_logData == logData.data())
+            if(f_logData == logData.get())
                 return;
         }
-        f_model->addLogData(QSharedPointer<ILogData>(f_logData));
+        f_model->addLogData(std::shared_ptr<ILogData>(f_logData));
     }
     else if(f_baseFormat == "dataBlock"){
         IBlock *f_dataBlock = (dynamic_cast<IBlock*>(reinterpret_cast<QObject*>(event->mimeData()->data("dataBlock").toLongLong(&ok))));

@@ -1,5 +1,6 @@
 #include "modulesmodel.h"
 #include <QDebug>
+#include <QColor>
 
 ModulesModel::ModulesModel()
     : m_modules(nullptr)
@@ -33,7 +34,6 @@ QModelIndex ModulesModel::parent(const QModelIndex &child)const{
     }
     else if(dynamic_cast<VersionInfo*>(static_cast<QObject*>(child.internalPointer()))){
         VersionInfo *f_versions = dynamic_cast<VersionInfo*>(static_cast<QObject*>(child.internalPointer()));
-        //foreach(auto module,*m_modules){
         for(int i = 0; i < m_modules->size();++i){
             for(int j = 0;j < m_modules->operator[](i)->m_versions->size();++j){
                 if(m_modules->operator[](i)->m_versions->operator[](j) == f_versions){
@@ -53,7 +53,7 @@ int ModulesModel::rowCount(const QModelIndex &parent )const{
         return m_modules->size();
     }
     else if (dynamic_cast<VersionInfo*>(static_cast<QObject*>(parent.internalPointer()))){
-        VersionInfo *f_version = dynamic_cast<VersionInfo*>(static_cast<QObject*>(parent.internalPointer()));
+        //VersionInfo *f_version = dynamic_cast<VersionInfo*>(static_cast<QObject*>(parent.internalPointer()));
         return 0;
     }
     else if (dynamic_cast<Module*>(static_cast<QObject*>(parent.internalPointer()))){
@@ -65,6 +65,7 @@ int ModulesModel::rowCount(const QModelIndex &parent )const{
 }
 
 int ModulesModel::columnCount(const QModelIndex &parent )const{
+    Q_UNUSED(parent)
     return 1;
 }
 
@@ -72,9 +73,6 @@ QVariant ModulesModel::data(const QModelIndex &index, int role )const{
     if (!index.isValid())
             return QVariant();
     if (role == Qt::DisplayRole){
-        if (!index.isValid()){
-            return QVariant();
-        }
         if (dynamic_cast<Module*>(static_cast<QObject*>(index.internalPointer()))){
             Module *f_module = static_cast<Module *>(index.internalPointer());
             return f_module->m_name;
@@ -84,6 +82,7 @@ QVariant ModulesModel::data(const QModelIndex &index, int role )const{
             return f_versioninfo->version();
         }
     }
+
     return QVariant();
 }
 

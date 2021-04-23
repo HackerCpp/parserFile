@@ -32,14 +32,16 @@ void ChoosingAPath::dragEnterEvent(QDragEnterEvent *event){
 }
 
 void ChoosingAPath::dragMoveEvent(QDragMoveEvent *event){
-
+    Q_UNUSED(event)
 }
 
 void ChoosingAPath::dragLeaveEvent(QDragLeaveEvent *event){
+    Q_UNUSED(event)
     m_currentPath = "";
 }
 
 void ChoosingAPath::dropEvent(QDropEvent *event){
+    Q_UNUSED(event)
     if(m_currentPath != ""){
         m_fileDialog->setDirectory(QFileInfo(m_currentPath).path());
     }
@@ -103,6 +105,7 @@ QUrl SpecFileDialog::specGetOpenFileUrl(QWidget *parent,
                                  Options options,
                                  const QStringList &supportedSchemes)
 {
+    Q_UNUSED(parent)
     /*QFileDialogArgs args;
     args.parent = parent;
     args.caption = caption;

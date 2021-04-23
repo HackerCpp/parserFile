@@ -64,6 +64,7 @@ void EMDS::fillingTheBoard(QList<IBlock *> *blocks){
     }
     if(!m_blockChannels)
         return;
+    qDebug() << m_blockChannels->numberOfVectors();
     //Создаём спектр
     ICurve *f_curve = new Curve<double>(m_blockChannels->numberOfVectors(),34);
     Desc *f_desc = new Desc();

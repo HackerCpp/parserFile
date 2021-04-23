@@ -148,6 +148,7 @@ void VAcuItem::drawInterpolationHorizontal(QPainter *per,QRectF visibleRect,bool
 }
 
 void VAcuItem::drawInterpolationHorizontalNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag){
+    Q_UNUSED(y_bottom)
     qreal quantityElem = m_curve->sizeOffset();
     qreal step = m_dataStepPix;
     float f_yTop = y_top;
@@ -226,6 +227,7 @@ void VAcuItem::drawInterpolationHorizontalNoOffset(QPainter *per,int y_top,int y
 
 
 void VAcuItem::drawPointsTwoColorsNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag){
+    Q_UNUSED(y_bottom)
     qreal quantityElem = m_curve->sizeOffset();
     qreal f_step = m_dataStepPix;
     float f_yTop = y_top;
@@ -412,6 +414,7 @@ void VAcuItem::updateParam(){
 }
 
 QList<QPointF> VAcuItem::oneWave(int position,bool *flag){
+    Q_UNUSED(flag)
     QList<QPointF> f_returnList;
     if(!currentMainValue() || !currentMainValue()->size())
         return f_returnList;
@@ -426,7 +429,8 @@ QList<QPointF> VAcuItem::oneWave(int position,bool *flag){
     }
     else{
         for(uint i = 0; i < currentMainValue()->size() - 1; ++i){
-           if(mainValue(i) > position && mainValue(i + 1) < position || mainValue(i) < position && mainValue(i + 1) > position){
+           if((mainValue(i) > position && mainValue(i + 1) < position)
+                   || (mainValue(i) < position && mainValue(i + 1) > position)){
                indexBegin = i;
                break;
            }

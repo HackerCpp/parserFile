@@ -32,10 +32,10 @@ GraphicWidget::GraphicWidget(QWidget *parent)
 
 }
 
-void GraphicWidget::addLogData(QSharedPointer<ILogData> logData){
+void GraphicWidget::addLogData(std::shared_ptr<ILogData> logData){
     GraphicEditor *f_graphicEditor = new GraphicEditor(logData,m_drawSettings);
     connect(m_selectingModePanel,&SelectingModePanel::changeMode,f_graphicEditor, &GraphicEditor::changeMode);
-    m_tabWidget->addTab(f_graphicEditor,logData->name());
+    m_tabWidget->addTab(f_graphicEditor,logData->name().split('/').last());
     //connect(m_controlPanel,&GraphicsControlPanel::refresh,f_graphicEditor,&GraphicEditor::refresh);
     m_tabWidget->setCurrentWidget(f_graphicEditor);
 }

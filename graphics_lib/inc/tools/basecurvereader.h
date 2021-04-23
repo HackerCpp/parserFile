@@ -8,7 +8,7 @@ public:
     BaseCurveReader();
     virtual ~BaseCurveReader(){}
     virtual void apply(){}
-    virtual void changePosition(int newPosition){}
+    virtual void changePosition(int newPosition){Q_UNUSED(newPosition)}
 };
 
 #endif // BASECURVEREADER_H

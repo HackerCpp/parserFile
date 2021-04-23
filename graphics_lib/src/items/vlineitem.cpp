@@ -77,6 +77,7 @@ void VLineItem::loadDrawingParam(int width){
 
 void VLineItem::drawBody(QPainter *per,QRectF visibleRect,bool *flag){
     if(!currentMainValue() || !m_itemInfo || !per || !m_board){
+        qDebug() << currentMainValue() << m_itemInfo << per << m_board;
         qDebug() << "LineItemInfo = nullptr или painter = nullptr m_board = null Не удаётся нарисовать кривую";
         return;
     }
@@ -180,14 +181,14 @@ void VLineItem::drawHeader(QPainter *per,int &position,bool *flag){
 }
 
 qreal VLineItem::operator[](int index){
-    if(index < m_curve->size())
+    if(index < (int)m_curve->size())
         return m_curve->data(index) * m_scale + m_offsetPix;
     else
         return 0;
 }
 
 qreal VLineItem::pixelX(int index,int width){
-    if(index < m_curve->size()){
+    if(index < (int)m_curve->size()){
         qreal f_value = fmod(m_curve->data(index) * m_scale + m_offsetPix,width);
         //return f_value;
         return f_value >= 0 ? f_value : width + f_value;

@@ -50,6 +50,7 @@ void InterpreterPython::init(){
             f_curveNameForPython = f_curveNameForPython.remove(")");
             f_curveNameForPython = f_curveNameForPython.remove("-");
             f_curveNameForPython = f_curveNameForPython.remove("/");
+            f_curveNameForPython = f_curveNameForPython.replace("%","Percent");
             if(!m_mainContext->getVariable(f_curveNameForPython).isValid())
                 m_mainContext->addObject(f_translater.translate(f_curveNameForPython), curve);
         }

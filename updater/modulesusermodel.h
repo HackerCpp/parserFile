@@ -5,11 +5,15 @@
 #include <QAbstractItemModel>
 #include "module.h"
 #include <QStringList>
+#include <QColor>
 
 class ModulesUserModel : public QAbstractItemModel
 {
     QVector<Module*> *m_modules;
     QStringList m_headerList;
+    const QColor m_colorNotMarked = QColor(200,0,0,100);
+    const QColor m_colorDeprecated = QColor(246, 250, 10,100);
+    const QColor m_colorAllGood = QColor(0,200,0,100);
 public:
     ModulesUserModel();
 

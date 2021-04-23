@@ -13,10 +13,10 @@ public:
 class AGraphicEditor : public IGraphicEditor
 {
 protected:
-    QSharedPointer<ILogData> m_logData;
+    std::shared_ptr<ILogData> m_logData;
 
 public:
-    AGraphicEditor(QSharedPointer<ILogData> logData);
+    AGraphicEditor(std::shared_ptr<ILogData> logData);
     virtual ~AGraphicEditor()override;
     virtual void refresh(){}
 };

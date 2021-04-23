@@ -6,6 +6,7 @@
 #include <datablock.h>
 #include <curve.h>
 #include <headerblock.h>
+#include <QChar>
 
 LasLoader::LasLoader(QString path)
     : m_path(path){
@@ -50,7 +51,6 @@ void LasLoader::findBlocks(const QByteArray &data,QList<BlockLas> *blocksLas){
         QByteArray f_bodyBlock = f_block.mid(f_block.indexOf("\n") + 1);
         blocksLas->push_back(BlockLas{m_hashTypes.value(f_typeBlock),f_bodyBlock});
     };
-
 }
 
 QString LasLoader::version(QList<BlockLas> *blocksLas){
@@ -71,6 +71,15 @@ void LasLoader::parser20(const QList<BlockLas> &blocksLas){
     DataBlock *f_dataBlock = dynamic_cast<DataBlock *>(IBlock::blockCreater(IBlock::DATA_BLOCK));
     createCurves20(f_dataBlock,blocksLas);
     fillCurves20(f_dataBlock,blocksLas);
+    //Нужно сделать по нормальному через калиб
+    foreach(auto curve,*f_dataBlock->curves()){
+        if(curve->mnemonic() == "TIME(SEC)"){
+            for(uint i = 0; i < curve->size(); ++i){
+                curve->setData(curve->data(i) * 6000,i);
+            }
+        }
+    }
+//---------------_______________-------------------------
     f_dataBlock->setNumberOfVectors(f_dataBlock->curves()->first()->size());
     m_blocks->push_back(f_dataBlock);
     findHeader20(blocksLas);
@@ -79,7 +88,8 @@ void LasLoader::parser20(const QList<BlockLas> &blocksLas){
 void LasLoader::findCurve(ICurve *curve,const QString &curveLine){
     int f_indexEndMnemonic = curveLine.indexOf(" ",curveLine.indexOf("."));
     //QTextCodec::codecForName("Windows-1251")->toUnicode(
-    QString f_mnemonic = (curveLine.mid(0,f_indexEndMnemonic).replace(" ","").replace(".","(") + ")");
+    QString f_mnemonic = (curveLine.mid(0,f_indexEndMnemonic).replace(" ",""));
+    f_mnemonic =        f_mnemonic.replace(f_mnemonic.indexOf("."),1,"(") + ")";
     //qDebug() << QTextCodec::codecForName("UTF-8")->toUnicode(curveLine.mid(0,f_indexEndMnemonic).toLocal8Bit());
     curve->setMnemonic(f_mnemonic);
 }
@@ -111,22 +121,25 @@ void LasLoader::createCurves20(DataBlock *dataBlock,const QList<BlockLas> &block
 
                 f_curve->setShortCut(dataBlock->shortCuts()->first());
                 findCurve(f_curve,string);
-                if(f_curve->mnemonic().indexOf("DEPT") != -1){
+                if(f_curve->mnemonic().contains("DEPT")){
                     f_curve->desc()->setParam("draw_type","DEPTH");
                     f_curve->setShortCut(f_timeDepth);
                     f_depth = f_curve;
                 }
-                else if(f_curve->mnemonic() == "TIME"){
+                else if(f_curve->mnemonic() == "TIME(SEC)"){
                     f_curve->desc()->setParam("draw_type","TIME");
                     f_curve->setShortCut(f_timeDepth);
                     f_time = f_curve;
                 }
-                else
+                else{
                     f_curve->desc()->setParam("draw_type","LINE");
-                dataBlock->setcurve(f_curve);
-                dataBlock->setMainTime(f_time);
+                }
                 dataBlock->setMainDepth(f_depth);
+                dataBlock->setMainTime(f_time);
+                dataBlock->setcurve(f_curve); 
+
             }
+
         }
     }
     foreach(auto curve,*dataBlock->curves()){
@@ -212,6 +225,12 @@ void LasLoader::run(){
     m_isReady = true;
     emit ready();
 }
+
+
+/*LasLoader::LasLoader(QString path):
+    LoaderViaConverterGTK(path){
+    m_format = ".las";
+}*/
 
 
 

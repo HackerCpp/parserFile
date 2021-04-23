@@ -2,7 +2,7 @@
 #include "datablock.h"
 
 
-AGraphicEditor::AGraphicEditor(QSharedPointer<ILogData> logData){
+AGraphicEditor::AGraphicEditor(std::shared_ptr<ILogData> logData){
     m_logData = logData;
 }
 

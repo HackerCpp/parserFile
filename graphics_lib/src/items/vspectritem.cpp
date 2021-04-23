@@ -162,6 +162,7 @@ void inline VSpectrItem::drawInterpolationVertical(QPainter *per,QRectF visibleR
 }
 
 void inline VSpectrItem::drawInterpolationVerticalNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag){
+    Q_UNUSED(y_bottom)
     if(!per->isActive() || !currentMainValue())
         return;
     qreal quantityElem = m_curve->sizeOffset();
@@ -333,6 +334,7 @@ void VSpectrItem::loadDrawingParam(int width){
 
 
 void VSpectrItem::drawOneWawe(QPainter *per,int position,bool *flag){
+    Q_UNUSED(flag)
     if(!per->isActive() || !currentMainValue() || !currentMainValue()->size())
         return;
     uint indexBegin  = 0;
@@ -345,8 +347,8 @@ void VSpectrItem::drawOneWawe(QPainter *per,int position,bool *flag){
     }
     else{
         for(uint i = 0; i < currentMainValue()->size() - 1; ++i){
-           if(mainValue(i) > position && mainValue(i + 1) < position
-                   || mainValue(i) < position && mainValue(i + 1) > position){
+           if((mainValue(i) > position && mainValue(i + 1) < position)
+                   || (mainValue(i) < position && mainValue(i + 1) > position)){
                indexBegin = i;
                break;
            }
@@ -366,6 +368,7 @@ void VSpectrItem::drawOneWawe(QPainter *per,int position,bool *flag){
 }
 
 QList<QPointF> VSpectrItem::oneWave(int position,bool *flag){
+    Q_UNUSED(flag)
     QList<QPointF> f_returnList;
     if(!currentMainValue() || !currentMainValue()->size())
         return f_returnList;
@@ -380,7 +383,8 @@ QList<QPointF> VSpectrItem::oneWave(int position,bool *flag){
     }
     else{
         for(uint i = 0; i < currentMainValue()->size() - 1; ++i){
-           if(mainValue(i) > position && mainValue(i + 1) < position || mainValue(i) < position && mainValue(i + 1) > position){
+           if((mainValue(i) > position && mainValue(i + 1) < position)
+                   || (mainValue(i) < position && mainValue(i + 1) > position)){
                indexBegin = i;
                break;
            }

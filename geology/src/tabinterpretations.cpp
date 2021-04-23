@@ -77,12 +77,12 @@ Qt::ItemFlags ModelForTabInterpretation::flags(const QModelIndex &index) const {
         return Qt::NoItemFlags;
     int column = index.column();
     switch (column){
-         case 0:{
+        case 0:{
             return Qt::ItemIsEnabled | Qt::ItemNeverHasChildren | Qt::ItemIsEditable;
-         }
-         default:
-             return 0;
-      }
+        }
+        default:
+            return Qt::NoItemFlags;
+    }
 }
 
 bool ModelForTabInterpretation::setData(const QModelIndex &index, const QVariant &value, int role){
@@ -156,6 +156,7 @@ TabInterpretations::~TabInterpretations(){
 }
 
 void TabInterpretations::closeEvent(QCloseEvent *event){
+    Q_UNUSED(event)
     m_isClose = true;
 }
 

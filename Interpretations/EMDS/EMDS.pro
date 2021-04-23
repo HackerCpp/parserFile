@@ -1,4 +1,4 @@
-QT += gui
+QT += core gui widgets
 
 TEMPLATE = lib
 DEFINES += EMDS_LIBRARY

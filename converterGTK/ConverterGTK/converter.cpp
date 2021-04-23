@@ -3,6 +3,8 @@
 #include "loaderdll.h"
 #include <gtk.h>
 #include <windows.h>
+#include <codecvt>
+
 extern "C"{
 void prog_dir_init( const char *main_path_local );
 }
@@ -18,12 +20,27 @@ Converter::Converter()
 
 void Converter::convert(string filePath,string dst_format){
     cout << filePath;
+    std::string codepage_str = filePath;
+    int size = MultiByteToWideChar(CP_ACP, MB_COMPOSITE, codepage_str.c_str(),
+                                   codepage_str.length(), nullptr, 0);
+    std::wstring utf16_str(size, '\0');
+    MultiByteToWideChar(CP_ACP, MB_COMPOSITE, codepage_str.c_str(),
+                        codepage_str.length(), &utf16_str[0], size);
+
+    int utf8_size = WideCharToMultiByte(CP_UTF8, 0, utf16_str.c_str(),
+                                        utf16_str.length(), nullptr, 0,
+                                        nullptr, nullptr);
+    std::string utf8_str(utf8_size, '\0');
+    WideCharToMultiByte(CP_UTF8, 0, utf16_str.c_str(),
+                        utf16_str.length(), &utf8_str[0], utf8_size,
+                        nullptr, nullptr);
+
     if(f_formats.find(dst_format) == f_formats.end()){
         cout << "error : dst format not found " +  dst_format;
         return;
     }
     enum Converter::Formats format = f_formats.at(dst_format);
-    vfunc[file_format(filePath)](filePath,format);
+    vfunc[file_format(utf8_str)](utf8_str,format);
     cout << "end converter";
 }
 

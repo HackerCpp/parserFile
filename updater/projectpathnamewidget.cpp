@@ -122,5 +122,6 @@ void ProjectPathNameWidget::openDir(){
 }
 
 void ProjectPathNameWidget::closeEvent(QCloseEvent *event){
+    Q_UNUSED(event)
     cancel();
 }

@@ -66,7 +66,7 @@ void GraphicItemForSpectr::changeVisibilityZone(QRectF visibilityZone){
 
 void GraphicItemForSpectr::changeSize(int width){
     m_endRedraw = true;
-    bool flag = false;
+    //bool flag = false;
     wait();
     m_spectrItem->updateParam(width - 50);
 

@@ -46,7 +46,7 @@ public slots:
     virtual void dataReady(){}
 
 public:
-    static QSharedPointer<ILogData> createLogData();
+    static std::shared_ptr<ILogData> createLogData() ;
 };
 
 #endif // ILOGDATA_H

@@ -145,7 +145,7 @@ void ModelOneWave::changeCurentPosition(QPointF pointPosition){
             ++f_band;
         }
     }
-    qreal f_amplOne = 0,f_amplTwo = 0;
+    qreal f_amplOne = 0;//f_amplTwo = 0;
     bool f_amplitudeSearchFlag = false;
     foreach(auto vaweInfo,*m_listVaweInfo){
         if(vaweInfo.isVisible && !f_amplitudeSearchFlag){

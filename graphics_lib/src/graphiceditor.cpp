@@ -8,7 +8,7 @@
 #include <labelblock.h>
 #include "setlabelsforboard.h"
 
-GraphicEditor::GraphicEditor(QSharedPointer<ILogData> logData,DrawSettings *drawSettings,QWidget *parent)
+GraphicEditor::GraphicEditor(std::shared_ptr<ILogData> logData,DrawSettings *drawSettings,QWidget *parent)
     : QTabWidget(parent),AGraphicEditor(logData),m_forms(nullptr),m_drawSettings(drawSettings){
     this->setStyleSheet("QGraphicsView{background-color:white;}");
     m_curves = new QMap<QString,ICurve*>;
@@ -16,7 +16,6 @@ GraphicEditor::GraphicEditor(QSharedPointer<ILogData> logData,DrawSettings *draw
     m_tabMenu = QPointer<QMenu>(new QMenu(tr("&Forms menu")));
     m_tabMenu->addAction(tr("&Rename board"),this, SLOT(renameBoard()));
     m_tabMenu->addAction(tr("&Delete board"),this, SLOT(deleteBoard()));
-    //m_tabMenu->setMaximumSize(1000,1000);
     addCurves();
     addForms();
     tabBar()->installEventFilter(this); // установка фильтра обработки событий
@@ -74,6 +73,12 @@ void GraphicEditor::addForms(){
     foreach(auto block,*m_logData->blocks()){
         if(block->name() == IBlock::FORMS_BLOCK){
             m_forms = dynamic_cast<FormsBlock *>(block);
+            if(m_forms)
+                f_boards = m_forms->boards();
+            if(!f_boards){
+                qDebug() << "FormsBlock Вернул нулевой указатель на борды";
+                return;
+            }
         }
         else if(block->name() == IBlock::LABELS_BLOCK){
             f_labelsBlock = dynamic_cast<LabelBlock *>(block);
@@ -84,11 +89,6 @@ void GraphicEditor::addForms(){
         m_logData->addBlock(f_labelsBlock);
     }
 
-    f_boards = m_forms->boards();
-    if(!f_boards){
-        qDebug() << "FormsBlock Вернул нулевой указатель на борды";
-        return;
-    }
     if(f_boards){
         foreach(auto boardInfo,*f_boards){
             SetLabelsForBoard *f_setLabels = nullptr;

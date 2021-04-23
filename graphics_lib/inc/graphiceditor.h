@@ -23,7 +23,7 @@ class GraphicEditor : public QTabWidget, AGraphicEditor{
     bool eventFilter(QObject *watched, QEvent *event)override;
 
 public:
-    GraphicEditor(QSharedPointer<ILogData> logData,DrawSettings *drawSettings,QWidget *parent = nullptr);
+    GraphicEditor(std::shared_ptr<ILogData> logData,DrawSettings *drawSettings,QWidget *parent = nullptr);
     virtual ~GraphicEditor()override;
 
     void setDrawTime();

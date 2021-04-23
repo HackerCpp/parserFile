@@ -124,7 +124,7 @@ void ColorDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, con
 }
 
 void ColorDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index) const{
-
+    Q_UNUSED(editor)Q_UNUSED(option)Q_UNUSED(index)
 }
 
 

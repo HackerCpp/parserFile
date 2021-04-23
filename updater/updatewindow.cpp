@@ -4,27 +4,43 @@
 #include <QDir>
 #include "unpacker.h"
 #include <QFileInfo>
+#include <QProcess>
 
-
-UpdateWindow::UpdateWindow(QString url,QString whereToUnpack)
-    : m_currentUrl(url),m_pathWhereToUnpack(whereToUnpack)
-{
+void UpdateWindow::init(){
     m_loading.hide();
     m_loading.setText(tr("loading"));
+    m_loader = new Loader(this);
+    m_loader->getData(m_currentUrl);
+    connect(m_loader,&Loader::onReady,this,&UpdateWindow::processingFileAfterUploading);
+    connect(m_loader,&Loader::error,this,&UpdateWindow::processingErrorLoading);
+}
+
+void UpdateWindow::createGui(){
     m_model = new ModulesUserModel();
     m_treView = new QTreeView(this);
     m_buttonUpdate = new QPushButton(tr("Update"));
-    m_mainLayout = new QVBoxLayout();
-
+    m_mainLayout = new QVBoxLayout(this);
     setLayout(m_mainLayout);
     m_treView->setModel(m_model);
     m_mainLayout->addWidget(m_treView);
     m_mainLayout->addWidget(m_buttonUpdate);
+    init();
+}
 
-    m_loader = new Loader(this);
-    m_loader->getData(url);
-    connect(m_loader,&Loader::onReady,this,&UpdateWindow::processingFileAfterUploading);
-    connect(m_loader,&Loader::error,this,&UpdateWindow::processingErrorLoading);
+UpdateWindow::UpdateWindow(QString url,QString whereToUnpack)
+    : m_currentUrl(url),m_pathWhereToUnpack(whereToUnpack)
+{
+    createGui();
+}
+
+UpdateWindow::UpdateWindow(QString url,QString whereToUnpack,QString programAfterUpdate)
+    : m_currentUrl(url),m_pathWhereToUnpack(whereToUnpack),m_programAfterUpdate(programAfterUpdate)
+{
+    createGui();
+}
+
+UpdateWindow::~UpdateWindow(){
+
 }
 
 bool UpdateWindow::loadArhives(){
@@ -38,8 +54,8 @@ bool UpdateWindow::loadArhives(){
 }
 
 void UpdateWindow::createXML(){
-    //QFile f_fileCurrent(m_pathWhereToUnpack + projectName + ".xml");
-    QFile f_fileCurrent(projectName + "Loaded" + ".xml");
+    QFile f_fileCurrent(m_pathWhereToUnpack + projectName + "Loaded.xml");
+
     f_fileCurrent.open(QIODevice::WriteOnly);
     QXmlStreamWriter xmlWriter(&f_fileCurrent);
     xmlWriter.setAutoFormatting(true);
@@ -57,10 +73,18 @@ void UpdateWindow::createXML(){
     f_fileCurrent.close();
 }
 
-
+void UpdateWindow::startProgramAfterUpdate(){
+    QProcess f_process;
+    f_process.startDetached(m_programAfterUpdate);
+    if(f_process.waitForStarted()){
+        m_programAfterUpdate.clear();
+        QMessageBox::information(this, tr("Information"),tr("Failed to start the program") + m_programAfterUpdate);
+    }
+    else
+        qApp->quit();
+}
 
 void UpdateWindow::processingFileAfterUploading(QString fileName){
-
     if(fileName.right(3) == "xml")
         processingXML(fileName);
     else if(fileName.right(3) == "zip")
@@ -70,10 +94,13 @@ void UpdateWindow::processingFileAfterUploading(QString fileName){
 void UpdateWindow::processingErrorLoading(QString error){
     QMessageBox::warning(this, tr("warning"),error);
 }
+
 void UpdateWindow::updateStart(){
     m_buttonUpdate->setEnabled(false);
     if(!loadArhives()){
         QMessageBox::information(this, tr("Information"),tr("All packages are loaded"));
+        if(!m_programAfterUpdate.isEmpty())
+            startProgramAfterUpdate();
     }
     else
         m_loading.show();
@@ -87,7 +114,6 @@ void UpdateWindow::processingXML(QString filePath){
     QByteArray xml = f_file.readAll();
     f_file.remove();
     QXmlStreamReader xmlReader(xml);
-
     Module *f_module = nullptr;
     while(!xmlReader.atEnd() && !xmlReader.hasError()){
         QXmlStreamReader::TokenType token = xmlReader.readNext();
@@ -111,8 +137,8 @@ void UpdateWindow::processingXML(QString filePath){
     }
     if(!QDir().exists(QFileInfo(m_pathWhereToUnpack).path()))
         QDir().mkdir(QFileInfo(m_pathWhereToUnpack).path());
-    //QFile f_fileCurrent(m_pathWhereToUnpack + projectName + ".xml");
-    QFile f_fileCurrent(projectName + "Loaded" + ".xml");
+    QFile f_fileCurrent(m_pathWhereToUnpack + projectName + "Loaded.xml");
+
     if(!f_fileCurrent.open(QIODevice::ReadWrite))
             return;
     QByteArray f_currentXML = f_fileCurrent.readAll();
@@ -135,9 +161,9 @@ void UpdateWindow::processingXML(QString filePath){
         }
     }
     f_fileCurrent.close();
+
     m_model->setModules(&m_modules);
     connect(m_buttonUpdate,&QPushButton::released,this,&UpdateWindow::updateStart);
-
 }
 
 void UpdateWindow::processingZIP(QString filePath){
@@ -157,6 +183,9 @@ void UpdateWindow::processingZIP(QString filePath){
         m_loading.hide();
         m_buttonUpdate->setEnabled(true);
         QMessageBox::information(this, tr("Information"),tr("All packages are loaded"));
+        if(!m_programAfterUpdate.isEmpty()){
+            startProgramAfterUpdate();
+        }
     }
 
 }

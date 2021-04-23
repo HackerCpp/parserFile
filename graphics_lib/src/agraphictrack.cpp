@@ -98,7 +98,7 @@ qreal AGraphicTrack::bottomValue(){
     if(!m_items){
         return 0;
     }
-    qreal f_maximum = -999999999999999999;
+    qreal f_maximum = -999999999999999999.0;
     foreach(auto value,*m_items){
         f_maximum = f_maximum > value->bottomValue() ? f_maximum : value->bottomValue();
     }
@@ -157,6 +157,8 @@ void AGraphicTrack::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event){
             break;
         case CURVE_SHIFT_MODE:
             mouseDoubleClickEventCurveShiftMode(event);
+            break;
+        case DRAW_LABEL_MODE:
             break;
     }
 }
@@ -320,7 +322,7 @@ void AGraphicTrack::mouseReleaseEventCurveShiftMode(QGraphicsSceneMouseEvent *ev
 }
 
 void AGraphicTrack::mouseDoubleClickEventCurveShiftMode(QGraphicsSceneMouseEvent *event){
-
+    Q_UNUSED(event)
 }
 
 void AGraphicTrack::timerLeftClick(){
@@ -368,5 +370,6 @@ void AGraphicTrack::mouseMoveEventDrawLabelMode(QGraphicsSceneMouseEvent *event)
 }
 
 void AGraphicTrack::mouseReleaseEventDrawLabelMode(QGraphicsSceneMouseEvent *event){
+    Q_UNUSED(event)
     m_isClickAddLabel = false;
 }

@@ -10,12 +10,13 @@
 #include "datamodel.h"
 #include "datatreeview.h"
 #include "graphicwidget.h"
+using namespace std;
 
 class LogDataView : public QWidget
 {
     Q_OBJECT
 
-    QList<QSharedPointer<ILogData> > *m_logDataList;
+    QList<shared_ptr<ILogData> > *m_logDataList;
     QHBoxLayout *m_mainHorLayout;
     QSplitter *m_splitter;
     DataModel *m_dataModel;
@@ -26,8 +27,8 @@ public:
     explicit LogDataView(QWidget *parent = nullptr);
     ~LogDataView();
 
-    void addLogData(QSharedPointer<ILogData> logData);
-    ILogData * curentLogData(){return m_dataModel->curentLogData();};
+    void addLogData(shared_ptr<ILogData> logData);
+    ILogData *curentLogData(){return m_dataModel->curentLogData();};
 public slots:
     void lastDataReady();
 

@@ -16,7 +16,7 @@ public:
     BaseStandartWidget();
     virtual ~BaseStandartWidget(){}
 
-    virtual void changePosition(QPointF scenePoint){}
+    virtual void changePosition(QPointF scenePoint){Q_UNUSED(scenePoint)}
 };
 
 #endif // BASESTANDARTWIDGET_H

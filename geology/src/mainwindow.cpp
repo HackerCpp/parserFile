@@ -15,13 +15,15 @@
 #include "geoloader.h"
 #include "interpretercreater.h"
 #include <QInputDialog>
+#include <string_view>
 
 MainWindow::MainWindow(QWidget *parent)
     : WindowForMenu(parent){
-    qputenv("PYTHONPATH",QString(QDir().absolutePath() + "/python3/Lib;" +
-                                 QDir().absolutePath() + "/python3/Lib/site-packages;" +
-                                 QDir().absolutePath() + "/python3/DLLs;" +
-                                 QDir().absolutePath() + "/python3;").toLatin1());
+    QString f_absolutePath = QDir().absolutePath();
+    qputenv("PYTHONPATH",QString(f_absolutePath + "/python3/Lib;" +
+                                 f_absolutePath + "/python3/Lib/site-packages;" +
+                                 f_absolutePath + "/python3/DLLs;" +
+                                 f_absolutePath + "/python3;").toLatin1());
 
     m_menu = new Menu(this);
     m_menu->installEventFilter(this);
@@ -67,7 +69,7 @@ void MainWindow::openFile(){
     QString f_openPath = m_settings->value("paths/pathOpenFile").toString();
     //QString filePath = fileDialog.specGetOpenFileName(this, tr("Open File"),f_openPath,tr("*.forms *.gfm *.las *.lis"));
     QString filePath = QFileDialog().getOpenFileName(this, tr("Open File"),f_openPath,tr("*.forms *.gfm *.las *.geo *.lis"));
-    if(filePath == "")
+    if(filePath.isEmpty())
         return;
     m_settings->setValue("paths/pathOpenFile",filePath);
     FileReader f_file(filePath);
@@ -89,7 +91,7 @@ void MainWindow::openFile(){
     }
     m_logDataView->show();
     if(f_loader){
-        QSharedPointer<ILogData> f_logData = ILogData::createLogData();
+        auto f_logData = ILogData::createLogData();
         f_logData->setName(filePath);
         m_logDataView->addLogData(f_logData);
         f_logData->setLoader(f_loader);
@@ -122,7 +124,7 @@ void MainWindow::addFromFile(){
         return;
     }
     if(f_loader){
-        ILogData *  f_logData = m_logDataView->curentLogData();
+        auto  f_logData = m_logDataView->curentLogData();
         if(f_logData){
             f_logData->setLoader(f_loader);
             f_logData->load();
@@ -131,7 +133,7 @@ void MainWindow::addFromFile(){
 }
 
 void MainWindow::saveFile(ISaverLogData *saver){
-    ILogData *f_logData = m_logDataView->curentLogData();
+    auto f_logData = m_logDataView->curentLogData();
     if(!f_logData)
         return;
     f_logData->setSaver(saver);
@@ -161,7 +163,7 @@ void MainWindow::fileExists(QString filePath){
 }
 
 void MainWindow::openConsolePython(){
-    ILogData *f_logData = m_logDataView->curentLogData();
+    auto f_logData = m_logDataView->curentLogData();
     if(!f_logData)
         return;
     if(!f_logData->isInterpreter()){
@@ -172,7 +174,7 @@ void MainWindow::openConsolePython(){
 }
 
 void MainWindow::openEditorPython(){
-    ILogData *f_logData = m_logDataView->curentLogData();
+    auto f_logData = m_logDataView->curentLogData();
     if(!f_logData)
         return;
     if(!f_logData->isInterpreter()){
@@ -183,7 +185,7 @@ void MainWindow::openEditorPython(){
 }
 
 void MainWindow::insertCalibrationInTheScript(){
-    ILogData *f_logData = m_logDataView->curentLogData();
+    auto f_logData = m_logDataView->curentLogData();
     if(!f_logData)
         return;
     QFileDialog fileDialog;
@@ -209,7 +211,7 @@ void MainWindow::addLibraryPython(){
 }
 
 void MainWindow::openInterpretations(){
-    ILogData *f_urentLogdata = m_logDataView->curentLogData();
+    auto f_urentLogdata = m_logDataView->curentLogData();
     if(!f_urentLogdata)
         return;
     QDir dir(QDir().absolutePath()+ "/interpretations/release");
@@ -227,7 +229,7 @@ void MainWindow::openInterpretations(){
     typedef ILogData *(*FIlogData)(ILogData *);
     FIlogData interpr = (FIlogData)(lib.resolve("interpretation"));
     if(interpr){
-        QSharedPointer<ILogData> f_logData(interpr(f_urentLogdata));
+        auto f_logData = std::shared_ptr<ILogData>(interpr(f_urentLogdata));
         m_logDataView->addLogData(f_logData);
     }
 }
@@ -240,11 +242,17 @@ void MainWindow::update(){
     if (QMessageBox::Yes == QMessageBox::question(this, tr("Update?"),
                               tr("The program will close and start updating, and all unsaved data will be lost. Update?"),
                               QMessageBox::Yes|QMessageBox::No)){
+
+        QString f_current_path = ((QDir*)1)->currentPath();//"/Geology.exe";
         QProcess f_process;
-        f_process.startDetached(QDir().currentPath() + "/updater/updater.exe",
-                                QStringList() << "http://www.gfm.ru/kedr_files/x64/geology_loader.xml" << ".//" );
-        disconnect(qApp, SIGNAL(aboutToQuit()),this, SLOT(quit()));
-        qApp->quit();
+        if(f_process.startDetached(f_current_path + "/updater/updater.exe",
+            QStringList() << "http://www.gfm.ru/kedr_files/x64/geology_loader.xml"
+                          << ".//"
+                          << f_current_path + "/Geology.exe")){
+
+            disconnect(qApp, SIGNAL(aboutToQuit()),this, SLOT(quit()));
+            qApp->quit();
+        }
         //exit(0);
     }
 }

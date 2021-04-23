@@ -33,7 +33,7 @@ private:
     static bool convert_geo(string filePath,enum Formats dst_format);
     static bool convert_las(string filePath,enum Formats dst_format);
     static bool convert_lis(string filePath,enum Formats dst_format);
-    static bool no_convert(string filePath,enum Formats dst_format){return false;}
+    static bool no_convert(string filePath,enum Formats dst_format){(void)(dst_format);(void)(filePath);return false;}
 
     static bool geo_to_gfm(string filePath);
 

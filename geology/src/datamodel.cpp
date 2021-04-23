@@ -10,7 +10,7 @@
 
 
 DataModel::DataModel(){
-    m_logDataVector = new QVector<QSharedPointer<ILogData> >;
+    m_logDataVector = new QVector<shared_ptr<ILogData> >;
     m_curentLogData = nullptr;
 }
 
@@ -18,8 +18,8 @@ DataModel::~DataModel(){
     if(m_logDataVector){delete m_logDataVector; m_logDataVector = nullptr;}
 }
 
-void DataModel::addLogData(QSharedPointer<ILogData> logData){
-    m_curentLogData = logData.data();
+void DataModel::addLogData(std::shared_ptr<ILogData> logData){
+    m_curentLogData = logData.get();
     if(m_logDataVector){
        beginInsertRows(QModelIndex(),m_logDataVector->size(), m_logDataVector->size());
        m_logDataVector->push_back(logData);
@@ -27,7 +27,7 @@ void DataModel::addLogData(QSharedPointer<ILogData> logData){
     }
 }
 
-void DataModel::removeLogData(QSharedPointer<ILogData> logData){
+void DataModel::removeLogData(shared_ptr<ILogData> logData){
     m_logDataVector->removeOne(logData);
     update();
 }
@@ -46,7 +46,7 @@ QModelIndex DataModel::index(int row, int column, const QModelIndex &parent)cons
         return QModelIndex();
     }
     if (!parent.isValid()){ // запрашивают индексы корневых узлов
-        return createIndex(row, column, m_logDataVector->at(row).data());
+        return createIndex(row, column, m_logDataVector->at(row).get());
     }
     else if (dynamic_cast<ILogData*>(static_cast<QObject*>(parent.internalPointer()))){
         ILogData *f_logData = static_cast<ILogData *>(parent.internalPointer());
@@ -116,6 +116,7 @@ QModelIndex DataModel::index(int row, int column, const QModelIndex &parent)cons
             return createIndex(row,column,f_label);
         }
     }
+    return QModelIndex();
 }
 
 QModelIndex DataModel::parent(const QModelIndex &child)const{
@@ -133,7 +134,7 @@ QModelIndex DataModel::parent(const QModelIndex &child)const{
             QList<IBlock *> *f_blocks = logData->blocks();
             foreach(auto block,*f_blocks){
                 if(block == f_block){
-                    return createIndex(m_logDataVector->indexOf(logData),0,logData.data());
+                    return createIndex(m_logDataVector->indexOf(logData),0,logData.get());
                 }
             }
         }
@@ -361,6 +362,7 @@ int DataModel::rowCount(const QModelIndex &parent )const{
 }
 
 int DataModel::columnCount(const QModelIndex &parent )const{
+    Q_UNUSED(parent)
     return 1;
 }
 
@@ -520,12 +522,8 @@ QVariant DataModel::data(const QModelIndex &index, int role )const{
         }
         return QVariant();
     }
-    else if(role == Qt::FontRole){
-           //return QFont("Times", 10, QFont::Bold);
-        return QVariant();
-    }
-    else
-        return QVariant();
+
+    return QVariant();
 }
 
 Qt::ItemFlags DataModel::flags(const QModelIndex &index) const {
@@ -545,6 +543,7 @@ Qt::ItemFlags DataModel::flags(const QModelIndex &index) const {
 }
 
 QVariant DataModel::headerData(int section, Qt::Orientation orientation, int role)const{
+    Q_UNUSED(section)Q_UNUSED(orientation)Q_UNUSED(role)
     return QVariant();
 }
 
@@ -555,13 +554,6 @@ bool DataModel::deleteBlock(IBlock *block){
         QList<IBlock *> *f_blocks = logData->blocks();
         if(!f_blocks)
             continue;
-        /*foreach(auto f_block,*f_blocks){
-            if(block == f_block){
-                f_blocks->removeOne(f_block);
-                update();
-                return true;
-            }
-        }*/
         if(f_blocks->removeOne(block)){
             update();
             return true;

@@ -78,12 +78,15 @@ bool Unpacker::unpack(QString file,QString where,bool isDeleted){
         QByteArray f_byteArray = zip_r.fileData(entry.filePath);
         QFile f_file(f_filePath);
         if(!f_file.open(QIODevice::WriteOnly)){
-            QFile f_logs("logUpdater.txt");
-            if(f_logs.open(QIODevice::Append)){
-                f_logs.write((f_filePath + "\n").toLocal8Bit());
-                qDebug() << "no open file" << f_filePath;
+            QDir().mkpath(QFileInfo(f_filePath).path());
+            if(!f_file.open(QIODevice::WriteOnly)){
+                QFile f_logs("logUpdater.txt");
+                if(f_logs.open(QIODevice::Append)){
+                    f_logs.write((f_filePath + "\n" + "not open").toLocal8Bit());
+                    qDebug() << "no open file" << f_filePath;
+                }
+                f_logs.close();
             }
-            f_logs.close();
         }
         f_file.write(f_byteArray);
         f_file.close();

@@ -1,5 +1,6 @@
 #include "modulesusermodel.h"
 #include "QDebug"
+#include <QColor>
 
 
 ModulesUserModel::ModulesUserModel()
@@ -14,12 +15,10 @@ ModulesUserModel::ModulesUserModel()
 QModelIndex ModulesUserModel::index(int row, int column, const QModelIndex &parent)const{
    if(!m_modules || !m_modules->size())
        return QModelIndex();
-   if(!parent.isValid()){
+   if(!parent.isValid())
        return createIndex(row, column, m_modules->operator[](row));
-   }
    else
      return QModelIndex();
-
 }
 
 QModelIndex ModulesUserModel::parent(const QModelIndex &child)const{
@@ -42,6 +41,7 @@ int ModulesUserModel::rowCount(const QModelIndex &parent )const{
 }
 
 int ModulesUserModel::columnCount(const QModelIndex &parent )const{
+    Q_UNUSED(parent)
     return 3;
 }
 
@@ -50,9 +50,6 @@ QVariant ModulesUserModel::data(const QModelIndex &index, int role )const{
             return QVariant();
     int f_column = index.column();
     if (role == Qt::DisplayRole){
-        if (!index.isValid()){
-            return QVariant();
-        }
         if (dynamic_cast<Module*>(static_cast<QObject*>(index.internalPointer()))){
             Module *f_module = static_cast<Module *>(index.internalPointer());
             if(!f_column)
@@ -64,19 +61,30 @@ QVariant ModulesUserModel::data(const QModelIndex &index, int role )const{
         }
     }
     else if(role == Qt::CheckStateRole){
-        if (!index.isValid()){
-            return QVariant();
-        }
         if (dynamic_cast<Module*>(static_cast<QObject*>(index.internalPointer()))){
             Module *f_module = static_cast<Module *>(index.internalPointer());
             if(!f_column)
                 return f_module->m_isInstalled;
         }
     }
+    else if(role == Qt::BackgroundRole){
+        if (dynamic_cast<Module*>(static_cast<QObject*>(index.internalPointer()))){
+            Module *f_module = static_cast<Module *>(index.internalPointer());
+            if(f_module->latestVersion() != f_module->m_currentVersion->version()){
+                if(f_module->m_isInstalled)
+                    return m_colorDeprecated;
+                else
+                    return m_colorNotMarked;
+
+            }
+            return m_colorAllGood;
+        }
+    }
     return QVariant();
 }
 
 bool ModulesUserModel::setData(const QModelIndex &index, const QVariant &value, int role){
+    Q_UNUSED(value)
     if (!index.isValid())
         return false;
     int f_column = index.column();
@@ -85,13 +93,14 @@ bool ModulesUserModel::setData(const QModelIndex &index, const QVariant &value, 
             return false;
         }
         if (dynamic_cast<Module*>(static_cast<QObject*>(index.internalPointer()))){
-            Module *f_module = static_cast<Module *>(index.internalPointer());
+            Module *f_module = (Module *)index.internalPointer();
             if(!f_column){
                 f_module->m_isInstalled = !f_module->m_isInstalled;
                 return true;
             }
         }
     }
+    return false;
 }
 
 Qt::ItemFlags ModulesUserModel::flags(const QModelIndex &index) const {
@@ -107,8 +116,7 @@ Qt::ItemFlags ModulesUserModel::flags(const QModelIndex &index) const {
 QVariant ModulesUserModel::headerData(int section, Qt::Orientation orientation, int role)const{
     if (role != Qt::DisplayRole)
        return QVariant();
-    if (orientation == Qt::Horizontal && section < m_headerList.size()){
+    if (orientation == Qt::Horizontal && section < m_headerList.size())
         return m_headerList[section];
-    }
     return QVariant();
 }

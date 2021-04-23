@@ -1,26 +1,26 @@
-#include "lisloader.h"
-#include <QFile>
-#include <QDebug>
-#include <QTextCodec>
-#include <QFileInfo>
+#include "loaderviaconvertergtk.h"
 
-
-LisLoader::LisLoader(QString path):
+LoaderViaConverterGTK::LoaderViaConverterGTK(QString path):
     m_path(path),m_process(nullptr),m_gfmLoader(nullptr)
 {
-    m_process =  new QProcess();
-    connect(m_process,SIGNAL(finished(int)),
+    m_format = "";
+    m_process =  std::make_unique<QProcess>();
+    connect(m_process.get(),SIGNAL(finished(int)),
                   this,SLOT(endProcess(int)));
-    connect(m_process,SIGNAL(readyReadStandardOutput()),
+    connect(m_process.get(),SIGNAL(readyReadStandardOutput()),
                   this,SLOT(readyRead()));
 
 }
 
-LisLoader::~LisLoader(){
+
+
+
+LoaderViaConverterGTK::~LoaderViaConverterGTK(){
 
 }
 
-bool LisLoader::download(){
+bool LoaderViaConverterGTK::download(){
+    if(m_format.isEmpty())
     m_isReady = false;
     QStringList f_arguments;
     f_arguments << QTextCodec::codecForName("UTF-8")->fromUnicode(m_path) << QTextCodec::codecForName("UTF-8")->fromUnicode("gfm");
@@ -31,21 +31,21 @@ bool LisLoader::download(){
     return true;
 }
 
-void LisLoader::run(){
+void LoaderViaConverterGTK::run(){
 
 }
 
-void LisLoader::endProcess(int exitCode){
+void LoaderViaConverterGTK::endProcess(int exitCode){
     qDebug() << m_process->readAll() << exitCode;
     QFileInfo f_fileInfo(m_path);
-    QString f_fileNameGFM = f_fileInfo.fileName().replace(".lis",".gfm");
+    QString f_fileNameGFM = f_fileInfo.fileName().replace(m_format,".gfm");
     QFile f_fileGFM("work/tmp/" + f_fileNameGFM);
     if(!f_fileGFM.exists()){
         m_blocks = nullptr;
         return;
     }
     qDebug() << QFileInfo(f_fileGFM).absoluteFilePath();
-    m_gfmLoader = new GFMLoader(QFileInfo(f_fileGFM).absoluteFilePath());
+    m_gfmLoader = std::make_unique<GFMLoader>(QFileInfo(f_fileGFM).absoluteFilePath());
     m_gfmLoader->setBlocks(m_blocks);
     m_gfmLoader->download();
     while(!m_gfmLoader->isReady()){}
@@ -57,6 +57,6 @@ void LisLoader::endProcess(int exitCode){
     emit ready();
 }
 
-void LisLoader::readyRead(){
+void LoaderViaConverterGTK::readyRead(){
     qDebug() << m_process->readAll();
 }

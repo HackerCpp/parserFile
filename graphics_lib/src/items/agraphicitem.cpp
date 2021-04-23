@@ -133,7 +133,7 @@ qreal AGraphicItem::maximumFromScenePoints(QPointF pointBegin,QPointF pointEnd){
     }
     m_curve->load();
     qreal f_maximum =  -std::numeric_limits<double>::max();
-    for(int index = f_indexBegin * m_curve->sizeOffset(); index <= f_indexEnd * m_curve->sizeOffset(); ++index)
+    for(int index = f_indexBegin * m_curve->sizeOffset(); index <= f_indexEnd * (int)m_curve->sizeOffset(); ++index)
         f_maximum = std::max(m_curve->data(index),f_maximum);
     m_curve->unload();
     return f_maximum;
@@ -153,7 +153,7 @@ qreal AGraphicItem::minimumFromScenePoints(QPointF pointBegin,QPointF pointEnd){
     }
     m_curve->load();
     qreal f_minimum = std::numeric_limits<double>::max();
-    for(int index = f_indexBegin * m_curve->sizeOffset(); index <= f_indexEnd * m_curve->sizeOffset(); ++index)
+    for(int index = f_indexBegin * m_curve->sizeOffset(); index <= f_indexEnd * (int)m_curve->sizeOffset(); ++index)
         f_minimum = std::min(m_curve->data(index),f_minimum);
     m_curve->unload();
     return f_minimum;

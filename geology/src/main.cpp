@@ -28,6 +28,13 @@ int main(int argc, char *argv[])
             QDir().rename(f_currrDir + "/updaterNew",f_currrDir + "/updater");
         //}
     }
+    /*QDate date(2021,04,1);
+
+    if(QDate::currentDate() >= date){
+        QMessageBox::warning(nullptr,"Предкпреждение!", "Закончился пробный период!\n Обратитесь к разработчикам");
+        return 0;
+    }*/
+
     MainWindow w;
 
     QCoreApplication::setOrganizationName("GFM");

@@ -12,7 +12,7 @@ class DataBlock : public ABlock{
     ICurve *m_mainTime;
     ICurve *m_mainDepth;
 
-    uint m_numberOfVectors;
+    uint m_numberOfVectors; //Количество данных в каждой кривой
     QString m_nameRecord;
     QString m_moduleMnemonics;
     QString m_plugins;
@@ -35,7 +35,7 @@ public:
 
     bool removeCurveOne(ICurve *curve);
 
-    uint numberOfVectors();
+    uint numberOfVectors(){return m_numberOfVectors;}
     QList<ICurve*> *curves();
     QList<ShortCut> *shortCuts();
     QString nameRecord();

@@ -239,7 +239,7 @@ void SpectrReader::applyAllFilters(){
         ICurve * f_originalCurve = spectrViewer->originalCurve();
         if(!f_originalCurve || !f_experCurve)
             continue;
-        for(int i = 0; i < f_originalCurve->size(); ++i){
+        for(int i = 0; i < (int)f_originalCurve->size(); ++i){
             f_experCurve->setData(f_originalCurve->data(i),i);
         }
 

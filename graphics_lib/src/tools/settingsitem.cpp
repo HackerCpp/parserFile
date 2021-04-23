@@ -63,7 +63,7 @@ Selection::Selection(QStringList name,int activeIndex){
     this->setLayout(m_mainLout);
     //setMaximumSize(300,100);
     //setMinimumSize(300,100);
-    connect(m_btnGroup,static_cast<void (QButtonGroup::*)(int,bool)>(&QButtonGroup::buttonToggled),this,&Selection::bthToggle);
+    connect(m_btnGroup,static_cast<void (QButtonGroup::*)(int,bool)>(&QButtonGroup::idToggled),this,&Selection::bthToggle);
     //connect(m_btnGroup,QOverload<int,bool>::of(&QButtonGroup::buttonToggled),this,&Selection::bthToggle);
 }
 
@@ -343,7 +343,7 @@ void SettingsSpectrItem::configure(){
             m_multicolorSelection->show();
     }
     else if(m_radioWave->isChecked())
-        ;
+        return;
 }
 /*************************Settings for acu item**************************************/
 
@@ -416,13 +416,13 @@ void SettingsAcuItem::applySpecificSettings(){
 
 void SettingsAcuItem::configure(){
     if(m_radioTwoColor->isChecked())
-        ;
+        return;
     else if(m_radioMulticolor->isChecked()){
         if(m_multicolorSelection)
             m_multicolorSelection->show();
     }
     else if(m_radioWave->isChecked())
-        ;
+        return;
 }
 
 

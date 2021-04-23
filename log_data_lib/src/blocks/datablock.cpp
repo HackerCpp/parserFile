@@ -114,9 +114,9 @@ bool DataBlock::removeCurveOne(ICurve *curve){
     emit dataUpdate();
 }
 
-uint DataBlock::numberOfVectors(){
+/*uint DataBlock::numberOfVectors(){
     return m_numberOfVectors;
-}
+}*/
 
 QList<ICurve*> *DataBlock::curves(){
     return m_curves;

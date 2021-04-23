@@ -426,7 +426,7 @@ void  VerticalTrack::clickLeftHandler(QPointF point){
 }
 
 void  VerticalTrack::clickRightHandler(QPointF point){
-
+    Q_UNUSED(point)
 }
 
 void  VerticalTrack::moveLeftHandler(QPointF point){
@@ -439,10 +439,11 @@ void  VerticalTrack::moveLeftHandler(QPointF point){
 }
 
 void  VerticalTrack::moveRightHandler(QPointF point){
-
+    Q_UNUSED(point)
 }
 
 void  VerticalTrack::releaseLeftHandler(QPointF point){
+    Q_UNUSED(point)
     if(m_isDrawLine || m_isShowLegend){
         m_isDrawLine = m_isShowLegend = false;
         this->m_legend->hide();
@@ -451,19 +452,22 @@ void  VerticalTrack::releaseLeftHandler(QPointF point){
 }
 
 void  VerticalTrack::releaseRightHandler(QPointF point){
-
+    Q_UNUSED(point)
 }
 
 
 void VerticalTrack::dragEnterEvent(QGraphicsSceneDragDropEvent *event){
+    Q_UNUSED(event)
     //qDebug() << "drEnterEvent";
 }
 
 void VerticalTrack::dragLeaveEvent(QGraphicsSceneDragDropEvent *event){
+    Q_UNUSED(event)
     //qDebug() << "drLeaveEvent" << m_track->name();
 }
 
 void VerticalTrack::dragMoveEvent(QGraphicsSceneDragDropEvent *event){
+    Q_UNUSED(event)
    // qDebug() << "drMoveEvent";
 }
 
@@ -507,7 +511,7 @@ bool VerticalTrack::is_lineCurveShift(QPointF point){
 }
 
 void VerticalTrack::lineCurveShiftPresHandler(QPointF point){
-
+    Q_UNUSED(point)
 }
 
 void VerticalTrack::lineCurveShiftMoveHandler(QPointF point){
@@ -517,6 +521,7 @@ void VerticalTrack::lineCurveShiftMoveHandler(QPointF point){
 }
 
 void VerticalTrack::lineCurveShiftReleaseHandler(QPointF point){
+    Q_UNUSED(point)
     foreach(auto item,*m_items){
         if(!item || !item->is_visible())
             continue;
@@ -572,10 +577,10 @@ void VerticalTrack::run(){
         return;
     if(m_doublePixMap->isNull() || m_infoPixMap->isNull() || m_doubleHeader->isNull())
         return;
-    /*if(m_visibilitySquare.x() > boundingRect().x() + boundingRect().width()
+    if(m_visibilitySquare.x() > boundingRect().x() + boundingRect().width()
     || m_visibilitySquare.x() + m_visibilitySquare.width() < boundingRect().x()){
         return; //Если трек не в зоне видимости рисовать не будем
-    }*/
+    }
     //QTime time = QTime::currentTime();
     QPainter painter(m_doublePixMap);
     QPainter painterInfo(m_infoPixMap);

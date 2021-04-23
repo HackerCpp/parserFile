@@ -24,7 +24,7 @@ public:
     explicit GraphicWidget(QWidget *parent = nullptr);
     virtual ~GraphicWidget(){}
 
-    void addLogData(QSharedPointer<ILogData> logData);
+    void addLogData(std::shared_ptr<ILogData> logData);
 public slots:
     void settingsHaveChanged();
     void tabChanged();

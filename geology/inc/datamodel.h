@@ -5,20 +5,20 @@
 #include <QList>
 #include "datablock.h"
 
-
+using namespace std;
 
 class DataModel : public  QAbstractItemModel
 {
-    QVector<QSharedPointer<ILogData> > *m_logDataVector;
+    QVector<shared_ptr<ILogData> > *m_logDataVector;
     ILogData *m_curentLogData;
 
 public:
     DataModel();
     ~DataModel() override;
 
-    void addLogData(QSharedPointer<ILogData> logData);
-    void removeLogData(QSharedPointer<ILogData> logData);
-    QVector<QSharedPointer<ILogData> > *logDataVector(){return m_logDataVector;}
+    void addLogData(shared_ptr<ILogData> logData);
+    void removeLogData(shared_ptr<ILogData> logData);
+    QVector<shared_ptr<ILogData> > *logDataVector(){return m_logDataVector;}
     void update();
 
     QModelIndex index(int row, int column, const QModelIndex &parent) const override;

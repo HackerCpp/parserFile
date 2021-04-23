@@ -20,7 +20,7 @@ ChartViewSelectSegment::ChartViewSelectSegment(QWidget *parent)
     m_horizontalLine->setPen(f_penH);
     m_horizontalLine->setZValue(100);
 
-    m_verticalLineLeft->setLine(width()/3,0,width()/3,height());
+    m_verticalLineLeft->setLine(width() / 3,0,width() / 3,height());
     m_verticalLineRight->setLine(width() - width()/3,0,width() - width()/3,height());
     m_horizontalLine->setLine(0,height() / 2,width(),height() / 2);
     if(scene()){
@@ -107,6 +107,7 @@ void ChartViewSelectSegment::mouseMoveEvent(QMouseEvent *event){
 }
 
 void ChartViewSelectSegment::mouseReleaseEvent(QMouseEvent *event){
+    Q_UNUSED(event)
     if(m_isActiveLeftLine){
         m_isActiveLeftLine = false;
     }

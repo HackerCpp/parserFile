@@ -27,6 +27,7 @@ WidgetSelectWaveSegment::WidgetSelectWaveSegment(QVector<VAcuItem *> acuItems)
     m_sliderAmplitude->setSpan(m_sliderAmplitude->minimum(),m_sliderAmplitude->maximum());
 
 
+//Вставляем отрисовку сбоку всех акустик, слева направо
 
     foreach(auto acuItem,m_acuItems){
         m_chartViews->push_back(new ChartViewSelectSegment(this));
@@ -69,6 +70,8 @@ WidgetSelectWaveSegment::WidgetSelectWaveSegment(QVector<VAcuItem *> acuItems)
         m_chartViews->last()->chart()->addSeries(m_series->last());
         m_chartViews->last()->chart()->setAxisX(xAxis->last(), m_series->last());
         m_chartViews->last()->chart()->setAxisY(yAxis->last(), m_series->last());
+        //m_chartViews->last()->chart()->addAxis(xAxis->last(),Qt::AlignBottom);
+        //m_chartViews->last()->chart()->addAxis(yAxis->last(),Qt::AlignLeft);
 
         m_vLayouts->last()->addWidget(m_chartViews->last());
         m_vLayouts->last()->addWidget(m_sliderMicroSec->last());

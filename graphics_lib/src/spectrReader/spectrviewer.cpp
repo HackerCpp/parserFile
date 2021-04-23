@@ -59,6 +59,7 @@ void SpectrViewer::scrollChanged(){
 }
 
 void SpectrViewer::resizeEvent(QResizeEvent *event){
+    Q_UNUSED(event)
     scrollChanged();
 }
 

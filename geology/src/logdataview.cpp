@@ -4,7 +4,7 @@
 
 LogDataView::LogDataView(QWidget *parent) : QWidget(parent)
 {
-    m_logDataList = new QList<QSharedPointer<ILogData> >;
+    m_logDataList = new QList<shared_ptr<ILogData> >;
     m_mainHorLayout = new QHBoxLayout(this);
     m_splitter = new QSplitter();
     m_dataModel = new DataModel();
@@ -25,10 +25,10 @@ LogDataView::~LogDataView(){
 
 }
 
-void LogDataView::addLogData(QSharedPointer<ILogData> logData){
+void LogDataView::addLogData(shared_ptr<ILogData> logData){
     m_logDataList->push_back(logData);
     if(!logData->isReady()){
-        connect(logData.data(),&ILogData::ready,this,&LogDataView::lastDataReady);
+        connect(logData.get(),&ILogData::ready,this,&LogDataView::lastDataReady);
     }
     else{
         lastDataReady();
@@ -36,9 +36,9 @@ void LogDataView::addLogData(QSharedPointer<ILogData> logData){
 }
 
 void LogDataView::lastDataReady(){
-    QSharedPointer<ILogData> f_curentLogData = m_logDataList->last();
-    disconnect(f_curentLogData.data(),&ILogData::ready,this,&LogDataView::lastDataReady);
-    if(!f_curentLogData.data()){
+    shared_ptr<ILogData> f_curentLogData = m_logDataList->last();
+    disconnect(f_curentLogData.get(),&ILogData::ready,this,&LogDataView::lastDataReady);
+    if(f_curentLogData == nullptr){
         m_logDataList->removeLast();
         return;
     }

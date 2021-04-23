@@ -78,18 +78,19 @@ QVariant ModelLegendItems::data(const QModelIndex &index, int role ) const {
 }
 
 int ModelLegendItems::rowCount(const QModelIndex &parent) const {
+    Q_UNUSED(parent)
     if(!m_visibleItems.size())
         return 0;
     return m_visibleItems.size();
 }
 
 int ModelLegendItems::columnCount(const QModelIndex &parent) const {
+    Q_UNUSED(parent)
     return m_headerList.size();
 }
 
 QVariant ModelLegendItems::headerData(int section, Qt::Orientation orientation, int role) const {
     if (role == Qt::DisplayRole){
-       //return QVariant();
         if (orientation == Qt::Horizontal && section < m_headerList.size()){
             return m_headerList[section];
         }
@@ -105,8 +106,8 @@ QVariant ModelLegendItems::headerData(int section, Qt::Orientation orientation, 
     else if(role == Qt::FontRole){
            return QFont("Times", 12, QFont::Bold);
     }
-    else
-        return QVariant();
+
+    return QVariant();
 }
 
 Qt::ItemFlags ModelLegendItems::flags(const QModelIndex &index) const {

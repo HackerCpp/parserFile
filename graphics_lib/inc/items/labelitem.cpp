@@ -115,6 +115,7 @@ QRect LDLabelItem::lineRect(){
     qreal f_y = m_board->scale() * (m_board->isDrawTime() ?  (m_label->timeOrDepth()) : m_label->timeOrDepth());
     qreal f_xBegin = (m_trackParent ? m_trackParent->boundingRect().x() : 0) +  (m_label->leftIndent() * m_board->pixelPerMm());
     QRect f_lineR = QRect(f_xBegin,f_y,m_sizePixels.width(),-m_sizePixels.height());
+    return f_lineR;
 }
 
 void LDLabelItem::updateParam(){
@@ -154,6 +155,7 @@ void LDLabelItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
 }
 
 void LDLabelItem::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event){
+    Q_UNUSED(event)
     qDebug() << "mouse doubleClick";
 }
 

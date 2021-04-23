@@ -1,21 +1,11 @@
-QT += core gui xml
+QT += core gui xml charts
 CONFIG += c++11
 INCLUDEPATH += $$PWD $$PWD/inc $$PWD/inc/items \
 $$PWD/inc/tools $$PWD/inc/acousticsEditor\
 $$PWD/inc/spectrReader $$PWD/inc/drawObjects \
 $$PWD/../log_data_interpreter/include
 
-contains(QMAKE_HOST.arch, x86_64):{
-    QT += charts
-    LIBS += ../build/release/LogData.lib
-}
-!contains(QMAKE_HOST.arch, x86_64):{
-    INCLUDEPATH += $$PWD/../build86/QtCharts
-
-    LIBS += ../build86/release/LogData.dll \
-    ../build86/release/Qt5Charts.dll
-}
-
+LIBS += ../build/release/LogData.lib
 
 SOURCES += \
     $$PWD/inc/items/labelitem.cpp \

@@ -773,6 +773,7 @@ release/moc_updatewindow.cpp: C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtWidgets/Q
 		../modulesusermodel.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QAbstractItemModel \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QStringList \
+		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtGui/QColor \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtWidgets/QPushButton \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtWidgets/qpushbutton.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtWidgets/qabstractbutton.h \
@@ -781,6 +782,8 @@ release/moc_updatewindow.cpp: C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtWidgets/Q
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtWidgets/qlayout.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtWidgets/qlayoutitem.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtWidgets/qgridlayout.h \
+		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QPointer \
+		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qpointer.h \
 		../loader.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtNetwork/QNetworkAccessManager \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtNetwork/qnetworkaccessmanager.h \
@@ -819,7 +822,6 @@ release/moc_updatewindow.cpp: C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtWidgets/Q
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qeventloop.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtGui/qimageiohandler.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qplugin.h \
-		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qpointer.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qjsonobject.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qjsonvalue.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qfactoryinterface.h \
@@ -1375,6 +1377,7 @@ release/main.o: ../main.cpp ../mainwindow.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtWidgets/QWidget \
 		../modulesusermodel.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QStringList \
+		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtGui/QColor \
 		../infiniteloading.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtWidgets/QLabel \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtWidgets/qlabel.h \
@@ -1767,7 +1770,11 @@ release/modulesmodel.o: ../modulesmodel.cpp ../modulesmodel.h \
 		../module.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QString \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QObject \
-		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QDebug
+		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QDebug \
+		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtGui/QColor \
+		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtGui/qcolor.h \
+		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtGui/qrgb.h \
+		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtGui/qrgba64.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/modulesmodel.o ../modulesmodel.cpp
 
 release/modulesusermodel.o: ../modulesusermodel.cpp ../modulesusermodel.h \
@@ -1843,6 +1850,10 @@ release/modulesusermodel.o: ../modulesusermodel.cpp ../modulesusermodel.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QString \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QObject \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QStringList \
+		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtGui/QColor \
+		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtGui/qcolor.h \
+		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtGui/qrgb.h \
+		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtGui/qrgba64.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/modulesusermodel.o ../modulesusermodel.cpp
 
@@ -2255,6 +2266,7 @@ release/updatewindow.o: ../updatewindow.cpp ../updatewindow.h \
 		../modulesusermodel.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QAbstractItemModel \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QStringList \
+		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtGui/QColor \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtWidgets/QPushButton \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtWidgets/qpushbutton.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtWidgets/qabstractbutton.h \
@@ -2263,6 +2275,8 @@ release/updatewindow.o: ../updatewindow.cpp ../updatewindow.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtWidgets/qlayout.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtWidgets/qlayoutitem.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtWidgets/qgridlayout.h \
+		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QPointer \
+		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qpointer.h \
 		../loader.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtNetwork/QNetworkAccessManager \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtNetwork/qnetworkaccessmanager.h \
@@ -2301,7 +2315,6 @@ release/updatewindow.o: ../updatewindow.cpp ../updatewindow.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qeventloop.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtGui/qimageiohandler.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qplugin.h \
-		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qpointer.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qjsonobject.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qjsonvalue.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qfactoryinterface.h \
@@ -2314,7 +2327,9 @@ release/updatewindow.o: ../updatewindow.cpp ../updatewindow.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qdir.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qfileinfo.h \
 		../unpacker.h \
-		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QFileInfo
+		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QFileInfo \
+		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QProcess \
+		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qprocess.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/updatewindow.o ../updatewindow.cpp
 
 release/qrc_res.o: release/qrc_res.cpp 

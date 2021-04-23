@@ -20,10 +20,10 @@ ModelCurveEditor::~ModelCurveEditor(){
 QVariant ModelCurveEditor::data(const QModelIndex &index, int role) const {
     if (!index.isValid())
         return QVariant();
-    if (index.row() >= m_time->size())
+    if (index.row() >= (int)m_time->size())
         return QVariant();
     int column = index.column();
-    if(column > m_curve->sizeOffset() + 1)
+    if(column > (int)m_curve->sizeOffset() + 1)
         return QVariant();
     if (role == Qt::DisplayRole){
     switch (column){
@@ -44,10 +44,12 @@ QVariant ModelCurveEditor::data(const QModelIndex &index, int role) const {
 }
 
 int ModelCurveEditor::rowCount(const QModelIndex &parent) const {
+    Q_UNUSED(parent)
     return m_time->size();
 }
 
 int ModelCurveEditor::columnCount(const QModelIndex &parent) const{
+    Q_UNUSED(parent)
     return 2 + m_curve->sizeOffset();
 }
 
@@ -71,16 +73,17 @@ QVariant ModelCurveEditor::headerData(int section, Qt::Orientation orientation, 
 }
 
 Qt::ItemFlags ModelCurveEditor::flags(const QModelIndex &index) const {
+    Q_UNUSED(index)
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemNeverHasChildren | Qt::ItemIsEditable;
 }
 
 bool ModelCurveEditor::setData(const QModelIndex &index, const QVariant &value, int role ){
     if (!index.isValid())
         return false;
-    if (index.row() >= m_time->size())
+    if (index.row() >= (int)m_time->size())
         return false;
     int column = index.column();
-    if(column > m_curve->sizeOffset() + 1)
+    if(column > (int)m_curve->sizeOffset() + 1)
         return false;
     if (role == Qt::EditRole){
     switch (column){
@@ -102,7 +105,7 @@ bool ModelCurveEditor::setData(const QModelIndex &index, const QVariant &value, 
 }
 
 void ModelCurveEditor::apply(){
-    for(int i = 0;i < m_curve->size(); ++i){
+    for(int i = 0;i < (int)m_curve->size(); ++i){
         m_curve->setData(m_vector->data()[i],i);
     }
 }

@@ -31,8 +31,15 @@ public:
 
     bool download()override;
     void run()override;
-
-
 };
+
+/*#include "loaderviaconvertergtk.h"
+
+class LOADER_EXPORT LasLoader : public LoaderViaConverterGTK
+{
+public:
+    LasLoader(QString path);
+    ~LasLoader(){}
+};*/
 
 #endif // LASLOADER_H

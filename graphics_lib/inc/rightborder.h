@@ -7,7 +7,8 @@
 
 class Border : public QImage{
 public:
-    Border(int width,int height,Format format):QImage(width,height,QImage::Format_ARGB32){}
+    Border(int width,int height,Format format = QImage::Format_ARGB32)
+        :QImage(width,height,QImage::Format_ARGB32){Q_UNUSED(format)}
     virtual ~Border(){}
 
     virtual void click(bool isClick){Q_UNUSED(isClick)}

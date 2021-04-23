@@ -15,7 +15,7 @@ CC            = gcc
 CXX           = g++
 DEFINES       = -DUNICODE -D_UNICODE -DWIN32 -DMINGW_HAS_SECURE_API=1
 CFLAGS        = -fno-keep-inline-dllexport -g -Wall -Wextra -Wextra $(DEFINES)
-CXXFLAGS      = -fno-keep-inline-dllexport -g -std=gnu++11 -Wall -Wextra -Wextra -fexceptions -mthreads $(DEFINES)
+CXXFLAGS      = -fno-keep-inline-dllexport -g -std=gnu++1y -Wall -Wextra -Wextra -fexceptions -mthreads $(DEFINES)
 INCPATH       = -I../ConverterGTK -I. -I../../gtk/win32/include/gtk-3.0/gtk -I../../gtk/win32/include/gtk-3.0 -I../../gtk/win32/include/glib-2.0 -I../../gtk/win32/include/pango-1.0 -I../../gtk/win32/include/cairo -I../../gtk/win32/include/gdk-pixbuf-2.0 -I../../gtk/win32/include/atk-1.0 -I../../gtk/win32/share/gettext -I../../gtk/win32/include -I../../gtk/win32/include/harfbuzz -I../../gtk/win32/include/libxml2 -IC:/Qt/5.15.0/mingw81_32/mkspecs/win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-subsystem,console -mthreads
