@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>LOG_DATA_CORE: Исходный файл E:/MyQtProgram/parserGfm/log_data_lib/include/blocks/headerinfo.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css">
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Создано системой Doxygen 1.5.8 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Титульная&nbsp;страница</span></a></li>
+      <li><a href="annotated.html"><span>Классы</span></a></li>
+      <li class="current"><a href="files.html"><span>Файлы</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="files.html"><span>Файлы</span></a></li>
+      <li><a href="globals.html"><span>Список&nbsp;членов&nbsp;всех&nbsp;файлов</span></a></li>
+    </ul>
+  </div>
+<h1>E:/MyQtProgram/parserGfm/log_data_lib/include/blocks/headerinfo.h</h1><a href="headerinfo_8h.html">См. документацию.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef HEADERINFO_H</span>
+<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define HEADERINFO_H</span>
+<a name="l00003"></a>00003 <span class="preprocessor"></span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;QObject&gt;</span>
+<a name="l00005"></a>00005 
+<a name="l00006"></a><a class="code" href="class_header_info.html">00006</a> <span class="keyword">class </span><a class="code" href="class_header_info.html">HeaderInfo</a> : <span class="keyword">public</span> QObject{
+<a name="l00007"></a>00007     QString m_name;
+<a name="l00008"></a>00008     QString m_body;
+<a name="l00009"></a>00009     QString m_comment;
+<a name="l00010"></a>00010 <span class="keyword">public</span>:
+<a name="l00011"></a><a class="code" href="class_header_info.html#f9969be31c85662baf1bb4465acd5b64">00011</a>     <a class="code" href="class_header_info.html#f9969be31c85662baf1bb4465acd5b64">HeaderInfo</a>(){}
+<a name="l00012"></a><a class="code" href="class_header_info.html#93e92ccefce60bef55d1ae6ed5043cca">00012</a>     <a class="code" href="class_header_info.html#93e92ccefce60bef55d1ae6ed5043cca">HeaderInfo</a>(QString <a class="code" href="class_header_info.html#f7d53cddb47ff99884ecc52429e6052c">name</a>,QString <a class="code" href="class_header_info.html#e8aaddce535f64a90a99ef42868015d4">body</a>,QString <a class="code" href="class_header_info.html#7b80958731359c6a33e16c70ef24509f">comment</a> = <span class="stringliteral">""</span>):m_name(name),m_body(body),m_comment(<a class="code" href="class_header_info.html#7b80958731359c6a33e16c70ef24509f">comment</a>){}
+<a name="l00013"></a><a class="code" href="class_header_info.html#4368110ccd166a25c719e010984f283e">00013</a>     <a class="code" href="class_header_info.html#4368110ccd166a25c719e010984f283e">~HeaderInfo</a>(){}
+<a name="l00014"></a><a class="code" href="class_header_info.html#60a7db2302be57520021a831eb3ec901">00014</a>     <span class="keywordtype">void</span> <a class="code" href="class_header_info.html#60a7db2302be57520021a831eb3ec901">setName</a>(QString <a class="code" href="class_header_info.html#f7d53cddb47ff99884ecc52429e6052c">name</a>){m_name = name;}
+<a name="l00015"></a><a class="code" href="class_header_info.html#6b1fc80eef0ef7b9811ead4a8187b1b0">00015</a>     <span class="keywordtype">void</span> <a class="code" href="class_header_info.html#6b1fc80eef0ef7b9811ead4a8187b1b0">setBody</a>(QString <a class="code" href="class_header_info.html#e8aaddce535f64a90a99ef42868015d4">body</a>){m_body = body;}
+<a name="l00016"></a><a class="code" href="class_header_info.html#f668ec73671c02df19ff9ee50e40a248">00016</a>     <span class="keywordtype">void</span> <a class="code" href="class_header_info.html#f668ec73671c02df19ff9ee50e40a248">setComment</a>(QString mark){m_comment = mark;}
+<a name="l00017"></a><a class="code" href="class_header_info.html#f7d53cddb47ff99884ecc52429e6052c">00017</a>     QString <a class="code" href="class_header_info.html#f7d53cddb47ff99884ecc52429e6052c">name</a>(){<span class="keywordflow">return</span> m_name;}
+<a name="l00018"></a><a class="code" href="class_header_info.html#e8aaddce535f64a90a99ef42868015d4">00018</a>     QString <a class="code" href="class_header_info.html#e8aaddce535f64a90a99ef42868015d4">body</a>(){<span class="keywordflow">return</span> m_body;}
+<a name="l00019"></a><a class="code" href="class_header_info.html#7b80958731359c6a33e16c70ef24509f">00019</a>     QString <a class="code" href="class_header_info.html#7b80958731359c6a33e16c70ef24509f">comment</a>(){<span class="keywordflow">return</span> m_comment;}
+<a name="l00020"></a>00020 };
+<a name="l00021"></a>00021 
+<a name="l00022"></a>00022 <span class="preprocessor">#endif // HEADERINFO_H</span>
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Документация по LOG_DATA_CORE. Последние изменения: Wed May 12 15:29:44 2021. Создано системой&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
+</body>
+</html>

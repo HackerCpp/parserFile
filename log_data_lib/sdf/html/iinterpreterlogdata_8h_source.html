@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_CORE: Исходный файл E:/MyQtProgram/parserGfm/log_data_lib/include/externalComponents/iinterpreterlogdata.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_CORE
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_0050b698ec93709d88e88fefa3050080.html">log_data_lib</a></li><li class="navelem"><a class="el" href="dir_2f0999640edae1ed5e0daaf6e3e6adcd.html">include</a></li><li class="navelem"><a class="el" href="dir_31d0e65bfdb645073b606eea781254e2.html">externalComponents</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">iinterpreterlogdata.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="iinterpreterlogdata_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef IINTERPRETERLOGDATA_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define IINTERPRETERLOGDATA_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;QObject&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="interpretereditor_8h.html">interpretereditor.h</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">class </span><a class="code" href="class_i_block.html">IBlock</a>;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="class_i_interpreter_log_data.html">    8</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_i_interpreter_log_data.html">IInterpreterLogData</a>{</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="class_i_interpreter_log_data.html#af29f7744d2596d0b1150d9c5dae3ed3d">   11</a></span>&#160;    <a class="code" href="class_i_interpreter_log_data.html#af29f7744d2596d0b1150d9c5dae3ed3d">IInterpreterLogData</a>(){}</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="class_i_interpreter_log_data.html#aa532e2d122ea1cb518224c9fa30ed19e">   12</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_i_interpreter_log_data.html#aa532e2d122ea1cb518224c9fa30ed19e">~IInterpreterLogData</a>(){}</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_i_interpreter_log_data.html#adb5c0bee5746d0429966e6d9b73ab5ed">   14</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_i_interpreter_log_data.html#adb5c0bee5746d0429966e6d9b73ab5ed">openConsole</a>(){<span class="keywordflow">return</span> <span class="keyword">false</span>;}</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_i_interpreter_log_data.html#aafd4b3415f676dc2232aef982cec3a7e">   15</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_i_interpreter_log_data.html#aafd4b3415f676dc2232aef982cec3a7e">openScript</a>(){<span class="keywordflow">return</span> <span class="keyword">false</span>;}</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_i_interpreter_log_data.html#a217684ee229a02a71cac529787a0b65d">   16</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_i_interpreter_log_data.html#a217684ee229a02a71cac529787a0b65d">openEditor</a>(){<span class="keywordflow">return</span> <span class="keyword">false</span>;}</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_i_interpreter_log_data.html#ace9bf486b891a87a65da276211e6de26">   18</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_i_interpreter_log_data.html#ace9bf486b891a87a65da276211e6de26">setBlocks</a>(QList&lt;IBlock *&gt; *blocks){Q_UNUSED(blocks) <span class="keywordflow">return</span> <span class="keyword">false</span>;}</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_i_interpreter_log_data.html#a6fbdc12a1910ab4b8ce42222722fbcbd">   19</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_i_interpreter_log_data.html#a6fbdc12a1910ab4b8ce42222722fbcbd">addObject</a>(<span class="keyword">const</span> QString &amp;name, QObject *<span class="keywordtype">object</span>){Q_UNUSED(name) Q_UNUSED(<span class="keywordtype">object</span>) <span class="keywordflow">return</span> <span class="keyword">false</span>;}</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="class_i_interpreter_log_data.html#a351287d1a36eaa2095cfc738bdce7d39">   20</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_i_interpreter_log_data.html#a351287d1a36eaa2095cfc738bdce7d39">addVariable</a>(<span class="keyword">const</span> QString &amp;name, <span class="keyword">const</span> QVariant &amp;v){Q_UNUSED(name) Q_UNUSED(v) <span class="keywordflow">return</span> <span class="keyword">false</span>;}</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="class_i_interpreter_log_data.html#a7aef8e0863b61e1f0b5b68a4ae29f86b">   21</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_i_interpreter_log_data.html#a7aef8e0863b61e1f0b5b68a4ae29f86b">dataUpdate</a>(){}</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="class_i_interpreter_log_data.html#aa4cd3c1c760108ac0a9c17a6d17dfdd7">   22</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_interpreter_editor.html">InterpreterEditor</a> *<a class="code" href="class_i_interpreter_log_data.html#aa4cd3c1c760108ac0a9c17a6d17dfdd7">editor</a>(){<span class="keywordflow">return</span> <span class="keyword">nullptr</span>;}</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="class_i_interpreter_log_data.html#a3361a8d5b5b3fc66a489a6b50937968e">   23</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_i_interpreter_log_data.html#a3361a8d5b5b3fc66a489a6b50937968e">addLibrary</a>(QString nameLibrary){Q_UNUSED(nameLibrary) <span class="keywordflow">return</span> <span class="keyword">false</span>;}</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="class_i_interpreter_log_data.html#ab6668cd18cb18517d82ff27bbea0ea46">   25</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_i_interpreter_log_data.html#ab6668cd18cb18517d82ff27bbea0ea46">executeScriptFromFile</a>(<span class="keyword">const</span> QString&amp; filename){Q_UNUSED(filename) <span class="keywordflow">return</span> <span class="keyword">false</span>;}</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="class_i_interpreter_log_data.html#aac2c38b569d711a8a07c88aab7f7878f">   26</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_i_interpreter_log_data.html#aac2c38b569d711a8a07c88aab7f7878f">executeScriptFromString</a>(<span class="keyword">const</span> QString&amp; script){Q_UNUSED(script) <span class="keywordflow">return</span> <span class="keyword">false</span>;}</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;};</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// IINTERPRETERLOGDATA_H</span></div>
+<div class="ttc" id="aclass_i_block_html"><div class="ttname"><a href="class_i_block.html">IBlock</a></div><div class="ttdef"><b>Definition:</b> iblock.h:10</div></div>
+<div class="ttc" id="aclass_i_interpreter_log_data_html"><div class="ttname"><a href="class_i_interpreter_log_data.html">IInterpreterLogData</a></div><div class="ttdef"><b>Definition:</b> iinterpreterlogdata.h:8</div></div>
+<div class="ttc" id="aclass_i_interpreter_log_data_html_a217684ee229a02a71cac529787a0b65d"><div class="ttname"><a href="class_i_interpreter_log_data.html#a217684ee229a02a71cac529787a0b65d">IInterpreterLogData::openEditor</a></div><div class="ttdeci">virtual bool openEditor()</div><div class="ttdef"><b>Definition:</b> iinterpreterlogdata.h:16</div></div>
+<div class="ttc" id="aclass_i_interpreter_log_data_html_a3361a8d5b5b3fc66a489a6b50937968e"><div class="ttname"><a href="class_i_interpreter_log_data.html#a3361a8d5b5b3fc66a489a6b50937968e">IInterpreterLogData::addLibrary</a></div><div class="ttdeci">virtual bool addLibrary(QString nameLibrary)</div><div class="ttdef"><b>Definition:</b> iinterpreterlogdata.h:23</div></div>
+<div class="ttc" id="aclass_i_interpreter_log_data_html_a351287d1a36eaa2095cfc738bdce7d39"><div class="ttname"><a href="class_i_interpreter_log_data.html#a351287d1a36eaa2095cfc738bdce7d39">IInterpreterLogData::addVariable</a></div><div class="ttdeci">virtual bool addVariable(const QString &amp;name, const QVariant &amp;v)</div><div class="ttdef"><b>Definition:</b> iinterpreterlogdata.h:20</div></div>
+<div class="ttc" id="aclass_i_interpreter_log_data_html_a6fbdc12a1910ab4b8ce42222722fbcbd"><div class="ttname"><a href="class_i_interpreter_log_data.html#a6fbdc12a1910ab4b8ce42222722fbcbd">IInterpreterLogData::addObject</a></div><div class="ttdeci">virtual bool addObject(const QString &amp;name, QObject *object)</div><div class="ttdef"><b>Definition:</b> iinterpreterlogdata.h:19</div></div>
+<div class="ttc" id="aclass_i_interpreter_log_data_html_a7aef8e0863b61e1f0b5b68a4ae29f86b"><div class="ttname"><a href="class_i_interpreter_log_data.html#a7aef8e0863b61e1f0b5b68a4ae29f86b">IInterpreterLogData::dataUpdate</a></div><div class="ttdeci">virtual void dataUpdate()</div><div class="ttdef"><b>Definition:</b> iinterpreterlogdata.h:21</div></div>
+<div class="ttc" id="aclass_i_interpreter_log_data_html_aa4cd3c1c760108ac0a9c17a6d17dfdd7"><div class="ttname"><a href="class_i_interpreter_log_data.html#aa4cd3c1c760108ac0a9c17a6d17dfdd7">IInterpreterLogData::editor</a></div><div class="ttdeci">virtual InterpreterEditor * editor()</div><div class="ttdef"><b>Definition:</b> iinterpreterlogdata.h:22</div></div>
+<div class="ttc" id="aclass_i_interpreter_log_data_html_aa532e2d122ea1cb518224c9fa30ed19e"><div class="ttname"><a href="class_i_interpreter_log_data.html#aa532e2d122ea1cb518224c9fa30ed19e">IInterpreterLogData::~IInterpreterLogData</a></div><div class="ttdeci">virtual ~IInterpreterLogData()</div><div class="ttdef"><b>Definition:</b> iinterpreterlogdata.h:12</div></div>
+<div class="ttc" id="aclass_i_interpreter_log_data_html_aac2c38b569d711a8a07c88aab7f7878f"><div class="ttname"><a href="class_i_interpreter_log_data.html#aac2c38b569d711a8a07c88aab7f7878f">IInterpreterLogData::executeScriptFromString</a></div><div class="ttdeci">virtual bool executeScriptFromString(const QString &amp;script)</div><div class="ttdef"><b>Definition:</b> iinterpreterlogdata.h:26</div></div>
+<div class="ttc" id="aclass_i_interpreter_log_data_html_aafd4b3415f676dc2232aef982cec3a7e"><div class="ttname"><a href="class_i_interpreter_log_data.html#aafd4b3415f676dc2232aef982cec3a7e">IInterpreterLogData::openScript</a></div><div class="ttdeci">virtual bool openScript()</div><div class="ttdef"><b>Definition:</b> iinterpreterlogdata.h:15</div></div>
+<div class="ttc" id="aclass_i_interpreter_log_data_html_ab6668cd18cb18517d82ff27bbea0ea46"><div class="ttname"><a href="class_i_interpreter_log_data.html#ab6668cd18cb18517d82ff27bbea0ea46">IInterpreterLogData::executeScriptFromFile</a></div><div class="ttdeci">virtual bool executeScriptFromFile(const QString &amp;filename)</div><div class="ttdef"><b>Definition:</b> iinterpreterlogdata.h:25</div></div>
+<div class="ttc" id="aclass_i_interpreter_log_data_html_ace9bf486b891a87a65da276211e6de26"><div class="ttname"><a href="class_i_interpreter_log_data.html#ace9bf486b891a87a65da276211e6de26">IInterpreterLogData::setBlocks</a></div><div class="ttdeci">virtual bool setBlocks(QList&lt; IBlock * &gt; *blocks)</div><div class="ttdef"><b>Definition:</b> iinterpreterlogdata.h:18</div></div>
+<div class="ttc" id="aclass_i_interpreter_log_data_html_adb5c0bee5746d0429966e6d9b73ab5ed"><div class="ttname"><a href="class_i_interpreter_log_data.html#adb5c0bee5746d0429966e6d9b73ab5ed">IInterpreterLogData::openConsole</a></div><div class="ttdeci">virtual bool openConsole()</div><div class="ttdef"><b>Definition:</b> iinterpreterlogdata.h:14</div></div>
+<div class="ttc" id="aclass_i_interpreter_log_data_html_af29f7744d2596d0b1150d9c5dae3ed3d"><div class="ttname"><a href="class_i_interpreter_log_data.html#af29f7744d2596d0b1150d9c5dae3ed3d">IInterpreterLogData::IInterpreterLogData</a></div><div class="ttdeci">IInterpreterLogData()</div><div class="ttdef"><b>Definition:</b> iinterpreterlogdata.h:11</div></div>
+<div class="ttc" id="aclass_interpreter_editor_html"><div class="ttname"><a href="class_interpreter_editor.html">InterpreterEditor</a></div><div class="ttdef"><b>Definition:</b> interpretereditor.h:6</div></div>
+<div class="ttc" id="ainterpretereditor_8h_html"><div class="ttname"><a href="interpretereditor_8h.html">interpretereditor.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

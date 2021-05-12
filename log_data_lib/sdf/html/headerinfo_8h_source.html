@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_CORE: Исходный файл E:/MyQtProgram/parserGfm/log_data_lib/include/blocks/headerinfo.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_CORE
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_0050b698ec93709d88e88fefa3050080.html">log_data_lib</a></li><li class="navelem"><a class="el" href="dir_2f0999640edae1ed5e0daaf6e3e6adcd.html">include</a></li><li class="navelem"><a class="el" href="dir_ff252f7062675a6b0cb79ffa6e0de34d.html">blocks</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">headerinfo.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="headerinfo_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef HEADERINFO_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define HEADERINFO_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QObject&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="class_header_info.html">    6</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_header_info.html">HeaderInfo</a> : <span class="keyword">public</span> QObject{</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    QString m_name;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    QString m_body;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    QString m_comment;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="class_header_info.html#af9969be31c85662baf1bb4465acd5b64">   11</a></span>&#160;    <a class="code" href="class_header_info.html#af9969be31c85662baf1bb4465acd5b64">HeaderInfo</a>(){}</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="class_header_info.html#a93e92ccefce60bef55d1ae6ed5043cca">   12</a></span>&#160;    <a class="code" href="class_header_info.html#a93e92ccefce60bef55d1ae6ed5043cca">HeaderInfo</a>(QString <a class="code" href="class_header_info.html#af7d53cddb47ff99884ecc52429e6052c">name</a>,QString <a class="code" href="class_header_info.html#ae8aaddce535f64a90a99ef42868015d4">body</a>,QString <a class="code" href="class_header_info.html#a7b80958731359c6a33e16c70ef24509f">comment</a> = <span class="stringliteral">&quot;&quot;</span>):m_name(<a class="code" href="class_header_info.html#af7d53cddb47ff99884ecc52429e6052c">name</a>),m_body(<a class="code" href="class_header_info.html#ae8aaddce535f64a90a99ef42868015d4">body</a>),m_comment(<a class="code" href="class_header_info.html#a7b80958731359c6a33e16c70ef24509f">comment</a>){}</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="class_header_info.html#a4368110ccd166a25c719e010984f283e">   13</a></span>&#160;    <a class="code" href="class_header_info.html#a4368110ccd166a25c719e010984f283e">~HeaderInfo</a>(){}</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_header_info.html#a60a7db2302be57520021a831eb3ec901">   14</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_header_info.html#a60a7db2302be57520021a831eb3ec901">setName</a>(QString <a class="code" href="class_header_info.html#af7d53cddb47ff99884ecc52429e6052c">name</a>){m_name = <a class="code" href="class_header_info.html#af7d53cddb47ff99884ecc52429e6052c">name</a>;}</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_header_info.html#a6b1fc80eef0ef7b9811ead4a8187b1b0">   15</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_header_info.html#a6b1fc80eef0ef7b9811ead4a8187b1b0">setBody</a>(QString <a class="code" href="class_header_info.html#ae8aaddce535f64a90a99ef42868015d4">body</a>){m_body = <a class="code" href="class_header_info.html#ae8aaddce535f64a90a99ef42868015d4">body</a>;}</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_header_info.html#af668ec73671c02df19ff9ee50e40a248">   16</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_header_info.html#af668ec73671c02df19ff9ee50e40a248">setComment</a>(QString mark){m_comment = mark;}</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_header_info.html#af7d53cddb47ff99884ecc52429e6052c">   17</a></span>&#160;    QString <a class="code" href="class_header_info.html#af7d53cddb47ff99884ecc52429e6052c">name</a>(){<span class="keywordflow">return</span> m_name;}</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_header_info.html#ae8aaddce535f64a90a99ef42868015d4">   18</a></span>&#160;    QString <a class="code" href="class_header_info.html#ae8aaddce535f64a90a99ef42868015d4">body</a>(){<span class="keywordflow">return</span> m_body;}</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_header_info.html#a7b80958731359c6a33e16c70ef24509f">   19</a></span>&#160;    QString <a class="code" href="class_header_info.html#a7b80958731359c6a33e16c70ef24509f">comment</a>(){<span class="keywordflow">return</span> m_comment;}</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;};</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// HEADERINFO_H</span></div>
+<div class="ttc" id="aclass_header_info_html"><div class="ttname"><a href="class_header_info.html">HeaderInfo</a></div><div class="ttdef"><b>Definition:</b> headerinfo.h:6</div></div>
+<div class="ttc" id="aclass_header_info_html_a4368110ccd166a25c719e010984f283e"><div class="ttname"><a href="class_header_info.html#a4368110ccd166a25c719e010984f283e">HeaderInfo::~HeaderInfo</a></div><div class="ttdeci">~HeaderInfo()</div><div class="ttdef"><b>Definition:</b> headerinfo.h:13</div></div>
+<div class="ttc" id="aclass_header_info_html_a60a7db2302be57520021a831eb3ec901"><div class="ttname"><a href="class_header_info.html#a60a7db2302be57520021a831eb3ec901">HeaderInfo::setName</a></div><div class="ttdeci">void setName(QString name)</div><div class="ttdef"><b>Definition:</b> headerinfo.h:14</div></div>
+<div class="ttc" id="aclass_header_info_html_a6b1fc80eef0ef7b9811ead4a8187b1b0"><div class="ttname"><a href="class_header_info.html#a6b1fc80eef0ef7b9811ead4a8187b1b0">HeaderInfo::setBody</a></div><div class="ttdeci">void setBody(QString body)</div><div class="ttdef"><b>Definition:</b> headerinfo.h:15</div></div>
+<div class="ttc" id="aclass_header_info_html_a7b80958731359c6a33e16c70ef24509f"><div class="ttname"><a href="class_header_info.html#a7b80958731359c6a33e16c70ef24509f">HeaderInfo::comment</a></div><div class="ttdeci">QString comment()</div><div class="ttdef"><b>Definition:</b> headerinfo.h:19</div></div>
+<div class="ttc" id="aclass_header_info_html_a93e92ccefce60bef55d1ae6ed5043cca"><div class="ttname"><a href="class_header_info.html#a93e92ccefce60bef55d1ae6ed5043cca">HeaderInfo::HeaderInfo</a></div><div class="ttdeci">HeaderInfo(QString name, QString body, QString comment=&quot;&quot;)</div><div class="ttdef"><b>Definition:</b> headerinfo.h:12</div></div>
+<div class="ttc" id="aclass_header_info_html_ae8aaddce535f64a90a99ef42868015d4"><div class="ttname"><a href="class_header_info.html#ae8aaddce535f64a90a99ef42868015d4">HeaderInfo::body</a></div><div class="ttdeci">QString body()</div><div class="ttdef"><b>Definition:</b> headerinfo.h:18</div></div>
+<div class="ttc" id="aclass_header_info_html_af668ec73671c02df19ff9ee50e40a248"><div class="ttname"><a href="class_header_info.html#af668ec73671c02df19ff9ee50e40a248">HeaderInfo::setComment</a></div><div class="ttdeci">void setComment(QString mark)</div><div class="ttdef"><b>Definition:</b> headerinfo.h:16</div></div>
+<div class="ttc" id="aclass_header_info_html_af7d53cddb47ff99884ecc52429e6052c"><div class="ttname"><a href="class_header_info.html#af7d53cddb47ff99884ecc52429e6052c">HeaderInfo::name</a></div><div class="ttdeci">QString name()</div><div class="ttdef"><b>Definition:</b> headerinfo.h:17</div></div>
+<div class="ttc" id="aclass_header_info_html_af9969be31c85662baf1bb4465acd5b64"><div class="ttname"><a href="class_header_info.html#af9969be31c85662baf1bb4465acd5b64">HeaderInfo::HeaderInfo</a></div><div class="ttdeci">HeaderInfo()</div><div class="ttdef"><b>Definition:</b> headerinfo.h:11</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

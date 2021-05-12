@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_CORE: Исходный файл E:/MyQtProgram/parserGfm/log_data_lib/include/blocks/iblock.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_CORE
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_0050b698ec93709d88e88fefa3050080.html">log_data_lib</a></li><li class="navelem"><a class="el" href="dir_2f0999640edae1ed5e0daaf6e3e6adcd.html">include</a></li><li class="navelem"><a class="el" href="dir_ff252f7062675a6b0cb79ffa6e0de34d.html">blocks</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">iblock.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="iblock_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef IBLOCK_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define IBLOCK_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QString&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QList&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;QObject&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="class_i_block.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_i_block.html">IBlock</a> : <span class="keyword">public</span> QObject{</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_i_block.html#a4580ca6067ae988394af5abe86d2413eaa313638114224afb2c5f18e5ffe45472">   14</a></span>&#160;    <span class="keyword">enum</span> <a class="code" href="class_i_block.html#a4580ca6067ae988394af5abe86d2413e">TypeBlock</a> {<a class="code" href="class_i_block.html#a4580ca6067ae988394af5abe86d2413eac42910e43ca04fd4606503f87c516011">NO_BLOCK</a>,<a class="code" href="class_i_block.html#a4580ca6067ae988394af5abe86d2413eaa313638114224afb2c5f18e5ffe45472">DATA_BLOCK</a>, <a class="code" href="class_i_block.html#a4580ca6067ae988394af5abe86d2413ea9c73fc9fc8a99459a4d1f5861764ca69">FORMS_BLOCK</a>,</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_i_block.html#a4580ca6067ae988394af5abe86d2413ea18573c08fce6fa175c15efcaae96754a">   15</a></span>&#160;                    <a class="code" href="class_i_block.html#a4580ca6067ae988394af5abe86d2413ea85c0f99859450a8028c7e18e5773fc97">TOOLINFO_BLOCK</a>, <a class="code" href="class_i_block.html#a4580ca6067ae988394af5abe86d2413ea18573c08fce6fa175c15efcaae96754a">HEADER_BLOCK</a>,<a class="code" href="class_i_block.html#a4580ca6067ae988394af5abe86d2413eae46427360f680f406a7766c336be0950">LABELS_BLOCK</a>};</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="class_i_block.html#af26a7f3b50449bce99a7d1b1fd2cd3df">IBlock</a>();</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_i_block.html#a881db3cad5495aa06bcd9ffe35d09e79">   19</a></span>&#160;    <a class="code" href="class_i_block.html#a881db3cad5495aa06bcd9ffe35d09e79">IBlock</a>(<span class="keyword">const</span> <a class="code" href="class_i_block.html">IBlock</a> &amp;block){Q_UNUSED(block)}</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_i_block.html#a29915d51fec1dc91a54dae2de04065be">~IBlock</a>();</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_i_block.html#a4580ca6067ae988394af5abe86d2413e">TypeBlock</a> <a class="code" href="class_i_block.html#ad6c425853b81ef5afcfed41c447ec637">name</a>();</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_i_block.html#a4c838ac5928831035e373198be30dcc9">parser</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *body,uint32_t size);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_i_block.html">IBlock</a> * <a class="code" href="class_i_block.html#ae73ba6fd61924660e3da1fc7eaeb2d14">blockCreater</a>(<a class="code" href="class_i_block.html#a4580ca6067ae988394af5abe86d2413e">IBlock::TypeBlock</a> type);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_i_block.html">IBlock</a> * <a class="code" href="class_i_block.html#ae73ba6fd61924660e3da1fc7eaeb2d14">blockCreater</a>(<span class="keyword">const</span> <a class="code" href="class_i_block.html">IBlock</a> &amp;block);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;signals:</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="class_i_block.html#a41c89d6b339e48e749aa166d0a356e0e">   29</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_i_block.html#a41c89d6b339e48e749aa166d0a356e0e">dataUpdate</a>();</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;};</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// IBLOCK_H</span></div>
+<div class="ttc" id="aclass_i_block_html"><div class="ttname"><a href="class_i_block.html">IBlock</a></div><div class="ttdef"><b>Definition:</b> iblock.h:10</div></div>
+<div class="ttc" id="aclass_i_block_html_a29915d51fec1dc91a54dae2de04065be"><div class="ttname"><a href="class_i_block.html#a29915d51fec1dc91a54dae2de04065be">IBlock::~IBlock</a></div><div class="ttdeci">virtual ~IBlock()</div><div class="ttdef"><b>Definition:</b> iblock.cpp:10</div></div>
+<div class="ttc" id="aclass_i_block_html_a41c89d6b339e48e749aa166d0a356e0e"><div class="ttname"><a href="class_i_block.html#a41c89d6b339e48e749aa166d0a356e0e">IBlock::dataUpdate</a></div><div class="ttdeci">void dataUpdate()</div></div>
+<div class="ttc" id="aclass_i_block_html_a4580ca6067ae988394af5abe86d2413e"><div class="ttname"><a href="class_i_block.html#a4580ca6067ae988394af5abe86d2413e">IBlock::TypeBlock</a></div><div class="ttdeci">TypeBlock</div><div class="ttdef"><b>Definition:</b> iblock.h:14</div></div>
+<div class="ttc" id="aclass_i_block_html_a4580ca6067ae988394af5abe86d2413ea18573c08fce6fa175c15efcaae96754a"><div class="ttname"><a href="class_i_block.html#a4580ca6067ae988394af5abe86d2413ea18573c08fce6fa175c15efcaae96754a">IBlock::HEADER_BLOCK</a></div><div class="ttdeci">@ HEADER_BLOCK</div><div class="ttdef"><b>Definition:</b> iblock.h:15</div></div>
+<div class="ttc" id="aclass_i_block_html_a4580ca6067ae988394af5abe86d2413ea85c0f99859450a8028c7e18e5773fc97"><div class="ttname"><a href="class_i_block.html#a4580ca6067ae988394af5abe86d2413ea85c0f99859450a8028c7e18e5773fc97">IBlock::TOOLINFO_BLOCK</a></div><div class="ttdeci">@ TOOLINFO_BLOCK</div><div class="ttdef"><b>Definition:</b> iblock.h:15</div></div>
+<div class="ttc" id="aclass_i_block_html_a4580ca6067ae988394af5abe86d2413ea9c73fc9fc8a99459a4d1f5861764ca69"><div class="ttname"><a href="class_i_block.html#a4580ca6067ae988394af5abe86d2413ea9c73fc9fc8a99459a4d1f5861764ca69">IBlock::FORMS_BLOCK</a></div><div class="ttdeci">@ FORMS_BLOCK</div><div class="ttdef"><b>Definition:</b> iblock.h:14</div></div>
+<div class="ttc" id="aclass_i_block_html_a4580ca6067ae988394af5abe86d2413eaa313638114224afb2c5f18e5ffe45472"><div class="ttname"><a href="class_i_block.html#a4580ca6067ae988394af5abe86d2413eaa313638114224afb2c5f18e5ffe45472">IBlock::DATA_BLOCK</a></div><div class="ttdeci">@ DATA_BLOCK</div><div class="ttdef"><b>Definition:</b> iblock.h:14</div></div>
+<div class="ttc" id="aclass_i_block_html_a4580ca6067ae988394af5abe86d2413eac42910e43ca04fd4606503f87c516011"><div class="ttname"><a href="class_i_block.html#a4580ca6067ae988394af5abe86d2413eac42910e43ca04fd4606503f87c516011">IBlock::NO_BLOCK</a></div><div class="ttdeci">@ NO_BLOCK</div><div class="ttdef"><b>Definition:</b> iblock.h:14</div></div>
+<div class="ttc" id="aclass_i_block_html_a4580ca6067ae988394af5abe86d2413eae46427360f680f406a7766c336be0950"><div class="ttname"><a href="class_i_block.html#a4580ca6067ae988394af5abe86d2413eae46427360f680f406a7766c336be0950">IBlock::LABELS_BLOCK</a></div><div class="ttdeci">@ LABELS_BLOCK</div><div class="ttdef"><b>Definition:</b> iblock.h:15</div></div>
+<div class="ttc" id="aclass_i_block_html_a4c838ac5928831035e373198be30dcc9"><div class="ttname"><a href="class_i_block.html#a4c838ac5928831035e373198be30dcc9">IBlock::parser</a></div><div class="ttdeci">virtual bool parser(const char *body, uint32_t size)</div><div class="ttdef"><b>Definition:</b> iblock.cpp:17</div></div>
+<div class="ttc" id="aclass_i_block_html_a881db3cad5495aa06bcd9ffe35d09e79"><div class="ttname"><a href="class_i_block.html#a881db3cad5495aa06bcd9ffe35d09e79">IBlock::IBlock</a></div><div class="ttdeci">IBlock(const IBlock &amp;block)</div><div class="ttdef"><b>Definition:</b> iblock.h:19</div></div>
+<div class="ttc" id="aclass_i_block_html_ad6c425853b81ef5afcfed41c447ec637"><div class="ttname"><a href="class_i_block.html#ad6c425853b81ef5afcfed41c447ec637">IBlock::name</a></div><div class="ttdeci">virtual TypeBlock name()</div><div class="ttdef"><b>Definition:</b> iblock.cpp:13</div></div>
+<div class="ttc" id="aclass_i_block_html_ae73ba6fd61924660e3da1fc7eaeb2d14"><div class="ttname"><a href="class_i_block.html#ae73ba6fd61924660e3da1fc7eaeb2d14">IBlock::blockCreater</a></div><div class="ttdeci">static IBlock * blockCreater(IBlock::TypeBlock type)</div><div class="ttdef"><b>Definition:</b> iblock.cpp:23</div></div>
+<div class="ttc" id="aclass_i_block_html_af26a7f3b50449bce99a7d1b1fd2cd3df"><div class="ttname"><a href="class_i_block.html#af26a7f3b50449bce99a7d1b1fd2cd3df">IBlock::IBlock</a></div><div class="ttdeci">IBlock()</div><div class="ttdef"><b>Definition:</b> iblock.cpp:9</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

@@ -4,6 +4,12 @@
 
 #include "desc.h"
 #include "shortcut.h"
+/*!
+    \authors Пряников Алексей Владимирович
+
+    \brief Интерфейс кривой, любая кривая с данными
+        наследуется от данного интерфейса.
+*/
 
 class ICurve : public QObject{
     Q_OBJECT

@@ -8,17 +8,17 @@ INCLUDEPATH += include \
 ../log_data_lib/include/externalComponents\
 ../log_data_lib/include/curves \
 ../log_data_lib/include/blocks \
-../PythonQT3.2/src \
-../PythonQT3.2/extensions/PythonQt_QtAll \
-../python3/python38_x64-windows/include/python3.8\
-../QScintilla/Qt4Qt5
+libs/PythonQT3.2/src \
+libs/PythonQT3.2/extensions/PythonQt_QtAll \
+libs/python3/python38_x64-windows/include/python3.8\
+libs/QScintilla/Qt4Qt5
 
 !contains(DEFINES,MINI_VERSION):{
-LIBS += ../PythonQT3.2/build/lib/PythonQt-Qt5-Python383.lib \
-        ../PythonQT3.2/build/lib/PythonQt_QtAll-Qt5-Python383.lib \
-        ../python3/python38_x64-windows/lib/python38.lib \
+LIBS += $$PWD/libs/PythonQT3.2/build/lib/PythonQt-Qt5-Python383.lib \
+        $$PWD/libs/PythonQT3.2/build/lib/PythonQt_QtAll-Qt5-Python383.lib \
+        $$PWD/libs/python3/python38_x64-windows/lib/python38.lib \
         ../build/release/LogData.lib \
-        ../QScintilla/build/release/qscintilla2_qt5.lib
+        $$PWD/libs/QScintilla/build/release/qscintilla2_qt5.lib
 
 HEADERS += \
     include/interpreter_global.h \
@@ -38,11 +38,11 @@ contains(DEFINES,MINI_VERSION):{
 
 HEADERS += \
     include/interpretercreater.h \
-    translaterrustoing.h
+    include/translaterrustoing.h
 
 SOURCES += \
-    include/interpretercreater.cpp \
-    translaterrustoing.cpp
+    src/interpretercreater.cpp \
+    src/translaterrustoing.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings

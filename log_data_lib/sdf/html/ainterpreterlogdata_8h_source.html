@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_CORE: Исходный файл E:/MyQtProgram/parserGfm/log_data_lib/include/externalComponents/ainterpreterlogdata.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_CORE
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_0050b698ec93709d88e88fefa3050080.html">log_data_lib</a></li><li class="navelem"><a class="el" href="dir_2f0999640edae1ed5e0daaf6e3e6adcd.html">include</a></li><li class="navelem"><a class="el" href="dir_31d0e65bfdb645073b606eea781254e2.html">externalComponents</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">ainterpreterlogdata.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="ainterpreterlogdata_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef AINTERPRETERLOGDATA_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define AINTERPRETERLOGDATA_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QMap&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="iinterpreterlogdata_8h.html">iinterpreterlogdata.h</a>&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="class_ainterpreter_log_data.html">    8</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_ainterpreter_log_data.html">AinterpreterLogData</a> : <span class="keyword">public</span> <a class="code" href="class_i_interpreter_log_data.html">IInterpreterLogData</a>{</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="class_ainterpreter_log_data.html#a737c164abc75c417c0d0c85cd4fd9db3">   10</a></span>&#160;    QList&lt;IBlock *&gt; *<a class="code" href="class_ainterpreter_log_data.html#a737c164abc75c417c0d0c85cd4fd9db3">m_blocks</a>;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <a class="code" href="class_ainterpreter_log_data.html#a4df18c083ebc3b49390d8904b9c18c61">AinterpreterLogData</a>();</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_ainterpreter_log_data.html#a2b11b95662209aead62eb3f6c2285cea">~AinterpreterLogData</a>()<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_ainterpreter_log_data.html#a3284f607ce073d103dcee3e30bea757f">openConsole</a>()<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_ainterpreter_log_data.html#a73a581e109071be67a56bc72296a8d0a">openScript</a>()<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_ainterpreter_log_data.html#a4437f057b269b356ad43a85c9a68fb42">   18</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_ainterpreter_log_data.html#a4437f057b269b356ad43a85c9a68fb42">openEditor</a>()<span class="keyword">override</span>{<span class="keywordflow">return</span> <span class="keyword">false</span>;}</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_ainterpreter_log_data.html#aec218a42acaa02de4981cb4674eed7b0">setBlocks</a>(QList&lt;IBlock *&gt; *blocks)<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="class_ainterpreter_log_data.html#abf3061355f8019e4f6e17df87cfe2b59">   21</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_ainterpreter_log_data.html#abf3061355f8019e4f6e17df87cfe2b59">addObject</a>(<span class="keyword">const</span> QString &amp;name, QObject *<span class="keywordtype">object</span>)<span class="keyword">override</span>{Q_UNUSED(name) Q_UNUSED(<span class="keywordtype">object</span>) <span class="keywordflow">return</span> <span class="keyword">false</span>;}</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="class_ainterpreter_log_data.html#ac40db6a81b86b24a578bf9fdc11d57b3">   22</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_ainterpreter_log_data.html#ac40db6a81b86b24a578bf9fdc11d57b3">addVariable</a>(<span class="keyword">const</span> QString &amp;name, <span class="keyword">const</span> QVariant &amp;v)<span class="keyword">override</span>{Q_UNUSED(name) Q_UNUSED(v) <span class="keywordflow">return</span> <span class="keyword">false</span>;}</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="class_ainterpreter_log_data.html#acde1d4cfc907390fa305a91495af01ad">   23</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_ainterpreter_log_data.html#acde1d4cfc907390fa305a91495af01ad">dataUpdate</a>()<span class="keyword">override</span>{}</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="class_ainterpreter_log_data.html#a21359795b87f0f03b39a74749e77f494">   24</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_interpreter_editor.html">InterpreterEditor</a> *<a class="code" href="class_ainterpreter_log_data.html#a21359795b87f0f03b39a74749e77f494">editor</a>()<span class="keyword">override</span>{<span class="keywordflow">return</span> <span class="keyword">nullptr</span>;}</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="class_ainterpreter_log_data.html#a8848fb0cbfce3ce93552db754200bf55">   26</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_ainterpreter_log_data.html#a8848fb0cbfce3ce93552db754200bf55">executeScriptFromFile</a>(<span class="keyword">const</span> QString&amp; filename)<span class="keyword">override</span>{Q_UNUSED(filename) <span class="keywordflow">return</span> <span class="keyword">false</span>;}</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="class_ainterpreter_log_data.html#ad191030512d0901915a2c63daf348ebf">   27</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_ainterpreter_log_data.html#ad191030512d0901915a2c63daf348ebf">executeScriptFromString</a>(<span class="keyword">const</span> QString&amp; script)<span class="keyword">override</span>{Q_UNUSED(script) <span class="keywordflow">return</span> <span class="keyword">false</span>;}</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;};</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// AINTERPRETERLOGDATA_H</span></div>
+<div class="ttc" id="aclass_ainterpreter_log_data_html"><div class="ttname"><a href="class_ainterpreter_log_data.html">AinterpreterLogData</a></div><div class="ttdef"><b>Definition:</b> ainterpreterlogdata.h:8</div></div>
+<div class="ttc" id="aclass_ainterpreter_log_data_html_a21359795b87f0f03b39a74749e77f494"><div class="ttname"><a href="class_ainterpreter_log_data.html#a21359795b87f0f03b39a74749e77f494">AinterpreterLogData::editor</a></div><div class="ttdeci">virtual InterpreterEditor * editor() override</div><div class="ttdef"><b>Definition:</b> ainterpreterlogdata.h:24</div></div>
+<div class="ttc" id="aclass_ainterpreter_log_data_html_a2b11b95662209aead62eb3f6c2285cea"><div class="ttname"><a href="class_ainterpreter_log_data.html#a2b11b95662209aead62eb3f6c2285cea">AinterpreterLogData::~AinterpreterLogData</a></div><div class="ttdeci">virtual ~AinterpreterLogData() override</div><div class="ttdef"><b>Definition:</b> ainterpreterlogdata.cpp:8</div></div>
+<div class="ttc" id="aclass_ainterpreter_log_data_html_a3284f607ce073d103dcee3e30bea757f"><div class="ttname"><a href="class_ainterpreter_log_data.html#a3284f607ce073d103dcee3e30bea757f">AinterpreterLogData::openConsole</a></div><div class="ttdeci">virtual bool openConsole() override</div><div class="ttdef"><b>Definition:</b> ainterpreterlogdata.cpp:12</div></div>
+<div class="ttc" id="aclass_ainterpreter_log_data_html_a4437f057b269b356ad43a85c9a68fb42"><div class="ttname"><a href="class_ainterpreter_log_data.html#a4437f057b269b356ad43a85c9a68fb42">AinterpreterLogData::openEditor</a></div><div class="ttdeci">virtual bool openEditor() override</div><div class="ttdef"><b>Definition:</b> ainterpreterlogdata.h:18</div></div>
+<div class="ttc" id="aclass_ainterpreter_log_data_html_a4df18c083ebc3b49390d8904b9c18c61"><div class="ttname"><a href="class_ainterpreter_log_data.html#a4df18c083ebc3b49390d8904b9c18c61">AinterpreterLogData::AinterpreterLogData</a></div><div class="ttdeci">AinterpreterLogData()</div><div class="ttdef"><b>Definition:</b> ainterpreterlogdata.cpp:3</div></div>
+<div class="ttc" id="aclass_ainterpreter_log_data_html_a737c164abc75c417c0d0c85cd4fd9db3"><div class="ttname"><a href="class_ainterpreter_log_data.html#a737c164abc75c417c0d0c85cd4fd9db3">AinterpreterLogData::m_blocks</a></div><div class="ttdeci">QList&lt; IBlock * &gt; * m_blocks</div><div class="ttdef"><b>Definition:</b> ainterpreterlogdata.h:10</div></div>
+<div class="ttc" id="aclass_ainterpreter_log_data_html_a73a581e109071be67a56bc72296a8d0a"><div class="ttname"><a href="class_ainterpreter_log_data.html#a73a581e109071be67a56bc72296a8d0a">AinterpreterLogData::openScript</a></div><div class="ttdeci">virtual bool openScript() override</div><div class="ttdef"><b>Definition:</b> ainterpreterlogdata.cpp:16</div></div>
+<div class="ttc" id="aclass_ainterpreter_log_data_html_a8848fb0cbfce3ce93552db754200bf55"><div class="ttname"><a href="class_ainterpreter_log_data.html#a8848fb0cbfce3ce93552db754200bf55">AinterpreterLogData::executeScriptFromFile</a></div><div class="ttdeci">virtual bool executeScriptFromFile(const QString &amp;filename) override</div><div class="ttdef"><b>Definition:</b> ainterpreterlogdata.h:26</div></div>
+<div class="ttc" id="aclass_ainterpreter_log_data_html_abf3061355f8019e4f6e17df87cfe2b59"><div class="ttname"><a href="class_ainterpreter_log_data.html#abf3061355f8019e4f6e17df87cfe2b59">AinterpreterLogData::addObject</a></div><div class="ttdeci">virtual bool addObject(const QString &amp;name, QObject *object) override</div><div class="ttdef"><b>Definition:</b> ainterpreterlogdata.h:21</div></div>
+<div class="ttc" id="aclass_ainterpreter_log_data_html_ac40db6a81b86b24a578bf9fdc11d57b3"><div class="ttname"><a href="class_ainterpreter_log_data.html#ac40db6a81b86b24a578bf9fdc11d57b3">AinterpreterLogData::addVariable</a></div><div class="ttdeci">virtual bool addVariable(const QString &amp;name, const QVariant &amp;v) override</div><div class="ttdef"><b>Definition:</b> ainterpreterlogdata.h:22</div></div>
+<div class="ttc" id="aclass_ainterpreter_log_data_html_acde1d4cfc907390fa305a91495af01ad"><div class="ttname"><a href="class_ainterpreter_log_data.html#acde1d4cfc907390fa305a91495af01ad">AinterpreterLogData::dataUpdate</a></div><div class="ttdeci">virtual void dataUpdate() override</div><div class="ttdef"><b>Definition:</b> ainterpreterlogdata.h:23</div></div>
+<div class="ttc" id="aclass_ainterpreter_log_data_html_ad191030512d0901915a2c63daf348ebf"><div class="ttname"><a href="class_ainterpreter_log_data.html#ad191030512d0901915a2c63daf348ebf">AinterpreterLogData::executeScriptFromString</a></div><div class="ttdeci">virtual bool executeScriptFromString(const QString &amp;script) override</div><div class="ttdef"><b>Definition:</b> ainterpreterlogdata.h:27</div></div>
+<div class="ttc" id="aclass_ainterpreter_log_data_html_aec218a42acaa02de4981cb4674eed7b0"><div class="ttname"><a href="class_ainterpreter_log_data.html#aec218a42acaa02de4981cb4674eed7b0">AinterpreterLogData::setBlocks</a></div><div class="ttdeci">virtual bool setBlocks(QList&lt; IBlock * &gt; *blocks) override</div><div class="ttdef"><b>Definition:</b> ainterpreterlogdata.cpp:20</div></div>
+<div class="ttc" id="aclass_i_interpreter_log_data_html"><div class="ttname"><a href="class_i_interpreter_log_data.html">IInterpreterLogData</a></div><div class="ttdef"><b>Definition:</b> iinterpreterlogdata.h:8</div></div>
+<div class="ttc" id="aclass_interpreter_editor_html"><div class="ttname"><a href="class_interpreter_editor.html">InterpreterEditor</a></div><div class="ttdef"><b>Definition:</b> interpretereditor.h:6</div></div>
+<div class="ttc" id="aiinterpreterlogdata_8h_html"><div class="ttname"><a href="iinterpreterlogdata_8h.html">iinterpreterlogdata.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

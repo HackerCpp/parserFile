@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_CORE: Исходный файл E:/MyQtProgram/parserGfm/log_data_lib/include/externalComponents/iloaderlogdata.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_CORE
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_0050b698ec93709d88e88fefa3050080.html">log_data_lib</a></li><li class="navelem"><a class="el" href="dir_2f0999640edae1ed5e0daaf6e3e6adcd.html">include</a></li><li class="navelem"><a class="el" href="dir_31d0e65bfdb645073b606eea781254e2.html">externalComponents</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">iloaderlogdata.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="iloaderlogdata_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef ILOADLOGDATA_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define ILOADLOGDATA_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="iblock_8h.html">iblock.h</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QList&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QObject&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;QThread&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="class_i_loader_log_data.html">    9</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_i_loader_log_data.html">ILoaderLogData</a> : <span class="keyword">public</span> QThread{</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <a class="code" href="class_i_loader_log_data.html#adc5d57f710a71c6b7ea1010b5d0acc76">ILoaderLogData</a>();</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_i_loader_log_data.html#a507784a95eb4e7fa7853fa79ebdf655e">~ILoaderLogData</a>();</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_i_loader_log_data.html#a38c71dc4d6ea6b6c428675d0e05be332">download</a>();</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_i_loader_log_data.html#ae2719a2655dd7d5dbc2250e07994a4bf">isReady</a>();</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_i_loader_log_data.html#a50e090086b0730e96ad3c00f666ea34c">setBlocks</a>(QList&lt;IBlock *&gt; *blocks);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;signals:</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="class_i_loader_log_data.html#a55f8f68e793ca4b090171de1556dc125">   21</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_i_loader_log_data.html#a55f8f68e793ca4b090171de1556dc125">ready</a>();</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;};</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// ILOADLOGDATA_H</span></div>
+<div class="ttc" id="aclass_i_loader_log_data_html"><div class="ttname"><a href="class_i_loader_log_data.html">ILoaderLogData</a></div><div class="ttdef"><b>Definition:</b> iloaderlogdata.h:9</div></div>
+<div class="ttc" id="aclass_i_loader_log_data_html_a38c71dc4d6ea6b6c428675d0e05be332"><div class="ttname"><a href="class_i_loader_log_data.html#a38c71dc4d6ea6b6c428675d0e05be332">ILoaderLogData::download</a></div><div class="ttdeci">virtual bool download()</div><div class="ttdef"><b>Definition:</b> iloaderlogdata.cpp:11</div></div>
+<div class="ttc" id="aclass_i_loader_log_data_html_a507784a95eb4e7fa7853fa79ebdf655e"><div class="ttname"><a href="class_i_loader_log_data.html#a507784a95eb4e7fa7853fa79ebdf655e">ILoaderLogData::~ILoaderLogData</a></div><div class="ttdeci">virtual ~ILoaderLogData()</div><div class="ttdef"><b>Definition:</b> iloaderlogdata.cpp:7</div></div>
+<div class="ttc" id="aclass_i_loader_log_data_html_a50e090086b0730e96ad3c00f666ea34c"><div class="ttname"><a href="class_i_loader_log_data.html#a50e090086b0730e96ad3c00f666ea34c">ILoaderLogData::setBlocks</a></div><div class="ttdeci">virtual bool setBlocks(QList&lt; IBlock * &gt; *blocks)</div><div class="ttdef"><b>Definition:</b> iloaderlogdata.cpp:20</div></div>
+<div class="ttc" id="aclass_i_loader_log_data_html_a55f8f68e793ca4b090171de1556dc125"><div class="ttname"><a href="class_i_loader_log_data.html#a55f8f68e793ca4b090171de1556dc125">ILoaderLogData::ready</a></div><div class="ttdeci">void ready()</div></div>
+<div class="ttc" id="aclass_i_loader_log_data_html_adc5d57f710a71c6b7ea1010b5d0acc76"><div class="ttname"><a href="class_i_loader_log_data.html#adc5d57f710a71c6b7ea1010b5d0acc76">ILoaderLogData::ILoaderLogData</a></div><div class="ttdeci">ILoaderLogData()</div><div class="ttdef"><b>Definition:</b> iloaderlogdata.cpp:3</div></div>
+<div class="ttc" id="aclass_i_loader_log_data_html_ae2719a2655dd7d5dbc2250e07994a4bf"><div class="ttname"><a href="class_i_loader_log_data.html#ae2719a2655dd7d5dbc2250e07994a4bf">ILoaderLogData::isReady</a></div><div class="ttdeci">virtual bool isReady()</div><div class="ttdef"><b>Definition:</b> iloaderlogdata.cpp:16</div></div>
+<div class="ttc" id="aiblock_8h_html"><div class="ttname"><a href="iblock_8h.html">iblock.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

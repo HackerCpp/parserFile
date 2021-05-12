@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_CORE: Исходный файл E:/MyQtProgram/parserGfm/log_data_lib/include/blocks/AcuItem.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_CORE
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_0050b698ec93709d88e88fefa3050080.html">log_data_lib</a></li><li class="navelem"><a class="el" href="dir_2f0999640edae1ed5e0daaf6e3e6adcd.html">include</a></li><li class="navelem"><a class="el" href="dir_ff252f7062675a6b0cb79ffa6e0de34d.html">blocks</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">AcuItem.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_acu_item_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef ACUITEM_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define ACUITEM_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="aitem_8h.html">aitem.h</a>&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="class_acu_item.html">    6</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_acu_item.html">AcuItem</a> : <span class="keyword">public</span> <a class="code" href="class_a_item.html">AItem</a>{</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    QString m_brushColor;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    QString m_transparentColor;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    QList&lt;MulticolorItem&gt; *m_multicolor;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>  m_showMode;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keywordtype">int</span> m_levelCount;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="class_acu_item.html#aacb4eafa18aeda97197335982dfbfdb4">AcuItem</a>();</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="class_acu_item.html#aacb4eafa18aeda97197335982dfbfdb4">AcuItem</a>(<span class="keyword">const</span> <a class="code" href="class_acu_item.html">AcuItem</a> &amp;other);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="class_acu_item.html#a5ba949af7ac3cb02fe679915b062638c">~AcuItem</a>();</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_acu_item.html#a7abb1fa16d71487aa58c7f01f89ad167">   18</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_acu_item.html#a7abb1fa16d71487aa58c7f01f89ad167">setBrushColor</a>(QString brushColor){m_brushColor = brushColor;}</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_acu_item.html#a85c62fe29a86808e1724fd1369b40264">   19</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_acu_item.html#a85c62fe29a86808e1724fd1369b40264">setTransparentColor</a>(QString <a class="code" href="class_acu_item.html#ab0ae9b01c55b6db8f050679d88748511">transparentColor</a>){m_transparentColor = <a class="code" href="class_acu_item.html#ab0ae9b01c55b6db8f050679d88748511">transparentColor</a>;}</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_acu_item.html#a161dbac16ec8a339d51c36bb2172e712">setMulticolor</a>(<a class="code" href="struct_multicolor_item.html">MulticolorItem</a> multicolor);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_acu_item.html#a9b6ea8d031ff6ef49dce606a2cccd470">setShowMode</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_acu_item.html#a3a8f63128b6cc7f888bb482c44843c01">showMode</a>);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_acu_item.html#ae74b6c70b99abdb9d173570a99e2d522">setLevelCount</a>(<span class="keywordtype">int</span> <a class="code" href="class_acu_item.html#a4f963d6d2c8900e4840a816bfb542380">levelCount</a>);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    QString <a class="code" href="class_acu_item.html#aca467699d995bfa0e5564a6fa9ea53e3">bruchColor</a>();</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    QString <a class="code" href="class_acu_item.html#ab0ae9b01c55b6db8f050679d88748511">transparentColor</a>();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">unsigned</span>  <span class="keywordtype">int</span> <a class="code" href="class_acu_item.html#a3a8f63128b6cc7f888bb482c44843c01">showMode</a>();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_acu_item.html#a4f963d6d2c8900e4840a816bfb542380">levelCount</a>();</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    QList&lt;MulticolorItem&gt; *<a class="code" href="class_acu_item.html#a961ac94e0b355ce3e9a0e17dfcb52ee8">multiColor</a>();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;};</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// ACUITEM_H</span></div>
+<div class="ttc" id="aaitem_8h_html"><div class="ttname"><a href="aitem_8h.html">aitem.h</a></div></div>
+<div class="ttc" id="aclass_a_item_html"><div class="ttname"><a href="class_a_item.html">AItem</a></div><div class="ttdef"><b>Definition:</b> aitem.h:15</div></div>
+<div class="ttc" id="aclass_acu_item_html"><div class="ttname"><a href="class_acu_item.html">AcuItem</a></div><div class="ttdef"><b>Definition:</b> AcuItem.h:6</div></div>
+<div class="ttc" id="aclass_acu_item_html_a161dbac16ec8a339d51c36bb2172e712"><div class="ttname"><a href="class_acu_item.html#a161dbac16ec8a339d51c36bb2172e712">AcuItem::setMulticolor</a></div><div class="ttdeci">void setMulticolor(MulticolorItem multicolor)</div><div class="ttdef"><b>Definition:</b> AcuItem.cpp:28</div></div>
+<div class="ttc" id="aclass_acu_item_html_a3a8f63128b6cc7f888bb482c44843c01"><div class="ttname"><a href="class_acu_item.html#a3a8f63128b6cc7f888bb482c44843c01">AcuItem::showMode</a></div><div class="ttdeci">unsigned int showMode()</div><div class="ttdef"><b>Definition:</b> AcuItem.cpp:58</div></div>
+<div class="ttc" id="aclass_acu_item_html_a4f963d6d2c8900e4840a816bfb542380"><div class="ttname"><a href="class_acu_item.html#a4f963d6d2c8900e4840a816bfb542380">AcuItem::levelCount</a></div><div class="ttdeci">int levelCount()</div><div class="ttdef"><b>Definition:</b> AcuItem.cpp:42</div></div>
+<div class="ttc" id="aclass_acu_item_html_a5ba949af7ac3cb02fe679915b062638c"><div class="ttname"><a href="class_acu_item.html#a5ba949af7ac3cb02fe679915b062638c">AcuItem::~AcuItem</a></div><div class="ttdeci">~AcuItem()</div><div class="ttdef"><b>Definition:</b> AcuItem.cpp:24</div></div>
+<div class="ttc" id="aclass_acu_item_html_a7abb1fa16d71487aa58c7f01f89ad167"><div class="ttname"><a href="class_acu_item.html#a7abb1fa16d71487aa58c7f01f89ad167">AcuItem::setBrushColor</a></div><div class="ttdeci">void setBrushColor(QString brushColor)</div><div class="ttdef"><b>Definition:</b> AcuItem.h:18</div></div>
+<div class="ttc" id="aclass_acu_item_html_a85c62fe29a86808e1724fd1369b40264"><div class="ttname"><a href="class_acu_item.html#a85c62fe29a86808e1724fd1369b40264">AcuItem::setTransparentColor</a></div><div class="ttdeci">void setTransparentColor(QString transparentColor)</div><div class="ttdef"><b>Definition:</b> AcuItem.h:19</div></div>
+<div class="ttc" id="aclass_acu_item_html_a961ac94e0b355ce3e9a0e17dfcb52ee8"><div class="ttname"><a href="class_acu_item.html#a961ac94e0b355ce3e9a0e17dfcb52ee8">AcuItem::multiColor</a></div><div class="ttdeci">QList&lt; MulticolorItem &gt; * multiColor()</div><div class="ttdef"><b>Definition:</b> AcuItem.cpp:54</div></div>
+<div class="ttc" id="aclass_acu_item_html_a9b6ea8d031ff6ef49dce606a2cccd470"><div class="ttname"><a href="class_acu_item.html#a9b6ea8d031ff6ef49dce606a2cccd470">AcuItem::setShowMode</a></div><div class="ttdeci">void setShowMode(unsigned int showMode)</div><div class="ttdef"><b>Definition:</b> AcuItem.cpp:32</div></div>
+<div class="ttc" id="aclass_acu_item_html_aacb4eafa18aeda97197335982dfbfdb4"><div class="ttname"><a href="class_acu_item.html#aacb4eafa18aeda97197335982dfbfdb4">AcuItem::AcuItem</a></div><div class="ttdeci">AcuItem()</div><div class="ttdef"><b>Definition:</b> AcuItem.cpp:5</div></div>
+<div class="ttc" id="aclass_acu_item_html_ab0ae9b01c55b6db8f050679d88748511"><div class="ttname"><a href="class_acu_item.html#ab0ae9b01c55b6db8f050679d88748511">AcuItem::transparentColor</a></div><div class="ttdeci">QString transparentColor()</div><div class="ttdef"><b>Definition:</b> AcuItem.cpp:50</div></div>
+<div class="ttc" id="aclass_acu_item_html_aca467699d995bfa0e5564a6fa9ea53e3"><div class="ttname"><a href="class_acu_item.html#aca467699d995bfa0e5564a6fa9ea53e3">AcuItem::bruchColor</a></div><div class="ttdeci">QString bruchColor()</div><div class="ttdef"><b>Definition:</b> AcuItem.cpp:46</div></div>
+<div class="ttc" id="aclass_acu_item_html_ae74b6c70b99abdb9d173570a99e2d522"><div class="ttname"><a href="class_acu_item.html#ae74b6c70b99abdb9d173570a99e2d522">AcuItem::setLevelCount</a></div><div class="ttdeci">void setLevelCount(int levelCount)</div><div class="ttdef"><b>Definition:</b> AcuItem.cpp:36</div></div>
+<div class="ttc" id="astruct_multicolor_item_html"><div class="ttname"><a href="struct_multicolor_item.html">MulticolorItem</a></div><div class="ttdef"><b>Definition:</b> aitem.h:10</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

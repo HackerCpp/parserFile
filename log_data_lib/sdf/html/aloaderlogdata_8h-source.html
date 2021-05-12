@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>LOG_DATA_CORE: Исходный файл E:/MyQtProgram/parserGfm/log_data_lib/include/externalComponents/aloaderlogdata.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css">
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Создано системой Doxygen 1.5.8 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Титульная&nbsp;страница</span></a></li>
+      <li><a href="annotated.html"><span>Классы</span></a></li>
+      <li class="current"><a href="files.html"><span>Файлы</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="files.html"><span>Файлы</span></a></li>
+      <li><a href="globals.html"><span>Список&nbsp;членов&nbsp;всех&nbsp;файлов</span></a></li>
+    </ul>
+  </div>
+<h1>E:/MyQtProgram/parserGfm/log_data_lib/include/externalComponents/aloaderlogdata.h</h1><a href="aloaderlogdata_8h.html">См. документацию.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef ALOADERLOGDATA_H</span>
+<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define ALOADERLOGDATA_H</span>
+<a name="l00003"></a>00003 <span class="preprocessor"></span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include "<a class="code" href="iloaderlogdata_8h.html">iloaderlogdata.h</a>"</span>
+<a name="l00005"></a>00005 
+<a name="l00006"></a>00006 
+<a name="l00007"></a><a class="code" href="class_a_loader_log_data.html">00007</a> <span class="keyword">class </span><a class="code" href="class_a_loader_log_data.html">ALoaderLogData</a> :<span class="keyword">public</span> <a class="code" href="class_i_loader_log_data.html">ILoaderLogData</a>{
+<a name="l00008"></a>00008 
+<a name="l00009"></a>00009 <span class="keyword">protected</span>:
+<a name="l00010"></a><a class="code" href="class_a_loader_log_data.html#d671eb4ddf5bcfc8f56e5f8bc5dd28f2">00010</a>     <span class="keywordtype">bool</span> <a class="code" href="class_a_loader_log_data.html#d671eb4ddf5bcfc8f56e5f8bc5dd28f2">m_isReady</a>;
+<a name="l00011"></a><a class="code" href="class_a_loader_log_data.html#8aa0052af3d4ddc71f02f3741339a204">00011</a>     QList&lt;IBlock *&gt; *<a class="code" href="class_a_loader_log_data.html#8aa0052af3d4ddc71f02f3741339a204">m_blocks</a>;
+<a name="l00012"></a>00012 <span class="keyword">public</span>:
+<a name="l00013"></a>00013     <a class="code" href="class_a_loader_log_data.html#9b429827eb7f462716fe7c2a2e790022">ALoaderLogData</a>();
+<a name="l00014"></a>00014     <span class="keyword">virtual</span> <a class="code" href="class_a_loader_log_data.html#237281fce314fb5dc4ff8e0df7de2873">~ALoaderLogData</a>();
+<a name="l00015"></a>00015 
+<a name="l00016"></a>00016 
+<a name="l00017"></a>00017     <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_a_loader_log_data.html#a82a88892bcd1ec971dff68ddcdbce43">download</a>()<span class="keyword">override</span>;
+<a name="l00018"></a>00018     <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_a_loader_log_data.html#ec5793f6142ae40e98aac72fea64d128">isReady</a>()<span class="keyword">override</span>;
+<a name="l00019"></a>00019 
+<a name="l00020"></a>00020      <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_a_loader_log_data.html#3746d968d0251c11c36c8fe1fbfd925a">setBlocks</a>(QList&lt;IBlock *&gt; *blocks)<span class="keyword">override</span>;
+<a name="l00021"></a>00021 };
+<a name="l00022"></a>00022 
+<a name="l00023"></a>00023 <span class="preprocessor">#endif // ALOADERLOGDATA_H</span>
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Документация по LOG_DATA_CORE. Последние изменения: Wed May 12 15:29:44 2021. Создано системой&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
+</body>
+</html>

@@ -39,7 +39,7 @@ IBlock *IBlock::blockCreater(IBlock::TypeBlock type){
             break;
         }
         case HEADER_BLOCK:{
-            f_block = new HearedBlock();
+            f_block = new HeaderBlock();
             break;
         }
         case LABELS_BLOCK:{
@@ -71,7 +71,7 @@ IBlock *IBlock::blockCreater(const IBlock &block){
             break;
         }
         case HEADER_BLOCK:{
-            f_returnBlock = new HearedBlock(dynamic_cast<HearedBlock &>(f_block));
+            f_returnBlock = new HeaderBlock(dynamic_cast<HeaderBlock &>(f_block));
             break;
         }
         case LABELS_BLOCK:{

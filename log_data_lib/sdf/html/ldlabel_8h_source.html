@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_CORE: Исходный файл E:/MyQtProgram/parserGfm/log_data_lib/include/blocks/ldlabel.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_CORE
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_0050b698ec93709d88e88fefa3050080.html">log_data_lib</a></li><li class="navelem"><a class="el" href="dir_2f0999640edae1ed5e0daaf6e3e6adcd.html">include</a></li><li class="navelem"><a class="el" href="dir_ff252f7062675a6b0cb79ffa6e0de34d.html">blocks</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">ldlabel.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="ldlabel_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef LDLABEL_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define LDLABEL_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;QString&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QSize&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QObject&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="class_l_d_label.html">    7</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_l_d_label.html">LDLabel</a> : <span class="keyword">public</span> QObject</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keywordtype">bool</span> m_isDrawTime;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    qreal m_timeOrDepth;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    QSizeF m_size;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    QString m_text;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">int</span> m_track;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    QString m_boardName;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    qreal m_leftIndent;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    QString m_color;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    QString m_backgroundColor;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="class_l_d_label.html#ac81e6ba0bb322f287e207309a9d83081">LDLabel</a>(qreal <a class="code" href="class_l_d_label.html#aeea02d6107b6de830df773b272bdc816">timeOrDepth</a> = 0,<span class="keywordtype">bool</span> isdrawTime = <span class="keyword">true</span>,<span class="keywordtype">int</span> track = -1,</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            QString <a class="code" href="class_l_d_label.html#a08fc4cb1f85151c043597b9bd3f2abf0">boardName</a> = <span class="stringliteral">&quot;&quot;</span>,QString <a class="code" href="class_l_d_label.html#ae23e6ad19065038be941b72eedb2f8b4">text</a> = <span class="stringliteral">&quot;&quot;</span>,<span class="keywordtype">int</span> <a class="code" href="class_l_d_label.html#aca62e8275889af44af4981475e154f80">leftIndent</a> = 0);</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="class_l_d_label.html#a395108b239d0103656c3914ea389fdf6">   23</a></span>&#160;    <a class="code" href="class_l_d_label.html#a395108b239d0103656c3914ea389fdf6">~LDLabel</a>(){}</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="class_l_d_label.html#a0f6411ebe4e93bb48cb49f9905d95da2">   25</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_l_d_label.html#a0f6411ebe4e93bb48cb49f9905d95da2">setSize</a>(QSizeF <a class="code" href="class_l_d_label.html#ab53a4e87334d118743eca453f73dff39">size</a>){m_size = <a class="code" href="class_l_d_label.html#ab53a4e87334d118743eca453f73dff39">size</a>;}</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="class_l_d_label.html#a9cbc47be765edb1c7deef1b16a239a3c">   26</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_l_d_label.html#a9cbc47be765edb1c7deef1b16a239a3c">setText</a>(QString <a class="code" href="class_l_d_label.html#ae23e6ad19065038be941b72eedb2f8b4">text</a>){m_text = <a class="code" href="class_l_d_label.html#ae23e6ad19065038be941b72eedb2f8b4">text</a>;}</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="class_l_d_label.html#a8edaff40eb53f7646bed741b38e12d62">   27</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_l_d_label.html#a8edaff40eb53f7646bed741b38e12d62">appendText</a>(QString <a class="code" href="class_l_d_label.html#ae23e6ad19065038be941b72eedb2f8b4">text</a>){m_text.append(<a class="code" href="class_l_d_label.html#ae23e6ad19065038be941b72eedb2f8b4">text</a>);}</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="class_l_d_label.html#af0821a1630b3056d2310fb2339e919c5">   28</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_l_d_label.html#af0821a1630b3056d2310fb2339e919c5">setTrackNumber</a>(<span class="keywordtype">int</span> <a class="code" href="class_l_d_label.html#aec3666c16964e15599d82733bf813fbf">trackNumber</a>){m_track = <a class="code" href="class_l_d_label.html#aec3666c16964e15599d82733bf813fbf">trackNumber</a>;}</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="class_l_d_label.html#a73dcedb5143338e187a0023348adf138">   29</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_l_d_label.html#a73dcedb5143338e187a0023348adf138">setboardName</a>(QString <a class="code" href="class_l_d_label.html#a08fc4cb1f85151c043597b9bd3f2abf0">boardName</a>){m_boardName = <a class="code" href="class_l_d_label.html#a08fc4cb1f85151c043597b9bd3f2abf0">boardName</a>;}</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="class_l_d_label.html#a40f4f56076fce9ff3322f11037dd9c9f">   30</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_l_d_label.html#a40f4f56076fce9ff3322f11037dd9c9f">setLeftIndent</a>(qreal <a class="code" href="class_l_d_label.html#aca62e8275889af44af4981475e154f80">leftIndent</a>){m_leftIndent = <a class="code" href="class_l_d_label.html#aca62e8275889af44af4981475e154f80">leftIndent</a>;}</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="class_l_d_label.html#a0f71a7e4743d101832859bb14edc802c">   31</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_l_d_label.html#a0f71a7e4743d101832859bb14edc802c">setColor</a>(QString <a class="code" href="class_l_d_label.html#a07347723531c9be693a1baa8160a803a">color</a>){m_color = <a class="code" href="class_l_d_label.html#a07347723531c9be693a1baa8160a803a">color</a>;}</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="class_l_d_label.html#ae2f8d5cea371ed0647894cf46192c03b">   32</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_l_d_label.html#ae2f8d5cea371ed0647894cf46192c03b">setBackgraundColor</a>(QString <a class="code" href="class_l_d_label.html#ac410aeb96f94df164a41d90f01d365f4">backgroundColor</a>){m_backgroundColor = <a class="code" href="class_l_d_label.html#ac410aeb96f94df164a41d90f01d365f4">backgroundColor</a>;}</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="class_l_d_label.html#ab53a4e87334d118743eca453f73dff39">   34</a></span>&#160;    <span class="keyword">const</span> QSizeF <a class="code" href="class_l_d_label.html#ab53a4e87334d118743eca453f73dff39">size</a>(){<span class="keywordflow">return</span> m_size;}</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="class_l_d_label.html#ae23e6ad19065038be941b72eedb2f8b4">   35</a></span>&#160;    QString &amp;<a class="code" href="class_l_d_label.html#ae23e6ad19065038be941b72eedb2f8b4">text</a>(){<span class="keywordflow">return</span> m_text;}</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="class_l_d_label.html#aeea02d6107b6de830df773b272bdc816">   36</a></span>&#160;    qreal <a class="code" href="class_l_d_label.html#aeea02d6107b6de830df773b272bdc816">timeOrDepth</a>(){<span class="keywordflow">return</span> m_timeOrDepth;}</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_l_d_label.html#aec3666c16964e15599d82733bf813fbf">   37</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_l_d_label.html#aec3666c16964e15599d82733bf813fbf">trackNumber</a>(){<span class="keywordflow">return</span> m_track;}</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="class_l_d_label.html#a3710bbcf5b6c28e2e098d74d00f09b1e">   38</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_l_d_label.html#a3710bbcf5b6c28e2e098d74d00f09b1e">isDarawTime</a>(){<span class="keywordflow">return</span> m_isDrawTime;}</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="class_l_d_label.html#a08fc4cb1f85151c043597b9bd3f2abf0">   39</a></span>&#160;    QString <a class="code" href="class_l_d_label.html#a08fc4cb1f85151c043597b9bd3f2abf0">boardName</a>(){<span class="keywordflow">return</span> m_boardName;}</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="class_l_d_label.html#aca62e8275889af44af4981475e154f80">   40</a></span>&#160;    qreal <a class="code" href="class_l_d_label.html#aca62e8275889af44af4981475e154f80">leftIndent</a>(){<span class="keywordflow">return</span> m_leftIndent;}</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="class_l_d_label.html#a07347723531c9be693a1baa8160a803a">   41</a></span>&#160;    QString <a class="code" href="class_l_d_label.html#a07347723531c9be693a1baa8160a803a">color</a>(){<span class="keywordflow">return</span> m_color;}</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="class_l_d_label.html#ac410aeb96f94df164a41d90f01d365f4">   42</a></span>&#160;    QString <a class="code" href="class_l_d_label.html#ac410aeb96f94df164a41d90f01d365f4">backgroundColor</a>(){<span class="keywordflow">return</span> m_backgroundColor;}</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;};</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// LDLABEL_H</span></div>
+<div class="ttc" id="aclass_l_d_label_html"><div class="ttname"><a href="class_l_d_label.html">LDLabel</a></div><div class="ttdef"><b>Definition:</b> ldlabel.h:8</div></div>
+<div class="ttc" id="aclass_l_d_label_html_a07347723531c9be693a1baa8160a803a"><div class="ttname"><a href="class_l_d_label.html#a07347723531c9be693a1baa8160a803a">LDLabel::color</a></div><div class="ttdeci">QString color()</div><div class="ttdef"><b>Definition:</b> ldlabel.h:41</div></div>
+<div class="ttc" id="aclass_l_d_label_html_a08fc4cb1f85151c043597b9bd3f2abf0"><div class="ttname"><a href="class_l_d_label.html#a08fc4cb1f85151c043597b9bd3f2abf0">LDLabel::boardName</a></div><div class="ttdeci">QString boardName()</div><div class="ttdef"><b>Definition:</b> ldlabel.h:39</div></div>
+<div class="ttc" id="aclass_l_d_label_html_a0f6411ebe4e93bb48cb49f9905d95da2"><div class="ttname"><a href="class_l_d_label.html#a0f6411ebe4e93bb48cb49f9905d95da2">LDLabel::setSize</a></div><div class="ttdeci">void setSize(QSizeF size)</div><div class="ttdef"><b>Definition:</b> ldlabel.h:25</div></div>
+<div class="ttc" id="aclass_l_d_label_html_a0f71a7e4743d101832859bb14edc802c"><div class="ttname"><a href="class_l_d_label.html#a0f71a7e4743d101832859bb14edc802c">LDLabel::setColor</a></div><div class="ttdeci">void setColor(QString color)</div><div class="ttdef"><b>Definition:</b> ldlabel.h:31</div></div>
+<div class="ttc" id="aclass_l_d_label_html_a3710bbcf5b6c28e2e098d74d00f09b1e"><div class="ttname"><a href="class_l_d_label.html#a3710bbcf5b6c28e2e098d74d00f09b1e">LDLabel::isDarawTime</a></div><div class="ttdeci">bool isDarawTime()</div><div class="ttdef"><b>Definition:</b> ldlabel.h:38</div></div>
+<div class="ttc" id="aclass_l_d_label_html_a395108b239d0103656c3914ea389fdf6"><div class="ttname"><a href="class_l_d_label.html#a395108b239d0103656c3914ea389fdf6">LDLabel::~LDLabel</a></div><div class="ttdeci">~LDLabel()</div><div class="ttdef"><b>Definition:</b> ldlabel.h:23</div></div>
+<div class="ttc" id="aclass_l_d_label_html_a40f4f56076fce9ff3322f11037dd9c9f"><div class="ttname"><a href="class_l_d_label.html#a40f4f56076fce9ff3322f11037dd9c9f">LDLabel::setLeftIndent</a></div><div class="ttdeci">void setLeftIndent(qreal leftIndent)</div><div class="ttdef"><b>Definition:</b> ldlabel.h:30</div></div>
+<div class="ttc" id="aclass_l_d_label_html_a73dcedb5143338e187a0023348adf138"><div class="ttname"><a href="class_l_d_label.html#a73dcedb5143338e187a0023348adf138">LDLabel::setboardName</a></div><div class="ttdeci">void setboardName(QString boardName)</div><div class="ttdef"><b>Definition:</b> ldlabel.h:29</div></div>
+<div class="ttc" id="aclass_l_d_label_html_a8edaff40eb53f7646bed741b38e12d62"><div class="ttname"><a href="class_l_d_label.html#a8edaff40eb53f7646bed741b38e12d62">LDLabel::appendText</a></div><div class="ttdeci">void appendText(QString text)</div><div class="ttdef"><b>Definition:</b> ldlabel.h:27</div></div>
+<div class="ttc" id="aclass_l_d_label_html_a9cbc47be765edb1c7deef1b16a239a3c"><div class="ttname"><a href="class_l_d_label.html#a9cbc47be765edb1c7deef1b16a239a3c">LDLabel::setText</a></div><div class="ttdeci">void setText(QString text)</div><div class="ttdef"><b>Definition:</b> ldlabel.h:26</div></div>
+<div class="ttc" id="aclass_l_d_label_html_ab53a4e87334d118743eca453f73dff39"><div class="ttname"><a href="class_l_d_label.html#ab53a4e87334d118743eca453f73dff39">LDLabel::size</a></div><div class="ttdeci">const QSizeF size()</div><div class="ttdef"><b>Definition:</b> ldlabel.h:34</div></div>
+<div class="ttc" id="aclass_l_d_label_html_ac410aeb96f94df164a41d90f01d365f4"><div class="ttname"><a href="class_l_d_label.html#ac410aeb96f94df164a41d90f01d365f4">LDLabel::backgroundColor</a></div><div class="ttdeci">QString backgroundColor()</div><div class="ttdef"><b>Definition:</b> ldlabel.h:42</div></div>
+<div class="ttc" id="aclass_l_d_label_html_ac81e6ba0bb322f287e207309a9d83081"><div class="ttname"><a href="class_l_d_label.html#ac81e6ba0bb322f287e207309a9d83081">LDLabel::LDLabel</a></div><div class="ttdeci">LDLabel(qreal timeOrDepth=0, bool isdrawTime=true, int track=-1, QString boardName=&quot;&quot;, QString text=&quot;&quot;, int leftIndent=0)</div><div class="ttdef"><b>Definition:</b> ldlabel.cpp:3</div></div>
+<div class="ttc" id="aclass_l_d_label_html_aca62e8275889af44af4981475e154f80"><div class="ttname"><a href="class_l_d_label.html#aca62e8275889af44af4981475e154f80">LDLabel::leftIndent</a></div><div class="ttdeci">qreal leftIndent()</div><div class="ttdef"><b>Definition:</b> ldlabel.h:40</div></div>
+<div class="ttc" id="aclass_l_d_label_html_ae23e6ad19065038be941b72eedb2f8b4"><div class="ttname"><a href="class_l_d_label.html#ae23e6ad19065038be941b72eedb2f8b4">LDLabel::text</a></div><div class="ttdeci">QString &amp; text()</div><div class="ttdef"><b>Definition:</b> ldlabel.h:35</div></div>
+<div class="ttc" id="aclass_l_d_label_html_ae2f8d5cea371ed0647894cf46192c03b"><div class="ttname"><a href="class_l_d_label.html#ae2f8d5cea371ed0647894cf46192c03b">LDLabel::setBackgraundColor</a></div><div class="ttdeci">void setBackgraundColor(QString backgroundColor)</div><div class="ttdef"><b>Definition:</b> ldlabel.h:32</div></div>
+<div class="ttc" id="aclass_l_d_label_html_aec3666c16964e15599d82733bf813fbf"><div class="ttname"><a href="class_l_d_label.html#aec3666c16964e15599d82733bf813fbf">LDLabel::trackNumber</a></div><div class="ttdeci">int trackNumber()</div><div class="ttdef"><b>Definition:</b> ldlabel.h:37</div></div>
+<div class="ttc" id="aclass_l_d_label_html_aeea02d6107b6de830df773b272bdc816"><div class="ttname"><a href="class_l_d_label.html#aeea02d6107b6de830df773b272bdc816">LDLabel::timeOrDepth</a></div><div class="ttdeci">qreal timeOrDepth()</div><div class="ttdef"><b>Definition:</b> ldlabel.h:36</div></div>
+<div class="ttc" id="aclass_l_d_label_html_af0821a1630b3056d2310fb2339e919c5"><div class="ttname"><a href="class_l_d_label.html#af0821a1630b3056d2310fb2339e919c5">LDLabel::setTrackNumber</a></div><div class="ttdeci">void setTrackNumber(int trackNumber)</div><div class="ttdef"><b>Definition:</b> ldlabel.h:28</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

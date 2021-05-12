@@ -1,0 +1,979 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_CORE: Класс ICurve</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_CORE
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="#pub-static-methods">Открытые статические члены</a> &#124;
+<a href="class_i_curve-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle">
+<div class="title">Класс ICurve</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Интерфейс кривой, любая кривая с данными наследуется от данного интерфейса.  
+ <a href="class_i_curve.html#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="icurve_8h_source.html">icurve.h</a>&gt;</code></p>
+
+<p>Базовые классы:QObject.</p>
+
+<p>Производные классы:<a class="el" href="class_a_curve.html">ACurve</a>.</p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a0a4a15aa779a987c233e3f155e78e40b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#a0a4a15aa779a987c233e3f155e78e40b">ICurve</a> ()</td></tr>
+<tr class="separator:a0a4a15aa779a987c233e3f155e78e40b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49860b8cb2aebc4495b5adb4b817c9dc"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#a49860b8cb2aebc4495b5adb4b817c9dc">~ICurve</a> ()</td></tr>
+<tr class="separator:a49860b8cb2aebc4495b5adb4b817c9dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a132fcc6e7c4b359e60f554846b14a125"><td class="memItemLeft" align="right" valign="top">virtual qreal&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#a132fcc6e7c4b359e60f554846b14a125">data</a> (uint index)</td></tr>
+<tr class="separator:a132fcc6e7c4b359e60f554846b14a125"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d65db1145fd3d3690e92997960c4d2a"><td class="memItemLeft" align="right" valign="top">virtual QByteArray&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#a0d65db1145fd3d3690e92997960c4d2a">data</a> ()</td></tr>
+<tr class="separator:a0d65db1145fd3d3690e92997960c4d2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69d1f8528072aef64a0e45e72097386d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#a69d1f8528072aef64a0e45e72097386d">setData</a> (qreal <a class="el" href="class_i_curve.html#a132fcc6e7c4b359e60f554846b14a125">data</a>)</td></tr>
+<tr class="separator:a69d1f8528072aef64a0e45e72097386d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8897914dc80ced58a989337a5851a179"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#a8897914dc80ced58a989337a5851a179">setData</a> (qreal <a class="el" href="class_i_curve.html#a132fcc6e7c4b359e60f554846b14a125">data</a>, uint index)</td></tr>
+<tr class="separator:a8897914dc80ced58a989337a5851a179"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0365c8afccec2dac4b1b805b58a596e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#ad0365c8afccec2dac4b1b805b58a596e">setData</a> (const char *dataPtr, uint numberOfVectors)</td></tr>
+<tr class="separator:ad0365c8afccec2dac4b1b805b58a596e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5dc7433a3ef7b65d4d8899f3d9810fc"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#ad5dc7433a3ef7b65d4d8899f3d9810fc">setOffset</a> (qreal offset)</td></tr>
+<tr class="separator:ad5dc7433a3ef7b65d4d8899f3d9810fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21d564a6c160e4969b0e4dc3c3eff97c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#a21d564a6c160e4969b0e4dc3c3eff97c">setScale</a> (qreal scale)</td></tr>
+<tr class="separator:a21d564a6c160e4969b0e4dc3c3eff97c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0aa3572f55acee8615dd84fc9734915"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#ac0aa3572f55acee8615dd84fc9734915">setDesc</a> (<a class="el" href="class_desc.html">Desc</a> *<a class="el" href="class_i_curve.html#a1a86393c44d62e37c3e75a13a4660fb7">desc</a>)</td></tr>
+<tr class="separator:ac0aa3572f55acee8615dd84fc9734915"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee9a67d396dde48e8d45633ff7e5c781"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#aee9a67d396dde48e8d45633ff7e5c781">setShortCut</a> (<a class="el" href="class_short_cut.html">ShortCut</a> <a class="el" href="class_i_curve.html#abc31719cb3c56a13c74af454320d7178">shortCut</a>)</td></tr>
+<tr class="separator:aee9a67d396dde48e8d45633ff7e5c781"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9eed597ead6dcfd7cbfad0d4a36d423"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#ac9eed597ead6dcfd7cbfad0d4a36d423">setMnemonic</a> (QString <a class="el" href="class_i_curve.html#a61d1e0f763ec749874191d77ff246b51">mnemonic</a>)</td></tr>
+<tr class="separator:ac9eed597ead6dcfd7cbfad0d4a36d423"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afac5b84778fb7c45c5b33c46df53e5a7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#afac5b84778fb7c45c5b33c46df53e5a7">setRecordPoint</a> (qreal <a class="el" href="class_i_curve.html#a9d01647dc1ca7bb99f3937e016513268">recordPoint</a>)</td></tr>
+<tr class="separator:afac5b84778fb7c45c5b33c46df53e5a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17b2ba544e8f273f6610e553df2c72d4"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_i_curve.html">ICurve</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#a17b2ba544e8f273f6610e553df2c72d4">time</a> ()</td></tr>
+<tr class="separator:a17b2ba544e8f273f6610e553df2c72d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabf7e95a394da2a01048d37c6ec2afad"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_i_curve.html">ICurve</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#aabf7e95a394da2a01048d37c6ec2afad">depth</a> ()</td></tr>
+<tr class="separator:aabf7e95a394da2a01048d37c6ec2afad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24eb194bd69553b7d9073e12990b6452"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_i_curve.html">ICurve</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#a24eb194bd69553b7d9073e12990b6452">userBaseValue</a> ()</td></tr>
+<tr class="separator:a24eb194bd69553b7d9073e12990b6452"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4ae50320ac35c65f751d1a6326315e2"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#ae4ae50320ac35c65f751d1a6326315e2">setTime</a> (<a class="el" href="class_i_curve.html">ICurve</a> *<a class="el" href="class_i_curve.html#a17b2ba544e8f273f6610e553df2c72d4">time</a>)</td></tr>
+<tr class="separator:ae4ae50320ac35c65f751d1a6326315e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a370fc10ea44889f0dbab7303b1a254ad"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#a370fc10ea44889f0dbab7303b1a254ad">setDepth</a> (<a class="el" href="class_i_curve.html">ICurve</a> *<a class="el" href="class_i_curve.html#aabf7e95a394da2a01048d37c6ec2afad">depth</a>)</td></tr>
+<tr class="separator:a370fc10ea44889f0dbab7303b1a254ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8eced02096121e9a5c39a280b105b37e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#a8eced02096121e9a5c39a280b105b37e">setUserBaseValue</a> (<a class="el" href="class_i_curve.html">ICurve</a> *<a class="el" href="class_i_curve.html#a24eb194bd69553b7d9073e12990b6452">userBaseValue</a>)</td></tr>
+<tr class="separator:a8eced02096121e9a5c39a280b105b37e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa637c10303beb72d0ea2369c6944318d"><td class="memItemLeft" align="right" valign="top">virtual uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#aa637c10303beb72d0ea2369c6944318d">size</a> ()</td></tr>
+<tr class="separator:aa637c10303beb72d0ea2369c6944318d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42a69990c92f6d302ec62a933dc55ef7"><td class="memItemLeft" align="right" valign="top">virtual uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#a42a69990c92f6d302ec62a933dc55ef7">sizeOffset</a> ()</td></tr>
+<tr class="separator:a42a69990c92f6d302ec62a933dc55ef7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfb145e289b94fb6b384a1b9544d34e9"><td class="memItemLeft" align="right" valign="top">virtual qreal&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#acfb145e289b94fb6b384a1b9544d34e9">maximum</a> ()</td></tr>
+<tr class="separator:acfb145e289b94fb6b384a1b9544d34e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2b61cdf29878755b0bf4192bd4bd7d5"><td class="memItemLeft" align="right" valign="top">virtual qreal&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#af2b61cdf29878755b0bf4192bd4bd7d5">minimum</a> ()</td></tr>
+<tr class="separator:af2b61cdf29878755b0bf4192bd4bd7d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a86393c44d62e37c3e75a13a4660fb7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_desc.html">Desc</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#a1a86393c44d62e37c3e75a13a4660fb7">desc</a> ()</td></tr>
+<tr class="separator:a1a86393c44d62e37c3e75a13a4660fb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc31719cb3c56a13c74af454320d7178"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_short_cut.html">ShortCut</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#abc31719cb3c56a13c74af454320d7178">shortCut</a> ()</td></tr>
+<tr class="separator:abc31719cb3c56a13c74af454320d7178"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61d1e0f763ec749874191d77ff246b51"><td class="memItemLeft" align="right" valign="top">virtual QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#a61d1e0f763ec749874191d77ff246b51">mnemonic</a> ()</td></tr>
+<tr class="separator:a61d1e0f763ec749874191d77ff246b51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d01647dc1ca7bb99f3937e016513268"><td class="memItemLeft" align="right" valign="top">virtual qreal&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#a9d01647dc1ca7bb99f3937e016513268">recordPoint</a> ()</td></tr>
+<tr class="separator:a9d01647dc1ca7bb99f3937e016513268"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a527aed049e3a29d07d0e123b3946648e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#a527aed049e3a29d07d0e123b3946648e">load</a> ()</td></tr>
+<tr class="separator:a527aed049e3a29d07d0e123b3946648e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee52f37c1febceda8a8e2ddd77c8d293"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#aee52f37c1febceda8a8e2ddd77c8d293">unload</a> ()</td></tr>
+<tr class="separator:aee52f37c1febceda8a8e2ddd77c8d293"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Открытые статические члены</h2></td></tr>
+<tr class="memitem:a766b354fdc89707a6435df9c4508efc0"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_i_curve.html">ICurve</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_curve.html#a766b354fdc89707a6435df9c4508efc0">curveCreater</a> (const <a class="el" href="class_i_curve.html">ICurve</a> &amp;curve)</td></tr>
+<tr class="separator:a766b354fdc89707a6435df9c4508efc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Интерфейс кривой, любая кривая с данными наследуется от данного интерфейса. </p>
+<dl class="section author"><dt>Авторы</dt><dd>Пряников Алексей Владимирович </dd></dl>
+</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a id="a0a4a15aa779a987c233e3f155e78e40b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a4a15aa779a987c233e3f155e78e40b">&#9670;&nbsp;</a></span>ICurve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ICurve::ICurve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a49860b8cb2aebc4495b5adb4b817c9dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49860b8cb2aebc4495b5adb4b817c9dc">&#9670;&nbsp;</a></span>~ICurve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual ICurve::~ICurve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="a766b354fdc89707a6435df9c4508efc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a766b354fdc89707a6435df9c4508efc0">&#9670;&nbsp;</a></span>curveCreater()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_i_curve.html">ICurve</a> * ICurve::curveCreater </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_i_curve.html">ICurve</a> &amp;&#160;</td>
+          <td class="paramname"><em>curve</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0d65db1145fd3d3690e92997960c4d2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d65db1145fd3d3690e92997960c4d2a">&#9670;&nbsp;</a></span>data() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual QByteArray ICurve::data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_curve.html#a8f29c160e059a61c859e6c2379a17ef4">Curve&lt; T &gt;</a> и <a class="el" href="class_a_curve.html#a6948c826f6c28ebd4759b04c920c9b19">ACurve</a>.</p>
+
+</div>
+</div>
+<a id="a132fcc6e7c4b359e60f554846b14a125"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a132fcc6e7c4b359e60f554846b14a125">&#9670;&nbsp;</a></span>data() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual qreal ICurve::data </td>
+          <td>(</td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_curve.html#a345f3ffe40867cafeb3d31511f529a40">Curve&lt; T &gt;</a> и <a class="el" href="class_a_curve.html#acddf6a60e368823e6a28ca40138f7178">ACurve</a>.</p>
+
+</div>
+</div>
+<a id="aabf7e95a394da2a01048d37c6ec2afad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabf7e95a394da2a01048d37c6ec2afad">&#9670;&nbsp;</a></span>depth()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_i_curve.html">ICurve</a> * ICurve::depth </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_a_curve.html#a535f6d23afb5a1d788063ad1b14d2610">ACurve</a>.</p>
+
+</div>
+</div>
+<a id="a1a86393c44d62e37c3e75a13a4660fb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a86393c44d62e37c3e75a13a4660fb7">&#9670;&nbsp;</a></span>desc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_desc.html">Desc</a> * ICurve::desc </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_a_curve.html#a405d803825fcbed4b7de7182035a2315">ACurve</a>.</p>
+
+</div>
+</div>
+<a id="a527aed049e3a29d07d0e123b3946648e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a527aed049e3a29d07d0e123b3946648e">&#9670;&nbsp;</a></span>load()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void ICurve::load </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_curve.html#a64da62f590c5bd3adbe8ca9952b5cdb4">Curve&lt; T &gt;</a> и <a class="el" href="class_a_curve.html#ac2c71988ef0302881f8f4d4097c0390a">ACurve</a>.</p>
+
+</div>
+</div>
+<a id="acfb145e289b94fb6b384a1b9544d34e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfb145e289b94fb6b384a1b9544d34e9">&#9670;&nbsp;</a></span>maximum()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">qreal ICurve::maximum </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_a_curve.html#a33943bda5fad5d1518eb2281bdc11a4b">ACurve</a>.</p>
+
+</div>
+</div>
+<a id="af2b61cdf29878755b0bf4192bd4bd7d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2b61cdf29878755b0bf4192bd4bd7d5">&#9670;&nbsp;</a></span>minimum()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">qreal ICurve::minimum </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_a_curve.html#a96f7549eff9e97f0361a75d3948b303e">ACurve</a>.</p>
+
+</div>
+</div>
+<a id="a61d1e0f763ec749874191d77ff246b51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61d1e0f763ec749874191d77ff246b51">&#9670;&nbsp;</a></span>mnemonic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString ICurve::mnemonic </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_a_curve.html#a3d87195970b875ec0b8bddf7315012bd">ACurve</a>.</p>
+
+</div>
+</div>
+<a id="a9d01647dc1ca7bb99f3937e016513268"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d01647dc1ca7bb99f3937e016513268">&#9670;&nbsp;</a></span>recordPoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual qreal ICurve::recordPoint </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_a_curve.html#a87119899d965c0d7125a091a5a91f385">ACurve</a>.</p>
+
+</div>
+</div>
+<a id="ad0365c8afccec2dac4b1b805b58a596e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0365c8afccec2dac4b1b805b58a596e">&#9670;&nbsp;</a></span>setData() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ICurve::setData </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>dataPtr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>numberOfVectors</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_curve.html#a5bbc2e297de4b9c3675fc1de238b4785">Curve&lt; T &gt;</a> и <a class="el" href="class_a_curve.html#a55159ad3a49e097837496ee9236da2c3">ACurve</a>.</p>
+
+</div>
+</div>
+<a id="a69d1f8528072aef64a0e45e72097386d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69d1f8528072aef64a0e45e72097386d">&#9670;&nbsp;</a></span>setData() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ICurve::setData </td>
+          <td>(</td>
+          <td class="paramtype">qreal&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_curve.html#a22ee496d45ff8f992392c79b82b9a648">Curve&lt; T &gt;</a> и <a class="el" href="class_a_curve.html#a9de4db5a210ac1fa439d6020297d649f">ACurve</a>.</p>
+
+</div>
+</div>
+<a id="a8897914dc80ced58a989337a5851a179"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8897914dc80ced58a989337a5851a179">&#9670;&nbsp;</a></span>setData() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ICurve::setData </td>
+          <td>(</td>
+          <td class="paramtype">qreal&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_curve.html#ab5ade8ff8ed7850e68dc058ca6ad7327">Curve&lt; T &gt;</a> и <a class="el" href="class_a_curve.html#a386d4821fdc6abf1f4559db90c7b0eed">ACurve</a>.</p>
+
+</div>
+</div>
+<a id="a370fc10ea44889f0dbab7303b1a254ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a370fc10ea44889f0dbab7303b1a254ad">&#9670;&nbsp;</a></span>setDepth()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ICurve::setDepth </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_i_curve.html">ICurve</a> *&#160;</td>
+          <td class="paramname"><em>depth</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_a_curve.html#a10ef57da68bfc64984f8c16ae0428762">ACurve</a>.</p>
+
+</div>
+</div>
+<a id="ac0aa3572f55acee8615dd84fc9734915"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0aa3572f55acee8615dd84fc9734915">&#9670;&nbsp;</a></span>setDesc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void ICurve::setDesc </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_desc.html">Desc</a> *&#160;</td>
+          <td class="paramname"><em>desc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_a_curve.html#aa417a4c0dec0f25acbee65230d364c9b">ACurve</a>.</p>
+
+</div>
+</div>
+<a id="ac9eed597ead6dcfd7cbfad0d4a36d423"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9eed597ead6dcfd7cbfad0d4a36d423">&#9670;&nbsp;</a></span>setMnemonic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void ICurve::setMnemonic </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>mnemonic</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_a_curve.html#a7e832bd1aab3ab2b31f9763e4204c6d4">ACurve</a>.</p>
+
+</div>
+</div>
+<a id="ad5dc7433a3ef7b65d4d8899f3d9810fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5dc7433a3ef7b65d4d8899f3d9810fc">&#9670;&nbsp;</a></span>setOffset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void ICurve::setOffset </td>
+          <td>(</td>
+          <td class="paramtype">qreal&#160;</td>
+          <td class="paramname"><em>offset</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_a_curve.html#a00b7f9fe3d3ba1f0bfbb70541123252a">ACurve</a>.</p>
+
+</div>
+</div>
+<a id="afac5b84778fb7c45c5b33c46df53e5a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afac5b84778fb7c45c5b33c46df53e5a7">&#9670;&nbsp;</a></span>setRecordPoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void ICurve::setRecordPoint </td>
+          <td>(</td>
+          <td class="paramtype">qreal&#160;</td>
+          <td class="paramname"><em>recordPoint</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_a_curve.html#ae17785f48ab10612af4eb5c305f925f7">ACurve</a>.</p>
+
+</div>
+</div>
+<a id="a21d564a6c160e4969b0e4dc3c3eff97c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21d564a6c160e4969b0e4dc3c3eff97c">&#9670;&nbsp;</a></span>setScale()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void ICurve::setScale </td>
+          <td>(</td>
+          <td class="paramtype">qreal&#160;</td>
+          <td class="paramname"><em>scale</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_a_curve.html#a216ce7f63aeb6e7d45b0b85c9a2320ab">ACurve</a>.</p>
+
+</div>
+</div>
+<a id="aee9a67d396dde48e8d45633ff7e5c781"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee9a67d396dde48e8d45633ff7e5c781">&#9670;&nbsp;</a></span>setShortCut()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void ICurve::setShortCut </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_short_cut.html">ShortCut</a>&#160;</td>
+          <td class="paramname"><em>shortCut</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_a_curve.html#a9acd2dc510463c95118aada3d0627436">ACurve</a>.</p>
+
+</div>
+</div>
+<a id="ae4ae50320ac35c65f751d1a6326315e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4ae50320ac35c65f751d1a6326315e2">&#9670;&nbsp;</a></span>setTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ICurve::setTime </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_i_curve.html">ICurve</a> *&#160;</td>
+          <td class="paramname"><em>time</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_a_curve.html#ad8a9fada354477935a1db35c7958a9d4">ACurve</a>.</p>
+
+</div>
+</div>
+<a id="a8eced02096121e9a5c39a280b105b37e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8eced02096121e9a5c39a280b105b37e">&#9670;&nbsp;</a></span>setUserBaseValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ICurve::setUserBaseValue </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_i_curve.html">ICurve</a> *&#160;</td>
+          <td class="paramname"><em>userBaseValue</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_a_curve.html#a59fbb4eea2f6e6cf913499e33a9c16f1">ACurve</a>.</p>
+
+</div>
+</div>
+<a id="abc31719cb3c56a13c74af454320d7178"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc31719cb3c56a13c74af454320d7178">&#9670;&nbsp;</a></span>shortCut()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_short_cut.html">ShortCut</a> ICurve::shortCut </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_a_curve.html#ad4fe93665ea6a42738cdf4f06c835fcc">ACurve</a>.</p>
+
+</div>
+</div>
+<a id="aa637c10303beb72d0ea2369c6944318d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa637c10303beb72d0ea2369c6944318d">&#9670;&nbsp;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint ICurve::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_curve.html#aa4f060c214dd04cb941a4a64ceb8f682">Curve&lt; T &gt;</a> и <a class="el" href="class_a_curve.html#af67f3eeca7b0986b87d8fe136b6f6394">ACurve</a>.</p>
+
+</div>
+</div>
+<a id="a42a69990c92f6d302ec62a933dc55ef7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42a69990c92f6d302ec62a933dc55ef7">&#9670;&nbsp;</a></span>sizeOffset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint ICurve::sizeOffset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_curve.html#a70e89c169886ed87fd28405b31b4bccc">Curve&lt; T &gt;</a> и <a class="el" href="class_a_curve.html#aa77d98e14a08343dc16b2afeb4df72b4">ACurve</a>.</p>
+
+</div>
+</div>
+<a id="a17b2ba544e8f273f6610e553df2c72d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17b2ba544e8f273f6610e553df2c72d4">&#9670;&nbsp;</a></span>time()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_i_curve.html">ICurve</a> * ICurve::time </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_a_curve.html#a068ee532a1f27fa3caa350e17f4c2002">ACurve</a>.</p>
+
+</div>
+</div>
+<a id="aee52f37c1febceda8a8e2ddd77c8d293"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee52f37c1febceda8a8e2ddd77c8d293">&#9670;&nbsp;</a></span>unload()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void ICurve::unload </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_curve.html#ae0f953f04c87d335aaf5ac0d3fdaf7bd">Curve&lt; T &gt;</a> и <a class="el" href="class_a_curve.html#a487b5c7a631b395029fa2881e443977d">ACurve</a>.</p>
+
+</div>
+</div>
+<a id="a24eb194bd69553b7d9073e12990b6452"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24eb194bd69553b7d9073e12990b6452">&#9670;&nbsp;</a></span>userBaseValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_i_curve.html">ICurve</a> * ICurve::userBaseValue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_a_curve.html#aacec35948634ac1539f5632407d710e9">ACurve</a>.</p>
+
+</div>
+</div>
+<hr/>Объявления и описания членов классов находятся в файлах:<ul>
+<li>E:/MyQtProgram/parserGfm/log_data_lib/include/curves/<a class="el" href="icurve_8h_source.html">icurve.h</a></li>
+<li>E:/MyQtProgram/parserGfm/log_data_lib/src/curves/<a class="el" href="icurve_8cpp.html">icurve.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

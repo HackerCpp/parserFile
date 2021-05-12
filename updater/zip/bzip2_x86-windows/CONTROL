@@ -1,7 +1,0 @@
-Package: bzip2
-Version: 1.0.6-5
-Architecture: x86-windows
-Multi-Arch: same
-Abi: b33bc15259e921dfc4d2736324e0aba3981c6b74
-Description: High-quality data compressor.
-Type: Port

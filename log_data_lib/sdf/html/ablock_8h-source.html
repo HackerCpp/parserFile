@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>LOG_DATA_CORE: Исходный файл E:/MyQtProgram/parserGfm/log_data_lib/include/blocks/ablock.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css">
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Создано системой Doxygen 1.5.8 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Титульная&nbsp;страница</span></a></li>
+      <li><a href="annotated.html"><span>Классы</span></a></li>
+      <li class="current"><a href="files.html"><span>Файлы</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="files.html"><span>Файлы</span></a></li>
+      <li><a href="globals.html"><span>Список&nbsp;членов&nbsp;всех&nbsp;файлов</span></a></li>
+    </ul>
+  </div>
+<h1>E:/MyQtProgram/parserGfm/log_data_lib/include/blocks/ablock.h</h1><a href="ablock_8h.html">См. документацию.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef ABLOCK_H</span>
+<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define ABLOCK_H</span>
+<a name="l00003"></a>00003 <span class="preprocessor"></span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include "<a class="code" href="iblock_8h.html">iblock.h</a>"</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;QDebug&gt;</span>
+<a name="l00006"></a>00006 
+<a name="l00007"></a><a class="code" href="class_a_block.html">00007</a> <span class="keyword">class </span><a class="code" href="class_a_block.html">ABlock</a> : <span class="keyword">public</span> <a class="code" href="class_i_block.html">IBlock</a>{
+<a name="l00008"></a>00008 <span class="keyword">protected</span>:
+<a name="l00009"></a><a class="code" href="class_a_block.html#9b547a6f60c7b271f31c56ea51dbff52">00009</a>     <a class="code" href="class_i_block.html#4580ca6067ae988394af5abe86d2413e">TypeBlock</a> <a class="code" href="class_a_block.html#9b547a6f60c7b271f31c56ea51dbff52">m_type</a>;
+<a name="l00010"></a>00010 <span class="keyword">public</span>:
+<a name="l00011"></a><a class="code" href="class_a_block.html#83e90337aef733097113daea0e3e0e77">00011</a>     <a class="code" href="class_a_block.html#83e90337aef733097113daea0e3e0e77">ABlock</a>(){<a class="code" href="class_a_block.html#9b547a6f60c7b271f31c56ea51dbff52">m_type</a> = <a class="code" href="class_i_block.html#4580ca6067ae988394af5abe86d2413ec42910e43ca04fd4606503f87c516011">NO_BLOCK</a>;}
+<a name="l00012"></a><a class="code" href="class_a_block.html#14f809b33924ef45d9c79467e60a3557">00012</a>     <span class="keyword">virtual</span> <a class="code" href="class_a_block.html#14f809b33924ef45d9c79467e60a3557">~ABlock</a>(){}
+<a name="l00013"></a>00013 
+<a name="l00014"></a><a class="code" href="class_a_block.html#ec15b3777f7f55bf3882c6f1e22bff7f">00014</a>     <a class="code" href="class_i_block.html#4580ca6067ae988394af5abe86d2413e">TypeBlock</a> <a class="code" href="class_a_block.html#ec15b3777f7f55bf3882c6f1e22bff7f">name</a>()<span class="keyword">override</span>{<span class="keywordflow">return</span> <a class="code" href="class_a_block.html#9b547a6f60c7b271f31c56ea51dbff52">m_type</a>;}
+<a name="l00015"></a><a class="code" href="class_a_block.html#0ee01709e90bddb6ae93496615a9648e">00015</a>     <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_a_block.html#0ee01709e90bddb6ae93496615a9648e">parser</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *body,uint32_t size)<span class="keyword">override</span>{Q_UNUSED(body)Q_UNUSED(size)<span class="keywordflow">return</span> <span class="keyword">false</span>;}
+<a name="l00016"></a>00016 };
+<a name="l00017"></a>00017 
+<a name="l00018"></a>00018 <span class="preprocessor">#endif // ABLOCK_H</span>
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Документация по LOG_DATA_CORE. Последние изменения: Wed May 12 15:29:44 2021. Создано системой&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
+</body>
+</html>

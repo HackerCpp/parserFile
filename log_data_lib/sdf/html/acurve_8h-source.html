@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>LOG_DATA_CORE: Исходный файл E:/MyQtProgram/parserGfm/log_data_lib/include/curves/acurve.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css">
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Создано системой Doxygen 1.5.8 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Титульная&nbsp;страница</span></a></li>
+      <li><a href="annotated.html"><span>Классы</span></a></li>
+      <li class="current"><a href="files.html"><span>Файлы</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="files.html"><span>Файлы</span></a></li>
+      <li><a href="globals.html"><span>Список&nbsp;членов&nbsp;всех&nbsp;файлов</span></a></li>
+    </ul>
+  </div>
+<h1>E:/MyQtProgram/parserGfm/log_data_lib/include/curves/acurve.h</h1><a href="acurve_8h.html">См. документацию.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef ACURVE_H</span>
+<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define ACURVE_H</span>
+<a name="l00003"></a>00003 <span class="preprocessor"></span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include "<a class="code" href="icurve_8h.html">icurve.h</a>"</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include "<a class="code" href="shortcut_8h.html">shortcut.h</a>"</span>
+<a name="l00006"></a>00006 
+<a name="l00007"></a>00007 
+<a name="l00008"></a>00008 
+<a name="l00009"></a><a class="code" href="class_a_curve.html">00009</a> <span class="keyword">class </span><a class="code" href="class_a_curve.html">ACurve</a> : <span class="keyword">public</span> <a class="code" href="class_i_curve.html" title="Интерфейс кривой, любая кривая с данными наследуется...">ICurve</a>{
+<a name="l00010"></a>00010 
+<a name="l00011"></a>00011 <span class="keyword">protected</span>:
+<a name="l00012"></a><a class="code" href="class_a_curve.html#92b69ac946e59af7d714c9ae4bc6fa70">00012</a>     <a class="code" href="class_i_curve.html" title="Интерфейс кривой, любая кривая с данными наследуется...">ICurve</a> *<a class="code" href="class_a_curve.html#53c8ff5256afcca16b1a2bf732a2ab79">m_time</a>,*<a class="code" href="class_a_curve.html#561764c27bbc27ba77ff4c7b8da12f2b">m_depth</a>,*<a class="code" href="class_a_curve.html#92b69ac946e59af7d714c9ae4bc6fa70">m_userValue</a>;
+<a name="l00013"></a><a class="code" href="class_a_curve.html#b1608c609d4a39a187c0b72bdaf407f6">00013</a>     <a class="code" href="class_desc.html">Desc</a> *<a class="code" href="class_a_curve.html#b1608c609d4a39a187c0b72bdaf407f6">m_desc</a>;
+<a name="l00014"></a><a class="code" href="class_a_curve.html#fcaa82a4a130247e017f8076aafe1ef3">00014</a>     <a class="code" href="class_short_cut.html">ShortCut</a> <a class="code" href="class_a_curve.html#fcaa82a4a130247e017f8076aafe1ef3">m_shortCut</a>;
+<a name="l00015"></a>00015 
+<a name="l00016"></a><a class="code" href="class_a_curve.html#ed74b85992b3f2f2d8297f41d67715f8">00016</a>     qreal <a class="code" href="class_a_curve.html#ed74b85992b3f2f2d8297f41d67715f8">m_resolution</a>;
+<a name="l00017"></a><a class="code" href="class_a_curve.html#9372dcb8f8ae57c3753586b6a47d3e27">00017</a>     uint <a class="code" href="class_a_curve.html#9372dcb8f8ae57c3753586b6a47d3e27">m_sizeOffsetInByte</a>;
+<a name="l00018"></a><a class="code" href="class_a_curve.html#1ef72ac8544c597ac2d10d93047ffe38">00018</a>     uint <a class="code" href="class_a_curve.html#1ef72ac8544c597ac2d10d93047ffe38">m_sizeOfType</a>;
+<a name="l00019"></a><a class="code" href="class_a_curve.html#37d15ce4def1ff88c7c1c140a3f056c6">00019</a>     QString <a class="code" href="class_a_curve.html#37d15ce4def1ff88c7c1c140a3f056c6">m_mnemonic</a>;
+<a name="l00020"></a><a class="code" href="class_a_curve.html#aff330dcef2b834de36a45cdb93e76da">00020</a>     QString <a class="code" href="class_a_curve.html#aff330dcef2b834de36a45cdb93e76da">m_dataType</a>;
+<a name="l00021"></a><a class="code" href="class_a_curve.html#4573b97211c39a2bd9fa630b5fd89c0b">00021</a>     qreal <a class="code" href="class_a_curve.html#4573b97211c39a2bd9fa630b5fd89c0b">m_recordPoint</a>;
+<a name="l00022"></a><a class="code" href="class_a_curve.html#c42286aca997a785e161c95d88f6d4e2">00022</a>     qreal <a class="code" href="class_a_curve.html#c42286aca997a785e161c95d88f6d4e2">m_scale</a>,<a class="code" href="class_a_curve.html#dd1c430d166e50072e00b2125fa113b1">m_offset</a>; <span class="comment">// data * m_scale + m_offset</span>
+<a name="l00023"></a><a class="code" href="class_a_curve.html#ad05b5388b464a49a4fdfbd8d3a44662">00023</a>     QString <a class="code" href="class_a_curve.html#ad05b5388b464a49a4fdfbd8d3a44662">m_uid</a>;
+<a name="l00024"></a><a class="code" href="class_a_curve.html#45ca97f5f94927fc08984ebc59d1c783">00024</a>     uint <a class="code" href="class_a_curve.html#45ca97f5f94927fc08984ebc59d1c783">m_numberOfUsers</a>;
+<a name="l00025"></a>00025     qreal (<a class="code" href="class_a_curve.html">ACurve</a>::*<a class="code" href="class_a_curve.html#cc24fc954cdec4bd2a260c2ec5a23612">dataCountingFunction</a>)(qreal <a class="code" href="class_a_curve.html#6948c826f6c28ebd4759b04c920c9b19">data</a>);
+<a name="l00026"></a><a class="code" href="class_a_curve.html#2d63a26b10c65777c2787cc5d5a59b77">00026</a>     <span class="keyword">virtual</span> qreal <a class="code" href="class_a_curve.html#2d63a26b10c65777c2787cc5d5a59b77">minData</a>(){<span class="keywordflow">return</span> 0;}
+<a name="l00027"></a><a class="code" href="class_a_curve.html#7f357adbaab7df8e98f34edefb1d9a71">00027</a>     <span class="keyword">virtual</span> qreal <a class="code" href="class_a_curve.html#7f357adbaab7df8e98f34edefb1d9a71">maxData</a>(){<span class="keywordflow">return</span> 0;}
+<a name="l00028"></a>00028 <span class="keyword">public</span>:
+<a name="l00029"></a>00029 
+<a name="l00030"></a>00030     <a class="code" href="class_a_curve.html#080ee7abadd734f440255078004cf68c">ACurve</a>();
+<a name="l00031"></a>00031     <span class="keyword">virtual</span> <a class="code" href="class_a_curve.html#48f15b6d81660a8e6e76dd7de5c0ff1b">~ACurve</a>()<span class="keyword">override</span>;
+<a name="l00032"></a>00032 
+<a name="l00033"></a><a class="code" href="class_a_curve.html#cddf6a60e368823e6a28ca40138f7178">00033</a>     <span class="keyword">virtual</span> <span class="keyword">inline</span> qreal <a class="code" href="class_a_curve.html#cddf6a60e368823e6a28ca40138f7178">data</a>(uint index)<span class="keyword">override</span>{Q_UNUSED(index) <span class="keywordflow">return</span> 0;}
+<a name="l00034"></a><a class="code" href="class_a_curve.html#c335fe5c219040344959413e2ac81c9b">00034</a>     <span class="keyword">virtual</span> <span class="keyword">inline</span> qreal <a class="code" href="class_a_curve.html#c335fe5c219040344959413e2ac81c9b">rawData</a>(qreal <a class="code" href="class_a_curve.html#6948c826f6c28ebd4759b04c920c9b19">data</a>){Q_UNUSED(data) <span class="keywordflow">return</span> 0;}
+<a name="l00035"></a><a class="code" href="class_a_curve.html#2582f91709aba5d91949645df8cec0ee">00035</a>     <span class="keyword">virtual</span> <span class="keyword">inline</span> qreal <a class="code" href="class_a_curve.html#2582f91709aba5d91949645df8cec0ee">recalculatedData</a>(qreal <a class="code" href="class_a_curve.html#6948c826f6c28ebd4759b04c920c9b19">data</a>){Q_UNUSED(data) <span class="keywordflow">return</span> 0;}
+<a name="l00036"></a><a class="code" href="class_a_curve.html#6948c826f6c28ebd4759b04c920c9b19">00036</a>     <span class="keyword">virtual</span> QByteArray <a class="code" href="class_a_curve.html#6948c826f6c28ebd4759b04c920c9b19">data</a>()<span class="keyword">override</span>{<span class="keywordflow">return</span> 0;}
+<a name="l00037"></a><a class="code" href="class_a_curve.html#9de4db5a210ac1fa439d6020297d649f">00037</a>     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_a_curve.html#9de4db5a210ac1fa439d6020297d649f">setData</a>(qreal <a class="code" href="class_a_curve.html#6948c826f6c28ebd4759b04c920c9b19">data</a>)<span class="keyword">override</span>{Q_UNUSED(data)}
+<a name="l00038"></a><a class="code" href="class_a_curve.html#386d4821fdc6abf1f4559db90c7b0eed">00038</a>     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_a_curve.html#386d4821fdc6abf1f4559db90c7b0eed">setData</a>(qreal <a class="code" href="class_a_curve.html#6948c826f6c28ebd4759b04c920c9b19">data</a>,uint index)<span class="keyword">override</span>{Q_UNUSED(data)Q_UNUSED(index)}
+<a name="l00039"></a><a class="code" href="class_a_curve.html#55159ad3a49e097837496ee9236da2c3">00039</a>     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_a_curve.html#55159ad3a49e097837496ee9236da2c3">setData</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *dataPtr,uint numberOfVectors)<span class="keyword">override</span>{Q_UNUSED(dataPtr)Q_UNUSED(numberOfVectors)}
+<a name="l00040"></a>00040 
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042 
+<a name="l00043"></a>00043     <span class="keyword">virtual</span> <a class="code" href="class_i_curve.html" title="Интерфейс кривой, любая кривая с данными наследуется...">ICurve</a> *<a class="code" href="class_a_curve.html#068ee532a1f27fa3caa350e17f4c2002">time</a>()<span class="keyword">override</span>;
+<a name="l00044"></a>00044     <span class="keyword">virtual</span> <a class="code" href="class_i_curve.html" title="Интерфейс кривой, любая кривая с данными наследуется...">ICurve</a> *<a class="code" href="class_a_curve.html#535f6d23afb5a1d788063ad1b14d2610">depth</a>()<span class="keyword">override</span>;
+<a name="l00045"></a>00045     <span class="keyword">virtual</span> <a class="code" href="class_i_curve.html" title="Интерфейс кривой, любая кривая с данными наследуется...">ICurve</a> *<a class="code" href="class_a_curve.html#acec35948634ac1539f5632407d710e9">userBaseValue</a>()<span class="keyword">override</span>;
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047     <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_a_curve.html#d8a9fada354477935a1db35c7958a9d4">setTime</a>(<a class="code" href="class_i_curve.html" title="Интерфейс кривой, любая кривая с данными наследуется...">ICurve</a> *<a class="code" href="class_a_curve.html#068ee532a1f27fa3caa350e17f4c2002">time</a>)<span class="keyword">override</span>;
+<a name="l00048"></a>00048     <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_a_curve.html#10ef57da68bfc64984f8c16ae0428762">setDepth</a>(<a class="code" href="class_i_curve.html" title="Интерфейс кривой, любая кривая с данными наследуется...">ICurve</a> *<a class="code" href="class_a_curve.html#535f6d23afb5a1d788063ad1b14d2610">depth</a>)<span class="keyword">override</span>;
+<a name="l00049"></a>00049     <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_a_curve.html#59fbb4eea2f6e6cf913499e33a9c16f1">setUserBaseValue</a>(<a class="code" href="class_i_curve.html" title="Интерфейс кривой, любая кривая с данными наследуется...">ICurve</a> *<a class="code" href="class_a_curve.html#acec35948634ac1539f5632407d710e9">userBaseValue</a>)<span class="keyword">override</span>;
+<a name="l00050"></a>00050 
+<a name="l00051"></a>00051 
+<a name="l00052"></a>00052     <span class="keyword">virtual</span> uint <a class="code" href="class_a_curve.html#f67f3eeca7b0986b87d8fe136b6f6394">size</a>()<span class="keyword">override</span>;
+<a name="l00053"></a><a class="code" href="class_a_curve.html#a77d98e14a08343dc16b2afeb4df72b4">00053</a>     <span class="keyword">virtual</span> uint <a class="code" href="class_a_curve.html#a77d98e14a08343dc16b2afeb4df72b4">sizeOffset</a>()<span class="keyword">override</span>{<span class="keywordflow">return</span> 0;}
+<a name="l00054"></a><a class="code" href="class_a_curve.html#7306bf36ea52ec7238f32f2f3aac353a">00054</a>     <span class="keyword">virtual</span> uint <a class="code" href="class_a_curve.html#7306bf36ea52ec7238f32f2f3aac353a">sizeOffsetInBytes</a>(){<span class="keywordflow">return</span> <a class="code" href="class_a_curve.html#9372dcb8f8ae57c3753586b6a47d3e27">m_sizeOffsetInByte</a>;}
+<a name="l00055"></a>00055     <span class="keyword">virtual</span> qreal <a class="code" href="class_a_curve.html#33943bda5fad5d1518eb2281bdc11a4b">maximum</a>()<span class="keyword">override</span>;
+<a name="l00056"></a>00056     <span class="keyword">virtual</span> qreal <a class="code" href="class_a_curve.html#96f7549eff9e97f0361a75d3948b303e">minimum</a>()<span class="keyword">override</span>;
+<a name="l00057"></a><a class="code" href="class_a_curve.html#87119899d965c0d7125a091a5a91f385">00057</a>     <span class="keyword">virtual</span> qreal <a class="code" href="class_a_curve.html#87119899d965c0d7125a091a5a91f385">recordPoint</a>()<span class="keyword">override</span>{<span class="keywordflow">return</span> <a class="code" href="class_a_curve.html#4573b97211c39a2bd9fa630b5fd89c0b">m_recordPoint</a>;}
+<a name="l00058"></a>00058 
+<a name="l00059"></a>00059     <span class="keyword">virtual</span> <a class="code" href="class_desc.html">Desc</a> *<a class="code" href="class_a_curve.html#405d803825fcbed4b7de7182035a2315">desc</a>()<span class="keyword">override</span>;
+<a name="l00060"></a>00060     <span class="keyword">virtual</span> <a class="code" href="class_short_cut.html">ShortCut</a> <a class="code" href="class_a_curve.html#d4fe93665ea6a42738cdf4f06c835fcc">shortCut</a>()<span class="keyword">override</span>;
+<a name="l00061"></a>00061     <span class="keywordtype">void</span> <a class="code" href="class_a_curve.html#0141f28d28a98a7adcc8a5ee3cd4cfcc">checkingTheDataFunction</a>();
+<a name="l00062"></a>00062     <span class="keywordtype">void</span> <a class="code" href="class_a_curve.html#00b7f9fe3d3ba1f0bfbb70541123252a">setOffset</a>(qreal offset)<span class="keyword">override</span>;
+<a name="l00063"></a>00063     <span class="keywordtype">void</span> <a class="code" href="class_a_curve.html#216ce7f63aeb6e7d45b0b85c9a2320ab">setScale</a>(qreal scale)<span class="keyword">override</span>;
+<a name="l00064"></a>00064     <span class="keyword">virtual</span> QString <a class="code" href="class_a_curve.html#3d87195970b875ec0b8bddf7315012bd">mnemonic</a>()<span class="keyword">override</span>;
+<a name="l00065"></a>00065 
+<a name="l00066"></a>00066     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_a_curve.html#9acd2dc510463c95118aada3d0627436">setShortCut</a>(<a class="code" href="class_short_cut.html">ShortCut</a> <a class="code" href="class_a_curve.html#d4fe93665ea6a42738cdf4f06c835fcc">shortCut</a>)<span class="keyword">override</span>;
+<a name="l00067"></a>00067     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_a_curve.html#4cb9e150bf2a879a5929a8af75155c71">setSizeOffset</a>(uint <a class="code" href="class_a_curve.html#a77d98e14a08343dc16b2afeb4df72b4">sizeOffset</a>);
+<a name="l00068"></a>00068     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_a_curve.html#7e832bd1aab3ab2b31f9763e4204c6d4">setMnemonic</a>(QString <a class="code" href="class_a_curve.html#3d87195970b875ec0b8bddf7315012bd">mnemonic</a>)<span class="keyword">override</span>;
+<a name="l00069"></a>00069     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_a_curve.html#30974d2480f0008cbf96c9ab4c6b8c80">setDataType</a>(QString <a class="code" href="class_a_curve.html#fe0e764905093f50ea86d85205cdc8ac">dataType</a>);
+<a name="l00070"></a><a class="code" href="class_a_curve.html#e17785f48ab10612af4eb5c305f925f7">00070</a>     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_a_curve.html#e17785f48ab10612af4eb5c305f925f7">setRecordPoint</a>(qreal <a class="code" href="class_a_curve.html#87119899d965c0d7125a091a5a91f385">recordPoint</a>)<span class="keyword">override</span>{<a class="code" href="class_a_curve.html#4573b97211c39a2bd9fa630b5fd89c0b">m_recordPoint</a> = recordPoint;}
+<a name="l00071"></a>00071     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_a_curve.html#a417a4c0dec0f25acbee65230d364c9b">setDesc</a>(<a class="code" href="class_desc.html">Desc</a> *<a class="code" href="class_a_curve.html#405d803825fcbed4b7de7182035a2315">desc</a>)<span class="keyword">override</span>;
+<a name="l00072"></a>00072 
+<a name="l00073"></a>00073     <span class="keyword">virtual</span> QString <a class="code" href="class_a_curve.html#fe0e764905093f50ea86d85205cdc8ac">dataType</a>();
+<a name="l00074"></a>00074 
+<a name="l00075"></a><a class="code" href="class_a_curve.html#c2c71988ef0302881f8f4d4097c0390a">00075</a>     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_a_curve.html#c2c71988ef0302881f8f4d4097c0390a">load</a>()<span class="keyword">override</span>{}
+<a name="l00076"></a><a class="code" href="class_a_curve.html#487b5c7a631b395029fa2881e443977d">00076</a>     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_a_curve.html#487b5c7a631b395029fa2881e443977d">unload</a>()<span class="keyword">override</span>{}
+<a name="l00077"></a>00077 
+<a name="l00078"></a>00078 };
+<a name="l00079"></a>00079 
+<a name="l00080"></a>00080 <span class="preprocessor">#endif // ACURVE_H</span>
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Документация по LOG_DATA_CORE. Последние изменения: Wed May 12 15:29:44 2021. Создано системой&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
+</body>
+</html>

@@ -1,2 +1,0 @@
-E:/MyQtProgram/parserGfm/updater/build/translations/QtLanguage_ru.qm
-E:/MyQtProgram/parserGfm/updater/build/translations/QtLanguage_ru.qm

@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_CORE: Исходный файл E:/MyQtProgram/parserGfm/log_data_lib/include/blocks/setlabelsforboard.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_CORE
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_0050b698ec93709d88e88fefa3050080.html">log_data_lib</a></li><li class="navelem"><a class="el" href="dir_2f0999640edae1ed5e0daaf6e3e6adcd.html">include</a></li><li class="navelem"><a class="el" href="dir_ff252f7062675a6b0cb79ffa6e0de34d.html">blocks</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">setlabelsforboard.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="setlabelsforboard_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SETLABELSFORBOARD_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SETLABELSFORBOARD_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;QString&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QObject&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">class </span><a class="code" href="class_l_d_label.html">LDLabel</a>;</div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="class_set_labels_for_board.html">    6</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_set_labels_for_board.html">SetLabelsForBoard</a> : <span class="keyword">public</span> QObject</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    QString m_nameBoard;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    QList&lt;LDLabel *&gt; *m_labels;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <a class="code" href="class_set_labels_for_board.html#a4eaeae9b54b3b0ff7bb1a1fec0325418">SetLabelsForBoard</a>(QString <a class="code" href="class_set_labels_for_board.html#a3c6c5334ad839abb0a3dfae2687ac3b7">nameBoard</a>);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_set_labels_for_board.html#ae629bfe7d57100b81cd02a94b025c218">   14</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_set_labels_for_board.html#ae629bfe7d57100b81cd02a94b025c218">addLabel</a>(<a class="code" href="class_l_d_label.html">LDLabel</a> *label){m_labels-&gt;push_back(label);}</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_set_labels_for_board.html#a5083ef1e13117afff5de9d3cc3a0a993">setBoardName</a>(QString boardName);</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_set_labels_for_board.html#ac6a0bf4ee07ec82fc3fc04c99b913c98">   16</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_set_labels_for_board.html#ac6a0bf4ee07ec82fc3fc04c99b913c98">deleteLabel</a>(<a class="code" href="class_l_d_label.html">LDLabel</a> *label){m_labels-&gt;removeOne(label);}</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_set_labels_for_board.html#a3c6c5334ad839abb0a3dfae2687ac3b7">   18</a></span>&#160;    QString <a class="code" href="class_set_labels_for_board.html#a3c6c5334ad839abb0a3dfae2687ac3b7">nameBoard</a>(){<span class="keywordflow">return</span> m_nameBoard;}</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_set_labels_for_board.html#a1c0d2c1559eb17f6d5a6e1d0673277fd">   19</a></span>&#160;    QList&lt;LDLabel *&gt; *<a class="code" href="class_set_labels_for_board.html#a1c0d2c1559eb17f6d5a6e1d0673277fd">labels</a>(){<span class="keywordflow">return</span> m_labels;}</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;};</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// SETLABELSFORBOARD_H</span></div>
+<div class="ttc" id="aclass_l_d_label_html"><div class="ttname"><a href="class_l_d_label.html">LDLabel</a></div><div class="ttdef"><b>Definition:</b> ldlabel.h:8</div></div>
+<div class="ttc" id="aclass_set_labels_for_board_html"><div class="ttname"><a href="class_set_labels_for_board.html">SetLabelsForBoard</a></div><div class="ttdef"><b>Definition:</b> setlabelsforboard.h:7</div></div>
+<div class="ttc" id="aclass_set_labels_for_board_html_a1c0d2c1559eb17f6d5a6e1d0673277fd"><div class="ttname"><a href="class_set_labels_for_board.html#a1c0d2c1559eb17f6d5a6e1d0673277fd">SetLabelsForBoard::labels</a></div><div class="ttdeci">QList&lt; LDLabel * &gt; * labels()</div><div class="ttdef"><b>Definition:</b> setlabelsforboard.h:19</div></div>
+<div class="ttc" id="aclass_set_labels_for_board_html_a3c6c5334ad839abb0a3dfae2687ac3b7"><div class="ttname"><a href="class_set_labels_for_board.html#a3c6c5334ad839abb0a3dfae2687ac3b7">SetLabelsForBoard::nameBoard</a></div><div class="ttdeci">QString nameBoard()</div><div class="ttdef"><b>Definition:</b> setlabelsforboard.h:18</div></div>
+<div class="ttc" id="aclass_set_labels_for_board_html_a4eaeae9b54b3b0ff7bb1a1fec0325418"><div class="ttname"><a href="class_set_labels_for_board.html#a4eaeae9b54b3b0ff7bb1a1fec0325418">SetLabelsForBoard::SetLabelsForBoard</a></div><div class="ttdeci">SetLabelsForBoard(QString nameBoard)</div><div class="ttdef"><b>Definition:</b> setlabelsforboard.cpp:5</div></div>
+<div class="ttc" id="aclass_set_labels_for_board_html_a5083ef1e13117afff5de9d3cc3a0a993"><div class="ttname"><a href="class_set_labels_for_board.html#a5083ef1e13117afff5de9d3cc3a0a993">SetLabelsForBoard::setBoardName</a></div><div class="ttdeci">void setBoardName(QString boardName)</div><div class="ttdef"><b>Definition:</b> setlabelsforboard.cpp:12</div></div>
+<div class="ttc" id="aclass_set_labels_for_board_html_ac6a0bf4ee07ec82fc3fc04c99b913c98"><div class="ttname"><a href="class_set_labels_for_board.html#ac6a0bf4ee07ec82fc3fc04c99b913c98">SetLabelsForBoard::deleteLabel</a></div><div class="ttdeci">void deleteLabel(LDLabel *label)</div><div class="ttdef"><b>Definition:</b> setlabelsforboard.h:16</div></div>
+<div class="ttc" id="aclass_set_labels_for_board_html_ae629bfe7d57100b81cd02a94b025c218"><div class="ttname"><a href="class_set_labels_for_board.html#ae629bfe7d57100b81cd02a94b025c218">SetLabelsForBoard::addLabel</a></div><div class="ttdeci">void addLabel(LDLabel *label)</div><div class="ttdef"><b>Definition:</b> setlabelsforboard.h:14</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_CORE: Исходный файл E:/MyQtProgram/parserGfm/log_data_lib/include/blocks/specItem.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_CORE
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_0050b698ec93709d88e88fefa3050080.html">log_data_lib</a></li><li class="navelem"><a class="el" href="dir_2f0999640edae1ed5e0daaf6e3e6adcd.html">include</a></li><li class="navelem"><a class="el" href="dir_ff252f7062675a6b0cb79ffa6e0de34d.html">blocks</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">specItem.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="spec_item_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SPECITEM_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SPECITEM_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// SPECITEM_H</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="aitem_8h.html">aitem.h</a>&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="class_spec_item.html">    7</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_spec_item.html">SpecItem</a> : <span class="keyword">public</span> <a class="code" href="class_a_item.html">AItem</a>{</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    QString m_brushColor;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    QString m_transparentColor;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    QList&lt;MulticolorItem&gt; *m_multicolor;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>  m_showMode;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keywordtype">int</span> m_levelCount;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="class_spec_item.html#a6ed8b147b586d0e63e695eff71052d68">SpecItem</a>();</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="class_spec_item.html#a6ed8b147b586d0e63e695eff71052d68">SpecItem</a>(<span class="keyword">const</span> <a class="code" href="class_spec_item.html">SpecItem</a> &amp;other);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="class_spec_item.html#aca3a0498e23a7a028aa1292682e263de">~SpecItem</a>();</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spec_item.html#a8d615cdd31d0980cf3436caae8b94ee9">setColor</a> (QString <a class="code" href="class_spec_item.html#aa033d7a47bdd2fc94a47f68371bacb0f">bruchColor</a>, QString <a class="code" href="class_spec_item.html#ac08fc2f51a7885346c331f9cefa0c86d">transparentColor</a>);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spec_item.html#a3887814c316ec0e50b6b7bac94e5fa16">setMulticolor</a>(<a class="code" href="struct_multicolor_item.html">MulticolorItem</a> multicolor);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spec_item.html#ae985196d4e20e6f698b36120a3ab96e8">setShowMode</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_spec_item.html#a1e22ba73c24132fea5c28641d6f331f6">showMode</a>);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spec_item.html#adaafe5a11cba81d1833d459cdd84f1ee">setLevelCount</a>(<span class="keywordtype">int</span> <a class="code" href="class_spec_item.html#acc1a64ff61188c62aa53124f8adab7b5">levelCount</a>);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    QString <a class="code" href="class_spec_item.html#aa033d7a47bdd2fc94a47f68371bacb0f">bruchColor</a>();</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    QString <a class="code" href="class_spec_item.html#ac08fc2f51a7885346c331f9cefa0c86d">transparentColor</a>();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">unsigned</span>  <span class="keywordtype">int</span> <a class="code" href="class_spec_item.html#a1e22ba73c24132fea5c28641d6f331f6">showMode</a>();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_spec_item.html#acc1a64ff61188c62aa53124f8adab7b5">levelCount</a>();</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    QList&lt;MulticolorItem&gt; *<a class="code" href="class_spec_item.html#ad7edc52e0c25cca7f104e71ffc43bfd6">multiColor</a>();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;};</div>
+<div class="ttc" id="aaitem_8h_html"><div class="ttname"><a href="aitem_8h.html">aitem.h</a></div></div>
+<div class="ttc" id="aclass_a_item_html"><div class="ttname"><a href="class_a_item.html">AItem</a></div><div class="ttdef"><b>Definition:</b> aitem.h:15</div></div>
+<div class="ttc" id="aclass_spec_item_html"><div class="ttname"><a href="class_spec_item.html">SpecItem</a></div><div class="ttdef"><b>Definition:</b> specItem.h:7</div></div>
+<div class="ttc" id="aclass_spec_item_html_a1e22ba73c24132fea5c28641d6f331f6"><div class="ttname"><a href="class_spec_item.html#a1e22ba73c24132fea5c28641d6f331f6">SpecItem::showMode</a></div><div class="ttdeci">unsigned int showMode()</div><div class="ttdef"><b>Definition:</b> specItem.cpp:63</div></div>
+<div class="ttc" id="aclass_spec_item_html_a3887814c316ec0e50b6b7bac94e5fa16"><div class="ttname"><a href="class_spec_item.html#a3887814c316ec0e50b6b7bac94e5fa16">SpecItem::setMulticolor</a></div><div class="ttdeci">void setMulticolor(MulticolorItem multicolor)</div><div class="ttdef"><b>Definition:</b> specItem.cpp:33</div></div>
+<div class="ttc" id="aclass_spec_item_html_a6ed8b147b586d0e63e695eff71052d68"><div class="ttname"><a href="class_spec_item.html#a6ed8b147b586d0e63e695eff71052d68">SpecItem::SpecItem</a></div><div class="ttdeci">SpecItem()</div><div class="ttdef"><b>Definition:</b> specItem.cpp:6</div></div>
+<div class="ttc" id="aclass_spec_item_html_a8d615cdd31d0980cf3436caae8b94ee9"><div class="ttname"><a href="class_spec_item.html#a8d615cdd31d0980cf3436caae8b94ee9">SpecItem::setColor</a></div><div class="ttdeci">void setColor(QString bruchColor, QString transparentColor)</div><div class="ttdef"><b>Definition:</b> specItem.cpp:28</div></div>
+<div class="ttc" id="aclass_spec_item_html_aa033d7a47bdd2fc94a47f68371bacb0f"><div class="ttname"><a href="class_spec_item.html#aa033d7a47bdd2fc94a47f68371bacb0f">SpecItem::bruchColor</a></div><div class="ttdeci">QString bruchColor()</div><div class="ttdef"><b>Definition:</b> specItem.cpp:51</div></div>
+<div class="ttc" id="aclass_spec_item_html_ac08fc2f51a7885346c331f9cefa0c86d"><div class="ttname"><a href="class_spec_item.html#ac08fc2f51a7885346c331f9cefa0c86d">SpecItem::transparentColor</a></div><div class="ttdeci">QString transparentColor()</div><div class="ttdef"><b>Definition:</b> specItem.cpp:55</div></div>
+<div class="ttc" id="aclass_spec_item_html_aca3a0498e23a7a028aa1292682e263de"><div class="ttname"><a href="class_spec_item.html#aca3a0498e23a7a028aa1292682e263de">SpecItem::~SpecItem</a></div><div class="ttdeci">~SpecItem()</div><div class="ttdef"><b>Definition:</b> specItem.cpp:24</div></div>
+<div class="ttc" id="aclass_spec_item_html_acc1a64ff61188c62aa53124f8adab7b5"><div class="ttname"><a href="class_spec_item.html#acc1a64ff61188c62aa53124f8adab7b5">SpecItem::levelCount</a></div><div class="ttdeci">int levelCount()</div><div class="ttdef"><b>Definition:</b> specItem.cpp:47</div></div>
+<div class="ttc" id="aclass_spec_item_html_ad7edc52e0c25cca7f104e71ffc43bfd6"><div class="ttname"><a href="class_spec_item.html#ad7edc52e0c25cca7f104e71ffc43bfd6">SpecItem::multiColor</a></div><div class="ttdeci">QList&lt; MulticolorItem &gt; * multiColor()</div><div class="ttdef"><b>Definition:</b> specItem.cpp:59</div></div>
+<div class="ttc" id="aclass_spec_item_html_adaafe5a11cba81d1833d459cdd84f1ee"><div class="ttname"><a href="class_spec_item.html#adaafe5a11cba81d1833d459cdd84f1ee">SpecItem::setLevelCount</a></div><div class="ttdeci">void setLevelCount(int levelCount)</div><div class="ttdef"><b>Definition:</b> specItem.cpp:41</div></div>
+<div class="ttc" id="aclass_spec_item_html_ae985196d4e20e6f698b36120a3ab96e8"><div class="ttname"><a href="class_spec_item.html#ae985196d4e20e6f698b36120a3ab96e8">SpecItem::setShowMode</a></div><div class="ttdeci">void setShowMode(unsigned int showMode)</div><div class="ttdef"><b>Definition:</b> specItem.cpp:37</div></div>
+<div class="ttc" id="astruct_multicolor_item_html"><div class="ttname"><a href="struct_multicolor_item.html">MulticolorItem</a></div><div class="ttdef"><b>Definition:</b> aitem.h:10</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

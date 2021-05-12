@@ -32,22 +32,14 @@ contains(QMAKE_HOST.arch, x86_64):{
     ../build/release/LogDataSaver.lib \
     ../build/release/geometrologyDB.lib
 }
-#!contains(QMAKE_HOST.arch, x86_64):{
- #   LIBS += \
- #   ../build86/release/LogData.dll \
-  #  ../build86/release/LogDataInterpreter.dll \
-  #  ../build86/release/LogDataLoader.dll \
-  #  ../build86/release/LogDataSaver.dll
-  #  DEFINES += USING_X86
-#}
 
 
-include(../graphics_lib/graphics.pri)
+include(../log_data_graphics/graphics.pri)
 
 
 
 SOURCES += \
-    inc/selectingmodepanel.cpp \
+    src/selectingmodepanel.cpp \
     src/tabinterpretations.cpp \
     src/graphicscontrolpanel.cpp \
     src/graphicwidget.cpp \

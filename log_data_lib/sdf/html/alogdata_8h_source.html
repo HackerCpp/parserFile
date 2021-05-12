@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_CORE: Исходный файл E:/MyQtProgram/parserGfm/log_data_lib/include/logData/alogdata.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_CORE
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_0050b698ec93709d88e88fefa3050080.html">log_data_lib</a></li><li class="navelem"><a class="el" href="dir_2f0999640edae1ed5e0daaf6e3e6adcd.html">include</a></li><li class="navelem"><a class="el" href="dir_6a94a87025c9481da8505b5b0dc6aef2.html">logData</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">alogdata.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="alogdata_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef ALOGDATA_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define ALOGDATA_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="ilogdata_8h.html">ilogdata.h</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QList&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="iblock_8h.html">iblock.h</a>&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="class_a_log_data.html">    8</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_a_log_data.html">ALogData</a> : <span class="keyword">public</span> <a class="code" href="class_i_log_data.html">ILogData</a>{</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="class_a_log_data.html#ad72bb53763a457908564772684ff604c">   11</a></span>&#160;    <a class="code" href="class_i_loader_log_data.html">ILoaderLogData</a> *<a class="code" href="class_a_log_data.html#ad72bb53763a457908564772684ff604c">m_loader</a>;</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="class_a_log_data.html#afc65f80356e8d74e991eceeadde25981">   12</a></span>&#160;    <a class="code" href="class_i_saver_log_data.html">ISaverLogData</a> *<a class="code" href="class_a_log_data.html#afc65f80356e8d74e991eceeadde25981">m_saver</a>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="class_a_log_data.html#a45ad1d7b54549d21949ef0cc44b8b042">   13</a></span>&#160;    <a class="code" href="class_i_interpreter_log_data.html">IInterpreterLogData</a> *<a class="code" href="class_a_log_data.html#a45ad1d7b54549d21949ef0cc44b8b042">m_interpreter</a>;</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_a_log_data.html#af5ec048534b9a6be69308ab91ac27011">   14</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_a_log_data.html#af5ec048534b9a6be69308ab91ac27011">m_isReady</a>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="class_a_log_data.html#ae54797669fbff98a54b7b41272342c8f">ALogData</a>();</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_a_log_data.html#accf2027f5d91f52ef082e169a3c125f8">   17</a></span>&#160;    <a class="code" href="class_a_log_data.html#accf2027f5d91f52ef082e169a3c125f8">ALogData</a>(<a class="code" href="class_a_log_data.html">ALogData</a> &amp;logdata){Q_UNUSED(logdata)}</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_a_log_data.html#ad194d01f4a963e674baad4ba5b5dd694">   19</a></span>&#160;    <a class="code" href="class_a_log_data.html">ALogData</a> &amp;<a class="code" href="class_a_log_data.html#ad194d01f4a963e674baad4ba5b5dd694">operator=</a>(<span class="keyword">const</span> <a class="code" href="class_a_log_data.html">ALogData</a> &amp;logData){Q_UNUSED(logData)}</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_a_log_data.html#a07381d04ffe84d0a5390160c394573e0">~ALogData</a>()<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_a_log_data.html#af59ad52b89fb315cd9953f421da53df2">load</a>()<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_a_log_data.html#a08d94ffbc075b7c8a6d9510b381825e9">save</a>()<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="class_a_log_data.html#acf4443a32b9ec9845991fc048e2ca3a5">   25</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_a_log_data.html#acf4443a32b9ec9845991fc048e2ca3a5">openInterpreterConsole</a>()<span class="keyword">override</span>{<span class="keywordflow">return</span> <span class="keyword">false</span>;}</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="class_a_log_data.html#af1a2bb0a960ce2a5d50ed163ff21eb93">   26</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_a_log_data.html#af1a2bb0a960ce2a5d50ed163ff21eb93">openInterpreterScript</a>()<span class="keyword">override</span>{<span class="keywordflow">return</span> <span class="keyword">false</span>;}</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="class_a_log_data.html#a11e179ceb3250516292574b851c600f6">   27</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_a_log_data.html#a11e179ceb3250516292574b851c600f6">openInterpreterEditor</a>()<span class="keyword">override</span>{<span class="keywordflow">return</span> <span class="keyword">false</span>;}</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_a_log_data.html#ab2b4b0efc1afc00e69afb10cd816d438">isReady</a>()<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="class_a_log_data.html#aaa5c84989c810c4021eee4a452cee2a4">   30</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_a_log_data.html#aaa5c84989c810c4021eee4a452cee2a4">isInterpreter</a>()<span class="keyword">override</span>{<span class="keywordflow">return</span> <span class="keyword">false</span>;}</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_a_log_data.html#af367dd04ddef9ee832057352de5c15e9">setLoader</a>(<a class="code" href="class_i_loader_log_data.html">ILoaderLogData</a> *loader)<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_a_log_data.html#a5ebe4b07e35a2dfcfb3eb801ae458b67">setSaver</a>(<a class="code" href="class_i_saver_log_data.html">ISaverLogData</a> *saver)<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_a_log_data.html#adb30783bda6c69101e05c6dad686883e">setInterpreter</a>(<a class="code" href="class_i_interpreter_log_data.html">IInterpreterLogData</a> *<a class="code" href="class_a_log_data.html#aeb7b4ad3a2b65508f82875b1c9103857">interpreter</a>)<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="class_a_log_data.html#ac6c0a204a9a8916cdb327cdb3aef668c">   35</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_a_log_data.html#ac6c0a204a9a8916cdb327cdb3aef668c">setName</a>(QString <a class="code" href="class_a_log_data.html#a68242a57cccf09e38806c50912bd026e">name</a>)<span class="keyword">override</span>{Q_UNUSED(<a class="code" href="class_a_log_data.html#a68242a57cccf09e38806c50912bd026e">name</a>)}</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_a_log_data.html#afa6a610b579a5885480f13fc4b09dc7a">   37</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_a_log_data.html#afa6a610b579a5885480f13fc4b09dc7a">addBlock</a>(<a class="code" href="class_i_block.html">IBlock</a> *block)<span class="keyword">override</span>{Q_UNUSED(block)}</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">virtual</span> QList&lt;IBlock *&gt; *<a class="code" href="class_a_log_data.html#aa41b896a002002dc77bbdbaa86f41e35">blocks</a>()<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="class_a_log_data.html#a68242a57cccf09e38806c50912bd026e">   40</a></span>&#160;    <span class="keyword">virtual</span> QString <a class="code" href="class_a_log_data.html#a68242a57cccf09e38806c50912bd026e">name</a>()<span class="keyword">override</span>{ <span class="keywordflow">return</span> QString();}</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="class_a_log_data.html#aeb7b4ad3a2b65508f82875b1c9103857">   41</a></span>&#160;    <a class="code" href="class_i_interpreter_log_data.html">IInterpreterLogData</a> *<a class="code" href="class_a_log_data.html#aeb7b4ad3a2b65508f82875b1c9103857">interpreter</a>()<span class="keyword">override</span>{<span class="keywordflow">return</span> <a class="code" href="class_a_log_data.html#a45ad1d7b54549d21949ef0cc44b8b042">m_interpreter</a>;}</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="class_a_log_data.html#a339005db1b4ecc3e444c5e0e92ba7be0">   46</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_a_log_data.html#a339005db1b4ecc3e444c5e0e92ba7be0">dataUpdate</a>()<span class="keyword">override</span>{}</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_a_log_data.html#ac2b428778c6e98ff8bf458317bc6440d">dataReady</a>()<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;};</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// ALOGDATA_H</span></div>
+<div class="ttc" id="aclass_a_log_data_html"><div class="ttname"><a href="class_a_log_data.html">ALogData</a></div><div class="ttdef"><b>Definition:</b> alogdata.h:8</div></div>
+<div class="ttc" id="aclass_a_log_data_html_a07381d04ffe84d0a5390160c394573e0"><div class="ttname"><a href="class_a_log_data.html#a07381d04ffe84d0a5390160c394573e0">ALogData::~ALogData</a></div><div class="ttdeci">virtual ~ALogData() override</div><div class="ttdef"><b>Definition:</b> alogdata.cpp:11</div></div>
+<div class="ttc" id="aclass_a_log_data_html_a08d94ffbc075b7c8a6d9510b381825e9"><div class="ttname"><a href="class_a_log_data.html#a08d94ffbc075b7c8a6d9510b381825e9">ALogData::save</a></div><div class="ttdeci">virtual bool save() override</div><div class="ttdef"><b>Definition:</b> alogdata.cpp:19</div></div>
+<div class="ttc" id="aclass_a_log_data_html_a11e179ceb3250516292574b851c600f6"><div class="ttname"><a href="class_a_log_data.html#a11e179ceb3250516292574b851c600f6">ALogData::openInterpreterEditor</a></div><div class="ttdeci">virtual bool openInterpreterEditor() override</div><div class="ttdef"><b>Definition:</b> alogdata.h:27</div></div>
+<div class="ttc" id="aclass_a_log_data_html_a339005db1b4ecc3e444c5e0e92ba7be0"><div class="ttname"><a href="class_a_log_data.html#a339005db1b4ecc3e444c5e0e92ba7be0">ALogData::dataUpdate</a></div><div class="ttdeci">virtual void dataUpdate() override</div><div class="ttdef"><b>Definition:</b> alogdata.h:46</div></div>
+<div class="ttc" id="aclass_a_log_data_html_a45ad1d7b54549d21949ef0cc44b8b042"><div class="ttname"><a href="class_a_log_data.html#a45ad1d7b54549d21949ef0cc44b8b042">ALogData::m_interpreter</a></div><div class="ttdeci">IInterpreterLogData * m_interpreter</div><div class="ttdef"><b>Definition:</b> alogdata.h:13</div></div>
+<div class="ttc" id="aclass_a_log_data_html_a5ebe4b07e35a2dfcfb3eb801ae458b67"><div class="ttname"><a href="class_a_log_data.html#a5ebe4b07e35a2dfcfb3eb801ae458b67">ALogData::setSaver</a></div><div class="ttdeci">virtual bool setSaver(ISaverLogData *saver) override</div><div class="ttdef"><b>Definition:</b> alogdata.cpp:41</div></div>
+<div class="ttc" id="aclass_a_log_data_html_a68242a57cccf09e38806c50912bd026e"><div class="ttname"><a href="class_a_log_data.html#a68242a57cccf09e38806c50912bd026e">ALogData::name</a></div><div class="ttdeci">virtual QString name() override</div><div class="ttdef"><b>Definition:</b> alogdata.h:40</div></div>
+<div class="ttc" id="aclass_a_log_data_html_aa41b896a002002dc77bbdbaa86f41e35"><div class="ttname"><a href="class_a_log_data.html#aa41b896a002002dc77bbdbaa86f41e35">ALogData::blocks</a></div><div class="ttdeci">virtual QList&lt; IBlock * &gt; * blocks() override</div><div class="ttdef"><b>Definition:</b> alogdata.cpp:32</div></div>
+<div class="ttc" id="aclass_a_log_data_html_aaa5c84989c810c4021eee4a452cee2a4"><div class="ttname"><a href="class_a_log_data.html#aaa5c84989c810c4021eee4a452cee2a4">ALogData::isInterpreter</a></div><div class="ttdeci">virtual bool isInterpreter() override</div><div class="ttdef"><b>Definition:</b> alogdata.h:30</div></div>
+<div class="ttc" id="aclass_a_log_data_html_ab2b4b0efc1afc00e69afb10cd816d438"><div class="ttname"><a href="class_a_log_data.html#ab2b4b0efc1afc00e69afb10cd816d438">ALogData::isReady</a></div><div class="ttdeci">virtual bool isReady() override</div><div class="ttdef"><b>Definition:</b> alogdata.cpp:23</div></div>
+<div class="ttc" id="aclass_a_log_data_html_ac2b428778c6e98ff8bf458317bc6440d"><div class="ttname"><a href="class_a_log_data.html#ac2b428778c6e98ff8bf458317bc6440d">ALogData::dataReady</a></div><div class="ttdeci">virtual void dataReady() override</div><div class="ttdef"><b>Definition:</b> alogdata.cpp:46</div></div>
+<div class="ttc" id="aclass_a_log_data_html_ac6c0a204a9a8916cdb327cdb3aef668c"><div class="ttname"><a href="class_a_log_data.html#ac6c0a204a9a8916cdb327cdb3aef668c">ALogData::setName</a></div><div class="ttdeci">virtual void setName(QString name) override</div><div class="ttdef"><b>Definition:</b> alogdata.h:35</div></div>
+<div class="ttc" id="aclass_a_log_data_html_accf2027f5d91f52ef082e169a3c125f8"><div class="ttname"><a href="class_a_log_data.html#accf2027f5d91f52ef082e169a3c125f8">ALogData::ALogData</a></div><div class="ttdeci">ALogData(ALogData &amp;logdata)</div><div class="ttdef"><b>Definition:</b> alogdata.h:17</div></div>
+<div class="ttc" id="aclass_a_log_data_html_acf4443a32b9ec9845991fc048e2ca3a5"><div class="ttname"><a href="class_a_log_data.html#acf4443a32b9ec9845991fc048e2ca3a5">ALogData::openInterpreterConsole</a></div><div class="ttdeci">virtual bool openInterpreterConsole() override</div><div class="ttdef"><b>Definition:</b> alogdata.h:25</div></div>
+<div class="ttc" id="aclass_a_log_data_html_ad194d01f4a963e674baad4ba5b5dd694"><div class="ttname"><a href="class_a_log_data.html#ad194d01f4a963e674baad4ba5b5dd694">ALogData::operator=</a></div><div class="ttdeci">ALogData &amp; operator=(const ALogData &amp;logData)</div><div class="ttdef"><b>Definition:</b> alogdata.h:19</div></div>
+<div class="ttc" id="aclass_a_log_data_html_ad72bb53763a457908564772684ff604c"><div class="ttname"><a href="class_a_log_data.html#ad72bb53763a457908564772684ff604c">ALogData::m_loader</a></div><div class="ttdeci">ILoaderLogData * m_loader</div><div class="ttdef"><b>Definition:</b> alogdata.h:11</div></div>
+<div class="ttc" id="aclass_a_log_data_html_adb30783bda6c69101e05c6dad686883e"><div class="ttname"><a href="class_a_log_data.html#adb30783bda6c69101e05c6dad686883e">ALogData::setInterpreter</a></div><div class="ttdeci">virtual bool setInterpreter(IInterpreterLogData *interpreter) override</div><div class="ttdef"><b>Definition:</b> alogdata.cpp:27</div></div>
+<div class="ttc" id="aclass_a_log_data_html_ae54797669fbff98a54b7b41272342c8f"><div class="ttname"><a href="class_a_log_data.html#ae54797669fbff98a54b7b41272342c8f">ALogData::ALogData</a></div><div class="ttdeci">ALogData()</div><div class="ttdef"><b>Definition:</b> alogdata.cpp:5</div></div>
+<div class="ttc" id="aclass_a_log_data_html_aeb7b4ad3a2b65508f82875b1c9103857"><div class="ttname"><a href="class_a_log_data.html#aeb7b4ad3a2b65508f82875b1c9103857">ALogData::interpreter</a></div><div class="ttdeci">IInterpreterLogData * interpreter() override</div><div class="ttdef"><b>Definition:</b> alogdata.h:41</div></div>
+<div class="ttc" id="aclass_a_log_data_html_af1a2bb0a960ce2a5d50ed163ff21eb93"><div class="ttname"><a href="class_a_log_data.html#af1a2bb0a960ce2a5d50ed163ff21eb93">ALogData::openInterpreterScript</a></div><div class="ttdeci">virtual bool openInterpreterScript() override</div><div class="ttdef"><b>Definition:</b> alogdata.h:26</div></div>
+<div class="ttc" id="aclass_a_log_data_html_af367dd04ddef9ee832057352de5c15e9"><div class="ttname"><a href="class_a_log_data.html#af367dd04ddef9ee832057352de5c15e9">ALogData::setLoader</a></div><div class="ttdeci">virtual bool setLoader(ILoaderLogData *loader) override</div><div class="ttdef"><b>Definition:</b> alogdata.cpp:36</div></div>
+<div class="ttc" id="aclass_a_log_data_html_af59ad52b89fb315cd9953f421da53df2"><div class="ttname"><a href="class_a_log_data.html#af59ad52b89fb315cd9953f421da53df2">ALogData::load</a></div><div class="ttdeci">virtual bool load() override</div><div class="ttdef"><b>Definition:</b> alogdata.cpp:15</div></div>
+<div class="ttc" id="aclass_a_log_data_html_af5ec048534b9a6be69308ab91ac27011"><div class="ttname"><a href="class_a_log_data.html#af5ec048534b9a6be69308ab91ac27011">ALogData::m_isReady</a></div><div class="ttdeci">bool m_isReady</div><div class="ttdef"><b>Definition:</b> alogdata.h:14</div></div>
+<div class="ttc" id="aclass_a_log_data_html_afa6a610b579a5885480f13fc4b09dc7a"><div class="ttname"><a href="class_a_log_data.html#afa6a610b579a5885480f13fc4b09dc7a">ALogData::addBlock</a></div><div class="ttdeci">virtual void addBlock(IBlock *block) override</div><div class="ttdef"><b>Definition:</b> alogdata.h:37</div></div>
+<div class="ttc" id="aclass_a_log_data_html_afc65f80356e8d74e991eceeadde25981"><div class="ttname"><a href="class_a_log_data.html#afc65f80356e8d74e991eceeadde25981">ALogData::m_saver</a></div><div class="ttdeci">ISaverLogData * m_saver</div><div class="ttdef"><b>Definition:</b> alogdata.h:12</div></div>
+<div class="ttc" id="aclass_i_block_html"><div class="ttname"><a href="class_i_block.html">IBlock</a></div><div class="ttdef"><b>Definition:</b> iblock.h:10</div></div>
+<div class="ttc" id="aclass_i_interpreter_log_data_html"><div class="ttname"><a href="class_i_interpreter_log_data.html">IInterpreterLogData</a></div><div class="ttdef"><b>Definition:</b> iinterpreterlogdata.h:8</div></div>
+<div class="ttc" id="aclass_i_loader_log_data_html"><div class="ttname"><a href="class_i_loader_log_data.html">ILoaderLogData</a></div><div class="ttdef"><b>Definition:</b> iloaderlogdata.h:9</div></div>
+<div class="ttc" id="aclass_i_log_data_html"><div class="ttname"><a href="class_i_log_data.html">ILogData</a></div><div class="ttdef"><b>Definition:</b> ilogdata.h:10</div></div>
+<div class="ttc" id="aclass_i_saver_log_data_html"><div class="ttname"><a href="class_i_saver_log_data.html">ISaverLogData</a></div><div class="ttdef"><b>Definition:</b> isaverlogdata.h:8</div></div>
+<div class="ttc" id="aiblock_8h_html"><div class="ttname"><a href="iblock_8h.html">iblock.h</a></div></div>
+<div class="ttc" id="ailogdata_8h_html"><div class="ttname"><a href="ilogdata_8h.html">ilogdata.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>
