@@ -52,7 +52,7 @@ $(function() {
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;QHash&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QDebug&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="class_paraminfo.html">    6</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_paraminfo.html">Paraminfo</a> : <span class="keyword">public</span> QObject{</div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="class_paraminfo.html">    6</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_paraminfo.html">Paraminfo</a> : <span class="keyword">public</span> <a class="code" href="class_q_object.html">QObject</a>{</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    Q_OBJECT</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    QString m_index;</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    QString m_value;</div>
@@ -65,7 +65,7 @@ $(function() {
 <div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_paraminfo.html#af82fdb36b6f87241dbee116dc97150ad">   16</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_paraminfo.html#af82fdb36b6f87241dbee116dc97150ad">setValue</a>(QString <a class="code" href="class_paraminfo.html#a8a59ed7b1b3887a98f8e50efd8d84f4a">value</a>){m_value = <a class="code" href="class_paraminfo.html#a8a59ed7b1b3887a98f8e50efd8d84f4a">value</a>;}</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;};</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">/*****************************************************************/</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_parameters.html">   19</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_parameters.html">Parameters</a> : <span class="keyword">public</span> QObject{</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_parameters.html">   19</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_parameters.html">Parameters</a> : <span class="keyword">public</span> <a class="code" href="class_q_object.html">QObject</a>{</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="class_parameters.html#a35a071dcdce370bb5588e208546320cca7b984c1cf83beb4ae70b4073eb9863e1">   21</a></span>&#160;    <span class="keyword">enum</span> <a class="code" href="class_parameters.html#a35a071dcdce370bb5588e208546320cc">Type</a>{<a class="code" href="class_parameters.html#a35a071dcdce370bb5588e208546320ccad3f5f66e833c168f4666df17febee300">PARAM</a>,<a class="code" href="class_parameters.html#a35a071dcdce370bb5588e208546320cca7b984c1cf83beb4ae70b4073eb9863e1">CALIB</a>};</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">private</span>:</div>
@@ -88,7 +88,7 @@ $(function() {
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;};</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">/****************************************************************************************/</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="class_desc.html">   42</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_desc.html">Desc</a> : <span class="keyword">public</span> QObject{</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="class_desc.html">   42</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_desc.html">Desc</a> : <span class="keyword">public</span> <a class="code" href="class_q_object.html">QObject</a>{</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    Q_OBJECT</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="class_parameters.html">Parameters</a> *m_parameters;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="class_parameters.html">Parameters</a> *m_calibration;</div>
@@ -134,6 +134,7 @@ $(function() {
 <div class="ttc" id="aclass_paraminfo_html_a8a59ed7b1b3887a98f8e50efd8d84f4a"><div class="ttname"><a href="class_paraminfo.html#a8a59ed7b1b3887a98f8e50efd8d84f4a">Paraminfo::value</a></div><div class="ttdeci">QString value()</div><div class="ttdef"><b>Definition:</b> desc.h:15</div></div>
 <div class="ttc" id="aclass_paraminfo_html_aa603d24a6cdf9ba6b6c8f499cf399b1e"><div class="ttname"><a href="class_paraminfo.html#aa603d24a6cdf9ba6b6c8f499cf399b1e">Paraminfo::Paraminfo</a></div><div class="ttdeci">Paraminfo(QString index, QString value)</div><div class="ttdef"><b>Definition:</b> desc.cpp:3</div></div>
 <div class="ttc" id="aclass_paraminfo_html_af82fdb36b6f87241dbee116dc97150ad"><div class="ttname"><a href="class_paraminfo.html#af82fdb36b6f87241dbee116dc97150ad">Paraminfo::setValue</a></div><div class="ttdeci">void setValue(QString value)</div><div class="ttdef"><b>Definition:</b> desc.h:16</div></div>
+<div class="ttc" id="aclass_q_object_html"><div class="ttname"><a href="class_q_object.html">QObject</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -7,6 +7,7 @@
 #include <curve.h>
 #include <headerblock.h>
 #include <QChar>
+#include "headerinfo.h"
 
 LasLoader::LasLoader(QString path)
     : m_path(path){
@@ -181,7 +182,7 @@ void LasLoader::fillCurves20(DataBlock *dataBlock,const QList<BlockLas> &blocksL
 
 void LasLoader::findHeader20(const QList<BlockLas> &blocksLas){
     IBlock *f_block = IBlock::blockCreater(IBlock::HEADER_BLOCK);
-    HearedBlock *f_header = dynamic_cast<HearedBlock*>(f_block);
+    HeaderBlock *f_header = dynamic_cast<HeaderBlock*>(f_block);
     foreach(auto blockLas,blocksLas){
         if(blockLas.typeBlockLas == W || blockLas.typeBlockLas == P){
             QStringList f_lineList = QString(blockLas.bodyBlockLas).split('\n');

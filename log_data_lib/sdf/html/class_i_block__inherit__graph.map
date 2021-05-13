@@ -1,0 +1,11 @@
+<map id="IBlock" name="IBlock">
+<area shape="rect" id="node1" title=" " alt="" coords="319,80,378,107"/>
+<area shape="rect" id="node3" href="$class_a_block.html" title=" " alt="" coords="316,155,381,181"/>
+<area shape="rect" id="node2" href="$class_q_object.html" title=" " alt="" coords="312,5,385,32"/>
+<area shape="rect" id="node4" href="$class_data_block.html" title=" " alt="" coords="5,229,92,256"/>
+<area shape="rect" id="node5" href="$class_forms_block.html" title=" " alt="" coords="117,229,213,256"/>
+<area shape="rect" id="node6" href="$class_header_block.html" title=" " alt="" coords="237,229,340,256"/>
+<area shape="rect" id="node7" href="$class_label_block.html" title=" " alt="" coords="365,229,455,256"/>
+<area shape="rect" id="node8" href="$class_tool_info_block.html" title=" " alt="" coords="480,229,585,256"/>
+<area shape="rect" id="node9" href="$class_unknown_block.html" title=" " alt="" coords="610,229,725,256"/>
+</map>

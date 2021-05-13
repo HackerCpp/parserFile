@@ -7,6 +7,7 @@
 #include "QTextEdit"
 #include "setlabelsforboard.h"
 #include "ldlabel.h"
+#include "headerinfo.h"
 
 
 DataModel::DataModel(){
@@ -69,7 +70,7 @@ QModelIndex DataModel::index(int row, int column, const QModelIndex &parent)cons
                 break;
             }
             case IBlock::HEADER_BLOCK:{
-                HearedBlock *f_headerBlock = dynamic_cast<HearedBlock *>(f_block);
+                HeaderBlock *f_headerBlock = dynamic_cast<HeaderBlock *>(f_block);
                 if(f_headerBlock){
                     return createIndex(row,column,f_headerBlock->infoHeader()->at(row).data());
                 }
@@ -178,7 +179,7 @@ QModelIndex DataModel::parent(const QModelIndex &child)const{
         foreach(auto logData,*m_logDataVector){
             QList<IBlock *> *f_blocks = logData->blocks();
             foreach(auto block,*f_blocks){
-                    HearedBlock *f_formsBlock = dynamic_cast<HearedBlock *>(block);
+                    HeaderBlock *f_formsBlock = dynamic_cast<HeaderBlock *>(block);
                     if(f_formsBlock){
                         QList<QSharedPointer<HeaderInfo> > *f_listHeaderInfo = f_formsBlock->infoHeader();
                         foreach(auto headerInfo,*f_listHeaderInfo){
@@ -315,7 +316,7 @@ int DataModel::rowCount(const QModelIndex &parent )const{
                     QList<IBlock *> *f_blocks = logData->blocks();
                     foreach(auto block,*f_blocks){
                         if(block == f_block){
-                            HearedBlock *f_headerBlock = dynamic_cast<HearedBlock *>(block);
+                            HeaderBlock *f_headerBlock = dynamic_cast<HeaderBlock *>(block);
                             if(f_headerBlock){
                                 if(f_headerBlock->infoHeader()){
                                     return f_headerBlock->infoHeader()->size();

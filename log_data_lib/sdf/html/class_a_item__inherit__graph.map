@@ -1,0 +1,8 @@
+<map id="AItem" name="AItem">
+<area shape="rect" id="node1" title=" " alt="" coords="187,5,247,32"/>
+<area shape="rect" id="node2" href="$class_acu_item.html" title=" " alt="" coords="5,80,80,107"/>
+<area shape="rect" id="node3" href="$class_item.html" title=" " alt="" coords="104,80,155,107"/>
+<area shape="rect" id="node4" href="$class_line_item.html" title=" " alt="" coords="179,80,256,107"/>
+<area shape="rect" id="node5" href="$class_spec_item.html" title=" " alt="" coords="280,80,363,107"/>
+<area shape="rect" id="node6" href="$classmark_item.html" title=" " alt="" coords="387,80,471,107"/>
+</map>

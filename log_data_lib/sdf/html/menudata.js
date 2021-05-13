@@ -26,7 +26,7 @@ var menudata={children:[
 {text:"Титульная страница",url:"index.html"},
 {text:"Классы",url:"annotated.html",children:[
 {text:"Классы",url:"annotated.html"},
-{text:"Иерархия классов",url:"hierarchy.html"},
+{text:"Иерархия классов",url:"inherits.html"},
 {text:"Члены классов",url:"functions.html",children:[
 {text:"Указатель",url:"functions.html",children:[
 {text:"a",url:"functions.html#index_a"},

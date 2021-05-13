@@ -1,0 +1,4 @@
+<map id="ICurve" name="ICurve">
+<area shape="rect" id="node1" title="Интерфейс кривой, любая кривая с данными наследуется от данного интерфейса." alt="" coords="11,80,73,107"/>
+<area shape="rect" id="node2" href="$class_q_object.html" title=" " alt="" coords="5,5,79,32"/>
+</map>

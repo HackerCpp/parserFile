@@ -4,14 +4,12 @@
 #include "icurve.h"
 #include <QPainter>
 #include "boardfortrack.h"
-#include "customobject.h"
 
 class AGraphicItem
 {
 protected:
     AItem *m_itemInfo;
     ICurve *m_curve;
-    CustomObject *m_drawObject;
     BoardForTrack *m_board;
     bool m_isActive;
     int m_positionHeaderArea,m_heightHeaderArea,m_heightLegend;
@@ -27,7 +25,6 @@ protected:
 
 public:
     AGraphicItem(ICurve *curve,BoardForTrack *board);
-    AGraphicItem(CustomObject *drawObject,BoardForTrack *board);
     AGraphicItem(const AGraphicItem &other);
     virtual ~AGraphicItem(){}
     virtual void deleteLater(){}
@@ -48,7 +45,6 @@ public:
     virtual void updateParam(){}
 
     ICurve *curve(){return m_curve;}
-    CustomObject *drawObject(){return m_drawObject;}
     ICurve *currentMainValue(){return m_currentMainValue;}
     AItem *itemInfo(){return m_itemInfo;}
     virtual QColor color(){return Qt::black;}

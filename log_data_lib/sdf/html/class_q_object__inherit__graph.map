@@ -1,0 +1,29 @@
+<map id="QObject" name="QObject">
+<area shape="rect" id="node1" title=" " alt="" coords="5,436,79,463"/>
+<area shape="rect" id="node2" href="$class_desc.html" title=" " alt="" coords="171,157,225,184"/>
+<area shape="rect" id="node3" href="$class_header_info.html" title=" " alt="" coords="152,208,244,235"/>
+<area shape="rect" id="node4" href="$class_i_block.html" title=" " alt="" coords="169,259,227,285"/>
+<area shape="rect" id="node12" href="$class_i_board.html" title=" " alt="" coords="167,309,229,336"/>
+<area shape="rect" id="node15" href="$class_i_curve.html" title="Интерфейс кривой, любая кривая с данными наследуется от данного интерфейса." alt="" coords="167,360,229,387"/>
+<area shape="rect" id="node18" href="$class_i_log_data.html" title=" " alt="" coords="159,411,237,437"/>
+<area shape="rect" id="node21" href="$class_i_saver_log_data.html" title=" " alt="" coords="140,461,256,488"/>
+<area shape="rect" id="node23" href="$class_l_d_label.html" title=" " alt="" coords="161,512,235,539"/>
+<area shape="rect" id="node24" href="$class_linking.html" title=" " alt="" coords="165,563,231,589"/>
+<area shape="rect" id="node25" href="$class_parameters.html" title=" " alt="" coords="149,613,247,640"/>
+<area shape="rect" id="node26" href="$class_paraminfo.html" title=" " alt="" coords="155,664,241,691"/>
+<area shape="rect" id="node27" href="$class_set_labels_for_board.html" title=" " alt="" coords="127,715,269,741"/>
+<area shape="rect" id="node5" href="$class_a_block.html" title=" " alt="" coords="346,157,411,184"/>
+<area shape="rect" id="node6" href="$class_data_block.html" title=" " alt="" coords="502,5,589,32"/>
+<area shape="rect" id="node7" href="$class_forms_block.html" title=" " alt="" coords="497,56,593,83"/>
+<area shape="rect" id="node8" href="$class_header_block.html" title=" " alt="" coords="494,107,597,133"/>
+<area shape="rect" id="node9" href="$class_label_block.html" title=" " alt="" coords="500,157,591,184"/>
+<area shape="rect" id="node10" href="$class_tool_info_block.html" title=" " alt="" coords="493,208,598,235"/>
+<area shape="rect" id="node11" href="$class_unknown_block.html" title=" " alt="" coords="488,259,603,285"/>
+<area shape="rect" id="node13" href="$class_a_board.html" title=" " alt="" coords="344,309,413,336"/>
+<area shape="rect" id="node14" href="$class_board.html" title=" " alt="" coords="515,309,575,336"/>
+<area shape="rect" id="node16" href="$class_a_curve.html" title=" " alt="" coords="345,360,413,387"/>
+<area shape="rect" id="node17" href="$class_curve.html" title=" " alt="" coords="497,360,593,387"/>
+<area shape="rect" id="node19" href="$class_a_log_data.html" title=" " alt="" coords="336,411,421,437"/>
+<area shape="rect" id="node20" href="$class_log_data.html" title=" " alt="" coords="507,411,583,437"/>
+<area shape="rect" id="node22" href="$class_a_saver_log_data.html" title=" " alt="" coords="317,461,440,488"/>
+</map>

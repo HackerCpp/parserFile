@@ -9,7 +9,7 @@
 #else
 #include <QtZlib/zlib.h>
 #endif
-
+#include "headerinfo.h"
 #include <QXmlStreamReader>
 #include "board.h"
 #include "track.h"
@@ -304,9 +304,9 @@ void GFMLoader::parser(const QByteArray &bodyBlock,IBlock *block){
 }
 
 void GFMLoader::parserHeaderBlock(const QByteArray &bodyBlock,IBlock *block){
-    HearedBlock * hearedBlock = dynamic_cast<HearedBlock*>(block);
-    if(!hearedBlock){
-        qDebug() <<  "не удалось преобразовать IBlock в HearedBlock. Парсер дата блока";
+    HeaderBlock * f_headerBlock = dynamic_cast<HeaderBlock*>(block);
+    if(!f_headerBlock){
+        qDebug() <<  "не удалось преобразовать IBlock в HeaderBlock. Парсер дата блока";
         return;
     }
     QString endName = "]";
@@ -332,7 +332,7 @@ void GFMLoader::parserHeaderBlock(const QByteArray &bodyBlock,IBlock *block){
         bodyHeader = body.mid(0,IndexBeginName);
         f_info->setBody(bodyHeader);
         body = body.mid(IndexLineOff + 2, body.size() - IndexLineOff);
-        hearedBlock->setHeaderInfo(f_info);
+        f_headerBlock->setHeaderInfo(f_info);
     }
 }
 

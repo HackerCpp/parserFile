@@ -7,13 +7,6 @@ VerticalItem::VerticalItem(ICurve *curve,BoardForTrack *board)
 
 }
 
-VerticalItem::VerticalItem(CustomObject *object,BoardForTrack *board)
-    : AGraphicItem(object,board)
-{
-    m_heightHeaderArea = 40;
-
-}
-
 VerticalItem::VerticalItem(const VerticalItem &other)
     :AGraphicItem(other){
     m_heightHeaderArea = other.m_heightHeaderArea;

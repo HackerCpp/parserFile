@@ -8,7 +8,7 @@ $$PWD/../log_data_interpreter/include
 LIBS += ../build/release/LogData.lib
 
 SOURCES += \
-    $$PWD/inc/items/labelitem.cpp \
+    $$PWD/src/items/labelitem.cpp \
     $$PWD/src/canvas.cpp \
     $$PWD/src/tools/basestandartwidget.cpp \
     $$PWD/src/tools/curveshifttool.cpp \
@@ -18,8 +18,6 @@ SOURCES += \
     $$PWD/src/tools/customprogressbar.cpp \
     $$PWD/src/tools/modellegenditems.cpp \
     $$PWD/src/tools/multicolorselection.cpp \
-    $$PWD/src/drawObjects/objectColumn.cpp \
-    $$PWD/src/items/customobjectitem.cpp \
     $$PWD/src/drawsettings.cpp \
     $$PWD/src/tools/basecurvereader.cpp \
     $$PWD/src/items/drawingthroughadisk.cpp \
@@ -72,9 +70,7 @@ HEADERS += \
     $$PWD/inc/tools/curveshifttool.h \
     $$PWD/inc/tools/itemslegendview.h \
     $$PWD/inc/tools/customprogressbar.h \
-    $$PWD/inc/drawObjects/objectColumn.h \
     $$PWD/inc/drawsettings.h \
-    $$PWD/inc/items/customobjectitem.h \
     $$PWD/inc/agraphicboard.h \
     $$PWD/inc/items/agraphicitem.h \
     $$PWD/inc/agraphictrack.h \

@@ -22,6 +22,7 @@
 #include <QFileDialog>
 #include "specItem.h"
 #include "ldlabel.h"
+#include "headerinfo.h"
 
 
 GFMSaver::GFMSaver(){
@@ -221,9 +222,9 @@ QByteArray  GFMSaver::getForSave(IBlock *block){
 QByteArray  GFMSaver::getForSaveHeaderBlock(IBlock *block){
     QByteArray blockForWrite;
 
-    HearedBlock *headerBlock = dynamic_cast<HearedBlock*>(block);
+    HeaderBlock *headerBlock = dynamic_cast<HeaderBlock*>(block);
     if(!headerBlock){
-        qDebug() << "Не удалось перевести IBlock в HearedBlock";
+        qDebug() << "Не удалось перевести IBlock в HeaderBlock";
         return QByteArray();
     }
     QList<QSharedPointer<HeaderInfo> > *f_listHeaderInfo = headerBlock->infoHeader();

@@ -1,8 +1,8 @@
 QT -= gui
 
 TEMPLATE = lib
-CONFIG += staticlib
-#CONFIG += dynamiclib
+#CONFIG += staticlib
+CONFIG += dynamiclib
 
 
 CONFIG += c++17
@@ -28,13 +28,13 @@ SOURCES += \
     src/blocks/setlabelsforboard.cpp \
     src/curves/linking.cpp \
     src/externalComponents/interpretereditor.cpp \
-    src/customObject/customobject.cpp \
-    src/customObject/customobjectiteminfo.cpp \
+    #src/customObject/customobject.cpp \
+    #src/customObject/customobjectiteminfo.cpp \
     src/blocks/iteminfocreater.cpp \
     src/blocks/acuItem.cpp \
     src/blocks/lineItem.cpp \
     src/blocks/specItem.cpp \
-    src/customObject/primitive.cpp \
+    #src/customObject/primitive.cpp \
     src/externalComponents/asaverlogdata.cpp \
     src/externalComponents/isaverlogdata.cpp \
     src/blocks/astyleitem.cpp \
@@ -95,9 +95,9 @@ HEADERS += \
     include/blocks/board.h \
     include/blocks/track.h \
     include/curves/acurve.h \
-    include/customObject/customobject.h \
-    include/customObject/customobjectiteminfo.h \
-    include/customObject/primitive.h \
+    #include/customObject/customobject.h \
+    #include/customObject/customobjectiteminfo.h \
+    #include/customObject/primitive.h \
     include/externalComponents/ainterpreterlogdata.h \
     include/externalComponents/aloaderlogdata.h \
     include/externalComponents/asaverlogdata.h \

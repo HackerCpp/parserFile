@@ -2,7 +2,7 @@
 #include "verticalitem.h"
 
 AGraphicItem::AGraphicItem(ICurve *curve,BoardForTrack *board)
-    : m_curve(curve),m_drawObject(nullptr), m_board(board),m_currentMainValue(nullptr)
+    : m_curve(curve), m_board(board),m_currentMainValue(nullptr)
 {
     m_isActive = false;
     m_positionHeaderArea = 0;
@@ -12,16 +12,6 @@ AGraphicItem::AGraphicItem(ICurve *curve,BoardForTrack *board)
     m_heightLegend = QFontMetrics(m_fontLegend).height();
     m_recordPointDepth = qIsNaN(curve->recordPoint()) ? 0 : curve->recordPoint();
     m_modeCountedDepth = 0;
-}
-
-AGraphicItem::AGraphicItem(CustomObject *drawObject,BoardForTrack *board)
-    : m_curve(nullptr),m_drawObject(drawObject), m_board(board),m_currentMainValue(nullptr){
-    m_isActive = false;
-    m_positionHeaderArea = 0;
-    m_heightHeaderArea = 20;
-    m_recordPointDepth = 0;
-    m_modeCountedDepth = 0;
-
 }
 
 AGraphicItem::AGraphicItem(const AGraphicItem &other){

@@ -1,0 +1,11 @@
+<map id="LogData" name="LogData">
+<area shape="rect" id="node1" title=" " alt="" coords="235,247,311,273"/>
+<area shape="rect" id="node2" href="$class_a_log_data.html" title=" " alt="" coords="230,171,315,197"/>
+<area shape="rect" id="node3" href="$class_i_log_data.html" title=" " alt="" coords="5,81,84,108"/>
+<area shape="rect" id="node4" href="$class_q_object.html" title=" " alt="" coords="69,5,143,32"/>
+<area shape="rect" id="node7" href="$class_i_saver_log_data.html" title=" " alt="" coords="108,81,224,108"/>
+<area shape="rect" id="node5" title=" " alt="" coords="248,81,297,108"/>
+<area shape="rect" id="node6" href="$class_i_interpreter_log_data.html" title=" " alt="" coords="322,81,469,108"/>
+<area shape="rect" id="node8" href="$class_i_loader_log_data.html" title=" " alt="" coords="493,81,615,108"/>
+<area shape="rect" id="node9" href="$class_q_thread.html" title=" " alt="" coords="516,5,592,32"/>
+</map>

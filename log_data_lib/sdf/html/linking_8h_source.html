@@ -53,11 +53,11 @@ $(function() {
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QObject&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="icurve_8h.html">icurve.h</a>&quot;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="class_linking.html">    7</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_linking.html">Linking</a> : <span class="keyword">public</span> QObject</div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="class_linking.html">    7</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_linking.html">Linking</a> : <span class="keyword">public</span> <a class="code" href="class_q_object.html">QObject</a></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    Q_OBJECT</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_linking.html#adf11e045f2dbfb3b7cef641ff600043a">Linking</a>(QObject *parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_linking.html#adf11e045f2dbfb3b7cef641ff600043a">Linking</a>(<a class="code" href="class_q_object.html">QObject</a> *parent = <span class="keyword">nullptr</span>);</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <a class="code" href="class_i_curve.html">ICurve</a> *<a class="code" href="class_linking.html#aa7b545cae0cac03b4a23c862606fc0de">createTime</a>(uint timeBegin_min,uint timeEnd_min,qreal step_sec);</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="class_i_curve.html">ICurve</a> *<a class="code" href="class_linking.html#afd62ff8da710b725a771f67d4f5cf542">createDepth</a>(<span class="keywordtype">int</span> depthBegin_m,<span class="keywordtype">int</span> depthEnd_m,qreal step_m);</div>
@@ -76,6 +76,7 @@ $(function() {
 <div class="ttc" id="aclass_linking_html_adf11e045f2dbfb3b7cef641ff600043a"><div class="ttname"><a href="class_linking.html#adf11e045f2dbfb3b7cef641ff600043a">Linking::Linking</a></div><div class="ttdeci">Linking(QObject *parent=nullptr)</div><div class="ttdef"><b>Definition:</b> linking.cpp:5</div></div>
 <div class="ttc" id="aclass_linking_html_af27af470ccf656be32e3815b99056b74"><div class="ttname"><a href="class_linking.html#af27af470ccf656be32e3815b99056b74">Linking::linkDepth</a></div><div class="ttdeci">ICurve * linkDepth(ICurve *mainDepth, ICurve *curve)</div><div class="ttdef"><b>Definition:</b> linking.cpp:71</div></div>
 <div class="ttc" id="aclass_linking_html_afd62ff8da710b725a771f67d4f5cf542"><div class="ttname"><a href="class_linking.html#afd62ff8da710b725a771f67d4f5cf542">Linking::createDepth</a></div><div class="ttdeci">ICurve * createDepth(int depthBegin_m, int depthEnd_m, qreal step_m)</div><div class="ttdef"><b>Definition:</b> linking.cpp:36</div></div>
+<div class="ttc" id="aclass_q_object_html"><div class="ttname"><a href="class_q_object.html">QObject</a></div></div>
 <div class="ttc" id="aicurve_8h_html"><div class="ttname"><a href="icurve_8h.html">icurve.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
