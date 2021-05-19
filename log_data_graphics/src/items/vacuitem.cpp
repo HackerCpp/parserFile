@@ -14,7 +14,6 @@ VAcuItem::VAcuItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
     }
     bool ok = true;
     QString f_dataStep = m_curve->desc()->param("data_step").replace(",",".");
-    qDebug() << f_dataStep;
     m_dataStep =  f_dataStep.left(f_dataStep.indexOf("(")).toDouble(&ok);
 
     if(!ok){
@@ -412,38 +411,6 @@ void VAcuItem::updateParam(){
     m_currentScaleMainValue = m_board->scale();
     drawOnTheDisk();
 }
-
-QList<QPointF> VAcuItem::oneWave(int position,bool *flag){
-    Q_UNUSED(flag)
-    QList<QPointF> f_returnList;
-    if(!currentMainValue() || !currentMainValue()->size())
-        return f_returnList;
-
-    uint indexBegin  = 0;
-
-    if(mainValueMinimum() > position){
-        indexBegin = 0;
-    }
-    else if(mainValueMaximum() < position){
-        indexBegin = currentMainValue()->size() - 1;
-    }
-    else{
-        for(uint i = 0; i < currentMainValue()->size() - 1; ++i){
-           if((mainValue(i) > position && mainValue(i + 1) < position)
-                   || (mainValue(i) < position && mainValue(i + 1) > position)){
-               indexBegin = i;
-               break;
-           }
-        }
-    }
-    uint f_quantityElem = m_curve->sizeOffset();
-    uint f_indexDataBegin = indexBegin * f_quantityElem;
-    for(uint i = 0; i < f_quantityElem; ++i){
-        f_returnList.push_back(QPointF(qreal(i) * m_dataStep,m_curve->data(f_indexDataBegin + i)));
-    }
-    return f_returnList;
-}
-
 
 void VAcuItem::drawInterpolationHorForCheckArea(QPainter *per,QRectF visibleRect,bool *flag){
     float f_width = m_widthPicturePix;

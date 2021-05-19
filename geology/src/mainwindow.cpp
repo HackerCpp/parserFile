@@ -16,6 +16,7 @@
 #include "interpretercreater.h"
 #include <QInputDialog>
 #include <string_view>
+#include "logdatacalibrate.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : WindowForMenu(parent){
@@ -124,7 +125,7 @@ void MainWindow::addFromFile(){
         return;
     }
     if(f_loader){
-        auto  f_logData = m_logDataView->curentLogData();
+        auto  f_logData = m_logDataView->currentLogData();
         if(f_logData){
             f_logData->setLoader(f_loader);
             f_logData->load();
@@ -133,7 +134,7 @@ void MainWindow::addFromFile(){
 }
 
 void MainWindow::saveFile(ISaverLogData *saver){
-    auto f_logData = m_logDataView->curentLogData();
+    auto f_logData = m_logDataView->currentLogData();
     if(!f_logData)
         return;
     f_logData->setSaver(saver);
@@ -163,7 +164,7 @@ void MainWindow::fileExists(QString filePath){
 }
 
 void MainWindow::openConsolePython(){
-    auto f_logData = m_logDataView->curentLogData();
+    auto f_logData = m_logDataView->currentLogData();
     if(!f_logData)
         return;
     if(!f_logData->isInterpreter()){
@@ -174,7 +175,7 @@ void MainWindow::openConsolePython(){
 }
 
 void MainWindow::openEditorPython(){
-    auto f_logData = m_logDataView->curentLogData();
+    auto f_logData = m_logDataView->currentLogData();
     if(!f_logData)
         return;
     if(!f_logData->isInterpreter()){
@@ -185,7 +186,7 @@ void MainWindow::openEditorPython(){
 }
 
 void MainWindow::insertCalibrationInTheScript(){
-    auto f_logData = m_logDataView->curentLogData();
+    auto f_logData = m_logDataView->currentLogData();
     if(!f_logData)
         return;
     QFileDialog fileDialog;
@@ -210,9 +211,16 @@ void MainWindow::addLibraryPython(){
     InterpreterCreater::create()->addLibrary(f_name);
 }
 
+void MainWindow::openCalibrations(){
+    if(auto cLogData = m_logDataView->currentLogData(); cLogData){
+        LogDataCalibrate * f_calibrate = new LogDataCalibrate(cLogData,this);
+        f_calibrate->show();
+    }
+}
+
 void MainWindow::openInterpretations(){
-    auto f_urentLogdata = m_logDataView->curentLogData();
-    if(!f_urentLogdata)
+    auto f_currentLogdata = m_logDataView->currentLogData();//shared
+    if(!f_currentLogdata.get())
         return;
     QDir dir(QDir().absolutePath()+ "/interpretations/release");
     dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
@@ -229,7 +237,7 @@ void MainWindow::openInterpretations(){
     typedef ILogData *(*FIlogData)(ILogData *);
     FIlogData interpr = (FIlogData)(lib.resolve("interpretation"));
     if(interpr){
-        auto f_logData = std::shared_ptr<ILogData>(interpr(f_urentLogdata));
+        auto f_logData = std::shared_ptr<ILogData>(interpr(f_currentLogdata.get()));
         m_logDataView->addLogData(f_logData);
     }
 }

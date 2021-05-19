@@ -2,6 +2,16 @@
 #define CURVE_H
 
 #include "acurve.h"
+/*! \addtogroup  curve Описание кривой
+ * @{
+ */
+/*!
+*  \authors Пряников Алексей Владимирович
+*
+*   \brief Шаблонный класс кривой.
+*       Данный класс предназначен для работы с
+*    разными типами данных кривой.
+*/
 
 template<typename T>
 class Curve : public ACurve{
@@ -21,7 +31,7 @@ public:
 
      inline qreal rawData(qreal data);
      inline qreal recalculatedData(qreal data);
-     inline qreal data(uint index)override;
+     inline qreal data(uint index)override final;
      QByteArray data() override;
      void setData(qreal data)override;
      void setData(const char *dataPtr,uint numberOfVectors)override;
@@ -36,6 +46,7 @@ public:
      void load()override;
      void unload()override;
 };
+/*! @} */
 
 template<typename T> void Curve<T>::updateDataType(){
     if(std::is_same<T, uint8_t>::value)
@@ -78,18 +89,12 @@ template<typename T> Curve<T>::Curve(const Curve<T> &curve){
     m_userValue = curve.m_userValue;
     m_desc = curve.m_desc;
     m_shortCut = curve.m_shortCut;
-
-    m_resolution = curve.m_resolution;
     m_mnemonic = curve.m_mnemonic;
     m_dataType = curve.m_dataType;
     m_recordPoint = curve.m_recordPoint;
-    const_cast<Curve<T>*>(&curve)->load();
     foreach(auto value,*curve.m_data){
         m_data->push_back(value);
     }
-    const_cast<Curve<T>*>(&curve)->unload();
-    unload();
-
 }
 
 template<typename T> qreal Curve<T>::rawData(qreal data){
@@ -130,7 +135,6 @@ template<typename T> void Curve<T>::setData(const char *dataPtr,uint numberOfVec
     uint dataSizeInBytes = numberOfVectors * m_sizeOffsetInByte;
     m_data = new QVector<T>(dataSize);
     memcpy(m_data->data(),dataPtr,dataSizeInBytes);
-    unload();
 }
 
 template<typename T> uint Curve<T>::size(){

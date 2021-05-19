@@ -1,10 +1,10 @@
 <map id="ACurve" name="ACurve">
-<area shape="rect" id="node1" title=" " alt="" coords="210,229,278,256"/>
-<area shape="rect" id="node2" href="$class_i_curve.html" title="Интерфейс кривой, любая кривая с данными наследуется от данного интерфейса." alt="" coords="12,81,74,108"/>
-<area shape="rect" id="node3" href="$class_q_object.html" title=" " alt="" coords="54,5,128,32"/>
-<area shape="rect" id="node4" href="$class_desc.html" title=" " alt="" coords="114,81,169,108"/>
-<area shape="rect" id="node5" title=" " alt="" coords="209,81,280,108"/>
-<area shape="rect" id="node6" href="$class_short_cut.html" title=" " alt="" coords="325,81,404,108"/>
-<area shape="rect" id="node7" title=" " alt="" coords="448,81,502,108"/>
-<area shape="rect" id="node8" title=" " alt="" coords="628,81,674,108"/>
+<area shape="rect" id="node1" title="Абстрактный класс кривой. Содержит общие поля для всех типов данных." alt="" coords="208,215,276,241"/>
+<area shape="rect" id="node2" href="$class_i_curve.html" title="Интерфейс кривой, любая кривая с данными наследуется от данного интерфейса." alt="" coords="9,81,72,108"/>
+<area shape="rect" id="node3" href="$class_q_object.html" title=" " alt="" coords="52,5,125,32"/>
+<area shape="rect" id="node4" href="$class_desc.html" title="Класс содержит параметры кривой. Любая кривая содержит экземпляр данного класса. Обычно содержит опис..." alt="" coords="112,81,167,108"/>
+<area shape="rect" id="node5" title=" " alt="" coords="207,81,277,108"/>
+<area shape="rect" id="node6" href="$class_short_cut.html" title="Класс содержит общую информацию дата блока, название и номер прибора, дату и время создания...." alt="" coords="323,81,401,108"/>
+<area shape="rect" id="node7" title=" " alt="" coords="445,81,500,108"/>
+<area shape="rect" id="node8" title=" " alt="" coords="625,81,672,108"/>
 </map>

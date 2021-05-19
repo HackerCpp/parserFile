@@ -26,7 +26,6 @@ private:
     void init();
 public:
 
-
     Parameters(QByteArray parameters,Type type);
     Parameters(Type type);
     ~Parameters();
@@ -39,6 +38,18 @@ public:
 };
 
 /****************************************************************************************/
+/*! \addtogroup  curve Описание кривой
+ * @{
+ */
+
+/*!
+*  \authors Пряников Алексей Владимирович
+*
+*   \brief Класс содержит параметры кривой.
+*   Любая кривая содержит экземпляр данного класса.
+*   Обычно содержит описание основных параметров
+*   таких как: draw_type,resampling_type и др.
+*/
 class Desc : public QObject{
     Q_OBJECT
     Parameters *m_parameters;
@@ -58,5 +69,5 @@ public:
     Parameters *calibrations(){return m_calibration;}
 
 };
-
+/*! @} */
 #endif // DESC_H

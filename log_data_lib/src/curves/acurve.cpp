@@ -9,14 +9,9 @@ ACurve::ACurve(){
     // if m_scale = 1 and m_offset = 0 use ACurve::rawData
     // else use ACurve::recalculatedData
     m_uid = QUuid().createUuid().toString();
-    m_numberOfUsers = 0;
     m_scale = 1;
     m_offset = 0;
     dataCountingFunction = &ACurve::rawData;
-}
-
-ACurve::~ACurve(){
-
 }
 
 ICurve *ACurve::time(){
@@ -46,11 +41,6 @@ bool ACurve::setUserBaseValue(ICurve *userBaseValue){
     return true;
 }
 
-QString ACurve :: dataType()
-{
-    return m_dataType;
-}
-
 uint ACurve::size(){
     return 0;
 }
@@ -75,7 +65,6 @@ ShortCut ACurve::shortCut(){
 QString ACurve::mnemonic(){
     return m_mnemonic;
 }
-
 
 void ACurve::setShortCut(ShortCut shortCut){
     m_shortCut.setName(shortCut.name());

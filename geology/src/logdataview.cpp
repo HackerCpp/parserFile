@@ -35,6 +35,15 @@ void LogDataView::addLogData(shared_ptr<ILogData> logData){
     }
 }
 
+shared_ptr<ILogData> LogDataView::currentLogData(){
+    ILogData *f_currentLogData = m_dataModel->curentLogData();
+    foreach(auto logData,*m_logDataList){
+        if(logData.get() == f_currentLogData)
+            return logData;
+    }
+    return nullptr;
+}
+
 void LogDataView::lastDataReady(){
     shared_ptr<ILogData> f_curentLogData = m_logDataList->last();
     disconnect(f_curentLogData.get(),&ILogData::ready,this,&LogDataView::lastDataReady);

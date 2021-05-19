@@ -24,8 +24,9 @@ Menu::Menu(QWidget *parent)
     //mainMenu->addMenu(languageMenu);
     mainMenu->addAction (tr("Update"),m_parentWindow, SLOT(update()), Qt::CTRL + Qt::Key_U);
     mainMenu->addSeparator();
-    mainMenu->addAction (tr("&Interpretations"),m_parentWindow, SLOT(openInterpretations()), Qt::CTRL + Qt::Key_I);
-    mainMenu->addAction (tr("&Constructor"),m_parentWindow, SLOT(openConstructor()), Qt::CTRL + Qt::Key_C);
+    mainMenu->addAction (tr("Calibrate"),m_parentWindow, SLOT(openCalibrations()));
+    mainMenu->addAction (tr("Interpretations"),m_parentWindow, SLOT(openInterpretations()));
+    mainMenu->addAction (tr("Constructor"),m_parentWindow, SLOT(openConstructor()));
     mainMenu->addSeparator();
     mainMenu->addAction (tr("&Exit"), qApp, SLOT(quit()),Qt::Key_Escape);
     mnuArray->push_back(mainMenu);

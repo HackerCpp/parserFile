@@ -32,6 +32,7 @@ public:
 
     void setCurentLogData(ILogData *logData){m_curentLogData = logData;}
     ILogData *curentLogData(){return m_curentLogData;}
+
 };
 
 #endif // DATAMODEL_H

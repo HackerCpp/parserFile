@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <QString>
 #include <QLineSeries>
+#include <QLayout>
 
 ChartViewForOneWaveWidget::ChartViewForOneWaveWidget(ModelOneWave *modelOneWave)
     : m_modelOneWave(modelOneWave)
@@ -18,6 +19,7 @@ ChartViewForOneWaveWidget::ChartViewForOneWaveWidget(ModelOneWave *modelOneWave)
         scene()->addItem(m_textItem);
         scene()->addItem(m_verticalLine);
     }
+
 }
 
 void ChartViewForOneWaveWidget::updateLineInfo(QPointF point){

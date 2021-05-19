@@ -1,4 +1,4 @@
 <map id="Desc" name="Desc">
-<area shape="rect" id="node1" title=" " alt="" coords="15,80,69,107"/>
+<area shape="rect" id="node1" title="Класс содержит параметры кривой. Любая кривая содержит экземпляр данного класса. Обычно содержит опис..." alt="" coords="15,80,69,107"/>
 <area shape="rect" id="node2" href="$class_q_object.html" title=" " alt="" coords="5,5,79,32"/>
 </map>

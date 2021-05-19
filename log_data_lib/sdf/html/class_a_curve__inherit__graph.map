@@ -1,6 +1,6 @@
 <map id="ACurve" name="ACurve">
-<area shape="rect" id="node1" title=" " alt="" coords="19,155,87,181"/>
-<area shape="rect" id="node4" href="$class_curve.html" title=" " alt="" coords="5,229,101,256"/>
+<area shape="rect" id="node1" title="Абстрактный класс кривой. Содержит общие поля для всех типов данных." alt="" coords="19,155,87,181"/>
+<area shape="rect" id="node4" href="$class_curve.html" title="Шаблонный класс кривой. Данный класс предназначен для работы с разными типами данных кривой." alt="" coords="5,229,101,256"/>
 <area shape="rect" id="node2" href="$class_i_curve.html" title="Интерфейс кривой, любая кривая с данными наследуется от данного интерфейса." alt="" coords="22,80,85,107"/>
 <area shape="rect" id="node3" href="$class_q_object.html" title=" " alt="" coords="17,5,90,32"/>
 </map>

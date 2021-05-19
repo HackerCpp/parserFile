@@ -17,7 +17,6 @@ class VAcuItem : public TwoDimensionalArrayItem{
 public:
     void updateParam(int pictureWidth)override;
     void updateParam()override;
-    QList<QPointF> oneWave(int position,bool *flag);
     bool isLocatedInTheArea(QRectF area,QRectF visibleRect,QPainter *per)override;
     void loadDrawingParam(int width) override;
     void selectOptions()override;
@@ -28,9 +27,6 @@ public:
     VAcuItem(const VAcuItem &other);
     ~VAcuItem()override{}
     void deleteLater()override;
-
-    qreal dataStep(){return m_dataStep;}
-
 };
 
 #endif // VACUITEM_H

@@ -6,7 +6,16 @@
 #include <QList>
 #include <QObject>
 
+/*! \defgroup block Описание блоков
+ * @{
+ */
 
+/*!
+*  \authors Пряников Алексей Владимирович
+*
+*   \brief Интерфейс блоков, которые содержит log-data.
+*   Содержит общие поля для всех типов данных.
+*/
 class IBlock : public QObject{
     Q_OBJECT
 
@@ -28,5 +37,5 @@ public:
 signals:
     void dataUpdate();
 };
-
+/*! @} */
 #endif // IBLOCK_H

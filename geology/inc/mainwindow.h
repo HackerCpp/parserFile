@@ -24,19 +24,20 @@ public:
     bool eventFilter(QObject *o, QEvent *e)override;
     void saveFile(ISaverLogData *saver);
 public slots:
-    void openFile()override;
-    void addFromFile()override;
-    void saveGFM()override;
-    void saveLIS() override;
-    void saveLAS() override;
+    void openFile()override final;
+    void addFromFile()override final;
+    void saveGFM()override final;
+    void saveLIS() override final;
+    void saveLAS() override final;
     void fileExists(QString filePath);
-    void openConsolePython()override;
-    void openEditorPython()override;
-    void insertCalibrationInTheScript()override;
-    void addLibraryPython()override;
-    void openInterpretations()override;
-    void openConstructor()override;
-    void update()override;
+    void openConsolePython()override final;
+    void openEditorPython()override final;
+    void insertCalibrationInTheScript()override final;
+    void addLibraryPython()override final;
+    void openCalibrations()override final;
+    void openInterpretations()override final;
+    void openConstructor()override final;
+    void update()override final;
 
     void quit();
 

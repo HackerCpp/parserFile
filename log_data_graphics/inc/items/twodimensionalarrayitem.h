@@ -26,6 +26,7 @@ public:
     void drawBody(QPainter *per,QRectF visibleRect,bool *flag)override;
 
     void run()override;
+    QList<QPointF> oneWave(int position,bool *flag);
 
 protected:
     virtual void selectOptions(){pDrawingFunction = nullptr;}
@@ -36,6 +37,7 @@ public:
     virtual void drawWaveNoOffset(QPainter *per,int y_top,int y_bottom,bool *flag){Q_UNUSED(per) Q_UNUSED(y_top) Q_UNUSED(y_bottom) Q_UNUSED(flag)}
     // index_x ,index_y
     QPoint indexesFromScenePoint(QPointF point);
+    qreal dataStep(){return m_dataStep;}
 
 };
 

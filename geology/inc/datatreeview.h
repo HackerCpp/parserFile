@@ -4,6 +4,7 @@
 #include <QMenu>
 #include "datablock.h"
 #include "ilogdata.h"
+#include <memory>
 
 
 class DataTreeView : public QTreeView
@@ -13,7 +14,7 @@ class DataTreeView : public QTreeView
     QMenu *m_dataBlockMenu,*m_logDataMenu;
     QPointF m_prevPoint,m_ptDragPos;
     IBlock *m_curentBlock;
-    ILogData *m_curentLogData;
+    ILogData* m_currentLogData;
 public:
     DataTreeView(QWidget *parent = nullptr);
     ~DataTreeView()override;

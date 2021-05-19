@@ -4,11 +4,15 @@
 
 #include "desc.h"
 #include "shortcut.h"
-/*!
-    \authors Пряников Алексей Владимирович
 
-    \brief Интерфейс кривой, любая кривая с данными
-        наследуется от данного интерфейса.
+/*! \defgroup curve Описание кривой
+ * @{
+ */
+ /*!
+ *  \authors Пряников Алексей Владимирович
+ *
+ *   \brief Интерфейс кривой, любая кривая с данными
+ *      наследуется от данного интерфейса.
 */
 
 class ICurve : public QObject{
@@ -40,11 +44,14 @@ public:
 
     virtual uint size();
     virtual uint sizeOffset(){return 0;}
+    virtual uint sizeOffsetInBytes(){return 0;}
     virtual qreal maximum();
     virtual qreal minimum();
     virtual Desc *desc();
     virtual ShortCut shortCut();
     virtual QString mnemonic();
+    virtual QString dataType(){return "";}
+    virtual QString uniqID(){return "";}
     virtual qreal recordPoint(){return 0;}
 
     virtual void load(){}
@@ -52,5 +59,5 @@ public:
 
     static ICurve * curveCreater(const ICurve &curve);
 };
-
+/*! @} */
 #endif // INTERFACECURVE_H

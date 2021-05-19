@@ -5,7 +5,8 @@ $$PWD/inc/tools $$PWD/inc/acousticsEditor\
 $$PWD/inc/spectrReader $$PWD/inc/drawObjects \
 $$PWD/../log_data_interpreter/include
 
-LIBS += ../build/release/LogData.lib
+LIBS += ../build/release/LogData.lib\
+        ../build/release/LogDataInterpreter.lib
 
 SOURCES += \
     $$PWD/src/items/labelitem.cpp \

@@ -1,11 +1,11 @@
-QT += gui widgets
+QT += gui widgets sql
 
 DEFINES +=   VERSION_LIB=\\\"0.0.3\\\"
 
 TEMPLATE = lib
 DEFINES += SAVER_LIBRARY
 
-CONFIG += c++11
+CONFIG += c++17
 
 INCLUDEPATH += inc \
 ../log_data_lib/include/externalComponents \
@@ -34,6 +34,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    inc/sqlite3saver.cpp \
     src/lissaver.cpp \
     src/lassaver.cpp \
     src/gfmsaver.cpp
@@ -42,7 +43,8 @@ HEADERS += \
     inc/LogDataSaver_global.h \
     inc/gfmsaver.h \
     inc/lassaver.h \
-    inc/lissaver.h
+    inc/lissaver.h \
+    inc/sqlite3saver.h
 
 # Default rules for deployment.
 unix {

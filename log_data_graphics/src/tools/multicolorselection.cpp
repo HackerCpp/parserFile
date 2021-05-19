@@ -1,6 +1,7 @@
 #include "multicolorselection.h"
 #include "customdelegates.h"
 #include "vspectritem.h"
+#include "vacuitem.h"
 
 MulticolorSelection::MulticolorSelection(AGraphicItem *item,SelectingArea *selectingArea)
     : m_selectingArea(selectingArea){

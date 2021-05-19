@@ -28,7 +28,8 @@ public:
     ~LogDataView();
 
     void addLogData(shared_ptr<ILogData> logData);
-    ILogData *curentLogData(){return m_dataModel->curentLogData();};
+    shared_ptr<ILogData> currentLogData();//{return m_dataModel->curentLogData();};
+    //ILogData* currentLogData(){return m_dataModel->curentLogData();};
 public slots:
     void lastDataReady();
 

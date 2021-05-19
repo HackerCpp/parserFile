@@ -91,7 +91,7 @@ void DataTreeView::mousePressEvent(QMouseEvent *event){
         }
         ILogData *f_logData = dynamic_cast<ILogData *>(f_object);
         if(f_logData){
-            m_curentLogData = f_logData;
+            m_currentLogData = f_logData;
             m_logDataMenu->move(QCursor::pos());
             m_logDataMenu->show();
         }
@@ -234,47 +234,47 @@ void DataTreeView::deleteDataBlock(){
 }
 
 void DataTreeView::saveGFM(){
-    if(!m_curentLogData)
+    if(!m_currentLogData)
         return;
     ISaverLogData * gfmSaver = new GFMSaver();
-    m_curentLogData->setSaver(gfmSaver);
-    m_curentLogData->save();
+    m_currentLogData->setSaver(gfmSaver);
+    m_currentLogData->save();
 }
 
 void DataTreeView::openPythonConsole(){
-    if(!m_curentLogData)
+    if(!m_currentLogData)
         return;
-    if(!m_curentLogData->isInterpreter()){
+    if(!m_currentLogData->isInterpreter()){
         IInterpreterLogData *f_interpreter = InterpreterCreater::create();
-        m_curentLogData->setInterpreter(f_interpreter);
+        m_currentLogData->setInterpreter(f_interpreter);
     }
-    m_curentLogData->openInterpreterConsole();
+    m_currentLogData->openInterpreterConsole();
 }
 
 void DataTreeView::openPythonScript(){
-    if(!m_curentLogData)
+    if(!m_currentLogData)
         return;
-    if(!m_curentLogData->isInterpreter()){
+    if(!m_currentLogData->isInterpreter()){
         IInterpreterLogData *f_interpreter = InterpreterCreater::create();
-        m_curentLogData->setInterpreter(f_interpreter);
+        m_currentLogData->setInterpreter(f_interpreter);
     }
-    m_curentLogData->openInterpreterScript();
+    m_currentLogData->openInterpreterScript();
 }
 
 void DataTreeView::openPythonEditor(){
-    if(!m_curentLogData)
+    if(!m_currentLogData)
         return;
-    if(!m_curentLogData->isInterpreter()){
+    if(!m_currentLogData->isInterpreter()){
         IInterpreterLogData *f_interpreter = InterpreterCreater::create();
-        m_curentLogData->setInterpreter(f_interpreter);
+        m_currentLogData->setInterpreter(f_interpreter);
     }
-    m_curentLogData->openInterpreterEditor();
+    m_currentLogData->openInterpreterEditor();
 }
 
 void DataTreeView::makeActiveProject(){
     DataModel *f_model = dynamic_cast<DataModel *>(model());
     if(!f_model)
         return;
-    f_model->setCurentLogData(m_curentLogData);
+    f_model->setCurentLogData(m_currentLogData);
 
 }

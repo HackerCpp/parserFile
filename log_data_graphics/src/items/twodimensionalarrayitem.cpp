@@ -123,6 +123,38 @@ void TwoDimensionalArrayItem::run(){
     emit dataHardDiscReady();
 }
 
+
+QList<QPointF> TwoDimensionalArrayItem::oneWave(int position,bool *flag){
+    Q_UNUSED(flag)
+    QList<QPointF> f_returnList;
+    if(!currentMainValue() || !currentMainValue()->size())
+        return f_returnList;
+
+    uint indexBegin  = 0;
+
+    if(mainValueMinimum() > position){
+        indexBegin = 0;
+    }
+    else if(mainValueMaximum() < position){
+        indexBegin = currentMainValue()->size() - 1;
+    }
+    else{
+        for(uint i = 0; i < currentMainValue()->size() - 1; ++i){
+           if((mainValue(i) > position && mainValue(i + 1) < position)
+                   || (mainValue(i) < position && mainValue(i + 1) > position)){
+               indexBegin = i;
+               break;
+           }
+        }
+    }
+    uint f_quantityElem = m_curve->sizeOffset();
+    uint f_indexDataBegin = indexBegin * f_quantityElem;
+    for(uint i = 0; i < f_quantityElem; ++i){
+        f_returnList.push_back(QPointF(qreal(i) * m_dataStep,m_curve->data(f_indexDataBegin + i)));
+    }
+    return f_returnList;
+}
+
 QPoint TwoDimensionalArrayItem::indexesFromScenePoint(QPointF point){
     QPoint f_point;
     int f_x = (point.x() - m_offsetPix) / m_dataStepPix;

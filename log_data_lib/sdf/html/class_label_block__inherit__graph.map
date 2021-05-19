@@ -1,6 +1,6 @@
 <map id="LabelBlock" name="LabelBlock">
 <area shape="rect" id="node1" title=" " alt="" coords="5,229,96,256"/>
 <area shape="rect" id="node2" href="$class_a_block.html" title=" " alt="" coords="18,155,83,181"/>
-<area shape="rect" id="node3" href="$class_i_block.html" title=" " alt="" coords="21,80,80,107"/>
+<area shape="rect" id="node3" href="$class_i_block.html" title="Интерфейс блоков, которые содержит log&#45;data. Содержит общие поля для всех типов данных." alt="" coords="21,80,80,107"/>
 <area shape="rect" id="node4" href="$class_q_object.html" title=" " alt="" coords="14,5,87,32"/>
 </map>

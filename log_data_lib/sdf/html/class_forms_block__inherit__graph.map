@@ -1,6 +1,6 @@
 <map id="FormsBlock" name="FormsBlock">
 <area shape="rect" id="node1" title=" " alt="" coords="5,229,101,256"/>
 <area shape="rect" id="node2" href="$class_a_block.html" title=" " alt="" coords="21,155,86,181"/>
-<area shape="rect" id="node3" href="$class_i_block.html" title=" " alt="" coords="24,80,83,107"/>
+<area shape="rect" id="node3" href="$class_i_block.html" title="Интерфейс блоков, которые содержит log&#45;data. Содержит общие поля для всех типов данных." alt="" coords="24,80,83,107"/>
 <area shape="rect" id="node4" href="$class_q_object.html" title=" " alt="" coords="17,5,90,32"/>
 </map>

@@ -19,6 +19,7 @@ public slots:
     virtual void openEditorPython(){}
     virtual void insertCalibrationInTheScript(){}
     virtual void addLibraryPython(){}
+    virtual void openCalibrations(){}
     virtual void openInterpretations(){}
     virtual void openConstructor(){}
     virtual void update(){}

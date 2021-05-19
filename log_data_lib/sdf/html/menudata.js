@@ -24,6 +24,7 @@
 */
 var menudata={children:[
 {text:"Титульная страница",url:"index.html"},
+{text:"Группы",url:"modules.html"},
 {text:"Классы",url:"annotated.html",children:[
 {text:"Классы",url:"annotated.html"},
 {text:"Иерархия классов",url:"inherits.html"},

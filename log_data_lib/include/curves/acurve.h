@@ -4,7 +4,15 @@
 #include "icurve.h"
 #include "shortcut.h"
 
-
+/*! \addtogroup  curve Описание кривой
+ * @{
+ */
+/*!
+*  \authors Пряников Алексей Владимирович
+*
+*   \brief Абстрактный класс кривой.
+*   Содержит общие поля для всех типов данных.
+*/
 
 class ACurve : public ICurve{
 
@@ -13,7 +21,6 @@ protected:
     Desc *m_desc;
     ShortCut m_shortCut;
 
-    qreal m_resolution;
     uint m_sizeOffsetInByte;
     uint m_sizeOfType;
     QString m_mnemonic;
@@ -21,14 +28,13 @@ protected:
     qreal m_recordPoint;
     qreal m_scale,m_offset; // data * m_scale + m_offset
     QString m_uid;
-    uint m_numberOfUsers;
     qreal (ACurve::*dataCountingFunction)(qreal data);
     virtual qreal minData(){return 0;}
     virtual qreal maxData(){return 0;}
 public:
 
     ACurve();
-    virtual ~ACurve()override;
+    virtual ~ACurve()override{}
 
     virtual inline qreal data(uint index)override{Q_UNUSED(index) return 0;}
     virtual inline qreal rawData(qreal data){Q_UNUSED(data) return 0;}
@@ -51,7 +57,7 @@ public:
 
     virtual uint size()override;
     virtual uint sizeOffset()override{return 0;}
-    virtual uint sizeOffsetInBytes(){return m_sizeOffsetInByte;}
+    virtual uint sizeOffsetInBytes()override{return m_sizeOffsetInByte;}
     virtual qreal maximum()override;
     virtual qreal minimum()override;
     virtual qreal recordPoint()override{return m_recordPoint;}
@@ -62,6 +68,8 @@ public:
     void setOffset(qreal offset)override;
     void setScale(qreal scale)override;
     virtual QString mnemonic()override;
+    QString dataType() override{return m_dataType;};
+    virtual QString uniqID()override{return m_uid;}
 
     virtual void setShortCut(ShortCut shortCut)override;
     virtual void setSizeOffset(uint sizeOffset);
@@ -70,11 +78,9 @@ public:
     virtual void setRecordPoint(qreal recordPoint)override{m_recordPoint = recordPoint;}
     virtual void setDesc(Desc *desc)override;
 
-    virtual QString dataType();
-
     virtual void load()override{}
     virtual void unload()override{}
 
 };
-
+/*! @} */
 #endif // ACURVE_H
