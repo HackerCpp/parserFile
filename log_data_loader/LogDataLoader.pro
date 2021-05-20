@@ -1,4 +1,4 @@
-QT -= gui
+QT += sql gui core widgets
 
 TEMPLATE = lib
 DEFINES += LOADER_LIBRARY
@@ -34,6 +34,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/sqlite3loader.cpp \
     src/loaderviaconvertergtk.cpp \
     src/lisloader.cpp \
     src/geoloader.cpp \
@@ -46,7 +47,8 @@ HEADERS += \
     include/lasloader.h \
     include/lisloader.h \
     include/loader_global.h \
-    include/loaderviaconvertergtk.h
+    include/loaderviaconvertergtk.h \
+    include/sqlite3loader.h
 
 # Default rules for deployment.
 unix {

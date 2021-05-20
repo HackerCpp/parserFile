@@ -20,10 +20,12 @@ INCLUDEPATH += \
     ../log_data_lib/include/blocks \
     ../log_data_lib/include/curves \
     ../log_data_lib/include/externalComponents \
-    ../log_data_saver/inc
+    ../log_data_saver/inc \
+    ../log_data_loader/include
 
 LIBS += ../build/release/LogData.lib \
-        ../build/release/LogDataSaver.lib
+        ../build/release/LogDataSaver.lib \
+        ../build/release/LogDataLoader.lib
 
 include(../log_data_graphics/graphics.pri)
 SOURCES += \

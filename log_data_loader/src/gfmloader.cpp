@@ -836,7 +836,7 @@ void GFMLoader::findCurveInfo(QByteArray curveLine,DataBlock *dataBlock,ICurve *
 
     int indexEndsize = curveLine.indexOf("]",indexEndOffset + 2) - 3;
     uint size = curveLine.mid(indexEndOffset+3,indexEndsize - indexEndOffset).toUInt();
-    curveAbstract->setSizeOffset(size);
+    curveAbstract->setSizeOffsetInBytes(size);
 
     int indexShortCutBegin = curveLine.indexOf("{",indexEndsize);
     int indexShortCutEnd = curveLine.indexOf("}",indexShortCutBegin);

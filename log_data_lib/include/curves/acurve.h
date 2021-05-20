@@ -60,19 +60,19 @@ public:
     virtual uint sizeOffsetInBytes()override{return m_sizeOffsetInByte;}
     virtual qreal maximum()override;
     virtual qreal minimum()override;
-    virtual qreal recordPoint()override{return m_recordPoint;}
+    virtual qreal recordPoint()const override{return m_recordPoint;}
 
     virtual Desc *desc()override;
     virtual ShortCut shortCut()override;
     void checkingTheDataFunction();
     void setOffset(qreal offset)override;
     void setScale(qreal scale)override;
-    virtual QString mnemonic()override;
-    QString dataType() override{return m_dataType;};
-    virtual QString uniqID()override{return m_uid;}
+    virtual QString mnemonic()const override;
+    QString dataType()const override{return m_dataType;};
+    virtual QString uniqID()const override{return m_uid;}
 
     virtual void setShortCut(ShortCut shortCut)override;
-    virtual void setSizeOffset(uint sizeOffset);
+    virtual void setSizeOffsetInBytes(uint sizeOffset)override;
     virtual void setMnemonic(QString mnemonic)override;
     virtual void setDataType(QString dataType);
     virtual void setRecordPoint(qreal recordPoint)override{m_recordPoint = recordPoint;}

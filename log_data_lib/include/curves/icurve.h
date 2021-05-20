@@ -33,6 +33,7 @@ public:
     virtual void setShortCut(ShortCut shortCut){Q_UNUSED(shortCut)}
     virtual void setMnemonic(QString mnemonic){Q_UNUSED(mnemonic)}
     virtual void setRecordPoint(qreal recordPoint){Q_UNUSED(recordPoint)}
+    virtual void setSizeOffsetInBytes(uint sizeOffset){Q_UNUSED(sizeOffset)}
 
     virtual ICurve *time();
     virtual ICurve *depth();
@@ -49,15 +50,16 @@ public:
     virtual qreal minimum();
     virtual Desc *desc();
     virtual ShortCut shortCut();
-    virtual QString mnemonic();
-    virtual QString dataType(){return "";}
-    virtual QString uniqID(){return "";}
-    virtual qreal recordPoint(){return 0;}
+    virtual QString mnemonic()const{return nullptr;}
+    virtual QString dataType()const{return "";}
+    virtual QString uniqID()const{return "";}
+    virtual qreal recordPoint()const{return 0;}
 
     virtual void load(){}
     virtual void unload(){}
 
     static ICurve * curveCreater(const ICurve &curve);
+    static ICurve * curveCreater(const QString dataType);
 };
 /*! @} */
 #endif // INTERFACECURVE_H

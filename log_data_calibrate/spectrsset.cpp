@@ -5,6 +5,7 @@
 #include <QMouseEvent>
 #include <QWheelEvent>
 #include "sqlite3saver.h"
+#include "sqlite3loader.h"
 #include <memory>
 
 SpectrsSet::SpectrsSet(ICurve *curve,QWidget *parent)
@@ -99,12 +100,17 @@ void SpectrsSet::wheelEvent(QWheelEvent *event){
 
 void SpectrsSet::loadReference(){
 
+    auto f_loaderDB = std::make_unique<SQLite3Loader>();
+    m_referenceSpectr = f_loaderDB->loadCurve(36);
+    qDebug() << m_referenceSpectr;
+    if(m_referenceSpectr){
+        m_oneWave->addCurve(m_referenceSpectr);
+    }
 }
 
 void SpectrsSet::saveResult(){
     if(!m_resultSpectr)
         return;
     auto f_saverDB = std::make_unique<SQLite3Saver>();
-    //SQLite3Saver *f_saverDB = new SQLite3Saver();
     f_saverDB->saveCurve(*m_resultSpectr);
 }

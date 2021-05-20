@@ -3,11 +3,11 @@
 #include "asaverlogdata.h"
 #include "LogDataSaver_global.h"
 #include <memory>
+#include "desc.h"
 
 class QSqlDatabase;
 class QSettings;
 class ICurve;
-class Desc;
 class ShortCut;
 
 /*!
@@ -28,8 +28,15 @@ public:
     ~SQLite3Saver();
 
     int saveCurve(ICurve &curve);
-    int saveDesc(const Desc &desc);
-    int saveShortCut(const ShortCut &shortCut);
+    int saveShortCut( ShortCut &shortCut);
+    int saveParamInfo(Paraminfo &paramInfo,Parameters::Type type);
+    int saveDesc(Desc &desc,int indexCurve);
+    int linkCurveAndParamInfo(int indexCurve, int indexParamInfo);
+
+    int findShortCut(ShortCut &shortCut);
+    int findParamInfo(Paraminfo &paramInfo,Parameters::Type type);
+    int findLinkCurveAndParamInfo(int indexCurve, int indexParamInfo);
+    int findCurve(ICurve &curve);
 };
 
 #endif // SQLITE3SAVER_H

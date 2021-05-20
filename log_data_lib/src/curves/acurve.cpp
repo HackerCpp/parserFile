@@ -62,7 +62,7 @@ ShortCut ACurve::shortCut(){
 }
 
 
-QString ACurve::mnemonic(){
+QString ACurve::mnemonic()const{
     return m_mnemonic;
 }
 
@@ -88,7 +88,7 @@ void ACurve::setScale(qreal scale){
     checkingTheDataFunction();
 }
 
-void ACurve::setSizeOffset(uint sizeOffset){
+void ACurve::setSizeOffsetInBytes(uint sizeOffset){
     m_sizeOffsetInByte = sizeOffset;
 }
 
