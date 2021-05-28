@@ -14,15 +14,15 @@ ACurve::ACurve(){
     dataCountingFunction = &ACurve::rawData;
 }
 
-ICurve *ACurve::time(){
+ICurve *ACurve::time() const{
    return m_time;
 }
 
-ICurve *ACurve::depth(){
+ICurve *ACurve::depth() const{
     return m_depth;
 }
 
-ICurve *ACurve::userBaseValue(){
+ICurve *ACurve::userBaseValue() const{
     return m_userValue;
 }
 
@@ -41,23 +41,23 @@ bool ACurve::setUserBaseValue(ICurve *userBaseValue){
     return true;
 }
 
-uint ACurve::size(){
+uint ACurve::size() const{
     return 0;
 }
 
-qreal ACurve::maximum(){
+qreal ACurve::maximum() const{
     return (this->*dataCountingFunction)(maxData());
 }
 
-qreal ACurve::minimum(){
+qreal ACurve::minimum() const{
     return (this->*dataCountingFunction)(minData());
 }
 
-Desc *ACurve::desc(){
+Desc *ACurve::desc() const{
     return m_desc;
 }
 
-ShortCut ACurve::shortCut(){
+ShortCut ACurve::shortCut() const{
     return m_shortCut;
 }
 

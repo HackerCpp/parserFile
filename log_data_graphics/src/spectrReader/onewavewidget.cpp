@@ -237,6 +237,22 @@ void OneWaveWidget::addCurve(ICurve *curve){
                                           f_series->pen().color().name(),0,0,0,0,0});
 }
 
+void OneWaveWidget::removeCurve(const ICurve *curve){
+    if(m_curves){
+        for(auto value /*&& [f_curve,series]*/ : *m_curves){
+            if(value.first == curve){
+                m_chartView->chart()->removeSeries(value.second);
+                m_curves->removeOne(value);
+            }
+        }
+    }
+}
+void OneWaveWidget::removeLastCurve(){
+    m_chartView->chart()->removeSeries(m_curves->last().second);
+    m_curves->removeLast();
+    m_modelOneWave->removeLastWaveInfo();
+}
+
 void OneWaveWidget::changeVerticalCoord(int downValue ,int upValue){
     yAxis->setRange(downValue, upValue);
 }

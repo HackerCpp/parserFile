@@ -11,7 +11,6 @@ LogDataCalibrate::LogDataCalibrate(std::shared_ptr<ILogData> logData,QWidget *pa
 
     m_menuWidget = new QWidget();
     m_comboDevices = new QComboBox();
-    m_comboCurves = new QComboBox();
     m_menuHorLayout = new QHBoxLayout();
     m_mainVLayout = new QVBoxLayout();
     m_btnCalibrate = new QPushButton(tr("Calibrate"));
@@ -26,14 +25,9 @@ LogDataCalibrate::LogDataCalibrate(std::shared_ptr<ILogData> logData,QWidget *pa
                 continue;
             m_comboDevices->addItem( shortCut.device());
         }
-
-
-        foreach(auto curve,*f_dataBlock->curves())
-            m_comboCurves->addItem(curve->mnemonic());
     }
     m_menuHorLayout->addWidget(m_comboDevices);
     m_menuHorLayout->addWidget(m_btnCalibrate);
-    //m_menuHorLayout->addWidget(m_comboCurves);
     m_menuWidget->setLayout(m_menuHorLayout);
 
     m_mainVLayout->addWidget(m_menuWidget);

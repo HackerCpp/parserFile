@@ -22,8 +22,8 @@ public:
     ICurve(){}
     virtual ~ICurve(){}
 
-    virtual inline qreal data(uint index){Q_UNUSED(index)return 0;}
-    virtual QByteArray data(){return QByteArray();}
+    virtual inline qreal data(uint index) const{Q_UNUSED(index)return 0;}
+    virtual QByteArray data() const{return QByteArray();}
     virtual void setData(qreal data);
     virtual void setData(qreal data,uint index);
     virtual void setData(const char *dataPtr,uint numberOfVectors);
@@ -35,21 +35,21 @@ public:
     virtual void setRecordPoint(qreal recordPoint){Q_UNUSED(recordPoint)}
     virtual void setSizeOffsetInBytes(uint sizeOffset){Q_UNUSED(sizeOffset)}
 
-    virtual ICurve *time();
-    virtual ICurve *depth();
-    virtual ICurve *userBaseValue();
+    virtual ICurve *time() const;
+    virtual ICurve *depth() const;
+    virtual ICurve *userBaseValue() const;
 
     virtual bool setTime(ICurve *time);
     virtual bool setDepth(ICurve *depth);
     virtual bool setUserBaseValue(ICurve *userBaseValue);
 
-    virtual uint size();
-    virtual uint sizeOffset(){return 0;}
-    virtual uint sizeOffsetInBytes(){return 0;}
-    virtual qreal maximum();
-    virtual qreal minimum();
-    virtual Desc *desc();
-    virtual ShortCut shortCut();
+    virtual uint size() const;
+    virtual uint sizeOffset() const{return 0;}
+    virtual uint sizeOffsetInBytes() const{return 0;}
+    virtual qreal maximum() const;
+    virtual qreal minimum() const;
+    virtual Desc *desc() const;
+    virtual ShortCut shortCut() const;
     virtual QString mnemonic()const{return nullptr;}
     virtual QString dataType()const{return "";}
     virtual QString uniqID()const{return "";}

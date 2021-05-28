@@ -13,7 +13,6 @@ CalibrateNoise::CalibrateNoise(std::shared_ptr<ILogData> logData,QString device)
     m_mainVBoxLayout->setMargin(0);
 
     m_mainWidget = new QWidget();
-    //m_mainWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     foreach(auto block, *logData->blocks()){
         if(block->name() != IBlock::DATA_BLOCK)
@@ -23,11 +22,6 @@ CalibrateNoise::CalibrateNoise(std::shared_ptr<ILogData> logData,QString device)
             if(shortCut.device() == device){
                 foreach(auto curve,*f_dataBlock->curves()){
                     if(curve->mnemonic().indexOf("SPECTRUM1") != -1){
-                        /*for(uint i = 0; i < (curve->size() / curve->sizeOffset());++i){
-                            OneWaveWidget *f_wave = new OneWaveWidget(curve);
-                            f_wave->update(2);
-                            m_mainVBoxLayout->addWidget(f_wave);
-                        }*/
                         m_mainVBoxLayout->addWidget(new SpectrsSet(curve));
                     }
                 }

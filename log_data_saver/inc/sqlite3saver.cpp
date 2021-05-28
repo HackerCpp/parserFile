@@ -9,37 +9,66 @@
 #include <QByteArray>
 #include <QDateTime>
 #include "shortcut.h"
+#include "gfmsaver.h"
+#include <QMessageBox>
 
 
-SQLite3Saver::SQLite3Saver()
+SQLite3Saver::SQLite3Saver(QSqlDatabase *db) :
+    m_db(db)
 {
-    m_settings = std::make_unique<QSettings>(new QSettings("settings.ini",QSettings::IniFormat));
-    m_db = new QSqlDatabase(QSqlDatabase::addDatabase("QSQLITE"));
-    QString f_openPath = m_settings->value("paths/pathOpenDB").toString();
-    QString filePath = QFileDialog().getOpenFileName(nullptr, tr("Open File"),f_openPath,tr("*.db"));
-    m_settings->setValue("paths/pathOpenDB",filePath);
-    m_db->setDatabaseName(filePath);
-    if(!m_db->open()){
-        qDebug() << m_db->lastError().text();
-    }
-    else{
-        qDebug() << "OpenDb";
-
+    if(m_db->isOpen()){
+        QSqlQuery f_query;
+        f_query.prepare(
+            "CREATE TABLE IF NOT EXISTS LogDataCurve (\
+                    LDCurveID           INTEGER  PRIMARY KEY AUTOINCREMENT UNIQUE,\
+                    LDCLastСhanges      DATETIME,\
+                    LDCMnemonic         TEXT,\
+                    LDCTimeID           INTEGER  REFERENCES LogDataCurve (LDCurveID),\
+                    LDCDepthID          INTEGER  REFERENCES LogDataCurve (LDCurveID),\
+                    LDCShortCutID       INTEGER  REFERENCES LogDataShortCut (LDShortCutID),\
+                    LDCSizeOffsetInByte INTEGER,\
+                    LDCSizeOfType       INTEGER,\
+                    LDCDataType         TEXT,\
+                    LDCRecordPoint      DOUBLE,\
+                    LDCUID              TEXT,\
+                    LDCDATA             BLOB\
+                );");
+        f_query.exec();
+        qDebug() << f_query.lastError().text();
+        f_query.prepare("CREATE TABLE IF NOT EXISTS LogDataLinkCurveParamInfo (\
+                    LDLinkParameterParamInfoID INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,\
+                    LDLPPICurveID              INTEGER REFERENCES LogDataCurve (LDCurveID),\
+                    LDLPPIParamInfoID          INTEGER REFERENCES LogDataParamInfo (LDParamInfoID) \
+                );");
+        f_query.exec();
+        qDebug() << f_query.lastError().text();
+        f_query.prepare("CREATE TABLE IF NOT EXISTS LogDataParamInfo (\
+                    LDParamInfoID INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,\
+                    LDPIIndex     TEXT,\
+                    LDPIValue     TEXT,\
+                    LDPIType      INTEGER\
+        );");
+        f_query.exec();
+        qDebug() << f_query.lastError().text();
+        f_query.prepare("CREATE TABLE IF NOT EXISTS LogDataShortCut (\
+                    LDShortCutID INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,\
+                    LDSCRef      TEXT,\
+                    LDSCName     TEXT\
+                );");
+         f_query.exec();
+         qDebug() << f_query.lastError().text();
     }
 }
 
 SQLite3Saver::~SQLite3Saver(){
-    if(m_db){
-        if(m_db->isOpen())
-            m_db->close();
-        delete m_db;m_db = nullptr;
-    }
-    QSqlDatabase::removeDatabase(QLatin1String(QSqlDatabase::defaultConnection));
 }
 
-int SQLite3Saver::saveCurve(ICurve &curve){
+int SQLite3Saver::saveCurve(const ICurve &curve){
     if(!m_db->isOpen())
         return 0;
+    if(findCurve(curve))
+        return updateCurve(curve);
+
     ShortCut f_shortCut = curve.shortCut();
     int f_ShortCutId = saveShortCut(f_shortCut);
     int f_timeId = 0;
@@ -72,16 +101,11 @@ int SQLite3Saver::saveCurve(ICurve &curve){
      f_query.addBindValue(curve.dataType());
      f_query.addBindValue(curve.recordPoint());
      f_query.addBindValue(curve.uniqID());
-     f_query.addBindValue(curve.data());
+     QByteArray f_baCompressed;
+     GFMSaver::gzipCompress(curve.data(),f_baCompressed,9);
+     f_query.addBindValue(f_baCompressed);
     f_query.exec();
-    f_query.prepare("SELECT LDCurveID\
-                    FROM LogDataCurve\
-                    WHERE LogDataCurve.LDCUID = ?;");
-    f_query.addBindValue(curve.uniqID());
-    f_query.exec();
-    int f_currentIndexCurve = 0;
-    if(f_query.next())
-       f_currentIndexCurve = f_query.value(0).toInt();
+    int f_currentIndexCurve = findCurve(curve);
     if(f_currentIndexCurve)
         saveDesc(*curve.desc(),f_currentIndexCurve);
     return f_currentIndexCurve;
@@ -89,7 +113,7 @@ int SQLite3Saver::saveCurve(ICurve &curve){
 
 
 
-int SQLite3Saver::saveShortCut(ShortCut &shortCut){
+int SQLite3Saver::saveShortCut(const ShortCut &shortCut){
     if(!m_db->isOpen() || shortCut.name().isEmpty())
         return 0;
     if(int f_indexShortCut = findShortCut(shortCut);f_indexShortCut)
@@ -123,7 +147,7 @@ int SQLite3Saver::saveParamInfo(Paraminfo &paramInfo,Parameters::Type type){
     return findParamInfo(paramInfo,type);
 }
 
-int SQLite3Saver::saveDesc(Desc &desc,int indexCurve){
+int SQLite3Saver::saveDesc(const Desc &desc,int indexCurve){
     auto f_parsmeters = desc.parameters()->vectorParameters();
     auto f_calibrations = desc.calibrations()->vectorParameters();
     for(auto paramInfo : *f_parsmeters){
@@ -154,11 +178,55 @@ int SQLite3Saver::linkCurveAndParamInfo(int indexCurve, int indexParamInfo){
     return findLinkCurveAndParamInfo(indexCurve,indexParamInfo);
 }
 
+int SQLite3Saver::updateCurve(const ICurve &curve){
+    if(!m_db->isOpen())
+        return 0;
+    ShortCut f_shortCut = curve.shortCut();
+    int f_ShortCutId = saveShortCut(f_shortCut);
+    int f_timeId = 0;
+    int f_depthId = 0;
+    if(QString f_draw_type = curve.desc()->param("draw_type");
+            f_draw_type != "DEPTH" && f_draw_type != "TIME" ){
+        if(curve.time()){
+            if(f_timeId = findCurve(*curve.time());!f_timeId)
+                f_timeId = saveCurve(*curve.time());
+        }
+        if(curve.depth())
+            if(f_depthId = findCurve(*curve.depth());!f_depthId)
+                f_depthId = saveCurve(*curve.depth());
+    }
+    QSqlQuery f_query;
+    f_query.prepare(
+        "UPDATE LogDataCurve\
+        SET LDCLastСhanges = ?,LDCMnemonic = ?,LDCTimeID = ?,\
+            LDCDepthID = ?,LDCShortCutID = ?,LDCSizeOffsetInByte = ?,\
+            LDCSizeOfType = ?,LDCDataType = ?,LDCRecordPoint = ?,\
+            LDCDATA = ?\
+        WHERE LDCUID = ?");
+     f_query.addBindValue(QDateTime::currentDateTime().toString());
+     f_query.addBindValue(curve.mnemonic());
+     f_query.addBindValue(f_timeId);
+     f_query.addBindValue(f_depthId);
+     f_query.addBindValue(f_ShortCutId);
+     f_query.addBindValue(curve.sizeOffsetInBytes());
+     f_query.addBindValue(curve.sizeOffsetInBytes() / curve.sizeOffset());
+     f_query.addBindValue(curve.dataType());
+     f_query.addBindValue(curve.recordPoint());
+     f_query.addBindValue(curve.data());
+     f_query.addBindValue(curve.uniqID());
+    f_query.exec();
+
+    int f_currentIndexCurve = findCurve(curve);
+    if(f_currentIndexCurve)
+        saveDesc(*curve.desc(),f_currentIndexCurve);
+    return f_currentIndexCurve;
+}
 
 
 
 
-int SQLite3Saver::findShortCut(ShortCut &shortCut){
+
+int SQLite3Saver::findShortCut(const ShortCut &shortCut){
     if(!m_db->isOpen())
         return 0;
     QSqlQuery f_query;
@@ -173,7 +241,7 @@ int SQLite3Saver::findShortCut(ShortCut &shortCut){
    return 0;
 }
 
-int SQLite3Saver::findParamInfo(Paraminfo &paramInfo,Parameters::Type type){
+int SQLite3Saver::findParamInfo(const Paraminfo &paramInfo,Parameters::Type type){
     if(!m_db->isOpen())
         return 0;
     QSqlQuery f_query;
@@ -206,7 +274,7 @@ int SQLite3Saver::findLinkCurveAndParamInfo(int indexCurve, int indexParamInfo){
    return 0;
 }
 
-int SQLite3Saver::findCurve(ICurve &curve){
+int SQLite3Saver::findCurve(const ICurve &curve){
     if(!m_db->isOpen())
         return 0;
     QSqlQuery f_query;

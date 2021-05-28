@@ -15,15 +15,15 @@ void ICurve::setData(const char *dataPtr,uint numberOfVectors){
     Q_UNUSED(numberOfVectors)
 }
 
-ICurve *ICurve::time(){
+ICurve *ICurve::time() const{
     return nullptr;
 }
 
-ICurve *ICurve::depth(){
+ICurve *ICurve::depth() const{
     return nullptr;
 }
 
-ICurve *ICurve::userBaseValue(){
+ICurve *ICurve::userBaseValue() const{
     return nullptr;
 }
 
@@ -42,22 +42,22 @@ bool ICurve::setUserBaseValue(ICurve *userBaseValue){
     return false;
 }
 
-uint ICurve::size(){
+uint ICurve::size() const{
     return 0;
 }
-qreal ICurve::maximum(){
-    return 0;
-}
-
-qreal ICurve::minimum(){
+qreal ICurve::maximum() const{
     return 0;
 }
 
-Desc *ICurve::desc(){
+qreal ICurve::minimum() const{
+    return 0;
+}
+
+Desc *ICurve::desc() const{
    return nullptr;
 }
 
-ShortCut ICurve::shortCut(){
+ShortCut ICurve::shortCut() const{
     return ShortCut();
 }
 

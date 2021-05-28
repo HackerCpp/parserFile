@@ -37,7 +37,7 @@ public:
     bool isReady()override;
 
     QByteArray formBlokSave(FormsBlock* formsBlock);
-    bool gzipCompress(QByteArray input, QByteArray &output, int level);
+    static bool gzipCompress(QByteArray input, QByteArray &output, int level);
     QByteArray  getForSave(IBlock *block);
     QByteArray  getForSaveDataBlock(IBlock *block);
     QByteArray  getForSaveFormsBlock(IBlock *block);

@@ -28,42 +28,42 @@ protected:
     qreal m_recordPoint;
     qreal m_scale,m_offset; // data * m_scale + m_offset
     QString m_uid;
-    qreal (ACurve::*dataCountingFunction)(qreal data);
-    virtual qreal minData(){return 0;}
-    virtual qreal maxData(){return 0;}
+    qreal (ACurve::*dataCountingFunction)(qreal data)  const;
+    virtual qreal minData() const{return 0;}
+    virtual qreal maxData() const{return 0;}
 public:
 
     ACurve();
     virtual ~ACurve()override{}
 
-    virtual inline qreal data(uint index)override{Q_UNUSED(index) return 0;}
-    virtual inline qreal rawData(qreal data){Q_UNUSED(data) return 0;}
-    virtual inline qreal recalculatedData(qreal data){Q_UNUSED(data) return 0;}
-    virtual QByteArray data()override{return 0;}
+    virtual inline qreal data(uint index) const override{Q_UNUSED(index) return 0;}
+    virtual inline qreal rawData(qreal data) const{Q_UNUSED(data) return 0;}
+    virtual inline qreal recalculatedData(qreal data) const{Q_UNUSED(data) return 0;}
+    virtual QByteArray data() const override{return 0;}
     virtual void setData(qreal data)override{Q_UNUSED(data)}
     virtual void setData(qreal data,uint index)override{Q_UNUSED(data)Q_UNUSED(index)}
     virtual void setData(const char *dataPtr,uint numberOfVectors)override{Q_UNUSED(dataPtr)Q_UNUSED(numberOfVectors)}
 
 
 
-    virtual ICurve *time()override;
-    virtual ICurve *depth()override;
-    virtual ICurve *userBaseValue()override;
+    virtual ICurve *time() const override;
+    virtual ICurve *depth() const override;
+    virtual ICurve *userBaseValue() const override;
 
     virtual bool setTime(ICurve *time)override;
     virtual bool setDepth(ICurve *depth)override;
     virtual bool setUserBaseValue(ICurve *userBaseValue)override;
 
 
-    virtual uint size()override;
-    virtual uint sizeOffset()override{return 0;}
-    virtual uint sizeOffsetInBytes()override{return m_sizeOffsetInByte;}
-    virtual qreal maximum()override;
-    virtual qreal minimum()override;
+    virtual uint size() const override;
+    virtual uint sizeOffset() const override{return 0;}
+    virtual uint sizeOffsetInBytes() const override{return m_sizeOffsetInByte;}
+    virtual qreal maximum() const override;
+    virtual qreal minimum() const override;
     virtual qreal recordPoint()const override{return m_recordPoint;}
 
-    virtual Desc *desc()override;
-    virtual ShortCut shortCut()override;
+    virtual Desc *desc() const override;
+    virtual ShortCut shortCut() const override;
     void checkingTheDataFunction();
     void setOffset(qreal offset)override;
     void setScale(qreal scale)override;

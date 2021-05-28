@@ -11,8 +11,8 @@ class Paraminfo : public QObject{
 public:
     Paraminfo(QString index,QString value);
     ~Paraminfo(){}
-    QString index(){return m_index;}
-    QString value(){return m_value;}
+    QString index() const{return m_index;}
+    QString value() const{return m_value;}
     void setValue(QString value){m_value = value;}
 };
 /*****************************************************************/
@@ -62,11 +62,11 @@ public:
     void setParam(QString index,QString value);
     void setCalib(QString index,QString value);
 
-    QString param(QString index);
-    QString calib(QString index);
+    QString param(QString index) const;
+    QString calib(QString index) const;
 
-    Parameters *parameters(){return m_parameters;}
-    Parameters *calibrations(){return m_calibration;}
+    Parameters *parameters() const{return m_parameters;}
+    Parameters *calibrations() const{return m_calibration;}
 
 };
 /*! @} */

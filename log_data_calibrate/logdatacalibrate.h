@@ -14,12 +14,22 @@
 
 
 class ILogData;
-
+/*!
+*  \date 28.05.2021
+*
+*  \authors Пряников Алексей Владимирович
+*
+*   \brief Класс, калибровка каротажных данных.
+* Предлагает выбрать один из приборов найденных в данных(LogData).
+* При нажатии кнопки "калибровать", создаёт виджет калибровки.
+* Виджет калибровки для каждого прибора нужно делать свой.
+*
+*/
 class LOGDATACALIBRATE_EXPORT LogDataCalibrate :public QMainWindow
 {
     Q_OBJECT
     std::shared_ptr<ILogData> m_logData;
-    QComboBox *m_comboDevices,*m_comboCurves;
+    QComboBox *m_comboDevices;
     QPushButton *m_btnCalibrate;
     QTabWidget *m_calibTabs;
     QHBoxLayout *m_menuHorLayout;

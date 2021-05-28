@@ -23,7 +23,7 @@ class LOADER_EXPORT GFMLoader : public ALoaderLogData{
         QByteArray bodyBlock;
     };
 
-    bool gzipDecompress(QByteArray input, QByteArray &output);
+
 
     void mergeIdenticalBlocks();
 
@@ -36,6 +36,7 @@ public:
 
     bool download()override;
     void run()override;
+    static bool gzipDecompress(QByteArray input, QByteArray &output);
 
     void parser(const QByteArray &bodyBlock,IBlock *block);
     void parserDataBlock(const QByteArray &bodyBlock,IBlock *block);

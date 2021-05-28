@@ -29,19 +29,19 @@ public:
      Curve(const Curve<T> &curve);
     ~Curve()override{QFile(QDir().currentPath() + "/temporary/" + m_uid + ".bin").remove();}
 
-     inline qreal rawData(qreal data);
-     inline qreal recalculatedData(qreal data);
-     inline qreal data(uint index)override final;
-     QByteArray data() override;
+     inline qreal rawData(qreal data)const override;
+     inline qreal recalculatedData(qreal data)const override;
+     inline qreal data(uint index) const override final;
+     QByteArray data() const override;
      void setData(qreal data)override;
      void setData(const char *dataPtr,uint numberOfVectors)override;
      void setData(qreal data,uint index)override;
 
-     uint size()override;
-     uint sizeOffset()override;
+     uint size() const override;
+     uint sizeOffset() const override;
 
-     qreal minData(){return static_cast<qreal>(*std::min_element(m_data->begin(),m_data->end()));}
-     qreal maxData(){return static_cast<qreal>(*std::max_element(m_data->begin(),m_data->end()));}
+     qreal minData() const{return static_cast<qreal>(*std::min_element(m_data->begin(),m_data->end()));}
+     qreal maxData() const{return static_cast<qreal>(*std::max_element(m_data->begin(),m_data->end()));}
 
      void load()override;
      void unload()override;
@@ -97,21 +97,21 @@ template<typename T> Curve<T>::Curve(const Curve<T> &curve){
     }
 }
 
-template<typename T> qreal Curve<T>::rawData(qreal data){
+template<typename T> qreal Curve<T>::rawData(qreal data)const{
     return data;
 }
 
-template<typename T> qreal Curve<T>::recalculatedData(qreal data){
+template<typename T> qreal Curve<T>::recalculatedData(qreal data)const{
     return data * m_scale + m_offset;
 }
 
-template<typename T> QByteArray Curve<T>::data(){
+template<typename T> QByteArray Curve<T>::data() const {
     if(m_data)
         return QByteArray((const char*)m_data->data(),static_cast<int>(m_sizeOfType)*m_data->size());
     return QByteArray();
 }
 
-template<typename T> qreal Curve<T>::data(uint index){
+template<typename T> qreal Curve<T>::data(uint index) const{
     if(index >= static_cast<uint>(m_data->size())){
         return qQNaN();
     }
@@ -137,13 +137,13 @@ template<typename T> void Curve<T>::setData(const char *dataPtr,uint numberOfVec
     memcpy(m_data->data(),dataPtr,dataSizeInBytes);
 }
 
-template<typename T> uint Curve<T>::size(){
+template<typename T> uint Curve<T>::size() const{
     if(m_data)
         return m_data->size();
     return 0;
 }
 
-template<typename T> uint Curve<T>::sizeOffset(){
+template<typename T> uint Curve<T>::sizeOffset() const{
     return m_sizeOffsetInByte/m_sizeOfType;
 }
 

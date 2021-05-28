@@ -38,6 +38,8 @@ public:
 
     void addItem(AGraphicItem *item);
     void addCurve(ICurve *curve);
+    void removeCurve(const ICurve *curve);
+    void removeLastCurve();
 public slots:
     void changeVerticalCoord(int downValue ,int upValue);
     void changeHorizontalCoord(int downValue ,int upValue);

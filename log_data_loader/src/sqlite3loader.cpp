@@ -6,36 +6,40 @@
 #include <QDebug>
 #include <QSqlQuery>
 #include <icurve.h>
+#include "gfmloader.h"
 
-SQLite3Loader::SQLite3Loader()
+SQLite3Loader::SQLite3Loader(QSqlDatabase *db)
+    : m_db(db)
 {
-    m_settings = std::make_unique<QSettings>(new QSettings("settings.ini",QSettings::IniFormat));
-    m_db = new QSqlDatabase(QSqlDatabase::addDatabase("QSQLITE"));
-    QString f_openPath = m_settings->value("paths/pathOpenDB").toString();
-    QString filePath = QFileDialog().getOpenFileName(nullptr, tr("Open File"),f_openPath,tr("*.db"));
-    m_settings->setValue("paths/pathOpenDB",filePath);
-    m_db->setDatabaseName(filePath);
-    if(!m_db->open()){
-        qDebug() << m_db->lastError().text();
-    }
-    else{
-        qDebug() << "OpenDb";
-    }
+    /*if(!m_db){
+        m_settings = std::make_unique<QSettings>(new QSettings("settings.ini",QSettings::IniFormat));
+        m_db = new QSqlDatabase(QSqlDatabase::addDatabase("QSQLITE"));
+        QString f_openPath = m_settings->value("paths/pathOpenDB").toString();
+        QString filePath = QFileDialog().getOpenFileName(nullptr, tr("Open File"),f_openPath,tr("*.db"));
+        m_settings->setValue("paths/pathOpenDB",filePath);
+        m_db->setDatabaseName(filePath);
+        if(!m_db->open()){
+            qDebug() << m_db->lastError().text();
+        }
+        else{
+            qDebug() << "OpenDb";
+        }
+    }*/
 
 }
 
 SQLite3Loader::~SQLite3Loader(){
 
-    if(m_db){
+    /*if(m_db){
         if(m_db->isOpen())
             m_db->close();
         delete m_db;m_db = nullptr;
     }
-    QSqlDatabase::removeDatabase(QLatin1String(QSqlDatabase::defaultConnection));
+    QSqlDatabase::removeDatabase(QLatin1String(QSqlDatabase::defaultConnection));*/
 }
 
 
-ICurve * SQLite3Loader::loadCurve(int index){
+ICurve * SQLite3Loader::loadCurve(int curveIndex){
     if(!m_db->isOpen())
         return nullptr;
     QSqlQuery f_query;
@@ -45,7 +49,7 @@ ICurve * SQLite3Loader::loadCurve(int index){
                     LDCRecordPoint, LDCUID,LDCDATA\
                FROM LogDataCurve\
                WHERE LogDataCurve.LDCurveID = ?;");
-    f_query.addBindValue(index);
+    f_query.addBindValue(curveIndex);
     f_query.exec();
     if(!f_query.lastError().text().isEmpty())
         return nullptr;
@@ -56,10 +60,11 @@ ICurve * SQLite3Loader::loadCurve(int index){
         f_curve->setRecordPoint(f_query.value("LDCRecordPoint").toDouble());
         uint f_sizeOffsetInBytes = f_query.value("LDCSizeOffsetInByte").toUInt();
         f_curve->setSizeOffsetInBytes(f_sizeOffsetInBytes);
-        QByteArray f_data = f_query.value("LDCDATA").toByteArray();
-        f_curve->setData(f_data.data(),f_data.size() / f_sizeOffsetInBytes);
-        f_curve->setDesc(loadDesc(index));
-        qDebug() << f_curve->mnemonic() << f_curve->data(100);
+        QByteArray f_compressedData = f_query.value("LDCDATA").toByteArray();
+        QByteArray *f_decompressedData = new QByteArray();
+        GFMLoader::gzipDecompress(f_compressedData,*f_decompressedData);
+        f_curve->setData(f_decompressedData->data(),f_decompressedData->size() / f_sizeOffsetInBytes);
+        f_curve->setDesc(loadDesc(curveIndex));
         return f_curve;
     }
     return nullptr;
@@ -82,9 +87,6 @@ Desc *SQLite3Loader::loadDesc(int curveIndex){
     if(!f_query.lastError().text().isEmpty())
         return nullptr;
     while(f_query.next()){
-        qDebug() << f_query.value("LogDataParamInfo.LDPIType").toInt()
-                 << f_query.value("LogDataParamInfo.LDPIIndex").toString()
-                 << f_query.value("LogDataParamInfo.LDPIValue").toString();
         if(f_query.value("LogDataParamInfo.LDPIType").toInt() == Parameters::CALIB)
             f_calibrations->insert(f_query.value("LogDataParamInfo.LDPIIndex").toString(),f_query.value("LogDataParamInfo.LDPIValue").toString());
         if(f_query.value("LogDataParamInfo.LDPIType").toInt() == Parameters::PARAM)

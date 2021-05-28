@@ -8,7 +8,14 @@
 
 class ILogData;
 
-
+/*!
+*  \date 28.05.2021
+*
+*  \authors Пряников Алексей Владимирович
+*
+*   \brief Виджет для калибровки шумомера.
+*
+*/
 
 class CalibrateNoise : public QScrollArea
 {

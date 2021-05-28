@@ -182,3 +182,11 @@ QPair<qreal,qreal> ModelOneWave::calcMaximumAndMinimum(){
     }
     return m_maximumAndMinimum;
 }
+
+void ModelOneWave::removeLastWaveInfo(){
+    if(m_listVaweInfo){
+        beginRemoveRows(QModelIndex(),m_listVaweInfo->size() - 1, m_listVaweInfo->size() - 1);
+        m_listVaweInfo->removeFirst();
+        endRemoveRows();
+    }
+}

@@ -16,7 +16,8 @@ class ShortCut;
 *  \authors Пряников Алексей Владимирович
 *
 *   \brief Класс предназначен для сохранения Log Data
-* и её элементов по отдельности в базу данных
+* и её элементов по отдельности в базу данных.
+* 28.05.2021 реализовано сохранение кривой (ICurve)
 */
 
 class SAVER_EXPORT SQLite3Saver : public ASaverLogData
@@ -24,19 +25,24 @@ class SAVER_EXPORT SQLite3Saver : public ASaverLogData
     std::unique_ptr<QSettings> m_settings;
     QSqlDatabase *m_db;
 public:
-    SQLite3Saver();
+    /*!
+     * \param[in] db Указатель на базу данных.
+     *  База данных должна быть открыта(подключена)
+     */
+    explicit SQLite3Saver(QSqlDatabase *db);
     ~SQLite3Saver();
 
-    int saveCurve(ICurve &curve);
-    int saveShortCut( ShortCut &shortCut);
+    int saveCurve(const ICurve &curve);
+    int saveShortCut(const ShortCut &shortCut);
     int saveParamInfo(Paraminfo &paramInfo,Parameters::Type type);
-    int saveDesc(Desc &desc,int indexCurve);
+    int saveDesc(const Desc &desc,int indexCurve);
     int linkCurveAndParamInfo(int indexCurve, int indexParamInfo);
+    int updateCurve(const ICurve &curve);
 
-    int findShortCut(ShortCut &shortCut);
-    int findParamInfo(Paraminfo &paramInfo,Parameters::Type type);
+    int findShortCut(const ShortCut &shortCut);
+    int findParamInfo(const Paraminfo &paramInfo,Parameters::Type type);
     int findLinkCurveAndParamInfo(int indexCurve, int indexParamInfo);
-    int findCurve(ICurve &curve);
+    int findCurve(const ICurve &curve);
 };
 
 #endif // SQLITE3SAVER_H

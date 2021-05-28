@@ -102,11 +102,11 @@ void Desc::setCalib(QString index,QString value){
         m_calibration->insert(index,value);
 }
 
-QString Desc::param(QString index){
+QString Desc::param(QString index) const{
     return m_parameters->value(index);
 }
 
-QString Desc::calib(QString index){
+QString Desc::calib(QString index) const{
     return m_calibration->value(index);
 }
 

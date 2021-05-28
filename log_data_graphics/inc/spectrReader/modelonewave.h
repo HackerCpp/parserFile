@@ -44,6 +44,8 @@ public:
     qreal maximum(){return m_maximumAndMinimum.first;}
     qreal minimum(){return m_maximumAndMinimum.second;}
     QPair<qreal,qreal> calcMaximumAndMinimum();
+
+    void removeLastWaveInfo();
 };
 
 #endif // MODELONEWAVE_H
