@@ -1,4 +1,4 @@
-#include "selectcurvedb.h"
+#include "referenceLoader.h"
 #include <QSettings>
 #include <QSqlDatabase>
 #include <QFileDialog>
@@ -12,9 +12,12 @@
 #include <QHeaderView>
 #include <QModelIndex>
 #include "icurve.h"
+#include "sqlite3saver.h"
+#include <QSqlQuery>
 
 
-ReferenceLoader::ReferenceLoader(int lines,QString data_step){
+ReferenceLoader::ReferenceLoader(int lines,QString data_step,QSqlDatabase *db)
+    : GeologySQLiteDB(db){
 
     m_currentCurveIndex = -1;
     m_model = new QSqlQueryModel;
@@ -25,10 +28,11 @@ ReferenceLoader::ReferenceLoader(int lines,QString data_step){
         qDebug() << m_db->lastError().text();
         return;
     }
-    m_model->setQuery(QString("SELECT SCReferenceID,\
-                      SCRLastСhanges,SCRCurveMaxID,\
-                      SCRCurveAverID,SCRLines,SCRDataStep,SCRComment\
+    m_model->setQuery(QString("SELECT SpectrumCalibReference.SCReferenceID,CalibDevice.CDName,CalibDevice.CDNumber,\
+                      SpectrumCalibReference.SCRLastСhanges,SpectrumCalibReference.SCRCurveMaxID,\
+                      SpectrumCalibReference.SCRCurveAverID,SpectrumCalibReference.SCRLines,SpectrumCalibReference.SCRDataStep,SpectrumCalibReference.SCRComment\
                  FROM SpectrumCalibReference\
+                 JOIN CalibDevice ON CalibDevice.CDeviceID = SpectrumCalibReference.SCRDeviceID\
                  WHERE SpectrumCalibReference.SCRLines = %1 AND \
                  SpectrumCalibReference.SCRDataStep = '%2' ;").arg(lines).arg(data_step)
                 );
@@ -60,26 +64,14 @@ ReferenceLoader::~ReferenceLoader(){
     m_currentCurveIndex = -2;
 }
 
-ICurve *ReferenceLoader::getCurve(){
-    while(m_currentCurveIndex == -1){
-        qApp->processEvents();
-    }
-    ICurve *f_curve = nullptr;
-    if(m_currentCurveIndex){
-        auto f_loaderDB = std::make_unique<SQLite3Loader>(m_db);
-        f_curve = f_loaderDB->loadCurve(m_currentCurveIndex);
-    }
-    return f_curve;
-}
-
 void ReferenceLoader::loadRefCurves(ICurve *&refCurveMAX,ICurve *&refCurveAver){
     while(m_currentCurveIndex == -1){
         qApp->processEvents();
     }
 
     if(m_currentCurveIndex >= 0){
-        int indexCurveMaximum = m_model->data(m_model->index(m_currentCurveIndex,2)).toInt();
-        int indexCurveAverage = m_model->data(m_model->index(m_currentCurveIndex,3)).toInt();
+        int indexCurveMaximum = m_model->data(m_model->index(m_currentCurveIndex,4)).toInt();
+        int indexCurveAverage = m_model->data(m_model->index(m_currentCurveIndex,5)).toInt();
 
         auto f_loaderDB = std::make_unique<SQLite3Loader>(m_db);
         refCurveMAX = f_loaderDB->loadCurve(indexCurveMaximum);
@@ -97,4 +89,30 @@ bool ReferenceLoader::eventFilter(QObject *object, QEvent *event){
         m_currentCurveIndex = m_tableView->currentIndex().row();
     }
     return false;
+}
+
+int ReferenceLoader::findReference(const ICurve &refMax,const ICurve &refAver){
+    if(!m_db->isOpen())
+        return 0;
+    SQLite3Saver  f_saver = SQLite3Saver(m_db);
+    int f_indexRefMax = f_saver.findCurve(refMax);
+    int f_indexRefAver = f_saver.findCurve(refAver);
+    if(!f_indexRefMax || !f_indexRefAver)
+        return 0;
+    QSqlQuery f_query;
+    f_query.prepare("SELECT SCReferenceID \
+                       FROM SpectrumCalibReference\
+                       WHERE SpectrumCalibReference.SCRCurveMaxID = ? AND \
+                       SpectrumCalibReference.SCRCurveAverID = ? ;");
+    f_query.addBindValue(f_indexRefMax);
+    f_query.addBindValue(f_indexRefAver);
+    f_query.exec();
+    if(QString error = f_query.lastError().text();!error.isEmpty()){
+        qDebug() << error;
+        return 0;
+    }
+    if(f_query.next())
+        return f_query.value("SCReferenceID").toInt();
+    return 0;
+
 }

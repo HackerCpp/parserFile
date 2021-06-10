@@ -1,5 +1,4 @@
-QT += sql core gui widgets charts
-
+QT += sql core gui widgets charts printsupport webenginewidgets
 TEMPLATE = lib
 DEFINES += LOGDATACALIBRATE_LIBRARY
 
@@ -31,21 +30,33 @@ include(../log_data_graphics/graphics.pri)
 SOURCES += \
     calibratenoise.cpp \
     coefficientsdisplaying.cpp \
+    coeffs.cpp \
     geologysqlitedb.cpp \
     logdatacalibrate.cpp \
+    operator.cpp \
+    picturechart.cpp \
+    protocolcreater.cpp \
+    protocolnoise.cpp \
     referencesaver.cpp \
+    saverloadercalibdb.cpp \
     spectrsset.cpp \
-    selectcurvedb.cpp
+    referenceLoader.cpp
 
 HEADERS += \
     LogDataCalibrate_global.h \
     calibratenoise.h \
     coefficientsdisplaying.h \
+    coeffs.h \
     geologysqlitedb.h \
     logdatacalibrate.h \
+    operator.h \
+    picturechart.h \
+    protocolcreater.h \
+    protocolnoise.h \
     referencesaver.h \
+    saverloadercalibdb.h \
     spectrsset.h \
-    selectcurvedb.h
+    referenceLoader.h
 
 # Default rules for deployment.
 unix {

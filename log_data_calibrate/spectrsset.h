@@ -7,6 +7,8 @@
 #include <QSlider>
 #include <QSpinBox>
 #include "coefficientsdisplaying.h"
+#include <QMenu>
+#include "coeffs.h"
 
 class ICurve;
 class OneWaveWidget;
@@ -17,12 +19,7 @@ class QComboBox;
 class SpectrsSet : public QWidget
 {
     Q_OBJECT
-#pragma pack(push, 1)
-    struct CoeffsLinearDependence{
-        float k_a;
-        float k_b;
-    };
-#pragma pack(pop)
+
     QVector<CoeffsLinearDependence> *m_coeffs;
     QSplitter *m_mainSplitter;
     QHBoxLayout *m_mainHLayout;
@@ -34,24 +31,26 @@ class SpectrsSet : public QWidget
     QCheckBox *m_checkBox;
     QComboBox *m_comboMode;
     QPushButton *m_btnLoadReference,*m_btnSaveResult,
-    *m_btnCalcCoeffs, *m_btnApplyOrigin;
+    *m_btnCalcCoeffs, *m_btnApplyOrigin,/*m_btnSaveCalib,*/*m_btnOpenProtocol,
+    *m_btnLoadCoeffs,*m_btnCalcResult;
     QVector<Qt::CheckState> *m_useVectorMaximum;
     QVector<Qt::CheckState> *m_useVectorAverage;
     QVector<Qt::CheckState> *m_currentUseVector;
-    ICurve *m_resultSpectrMAX , *m_resultSpectrAVER;
-    ICurve *m_currentResultSpectr;
-    ICurve *m_originalSpectr,*m_duplicateSpectr;
+    ICurve *m_resultSpectrMAX , *m_resultSpectrAVER,*m_originalSpectr;
+    ICurve *m_recalcSpectrMAX , *m_recalcSpectrAVER,*m_duplicateSpectr;
     ICurve *m_referenceSpectrMAX,*m_referenceSpectrAVER;
+    int m_idReference, m_idOriginal;
     CoefficientsDisplaying * m_coeffDispl;
-    void(SpectrsSet::*pCurrentCalcFunction)();
+    QMenu m_menu;
 
-    void calculateAccumulationMaximum();
-    void calculateAccumulationAverage();
+    void calculateAccumulationMaximum(ICurve *spctrSrc,ICurve *spctrDst);
+    void calculateAccumulationAverage(ICurve *spctrSrc,ICurve *spctrDst);
     void calcCoeffLinePolinom(qreal x1,qreal x2,qreal y1,qreal y2,CoeffsLinearDependence &k);
 public:
     explicit SpectrsSet(ICurve *curve,QWidget *parent = nullptr);
 
     void mousePressEvent(QMouseEvent *event) override;
+    void mouseDoubleClickEvent(QMouseEvent *event) override;
     void wheelEvent(QWheelEvent *event) override;
     void showCoeffs();
 public slots:
@@ -63,6 +62,17 @@ public slots:
     void changeCalcFun(QString text);
     void applyCoeffsDuplicateSpectrum();
     void applyOrigin();
+    //void saveCalib();
+    void openProtocol();
+    void loadCoeffs();
+    void calcResult();
+
+    void useAllVectors();
+    void removeAllVectors();
+    void useAllUp();
+    void removeAllUp();
+    void useAllDown();
+    void removeAllDown();
 
 
 };

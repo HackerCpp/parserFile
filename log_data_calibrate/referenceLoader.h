@@ -21,14 +21,14 @@ class ReferenceLoader : public QWidget,public GeologySQLiteDB
     int m_currentCurveIndex;
 
 public:
-    ReferenceLoader(int lines,QString data_step);
+    explicit ReferenceLoader(int lines,QString data_step,QSqlDatabase *db = nullptr);
     ~ReferenceLoader();
 
-    ICurve *getCurve();
     void loadRefCurves(ICurve *&refCurveMAX,ICurve *&refCurveAver);
 
     void closeEvent (QCloseEvent *event) override;
     bool eventFilter(QObject *object, QEvent *event)override;
+    int findReference(const ICurve &refMax,const ICurve &refAver);
 };
 
 #endif // SELECTCURVEDB_H

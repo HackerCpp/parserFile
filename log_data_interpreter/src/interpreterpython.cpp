@@ -11,6 +11,7 @@
 #include <QWidget>
 #include <QFile>
 #include "translaterrustoing.h"
+#include <QMessageBox>
 
 
 InterpreterPython::InterpreterPython()
@@ -50,6 +51,8 @@ void InterpreterPython::init(){
             f_curveNameForPython = f_curveNameForPython.remove(")");
             f_curveNameForPython = f_curveNameForPython.remove("-");
             f_curveNameForPython = f_curveNameForPython.remove("/");
+            f_curveNameForPython = f_curveNameForPython.remove("{");
+            f_curveNameForPython = f_curveNameForPython.remove("}");
             f_curveNameForPython = f_curveNameForPython.replace("%","Percent");
             if(!m_mainContext->getVariable(f_curveNameForPython).isValid())
                 m_mainContext->addObject(f_translater.translate(f_curveNameForPython), curve);
@@ -109,7 +112,7 @@ bool InterpreterPython::addLibrary(QString nameLibrary){
     nameLibrary).toLatin1());
     file.close();
     f_process->startDetached(QDir().currentPath() + "/python3/lastCommand.bat",QStringList());
-    connect(f_process,&QProcess::readyReadStandardOutput,[=](){qDebug() << f_process->readAllStandardOutput();});
+    connect(f_process,&QProcess::readyReadStandardOutput,[=](){QMessageBox::information(nullptr,"Python library", QString(f_process->readAllStandardOutput()));});
     return true;
 }
 

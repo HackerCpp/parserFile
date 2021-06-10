@@ -10,31 +10,38 @@
 #include <QInputDialog>
 #include <QMessageBox>
 
-ReferenceSaver::ReferenceSaver()
-{
+void ReferenceSaver::createTable(){
     if(m_db->isOpen()){
         QSqlQuery f_query;
         f_query.prepare("CREATE TABLE IF NOT EXISTS SpectrumCalibReference (\
-                            SCReferenceID  INTEGER  PRIMARY KEY AUTOINCREMENT UNIQUE,\
-                            SCRLastСhanges DATETIME,\
-                            SCRCurveMaxID  INTEGER  REFERENCES LogDataCurve (LDCurveID),\
-                            SCRCurveAverID INTEGER  REFERENCES LogDataCurve (LDCurveID),\
-                            SCRLines       INTEGER,\
-                            SCRDataStep    TEXT,\
-                            SCRComment     TEXT\
-                        );"
+                        SCReferenceID  INTEGER  PRIMARY KEY AUTOINCREMENT UNIQUE,\
+                        SCRDeviceID     INTEGER  REFERENCES CalibDevice (CDeviceID),\
+                        SCRLastChanges DATETIME,\
+                        SCRCurveMaxID  INTEGER  REFERENCES LogDataCurve (LDCurveID),\
+                        SCRCurveAverID INTEGER  REFERENCES LogDataCurve (LDCurveID),\
+                        SCRLines       INTEGER,\
+                        SCRDataStep    TEXT,\
+                        SCRComment     TEXT\
+                    );"
             );
         f_query.exec();
         qDebug() << f_query.lastError().text();
     }
+}
 
+ReferenceSaver::ReferenceSaver(): GeologySQLiteDB(){
+    createTable();
+}
+
+ReferenceSaver::ReferenceSaver(QSqlDatabase *db) : GeologySQLiteDB(db){
+    createTable();
 }
 
 
 ReferenceSaver::~ReferenceSaver(){
 }
 
-int ReferenceSaver::saveReference(const ICurve &curveMaximum,const ICurve &curveAverage){
+int ReferenceSaver::saveReference(const ICurve &curveMaximum,const ICurve &curveAverage,int deviceID){
     if(!m_db->isOpen())
         return 0;
     auto f_saverLogData = std::make_unique<SQLite3Saver>(m_db);
@@ -42,18 +49,18 @@ int ReferenceSaver::saveReference(const ICurve &curveMaximum,const ICurve &curve
     int f_indexRefAVER = f_saverLogData->saveCurve(curveAverage);
 
     QSqlQuery f_query;
-    f_query.prepare("INSERT INTO SpectrumCalibReference (\
-                    SCRLastСhanges,SCRCurveMaxID,SCRCurveAverID,SCRLines,SCRDataStep ,SCRComment )\
-                    VALUES (?,?,?,?,?,?);");
+    f_query.prepare("INSERT INTO SpectrumCalibReference (SCRDeviceID,SCRLastСhanges,SCRCurveMaxID,SCRCurveAverID,SCRLines,SCRDataStep ,SCRComment )\
+                    VALUES (?,?,?,?,?,?,?);");
+    f_query.addBindValue(deviceID);
     f_query.addBindValue(QDateTime::currentDateTime().toString());
     f_query.addBindValue(f_indexRefMAX);
     f_query.addBindValue(f_indexRefAVER);
     f_query.addBindValue(curveMaximum.sizeOffset());
     f_query.addBindValue(curveMaximum.desc()->param("data_step"));
     bool bOk;
-    QString f_name = QInputDialog::getText( 0, tr("Comment"),"",QLineEdit::Normal,
+    QString f_comment = QInputDialog::getText( 0, tr("Comment"),"",QLineEdit::Normal,
                                          curveMaximum.shortCut().name(),&bOk);
-    f_query.addBindValue(f_name);
+    f_query.addBindValue(f_comment);
     f_query.exec();
     if(f_query.lastError().text().isEmpty())
         QMessageBox::question(nullptr,tr("Saver DB"),tr("Reference Saved!"),QMessageBox::Ok);

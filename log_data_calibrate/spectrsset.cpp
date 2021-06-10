@@ -5,22 +5,30 @@
 #include <QMouseEvent>
 #include <QWheelEvent>
 #include <memory>
-#include "selectcurvedb.h"
+#include "referenceLoader.h"
 #include "QMessageBox"
 #include <QDebug>
 #include <QComboBox>
 #include <referencesaver.h>
-
+#include "customprogressbar.h"
+#include "saverloadercalibdb.h"
+#include "protocolnoise.h"
 
 SpectrsSet::SpectrsSet(ICurve *curve,QWidget *parent)
     : QWidget(parent),m_coeffs(nullptr),
-      m_originalSpectr(curve),m_referenceSpectrMAX(nullptr),m_referenceSpectrAVER(nullptr)
+      m_originalSpectr(curve),m_referenceSpectrMAX(nullptr),
+      m_referenceSpectrAVER(nullptr)
 {
-    int f_sizeSpectrums = curve->size() / curve->sizeOffset();
+    m_idReference = m_idOriginal = 0;
+     int f_sizeSpectrums = curve->size() / curve->sizeOffset();
     m_useVectorMaximum = new QVector<Qt::CheckState>(f_sizeSpectrums + 1,Qt::Checked);
     m_useVectorAverage = new QVector<Qt::CheckState>(f_sizeSpectrums + 1,Qt::Checked);
     m_duplicateSpectr = ICurve::curveCreater(*m_originalSpectr);
     m_duplicateSpectr->setMnemonic("duplicateSpectrum(DB)");
+    m_recalcSpectrMAX = ICurve::curveCreater(*m_duplicateSpectr);
+    m_recalcSpectrMAX->setMnemonic("recalcSpectrumMAX(DB)");
+    m_recalcSpectrAVER = ICurve::curveCreater(*m_duplicateSpectr);
+    m_recalcSpectrAVER->setMnemonic("recalcSpectrumAVER(DB)");
     m_resultSpectrMAX = ICurve::curveCreater(*m_originalSpectr);
     m_resultSpectrMAX->setMnemonic("resultSpectrumMAX(DB)");
     m_resultSpectrAVER = ICurve::curveCreater(*m_originalSpectr);
@@ -32,6 +40,8 @@ SpectrsSet::SpectrsSet(ICurve *curve,QWidget *parent)
     m_oneWave->addCurve(m_originalSpectr);
     m_oneWave->addCurve(m_resultSpectrAVER);
     m_oneWave->addCurve(m_resultSpectrMAX);
+    m_oneWave->addCurve(m_recalcSpectrAVER);
+    m_oneWave->addCurve(m_recalcSpectrMAX);
     m_widgetInfo = new QWidget;
     m_layoutInfo = new QHBoxLayout;
     m_spinNumber = new QSpinBox;
@@ -44,14 +54,22 @@ SpectrsSet::SpectrsSet(ICurve *curve,QWidget *parent)
     m_btnSaveResult = new QPushButton(tr("Save Result"));
     m_btnCalcCoeffs = new QPushButton(tr("Calc coeffs"));
     m_btnApplyOrigin = new QPushButton(tr("Apply origin"));
+    //m_btnSaveCalib = new QPushButton(tr("Save calib"));
+    m_btnOpenProtocol = new QPushButton(tr("Open protocol"));
+    m_btnLoadCoeffs = new QPushButton(tr("Load coeffs"));
+    m_btnCalcResult = new QPushButton(tr("Calc result"));
     m_widgetInfo->setLayout(m_layoutInfo);
     m_layoutInfo->addWidget(m_spinNumber);
     m_layoutInfo->addWidget(m_checkBox);
     m_layoutInfo->addWidget(m_comboMode);
+    m_layoutInfo->addWidget(m_btnCalcResult);
     m_layoutInfo->addWidget(m_btnLoadReference);
     m_layoutInfo->addWidget(m_btnSaveResult);
     m_layoutInfo->addWidget(m_btnCalcCoeffs);
     m_layoutInfo->addWidget(m_btnApplyOrigin);
+    //m_layoutInfo->addWidget(m_btnSaveCalib);
+    m_layoutInfo->addWidget(m_btnOpenProtocol);
+    m_layoutInfo->addWidget(m_btnLoadCoeffs);
     m_btnApplyOrigin->setEnabled(false);
 
     m_slider->setRange(0,f_sizeSpectrums );
@@ -75,14 +93,26 @@ SpectrsSet::SpectrsSet(ICurve *curve,QWidget *parent)
     connect(m_btnCalcCoeffs,&QPushButton::released,this,&SpectrsSet::calcCoeffs);
     connect(m_btnApplyOrigin,&QPushButton::released,this,&SpectrsSet::applyOrigin);
 
-    pCurrentCalcFunction = &SpectrsSet::calculateAccumulationMaximum;
     m_currentUseVector = m_useVectorMaximum;
-    m_currentResultSpectr = m_resultSpectrMAX;
 
-    (this->*pCurrentCalcFunction)(); //Calc Maximum
-    calculateAccumulationAverage();  //Calc Average
+    calcResult();
 
     connect(m_comboMode,&QComboBox::currentTextChanged,this,&SpectrsSet::changeCalcFun);
+    //connect(m_btnSaveCalib,&QPushButton::released,this,&SpectrsSet::saveCalib);
+    connect(m_btnOpenProtocol,&QPushButton::released,this,&SpectrsSet::openProtocol);
+    connect(m_btnLoadCoeffs,&QPushButton::released,this,&SpectrsSet::loadCoeffs);
+    connect(m_btnCalcResult,&QPushButton::released,this,&SpectrsSet::calcResult);
+
+    m_menu.addAction (tr("Use all vectors"),this, SLOT(useAllVectors()));
+    m_menu.addAction (tr("Remove all vectors"),this, SLOT(removeAllVectors()));
+    m_menu.addAction (tr("Use all up"),this, SLOT(useAllUp()));
+    m_menu.addAction (tr("Remove all up"),this, SLOT(removeAllUp()));
+    m_menu.addAction (tr("Use all down"),this, SLOT(useAllDown()));
+    m_menu.addAction (tr("Remove all down"),this, SLOT(removeAllDown()));
+
+    m_btnCalcCoeffs->hide();
+    m_btnApplyOrigin->hide();
+    //m_btnSaveCalib->hide();
 }
 
 void SpectrsSet::changePosition(int value){
@@ -94,56 +124,72 @@ void SpectrsSet::changePosition(int value){
 
 void SpectrsSet::useSpectrumsChange(bool toggled){
     m_currentUseVector->replace(m_spinNumber->value(),m_checkBox->checkState());
-    (this->*pCurrentCalcFunction)();
 }
 
-void SpectrsSet::calculateAccumulationMaximum(){
-    int f_spectrums = m_resultSpectrMAX->size() / m_resultSpectrMAX->sizeOffset();
-    int f_offset = m_resultSpectrMAX->sizeOffset();
+void SpectrsSet::calculateAccumulationMaximum(ICurve *spctrSrc,ICurve *spctrDst){
+    if(!spctrSrc || !spctrDst)
+        return;
+    int f_spectrums = spctrDst->size() / spctrDst->sizeOffset();
+    int f_offset = spctrDst->sizeOffset();
     QVector<qreal> f_maximumValues(f_offset,-120);
+    CustomProgressBar f_progress;
+    f_progress.setValue(0);
+    f_progress.setText(tr("Accumulation maximum"));
+    f_progress.show();
+    qreal percent = 100.f / qreal(f_spectrums);
     for(int y = 0; y < f_spectrums; ++y){
-        if(m_currentUseVector->at(y) == Qt::Unchecked)
+        f_progress.setValue(y * percent);
+        f_progress.move(QCursor::pos());
+        if(m_useVectorMaximum->at(y) == Qt::Unchecked)
             for(int x = 0; x < f_offset; ++x){
                 int f_curInd = y * f_offset + x;
-                m_resultSpectrMAX->setData(f_maximumValues[x],f_curInd);
+                spctrDst->setData(f_maximumValues[x],f_curInd);
             }
         else
             for(int x = 0; x < f_offset; ++x){
                 int f_curInd = y * f_offset + x;
-                if(f_maximumValues[x] < m_originalSpectr->data(f_curInd))
-                    f_maximumValues[x] = m_originalSpectr->data(f_curInd);
-                m_resultSpectrMAX->setData(f_maximumValues[x],f_curInd);
+                if(f_maximumValues[x] < spctrSrc->data(f_curInd))
+                    f_maximumValues[x] = spctrSrc->data(f_curInd);
+                spctrDst->setData(f_maximumValues[x],f_curInd);
             }
     }
 }
 
 
-void SpectrsSet::calculateAccumulationAverage(){
-    int f_spectrums = m_resultSpectrAVER->size() / m_resultSpectrAVER->sizeOffset();
-    int f_offset = m_resultSpectrAVER->sizeOffset();
+void SpectrsSet::calculateAccumulationAverage(ICurve *spctrSrc,ICurve *spctrDst){
+    if(!spctrSrc || !spctrDst)
+        return;
+    int f_spectrums = spctrDst->size() / spctrDst->sizeOffset();
+    int f_offset = spctrDst->sizeOffset();
     QVector<qreal> f_averageValues(f_offset,0);
+    CustomProgressBar f_progress;
+    f_progress.setValue(0);
+    f_progress.setText(tr("Averaging calculation"));
+    f_progress.show();
+    qreal percent = 100.f / qreal(f_spectrums);
     for(int currentY = 0; currentY < f_spectrums; ++currentY){
-        if(m_currentUseVector->at(currentY) == Qt::Checked){
+        f_progress.setValue(currentY * percent);
+        f_progress.move(QCursor::pos());
+        if(m_useVectorAverage->at(currentY) == Qt::Checked){
             f_averageValues.fill(0,f_averageValues.size());
             qreal f_quantitySpectrums = currentY + 1;
             for(int y = 0; y < currentY; ++y){
-                if(m_currentUseVector->at(y) == Qt::Unchecked)
+                if(m_useVectorAverage->at(y) == Qt::Unchecked)
                     --f_quantitySpectrums;
             }
             qreal f_coef = 1.f / f_quantitySpectrums;
             for(int y = 0; y <= currentY; ++y){
-                if(m_currentUseVector->at(y) == Qt::Checked)
+                if(m_useVectorAverage->at(y) == Qt::Checked)
                     for(int x = 0; x < f_offset; ++x){
                         int f_curInd = y * f_offset + x;
-                        f_averageValues[x] += m_originalSpectr->data(f_curInd) * f_coef;
+                        f_averageValues[x] += spctrSrc->data(f_curInd) * f_coef;
                     }
             }
         }
         for(int x = 0; x < f_offset; ++x){
             int f_curInd = currentY * f_offset + x;
-            m_resultSpectrAVER->setData(f_averageValues[x],f_curInd);
+            spctrDst->setData(f_averageValues[x],f_curInd);
         }
-
     }
 }
 
@@ -151,6 +197,13 @@ void SpectrsSet::mousePressEvent(QMouseEvent *event){
     if(event->button() == Qt::RightButton){
         m_checkBox->setCheckState(m_checkBox->checkState() ? Qt::Unchecked : Qt::Checked);
         useSpectrumsChange(false);
+    }
+}
+
+void SpectrsSet::mouseDoubleClickEvent(QMouseEvent *event){
+    if(event->button() == Qt::RightButton){
+        m_menu.move(QCursor::pos());
+        m_menu.show();
     }
 }
 
@@ -173,7 +226,9 @@ void SpectrsSet::showCoeffs(){
 
 void SpectrsSet::loadReference(){
     ICurve *f_refMaxCurve = nullptr,*f_refAverCurve = nullptr;
-    ReferenceLoader(m_originalSpectr->sizeOffset(),m_originalSpectr->desc()->param("data_step")).loadRefCurves(f_refMaxCurve,f_refAverCurve);
+    auto f_loaderDB = std::make_unique<SaverLoaderCalibDB>();
+    f_loaderDB->loadReference(m_originalSpectr->sizeOffset(),m_originalSpectr->desc()->param("data_step"),f_refMaxCurve,f_refAverCurve);
+
     if(f_refMaxCurve && f_refAverCurve){
         if(m_referenceSpectrMAX)
             m_oneWave->removeLastCurve();
@@ -185,13 +240,14 @@ void SpectrsSet::loadReference(){
         m_referenceSpectrAVER = f_refAverCurve;
         m_referenceSpectrAVER->setMnemonic("refAVERAGE(DB)");
         m_oneWave->addCurve(m_referenceSpectrAVER);
+        m_btnCalcCoeffs->show();
     }
 }
 
 void SpectrsSet::saveResult(){
-    if(!m_currentResultSpectr)
+    if(!m_resultSpectrMAX || !m_resultSpectrAVER)
         return;
-    auto f_saverDB = std::make_unique<ReferenceSaver>();
+    auto f_saverDB = std::make_unique<SaverLoaderCalibDB>();
     f_saverDB->saveReference(*m_resultSpectrMAX,*m_resultSpectrAVER);
 }
 
@@ -221,18 +277,15 @@ void SpectrsSet::calcCoeffs(){
     m_btnApplyOrigin->setEnabled(true);
     applyCoeffsDuplicateSpectrum();
     showCoeffs();
+    m_btnOpenProtocol->show();
 }
 
 void SpectrsSet::changeCalcFun(QString text){
     if(text == tr("Maximum")){
-        pCurrentCalcFunction = &SpectrsSet::calculateAccumulationMaximum;
         m_currentUseVector = m_useVectorMaximum;
-        m_currentResultSpectr = m_resultSpectrMAX;
     }
     else if (text == tr("Average")){
-        pCurrentCalcFunction = &SpectrsSet::calculateAccumulationAverage;
         m_currentUseVector = m_useVectorAverage;
-        m_currentResultSpectr = m_resultSpectrAVER;
     }
 }
 
@@ -249,8 +302,7 @@ void SpectrsSet::applyCoeffsDuplicateSpectrum(){
             m_duplicateSpectr->setData(f_data,f_curInd);
         }
     }
-    calculateAccumulationAverage();
-    calculateAccumulationMaximum();
+    calcResult();
 }
 
 void SpectrsSet::applyOrigin(){
@@ -268,4 +320,97 @@ void SpectrsSet::applyOrigin(){
 void SpectrsSet::calcCoeffLinePolinom(qreal x1,qreal x2,qreal y1,qreal y2,CoeffsLinearDependence &k){
     k.k_a = (y2 - y1) / (x2 - x1);
     k.k_b = y1 - x1 * k.k_a;
+}
+
+/*void SpectrsSet::saveCalib(){
+    if(!m_originalSpectr || !m_coeffs || m_coeffs->isEmpty()){
+        return;
+    }
+    if(!m_referenceSpectrMAX || !m_referenceSpectrAVER){
+        return;
+    }
+
+    bool bOk;
+    QString f_operatorName = QInputDialog::getText( 0, tr("Operator name:(last name first name patronymic)"),"",QLineEdit::Normal,"",&bOk);
+    Operator f_operator(f_operatorName);
+
+    auto f_saverDB = std::make_unique<SaverLoaderCalibDB>();
+    //f_saverDB->saveNoiseProtocol(f_noiseProtocol);
+
+}*/
+
+void SpectrsSet::openProtocol(){
+    if(!m_originalSpectr || !m_coeffs || m_coeffs->isEmpty()){
+        return;
+    }
+    if(!m_referenceSpectrMAX || !m_referenceSpectrAVER){
+        return;
+    }
+
+    bool bOk;
+    QString f_operatorName = QInputDialog::getText( 0, tr("Operator name:(last name first name patronymic)"),"",QLineEdit::Normal,"",&bOk);
+    Operator f_operator(f_operatorName);
+    ProtocolNoise *f_noiseProtocol = new ProtocolNoise();
+    f_noiseProtocol->addReference(m_referenceSpectrMAX,m_referenceSpectrAVER);
+    f_noiseProtocol->addCurrent(m_resultSpectrMAX,m_resultSpectrAVER);
+    f_noiseProtocol->addRecalc(m_recalcSpectrMAX,m_recalcSpectrAVER);
+    f_noiseProtocol->addCoeffs(m_coeffs);
+    f_noiseProtocol->addChannelName(m_originalSpectr->mnemonic());
+    f_noiseProtocol->addOperator(f_operator);
+    f_noiseProtocol->createPDF();
+}
+
+void SpectrsSet::loadCoeffs(){
+
+}
+
+void SpectrsSet::calcResult(){
+    if(m_originalSpectr && m_resultSpectrMAX && m_resultSpectrAVER){
+        calculateAccumulationAverage(m_originalSpectr,m_resultSpectrAVER);
+        calculateAccumulationMaximum(m_originalSpectr,m_resultSpectrMAX);
+    }
+    if(m_duplicateSpectr && m_recalcSpectrMAX && m_recalcSpectrAVER){
+        calculateAccumulationAverage(m_duplicateSpectr,m_recalcSpectrAVER);
+        calculateAccumulationMaximum(m_duplicateSpectr,m_recalcSpectrMAX);
+    }
+}
+
+void SpectrsSet::useAllVectors(){
+    if(!m_currentUseVector)
+        return;
+    m_currentUseVector->fill(Qt::Checked);
+}
+
+void SpectrsSet::removeAllVectors(){
+    if(!m_currentUseVector)
+        return;
+    m_currentUseVector->fill(Qt::Unchecked);
+}
+
+void SpectrsSet::useAllUp(){
+    if(!m_currentUseVector)
+        return;
+    for(int i = m_slider->value();i < m_currentUseVector->size();++i)
+        m_currentUseVector->operator[](i) = Qt::Checked;
+}
+
+void SpectrsSet::removeAllUp(){
+    if(!m_currentUseVector)
+        return;
+    for(int i = m_slider->value();i < m_currentUseVector->size();++i)
+        m_currentUseVector->operator[](i) = Qt::Unchecked;
+}
+
+void SpectrsSet::useAllDown(){
+    if(!m_currentUseVector)
+        return;
+    for(int i = 0;i <= m_slider->value();++i)
+        m_currentUseVector->operator[](i) = Qt::Checked;
+}
+
+void SpectrsSet::removeAllDown(){
+    if(!m_currentUseVector)
+        return;
+    for(int i = 0;i <= m_slider->value();++i)
+        m_currentUseVector->operator[](i) = Qt::Unchecked;
 }

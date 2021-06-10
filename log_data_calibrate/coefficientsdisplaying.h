@@ -12,7 +12,7 @@ using namespace QtCharts;
 class CoefficientsDisplaying : public QChartView
 {
     QValueAxis *xAxis;
-    QValueAxis *yAxis;
+    QValueAxis *yAxisA,*yAxisB;
     QLineSeries *m_coeffASeries,*m_coeffBSeries;
 public:
     CoefficientsDisplaying();

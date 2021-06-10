@@ -19,6 +19,9 @@ class ShortCut{
     QString m_ref;
     QString m_name;
     QString m_nameWithoutNumber;
+    QString m_device;
+    QString m_devName;
+    QString m_devNum;
 public:
     ShortCut();
     void setRef(QString ref);
@@ -28,6 +31,8 @@ public:
     QString nameWithoutNumber() const;
     QString dateTime() const;
     QString device() const;
+    QString deviceName()const;
+    QString deviceNum()const;
 };
 /*! @} */
 #endif // SHORTCUT_H
