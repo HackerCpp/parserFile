@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_GRAPHICS: Исходный файл E:/MyQtProgram/parserGfm/log_data_graphics/inc/graphiceditor.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_GRAPHICS
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_53603dfb3fbca8a964ef75a71799598b.html">log_data_graphics</a></li><li class="navelem"><a class="el" href="dir_55342455956423183f7a145b2d21cf95.html">inc</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">graphiceditor.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="graphiceditor_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef GRAPHICEDITOR_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define GRAPHICEDITOR_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QTabWidget&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="igraphiceditor_8h.html">igraphiceditor.h</a>&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QWidget&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="verticalboard_8h.html">verticalboard.h</a>&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="drawsettings_8h.html">drawsettings.h</a>&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="class_graphic_editor.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_graphic_editor.html">GraphicEditor</a> : <span class="keyword">public</span> <a class="code" href="class_q_tab_widget.html">QTabWidget</a>, <a class="code" href="class_a_graphic_editor.html">AGraphicEditor</a>{</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <a class="code" href="class_a_graphic_board.html">AGraphicBoard</a> *m_curentBoard;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    QMap&lt;QString,ICurve*&gt; *m_curves;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    FormsBlock *m_forms;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="class_draw_settings.html">DrawSettings</a> *m_drawSettings;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">int</span>  m_lastTabClicked;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    QPointer&lt;QMenu&gt; m_tabMenu;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">void</span> newBoard();</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">bool</span> eventFilter(<a class="code" href="class_q_object.html">QObject</a> *watched, QEvent *event)<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_graphic_editor.html#a919cf0be8f9fcc30a34403f864e64f9b">GraphicEditor</a>(std::shared_ptr&lt;ILogData&gt; logData,<a class="code" href="class_draw_settings.html">DrawSettings</a> *drawSettings,QWidget *parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_graphic_editor.html#a558ab1911313680db0896746e481c0ce">~GraphicEditor</a>()<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="class_graphic_editor.html#a3c6f2348e5b55181a258c3f334ec7823">   27</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_graphic_editor.html#a3c6f2348e5b55181a258c3f334ec7823">setDrawTime</a>();</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="class_graphic_editor.html#a970f29009ac59e639f8dac161ff34ebe">   28</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_graphic_editor.html#a970f29009ac59e639f8dac161ff34ebe">setDrawDepth</a>();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_graphic_editor.html#a2d928e7136b085274f4f5d8646174ba5">addCurves</a>();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_graphic_editor.html#ae32ee84f28647cf05a1286b64f3c8b25">addForms</a>();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_graphic_editor.html#ad552df4029335726f471dcb745919f86">activate</a>(<span class="keywordtype">bool</span> active);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_graphic_editor.html#a8ae7901e2bc13a27a074de0ad7b49485">setCurrentIndexClick</a>(<span class="keywordtype">int</span> index);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_graphic_editor.html#adc05dc1d9c5c40839cf5a1c02c4eef9c">changeBoard</a>(<span class="keywordtype">int</span> index);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_graphic_editor.html#a53e662d277e0e538c1895f850a3c3588">refresh</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_graphic_editor.html#af6bc79fa6b3ce290050dd99f013cf8ab">renameBoard</a>();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_graphic_editor.html#a88a0c4f212fe4d6af416e675dc785f3e">deleteBoard</a>();</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_graphic_editor.html#a0d97db98a0841350c0954b3f4014f522">changeMode</a>(<span class="keywordtype">int</span> <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;};</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// GRAPHICEDITOR_H</span></div>
+<div class="ttc" id="aclass_a_graphic_board_html"><div class="ttname"><a href="class_a_graphic_board.html">AGraphicBoard</a></div><div class="ttdef"><b>Definition:</b> agraphicboard.h:13</div></div>
+<div class="ttc" id="aclass_a_graphic_editor_html"><div class="ttname"><a href="class_a_graphic_editor.html">AGraphicEditor</a></div><div class="ttdef"><b>Definition:</b> igraphiceditor.h:14</div></div>
+<div class="ttc" id="aclass_draw_settings_html"><div class="ttname"><a href="class_draw_settings.html">DrawSettings</a></div><div class="ttdef"><b>Definition:</b> drawsettings.h:9</div></div>
+<div class="ttc" id="aclass_graphic_editor_html"><div class="ttname"><a href="class_graphic_editor.html">GraphicEditor</a></div><div class="ttdef"><b>Definition:</b> graphiceditor.h:10</div></div>
+<div class="ttc" id="aclass_graphic_editor_html_a0d97db98a0841350c0954b3f4014f522"><div class="ttname"><a href="class_graphic_editor.html#a0d97db98a0841350c0954b3f4014f522">GraphicEditor::changeMode</a></div><div class="ttdeci">void changeMode(int id)</div><div class="ttdef"><b>Definition:</b> graphiceditor.cpp:249</div></div>
+<div class="ttc" id="aclass_graphic_editor_html_a2d928e7136b085274f4f5d8646174ba5"><div class="ttname"><a href="class_graphic_editor.html#a2d928e7136b085274f4f5d8646174ba5">GraphicEditor::addCurves</a></div><div class="ttdeci">void addCurves()</div><div class="ttdef"><b>Definition:</b> graphiceditor.cpp:38</div></div>
+<div class="ttc" id="aclass_graphic_editor_html_a3c6f2348e5b55181a258c3f334ec7823"><div class="ttname"><a href="class_graphic_editor.html#a3c6f2348e5b55181a258c3f334ec7823">GraphicEditor::setDrawTime</a></div><div class="ttdeci">void setDrawTime()</div></div>
+<div class="ttc" id="aclass_graphic_editor_html_a53e662d277e0e538c1895f850a3c3588"><div class="ttname"><a href="class_graphic_editor.html#a53e662d277e0e538c1895f850a3c3588">GraphicEditor::refresh</a></div><div class="ttdeci">void refresh() override</div><div class="ttdef"><b>Definition:</b> graphiceditor.cpp:178</div></div>
+<div class="ttc" id="aclass_graphic_editor_html_a558ab1911313680db0896746e481c0ce"><div class="ttname"><a href="class_graphic_editor.html#a558ab1911313680db0896746e481c0ce">GraphicEditor::~GraphicEditor</a></div><div class="ttdeci">virtual ~GraphicEditor() override</div><div class="ttdef"><b>Definition:</b> graphiceditor.cpp:123</div></div>
+<div class="ttc" id="aclass_graphic_editor_html_a88a0c4f212fe4d6af416e675dc785f3e"><div class="ttname"><a href="class_graphic_editor.html#a88a0c4f212fe4d6af416e675dc785f3e">GraphicEditor::deleteBoard</a></div><div class="ttdeci">void deleteBoard()</div><div class="ttdef"><b>Definition:</b> graphiceditor.cpp:238</div></div>
+<div class="ttc" id="aclass_graphic_editor_html_a8ae7901e2bc13a27a074de0ad7b49485"><div class="ttname"><a href="class_graphic_editor.html#a8ae7901e2bc13a27a074de0ad7b49485">GraphicEditor::setCurrentIndexClick</a></div><div class="ttdeci">void setCurrentIndexClick(int index)</div><div class="ttdef"><b>Definition:</b> graphiceditor.cpp:158</div></div>
+<div class="ttc" id="aclass_graphic_editor_html_a919cf0be8f9fcc30a34403f864e64f9b"><div class="ttname"><a href="class_graphic_editor.html#a919cf0be8f9fcc30a34403f864e64f9b">GraphicEditor::GraphicEditor</a></div><div class="ttdeci">GraphicEditor(std::shared_ptr&lt; ILogData &gt; logData, DrawSettings *drawSettings, QWidget *parent=nullptr)</div><div class="ttdef"><b>Definition:</b> graphiceditor.cpp:11</div></div>
+<div class="ttc" id="aclass_graphic_editor_html_a970f29009ac59e639f8dac161ff34ebe"><div class="ttname"><a href="class_graphic_editor.html#a970f29009ac59e639f8dac161ff34ebe">GraphicEditor::setDrawDepth</a></div><div class="ttdeci">void setDrawDepth()</div></div>
+<div class="ttc" id="aclass_graphic_editor_html_ad552df4029335726f471dcb745919f86"><div class="ttname"><a href="class_graphic_editor.html#ad552df4029335726f471dcb745919f86">GraphicEditor::activate</a></div><div class="ttdeci">void activate(bool active)</div><div class="ttdef"><b>Definition:</b> graphiceditor.cpp:117</div></div>
+<div class="ttc" id="aclass_graphic_editor_html_adc05dc1d9c5c40839cf5a1c02c4eef9c"><div class="ttname"><a href="class_graphic_editor.html#adc05dc1d9c5c40839cf5a1c02c4eef9c">GraphicEditor::changeBoard</a></div><div class="ttdeci">void changeBoard(int index)</div><div class="ttdef"><b>Definition:</b> graphiceditor.cpp:162</div></div>
+<div class="ttc" id="aclass_graphic_editor_html_ae32ee84f28647cf05a1286b64f3c8b25"><div class="ttname"><a href="class_graphic_editor.html#ae32ee84f28647cf05a1286b64f3c8b25">GraphicEditor::addForms</a></div><div class="ttdeci">void addForms()</div><div class="ttdef"><b>Definition:</b> graphiceditor.cpp:66</div></div>
+<div class="ttc" id="aclass_graphic_editor_html_af6bc79fa6b3ce290050dd99f013cf8ab"><div class="ttname"><a href="class_graphic_editor.html#af6bc79fa6b3ce290050dd99f013cf8ab">GraphicEditor::renameBoard</a></div><div class="ttdeci">void renameBoard()</div><div class="ttdef"><b>Definition:</b> graphiceditor.cpp:213</div></div>
+<div class="ttc" id="aclass_q_object_html"><div class="ttname"><a href="class_q_object.html">QObject</a></div></div>
+<div class="ttc" id="aclass_q_tab_widget_html"><div class="ttname"><a href="class_q_tab_widget.html">QTabWidget</a></div></div>
+<div class="ttc" id="adrawsettings_8h_html"><div class="ttname"><a href="drawsettings_8h.html">drawsettings.h</a></div></div>
+<div class="ttc" id="aigraphiceditor_8h_html"><div class="ttname"><a href="igraphiceditor_8h.html">igraphiceditor.h</a></div></div>
+<div class="ttc" id="averticalboard_8h_html"><div class="ttname"><a href="verticalboard_8h.html">verticalboard.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

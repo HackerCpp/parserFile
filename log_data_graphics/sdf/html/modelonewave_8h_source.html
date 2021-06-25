@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_GRAPHICS: Исходный файл E:/MyQtProgram/parserGfm/log_data_graphics/inc/spectrReader/modelonewave.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_GRAPHICS
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_53603dfb3fbca8a964ef75a71799598b.html">log_data_graphics</a></li><li class="navelem"><a class="el" href="dir_55342455956423183f7a145b2d21cf95.html">inc</a></li><li class="navelem"><a class="el" href="dir_f2ae106b4003225912847c6f66e2461a.html">spectrReader</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">modelonewave.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="modelonewave_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef MODELONEWAVE_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define MODELONEWAVE_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;QString&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QList&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QAbstractListModel&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QLineSeries&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">using namespace </span>QtCharts;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="struct_one_wave_info.html">   10</a></span>&#160;<span class="keyword">struct </span><a class="code" href="struct_one_wave_info.html">OneWaveInfo</a>{</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="struct_one_wave_info.html#a961969383f4c78ce17fdab446e987819">   11</a></span>&#160;    QLineSeries *<a class="code" href="struct_one_wave_info.html#a961969383f4c78ce17fdab446e987819">lineSeries</a>;</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="struct_one_wave_info.html#ae650b7b1fe2d89d056bce928ba14fde4">   12</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="struct_one_wave_info.html#ae650b7b1fe2d89d056bce928ba14fde4">isVisible</a>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="struct_one_wave_info.html#a82de1b12cc1a41df4c28727f2847f1f8">   13</a></span>&#160;    QString <a class="code" href="struct_one_wave_info.html#a82de1b12cc1a41df4c28727f2847f1f8">name</a>;</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="struct_one_wave_info.html#a85bedcb38eff027e719c6d705ec703af">   14</a></span>&#160;    QString <a class="code" href="struct_one_wave_info.html#a85bedcb38eff027e719c6d705ec703af">color</a>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="struct_one_wave_info.html#a7e05fe6e7e5a7a95613479552f04e257">   15</a></span>&#160;    qreal <a class="code" href="struct_one_wave_info.html#a7e05fe6e7e5a7a95613479552f04e257">amplitudeMaximum</a>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="struct_one_wave_info.html#a13404e90a12e736d4d00efe0b7bd6ec3">   16</a></span>&#160;    qreal <a class="code" href="struct_one_wave_info.html#a13404e90a12e736d4d00efe0b7bd6ec3">amplitudeMinimum</a>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="struct_one_wave_info.html#a5d2ad5c011d55837518dfe62f6e9ab17">   17</a></span>&#160;    qreal <a class="code" href="struct_one_wave_info.html#a5d2ad5c011d55837518dfe62f6e9ab17">currentBand</a>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="struct_one_wave_info.html#ae9e446d8d410df6f7034cab3998e0d7f">   18</a></span>&#160;    qreal <a class="code" href="struct_one_wave_info.html#ae9e446d8d410df6f7034cab3998e0d7f">currentFrequency</a>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="struct_one_wave_info.html#a11a779d1264a72403c423d1ee3abdb64">   19</a></span>&#160;    qreal <a class="code" href="struct_one_wave_info.html#a11a779d1264a72403c423d1ee3abdb64">currentAmplitude</a>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;};</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="class_model_one_wave.html">   22</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_model_one_wave.html">ModelOneWave</a> : <span class="keyword">public</span> <a class="code" href="class_q_abstract_list_model.html">QAbstractListModel</a></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    QList&lt;OneWaveInfo&gt; *m_listVaweInfo;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    QStringList m_headerList;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    QPair&lt;qreal,qreal&gt; m_maximumAndMinimum;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="class_model_one_wave.html">ModelOneWave</a>();</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="class_model_one_wave.html#a2eaad8c2a9005041efcba15ae5b16fd2">   30</a></span>&#160;    <a class="code" href="class_model_one_wave.html#a2eaad8c2a9005041efcba15ae5b16fd2">~ModelOneWave</a>()<span class="keyword">override</span>{}</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    QVariant data(<span class="keyword">const</span> QModelIndex &amp;index, <span class="keywordtype">int</span> role = Qt::DisplayRole) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">int</span> rowCount(<span class="keyword">const</span> QModelIndex &amp;parent = QModelIndex()) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">int</span> columnCount(<span class="keyword">const</span> QModelIndex &amp;parent = QModelIndex()) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    QVariant headerData(<span class="keywordtype">int</span> section, Qt::Orientation orientation, <span class="keywordtype">int</span> role) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    Qt::ItemFlags flags(<span class="keyword">const</span> QModelIndex &amp;index) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">bool</span> setData(<span class="keyword">const</span> QModelIndex &amp;index, <span class="keyword">const</span> QVariant &amp;value, <span class="keywordtype">int</span> role)<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> insertWaveInfo(<a class="code" href="struct_one_wave_info.html">OneWaveInfo</a> waveInfo);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">void</span> changeCurentPosition(QPointF pointPosition);</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="class_model_one_wave.html#a0a9728324e64a7109746c550db978c45">   41</a></span>&#160;    qreal <a class="code" href="class_model_one_wave.html#a0a9728324e64a7109746c550db978c45">delta</a>(){<span class="keywordflow">if</span>(m_listVaweInfo &amp;&amp; m_listVaweInfo-&gt;size()){<span class="keywordflow">return</span> m_listVaweInfo-&gt;at(m_listVaweInfo-&gt;size() - 1).currentAmplitude;}<span class="keywordflow">return</span> 0; }</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="class_model_one_wave.html#aa2d37fa647a5dea4699c3158ec0f464f">   42</a></span>&#160;    qreal <a class="code" href="class_model_one_wave.html#aa2d37fa647a5dea4699c3158ec0f464f">band</a>(){<span class="keywordflow">if</span>(m_listVaweInfo &amp;&amp; m_listVaweInfo-&gt;size()){<span class="keywordflow">return</span> m_listVaweInfo-&gt;first().currentBand;}<span class="keywordflow">return</span> 0;}</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="class_model_one_wave.html#a2d5bf072940d01083b8109f1c5d27e7a">   43</a></span>&#160;    qreal <a class="code" href="class_model_one_wave.html#a2d5bf072940d01083b8109f1c5d27e7a">frequency</a>(){<span class="keywordflow">if</span>(m_listVaweInfo &amp;&amp; m_listVaweInfo-&gt;size()){<span class="keywordflow">return</span> m_listVaweInfo-&gt;first().currentFrequency;}<span class="keywordflow">return</span> 0;}</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="class_model_one_wave.html#abd893fd5434c27e1123139dc135a63fe">   44</a></span>&#160;    qreal <a class="code" href="class_model_one_wave.html#abd893fd5434c27e1123139dc135a63fe">maximum</a>(){<span class="keywordflow">return</span> m_maximumAndMinimum.first;}</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="class_model_one_wave.html#aaf39df557b2dda0ea49d5549aa96e93f">   45</a></span>&#160;    qreal <a class="code" href="class_model_one_wave.html#aaf39df557b2dda0ea49d5549aa96e93f">minimum</a>(){<span class="keywordflow">return</span> m_maximumAndMinimum.second;}</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    QPair&lt;qreal,qreal&gt; calcMaximumAndMinimum();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> removeLastWaveInfo();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;};</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// MODELONEWAVE_H</span></div>
+<div class="ttc" id="aclass_model_one_wave_html"><div class="ttname"><a href="class_model_one_wave.html">ModelOneWave</a></div><div class="ttdef"><b>Definition:</b> modelonewave.h:23</div></div>
+<div class="ttc" id="aclass_model_one_wave_html_a0a9728324e64a7109746c550db978c45"><div class="ttname"><a href="class_model_one_wave.html#a0a9728324e64a7109746c550db978c45">ModelOneWave::delta</a></div><div class="ttdeci">qreal delta()</div><div class="ttdef"><b>Definition:</b> modelonewave.h:41</div></div>
+<div class="ttc" id="aclass_model_one_wave_html_a2d5bf072940d01083b8109f1c5d27e7a"><div class="ttname"><a href="class_model_one_wave.html#a2d5bf072940d01083b8109f1c5d27e7a">ModelOneWave::frequency</a></div><div class="ttdeci">qreal frequency()</div><div class="ttdef"><b>Definition:</b> modelonewave.h:43</div></div>
+<div class="ttc" id="aclass_model_one_wave_html_a2eaad8c2a9005041efcba15ae5b16fd2"><div class="ttname"><a href="class_model_one_wave.html#a2eaad8c2a9005041efcba15ae5b16fd2">ModelOneWave::~ModelOneWave</a></div><div class="ttdeci">~ModelOneWave() override</div><div class="ttdef"><b>Definition:</b> modelonewave.h:30</div></div>
+<div class="ttc" id="aclass_model_one_wave_html_aa2d37fa647a5dea4699c3158ec0f464f"><div class="ttname"><a href="class_model_one_wave.html#aa2d37fa647a5dea4699c3158ec0f464f">ModelOneWave::band</a></div><div class="ttdeci">qreal band()</div><div class="ttdef"><b>Definition:</b> modelonewave.h:42</div></div>
+<div class="ttc" id="aclass_model_one_wave_html_aaf39df557b2dda0ea49d5549aa96e93f"><div class="ttname"><a href="class_model_one_wave.html#aaf39df557b2dda0ea49d5549aa96e93f">ModelOneWave::minimum</a></div><div class="ttdeci">qreal minimum()</div><div class="ttdef"><b>Definition:</b> modelonewave.h:45</div></div>
+<div class="ttc" id="aclass_model_one_wave_html_abd893fd5434c27e1123139dc135a63fe"><div class="ttname"><a href="class_model_one_wave.html#abd893fd5434c27e1123139dc135a63fe">ModelOneWave::maximum</a></div><div class="ttdeci">qreal maximum()</div><div class="ttdef"><b>Definition:</b> modelonewave.h:44</div></div>
+<div class="ttc" id="aclass_q_abstract_list_model_html"><div class="ttname"><a href="class_q_abstract_list_model.html">QAbstractListModel</a></div></div>
+<div class="ttc" id="astruct_one_wave_info_html"><div class="ttname"><a href="struct_one_wave_info.html">OneWaveInfo</a></div><div class="ttdef"><b>Definition:</b> modelonewave.h:10</div></div>
+<div class="ttc" id="astruct_one_wave_info_html_a11a779d1264a72403c423d1ee3abdb64"><div class="ttname"><a href="struct_one_wave_info.html#a11a779d1264a72403c423d1ee3abdb64">OneWaveInfo::currentAmplitude</a></div><div class="ttdeci">qreal currentAmplitude</div><div class="ttdef"><b>Definition:</b> modelonewave.h:19</div></div>
+<div class="ttc" id="astruct_one_wave_info_html_a13404e90a12e736d4d00efe0b7bd6ec3"><div class="ttname"><a href="struct_one_wave_info.html#a13404e90a12e736d4d00efe0b7bd6ec3">OneWaveInfo::amplitudeMinimum</a></div><div class="ttdeci">qreal amplitudeMinimum</div><div class="ttdef"><b>Definition:</b> modelonewave.h:16</div></div>
+<div class="ttc" id="astruct_one_wave_info_html_a5d2ad5c011d55837518dfe62f6e9ab17"><div class="ttname"><a href="struct_one_wave_info.html#a5d2ad5c011d55837518dfe62f6e9ab17">OneWaveInfo::currentBand</a></div><div class="ttdeci">qreal currentBand</div><div class="ttdef"><b>Definition:</b> modelonewave.h:17</div></div>
+<div class="ttc" id="astruct_one_wave_info_html_a7e05fe6e7e5a7a95613479552f04e257"><div class="ttname"><a href="struct_one_wave_info.html#a7e05fe6e7e5a7a95613479552f04e257">OneWaveInfo::amplitudeMaximum</a></div><div class="ttdeci">qreal amplitudeMaximum</div><div class="ttdef"><b>Definition:</b> modelonewave.h:15</div></div>
+<div class="ttc" id="astruct_one_wave_info_html_a82de1b12cc1a41df4c28727f2847f1f8"><div class="ttname"><a href="struct_one_wave_info.html#a82de1b12cc1a41df4c28727f2847f1f8">OneWaveInfo::name</a></div><div class="ttdeci">QString name</div><div class="ttdef"><b>Definition:</b> modelonewave.h:13</div></div>
+<div class="ttc" id="astruct_one_wave_info_html_a85bedcb38eff027e719c6d705ec703af"><div class="ttname"><a href="struct_one_wave_info.html#a85bedcb38eff027e719c6d705ec703af">OneWaveInfo::color</a></div><div class="ttdeci">QString color</div><div class="ttdef"><b>Definition:</b> modelonewave.h:14</div></div>
+<div class="ttc" id="astruct_one_wave_info_html_a961969383f4c78ce17fdab446e987819"><div class="ttname"><a href="struct_one_wave_info.html#a961969383f4c78ce17fdab446e987819">OneWaveInfo::lineSeries</a></div><div class="ttdeci">QLineSeries * lineSeries</div><div class="ttdef"><b>Definition:</b> modelonewave.h:11</div></div>
+<div class="ttc" id="astruct_one_wave_info_html_ae650b7b1fe2d89d056bce928ba14fde4"><div class="ttname"><a href="struct_one_wave_info.html#ae650b7b1fe2d89d056bce928ba14fde4">OneWaveInfo::isVisible</a></div><div class="ttdeci">bool isVisible</div><div class="ttdef"><b>Definition:</b> modelonewave.h:12</div></div>
+<div class="ttc" id="astruct_one_wave_info_html_ae9e446d8d410df6f7034cab3998e0d7f"><div class="ttname"><a href="struct_one_wave_info.html#ae9e446d8d410df6f7034cab3998e0d7f">OneWaveInfo::currentFrequency</a></div><div class="ttdeci">qreal currentFrequency</div><div class="ttdef"><b>Definition:</b> modelonewave.h:18</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

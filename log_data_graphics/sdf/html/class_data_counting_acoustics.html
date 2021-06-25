@@ -1,0 +1,620 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_GRAPHICS: Класс DataCountingAcoustics</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_GRAPHICS
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Открытые типы</a> &#124;
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="class_data_counting_acoustics-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle">
+<div class="title">Класс DataCountingAcoustics</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="datacountingacoustics_8h_source.html">datacountingacoustics.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Открытые типы</h2></td></tr>
+<tr class="memitem:ae65f504a2da6ee4be90cfb4aacfa57da"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_counting_acoustics.html#ae65f504a2da6ee4be90cfb4aacfa57da">AcuTypeItem</a> { <br />
+&#160;&#160;<a class="el" href="class_data_counting_acoustics.html#ae65f504a2da6ee4be90cfb4aacfa57daaee6564de0c07ec12878401e1875c6a5d">ACU_ONE</a>
+, <a class="el" href="class_data_counting_acoustics.html#ae65f504a2da6ee4be90cfb4aacfa57daab63293e99881ac61d2f69578de506e4c">ACU_TWO</a>
+, <a class="el" href="class_data_counting_acoustics.html#ae65f504a2da6ee4be90cfb4aacfa57daa37192cdf399cce734fed3b7580d0e772">T_ONE</a>
+, <a class="el" href="class_data_counting_acoustics.html#ae65f504a2da6ee4be90cfb4aacfa57daa934d1a03d3bbf7dfdb5b9578c9f9d2a1">T_TWO</a>
+, <br />
+&#160;&#160;<a class="el" href="class_data_counting_acoustics.html#ae65f504a2da6ee4be90cfb4aacfa57daa7b812d41b7b000a4ef381917b20fd6d3">DT</a>
+, <a class="el" href="class_data_counting_acoustics.html#ae65f504a2da6ee4be90cfb4aacfa57daa1ce3954fb7bf7422d787c22fb5b3779b">A_ONEADCU</a>
+, <a class="el" href="class_data_counting_acoustics.html#ae65f504a2da6ee4be90cfb4aacfa57daa679eefc21026cb90fb90ffacffd5c9de">A_TWOADCU</a>
+, <a class="el" href="class_data_counting_acoustics.html#ae65f504a2da6ee4be90cfb4aacfa57daa8c519449a7ef3fdcc364308480109413">A_ONEDB</a>
+, <br />
+&#160;&#160;<a class="el" href="class_data_counting_acoustics.html#ae65f504a2da6ee4be90cfb4aacfa57daa0ce7cfd9edc05272a3a41d3c4f704b15">A_TWODB</a>
+, <a class="el" href="class_data_counting_acoustics.html#ae65f504a2da6ee4be90cfb4aacfa57daa312350bb9dd44fe5ca00ee46d8c982d7">ALPHA_DBM</a>
+, <a class="el" href="class_data_counting_acoustics.html#ae65f504a2da6ee4be90cfb4aacfa57daa43488feae5d6638c037cbb5c437396bb">MAXIMUM</a>
+<br />
+ }</td></tr>
+<tr class="separator:ae65f504a2da6ee4be90cfb4aacfa57da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:af652de96cecb4c08f6b31cf306e591e3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_counting_acoustics.html#af652de96cecb4c08f6b31cf306e591e3">DataCountingAcoustics</a> ()</td></tr>
+<tr class="separator:af652de96cecb4c08f6b31cf306e591e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6b9fbb68b2cc0bfde0ffc910b6f0adf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_counting_acoustics.html#ac6b9fbb68b2cc0bfde0ffc910b6f0adf">~DataCountingAcoustics</a> ()</td></tr>
+<tr class="separator:ac6b9fbb68b2cc0bfde0ffc910b6f0adf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0037c3282841d1db511b7ebe8c01e679"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_counting_acoustics.html#a0037c3282841d1db511b7ebe8c01e679">setAcuItemOne</a> (<a class="el" href="class_a_graphic_item.html">AGraphicItem</a> *acuItem)</td></tr>
+<tr class="separator:a0037c3282841d1db511b7ebe8c01e679"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5449dd6f720e05b0a1f80df321b5190"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_counting_acoustics.html#ae5449dd6f720e05b0a1f80df321b5190">setAcuItemTwo</a> (<a class="el" href="class_a_graphic_item.html">AGraphicItem</a> *acuItem)</td></tr>
+<tr class="separator:ae5449dd6f720e05b0a1f80df321b5190"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a854d3cfe7c38d87cf59052eb19f0f245"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_counting_acoustics.html#a854d3cfe7c38d87cf59052eb19f0f245">setItem</a> (<a class="el" href="class_a_graphic_item.html">AGraphicItem</a> *<a class="el" href="class_data_counting_acoustics.html#afa35eac6aa2cfe1947155b80dadbe9cd">item</a>, <a class="el" href="class_data_counting_acoustics.html#ae65f504a2da6ee4be90cfb4aacfa57da">AcuTypeItem</a> type)</td></tr>
+<tr class="separator:a854d3cfe7c38d87cf59052eb19f0f245"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3a8efeefafd8a56ce33111146181554"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_counting_acoustics.html#ac3a8efeefafd8a56ce33111146181554">acuItemOne</a> ()</td></tr>
+<tr class="separator:ac3a8efeefafd8a56ce33111146181554"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f57edff8577fcaf15f8a1a9db262d21"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_counting_acoustics.html#a6f57edff8577fcaf15f8a1a9db262d21">acuItemTwo</a> ()</td></tr>
+<tr class="separator:a6f57edff8577fcaf15f8a1a9db262d21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c20bc7e323364ffde189e86da33b399"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_counting_acoustics.html#a5c20bc7e323364ffde189e86da33b399">tItemOne</a> ()</td></tr>
+<tr class="separator:a5c20bc7e323364ffde189e86da33b399"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97258a3b0be6425254c981ddb3fec754"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_counting_acoustics.html#a97258a3b0be6425254c981ddb3fec754">tItemTwo</a> ()</td></tr>
+<tr class="separator:a97258a3b0be6425254c981ddb3fec754"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d18379fa2d1a77f5cd2e6a60c0130c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_counting_acoustics.html#a0d18379fa2d1a77f5cd2e6a60c0130c3">dtItem</a> ()</td></tr>
+<tr class="separator:a0d18379fa2d1a77f5cd2e6a60c0130c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9075a04e6516297e3923052fcdc04079"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_counting_acoustics.html#a9075a04e6516297e3923052fcdc04079">amplOneADCU</a> ()</td></tr>
+<tr class="separator:a9075a04e6516297e3923052fcdc04079"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7218f172605fbe331519d5adad48e510"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_counting_acoustics.html#a7218f172605fbe331519d5adad48e510">amplTwoADCU</a> ()</td></tr>
+<tr class="separator:a7218f172605fbe331519d5adad48e510"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadad140f892517f2a76accbe445f9f83"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_counting_acoustics.html#aadad140f892517f2a76accbe445f9f83">amplOneDB</a> ()</td></tr>
+<tr class="separator:aadad140f892517f2a76accbe445f9f83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b064643bf3f83780f277f6decc41113"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_counting_acoustics.html#a3b064643bf3f83780f277f6decc41113">amplTwoDB</a> ()</td></tr>
+<tr class="separator:a3b064643bf3f83780f277f6decc41113"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5a743ec2a47ddbb8adf7971947b3312"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_counting_acoustics.html#ad5a743ec2a47ddbb8adf7971947b3312">alphaDB_M</a> ()</td></tr>
+<tr class="separator:ad5a743ec2a47ddbb8adf7971947b3312"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa35eac6aa2cfe1947155b80dadbe9cd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_counting_acoustics.html#afa35eac6aa2cfe1947155b80dadbe9cd">item</a> (<a class="el" href="class_data_counting_acoustics.html#ae65f504a2da6ee4be90cfb4aacfa57da">AcuTypeItem</a> type)</td></tr>
+<tr class="separator:afa35eac6aa2cfe1947155b80dadbe9cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a481f731a33e0b193b178e3466851f3b6"><td class="memItemLeft" align="right" valign="top">QVector&lt; <a class="el" href="class_a_graphic_item.html">AGraphicItem</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_counting_acoustics.html#a481f731a33e0b193b178e3466851f3b6">items</a> ()</td></tr>
+<tr class="separator:a481f731a33e0b193b178e3466851f3b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8267d992990b1e9a405912b212c24b67"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_counting_acoustics.html#a8267d992990b1e9a405912b212c24b67">isValidItem</a> (<a class="el" href="class_a_graphic_item.html">AGraphicItem</a> *<a class="el" href="class_data_counting_acoustics.html#afa35eac6aa2cfe1947155b80dadbe9cd">item</a>)</td></tr>
+<tr class="separator:a8267d992990b1e9a405912b212c24b67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Перечисления</h2>
+<a id="ae65f504a2da6ee4be90cfb4aacfa57da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae65f504a2da6ee4be90cfb4aacfa57da">&#9670;&nbsp;</a></span>AcuTypeItem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_data_counting_acoustics.html#ae65f504a2da6ee4be90cfb4aacfa57da">DataCountingAcoustics::AcuTypeItem</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a id="ae65f504a2da6ee4be90cfb4aacfa57daaee6564de0c07ec12878401e1875c6a5d"></a>ACU_ONE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae65f504a2da6ee4be90cfb4aacfa57daab63293e99881ac61d2f69578de506e4c"></a>ACU_TWO&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae65f504a2da6ee4be90cfb4aacfa57daa37192cdf399cce734fed3b7580d0e772"></a>T_ONE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae65f504a2da6ee4be90cfb4aacfa57daa934d1a03d3bbf7dfdb5b9578c9f9d2a1"></a>T_TWO&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae65f504a2da6ee4be90cfb4aacfa57daa7b812d41b7b000a4ef381917b20fd6d3"></a>DT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae65f504a2da6ee4be90cfb4aacfa57daa1ce3954fb7bf7422d787c22fb5b3779b"></a>A_ONEADCU&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae65f504a2da6ee4be90cfb4aacfa57daa679eefc21026cb90fb90ffacffd5c9de"></a>A_TWOADCU&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae65f504a2da6ee4be90cfb4aacfa57daa8c519449a7ef3fdcc364308480109413"></a>A_ONEDB&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae65f504a2da6ee4be90cfb4aacfa57daa0ce7cfd9edc05272a3a41d3c4f704b15"></a>A_TWODB&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae65f504a2da6ee4be90cfb4aacfa57daa312350bb9dd44fe5ca00ee46d8c982d7"></a>ALPHA_DBM&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae65f504a2da6ee4be90cfb4aacfa57daa43488feae5d6638c037cbb5c437396bb"></a>MAXIMUM&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Конструктор(ы)</h2>
+<a id="af652de96cecb4c08f6b31cf306e591e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af652de96cecb4c08f6b31cf306e591e3">&#9670;&nbsp;</a></span>DataCountingAcoustics()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DataCountingAcoustics::DataCountingAcoustics </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac6b9fbb68b2cc0bfde0ffc910b6f0adf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6b9fbb68b2cc0bfde0ffc910b6f0adf">&#9670;&nbsp;</a></span>~DataCountingAcoustics()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DataCountingAcoustics::~DataCountingAcoustics </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="ac3a8efeefafd8a56ce33111146181554"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3a8efeefafd8a56ce33111146181554">&#9670;&nbsp;</a></span>acuItemOne()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a>* DataCountingAcoustics::acuItemOne </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6f57edff8577fcaf15f8a1a9db262d21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f57edff8577fcaf15f8a1a9db262d21">&#9670;&nbsp;</a></span>acuItemTwo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a>* DataCountingAcoustics::acuItemTwo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad5a743ec2a47ddbb8adf7971947b3312"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5a743ec2a47ddbb8adf7971947b3312">&#9670;&nbsp;</a></span>alphaDB_M()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a>* DataCountingAcoustics::alphaDB_M </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9075a04e6516297e3923052fcdc04079"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9075a04e6516297e3923052fcdc04079">&#9670;&nbsp;</a></span>amplOneADCU()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a>* DataCountingAcoustics::amplOneADCU </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aadad140f892517f2a76accbe445f9f83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadad140f892517f2a76accbe445f9f83">&#9670;&nbsp;</a></span>amplOneDB()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a>* DataCountingAcoustics::amplOneDB </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7218f172605fbe331519d5adad48e510"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7218f172605fbe331519d5adad48e510">&#9670;&nbsp;</a></span>amplTwoADCU()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a>* DataCountingAcoustics::amplTwoADCU </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3b064643bf3f83780f277f6decc41113"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b064643bf3f83780f277f6decc41113">&#9670;&nbsp;</a></span>amplTwoDB()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a>* DataCountingAcoustics::amplTwoDB </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0d18379fa2d1a77f5cd2e6a60c0130c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d18379fa2d1a77f5cd2e6a60c0130c3">&#9670;&nbsp;</a></span>dtItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a>* DataCountingAcoustics::dtItem </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8267d992990b1e9a405912b212c24b67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8267d992990b1e9a405912b212c24b67">&#9670;&nbsp;</a></span>isValidItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool DataCountingAcoustics::isValidItem </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a> *&#160;</td>
+          <td class="paramname"><em>item</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_data_counting_acoustics_a8267d992990b1e9a405912b212c24b67_cgraph.png" border="0" usemap="#aclass_data_counting_acoustics_a8267d992990b1e9a405912b212c24b67_cgraph" alt=""/></div>
+<map name="aclass_data_counting_acoustics_a8267d992990b1e9a405912b212c24b67_cgraph" id="aclass_data_counting_acoustics_a8267d992990b1e9a405912b212c24b67_cgraph">
+<area shape="rect" title=" " alt="" coords="5,27,176,69"/>
+<area shape="rect" href="class_a_graphic_item.html#a90fecfca61c3f76b0aac50b02442f194" title=" " alt="" coords="233,5,385,32"/>
+<area shape="rect" href="class_data_counting_acoustics.html#afa35eac6aa2cfe1947155b80dadbe9cd" title=" " alt="" coords="224,57,395,98"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="afa35eac6aa2cfe1947155b80dadbe9cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa35eac6aa2cfe1947155b80dadbe9cd">&#9670;&nbsp;</a></span>item()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a>* DataCountingAcoustics::item </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_data_counting_acoustics.html#ae65f504a2da6ee4be90cfb4aacfa57da">AcuTypeItem</a>&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a481f731a33e0b193b178e3466851f3b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a481f731a33e0b193b178e3466851f3b6">&#9670;&nbsp;</a></span>items()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QVector&lt;<a class="el" href="class_a_graphic_item.html">AGraphicItem</a> *&gt; DataCountingAcoustics::items </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0037c3282841d1db511b7ebe8c01e679"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0037c3282841d1db511b7ebe8c01e679">&#9670;&nbsp;</a></span>setAcuItemOne()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DataCountingAcoustics::setAcuItemOne </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a> *&#160;</td>
+          <td class="paramname"><em>acuItem</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae5449dd6f720e05b0a1f80df321b5190"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5449dd6f720e05b0a1f80df321b5190">&#9670;&nbsp;</a></span>setAcuItemTwo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DataCountingAcoustics::setAcuItemTwo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a> *&#160;</td>
+          <td class="paramname"><em>acuItem</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a854d3cfe7c38d87cf59052eb19f0f245"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a854d3cfe7c38d87cf59052eb19f0f245">&#9670;&nbsp;</a></span>setItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DataCountingAcoustics::setItem </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a> *&#160;</td>
+          <td class="paramname"><em>item</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_data_counting_acoustics.html#ae65f504a2da6ee4be90cfb4aacfa57da">AcuTypeItem</a>&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_data_counting_acoustics_a854d3cfe7c38d87cf59052eb19f0f245_cgraph.png" border="0" usemap="#aclass_data_counting_acoustics_a854d3cfe7c38d87cf59052eb19f0f245_cgraph" alt=""/></div>
+<map name="aclass_data_counting_acoustics_a854d3cfe7c38d87cf59052eb19f0f245_cgraph" id="aclass_data_counting_acoustics_a854d3cfe7c38d87cf59052eb19f0f245_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,176,47"/>
+<area shape="rect" href="class_data_counting_acoustics.html#afa35eac6aa2cfe1947155b80dadbe9cd" title=" " alt="" coords="224,5,395,47"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a5c20bc7e323364ffde189e86da33b399"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c20bc7e323364ffde189e86da33b399">&#9670;&nbsp;</a></span>tItemOne()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a>* DataCountingAcoustics::tItemOne </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a97258a3b0be6425254c981ddb3fec754"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97258a3b0be6425254c981ddb3fec754">&#9670;&nbsp;</a></span>tItemTwo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a>* DataCountingAcoustics::tItemTwo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>Объявления и описания членов классов находятся в файлах:<ul>
+<li>E:/MyQtProgram/parserGfm/log_data_graphics/inc/acousticsEditor/<a class="el" href="datacountingacoustics_8h_source.html">datacountingacoustics.h</a></li>
+<li>E:/MyQtProgram/parserGfm/log_data_graphics/src/acousticsEditor/<a class="el" href="datacountingacoustics_8cpp.html">datacountingacoustics.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

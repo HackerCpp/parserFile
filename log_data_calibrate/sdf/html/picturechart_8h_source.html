@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_CALIBRATE: Исходный файл E:/MyQtProgram/parserGfm/log_data_calibrate/src/picturechart.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_CALIBRATE
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_2d0751fb3bbd35f5629786370ddff2ab.html">log_data_calibrate</a></li><li class="navelem"><a class="el" href="dir_8a129a56028b7b1f9377e01dcb8ce97e.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">picturechart.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="picturechart_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef PICTURECHART_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define PICTURECHART_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;QString&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QStringList&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="coeffs_8h.html">coeffs.h</a>&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QObject&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">class </span>ICurve;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="class_picture_chart.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_picture_chart.html">PictureChart</a> : <span class="keyword">public</span> <a class="code" href="class_q_object.html">QObject</a></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    QStringList m_picturesPaths;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="class_picture_chart.html#a45b56d6a8f7c88d8190bc2b2ed801f50">PictureChart</a>();</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="class_picture_chart.html#a4ee7a5b1fd1e16bef91b1016744ecbc7">~PictureChart</a>();</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    QString <a class="code" href="class_picture_chart.html#a5fa2a755643a0ec1ba9f8aaa277d8c56">refToPicture</a>(<span class="keyword">const</span> ICurve &amp;curveMAX,<span class="keyword">const</span> ICurve &amp;curveAVER);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    QString <a class="code" href="class_picture_chart.html#a086ff270ce033727244622a16d52c064">coeffToPicture</a>(QVector&lt;CoeffsLinearDependence&gt; *coeffs);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;};</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// PICTURECHART_H</span></div>
+<div class="ttc" id="aclass_picture_chart_html"><div class="ttname"><a href="class_picture_chart.html">PictureChart</a></div><div class="ttdef"><b>Definition:</b> picturechart.h:11</div></div>
+<div class="ttc" id="aclass_picture_chart_html_a086ff270ce033727244622a16d52c064"><div class="ttname"><a href="class_picture_chart.html#a086ff270ce033727244622a16d52c064">PictureChart::coeffToPicture</a></div><div class="ttdeci">QString coeffToPicture(QVector&lt; CoeffsLinearDependence &gt; *coeffs)</div><div class="ttdef"><b>Definition:</b> picturechart.cpp:78</div></div>
+<div class="ttc" id="aclass_picture_chart_html_a45b56d6a8f7c88d8190bc2b2ed801f50"><div class="ttname"><a href="class_picture_chart.html#a45b56d6a8f7c88d8190bc2b2ed801f50">PictureChart::PictureChart</a></div><div class="ttdeci">PictureChart()</div><div class="ttdef"><b>Definition:</b> picturechart.cpp:9</div></div>
+<div class="ttc" id="aclass_picture_chart_html_a4ee7a5b1fd1e16bef91b1016744ecbc7"><div class="ttname"><a href="class_picture_chart.html#a4ee7a5b1fd1e16bef91b1016744ecbc7">PictureChart::~PictureChart</a></div><div class="ttdeci">~PictureChart()</div><div class="ttdef"><b>Definition:</b> picturechart.cpp:14</div></div>
+<div class="ttc" id="aclass_picture_chart_html_a5fa2a755643a0ec1ba9f8aaa277d8c56"><div class="ttname"><a href="class_picture_chart.html#a5fa2a755643a0ec1ba9f8aaa277d8c56">PictureChart::refToPicture</a></div><div class="ttdeci">QString refToPicture(const ICurve &amp;curveMAX, const ICurve &amp;curveAVER)</div><div class="ttdef"><b>Definition:</b> picturechart.cpp:38</div></div>
+<div class="ttc" id="aclass_q_object_html"><div class="ttname"><a href="class_q_object.html">QObject</a></div></div>
+<div class="ttc" id="acoeffs_8h_html"><div class="ttname"><a href="coeffs_8h.html">coeffs.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

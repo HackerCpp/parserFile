@@ -26,6 +26,7 @@ void ChartViewForOneWaveWidget::updateLineInfo(QPointF point){
     m_modelOneWave->changeCurentPosition(chart()->mapToValue(point));
     m_verticalLine->setLine(point.x(),0,point.x(),scene()->height());
     m_textItem->setPos(point);
+
     m_textItem->setHtml("<div style='background-color:transparent;'>" + tr("Difference: ") + QString::number(m_modelOneWave->delta()) + "<br>" +
                              tr("Band: ") + QString::number(m_modelOneWave->band()) + "<br>" +
                              tr("Frequency: ") + QString::number(m_modelOneWave->frequency()) + "<br>" +

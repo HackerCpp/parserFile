@@ -1,0 +1,10 @@
+<map id="GraphicEditor::activate" name="GraphicEditor::activate">
+<area shape="rect" id="node1" title=" " alt="" coords="5,56,172,83"/>
+<area shape="rect" id="node2" href="$class_a_graphic_board.html#aee03a3f8c6268c77835e5b871aa31c70" title=" " alt="" coords="220,56,397,83"/>
+<area shape="rect" id="node3" href="$class_a_graphic_track.html#ac6e116451a351aae691213a2b7e026a1" title=" " alt="" coords="445,31,619,57"/>
+<area shape="rect" id="node4" href="$class_a_graphic_board.html#af5b19173cec62cba85b3b33a8161ff4a" title=" " alt="" coords="450,81,614,108"/>
+<area shape="rect" id="node5" href="$class_a_graphic_track.html#a11dbdb0ef068cd0a4bb72e6e91184483" title=" " alt="" coords="667,5,872,32"/>
+<area shape="rect" id="node6" href="$class_draw_settings.html#a569b21556b08471cd3f57c6a39f8ff46" title=" " alt="" coords="675,56,864,83"/>
+<area shape="rect" id="node7" href="$class_a_graphic_track.html#ac5ee1c646d59440ffdc625756b1fe6d2" title=" " alt="" coords="689,107,849,133"/>
+<area shape="rect" id="node8" href="$class_a_graphic_track.html#a4f21d9c5fa6c33fa7a0c01d11e4601ee" title=" " alt="" coords="680,157,859,184"/>
+</map>

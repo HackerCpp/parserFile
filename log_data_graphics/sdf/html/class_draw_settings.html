@@ -1,0 +1,928 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_GRAPHICS: Класс DrawSettings</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_GRAPHICS
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Открытые типы</a> &#124;
+<a href="#pub-slots">Открытые слоты</a> &#124;
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="class_draw_settings-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle">
+<div class="title">Класс DrawSettings</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="drawsettings_8h_source.html">drawsettings.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:DrawSettings:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_draw_settings__inherit__graph.png" border="0" usemap="#a_draw_settings_inherit__map" alt="Inheritance graph"/></div>
+<map name="a_draw_settings_inherit__map" id="a_draw_settings_inherit__map">
+<area shape="rect" title=" " alt="" coords="5,80,112,107"/>
+<area shape="rect" href="class_q_object.html" title=" " alt="" coords="22,5,95,32"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<div class="dynheader">
+Граф связей класса DrawSettings:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_draw_settings__coll__graph.png" border="0" usemap="#a_draw_settings_coll__map" alt="Collaboration graph"/></div>
+<map name="a_draw_settings_coll__map" id="a_draw_settings_coll__map">
+<area shape="rect" title=" " alt="" coords="5,80,112,107"/>
+<area shape="rect" href="class_q_object.html" title=" " alt="" coords="22,5,95,32"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Открытые типы</h2></td></tr>
+<tr class="memitem:ad7a0345a2fbd5b392940035f1f9aac56"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#ad7a0345a2fbd5b392940035f1f9aac56">FormatTime</a> { <br />
+&#160;&#160;<a class="el" href="class_draw_settings.html#ad7a0345a2fbd5b392940035f1f9aac56a60b22db08f51c9404bc55f9a2c3b7875">MSEC_SM_100</a>
+, <a class="el" href="class_draw_settings.html#ad7a0345a2fbd5b392940035f1f9aac56a828e4a5c73dc158a42988801c929056e">SEC_SM_1</a>
+, <a class="el" href="class_draw_settings.html#ad7a0345a2fbd5b392940035f1f9aac56af46a84350ca6e6461691720bddd96e11">SEC_SM_5</a>
+, <a class="el" href="class_draw_settings.html#ad7a0345a2fbd5b392940035f1f9aac56a83520bed5f53f65548d58e6aaff1f1e2">SEC_SM_10</a>
+, <br />
+&#160;&#160;<a class="el" href="class_draw_settings.html#ad7a0345a2fbd5b392940035f1f9aac56ab9d0f4e73aa3743fdc14a1fea16c832c">SEC_SM_30</a>
+, <a class="el" href="class_draw_settings.html#ad7a0345a2fbd5b392940035f1f9aac56a36b3221b1aaf28e88e80311c091c4a13">MIN_SM_1</a>
+, <a class="el" href="class_draw_settings.html#ad7a0345a2fbd5b392940035f1f9aac56aa70c34fac9d5de5c20056a44a86ab856">MIN_SM_5</a>
+, <a class="el" href="class_draw_settings.html#ad7a0345a2fbd5b392940035f1f9aac56ae0886a9d81b2c7e62f83ddeda61a366b">MIN_SM_10</a>
+, <br />
+&#160;&#160;<a class="el" href="class_draw_settings.html#ad7a0345a2fbd5b392940035f1f9aac56a880e750844167172777c1f27181352a6">MIN_SM_30</a>
+<br />
+ }</td></tr>
+<tr class="separator:ad7a0345a2fbd5b392940035f1f9aac56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdf4b38dddcd87416c144cc1bdef4b09"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#afdf4b38dddcd87416c144cc1bdef4b09">FormatDepth</a> { <br />
+&#160;&#160;<a class="el" href="class_draw_settings.html#afdf4b38dddcd87416c144cc1bdef4b09a65ad65f0e3f0662931559247f3fe98bf">F1_10</a>
+, <a class="el" href="class_draw_settings.html#afdf4b38dddcd87416c144cc1bdef4b09addd739d45872c743b7258ec7a63cca75">F1_50</a>
+, <a class="el" href="class_draw_settings.html#afdf4b38dddcd87416c144cc1bdef4b09aadcf9e4ab27cc261344157eb00a15e07">F1_100</a>
+, <a class="el" href="class_draw_settings.html#afdf4b38dddcd87416c144cc1bdef4b09a4b939018ae0567f893a5b94e463a9cab">F1_200</a>
+, <br />
+&#160;&#160;<a class="el" href="class_draw_settings.html#afdf4b38dddcd87416c144cc1bdef4b09a3838ea48a845bb2741f298efc767fa27">F1_500</a>
+, <a class="el" href="class_draw_settings.html#afdf4b38dddcd87416c144cc1bdef4b09a804aadbd0e0449eacd2b79ac8420d6bb">F1_1000</a>
+, <a class="el" href="class_draw_settings.html#afdf4b38dddcd87416c144cc1bdef4b09a8b1b63e8ee181ac8d4341c5019e16b29">F1_2000</a>
+, <a class="el" href="class_draw_settings.html#afdf4b38dddcd87416c144cc1bdef4b09af91bd8b74fc2ffe9dfb1c0d78cf358a5">F1_5000</a>
+, <br />
+&#160;&#160;<a class="el" href="class_draw_settings.html#afdf4b38dddcd87416c144cc1bdef4b09a790f8b92cb6d0b7182eead4e5f565ba6">F1_10000</a>
+<br />
+ }</td></tr>
+<tr class="separator:afdf4b38dddcd87416c144cc1bdef4b09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95300fd481c240a1493e85193d33c803"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#a95300fd481c240a1493e85193d33c803">LengthPicture</a> { <a class="el" href="class_draw_settings.html#a95300fd481c240a1493e85193d33c803a692a9a39b1d5de09b79aeb8ec1b34d4c">MIN</a>
+, <a class="el" href="class_draw_settings.html#a95300fd481c240a1493e85193d33c803a618f99316f0741cac078728238e75874">AVERAGE</a>
+, <a class="el" href="class_draw_settings.html#a95300fd481c240a1493e85193d33c803a574bd1c864a977d6c5c18b2be47309f0">MAX</a>
+ }</td></tr>
+<tr class="separator:a95300fd481c240a1493e85193d33c803"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-slots"></a>
+Открытые слоты</h2></td></tr>
+<tr class="memitem:a8d7dd72661c54dac1331ca677f642ea7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#a8d7dd72661c54dac1331ca677f642ea7">setFormatTime</a> (<a class="el" href="class_draw_settings.html#ad7a0345a2fbd5b392940035f1f9aac56">FormatTime</a> format)</td></tr>
+<tr class="separator:a8d7dd72661c54dac1331ca677f642ea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac95fb42f840dee440dfa46478ebf2f52"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#ac95fb42f840dee440dfa46478ebf2f52">setFormatDepth</a> (<a class="el" href="class_draw_settings.html#afdf4b38dddcd87416c144cc1bdef4b09">FormatDepth</a> format)</td></tr>
+<tr class="separator:ac95fb42f840dee440dfa46478ebf2f52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee21480062e20719cfaed8f91397bda0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#aee21480062e20719cfaed8f91397bda0">setLengthPicture</a> (<a class="el" href="class_draw_settings.html#a95300fd481c240a1493e85193d33c803">LengthPicture</a> format)</td></tr>
+<tr class="separator:aee21480062e20719cfaed8f91397bda0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefdf6589b0577d1b65163d15aaec9cee"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#aefdf6589b0577d1b65163d15aaec9cee">setFormatPicture</a> (QImage::Format format)</td></tr>
+<tr class="separator:aefdf6589b0577d1b65163d15aaec9cee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2f51d323df4d11bc2fc8df9f5b5d42d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#ab2f51d323df4d11bc2fc8df9f5b5d42d">setScalePixelPerMm</a> (qreal scalePixelPerMm)</td></tr>
+<tr class="separator:ab2f51d323df4d11bc2fc8df9f5b5d42d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a829888836b60e6e5b61bf2d8f5652a92"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#a829888836b60e6e5b61bf2d8f5652a92">setDrawType</a> (int drawType)</td></tr>
+<tr class="separator:a829888836b60e6e5b61bf2d8f5652a92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:aae44bf80a188af52e01a30b39a009f8a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#aae44bf80a188af52e01a30b39a009f8a">DrawSettings</a> ()</td></tr>
+<tr class="separator:aae44bf80a188af52e01a30b39a009f8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2587cd793ddef1a832d36c256db598a"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#ac2587cd793ddef1a832d36c256db598a">~DrawSettings</a> ()</td></tr>
+<tr class="separator:ac2587cd793ddef1a832d36c256db598a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97febf850972228add8473b5be2fa5ef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_draw_settings.html#ad7a0345a2fbd5b392940035f1f9aac56">DrawSettings::FormatTime</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#a97febf850972228add8473b5be2fa5ef">curentFormatTime</a> ()</td></tr>
+<tr class="separator:a97febf850972228add8473b5be2fa5ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c53565ceb23c9c7bc9adf15a62ec0f5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_draw_settings.html#afdf4b38dddcd87416c144cc1bdef4b09">DrawSettings::FormatDepth</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#a7c53565ceb23c9c7bc9adf15a62ec0f5">curentFormatDepth</a> ()</td></tr>
+<tr class="separator:a7c53565ceb23c9c7bc9adf15a62ec0f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e5778ce3c5fa8d44fc8a9c6a31f8d5d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_draw_settings.html#a95300fd481c240a1493e85193d33c803">DrawSettings::LengthPicture</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#a3e5778ce3c5fa8d44fc8a9c6a31f8d5d">curentPictureHeight</a> ()</td></tr>
+<tr class="separator:a3e5778ce3c5fa8d44fc8a9c6a31f8d5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e0dad105f2a7e17ac58267ab7cdbf6d"><td class="memItemLeft" align="right" valign="top">qreal&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#a1e0dad105f2a7e17ac58267ab7cdbf6d">curentScalePixelPerMm</a> ()</td></tr>
+<tr class="separator:a1e0dad105f2a7e17ac58267ab7cdbf6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80abae9d87b18afe244384a33c99a3e5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#a80abae9d87b18afe244384a33c99a3e5">setDrawTime</a> ()</td></tr>
+<tr class="separator:a80abae9d87b18afe244384a33c99a3e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26b839f26fac14f40b25c1ba7b13a120"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#a26b839f26fac14f40b25c1ba7b13a120">setDrawDepth</a> ()</td></tr>
+<tr class="separator:a26b839f26fac14f40b25c1ba7b13a120"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae99290e2bd10daf095625e6ff7fae1c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#ae99290e2bd10daf095625e6ff7fae1c4">setScaleForTime</a> (qreal <a class="el" href="class_draw_settings.html#a512d2758913c0cf98ee0e3180db25d0b">scale</a>)</td></tr>
+<tr class="separator:ae99290e2bd10daf095625e6ff7fae1c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac69b22138b5eea96d0a7b38478309a27"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#ac69b22138b5eea96d0a7b38478309a27">setScaleForDepth</a> (qreal <a class="el" href="class_draw_settings.html#a512d2758913c0cf98ee0e3180db25d0b">scale</a>)</td></tr>
+<tr class="separator:ac69b22138b5eea96d0a7b38478309a27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77595bc1350fe2133cad3c34c093e736"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#a77595bc1350fe2133cad3c34c093e736">setPictureHeightPix</a> (uint heightPix)</td></tr>
+<tr class="separator:a77595bc1350fe2133cad3c34c093e736"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a569b21556b08471cd3f57c6a39f8ff46"><td class="memItemLeft" align="right" valign="top">qreal&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#a569b21556b08471cd3f57c6a39f8ff46">pixelPerMm</a> ()</td></tr>
+<tr class="separator:a569b21556b08471cd3f57c6a39f8ff46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace8ac6718193cf82bc7d3fa0987f18df"><td class="memItemLeft" align="right" valign="top">uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#ace8ac6718193cf82bc7d3fa0987f18df">pictureHeight</a> ()</td></tr>
+<tr class="separator:ace8ac6718193cf82bc7d3fa0987f18df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87eac16c46b642ce1a5c4849a9d5b566"><td class="memItemLeft" align="right" valign="top">uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#a87eac16c46b642ce1a5c4849a9d5b566">offsetUp</a> ()</td></tr>
+<tr class="separator:a87eac16c46b642ce1a5c4849a9d5b566"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a087446f5205b9cf95aff921a5ae82c3f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#a087446f5205b9cf95aff921a5ae82c3f">isDrawTime</a> ()</td></tr>
+<tr class="separator:a087446f5205b9cf95aff921a5ae82c3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3527c884df24f575c314a57c128cd76d"><td class="memItemLeft" align="right" valign="top">QImage::Format&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#a3527c884df24f575c314a57c128cd76d">formatPicture</a> ()</td></tr>
+<tr class="separator:a3527c884df24f575c314a57c128cd76d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a512d2758913c0cf98ee0e3180db25d0b"><td class="memItemLeft" align="right" valign="top">qreal&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#a512d2758913c0cf98ee0e3180db25d0b">scale</a> ()</td></tr>
+<tr class="separator:a512d2758913c0cf98ee0e3180db25d0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78f4826f813230612fb61a8b1166cef7"><td class="memItemLeft" align="right" valign="top">qreal&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#a78f4826f813230612fb61a8b1166cef7">scaleTime</a> ()</td></tr>
+<tr class="separator:a78f4826f813230612fb61a8b1166cef7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb2cfaa945c5e29a381e9cc68491ae14"><td class="memItemLeft" align="right" valign="top">qreal&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_settings.html#aeb2cfaa945c5e29a381e9cc68491ae14">scaleDepth</a> ()</td></tr>
+<tr class="separator:aeb2cfaa945c5e29a381e9cc68491ae14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Перечисления</h2>
+<a id="afdf4b38dddcd87416c144cc1bdef4b09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afdf4b38dddcd87416c144cc1bdef4b09">&#9670;&nbsp;</a></span>FormatDepth</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_draw_settings.html#afdf4b38dddcd87416c144cc1bdef4b09">DrawSettings::FormatDepth</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a id="afdf4b38dddcd87416c144cc1bdef4b09a65ad65f0e3f0662931559247f3fe98bf"></a>F1_10&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="afdf4b38dddcd87416c144cc1bdef4b09addd739d45872c743b7258ec7a63cca75"></a>F1_50&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="afdf4b38dddcd87416c144cc1bdef4b09aadcf9e4ab27cc261344157eb00a15e07"></a>F1_100&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="afdf4b38dddcd87416c144cc1bdef4b09a4b939018ae0567f893a5b94e463a9cab"></a>F1_200&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="afdf4b38dddcd87416c144cc1bdef4b09a3838ea48a845bb2741f298efc767fa27"></a>F1_500&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="afdf4b38dddcd87416c144cc1bdef4b09a804aadbd0e0449eacd2b79ac8420d6bb"></a>F1_1000&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="afdf4b38dddcd87416c144cc1bdef4b09a8b1b63e8ee181ac8d4341c5019e16b29"></a>F1_2000&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="afdf4b38dddcd87416c144cc1bdef4b09af91bd8b74fc2ffe9dfb1c0d78cf358a5"></a>F1_5000&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="afdf4b38dddcd87416c144cc1bdef4b09a790f8b92cb6d0b7182eead4e5f565ba6"></a>F1_10000&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="ad7a0345a2fbd5b392940035f1f9aac56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7a0345a2fbd5b392940035f1f9aac56">&#9670;&nbsp;</a></span>FormatTime</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_draw_settings.html#ad7a0345a2fbd5b392940035f1f9aac56">DrawSettings::FormatTime</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a id="ad7a0345a2fbd5b392940035f1f9aac56a60b22db08f51c9404bc55f9a2c3b7875"></a>MSEC_SM_100&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad7a0345a2fbd5b392940035f1f9aac56a828e4a5c73dc158a42988801c929056e"></a>SEC_SM_1&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad7a0345a2fbd5b392940035f1f9aac56af46a84350ca6e6461691720bddd96e11"></a>SEC_SM_5&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad7a0345a2fbd5b392940035f1f9aac56a83520bed5f53f65548d58e6aaff1f1e2"></a>SEC_SM_10&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad7a0345a2fbd5b392940035f1f9aac56ab9d0f4e73aa3743fdc14a1fea16c832c"></a>SEC_SM_30&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad7a0345a2fbd5b392940035f1f9aac56a36b3221b1aaf28e88e80311c091c4a13"></a>MIN_SM_1&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad7a0345a2fbd5b392940035f1f9aac56aa70c34fac9d5de5c20056a44a86ab856"></a>MIN_SM_5&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad7a0345a2fbd5b392940035f1f9aac56ae0886a9d81b2c7e62f83ddeda61a366b"></a>MIN_SM_10&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad7a0345a2fbd5b392940035f1f9aac56a880e750844167172777c1f27181352a6"></a>MIN_SM_30&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="a95300fd481c240a1493e85193d33c803"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95300fd481c240a1493e85193d33c803">&#9670;&nbsp;</a></span>LengthPicture</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_draw_settings.html#a95300fd481c240a1493e85193d33c803">DrawSettings::LengthPicture</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a id="a95300fd481c240a1493e85193d33c803a692a9a39b1d5de09b79aeb8ec1b34d4c"></a>MIN&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a95300fd481c240a1493e85193d33c803a618f99316f0741cac078728238e75874"></a>AVERAGE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a95300fd481c240a1493e85193d33c803a574bd1c864a977d6c5c18b2be47309f0"></a>MAX&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Конструктор(ы)</h2>
+<a id="aae44bf80a188af52e01a30b39a009f8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae44bf80a188af52e01a30b39a009f8a">&#9670;&nbsp;</a></span>DrawSettings()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DrawSettings::DrawSettings </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac2587cd793ddef1a832d36c256db598a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2587cd793ddef1a832d36c256db598a">&#9670;&nbsp;</a></span>~DrawSettings()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DrawSettings::~DrawSettings </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="a7c53565ceb23c9c7bc9adf15a62ec0f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c53565ceb23c9c7bc9adf15a62ec0f5">&#9670;&nbsp;</a></span>curentFormatDepth()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_draw_settings.html#afdf4b38dddcd87416c144cc1bdef4b09">DrawSettings::FormatDepth</a> DrawSettings::curentFormatDepth </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a97febf850972228add8473b5be2fa5ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97febf850972228add8473b5be2fa5ef">&#9670;&nbsp;</a></span>curentFormatTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_draw_settings.html#ad7a0345a2fbd5b392940035f1f9aac56">DrawSettings::FormatTime</a> DrawSettings::curentFormatTime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3e5778ce3c5fa8d44fc8a9c6a31f8d5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e5778ce3c5fa8d44fc8a9c6a31f8d5d">&#9670;&nbsp;</a></span>curentPictureHeight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_draw_settings.html#a95300fd481c240a1493e85193d33c803">DrawSettings::LengthPicture</a> DrawSettings::curentPictureHeight </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1e0dad105f2a7e17ac58267ab7cdbf6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e0dad105f2a7e17ac58267ab7cdbf6d">&#9670;&nbsp;</a></span>curentScalePixelPerMm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">qreal DrawSettings::curentScalePixelPerMm </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3527c884df24f575c314a57c128cd76d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3527c884df24f575c314a57c128cd76d">&#9670;&nbsp;</a></span>formatPicture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QImage::Format DrawSettings::formatPicture </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a087446f5205b9cf95aff921a5ae82c3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a087446f5205b9cf95aff921a5ae82c3f">&#9670;&nbsp;</a></span>isDrawTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool DrawSettings::isDrawTime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a87eac16c46b642ce1a5c4849a9d5b566"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87eac16c46b642ce1a5c4849a9d5b566">&#9670;&nbsp;</a></span>offsetUp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint DrawSettings::offsetUp </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ace8ac6718193cf82bc7d3fa0987f18df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace8ac6718193cf82bc7d3fa0987f18df">&#9670;&nbsp;</a></span>pictureHeight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint DrawSettings::pictureHeight </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a569b21556b08471cd3f57c6a39f8ff46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a569b21556b08471cd3f57c6a39f8ff46">&#9670;&nbsp;</a></span>pixelPerMm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">qreal DrawSettings::pixelPerMm </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a512d2758913c0cf98ee0e3180db25d0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a512d2758913c0cf98ee0e3180db25d0b">&#9670;&nbsp;</a></span>scale()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">qreal DrawSettings::scale </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_draw_settings_a512d2758913c0cf98ee0e3180db25d0b_cgraph.png" border="0" usemap="#aclass_draw_settings_a512d2758913c0cf98ee0e3180db25d0b_cgraph" alt=""/></div>
+<map name="aclass_draw_settings_a512d2758913c0cf98ee0e3180db25d0b_cgraph" id="aclass_draw_settings_a512d2758913c0cf98ee0e3180db25d0b_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,153,32"/>
+<area shape="rect" href="class_draw_settings.html#a569b21556b08471cd3f57c6a39f8ff46" title=" " alt="" coords="201,5,391,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aeb2cfaa945c5e29a381e9cc68491ae14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb2cfaa945c5e29a381e9cc68491ae14">&#9670;&nbsp;</a></span>scaleDepth()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">qreal DrawSettings::scaleDepth </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_draw_settings_aeb2cfaa945c5e29a381e9cc68491ae14_cgraph.png" border="0" usemap="#aclass_draw_settings_aeb2cfaa945c5e29a381e9cc68491ae14_cgraph" alt=""/></div>
+<map name="aclass_draw_settings_aeb2cfaa945c5e29a381e9cc68491ae14_cgraph" id="aclass_draw_settings_aeb2cfaa945c5e29a381e9cc68491ae14_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,192,32"/>
+<area shape="rect" href="class_draw_settings.html#a569b21556b08471cd3f57c6a39f8ff46" title=" " alt="" coords="240,5,429,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a78f4826f813230612fb61a8b1166cef7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78f4826f813230612fb61a8b1166cef7">&#9670;&nbsp;</a></span>scaleTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">qreal DrawSettings::scaleTime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_draw_settings_a78f4826f813230612fb61a8b1166cef7_cgraph.png" border="0" usemap="#aclass_draw_settings_a78f4826f813230612fb61a8b1166cef7_cgraph" alt=""/></div>
+<map name="aclass_draw_settings_a78f4826f813230612fb61a8b1166cef7_cgraph" id="aclass_draw_settings_a78f4826f813230612fb61a8b1166cef7_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,184,32"/>
+<area shape="rect" href="class_draw_settings.html#a569b21556b08471cd3f57c6a39f8ff46" title=" " alt="" coords="232,5,421,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a26b839f26fac14f40b25c1ba7b13a120"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26b839f26fac14f40b25c1ba7b13a120">&#9670;&nbsp;</a></span>setDrawDepth()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void DrawSettings::setDrawDepth </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a80abae9d87b18afe244384a33c99a3e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80abae9d87b18afe244384a33c99a3e5">&#9670;&nbsp;</a></span>setDrawTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void DrawSettings::setDrawTime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a829888836b60e6e5b61bf2d8f5652a92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a829888836b60e6e5b61bf2d8f5652a92">&#9670;&nbsp;</a></span>setDrawType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DrawSettings::setDrawType </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>drawType</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac95fb42f840dee440dfa46478ebf2f52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac95fb42f840dee440dfa46478ebf2f52">&#9670;&nbsp;</a></span>setFormatDepth</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DrawSettings::setFormatDepth </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_draw_settings.html#afdf4b38dddcd87416c144cc1bdef4b09">FormatDepth</a>&#160;</td>
+          <td class="paramname"><em>format</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_draw_settings_ac95fb42f840dee440dfa46478ebf2f52_cgraph.png" border="0" usemap="#aclass_draw_settings_ac95fb42f840dee440dfa46478ebf2f52_cgraph" alt=""/></div>
+<map name="aclass_draw_settings_ac95fb42f840dee440dfa46478ebf2f52_cgraph" id="aclass_draw_settings_ac95fb42f840dee440dfa46478ebf2f52_cgraph">
+<area shape="rect" title=" " alt="" coords="5,13,225,39"/>
+<area shape="rect" href="class_draw_settings.html#ac69b22138b5eea96d0a7b38478309a27" title=" " alt="" coords="273,5,464,47"/>
+<area shape="rect" href="class_draw_settings.html#a512d2758913c0cf98ee0e3180db25d0b" title=" " alt="" coords="512,13,660,39"/>
+<area shape="rect" href="class_draw_settings.html#a569b21556b08471cd3f57c6a39f8ff46" title=" " alt="" coords="708,13,897,39"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aefdf6589b0577d1b65163d15aaec9cee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefdf6589b0577d1b65163d15aaec9cee">&#9670;&nbsp;</a></span>setFormatPicture</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DrawSettings::setFormatPicture </td>
+          <td>(</td>
+          <td class="paramtype">QImage::Format&#160;</td>
+          <td class="paramname"><em>format</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8d7dd72661c54dac1331ca677f642ea7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d7dd72661c54dac1331ca677f642ea7">&#9670;&nbsp;</a></span>setFormatTime</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DrawSettings::setFormatTime </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_draw_settings.html#ad7a0345a2fbd5b392940035f1f9aac56">FormatTime</a>&#160;</td>
+          <td class="paramname"><em>format</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_draw_settings_a8d7dd72661c54dac1331ca677f642ea7_cgraph.png" border="0" usemap="#aclass_draw_settings_a8d7dd72661c54dac1331ca677f642ea7_cgraph" alt=""/></div>
+<map name="aclass_draw_settings_a8d7dd72661c54dac1331ca677f642ea7_cgraph" id="aclass_draw_settings_a8d7dd72661c54dac1331ca677f642ea7_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,217,32"/>
+<area shape="rect" href="class_draw_settings.html#ae99290e2bd10daf095625e6ff7fae1c4" title=" " alt="" coords="265,5,487,32"/>
+<area shape="rect" href="class_draw_settings.html#a512d2758913c0cf98ee0e3180db25d0b" title=" " alt="" coords="535,5,683,32"/>
+<area shape="rect" href="class_draw_settings.html#a569b21556b08471cd3f57c6a39f8ff46" title=" " alt="" coords="731,5,920,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aee21480062e20719cfaed8f91397bda0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee21480062e20719cfaed8f91397bda0">&#9670;&nbsp;</a></span>setLengthPicture</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DrawSettings::setLengthPicture </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_draw_settings.html#a95300fd481c240a1493e85193d33c803">LengthPicture</a>&#160;</td>
+          <td class="paramname"><em>format</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_draw_settings_aee21480062e20719cfaed8f91397bda0_cgraph.png" border="0" usemap="#aclass_draw_settings_aee21480062e20719cfaed8f91397bda0_cgraph" alt=""/></div>
+<map name="aclass_draw_settings_aee21480062e20719cfaed8f91397bda0_cgraph" id="aclass_draw_settings_aee21480062e20719cfaed8f91397bda0_cgraph">
+<area shape="rect" title=" " alt="" coords="5,13,228,39"/>
+<area shape="rect" href="class_draw_settings.html#a77595bc1350fe2133cad3c34c093e736" title=" " alt="" coords="276,5,455,47"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a77595bc1350fe2133cad3c34c093e736"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77595bc1350fe2133cad3c34c093e736">&#9670;&nbsp;</a></span>setPictureHeightPix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void DrawSettings::setPictureHeightPix </td>
+          <td>(</td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>heightPix</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac69b22138b5eea96d0a7b38478309a27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac69b22138b5eea96d0a7b38478309a27">&#9670;&nbsp;</a></span>setScaleForDepth()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DrawSettings::setScaleForDepth </td>
+          <td>(</td>
+          <td class="paramtype">qreal&#160;</td>
+          <td class="paramname"><em>scale</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_draw_settings_ac69b22138b5eea96d0a7b38478309a27_cgraph.png" border="0" usemap="#aclass_draw_settings_ac69b22138b5eea96d0a7b38478309a27_cgraph" alt=""/></div>
+<map name="aclass_draw_settings_ac69b22138b5eea96d0a7b38478309a27_cgraph" id="aclass_draw_settings_ac69b22138b5eea96d0a7b38478309a27_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,196,47"/>
+<area shape="rect" href="class_draw_settings.html#a512d2758913c0cf98ee0e3180db25d0b" title=" " alt="" coords="244,13,392,39"/>
+<area shape="rect" href="class_draw_settings.html#a569b21556b08471cd3f57c6a39f8ff46" title=" " alt="" coords="440,13,629,39"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ae99290e2bd10daf095625e6ff7fae1c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae99290e2bd10daf095625e6ff7fae1c4">&#9670;&nbsp;</a></span>setScaleForTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DrawSettings::setScaleForTime </td>
+          <td>(</td>
+          <td class="paramtype">qreal&#160;</td>
+          <td class="paramname"><em>scale</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_draw_settings_ae99290e2bd10daf095625e6ff7fae1c4_cgraph.png" border="0" usemap="#aclass_draw_settings_ae99290e2bd10daf095625e6ff7fae1c4_cgraph" alt=""/></div>
+<map name="aclass_draw_settings_ae99290e2bd10daf095625e6ff7fae1c4_cgraph" id="aclass_draw_settings_ae99290e2bd10daf095625e6ff7fae1c4_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,227,32"/>
+<area shape="rect" href="class_draw_settings.html#a512d2758913c0cf98ee0e3180db25d0b" title=" " alt="" coords="275,5,423,32"/>
+<area shape="rect" href="class_draw_settings.html#a569b21556b08471cd3f57c6a39f8ff46" title=" " alt="" coords="471,5,660,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ab2f51d323df4d11bc2fc8df9f5b5d42d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2f51d323df4d11bc2fc8df9f5b5d42d">&#9670;&nbsp;</a></span>setScalePixelPerMm</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DrawSettings::setScalePixelPerMm </td>
+          <td>(</td>
+          <td class="paramtype">qreal&#160;</td>
+          <td class="paramname"><em>scalePixelPerMm</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>Объявления и описания членов классов находятся в файлах:<ul>
+<li>E:/MyQtProgram/parserGfm/log_data_graphics/inc/<a class="el" href="drawsettings_8h_source.html">drawsettings.h</a></li>
+<li>E:/MyQtProgram/parserGfm/log_data_graphics/src/<a class="el" href="drawsettings_8cpp.html">drawsettings.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

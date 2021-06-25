@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_GRAPHICS: Исходный файл E:/MyQtProgram/parserGfm/log_data_graphics/inc/tools/colorscale.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_GRAPHICS
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_53603dfb3fbca8a964ef75a71799598b.html">log_data_graphics</a></li><li class="navelem"><a class="el" href="dir_55342455956423183f7a145b2d21cf95.html">inc</a></li><li class="navelem"><a class="el" href="dir_f249a64485145ebec929808e1d66b406.html">tools</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">colorscale.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="colorscale_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef COLORSCALE_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define COLORSCALE_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QColor&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QImage&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;acuItem.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="namespace_interpolation_function.html">    9</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_interpolation_function.html">InterpolationFunction</a> {</div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="namespace_interpolation_function.html#aef76d83c11729dccf822aa842f814c62adabb2f42ccfe4228d48d4d94dd94eac9">   10</a></span>&#160;    <span class="keyword">enum</span> <a class="code" href="namespace_interpolation_function.html">InterpolationFunction</a>{<a class="code" href="namespace_interpolation_function.html#aef76d83c11729dccf822aa842f814c62a19048ba8667b652cef70bd530244cdf3">Linear</a>,<a class="code" href="namespace_interpolation_function.html#aef76d83c11729dccf822aa842f814c62adabb2f42ccfe4228d48d4d94dd94eac9">Cosinus</a>};</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;}</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="namespace_gradient_style.html">   13</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_gradient_style.html">GradientStyle</a> {</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="namespace_gradient_style.html#a8b0b438e7ad9a0aab9c8bf6c02daa38da1ee31a259821f1777a5deb6e976231b2">   14</a></span>&#160;    <span class="keyword">enum</span> <a class="code" href="namespace_gradient_style.html">GradientStyle</a> {<a class="code" href="namespace_gradient_style.html#a8b0b438e7ad9a0aab9c8bf6c02daa38da32979e1cf4a9486d83d1c2b106bf519b">Linear</a>,<a class="code" href="namespace_gradient_style.html#a8b0b438e7ad9a0aab9c8bf6c02daa38da1ee31a259821f1777a5deb6e976231b2">Circle</a>,<a class="code" href="namespace_gradient_style.html#a8b0b438e7ad9a0aab9c8bf6c02daa38dabc62d1863236849087a06c9142784e34">Radial</a>,<a class="code" href="namespace_gradient_style.html#a8b0b438e7ad9a0aab9c8bf6c02daa38da24d54da3a51bc278c350d0836b89d6a9">Reflex</a>};</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;}</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_color_scale.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_color_scale.html">ColorScale</a> : <span class="keyword">protected</span> std::map&lt;double,QColor&gt;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="class_color_scale.html#a5802325f281af632bcae5f44315c7965">ColorScale</a>();</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_color_scale.html#a3d087a68684f715727467326a8391662">insert</a>(<span class="keywordtype">double</span> position, QColor color);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_color_scale.html#a8ddba49b094b3ed48ae6624765926830">fillTab</a>(QColor* colorTab, <span class="keywordtype">int</span> size, <a class="code" href="namespace_interpolation_function.html#aef76d83c11729dccf822aa842f814c62">InterpolationFunction::InterpolationFunction</a> <span class="keyword">function</span> = <a class="code" href="namespace_interpolation_function.html#aef76d83c11729dccf822aa842f814c62a19048ba8667b652cef70bd530244cdf3">InterpolationFunction::Linear</a>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_color_scale.html#aabf8af3684ab10546bcf0877afe4957f">draw</a>(<a class="code" href="class_q_image.html">QImage</a> &amp;img,QRect area,<span class="keyword">const</span> QPointF &amp;start,<span class="keyword">const</span> QPointF&amp; end,<a class="code" href="namespace_gradient_style.html#a8b0b438e7ad9a0aab9c8bf6c02daa38d">GradientStyle::GradientStyle</a> style=<a class="code" href="namespace_gradient_style.html#a8b0b438e7ad9a0aab9c8bf6c02daa38da32979e1cf4a9486d83d1c2b106bf519b">GradientStyle::Linear</a>, <span class="keywordtype">int</span> size = 500) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">static</span> QColor <a class="code" href="class_color_scale.html#aeefcbdc8de80606ec59a04417749d8c0">get_linear_color</a>(qreal value, MulticolorItem multicol1,MulticolorItem multicol2);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;};</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// COLORSCALE_H</span></div>
+<div class="ttc" id="aclass_color_scale_html"><div class="ttname"><a href="class_color_scale.html">ColorScale</a></div><div class="ttdef"><b>Definition:</b> colorscale.h:18</div></div>
+<div class="ttc" id="aclass_color_scale_html_a3d087a68684f715727467326a8391662"><div class="ttname"><a href="class_color_scale.html#a3d087a68684f715727467326a8391662">ColorScale::insert</a></div><div class="ttdeci">bool insert(double position, QColor color)</div><div class="ttdef"><b>Definition:</b> colorscale.cpp:79</div></div>
+<div class="ttc" id="aclass_color_scale_html_a5802325f281af632bcae5f44315c7965"><div class="ttname"><a href="class_color_scale.html#a5802325f281af632bcae5f44315c7965">ColorScale::ColorScale</a></div><div class="ttdeci">ColorScale()</div><div class="ttdef"><b>Definition:</b> colorscale.cpp:75</div></div>
+<div class="ttc" id="aclass_color_scale_html_a8ddba49b094b3ed48ae6624765926830"><div class="ttname"><a href="class_color_scale.html#a8ddba49b094b3ed48ae6624765926830">ColorScale::fillTab</a></div><div class="ttdeci">void fillTab(QColor *colorTab, int size, InterpolationFunction::InterpolationFunction function=InterpolationFunction::Linear) const</div><div class="ttdef"><b>Definition:</b> colorscale.cpp:88</div></div>
+<div class="ttc" id="aclass_color_scale_html_aabf8af3684ab10546bcf0877afe4957f"><div class="ttname"><a href="class_color_scale.html#aabf8af3684ab10546bcf0877afe4957f">ColorScale::draw</a></div><div class="ttdeci">void draw(QImage &amp;img, QRect area, const QPointF &amp;start, const QPointF &amp;end, GradientStyle::GradientStyle style=GradientStyle::Linear, int size=500) const</div><div class="ttdef"><b>Definition:</b> colorscale.cpp:134</div></div>
+<div class="ttc" id="aclass_color_scale_html_aeefcbdc8de80606ec59a04417749d8c0"><div class="ttname"><a href="class_color_scale.html#aeefcbdc8de80606ec59a04417749d8c0">ColorScale::get_linear_color</a></div><div class="ttdeci">static QColor get_linear_color(qreal value, MulticolorItem multicol1, MulticolorItem multicol2)</div><div class="ttdef"><b>Definition:</b> colorscale.cpp:165</div></div>
+<div class="ttc" id="aclass_q_image_html"><div class="ttname"><a href="class_q_image.html">QImage</a></div></div>
+<div class="ttc" id="anamespace_gradient_style_html"><div class="ttname"><a href="namespace_gradient_style.html">GradientStyle</a></div><div class="ttdef"><b>Definition:</b> colorscale.h:13</div></div>
+<div class="ttc" id="anamespace_gradient_style_html_a8b0b438e7ad9a0aab9c8bf6c02daa38d"><div class="ttname"><a href="namespace_gradient_style.html#a8b0b438e7ad9a0aab9c8bf6c02daa38d">GradientStyle::GradientStyle</a></div><div class="ttdeci">GradientStyle</div><div class="ttdef"><b>Definition:</b> colorscale.h:14</div></div>
+<div class="ttc" id="anamespace_gradient_style_html_a8b0b438e7ad9a0aab9c8bf6c02daa38da1ee31a259821f1777a5deb6e976231b2"><div class="ttname"><a href="namespace_gradient_style.html#a8b0b438e7ad9a0aab9c8bf6c02daa38da1ee31a259821f1777a5deb6e976231b2">GradientStyle::Circle</a></div><div class="ttdeci">@ Circle</div><div class="ttdef"><b>Definition:</b> colorscale.h:14</div></div>
+<div class="ttc" id="anamespace_gradient_style_html_a8b0b438e7ad9a0aab9c8bf6c02daa38da24d54da3a51bc278c350d0836b89d6a9"><div class="ttname"><a href="namespace_gradient_style.html#a8b0b438e7ad9a0aab9c8bf6c02daa38da24d54da3a51bc278c350d0836b89d6a9">GradientStyle::Reflex</a></div><div class="ttdeci">@ Reflex</div><div class="ttdef"><b>Definition:</b> colorscale.h:14</div></div>
+<div class="ttc" id="anamespace_gradient_style_html_a8b0b438e7ad9a0aab9c8bf6c02daa38da32979e1cf4a9486d83d1c2b106bf519b"><div class="ttname"><a href="namespace_gradient_style.html#a8b0b438e7ad9a0aab9c8bf6c02daa38da32979e1cf4a9486d83d1c2b106bf519b">GradientStyle::Linear</a></div><div class="ttdeci">@ Linear</div><div class="ttdef"><b>Definition:</b> colorscale.h:14</div></div>
+<div class="ttc" id="anamespace_gradient_style_html_a8b0b438e7ad9a0aab9c8bf6c02daa38dabc62d1863236849087a06c9142784e34"><div class="ttname"><a href="namespace_gradient_style.html#a8b0b438e7ad9a0aab9c8bf6c02daa38dabc62d1863236849087a06c9142784e34">GradientStyle::Radial</a></div><div class="ttdeci">@ Radial</div><div class="ttdef"><b>Definition:</b> colorscale.h:14</div></div>
+<div class="ttc" id="anamespace_interpolation_function_html"><div class="ttname"><a href="namespace_interpolation_function.html">InterpolationFunction</a></div><div class="ttdef"><b>Definition:</b> colorscale.h:9</div></div>
+<div class="ttc" id="anamespace_interpolation_function_html_aef76d83c11729dccf822aa842f814c62"><div class="ttname"><a href="namespace_interpolation_function.html#aef76d83c11729dccf822aa842f814c62">InterpolationFunction::InterpolationFunction</a></div><div class="ttdeci">InterpolationFunction</div><div class="ttdef"><b>Definition:</b> colorscale.h:10</div></div>
+<div class="ttc" id="anamespace_interpolation_function_html_aef76d83c11729dccf822aa842f814c62a19048ba8667b652cef70bd530244cdf3"><div class="ttname"><a href="namespace_interpolation_function.html#aef76d83c11729dccf822aa842f814c62a19048ba8667b652cef70bd530244cdf3">InterpolationFunction::Linear</a></div><div class="ttdeci">@ Linear</div><div class="ttdef"><b>Definition:</b> colorscale.h:10</div></div>
+<div class="ttc" id="anamespace_interpolation_function_html_aef76d83c11729dccf822aa842f814c62adabb2f42ccfe4228d48d4d94dd94eac9"><div class="ttname"><a href="namespace_interpolation_function.html#aef76d83c11729dccf822aa842f814c62adabb2f42ccfe4228d48d4d94dd94eac9">InterpolationFunction::Cosinus</a></div><div class="ttdeci">@ Cosinus</div><div class="ttdef"><b>Definition:</b> colorscale.h:10</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

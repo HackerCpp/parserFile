@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_GRAPHICS: Исходный файл E:/MyQtProgram/parserGfm/log_data_graphics/inc/tools/curveeditor.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_GRAPHICS
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_53603dfb3fbca8a964ef75a71799598b.html">log_data_graphics</a></li><li class="navelem"><a class="el" href="dir_55342455956423183f7a145b2d21cf95.html">inc</a></li><li class="navelem"><a class="el" href="dir_f249a64485145ebec929808e1d66b406.html">tools</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">curveeditor.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="curveeditor_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CURVEEDITOR_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CURVEEDITOR_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="basesettingswindow_8h.html">basesettingswindow.h</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="modelcurveeditor_8h.html">modelcurveeditor.h</a>&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QTableView&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;QSplitter&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="basecurvereader_8h.html">basecurvereader.h</a>&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="class_curve_editor.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_curve_editor.html">CurveEditor</a> : <span class="keyword">public</span> <a class="code" href="class_base_settings_window.html">BaseSettingsWindow</a></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <a class="code" href="class_base_curve_reader.html">BaseCurveReader</a> *m_curveReader;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    QSplitter *m_splitter;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="class_curve_editor.html#a585d3dcc2876175ee3a1954d401f9b18">CurveEditor</a>(<a class="code" href="class_a_graphic_item.html">AGraphicItem</a> *graphicItem,QWidget *parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="class_curve_editor.html#adc097a7afc252679d554f753e679bf8c">~CurveEditor</a>()<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_curve_editor.html#a53929497446b3fd287d68e51a8e0c884">apply</a>()<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;};</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CURVEEDITOR_H</span></div>
+<div class="ttc" id="abasecurvereader_8h_html"><div class="ttname"><a href="basecurvereader_8h.html">basecurvereader.h</a></div></div>
+<div class="ttc" id="abasesettingswindow_8h_html"><div class="ttname"><a href="basesettingswindow_8h.html">basesettingswindow.h</a></div></div>
+<div class="ttc" id="aclass_a_graphic_item_html"><div class="ttname"><a href="class_a_graphic_item.html">AGraphicItem</a></div><div class="ttdef"><b>Definition:</b> agraphicitem.h:9</div></div>
+<div class="ttc" id="aclass_base_curve_reader_html"><div class="ttname"><a href="class_base_curve_reader.html">BaseCurveReader</a></div><div class="ttdef"><b>Definition:</b> basecurvereader.h:6</div></div>
+<div class="ttc" id="aclass_base_settings_window_html"><div class="ttname"><a href="class_base_settings_window.html">BaseSettingsWindow</a></div><div class="ttdef"><b>Definition:</b> basesettingswindow.h:12</div></div>
+<div class="ttc" id="aclass_curve_editor_html"><div class="ttname"><a href="class_curve_editor.html">CurveEditor</a></div><div class="ttdef"><b>Definition:</b> curveeditor.h:11</div></div>
+<div class="ttc" id="aclass_curve_editor_html_a53929497446b3fd287d68e51a8e0c884"><div class="ttname"><a href="class_curve_editor.html#a53929497446b3fd287d68e51a8e0c884">CurveEditor::apply</a></div><div class="ttdeci">void apply() override</div><div class="ttdef"><b>Definition:</b> curveeditor.cpp:33</div></div>
+<div class="ttc" id="aclass_curve_editor_html_a585d3dcc2876175ee3a1954d401f9b18"><div class="ttname"><a href="class_curve_editor.html#a585d3dcc2876175ee3a1954d401f9b18">CurveEditor::CurveEditor</a></div><div class="ttdeci">CurveEditor(AGraphicItem *graphicItem, QWidget *parent=nullptr)</div><div class="ttdef"><b>Definition:</b> curveeditor.cpp:8</div></div>
+<div class="ttc" id="aclass_curve_editor_html_adc097a7afc252679d554f753e679bf8c"><div class="ttname"><a href="class_curve_editor.html#adc097a7afc252679d554f753e679bf8c">CurveEditor::~CurveEditor</a></div><div class="ttdeci">~CurveEditor() override</div><div class="ttdef"><b>Definition:</b> curveeditor.cpp:27</div></div>
+<div class="ttc" id="amodelcurveeditor_8h_html"><div class="ttname"><a href="modelcurveeditor_8h.html">modelcurveeditor.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

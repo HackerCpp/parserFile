@@ -1,0 +1,19 @@
+<map id="SaverLoaderCalibDB::loadNoiseProtocol" name="SaverLoaderCalibDB::loadNoiseProtocol">
+<area shape="rect" id="node1" title=" " alt="" coords="5,226,159,267"/>
+<area shape="rect" id="node2" href="$class_protocol_noise.html#a4577b4b4705b75e8e662af71e3ca367b" title=" " alt="" coords="207,5,439,32"/>
+<area shape="rect" id="node3" href="$class_protocol_noise.html#a66c946cfc84c53b49eae19d7f039a6e0" title=" " alt="" coords="207,56,440,83"/>
+<area shape="rect" id="node4" href="$class_protocol_noise.html#a08555a2c9e953b7895c485a7142fb373" title=" " alt="" coords="232,107,415,133"/>
+<area shape="rect" id="node5" href="$class_protocol_noise.html#a141a54cabb8387689874df4154ba3bfa" title=" " alt="" coords="224,157,423,184"/>
+<area shape="rect" id="node6" href="$class_protocol_noise.html#a446cf0067089f2643ffc8924b61a31c7" title=" " alt="" coords="220,208,427,235"/>
+<area shape="rect" id="node7" href="$class_protocol_noise.html#ae2e17e6e2f0f952ae7de8119acd73584" title=" " alt="" coords="230,259,417,285"/>
+<area shape="rect" id="node8" href="$class_protocol_noise.html#a88f47559941288d9439577b3877b02b3" title=" " alt="" coords="231,309,415,336"/>
+<area shape="rect" id="node9" href="$class_saver_loader_calib_d_b.html#a9b5c02d9eb7aabc0e3e3531dc60febcc" title=" " alt="" coords="247,361,400,402"/>
+<area shape="rect" id="node10" href="$class_saver_loader_calib_d_b.html#a5795cfaa2fc8682ea7fcfa673a029d80" title=" " alt="" coords="247,426,400,467"/>
+<area shape="rect" id="node16" href="$class_saver_loader_calib_d_b.html#a61372e5663207e1c7d8c4368fedc8b37" title=" " alt="" coords="247,502,400,543"/>
+<area shape="rect" id="node11" href="$class_operator.html#af794beaf874d06b069531433e487f902" title=" " alt="" coords="505,371,678,397"/>
+<area shape="rect" id="node13" href="$class_operator.html#ac7dcca71671ede022de25cddef01ffa0" title=" " alt="" coords="505,421,678,448"/>
+<area shape="rect" id="node15" href="$class_operator.html#aab067cf67f95d98582db3f7361cc39d7" title=" " alt="" coords="488,472,695,499"/>
+<area shape="rect" id="node12" href="$class_operator.html#aca0dc5b3238195a770db08f165097d4e" title=" " alt="" coords="743,371,893,397"/>
+<area shape="rect" id="node14" href="$class_operator.html#a0cdd13984796035bc09766103154b667" title=" " alt="" coords="743,421,893,448"/>
+<area shape="rect" id="node17" href="$class_reference_loader.html#a348cfe176da81a07b907cd86ab7c5a12" title=" " alt="" coords="499,523,684,565"/>
+</map>

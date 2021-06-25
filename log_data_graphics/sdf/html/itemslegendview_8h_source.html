@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_GRAPHICS: Исходный файл E:/MyQtProgram/parserGfm/log_data_graphics/inc/tools/itemslegendview.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_GRAPHICS
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_53603dfb3fbca8a964ef75a71799598b.html">log_data_graphics</a></li><li class="navelem"><a class="el" href="dir_55342455956423183f7a145b2d21cf95.html">inc</a></li><li class="navelem"><a class="el" href="dir_f249a64485145ebec929808e1d66b406.html">tools</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">itemslegendview.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="itemslegendview_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef ITEMSLEGENDVIEW_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define ITEMSLEGENDVIEW_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QWidget&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="agraphicitem_8h.html">agraphicitem.h</a>&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QTableView&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="modellegenditems_8h.html">modellegenditems.h</a>&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="class_items_legend_view.html">    9</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_items_legend_view.html">ItemsLegendView</a> : <span class="keyword">public</span> <a class="code" href="class_q_table_view.html">QTableView</a></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    QList&lt;AGraphicItem*&gt; *m_items;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="comment">//QImage m_image;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    QPointF m_startingPosition;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="class_model_legend_items.html">ModelLegendItems</a> *m_modelItems;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">void</span> init();</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_items_legend_view.html#a7e46ee09e65984e72add93b9e4f2ae19">ItemsLegendView</a>(QList&lt;AGraphicItem*&gt; *items,QWidget *parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_items_legend_view.html#a7e46ee09e65984e72add93b9e4f2ae19">ItemsLegendView</a>(QMap&lt;QString,AGraphicItem *&gt; *items,QWidget *parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_items_legend_view.html#a4c14c08c728bb4eb7bce92b9b321c446">changeScenePoint</a>(QPointF point);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_items_legend_view.html#aeec26054d30008223c9358d76dbfd075">setStartingScenePoint</a>(QPointF point);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="comment">//void paintEvent(QPaintEvent *event)override;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;signals:</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;};</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// ITEMSLEGENDVIEW_H</span></div>
+<div class="ttc" id="aagraphicitem_8h_html"><div class="ttname"><a href="agraphicitem_8h.html">agraphicitem.h</a></div></div>
+<div class="ttc" id="aclass_items_legend_view_html"><div class="ttname"><a href="class_items_legend_view.html">ItemsLegendView</a></div><div class="ttdef"><b>Definition:</b> itemslegendview.h:10</div></div>
+<div class="ttc" id="aclass_items_legend_view_html_a4c14c08c728bb4eb7bce92b9b321c446"><div class="ttname"><a href="class_items_legend_view.html#a4c14c08c728bb4eb7bce92b9b321c446">ItemsLegendView::changeScenePoint</a></div><div class="ttdeci">void changeScenePoint(QPointF point)</div><div class="ttdef"><b>Definition:</b> itemslegendview.cpp:45</div></div>
+<div class="ttc" id="aclass_items_legend_view_html_a7e46ee09e65984e72add93b9e4f2ae19"><div class="ttname"><a href="class_items_legend_view.html#a7e46ee09e65984e72add93b9e4f2ae19">ItemsLegendView::ItemsLegendView</a></div><div class="ttdeci">ItemsLegendView(QList&lt; AGraphicItem * &gt; *items, QWidget *parent=nullptr)</div><div class="ttdef"><b>Definition:</b> itemslegendview.cpp:29</div></div>
+<div class="ttc" id="aclass_items_legend_view_html_aeec26054d30008223c9358d76dbfd075"><div class="ttname"><a href="class_items_legend_view.html#aeec26054d30008223c9358d76dbfd075">ItemsLegendView::setStartingScenePoint</a></div><div class="ttdeci">void setStartingScenePoint(QPointF point)</div><div class="ttdef"><b>Definition:</b> itemslegendview.cpp:60</div></div>
+<div class="ttc" id="aclass_model_legend_items_html"><div class="ttname"><a href="class_model_legend_items.html">ModelLegendItems</a></div><div class="ttdef"><b>Definition:</b> modellegenditems.h:7</div></div>
+<div class="ttc" id="aclass_q_table_view_html"><div class="ttname"><a href="class_q_table_view.html">QTableView</a></div></div>
+<div class="ttc" id="amodellegenditems_8h_html"><div class="ttname"><a href="modellegenditems_8h.html">modellegenditems.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

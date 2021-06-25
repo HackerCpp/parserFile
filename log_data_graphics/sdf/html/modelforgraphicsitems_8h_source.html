@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_GRAPHICS: Исходный файл E:/MyQtProgram/parserGfm/log_data_graphics/inc/tools/modelforgraphicsitems.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_GRAPHICS
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_53603dfb3fbca8a964ef75a71799598b.html">log_data_graphics</a></li><li class="navelem"><a class="el" href="dir_55342455956423183f7a145b2d21cf95.html">inc</a></li><li class="navelem"><a class="el" href="dir_f249a64485145ebec929808e1d66b406.html">tools</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">modelforgraphicsitems.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="modelforgraphicsitems_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef MODELFORGRAPHICSITEMS_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define MODELFORGRAPHICSITEMS_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="agraphicitem_8h.html">agraphicitem.h</a>&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="class_model_for_graphics_items.html">    5</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_model_for_graphics_items.html">ModelForGraphicsItems</a> : <span class="keyword">public</span> <a class="code" href="class_q_abstract_list_model.html">QAbstractListModel</a></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;{</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    QVector&lt;AGraphicItem *&gt; *m_items;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    QStringList m_headerList;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <a class="code" href="class_model_for_graphics_items.html#ac0e5e11cb784b334482a95128339a346">ModelForGraphicsItems</a>(QMap&lt;QString,AGraphicItem *&gt; *items);</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <a class="code" href="class_model_for_graphics_items.html#a938cac3dd0764c81d259be1980415455">~ModelForGraphicsItems</a>()<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    QVariant <a class="code" href="class_model_for_graphics_items.html#afc236682b87373f9dca06e49782688ee">data</a>(<span class="keyword">const</span> QModelIndex &amp;index, <span class="keywordtype">int</span> role = Qt::DisplayRole) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_model_for_graphics_items.html#a47058c02ee56478920ceb917c66e3043">rowCount</a>(<span class="keyword">const</span> QModelIndex &amp;parent = QModelIndex()) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_model_for_graphics_items.html#a54929f496cba4183ec83a37178eb3175">columnCount</a>(<span class="keyword">const</span> QModelIndex &amp;parent = QModelIndex()) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    QVariant <a class="code" href="class_model_for_graphics_items.html#a85dc209f0eea2a89652881941536f535">headerData</a>(<span class="keywordtype">int</span> section, Qt::Orientation orientation, <span class="keywordtype">int</span> role) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    Qt::ItemFlags <a class="code" href="class_model_for_graphics_items.html#a9a42ef0b18db810ca7caf40dfd3946b9">flags</a>(<span class="keyword">const</span> QModelIndex &amp;index) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_model_for_graphics_items.html#a2eba131efbfc353c2f5b766991ef10f9">setData</a>(<span class="keyword">const</span> QModelIndex &amp;index, <span class="keyword">const</span> QVariant &amp;value, <span class="keywordtype">int</span> role = Qt::EditRole)<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;};</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// MODELFORGRAPHICSITEMS_H</span></div>
+<div class="ttc" id="aagraphicitem_8h_html"><div class="ttname"><a href="agraphicitem_8h.html">agraphicitem.h</a></div></div>
+<div class="ttc" id="aclass_model_for_graphics_items_html"><div class="ttname"><a href="class_model_for_graphics_items.html">ModelForGraphicsItems</a></div><div class="ttdef"><b>Definition:</b> modelforgraphicsitems.h:6</div></div>
+<div class="ttc" id="aclass_model_for_graphics_items_html_a2eba131efbfc353c2f5b766991ef10f9"><div class="ttname"><a href="class_model_for_graphics_items.html#a2eba131efbfc353c2f5b766991ef10f9">ModelForGraphicsItems::setData</a></div><div class="ttdeci">bool setData(const QModelIndex &amp;index, const QVariant &amp;value, int role=Qt::EditRole) override</div><div class="ttdef"><b>Definition:</b> modelforgraphicsitems.cpp:102</div></div>
+<div class="ttc" id="aclass_model_for_graphics_items_html_a47058c02ee56478920ceb917c66e3043"><div class="ttname"><a href="class_model_for_graphics_items.html#a47058c02ee56478920ceb917c66e3043">ModelForGraphicsItems::rowCount</a></div><div class="ttdeci">int rowCount(const QModelIndex &amp;parent=QModelIndex()) const override</div><div class="ttdef"><b>Definition:</b> modelforgraphicsitems.cpp:59</div></div>
+<div class="ttc" id="aclass_model_for_graphics_items_html_a54929f496cba4183ec83a37178eb3175"><div class="ttname"><a href="class_model_for_graphics_items.html#a54929f496cba4183ec83a37178eb3175">ModelForGraphicsItems::columnCount</a></div><div class="ttdeci">int columnCount(const QModelIndex &amp;parent=QModelIndex()) const override</div><div class="ttdef"><b>Definition:</b> modelforgraphicsitems.cpp:64</div></div>
+<div class="ttc" id="aclass_model_for_graphics_items_html_a85dc209f0eea2a89652881941536f535"><div class="ttname"><a href="class_model_for_graphics_items.html#a85dc209f0eea2a89652881941536f535">ModelForGraphicsItems::headerData</a></div><div class="ttdeci">QVariant headerData(int section, Qt::Orientation orientation, int role) const override</div><div class="ttdef"><b>Definition:</b> modelforgraphicsitems.cpp:69</div></div>
+<div class="ttc" id="aclass_model_for_graphics_items_html_a938cac3dd0764c81d259be1980415455"><div class="ttname"><a href="class_model_for_graphics_items.html#a938cac3dd0764c81d259be1980415455">ModelForGraphicsItems::~ModelForGraphicsItems</a></div><div class="ttdeci">~ModelForGraphicsItems() override</div><div class="ttdef"><b>Definition:</b> modelforgraphicsitems.cpp:18</div></div>
+<div class="ttc" id="aclass_model_for_graphics_items_html_a9a42ef0b18db810ca7caf40dfd3946b9"><div class="ttname"><a href="class_model_for_graphics_items.html#a9a42ef0b18db810ca7caf40dfd3946b9">ModelForGraphicsItems::flags</a></div><div class="ttdeci">Qt::ItemFlags flags(const QModelIndex &amp;index) const override</div><div class="ttdef"><b>Definition:</b> modelforgraphicsitems.cpp:81</div></div>
+<div class="ttc" id="aclass_model_for_graphics_items_html_ac0e5e11cb784b334482a95128339a346"><div class="ttname"><a href="class_model_for_graphics_items.html#ac0e5e11cb784b334482a95128339a346">ModelForGraphicsItems::ModelForGraphicsItems</a></div><div class="ttdeci">ModelForGraphicsItems(QMap&lt; QString, AGraphicItem * &gt; *items)</div><div class="ttdef"><b>Definition:</b> modelforgraphicsitems.cpp:5</div></div>
+<div class="ttc" id="aclass_model_for_graphics_items_html_afc236682b87373f9dca06e49782688ee"><div class="ttname"><a href="class_model_for_graphics_items.html#afc236682b87373f9dca06e49782688ee">ModelForGraphicsItems::data</a></div><div class="ttdeci">QVariant data(const QModelIndex &amp;index, int role=Qt::DisplayRole) const override</div><div class="ttdef"><b>Definition:</b> modelforgraphicsitems.cpp:22</div></div>
+<div class="ttc" id="aclass_q_abstract_list_model_html"><div class="ttname"><a href="class_q_abstract_list_model.html">QAbstractListModel</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

@@ -212,10 +212,10 @@ void MainWindow::addLibraryPython(){
 }
 
 void MainWindow::openCalibrations(){
-    if(auto cLogData = m_logDataView->currentLogData(); cLogData){
+    /*if(*/auto cLogData = m_logDataView->currentLogData();/* cLogData){*/
         LogDataCalibrate * f_calibrate = new LogDataCalibrate(cLogData,this);
         f_calibrate->show();
-    }
+    //}
 }
 
 void MainWindow::openInterpretations(){

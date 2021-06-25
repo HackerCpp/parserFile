@@ -12,22 +12,7 @@ VAcuItem::VAcuItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
     else{
         qDebug() << "Не удалось преобразовать AItemInfo в AcuItemInfo" << itemInfo->name();
     }
-    bool ok = true;
-    QString f_dataStep = m_curve->desc()->param("data_step").replace(",",".");
-    m_dataStep =  f_dataStep.left(f_dataStep.indexOf("(")).toDouble(&ok);
 
-    if(!ok){
-        qDebug() << "Не удалось преобразовать data_step в акустике";
-        m_dataStep = 2;
-    }
-    else{
-        QString f_type = f_dataStep.mid(f_dataStep.indexOf("("));
-        if(f_type == "(USEC)")
-           ;
-        else{
-            qDebug() << "не описанный тип данных data_step акустика" << f_type;
-        }
-    }
     m_updatedParam = true;
 }
 

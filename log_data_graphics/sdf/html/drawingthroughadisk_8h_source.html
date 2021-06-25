@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_GRAPHICS: Исходный файл E:/MyQtProgram/parserGfm/log_data_graphics/inc/items/drawingthroughadisk.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_GRAPHICS
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_53603dfb3fbca8a964ef75a71799598b.html">log_data_graphics</a></li><li class="navelem"><a class="el" href="dir_55342455956423183f7a145b2d21cf95.html">inc</a></li><li class="navelem"><a class="el" href="dir_de596e210b672c9a6f9cfeeec750f35b.html">items</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">drawingthroughadisk.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="drawingthroughadisk_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef DRAWINGTHROUGHADISK_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define DRAWINGTHROUGHADISK_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;QThread&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="class_drawing_through_a_disk.html">    6</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_drawing_through_a_disk.html">DrawingThroughADisk</a> : <span class="keyword">public</span> <a class="code" href="class_q_thread.html">QThread</a></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="class_drawing_through_a_disk.html#aeabd5dc97cf2e41e5fc7e525b2b13774">   11</a></span>&#160;    QString <a class="code" href="class_drawing_through_a_disk.html#aeabd5dc97cf2e41e5fc7e525b2b13774">m_uid</a>;</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="class_drawing_through_a_disk.html#a5e62350fc16e1dbcc3bc943f30a9e085">   12</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_drawing_through_a_disk.html#a5e62350fc16e1dbcc3bc943f30a9e085">m_isEndThread</a>,<a class="code" href="class_drawing_through_a_disk.html#a10ebbbbde7e1bb90d0fef86baf9bf8a1">m_isRedraw</a>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="class_drawing_through_a_disk.html#a00cff0f0905fd45989bd0cc73e0acdc7">   13</a></span>&#160;    qreal <a class="code" href="class_drawing_through_a_disk.html#a00cff0f0905fd45989bd0cc73e0acdc7">m_curentPictureWidth</a>;</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_drawing_through_a_disk.html#a9eef0b8237b362c90a70e8fdeb0c4fbd">   14</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_drawing_through_a_disk.html#a9eef0b8237b362c90a70e8fdeb0c4fbd">m_updatedParam</a>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_drawing_through_a_disk.html#ab71edd4f065cbdef817592181405565d">   15</a></span>&#160;    QStringList <a class="code" href="class_drawing_through_a_disk.html#ab71edd4f065cbdef817592181405565d">m_picturePath</a>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_drawing_through_a_disk.html#a1ae608d57b55cffe07a25c09f48fe58a">   16</a></span>&#160;    <span class="keyword">const</span> uint16_t <a class="code" href="class_drawing_through_a_disk.html#a1ae608d57b55cffe07a25c09f48fe58a">M_HEIGHT_PICTURE</a> = 16000;</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_drawing_through_a_disk.html#a310d1537f9d22ae2ae74142f12761730">   17</a></span>&#160;    uint16_t <a class="code" href="class_drawing_through_a_disk.html#a310d1537f9d22ae2ae74142f12761730">m_lengthOverlay</a>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_drawing_through_a_disk.html#a91391dc1415231fcaabc406a291494b1">   18</a></span>&#160;    qreal <a class="code" href="class_drawing_through_a_disk.html#a91391dc1415231fcaabc406a291494b1">m_curentDrawPersent</a>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_drawing_through_a_disk.html#a2f2b413df4deb30c1c1ef3012ab9fb2d">   19</a></span>&#160;    <span class="keyword">volatile</span> <span class="keywordtype">bool</span> <a class="code" href="class_drawing_through_a_disk.html#a2f2b413df4deb30c1c1ef3012ab9fb2d">m_saversMoment</a>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="class_drawing_through_a_disk.html#abdb141a74290e0480f885dd6915308b3">DrawingThroughADisk</a>();</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="class_drawing_through_a_disk.html#a40136a2d549fd32f8127b74560d37a11">   24</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_drawing_through_a_disk.html#a40136a2d549fd32f8127b74560d37a11">~DrawingThroughADisk</a>()<span class="keyword">override</span>{}</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="class_drawing_through_a_disk.html#a9d427b6122d497d2642ab2996e1e0984">   26</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_drawing_through_a_disk.html#a9d427b6122d497d2642ab2996e1e0984">loadDrawingParam</a>(<span class="keywordtype">int</span> width){Q_UNUSED(width)}</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="class_drawing_through_a_disk.html#afef539c0c7447dd3bc908413121a5e13">   27</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_drawing_through_a_disk.html#afef539c0c7447dd3bc908413121a5e13">drawOnTheDisk</a>(){}</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;signals:</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="class_drawing_through_a_disk.html#a029518b577b4266e23a6b5ee76d7a418">   29</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_drawing_through_a_disk.html#a029518b577b4266e23a6b5ee76d7a418">dataHardDiscReady</a>();</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_drawing_through_a_disk.html#aa77855d1fac11037774f890e7127d2f3">endThreadHandler</a>();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;};</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// DRAWINGTHROUGHADISK_H</span></div>
+<div class="ttc" id="aclass_drawing_through_a_disk_html"><div class="ttname"><a href="class_drawing_through_a_disk.html">DrawingThroughADisk</a></div><div class="ttdef"><b>Definition:</b> drawingthroughadisk.h:7</div></div>
+<div class="ttc" id="aclass_drawing_through_a_disk_html_a00cff0f0905fd45989bd0cc73e0acdc7"><div class="ttname"><a href="class_drawing_through_a_disk.html#a00cff0f0905fd45989bd0cc73e0acdc7">DrawingThroughADisk::m_curentPictureWidth</a></div><div class="ttdeci">qreal m_curentPictureWidth</div><div class="ttdef"><b>Definition:</b> drawingthroughadisk.h:13</div></div>
+<div class="ttc" id="aclass_drawing_through_a_disk_html_a029518b577b4266e23a6b5ee76d7a418"><div class="ttname"><a href="class_drawing_through_a_disk.html#a029518b577b4266e23a6b5ee76d7a418">DrawingThroughADisk::dataHardDiscReady</a></div><div class="ttdeci">void dataHardDiscReady()</div></div>
+<div class="ttc" id="aclass_drawing_through_a_disk_html_a10ebbbbde7e1bb90d0fef86baf9bf8a1"><div class="ttname"><a href="class_drawing_through_a_disk.html#a10ebbbbde7e1bb90d0fef86baf9bf8a1">DrawingThroughADisk::m_isRedraw</a></div><div class="ttdeci">bool m_isRedraw</div><div class="ttdef"><b>Definition:</b> drawingthroughadisk.h:12</div></div>
+<div class="ttc" id="aclass_drawing_through_a_disk_html_a1ae608d57b55cffe07a25c09f48fe58a"><div class="ttname"><a href="class_drawing_through_a_disk.html#a1ae608d57b55cffe07a25c09f48fe58a">DrawingThroughADisk::M_HEIGHT_PICTURE</a></div><div class="ttdeci">const uint16_t M_HEIGHT_PICTURE</div><div class="ttdef"><b>Definition:</b> drawingthroughadisk.h:16</div></div>
+<div class="ttc" id="aclass_drawing_through_a_disk_html_a2f2b413df4deb30c1c1ef3012ab9fb2d"><div class="ttname"><a href="class_drawing_through_a_disk.html#a2f2b413df4deb30c1c1ef3012ab9fb2d">DrawingThroughADisk::m_saversMoment</a></div><div class="ttdeci">volatile bool m_saversMoment</div><div class="ttdef"><b>Definition:</b> drawingthroughadisk.h:19</div></div>
+<div class="ttc" id="aclass_drawing_through_a_disk_html_a310d1537f9d22ae2ae74142f12761730"><div class="ttname"><a href="class_drawing_through_a_disk.html#a310d1537f9d22ae2ae74142f12761730">DrawingThroughADisk::m_lengthOverlay</a></div><div class="ttdeci">uint16_t m_lengthOverlay</div><div class="ttdef"><b>Definition:</b> drawingthroughadisk.h:17</div></div>
+<div class="ttc" id="aclass_drawing_through_a_disk_html_a40136a2d549fd32f8127b74560d37a11"><div class="ttname"><a href="class_drawing_through_a_disk.html#a40136a2d549fd32f8127b74560d37a11">DrawingThroughADisk::~DrawingThroughADisk</a></div><div class="ttdeci">virtual ~DrawingThroughADisk() override</div><div class="ttdef"><b>Definition:</b> drawingthroughadisk.h:24</div></div>
+<div class="ttc" id="aclass_drawing_through_a_disk_html_a5e62350fc16e1dbcc3bc943f30a9e085"><div class="ttname"><a href="class_drawing_through_a_disk.html#a5e62350fc16e1dbcc3bc943f30a9e085">DrawingThroughADisk::m_isEndThread</a></div><div class="ttdeci">bool m_isEndThread</div><div class="ttdef"><b>Definition:</b> drawingthroughadisk.h:12</div></div>
+<div class="ttc" id="aclass_drawing_through_a_disk_html_a91391dc1415231fcaabc406a291494b1"><div class="ttname"><a href="class_drawing_through_a_disk.html#a91391dc1415231fcaabc406a291494b1">DrawingThroughADisk::m_curentDrawPersent</a></div><div class="ttdeci">qreal m_curentDrawPersent</div><div class="ttdef"><b>Definition:</b> drawingthroughadisk.h:18</div></div>
+<div class="ttc" id="aclass_drawing_through_a_disk_html_a9d427b6122d497d2642ab2996e1e0984"><div class="ttname"><a href="class_drawing_through_a_disk.html#a9d427b6122d497d2642ab2996e1e0984">DrawingThroughADisk::loadDrawingParam</a></div><div class="ttdeci">virtual void loadDrawingParam(int width)</div><div class="ttdef"><b>Definition:</b> drawingthroughadisk.h:26</div></div>
+<div class="ttc" id="aclass_drawing_through_a_disk_html_a9eef0b8237b362c90a70e8fdeb0c4fbd"><div class="ttname"><a href="class_drawing_through_a_disk.html#a9eef0b8237b362c90a70e8fdeb0c4fbd">DrawingThroughADisk::m_updatedParam</a></div><div class="ttdeci">bool m_updatedParam</div><div class="ttdef"><b>Definition:</b> drawingthroughadisk.h:14</div></div>
+<div class="ttc" id="aclass_drawing_through_a_disk_html_aa77855d1fac11037774f890e7127d2f3"><div class="ttname"><a href="class_drawing_through_a_disk.html#aa77855d1fac11037774f890e7127d2f3">DrawingThroughADisk::endThreadHandler</a></div><div class="ttdeci">virtual void endThreadHandler()</div><div class="ttdef"><b>Definition:</b> drawingthroughadisk.cpp:15</div></div>
+<div class="ttc" id="aclass_drawing_through_a_disk_html_ab71edd4f065cbdef817592181405565d"><div class="ttname"><a href="class_drawing_through_a_disk.html#ab71edd4f065cbdef817592181405565d">DrawingThroughADisk::m_picturePath</a></div><div class="ttdeci">QStringList m_picturePath</div><div class="ttdef"><b>Definition:</b> drawingthroughadisk.h:15</div></div>
+<div class="ttc" id="aclass_drawing_through_a_disk_html_abdb141a74290e0480f885dd6915308b3"><div class="ttname"><a href="class_drawing_through_a_disk.html#abdb141a74290e0480f885dd6915308b3">DrawingThroughADisk::DrawingThroughADisk</a></div><div class="ttdeci">DrawingThroughADisk()</div><div class="ttdef"><b>Definition:</b> drawingthroughadisk.cpp:6</div></div>
+<div class="ttc" id="aclass_drawing_through_a_disk_html_aeabd5dc97cf2e41e5fc7e525b2b13774"><div class="ttname"><a href="class_drawing_through_a_disk.html#aeabd5dc97cf2e41e5fc7e525b2b13774">DrawingThroughADisk::m_uid</a></div><div class="ttdeci">QString m_uid</div><div class="ttdef"><b>Definition:</b> drawingthroughadisk.h:11</div></div>
+<div class="ttc" id="aclass_drawing_through_a_disk_html_afef539c0c7447dd3bc908413121a5e13"><div class="ttname"><a href="class_drawing_through_a_disk.html#afef539c0c7447dd3bc908413121a5e13">DrawingThroughADisk::drawOnTheDisk</a></div><div class="ttdeci">virtual void drawOnTheDisk()</div><div class="ttdef"><b>Definition:</b> drawingthroughadisk.h:27</div></div>
+<div class="ttc" id="aclass_q_thread_html"><div class="ttname"><a href="class_q_thread.html">QThread</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

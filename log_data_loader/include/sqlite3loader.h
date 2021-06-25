@@ -7,7 +7,7 @@ class QSqlDatabase;
 class QSettings;
 class ICurve;
 class Desc;
-
+class ShortCut;
 /*!
 *	\authors Пряников Алексей Владимирович
 *
@@ -39,6 +39,12 @@ public:
      *  дополнительные параметры кривой. См.class Desc
      */
     Desc *loadDesc(int curveIndex);
+    /*!
+     * \param[in] index Первичный ключ кривой в базе данных.
+     * \param[out] Экземпляр класса, который содержит
+     *  дополнительные параметры кривой. См.class ShortCut
+     */
+    ShortCut *loadShortCut(int curveIndex);
 
 };
 

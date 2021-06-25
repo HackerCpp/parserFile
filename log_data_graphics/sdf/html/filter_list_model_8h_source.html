@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_GRAPHICS: Исходный файл E:/MyQtProgram/parserGfm/log_data_graphics/inc/spectrReader/filterListModel.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_GRAPHICS
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_53603dfb3fbca8a964ef75a71799598b.html">log_data_graphics</a></li><li class="navelem"><a class="el" href="dir_55342455956423183f7a145b2d21cf95.html">inc</a></li><li class="navelem"><a class="el" href="dir_f2ae106b4003225912847c6f66e2461a.html">spectrReader</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">filterListModel.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="filter_list_model_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef FILTER_MODEL_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define FILTER_MODEL_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;QAbstractListModel&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="agraphicitem_8h.html">agraphicitem.h</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="struct_filter_info.html">    6</a></span>&#160;<span class="keyword">struct </span><a class="code" href="struct_filter_info.html">FilterInfo</a>{</div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="struct_filter_info.html#a5e07cac3edbe1951cde000242c2d3136">    7</a></span>&#160;    QString <a class="code" href="struct_filter_info.html#a5e07cac3edbe1951cde000242c2d3136">name</a>;</div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="struct_filter_info.html#aa205a4af05f9da3dca77eba00c931cb5">    8</a></span>&#160;    qreal <a class="code" href="struct_filter_info.html#aa205a4af05f9da3dca77eba00c931cb5">left</a>;</div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="struct_filter_info.html#a56f7a0e25e883bbc6ef56a0cd5bf2082">    9</a></span>&#160;    qreal <a class="code" href="struct_filter_info.html#a56f7a0e25e883bbc6ef56a0cd5bf2082">right</a>;</div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="struct_filter_info.html#abd0237df72348c8332282c8645ee1f85">   10</a></span>&#160;    qreal <a class="code" href="struct_filter_info.html#abd0237df72348c8332282c8645ee1f85">up</a>;</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="struct_filter_info.html#a23a861c4a6951c590ae8c3b10cdc2790">   11</a></span>&#160;    qreal <a class="code" href="struct_filter_info.html#a23a861c4a6951c590ae8c3b10cdc2790">down</a>;</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="struct_filter_info.html#a4032da9db6ce2171e19c097d9add7f09">   12</a></span>&#160;    qreal <a class="code" href="struct_filter_info.html#a4032da9db6ce2171e19c097d9add7f09">param1</a>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="struct_filter_info.html#a9bc7296dce6dfc0d1fb5392cb14c742a">   13</a></span>&#160;    qreal <a class="code" href="struct_filter_info.html#a9bc7296dce6dfc0d1fb5392cb14c742a">param2</a>;</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="struct_filter_info.html#a00b9ad1f01788790201759e867657021">   14</a></span>&#160;    qreal <a class="code" href="struct_filter_info.html#a00b9ad1f01788790201759e867657021">param3</a>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="struct_filter_info.html#a4cc3548488e9591b7d2b1f300833e2d4">   15</a></span>&#160;    QString <a class="code" href="struct_filter_info.html#a4cc3548488e9591b7d2b1f300833e2d4">path</a>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;};</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_filter_list_model.html">   18</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_filter_list_model.html">FilterListModel</a> : <span class="keyword">public</span> <a class="code" href="class_q_abstract_list_model.html">QAbstractListModel</a>{</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    QVector&lt;FilterInfo &gt; *m_vectorFilters;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    QStringList m_headerList;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="class_filter_list_model.html#a13a4209b432607256f01cc21cfdc690e">FilterListModel</a>();</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_filter_list_model.html#aa88f9b4ca6837d746479391d7e36555f">~FilterListModel</a>()<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    QVariant <a class="code" href="class_filter_list_model.html#aee492230038739ac6507eb4cd6c595dd">data</a>(<span class="keyword">const</span> QModelIndex &amp;index, <span class="keywordtype">int</span> role = Qt::DisplayRole) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_filter_list_model.html#a098271d257277ef1de8ea2b02c44112a">rowCount</a>(<span class="keyword">const</span> QModelIndex &amp;parent = QModelIndex()) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_filter_list_model.html#aaa651653a551a18c562c117fad7e9a3b">columnCount</a>(<span class="keyword">const</span> QModelIndex &amp;parent = QModelIndex()) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    QVariant <a class="code" href="class_filter_list_model.html#a68bcd5239297b3cc281aac89dcdb2acd">headerData</a>(<span class="keywordtype">int</span> section, Qt::Orientation orientation, <span class="keywordtype">int</span> role) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    Qt::ItemFlags <a class="code" href="class_filter_list_model.html#a53e327bfa28577c58851073fdc64c9e4">flags</a>(<span class="keyword">const</span> QModelIndex &amp;index) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_filter_list_model.html#af2b74deab2a407685d14a195be18fdd2">setData</a>(<span class="keyword">const</span> QModelIndex &amp;index, <span class="keyword">const</span> QVariant &amp;value, <span class="keywordtype">int</span> role = Qt::EditRole)<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_filter_list_model.html#a5739d767325381c114313bab69aafdea">insertFilter</a>(<a class="code" href="struct_filter_info.html">FilterInfo</a> newFilter);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_filter_list_model.html#aaf79d0c3041dae9762f2a6ed3ed3d973">removeFilter</a>(<span class="keywordtype">int</span> index);</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="class_filter_list_model.html#a9d38955a56619521e5aa26870b68cfb8">   36</a></span>&#160;    QVector&lt;FilterInfo &gt; *<a class="code" href="class_filter_list_model.html#a9d38955a56619521e5aa26870b68cfb8">filters</a>(){<span class="keywordflow">return</span> m_vectorFilters;}</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_filter_list_model.html#a9031c1557bb557425340126a3739f367">changeBorderFilters</a>(QList&lt;int&gt; listSelectedRows,QPoint leftTop,QPoint rightBottom);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;};</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aagraphicitem_8h_html"><div class="ttname"><a href="agraphicitem_8h.html">agraphicitem.h</a></div></div>
+<div class="ttc" id="aclass_filter_list_model_html"><div class="ttname"><a href="class_filter_list_model.html">FilterListModel</a></div><div class="ttdef"><b>Definition:</b> filterListModel.h:18</div></div>
+<div class="ttc" id="aclass_filter_list_model_html_a098271d257277ef1de8ea2b02c44112a"><div class="ttname"><a href="class_filter_list_model.html#a098271d257277ef1de8ea2b02c44112a">FilterListModel::rowCount</a></div><div class="ttdeci">int rowCount(const QModelIndex &amp;parent=QModelIndex()) const override</div><div class="ttdef"><b>Definition:</b> filterListModel.cpp:56</div></div>
+<div class="ttc" id="aclass_filter_list_model_html_a13a4209b432607256f01cc21cfdc690e"><div class="ttname"><a href="class_filter_list_model.html#a13a4209b432607256f01cc21cfdc690e">FilterListModel::FilterListModel</a></div><div class="ttdeci">FilterListModel()</div><div class="ttdef"><b>Definition:</b> filterListModel.cpp:5</div></div>
+<div class="ttc" id="aclass_filter_list_model_html_a53e327bfa28577c58851073fdc64c9e4"><div class="ttname"><a href="class_filter_list_model.html#a53e327bfa28577c58851073fdc64c9e4">FilterListModel::flags</a></div><div class="ttdeci">Qt::ItemFlags flags(const QModelIndex &amp;index) const override</div><div class="ttdef"><b>Definition:</b> filterListModel.cpp:78</div></div>
+<div class="ttc" id="aclass_filter_list_model_html_a5739d767325381c114313bab69aafdea"><div class="ttname"><a href="class_filter_list_model.html#a5739d767325381c114313bab69aafdea">FilterListModel::insertFilter</a></div><div class="ttdeci">void insertFilter(FilterInfo newFilter)</div><div class="ttdef"><b>Definition:</b> filterListModel.cpp:141</div></div>
+<div class="ttc" id="aclass_filter_list_model_html_a68bcd5239297b3cc281aac89dcdb2acd"><div class="ttname"><a href="class_filter_list_model.html#a68bcd5239297b3cc281aac89dcdb2acd">FilterListModel::headerData</a></div><div class="ttdeci">QVariant headerData(int section, Qt::Orientation orientation, int role) const override</div><div class="ttdef"><b>Definition:</b> filterListModel.cpp:66</div></div>
+<div class="ttc" id="aclass_filter_list_model_html_a9031c1557bb557425340126a3739f367"><div class="ttname"><a href="class_filter_list_model.html#a9031c1557bb557425340126a3739f367">FilterListModel::changeBorderFilters</a></div><div class="ttdeci">void changeBorderFilters(QList&lt; int &gt; listSelectedRows, QPoint leftTop, QPoint rightBottom)</div><div class="ttdef"><b>Definition:</b> filterListModel.cpp:157</div></div>
+<div class="ttc" id="aclass_filter_list_model_html_a9d38955a56619521e5aa26870b68cfb8"><div class="ttname"><a href="class_filter_list_model.html#a9d38955a56619521e5aa26870b68cfb8">FilterListModel::filters</a></div><div class="ttdeci">QVector&lt; FilterInfo &gt; * filters()</div><div class="ttdef"><b>Definition:</b> filterListModel.h:36</div></div>
+<div class="ttc" id="aclass_filter_list_model_html_aa88f9b4ca6837d746479391d7e36555f"><div class="ttname"><a href="class_filter_list_model.html#aa88f9b4ca6837d746479391d7e36555f">FilterListModel::~FilterListModel</a></div><div class="ttdeci">~FilterListModel() override</div><div class="ttdef"><b>Definition:</b> filterListModel.cpp:13</div></div>
+<div class="ttc" id="aclass_filter_list_model_html_aaa651653a551a18c562c117fad7e9a3b"><div class="ttname"><a href="class_filter_list_model.html#aaa651653a551a18c562c117fad7e9a3b">FilterListModel::columnCount</a></div><div class="ttdeci">int columnCount(const QModelIndex &amp;parent=QModelIndex()) const override</div><div class="ttdef"><b>Definition:</b> filterListModel.cpp:61</div></div>
+<div class="ttc" id="aclass_filter_list_model_html_aaf79d0c3041dae9762f2a6ed3ed3d973"><div class="ttname"><a href="class_filter_list_model.html#aaf79d0c3041dae9762f2a6ed3ed3d973">FilterListModel::removeFilter</a></div><div class="ttdeci">void removeFilter(int index)</div><div class="ttdef"><b>Definition:</b> filterListModel.cpp:149</div></div>
+<div class="ttc" id="aclass_filter_list_model_html_aee492230038739ac6507eb4cd6c595dd"><div class="ttname"><a href="class_filter_list_model.html#aee492230038739ac6507eb4cd6c595dd">FilterListModel::data</a></div><div class="ttdeci">QVariant data(const QModelIndex &amp;index, int role=Qt::DisplayRole) const override</div><div class="ttdef"><b>Definition:</b> filterListModel.cpp:17</div></div>
+<div class="ttc" id="aclass_filter_list_model_html_af2b74deab2a407685d14a195be18fdd2"><div class="ttname"><a href="class_filter_list_model.html#af2b74deab2a407685d14a195be18fdd2">FilterListModel::setData</a></div><div class="ttdeci">bool setData(const QModelIndex &amp;index, const QVariant &amp;value, int role=Qt::EditRole) override</div><div class="ttdef"><b>Definition:</b> filterListModel.cpp:93</div></div>
+<div class="ttc" id="aclass_q_abstract_list_model_html"><div class="ttname"><a href="class_q_abstract_list_model.html">QAbstractListModel</a></div></div>
+<div class="ttc" id="astruct_filter_info_html"><div class="ttname"><a href="struct_filter_info.html">FilterInfo</a></div><div class="ttdef"><b>Definition:</b> filterListModel.h:6</div></div>
+<div class="ttc" id="astruct_filter_info_html_a00b9ad1f01788790201759e867657021"><div class="ttname"><a href="struct_filter_info.html#a00b9ad1f01788790201759e867657021">FilterInfo::param3</a></div><div class="ttdeci">qreal param3</div><div class="ttdef"><b>Definition:</b> filterListModel.h:14</div></div>
+<div class="ttc" id="astruct_filter_info_html_a23a861c4a6951c590ae8c3b10cdc2790"><div class="ttname"><a href="struct_filter_info.html#a23a861c4a6951c590ae8c3b10cdc2790">FilterInfo::down</a></div><div class="ttdeci">qreal down</div><div class="ttdef"><b>Definition:</b> filterListModel.h:11</div></div>
+<div class="ttc" id="astruct_filter_info_html_a4032da9db6ce2171e19c097d9add7f09"><div class="ttname"><a href="struct_filter_info.html#a4032da9db6ce2171e19c097d9add7f09">FilterInfo::param1</a></div><div class="ttdeci">qreal param1</div><div class="ttdef"><b>Definition:</b> filterListModel.h:12</div></div>
+<div class="ttc" id="astruct_filter_info_html_a4cc3548488e9591b7d2b1f300833e2d4"><div class="ttname"><a href="struct_filter_info.html#a4cc3548488e9591b7d2b1f300833e2d4">FilterInfo::path</a></div><div class="ttdeci">QString path</div><div class="ttdef"><b>Definition:</b> filterListModel.h:15</div></div>
+<div class="ttc" id="astruct_filter_info_html_a56f7a0e25e883bbc6ef56a0cd5bf2082"><div class="ttname"><a href="struct_filter_info.html#a56f7a0e25e883bbc6ef56a0cd5bf2082">FilterInfo::right</a></div><div class="ttdeci">qreal right</div><div class="ttdef"><b>Definition:</b> filterListModel.h:9</div></div>
+<div class="ttc" id="astruct_filter_info_html_a5e07cac3edbe1951cde000242c2d3136"><div class="ttname"><a href="struct_filter_info.html#a5e07cac3edbe1951cde000242c2d3136">FilterInfo::name</a></div><div class="ttdeci">QString name</div><div class="ttdef"><b>Definition:</b> filterListModel.h:7</div></div>
+<div class="ttc" id="astruct_filter_info_html_a9bc7296dce6dfc0d1fb5392cb14c742a"><div class="ttname"><a href="struct_filter_info.html#a9bc7296dce6dfc0d1fb5392cb14c742a">FilterInfo::param2</a></div><div class="ttdeci">qreal param2</div><div class="ttdef"><b>Definition:</b> filterListModel.h:13</div></div>
+<div class="ttc" id="astruct_filter_info_html_aa205a4af05f9da3dca77eba00c931cb5"><div class="ttname"><a href="struct_filter_info.html#aa205a4af05f9da3dca77eba00c931cb5">FilterInfo::left</a></div><div class="ttdeci">qreal left</div><div class="ttdef"><b>Definition:</b> filterListModel.h:8</div></div>
+<div class="ttc" id="astruct_filter_info_html_abd0237df72348c8332282c8645ee1f85"><div class="ttname"><a href="struct_filter_info.html#abd0237df72348c8332282c8645ee1f85">FilterInfo::up</a></div><div class="ttdeci">qreal up</div><div class="ttdef"><b>Definition:</b> filterListModel.h:10</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

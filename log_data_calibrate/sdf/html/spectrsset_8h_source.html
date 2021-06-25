@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_CALIBRATE: Исходный файл E:/MyQtProgram/parserGfm/log_data_calibrate/src/spectrsset.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_CALIBRATE
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_2d0751fb3bbd35f5629786370ddff2ab.html">log_data_calibrate</a></li><li class="navelem"><a class="el" href="dir_8a129a56028b7b1f9377e01dcb8ce97e.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">spectrsset.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="spectrsset_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SPECTRSSET_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SPECTRSSET_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QWidget&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QSplitter&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QHBoxLayout&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;QSlider&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;QSpinBox&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="coefficientsdisplaying_8h.html">coefficientsdisplaying.h</a>&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;QMenu&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="coeffs_8h.html">coeffs.h</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="protocolnoise_8h.html">protocolnoise.h</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">class </span>ICurve;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">class </span>OneWaveWidget;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">class </span>QCheckBox;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">class </span>QPushButton;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">class </span>QComboBox;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="class_spectrs_set.html">   23</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_spectrs_set.html">SpectrsSet</a> : <span class="keyword">public</span> <a class="code" href="class_q_widget.html">QWidget</a></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    QVector&lt;CoeffsLinearDependence&gt; *m_upCoeffs;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    QVector&lt;CoeffsLinearDependence&gt; *m_downCoeffs;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    QSplitter *m_mainSplitter;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    QHBoxLayout *m_mainHLayout;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    QSlider *m_slider;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    OneWaveWidget *m_oneWave;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="class_q_widget.html">QWidget</a> *m_widgetInfo;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    QHBoxLayout *m_layoutInfo;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    QSpinBox *m_spinNumber;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    QCheckBox *m_checkBox;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    QComboBox *m_comboMode;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    QPushButton *m_btnLoadReference,*m_btnSaveResult,</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    *m_btnCalcCoeffs, *m_btnApplyOrigin,<span class="comment">/*m_btnSaveCalib,*/</span>*m_btnOpenProtocol,</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    *m_btnLoadCoeffs,*m_btnCalcResult;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    QVector&lt;QVector&lt;Qt::CheckState&gt; *&gt; m_useVectors{<a class="code" href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efca4273153519c72c5aa491e12fa7253a28">TYPE_SPECTRUM_MAX</a>};</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    QVector&lt;Qt::CheckState&gt; *m_currentUseVector;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    QVector&lt;ICurve*&gt; m_sourceSpectrums{<a class="code" href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efca4273153519c72c5aa491e12fa7253a28">TYPE_SPECTRUM_MAX</a>,<span class="keyword">nullptr</span>};</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    QVector&lt;ICurve*&gt; m_approximatedSpectrums{<a class="code" href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efca4273153519c72c5aa491e12fa7253a28">TYPE_SPECTRUM_MAX</a>,<span class="keyword">nullptr</span>};</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    QVector&lt;ICurve*&gt; m_referenceSpectrums{<a class="code" href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efca4273153519c72c5aa491e12fa7253a28">TYPE_SPECTRUM_MAX</a>,<span class="keyword">nullptr</span>};</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    QStringList m_referMnemonics,m_approximatedMnemonics,m_sourceMnemonics;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    ICurve *m_originalSpectr,*m_duplicateSpectr;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">int</span> m_idReference, m_idOriginal;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="class_coefficients_displaying.html">CoefficientsDisplaying</a> * m_coeffDispl;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    QMenu m_menu;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">void</span> calculateAccumulationMaximum(ICurve *spctrSrc,ICurve *spctrDst,QVector&lt;Qt::CheckState&gt; *useVector);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> calculateAccumulationAverage(ICurve *spctrSrc,ICurve *spctrDst,QVector&lt;Qt::CheckState&gt; *useVector);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> calcCoeffLinePolinom(qreal x1,qreal x2,qreal y1,qreal y2,<a class="code" href="struct_coeffs_linear_dependence.html">CoeffsLinearDependence</a> &amp;k);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_spectrs_set.html#a0fdd8b8f1fac91f3ced1748d12b98b0f">SpectrsSet</a>(ICurve *curve,<a class="code" href="class_q_widget.html">QWidget</a> *parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectrs_set.html#aa7e0c68c6ba451eed67d58ada9637c21">mousePressEvent</a>(QMouseEvent *event) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectrs_set.html#ab7b70fc9507e7fd5a575a9624eb3f2a5">mouseDoubleClickEvent</a>(QMouseEvent *event) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectrs_set.html#ad04309f6f15c79784695b2a9eadf4b74">wheelEvent</a>(QWheelEvent *event) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectrs_set.html#a418da0c1265239f431c1f8365334f9f9">showCoeffs</a>();</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectrs_set.html#add45085bcd855290e8d83f5cea676f33">changePosition</a>(<span class="keywordtype">int</span> value);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectrs_set.html#a7436e67c568c06ab8d87feee7a991a82">useSpectrumsChange</a>(<span class="keywordtype">bool</span> toggled);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectrs_set.html#aad45eb0bf0a17912ce05476588ebc976">loadReference</a>();</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectrs_set.html#aa7e374e9a09b4a2d58a06c88e7b4efac">saveResult</a>();</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectrs_set.html#a53d8fe703ae887fa02c7c2b6124838a4">calcCoeffs</a>();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectrs_set.html#acec6662684075dbdd2cd318a175ecee2">changeCalcFun</a>(QString text);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectrs_set.html#aca091f89c5e83c3132f1ecf67ff46bc7">applyCoeffsDuplicateSpectrum</a>();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectrs_set.html#abe24e19b155b3651e6c04736b96a15ab">applyOrigin</a>();</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="comment">//void saveCalib();</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectrs_set.html#ad0f7be8a54d36faf890ba5e7a3ab69d8">openProtocol</a>();</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectrs_set.html#a828f0c1c6caefd8cc4cca7f79f04fae4">loadCoeffs</a>();</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectrs_set.html#a0b536446723a47e6c0c20e4c63641852">calcResult</a>();</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectrs_set.html#a3da52809128bf6f60732cb51bf58e3fb">useAllVectors</a>();</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectrs_set.html#a222f3d5711fcc5ec138b3e2c52266d16">removeAllVectors</a>();</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectrs_set.html#a738090ff9aebd6cde5df3422dc3edf60">useAllUp</a>();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectrs_set.html#af40aa7e90e43386a49986f1b47a0fbf5">removeAllUp</a>();</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectrs_set.html#afb8bc42ed7ec8646eebc8bb2f23b20b3">useAllDown</a>();</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectrs_set.html#ae7e70e8b453d17d2f7afb07bc6329a4f">removeAllDown</a>();</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;};</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// SPECTRSSET_H</span></div>
+<div class="ttc" id="aclass_coefficients_displaying_html"><div class="ttname"><a href="class_coefficients_displaying.html">CoefficientsDisplaying</a></div><div class="ttdef"><b>Definition:</b> coefficientsdisplaying.h:13</div></div>
+<div class="ttc" id="aclass_q_widget_html"><div class="ttname"><a href="class_q_widget.html">QWidget</a></div></div>
+<div class="ttc" id="aclass_spectrs_set_html"><div class="ttname"><a href="class_spectrs_set.html">SpectrsSet</a></div><div class="ttdef"><b>Definition:</b> spectrsset.h:24</div></div>
+<div class="ttc" id="aclass_spectrs_set_html_a0b536446723a47e6c0c20e4c63641852"><div class="ttname"><a href="class_spectrs_set.html#a0b536446723a47e6c0c20e4c63641852">SpectrsSet::calcResult</a></div><div class="ttdeci">void calcResult()</div><div class="ttdef"><b>Definition:</b> spectrsset.cpp:406</div></div>
+<div class="ttc" id="aclass_spectrs_set_html_a0fdd8b8f1fac91f3ced1748d12b98b0f"><div class="ttname"><a href="class_spectrs_set.html#a0fdd8b8f1fac91f3ced1748d12b98b0f">SpectrsSet::SpectrsSet</a></div><div class="ttdeci">SpectrsSet(ICurve *curve, QWidget *parent=nullptr)</div><div class="ttdef"><b>Definition:</b> spectrsset.cpp:16</div></div>
+<div class="ttc" id="aclass_spectrs_set_html_a222f3d5711fcc5ec138b3e2c52266d16"><div class="ttname"><a href="class_spectrs_set.html#a222f3d5711fcc5ec138b3e2c52266d16">SpectrsSet::removeAllVectors</a></div><div class="ttdeci">void removeAllVectors()</div><div class="ttdef"><b>Definition:</b> spectrsset.cpp:423</div></div>
+<div class="ttc" id="aclass_spectrs_set_html_a3da52809128bf6f60732cb51bf58e3fb"><div class="ttname"><a href="class_spectrs_set.html#a3da52809128bf6f60732cb51bf58e3fb">SpectrsSet::useAllVectors</a></div><div class="ttdeci">void useAllVectors()</div><div class="ttdef"><b>Definition:</b> spectrsset.cpp:417</div></div>
+<div class="ttc" id="aclass_spectrs_set_html_a418da0c1265239f431c1f8365334f9f9"><div class="ttname"><a href="class_spectrs_set.html#a418da0c1265239f431c1f8365334f9f9">SpectrsSet::showCoeffs</a></div><div class="ttdeci">void showCoeffs()</div><div class="ttdef"><b>Definition:</b> spectrsset.cpp:221</div></div>
+<div class="ttc" id="aclass_spectrs_set_html_a53d8fe703ae887fa02c7c2b6124838a4"><div class="ttname"><a href="class_spectrs_set.html#a53d8fe703ae887fa02c7c2b6124838a4">SpectrsSet::calcCoeffs</a></div><div class="ttdeci">void calcCoeffs()</div><div class="ttdef"><b>Definition:</b> spectrsset.cpp:264</div></div>
+<div class="ttc" id="aclass_spectrs_set_html_a738090ff9aebd6cde5df3422dc3edf60"><div class="ttname"><a href="class_spectrs_set.html#a738090ff9aebd6cde5df3422dc3edf60">SpectrsSet::useAllUp</a></div><div class="ttdeci">void useAllUp()</div><div class="ttdef"><b>Definition:</b> spectrsset.cpp:429</div></div>
+<div class="ttc" id="aclass_spectrs_set_html_a7436e67c568c06ab8d87feee7a991a82"><div class="ttname"><a href="class_spectrs_set.html#a7436e67c568c06ab8d87feee7a991a82">SpectrsSet::useSpectrumsChange</a></div><div class="ttdeci">void useSpectrumsChange(bool toggled)</div><div class="ttdef"><b>Definition:</b> spectrsset.cpp:131</div></div>
+<div class="ttc" id="aclass_spectrs_set_html_a828f0c1c6caefd8cc4cca7f79f04fae4"><div class="ttname"><a href="class_spectrs_set.html#a828f0c1c6caefd8cc4cca7f79f04fae4">SpectrsSet::loadCoeffs</a></div><div class="ttdeci">void loadCoeffs()</div><div class="ttdef"><b>Definition:</b> spectrsset.cpp:402</div></div>
+<div class="ttc" id="aclass_spectrs_set_html_aa7e0c68c6ba451eed67d58ada9637c21"><div class="ttname"><a href="class_spectrs_set.html#aa7e0c68c6ba451eed67d58ada9637c21">SpectrsSet::mousePressEvent</a></div><div class="ttdeci">void mousePressEvent(QMouseEvent *event) override</div><div class="ttdef"><b>Definition:</b> spectrsset.cpp:202</div></div>
+<div class="ttc" id="aclass_spectrs_set_html_aa7e374e9a09b4a2d58a06c88e7b4efac"><div class="ttname"><a href="class_spectrs_set.html#aa7e374e9a09b4a2d58a06c88e7b4efac">SpectrsSet::saveResult</a></div><div class="ttdeci">void saveResult()</div><div class="ttdef"><b>Definition:</b> spectrsset.cpp:252</div></div>
+<div class="ttc" id="aclass_spectrs_set_html_aad45eb0bf0a17912ce05476588ebc976"><div class="ttname"><a href="class_spectrs_set.html#aad45eb0bf0a17912ce05476588ebc976">SpectrsSet::loadReference</a></div><div class="ttdeci">void loadReference()</div><div class="ttdef"><b>Definition:</b> spectrsset.cpp:233</div></div>
+<div class="ttc" id="aclass_spectrs_set_html_ab7b70fc9507e7fd5a575a9624eb3f2a5"><div class="ttname"><a href="class_spectrs_set.html#ab7b70fc9507e7fd5a575a9624eb3f2a5">SpectrsSet::mouseDoubleClickEvent</a></div><div class="ttdeci">void mouseDoubleClickEvent(QMouseEvent *event) override</div><div class="ttdef"><b>Definition:</b> spectrsset.cpp:209</div></div>
+<div class="ttc" id="aclass_spectrs_set_html_abe24e19b155b3651e6c04736b96a15ab"><div class="ttname"><a href="class_spectrs_set.html#abe24e19b155b3651e6c04736b96a15ab">SpectrsSet::applyOrigin</a></div><div class="ttdeci">void applyOrigin()</div><div class="ttdef"><b>Definition:</b> spectrsset.cpp:347</div></div>
+<div class="ttc" id="aclass_spectrs_set_html_aca091f89c5e83c3132f1ecf67ff46bc7"><div class="ttname"><a href="class_spectrs_set.html#aca091f89c5e83c3132f1ecf67ff46bc7">SpectrsSet::applyCoeffsDuplicateSpectrum</a></div><div class="ttdeci">void applyCoeffsDuplicateSpectrum()</div><div class="ttdef"><b>Definition:</b> spectrsset.cpp:319</div></div>
+<div class="ttc" id="aclass_spectrs_set_html_acec6662684075dbdd2cd318a175ecee2"><div class="ttname"><a href="class_spectrs_set.html#acec6662684075dbdd2cd318a175ecee2">SpectrsSet::changeCalcFun</a></div><div class="ttdeci">void changeCalcFun(QString text)</div><div class="ttdef"><b>Definition:</b> spectrsset.cpp:310</div></div>
+<div class="ttc" id="aclass_spectrs_set_html_ad04309f6f15c79784695b2a9eadf4b74"><div class="ttname"><a href="class_spectrs_set.html#ad04309f6f15c79784695b2a9eadf4b74">SpectrsSet::wheelEvent</a></div><div class="ttdeci">void wheelEvent(QWheelEvent *event) override</div><div class="ttdef"><b>Definition:</b> spectrsset.cpp:216</div></div>
+<div class="ttc" id="aclass_spectrs_set_html_ad0f7be8a54d36faf890ba5e7a3ab69d8"><div class="ttname"><a href="class_spectrs_set.html#ad0f7be8a54d36faf890ba5e7a3ab69d8">SpectrsSet::openProtocol</a></div><div class="ttdeci">void openProtocol()</div><div class="ttdef"><b>Definition:</b> spectrsset.cpp:381</div></div>
+<div class="ttc" id="aclass_spectrs_set_html_add45085bcd855290e8d83f5cea676f33"><div class="ttname"><a href="class_spectrs_set.html#add45085bcd855290e8d83f5cea676f33">SpectrsSet::changePosition</a></div><div class="ttdeci">void changePosition(int value)</div><div class="ttdef"><b>Definition:</b> spectrsset.cpp:124</div></div>
+<div class="ttc" id="aclass_spectrs_set_html_ae7e70e8b453d17d2f7afb07bc6329a4f"><div class="ttname"><a href="class_spectrs_set.html#ae7e70e8b453d17d2f7afb07bc6329a4f">SpectrsSet::removeAllDown</a></div><div class="ttdeci">void removeAllDown()</div><div class="ttdef"><b>Definition:</b> spectrsset.cpp:450</div></div>
+<div class="ttc" id="aclass_spectrs_set_html_af40aa7e90e43386a49986f1b47a0fbf5"><div class="ttname"><a href="class_spectrs_set.html#af40aa7e90e43386a49986f1b47a0fbf5">SpectrsSet::removeAllUp</a></div><div class="ttdeci">void removeAllUp()</div><div class="ttdef"><b>Definition:</b> spectrsset.cpp:436</div></div>
+<div class="ttc" id="aclass_spectrs_set_html_afb8bc42ed7ec8646eebc8bb2f23b20b3"><div class="ttname"><a href="class_spectrs_set.html#afb8bc42ed7ec8646eebc8bb2f23b20b3">SpectrsSet::useAllDown</a></div><div class="ttdeci">void useAllDown()</div><div class="ttdef"><b>Definition:</b> spectrsset.cpp:443</div></div>
+<div class="ttc" id="acoefficientsdisplaying_8h_html"><div class="ttname"><a href="coefficientsdisplaying_8h.html">coefficientsdisplaying.h</a></div></div>
+<div class="ttc" id="acoeffs_8h_html"><div class="ttname"><a href="coeffs_8h.html">coeffs.h</a></div></div>
+<div class="ttc" id="aprotocolinfo_8h_html_a5bcc7bbc6df6703aa7f6d54f7d8c3efca4273153519c72c5aa491e12fa7253a28"><div class="ttname"><a href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efca4273153519c72c5aa491e12fa7253a28">TYPE_SPECTRUM_MAX</a></div><div class="ttdeci">@ TYPE_SPECTRUM_MAX</div><div class="ttdef"><b>Definition:</b> protocolinfo.h:15</div></div>
+<div class="ttc" id="aprotocolnoise_8h_html"><div class="ttname"><a href="protocolnoise_8h.html">protocolnoise.h</a></div></div>
+<div class="ttc" id="astruct_coeffs_linear_dependence_html"><div class="ttname"><a href="struct_coeffs_linear_dependence.html">CoeffsLinearDependence</a></div><div class="ttdef"><b>Definition:</b> coeffs.h:6</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

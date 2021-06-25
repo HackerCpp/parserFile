@@ -1,0 +1,12 @@
+<map id="ObjectOfTheBoard" name="ObjectOfTheBoard">
+<area shape="rect" id="node1" title=" " alt="" coords="428,80,567,107"/>
+<area shape="rect" id="node4" href="$class_a_graphic_track.html" title=" " alt="" coords="5,155,120,181"/>
+<area shape="rect" id="node6" href="$class_counting_acoustics_item.html" title=" " alt="" coords="145,155,314,181"/>
+<area shape="rect" id="node7" href="$class_graphic_item_for_spectr.html" title=" " alt="" coords="339,155,501,181"/>
+<area shape="rect" id="node8" href="$class_header_item.html" title=" " alt="" coords="525,155,624,181"/>
+<area shape="rect" id="node9" href="$class_l_d_label_item.html" title=" " alt="" coords="649,155,751,181"/>
+<area shape="rect" id="node10" href="$class_ruler.html" title=" " alt="" coords="775,155,830,181"/>
+<area shape="rect" id="node2" href="$class_q_thread.html" title=" " alt="" coords="399,5,475,32"/>
+<area shape="rect" id="node3" href="$class_q_graphics_item.html" title=" " alt="" coords="500,5,617,32"/>
+<area shape="rect" id="node5" href="$class_vertical_track.html" title=" " alt="" coords="11,229,115,256"/>
+</map>

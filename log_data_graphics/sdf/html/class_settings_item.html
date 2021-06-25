@@ -1,0 +1,741 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_GRAPHICS: Класс SettingsItem</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_GRAPHICS
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="#pub-static-methods">Открытые статические члены</a> &#124;
+<a href="#pro-methods">Защищенные члены</a> &#124;
+<a href="#pro-attribs">Защищенные данные</a> &#124;
+<a href="class_settings_item-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle">
+<div class="title">Класс SettingsItem</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="settingsitem_8h_source.html">settingsitem.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:SettingsItem:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_settings_item__inherit__graph.png" border="0" usemap="#a_settings_item_inherit__map" alt="Inheritance graph"/></div>
+<map name="a_settings_item_inherit__map" id="a_settings_item_inherit__map">
+<area shape="rect" title=" " alt="" coords="171,80,275,107"/>
+<area shape="rect" href="class_settings_acu_item.html" title=" " alt="" coords="5,155,133,181"/>
+<area shape="rect" href="class_settings_line_item.html" title=" " alt="" coords="157,155,288,181"/>
+<area shape="rect" href="class_settings_spectr_item.html" title=" " alt="" coords="312,155,459,181"/>
+<area shape="rect" title=" " alt="" coords="185,5,260,32"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<div class="dynheader">
+Граф связей класса SettingsItem:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_settings_item__coll__graph.png" border="0" usemap="#a_settings_item_coll__map" alt="Collaboration graph"/></div>
+<map name="a_settings_item_coll__map" id="a_settings_item_coll__map">
+<area shape="rect" title=" " alt="" coords="1061,305,1165,332"/>
+<area shape="rect" title=" " alt="" coords="759,65,833,92"/>
+<area shape="rect" title=" " alt="" coords="763,153,829,180"/>
+<area shape="rect" href="class_selecting_area.html" title=" " alt="" coords="741,204,851,231"/>
+<area shape="rect" href="class_q_graphics_item.html" title=" " alt="" coords="421,5,538,32"/>
+<area shape="rect" href="class_a_graphic_item.html" title=" " alt="" coords="741,255,851,281"/>
+<area shape="rect" title=" " alt="" coords="444,159,515,185"/>
+<area shape="rect" href="class_board_for_track.html" title=" " alt="" coords="422,316,537,343"/>
+<area shape="rect" href="class_draw_settings.html" title=" " alt="" coords="128,335,235,361"/>
+<area shape="rect" href="class_q_object.html" title=" " alt="" coords="5,335,79,361"/>
+<area shape="rect" title=" " alt="" coords="162,269,201,296"/>
+<area shape="rect" title=" " alt="" coords="154,448,209,475"/>
+<area shape="rect" title=" " alt="" coords="449,532,509,559"/>
+<area shape="rect" title=" " alt="" coords="455,56,504,83"/>
+<area shape="rect" title=" " alt="" coords="443,108,516,135"/>
+<area shape="rect" title=" " alt="" coords="742,305,850,332"/>
+<area shape="rect" title=" " alt="" coords="740,356,852,383"/>
+<area shape="rect" title=" " alt="" coords="743,407,849,433"/>
+<area shape="rect" title=" " alt="" coords="749,508,843,535"/>
+<area shape="rect" href="class_selection.html" title=" " alt="" coords="755,580,837,607"/>
+<area shape="rect" href="class_q_group_box.html" title=" " alt="" coords="432,583,527,609"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a8079820c92055778f6046ccd8b71d3bf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_item.html#a8079820c92055778f6046ccd8b71d3bf">SettingsItem</a> (<a class="el" href="class_a_graphic_item.html">AGraphicItem</a> *item, <a class="el" href="class_selecting_area.html">SelectingArea</a> *selectingArea)</td></tr>
+<tr class="separator:a8079820c92055778f6046ccd8b71d3bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae92551ac5bf7d1992d83d5f71eba33a8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_item.html#ae92551ac5bf7d1992d83d5f71eba33a8">~SettingsItem</a> ()</td></tr>
+<tr class="separator:ae92551ac5bf7d1992d83d5f71eba33a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54798eef2763ca63f466ca65787aad85"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_item.html#a54798eef2763ca63f466ca65787aad85">apply</a> ()</td></tr>
+<tr class="separator:a54798eef2763ca63f466ca65787aad85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Открытые статические члены</h2></td></tr>
+<tr class="memitem:a866084abb80aa1e9af482e715e2937bf"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_settings_item.html">SettingsItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_item.html#a866084abb80aa1e9af482e715e2937bf">createSettingsItem</a> (<a class="el" href="class_a_graphic_item.html">AGraphicItem</a> *item, <a class="el" href="class_selecting_area.html">SelectingArea</a> *selectingArea)</td></tr>
+<tr class="separator:a866084abb80aa1e9af482e715e2937bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Защищенные члены</h2></td></tr>
+<tr class="memitem:a698f5cb7f94a69c03aa8c34e67111af7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_item.html#a698f5cb7f94a69c03aa8c34e67111af7">applyBaseSettings</a> ()</td></tr>
+<tr class="separator:a698f5cb7f94a69c03aa8c34e67111af7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa13349254480153d486c767a3b35a192"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_item.html#aa13349254480153d486c767a3b35a192">applySpecificSettings</a> ()</td></tr>
+<tr class="separator:aa13349254480153d486c767a3b35a192"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Защищенные данные</h2></td></tr>
+<tr class="memitem:a9f8484520b10710b07cb86a5253243f5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_item.html#a9f8484520b10710b07cb86a5253243f5">m_item</a></td></tr>
+<tr class="separator:a9f8484520b10710b07cb86a5253243f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48d27194edf1e3fc2d29874e0cd8f5f1"><td class="memItemLeft" align="right" valign="top">QVBoxLayout *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_item.html#a48d27194edf1e3fc2d29874e0cd8f5f1">m_mainVLout</a></td></tr>
+<tr class="separator:a48d27194edf1e3fc2d29874e0cd8f5f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accb87b6b5dacd4b14b47cac74d3a8823"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_selection.html">Selection</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_item.html#accb87b6b5dacd4b14b47cac74d3a8823">m_leftBorderSettings</a></td></tr>
+<tr class="separator:accb87b6b5dacd4b14b47cac74d3a8823"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f17e80f475c388e45cfb3147053937c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_selection.html">Selection</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_item.html#a8f17e80f475c388e45cfb3147053937c">m_rightBorderSettings</a></td></tr>
+<tr class="separator:a8f17e80f475c388e45cfb3147053937c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ba392a98b03165e02e011677dd4d7d2"><td class="memItemLeft" align="right" valign="top">QLabel *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_item.html#a4ba392a98b03165e02e011677dd4d7d2">m_labelRecordPoint</a></td></tr>
+<tr class="separator:a4ba392a98b03165e02e011677dd4d7d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8092f4382517c8f7f071905c795c900"><td class="memItemLeft" align="right" valign="top">QLabel *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_item.html#ad8092f4382517c8f7f071905c795c900">m_labelDepthOffset</a></td></tr>
+<tr class="separator:ad8092f4382517c8f7f071905c795c900"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a464457e0815328f394c9ec2023d02e72"><td class="memItemLeft" align="right" valign="top">QLabel *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_item.html#a464457e0815328f394c9ec2023d02e72">m_labelTimeOffset</a></td></tr>
+<tr class="separator:a464457e0815328f394c9ec2023d02e72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad776c91d242f806e436361cef0a61e9c"><td class="memItemLeft" align="right" valign="top">QLabel *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_item.html#ad776c91d242f806e436361cef0a61e9c">m_labelDepthScale</a></td></tr>
+<tr class="separator:ad776c91d242f806e436361cef0a61e9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accf2e461600679de02d7a1a772a7635e"><td class="memItemLeft" align="right" valign="top">QLabel *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_item.html#accf2e461600679de02d7a1a772a7635e">m_labelTimeScale</a></td></tr>
+<tr class="separator:accf2e461600679de02d7a1a772a7635e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec9f200859e496bb2638c852154b73c7"><td class="memItemLeft" align="right" valign="top">QLineEdit *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_item.html#aec9f200859e496bb2638c852154b73c7">m_editRecordPoint</a></td></tr>
+<tr class="separator:aec9f200859e496bb2638c852154b73c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1098aaa90e17edbca10dd1889152f14f"><td class="memItemLeft" align="right" valign="top">QLineEdit *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_item.html#a1098aaa90e17edbca10dd1889152f14f">m_editDepthOffset</a></td></tr>
+<tr class="separator:a1098aaa90e17edbca10dd1889152f14f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a133ffdb45479fb9770c3af3d6ff09169"><td class="memItemLeft" align="right" valign="top">QLineEdit *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_item.html#a133ffdb45479fb9770c3af3d6ff09169">m_editTimeOffset</a></td></tr>
+<tr class="separator:a133ffdb45479fb9770c3af3d6ff09169"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a547576e3fc535460ded5cd88185d530e"><td class="memItemLeft" align="right" valign="top">QLineEdit *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_item.html#a547576e3fc535460ded5cd88185d530e">m_editDepthScale</a></td></tr>
+<tr class="separator:a547576e3fc535460ded5cd88185d530e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd18f23b709e86302d64d3cbdd73c07d"><td class="memItemLeft" align="right" valign="top">QLineEdit *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_item.html#abd18f23b709e86302d64d3cbdd73c07d">m_editTimeScale</a></td></tr>
+<tr class="separator:abd18f23b709e86302d64d3cbdd73c07d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc91ba8471239a45f4cc73233c99c66e"><td class="memItemLeft" align="right" valign="top">QGridLayout *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_item.html#abc91ba8471239a45f4cc73233c99c66e">m_recordPointLayout</a></td></tr>
+<tr class="separator:abc91ba8471239a45f4cc73233c99c66e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6fa032230369db91a65005264b0d241"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_q_group_box.html">QGroupBox</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_item.html#af6fa032230369db91a65005264b0d241">m_recordPointGroupBox</a></td></tr>
+<tr class="separator:af6fa032230369db91a65005264b0d241"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dd78d85a6af82d9a90110fcb0e7947e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_selecting_area.html">SelectingArea</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_settings_item.html#a6dd78d85a6af82d9a90110fcb0e7947e">m_selectingArea</a></td></tr>
+<tr class="separator:a6dd78d85a6af82d9a90110fcb0e7947e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Конструктор(ы)</h2>
+<a id="a8079820c92055778f6046ccd8b71d3bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8079820c92055778f6046ccd8b71d3bf">&#9670;&nbsp;</a></span>SettingsItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SettingsItem::SettingsItem </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a> *&#160;</td>
+          <td class="paramname"><em>item</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_selecting_area.html">SelectingArea</a> *&#160;</td>
+          <td class="paramname"><em>selectingArea</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_settings_item_a8079820c92055778f6046ccd8b71d3bf_cgraph.png" border="0" usemap="#aclass_settings_item_a8079820c92055778f6046ccd8b71d3bf_cgraph" alt=""/></div>
+<map name="aclass_settings_item_a8079820c92055778f6046ccd8b71d3bf_cgraph" id="aclass_settings_item_a8079820c92055778f6046ccd8b71d3bf_cgraph">
+<area shape="rect" title=" " alt="" coords="5,56,200,83"/>
+<area shape="rect" href="class_a_graphic_item.html#a90fecfca61c3f76b0aac50b02442f194" title=" " alt="" coords="257,5,409,32"/>
+<area shape="rect" href="class_a_graphic_item.html#a3acc8d01bcfc185179725e5ceacd6712" title=" " alt="" coords="248,56,417,83"/>
+<area shape="rect" href="class_selection.html#a4e44d4fb40605a2d01462dab70e85952" title=" " alt="" coords="260,107,405,133"/>
+<area shape="rect" href="class_selection.html#acd7dff5e0d94fff3241d752a1985a39c" title=" " alt="" coords="465,107,588,133"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ae92551ac5bf7d1992d83d5f71eba33a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae92551ac5bf7d1992d83d5f71eba33a8">&#9670;&nbsp;</a></span>~SettingsItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SettingsItem::~SettingsItem </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="a54798eef2763ca63f466ca65787aad85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54798eef2763ca63f466ca65787aad85">&#9670;&nbsp;</a></span>apply()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SettingsItem::apply </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_settings_item_a54798eef2763ca63f466ca65787aad85_cgraph.png" border="0" usemap="#aclass_settings_item_a54798eef2763ca63f466ca65787aad85_cgraph" alt=""/></div>
+<map name="aclass_settings_item_a54798eef2763ca63f466ca65787aad85_cgraph" id="aclass_settings_item_a54798eef2763ca63f466ca65787aad85_cgraph">
+<area shape="rect" title=" " alt="" coords="5,111,152,137"/>
+<area shape="rect" href="class_settings_item.html#a698f5cb7f94a69c03aa8c34e67111af7" title=" " alt="" coords="200,81,431,108"/>
+<area shape="rect" href="class_settings_item.html#aa13349254480153d486c767a3b35a192" title=" " alt="" coords="218,133,413,174"/>
+<area shape="rect" href="class_a_graphic_item.html#a90fecfca61c3f76b0aac50b02442f194" title=" " alt="" coords="487,5,639,32"/>
+<area shape="rect" href="class_selection.html#a90bf92f05d620127a8767d3b662318a7" title=" " alt="" coords="482,56,645,83"/>
+<area shape="rect" href="class_a_graphic_item.html#a3acc8d01bcfc185179725e5ceacd6712" title=" " alt="" coords="479,107,648,133"/>
+<area shape="rect" href="class_selection.html#acd7dff5e0d94fff3241d752a1985a39c" title=" " alt="" coords="502,157,625,184"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a698f5cb7f94a69c03aa8c34e67111af7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a698f5cb7f94a69c03aa8c34e67111af7">&#9670;&nbsp;</a></span>applyBaseSettings()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SettingsItem::applyBaseSettings </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_settings_item_a698f5cb7f94a69c03aa8c34e67111af7_cgraph.png" border="0" usemap="#aclass_settings_item_a698f5cb7f94a69c03aa8c34e67111af7_cgraph" alt=""/></div>
+<map name="aclass_settings_item_a698f5cb7f94a69c03aa8c34e67111af7_cgraph" id="aclass_settings_item_a698f5cb7f94a69c03aa8c34e67111af7_cgraph">
+<area shape="rect" title=" " alt="" coords="5,81,236,108"/>
+<area shape="rect" href="class_a_graphic_item.html#a90fecfca61c3f76b0aac50b02442f194" title=" " alt="" coords="293,5,445,32"/>
+<area shape="rect" href="class_selection.html#a90bf92f05d620127a8767d3b662318a7" title=" " alt="" coords="287,56,450,83"/>
+<area shape="rect" href="class_a_graphic_item.html#a3acc8d01bcfc185179725e5ceacd6712" title=" " alt="" coords="284,107,453,133"/>
+<area shape="rect" href="class_selection.html#acd7dff5e0d94fff3241d752a1985a39c" title=" " alt="" coords="307,157,430,184"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aa13349254480153d486c767a3b35a192"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa13349254480153d486c767a3b35a192">&#9670;&nbsp;</a></span>applySpecificSettings()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void SettingsItem::applySpecificSettings </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Переопределяется в <a class="el" href="class_settings_acu_item.html#ae83f2c2c9f5edb0d485a65dfe25e4bcf">SettingsAcuItem</a>, <a class="el" href="class_settings_spectr_item.html#af81ed3d8d870e927709a5a883b8b1a7e">SettingsSpectrItem</a> и <a class="el" href="class_settings_line_item.html#a82f33019fe309640f2ec396ac4afc2f5">SettingsLineItem</a>.</p>
+
+</div>
+</div>
+<a id="a866084abb80aa1e9af482e715e2937bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a866084abb80aa1e9af482e715e2937bf">&#9670;&nbsp;</a></span>createSettingsItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_settings_item.html">SettingsItem</a> * SettingsItem::createSettingsItem </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a> *&#160;</td>
+          <td class="paramname"><em>item</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_selecting_area.html">SelectingArea</a> *&#160;</td>
+          <td class="paramname"><em>selectingArea</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_settings_item_a866084abb80aa1e9af482e715e2937bf_cgraph.png" border="0" usemap="#aclass_settings_item_a866084abb80aa1e9af482e715e2937bf_cgraph" alt=""/></div>
+<map name="aclass_settings_item_a866084abb80aa1e9af482e715e2937bf_cgraph" id="aclass_settings_item_a866084abb80aa1e9af482e715e2937bf_cgraph">
+<area shape="rect" title=" " alt="" coords="5,31,240,57"/>
+<area shape="rect" href="class_a_graphic_item.html#a3acc8d01bcfc185179725e5ceacd6712" title=" " alt="" coords="531,5,700,32"/>
+<area shape="rect" href="class_settings_item.html#a8079820c92055778f6046ccd8b71d3bf" title=" " alt="" coords="288,56,483,83"/>
+<area shape="rect" href="class_a_graphic_item.html#a90fecfca61c3f76b0aac50b02442f194" title=" " alt="" coords="539,56,691,83"/>
+<area shape="rect" href="class_selection.html#a4e44d4fb40605a2d01462dab70e85952" title=" " alt="" coords="543,107,688,133"/>
+<area shape="rect" href="class_selection.html#acd7dff5e0d94fff3241d752a1985a39c" title=" " alt="" coords="748,107,871,133"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Данные класса</h2>
+<a id="a1098aaa90e17edbca10dd1889152f14f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1098aaa90e17edbca10dd1889152f14f">&#9670;&nbsp;</a></span>m_editDepthOffset</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QLineEdit * SettingsItem::m_editDepthOffset</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a547576e3fc535460ded5cd88185d530e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a547576e3fc535460ded5cd88185d530e">&#9670;&nbsp;</a></span>m_editDepthScale</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QLineEdit * SettingsItem::m_editDepthScale</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aec9f200859e496bb2638c852154b73c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec9f200859e496bb2638c852154b73c7">&#9670;&nbsp;</a></span>m_editRecordPoint</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QLineEdit* SettingsItem::m_editRecordPoint</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a133ffdb45479fb9770c3af3d6ff09169"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a133ffdb45479fb9770c3af3d6ff09169">&#9670;&nbsp;</a></span>m_editTimeOffset</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QLineEdit * SettingsItem::m_editTimeOffset</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abd18f23b709e86302d64d3cbdd73c07d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd18f23b709e86302d64d3cbdd73c07d">&#9670;&nbsp;</a></span>m_editTimeScale</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QLineEdit * SettingsItem::m_editTimeScale</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9f8484520b10710b07cb86a5253243f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f8484520b10710b07cb86a5253243f5">&#9670;&nbsp;</a></span>m_item</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_a_graphic_item.html">AGraphicItem</a>* SettingsItem::m_item</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad8092f4382517c8f7f071905c795c900"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8092f4382517c8f7f071905c795c900">&#9670;&nbsp;</a></span>m_labelDepthOffset</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QLabel * SettingsItem::m_labelDepthOffset</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad776c91d242f806e436361cef0a61e9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad776c91d242f806e436361cef0a61e9c">&#9670;&nbsp;</a></span>m_labelDepthScale</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QLabel * SettingsItem::m_labelDepthScale</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4ba392a98b03165e02e011677dd4d7d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ba392a98b03165e02e011677dd4d7d2">&#9670;&nbsp;</a></span>m_labelRecordPoint</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QLabel* SettingsItem::m_labelRecordPoint</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a464457e0815328f394c9ec2023d02e72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a464457e0815328f394c9ec2023d02e72">&#9670;&nbsp;</a></span>m_labelTimeOffset</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QLabel * SettingsItem::m_labelTimeOffset</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="accf2e461600679de02d7a1a772a7635e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accf2e461600679de02d7a1a772a7635e">&#9670;&nbsp;</a></span>m_labelTimeScale</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QLabel * SettingsItem::m_labelTimeScale</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="accb87b6b5dacd4b14b47cac74d3a8823"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accb87b6b5dacd4b14b47cac74d3a8823">&#9670;&nbsp;</a></span>m_leftBorderSettings</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_selection.html">Selection</a>* SettingsItem::m_leftBorderSettings</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a48d27194edf1e3fc2d29874e0cd8f5f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48d27194edf1e3fc2d29874e0cd8f5f1">&#9670;&nbsp;</a></span>m_mainVLout</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QVBoxLayout* SettingsItem::m_mainVLout</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af6fa032230369db91a65005264b0d241"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6fa032230369db91a65005264b0d241">&#9670;&nbsp;</a></span>m_recordPointGroupBox</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_q_group_box.html">QGroupBox</a>* SettingsItem::m_recordPointGroupBox</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abc91ba8471239a45f4cc73233c99c66e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc91ba8471239a45f4cc73233c99c66e">&#9670;&nbsp;</a></span>m_recordPointLayout</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QGridLayout* SettingsItem::m_recordPointLayout</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8f17e80f475c388e45cfb3147053937c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f17e80f475c388e45cfb3147053937c">&#9670;&nbsp;</a></span>m_rightBorderSettings</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_selection.html">Selection</a> * SettingsItem::m_rightBorderSettings</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6dd78d85a6af82d9a90110fcb0e7947e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6dd78d85a6af82d9a90110fcb0e7947e">&#9670;&nbsp;</a></span>m_selectingArea</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_selecting_area.html">SelectingArea</a>* SettingsItem::m_selectingArea</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>Объявления и описания членов классов находятся в файлах:<ul>
+<li>E:/MyQtProgram/parserGfm/log_data_graphics/inc/tools/<a class="el" href="settingsitem_8h_source.html">settingsitem.h</a></li>
+<li>E:/MyQtProgram/parserGfm/log_data_graphics/src/tools/<a class="el" href="settingsitem_8cpp.html">settingsitem.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

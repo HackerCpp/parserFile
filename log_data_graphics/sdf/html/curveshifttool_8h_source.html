@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_GRAPHICS: Исходный файл E:/MyQtProgram/parserGfm/log_data_graphics/inc/tools/curveshifttool.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_GRAPHICS
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_53603dfb3fbca8a964ef75a71799598b.html">log_data_graphics</a></li><li class="navelem"><a class="el" href="dir_55342455956423183f7a145b2d21cf95.html">inc</a></li><li class="navelem"><a class="el" href="dir_f249a64485145ebec929808e1d66b406.html">tools</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">curveshifttool.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="curveshifttool_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CURVESHIFTTOOL_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CURVESHIFTTOOL_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;QWidget&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QVBoxLayout&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QPointer&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QPushButton&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;QLabel&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;QPoint&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="class_curve_shift_tool.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_curve_shift_tool.html">CurveShiftTool</a> : <span class="keyword">public</span> QWidget</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    QPointer&lt;QVBoxLayout&gt; m_mainVLayout;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    QPushButton *m_btnOk;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    QList&lt;QPointF&gt; m_positions;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    QList&lt;QLabel *&gt; m_labels;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    QLabel m_coeffs;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    QVector&lt;qreal&gt; m_vector;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="class_curve_shift_tool.html#a045d2fd08197f3c1bc2cd1a2addef433">CurveShiftTool</a>(QWidget* parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="class_curve_shift_tool.html#adfe49cb821257721b4faabb9a9843750">~CurveShiftTool</a>();</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_curve_shift_tool.html#a75e6833cf5cc9d2baeff24dc2e9dec39">addPosition</a>(qreal position);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_curve_shift_tool.html#a16cef88d8dcdee97ffa55b82133ab37e">changePosition</a>(qreal position,<span class="keywordtype">int</span> index);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_curve_shift_tool.html#a9ae06847ef2ab7a99c160216c72f934a">clear</a>();</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_curve_shift_tool.html#a59d15c71a4d32bd3de73e121fd6f97b5">calcCoeffPolinom</a>(<span class="keyword">const</span> QList&lt;QPointF&gt; points, QVector&lt;qreal&gt; &amp;k);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_curve_shift_tool.html#a680e8e3ffaa39b37ac7d3a05107e8209">calcCoeffLinePolinom</a>(<span class="keyword">const</span> QList&lt;QPointF&gt; points, QVector&lt;qreal&gt; &amp;k);</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="class_curve_shift_tool.html#af2322995408d0e5d376b0a685875cda1">   30</a></span>&#160;    QVector&lt;qreal&gt; <a class="code" href="class_curve_shift_tool.html#af2322995408d0e5d376b0a685875cda1">coeffs</a>(){<span class="keywordflow">return</span> m_vector;}</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">private</span> slots:</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">void</span> btnOk();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;signals:</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="class_curve_shift_tool.html#a053fccfb7d52f085080360785a17e8a6">   34</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_curve_shift_tool.html#a053fccfb7d52f085080360785a17e8a6">apply</a>();</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;};</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CURVESHIFTTOOL_H</span></div>
+<div class="ttc" id="aclass_curve_shift_tool_html"><div class="ttname"><a href="class_curve_shift_tool.html">CurveShiftTool</a></div><div class="ttdef"><b>Definition:</b> curveshifttool.h:12</div></div>
+<div class="ttc" id="aclass_curve_shift_tool_html_a045d2fd08197f3c1bc2cd1a2addef433"><div class="ttname"><a href="class_curve_shift_tool.html#a045d2fd08197f3c1bc2cd1a2addef433">CurveShiftTool::CurveShiftTool</a></div><div class="ttdeci">CurveShiftTool(QWidget *parent=nullptr)</div><div class="ttdef"><b>Definition:</b> curveshifttool.cpp:4</div></div>
+<div class="ttc" id="aclass_curve_shift_tool_html_a053fccfb7d52f085080360785a17e8a6"><div class="ttname"><a href="class_curve_shift_tool.html#a053fccfb7d52f085080360785a17e8a6">CurveShiftTool::apply</a></div><div class="ttdeci">void apply()</div></div>
+<div class="ttc" id="aclass_curve_shift_tool_html_a16cef88d8dcdee97ffa55b82133ab37e"><div class="ttname"><a href="class_curve_shift_tool.html#a16cef88d8dcdee97ffa55b82133ab37e">CurveShiftTool::changePosition</a></div><div class="ttdeci">void changePosition(qreal position, int index)</div><div class="ttdef"><b>Definition:</b> curveshifttool.cpp:28</div></div>
+<div class="ttc" id="aclass_curve_shift_tool_html_a59d15c71a4d32bd3de73e121fd6f97b5"><div class="ttname"><a href="class_curve_shift_tool.html#a59d15c71a4d32bd3de73e121fd6f97b5">CurveShiftTool::calcCoeffPolinom</a></div><div class="ttdeci">void calcCoeffPolinom(const QList&lt; QPointF &gt; points, QVector&lt; qreal &gt; &amp;k)</div><div class="ttdef"><b>Definition:</b> curveshifttool.cpp:60</div></div>
+<div class="ttc" id="aclass_curve_shift_tool_html_a680e8e3ffaa39b37ac7d3a05107e8209"><div class="ttname"><a href="class_curve_shift_tool.html#a680e8e3ffaa39b37ac7d3a05107e8209">CurveShiftTool::calcCoeffLinePolinom</a></div><div class="ttdeci">void calcCoeffLinePolinom(const QList&lt; QPointF &gt; points, QVector&lt; qreal &gt; &amp;k)</div><div class="ttdef"><b>Definition:</b> curveshifttool.cpp:98</div></div>
+<div class="ttc" id="aclass_curve_shift_tool_html_a75e6833cf5cc9d2baeff24dc2e9dec39"><div class="ttname"><a href="class_curve_shift_tool.html#a75e6833cf5cc9d2baeff24dc2e9dec39">CurveShiftTool::addPosition</a></div><div class="ttdeci">void addPosition(qreal position)</div><div class="ttdef"><b>Definition:</b> curveshifttool.cpp:21</div></div>
+<div class="ttc" id="aclass_curve_shift_tool_html_a9ae06847ef2ab7a99c160216c72f934a"><div class="ttname"><a href="class_curve_shift_tool.html#a9ae06847ef2ab7a99c160216c72f934a">CurveShiftTool::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdef"><b>Definition:</b> curveshifttool.cpp:52</div></div>
+<div class="ttc" id="aclass_curve_shift_tool_html_adfe49cb821257721b4faabb9a9843750"><div class="ttname"><a href="class_curve_shift_tool.html#adfe49cb821257721b4faabb9a9843750">CurveShiftTool::~CurveShiftTool</a></div><div class="ttdeci">~CurveShiftTool()</div><div class="ttdef"><b>Definition:</b> curveshifttool.cpp:19</div></div>
+<div class="ttc" id="aclass_curve_shift_tool_html_af2322995408d0e5d376b0a685875cda1"><div class="ttname"><a href="class_curve_shift_tool.html#af2322995408d0e5d376b0a685875cda1">CurveShiftTool::coeffs</a></div><div class="ttdeci">QVector&lt; qreal &gt; coeffs()</div><div class="ttdef"><b>Definition:</b> curveshifttool.h:30</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

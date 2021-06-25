@@ -28,35 +28,39 @@ LIBS += ../build/release/LogData.lib \
 
 include(../log_data_graphics/graphics.pri)
 SOURCES += \
-    calibratenoise.cpp \
-    coefficientsdisplaying.cpp \
-    coeffs.cpp \
-    geologysqlitedb.cpp \
-    logdatacalibrate.cpp \
-    operator.cpp \
-    picturechart.cpp \
-    protocolcreater.cpp \
-    protocolnoise.cpp \
-    referencesaver.cpp \
-    saverloadercalibdb.cpp \
-    spectrsset.cpp \
-    referenceLoader.cpp
+    src/calibratenoise.cpp \
+    src/coefficientsdisplaying.cpp \
+    src/coeffs.cpp \
+    src/geologysqlitedb.cpp \
+    src/logdatacalibrate.cpp \
+    src/operator.cpp \
+    src/picturechart.cpp \
+    src/protocolcreater.cpp \
+    src/protocolinfo.cpp \
+    src/protocolnoise.cpp \
+    src/referencesaver.cpp \
+    src/saverloadercalibdb.cpp \
+    src/selectingidfromdb.cpp \
+    src/spectrsset.cpp \
+    src/referenceLoader.cpp
 
 HEADERS += \
-    LogDataCalibrate_global.h \
-    calibratenoise.h \
-    coefficientsdisplaying.h \
-    coeffs.h \
-    geologysqlitedb.h \
-    logdatacalibrate.h \
-    operator.h \
-    picturechart.h \
-    protocolcreater.h \
-    protocolnoise.h \
-    referencesaver.h \
-    saverloadercalibdb.h \
-    spectrsset.h \
-    referenceLoader.h
+    src/LogDataCalibrate_global.h \
+    src/calibratenoise.h \
+    src/coefficientsdisplaying.h \
+    src/coeffs.h \
+    src/geologysqlitedb.h \
+    src/logdatacalibrate.h \
+    src/operator.h \
+    src/picturechart.h \
+    src/protocolcreater.h \
+    src/protocolinfo.h \
+    src/protocolnoise.h \
+    src/referencesaver.h \
+    src/saverloadercalibdb.h \
+    src/selectingidfromdb.h \
+    src/spectrsset.h \
+    src/referenceLoader.h
 
 # Default rules for deployment.
 unix {

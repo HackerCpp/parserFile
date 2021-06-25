@@ -1,0 +1,4 @@
+<map id="LogDataCalibrate" name="LogDataCalibrate">
+<area shape="rect" id="node1" title="Класс, калибровка каротажных данных. Предлагает выбрать один из приборов найденных в данных(LogData)...." alt="" coords="5,80,139,107"/>
+<area shape="rect" id="node2" href="$class_q_main_window.html" title=" " alt="" coords="17,5,127,32"/>
+</map>

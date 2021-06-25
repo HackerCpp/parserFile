@@ -58,11 +58,18 @@ void Ruler::run(){
     qreal f_step = 10 * m_board->pixelPerMm();
     qreal mm5 = 2 * m_board->pixelPerMm();
     qreal divider = m_board->isDrawTime() ? 60000 :  1;
+
     for(qreal i = f_step - fmod(m_visibilitySquare.y(),f_step);i < f_height;i += f_step){
         f_painter.drawLine(QPointF(0,i),QPointF(mm5,i));
         f_painter.drawLine(QPointF(f_width - mm5,i),QPointF(f_width,i));
-        qreal f_number = (m_visibilitySquare.y() + i - m_board->offsetUp()) / m_board->scale()/divider;
-        f_painter.drawText(QRectF(0,i - 10,f_width,20),Qt::AlignHCenter|Qt::AlignVCenter,QString::number(round(f_number*100)/100));
+        qreal f_number = (m_visibilitySquare.y() + i - m_board->offsetUp()) / m_board->scale() / divider;
+        QString f_value = QString::number(round(f_number * 1000)/1000);
+        if(m_board->isDrawTime()){
+            int min = f_number;
+            int sec = 60.0 * qreal(f_number - int(f_number));
+            f_value = QString::number(min) +":"+ QString::number(sec);
+        }
+        f_painter.drawText(QRectF(0,i - 10,f_width,20),Qt::AlignHCenter|Qt::AlignVCenter,f_value);
 
         if(m_endRedraw)
             return;

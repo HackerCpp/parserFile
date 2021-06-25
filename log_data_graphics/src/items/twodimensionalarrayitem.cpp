@@ -5,6 +5,24 @@ TwoDimensionalArrayItem::TwoDimensionalArrayItem(AItem *itemInfo,ICurve *curve,B
 {
     Q_UNUSED(itemInfo)
 
+    bool ok = true;
+    QString f_dataStep = m_curve->desc()->param("data_step");
+    m_dataStep =  f_dataStep.left(f_dataStep.indexOf("(")).replace(",",".").toDouble(&ok);
+    if(!ok){
+        qDebug() << "VSpectrItem::VSpectrItem Не удалось преобразовать data_step в TwoDimensionalArrayItem constructor";
+        m_dataStep = 2;
+    }
+    else{
+        QString f_type = f_dataStep.mid(f_dataStep.indexOf("("));
+        if(f_type == "(USEC)")
+           ;
+        else if(f_type == "(HZ)")
+           ;
+        else{
+            qDebug() << "TwoDimensionalArrayItem::TwoDimensionalArrayItem не описанный тип данных data_step TwoDimensionalArrayItem" << f_type;
+        }
+    }
+
 }
 
 TwoDimensionalArrayItem::TwoDimensionalArrayItem(const TwoDimensionalArrayItem &other)

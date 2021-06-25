@@ -1,0 +1,5 @@
+<map id="BoardForTrack" name="BoardForTrack">
+<area shape="rect" id="node1" title=" " alt="" coords="7,5,122,32"/>
+<area shape="rect" id="node2" href="$class_a_graphic_board.html" title=" " alt="" coords="5,80,124,107"/>
+<area shape="rect" id="node3" href="$class_vertical_board.html" title=" " alt="" coords="11,155,119,181"/>
+</map>

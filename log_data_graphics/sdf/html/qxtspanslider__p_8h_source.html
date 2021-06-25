@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_GRAPHICS: Исходный файл E:/MyQtProgram/parserGfm/log_data_graphics/inc/tools/qxtspanslider_p.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_GRAPHICS
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_53603dfb3fbca8a964ef75a71799598b.html">log_data_graphics</a></li><li class="navelem"><a class="el" href="dir_55342455956423183f7a145b2d21cf95.html">inc</a></li><li class="navelem"><a class="el" href="dir_f249a64485145ebec929808e1d66b406.html">tools</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">qxtspanslider_p.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="qxtspanslider__p_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef QXTSPANSLIDER_P_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">/****************************************************************************</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">** Copyright (c) 2006 - 2011, the LibQxt project.</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">** See the Qxt AUTHORS file for a list of authors and copyright holders.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">** All rights reserved.</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">**</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">** Redistribution and use in source and binary forms, with or without</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">** modification, are permitted provided that the following conditions are met:</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">**     * Redistributions of source code must retain the above copyright</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">**       notice, this list of conditions and the following disclaimer.</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">**     * Redistributions in binary form must reproduce the above copyright</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">**       notice, this list of conditions and the following disclaimer in the</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">**       documentation and/or other materials provided with the distribution.</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">**     * Neither the name of the LibQxt project nor the</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">**       names of its contributors may be used to endorse or promote products</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">**       derived from this software without specific prior written permission.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">**</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">** ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">** WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">** DISCLAIMED. IN NO EVENT SHALL &lt;COPYRIGHT HOLDER&gt; BE LIABLE FOR ANY</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">** DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">** (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">** LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">** ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">** SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">**</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">** &lt;http://libqxt.org&gt;  &lt;foundation@libqxt.org&gt;</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">*****************************************************************************/</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="qxtspanslider__p_8h.html#abb92239ec748511cb78afc4be6b898ef">   32</a></span>&#160;<span class="preprocessor">#define QXTSPANSLIDER_P_H</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;QStyle&gt;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;QObject&gt;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="qxtspanslider_8h.html">qxtspanslider.h</a>&quot;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;QT_FORWARD_DECLARE_CLASS(QStylePainter)</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;QT_FORWARD_DECLARE_CLASS(QStyleOptionSlider)</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="class_qxt_span_slider_private.html">   41</a></span>&#160;class <a class="code" href="class_qxt_span_slider_private.html">QxtSpanSliderPrivate</a> : public <a class="code" href="class_q_object.html">QObject</a> {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="class_qxt_span_slider_private.html">QxtSpanSliderPrivate</a>();</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> initStyleOption(QStyleOptionSlider* option, <a class="code" href="class_qxt_span_slider.html#a982f30a82758a91c23ea8ae6b47ff931">QxtSpanSlider::SpanHandle</a> handle = <a class="code" href="class_qxt_span_slider.html#a982f30a82758a91c23ea8ae6b47ff931a591db45a3521347887368c4840a09280">QxtSpanSlider::UpperHandle</a>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="class_qxt_span_slider_private.html#a9d6b22bf195ba6d947c9d3379a7a0330">   46</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_qxt_span_slider_private.html#a9d6b22bf195ba6d947c9d3379a7a0330">pick</a>(<span class="keyword">const</span> QPoint&amp; pt)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordflow">return</span> q_ptr-&gt;orientation() == Qt::Horizontal ? pt.x() : pt.y();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    }</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">int</span> pixelPosToRangeValue(<span class="keywordtype">int</span> pos) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">void</span> handleMousePress(<span class="keyword">const</span> QPoint&amp; pos, QStyle::SubControl&amp; control, <span class="keywordtype">int</span> value, <a class="code" href="class_qxt_span_slider.html#a982f30a82758a91c23ea8ae6b47ff931">QxtSpanSlider::SpanHandle</a> handle);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">void</span> drawHandle(QStylePainter* painter, <a class="code" href="class_qxt_span_slider.html#a982f30a82758a91c23ea8ae6b47ff931">QxtSpanSlider::SpanHandle</a> handle) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> setupPainter(QPainter* painter, Qt::Orientation orientation, qreal x1, qreal y1, qreal x2, qreal y2) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> drawSpan(QStylePainter* painter, <span class="keyword">const</span> QRect&amp; rect) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">void</span> triggerAction(QAbstractSlider::SliderAction action, <span class="keywordtype">bool</span> main);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">void</span> swapControls();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="class_qxt_span_slider_private.html#ad28d080108e6ed7fd0891de03fc36a79">   58</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_qxt_span_slider_private.html#ad28d080108e6ed7fd0891de03fc36a79">lower</a>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="class_qxt_span_slider_private.html#acaff5f8aaf5bca2a648df31e3357b196">   59</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_qxt_span_slider_private.html#acaff5f8aaf5bca2a648df31e3357b196">upper</a>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="class_qxt_span_slider_private.html#a9029327c96505de72026596dae6aabde">   60</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_qxt_span_slider_private.html#a9029327c96505de72026596dae6aabde">lowerPos</a>;</div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="class_qxt_span_slider_private.html#a4079e7b303cd437ec8859f8c723812d0">   61</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_qxt_span_slider_private.html#a4079e7b303cd437ec8859f8c723812d0">upperPos</a>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="class_qxt_span_slider_private.html#a821754a58831636855279c72a2a3fe43">   62</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_qxt_span_slider_private.html#a821754a58831636855279c72a2a3fe43">offset</a>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="class_qxt_span_slider_private.html#a35038ca2093223f5ebd1d2f3affb0b47">   63</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_qxt_span_slider_private.html#a35038ca2093223f5ebd1d2f3affb0b47">position</a>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="class_qxt_span_slider_private.html#a5a6aab5f50b92c614b8e6eb22c000054">   64</a></span>&#160;    <a class="code" href="class_qxt_span_slider.html#a982f30a82758a91c23ea8ae6b47ff931">QxtSpanSlider::SpanHandle</a> <a class="code" href="class_qxt_span_slider_private.html#a5a6aab5f50b92c614b8e6eb22c000054">lastPressed</a>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="class_qxt_span_slider_private.html#a8560bd21ffa9692e13993fed4f4acc10">   65</a></span>&#160;    <a class="code" href="class_qxt_span_slider.html#a982f30a82758a91c23ea8ae6b47ff931">QxtSpanSlider::SpanHandle</a> <a class="code" href="class_qxt_span_slider_private.html#a8560bd21ffa9692e13993fed4f4acc10">mainControl</a>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="class_qxt_span_slider_private.html#a11572e04dd18cd7d8c0b401e9fa5621a">   66</a></span>&#160;    QStyle::SubControl <a class="code" href="class_qxt_span_slider_private.html#a11572e04dd18cd7d8c0b401e9fa5621a">lowerPressed</a>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="class_qxt_span_slider_private.html#a21fa7c49320b938994a6b141017e0e42">   67</a></span>&#160;    QStyle::SubControl <a class="code" href="class_qxt_span_slider_private.html#a21fa7c49320b938994a6b141017e0e42">upperPressed</a>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="class_qxt_span_slider_private.html#a9d185dd488339113f06df24f879b6ab2">   68</a></span>&#160;    <a class="code" href="class_qxt_span_slider.html#a6dabb5d033accfd402d1542405175ac1">QxtSpanSlider::HandleMovementMode</a> <a class="code" href="class_qxt_span_slider_private.html#a9d185dd488339113f06df24f879b6ab2">movement</a>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="class_qxt_span_slider_private.html#a4b507902da0592f806d56879867d1e24">   69</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_qxt_span_slider_private.html#a4b507902da0592f806d56879867d1e24">firstMovement</a>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="class_qxt_span_slider_private.html#aa899f66eab1f16c0a4cc3c2e99d98e8b">   70</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_qxt_span_slider_private.html#aa899f66eab1f16c0a4cc3c2e99d98e8b">blockTracking</a>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keyword">public</span> Q_SLOTS:</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">void</span> updateRange(<span class="keywordtype">int</span> min, <span class="keywordtype">int</span> max);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">void</span> movePressedHandle();</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <a class="code" href="class_qxt_span_slider.html">QxtSpanSlider</a>* q_ptr;</div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="class_qxt_span_slider_private.html#ac1ab08302a7ac0c6d7249157943984a3">   79</a></span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="class_qxt_span_slider.html">QxtSpanSlider</a>;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;};</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// QXTSPANSLIDER_P_H</span></div>
+<div class="ttc" id="aclass_q_object_html"><div class="ttname"><a href="class_q_object.html">QObject</a></div></div>
+<div class="ttc" id="aclass_qxt_span_slider_html"><div class="ttname"><a href="class_qxt_span_slider.html">QxtSpanSlider</a></div><div class="ttdoc">The QxtSpanSlider widget is a QSlider with two handles.</div><div class="ttdef"><b>Definition:</b> qxtspanslider.h:41</div></div>
+<div class="ttc" id="aclass_qxt_span_slider_html_a6dabb5d033accfd402d1542405175ac1"><div class="ttname"><a href="class_qxt_span_slider.html#a6dabb5d033accfd402d1542405175ac1">QxtSpanSlider::HandleMovementMode</a></div><div class="ttdeci">HandleMovementMode</div><div class="ttdef"><b>Definition:</b> qxtspanslider.h:58</div></div>
+<div class="ttc" id="aclass_qxt_span_slider_html_a982f30a82758a91c23ea8ae6b47ff931"><div class="ttname"><a href="class_qxt_span_slider.html#a982f30a82758a91c23ea8ae6b47ff931">QxtSpanSlider::SpanHandle</a></div><div class="ttdeci">SpanHandle</div><div class="ttdef"><b>Definition:</b> qxtspanslider.h:65</div></div>
+<div class="ttc" id="aclass_qxt_span_slider_html_a982f30a82758a91c23ea8ae6b47ff931a591db45a3521347887368c4840a09280"><div class="ttname"><a href="class_qxt_span_slider.html#a982f30a82758a91c23ea8ae6b47ff931a591db45a3521347887368c4840a09280">QxtSpanSlider::UpperHandle</a></div><div class="ttdeci">@ UpperHandle</div><div class="ttdef"><b>Definition:</b> qxtspanslider.h:68</div></div>
+<div class="ttc" id="aclass_qxt_span_slider_private_html"><div class="ttname"><a href="class_qxt_span_slider_private.html">QxtSpanSliderPrivate</a></div><div class="ttdef"><b>Definition:</b> qxtspanslider_p.h:41</div></div>
+<div class="ttc" id="aclass_qxt_span_slider_private_html_a11572e04dd18cd7d8c0b401e9fa5621a"><div class="ttname"><a href="class_qxt_span_slider_private.html#a11572e04dd18cd7d8c0b401e9fa5621a">QxtSpanSliderPrivate::lowerPressed</a></div><div class="ttdeci">QStyle::SubControl lowerPressed</div><div class="ttdef"><b>Definition:</b> qxtspanslider_p.h:66</div></div>
+<div class="ttc" id="aclass_qxt_span_slider_private_html_a21fa7c49320b938994a6b141017e0e42"><div class="ttname"><a href="class_qxt_span_slider_private.html#a21fa7c49320b938994a6b141017e0e42">QxtSpanSliderPrivate::upperPressed</a></div><div class="ttdeci">QStyle::SubControl upperPressed</div><div class="ttdef"><b>Definition:</b> qxtspanslider_p.h:67</div></div>
+<div class="ttc" id="aclass_qxt_span_slider_private_html_a35038ca2093223f5ebd1d2f3affb0b47"><div class="ttname"><a href="class_qxt_span_slider_private.html#a35038ca2093223f5ebd1d2f3affb0b47">QxtSpanSliderPrivate::position</a></div><div class="ttdeci">int position</div><div class="ttdef"><b>Definition:</b> qxtspanslider_p.h:63</div></div>
+<div class="ttc" id="aclass_qxt_span_slider_private_html_a4079e7b303cd437ec8859f8c723812d0"><div class="ttname"><a href="class_qxt_span_slider_private.html#a4079e7b303cd437ec8859f8c723812d0">QxtSpanSliderPrivate::upperPos</a></div><div class="ttdeci">int upperPos</div><div class="ttdef"><b>Definition:</b> qxtspanslider_p.h:61</div></div>
+<div class="ttc" id="aclass_qxt_span_slider_private_html_a4b507902da0592f806d56879867d1e24"><div class="ttname"><a href="class_qxt_span_slider_private.html#a4b507902da0592f806d56879867d1e24">QxtSpanSliderPrivate::firstMovement</a></div><div class="ttdeci">bool firstMovement</div><div class="ttdef"><b>Definition:</b> qxtspanslider_p.h:69</div></div>
+<div class="ttc" id="aclass_qxt_span_slider_private_html_a5a6aab5f50b92c614b8e6eb22c000054"><div class="ttname"><a href="class_qxt_span_slider_private.html#a5a6aab5f50b92c614b8e6eb22c000054">QxtSpanSliderPrivate::lastPressed</a></div><div class="ttdeci">QxtSpanSlider::SpanHandle lastPressed</div><div class="ttdef"><b>Definition:</b> qxtspanslider_p.h:64</div></div>
+<div class="ttc" id="aclass_qxt_span_slider_private_html_a821754a58831636855279c72a2a3fe43"><div class="ttname"><a href="class_qxt_span_slider_private.html#a821754a58831636855279c72a2a3fe43">QxtSpanSliderPrivate::offset</a></div><div class="ttdeci">int offset</div><div class="ttdef"><b>Definition:</b> qxtspanslider_p.h:62</div></div>
+<div class="ttc" id="aclass_qxt_span_slider_private_html_a8560bd21ffa9692e13993fed4f4acc10"><div class="ttname"><a href="class_qxt_span_slider_private.html#a8560bd21ffa9692e13993fed4f4acc10">QxtSpanSliderPrivate::mainControl</a></div><div class="ttdeci">QxtSpanSlider::SpanHandle mainControl</div><div class="ttdef"><b>Definition:</b> qxtspanslider_p.h:65</div></div>
+<div class="ttc" id="aclass_qxt_span_slider_private_html_a9029327c96505de72026596dae6aabde"><div class="ttname"><a href="class_qxt_span_slider_private.html#a9029327c96505de72026596dae6aabde">QxtSpanSliderPrivate::lowerPos</a></div><div class="ttdeci">int lowerPos</div><div class="ttdef"><b>Definition:</b> qxtspanslider_p.h:60</div></div>
+<div class="ttc" id="aclass_qxt_span_slider_private_html_a9d185dd488339113f06df24f879b6ab2"><div class="ttname"><a href="class_qxt_span_slider_private.html#a9d185dd488339113f06df24f879b6ab2">QxtSpanSliderPrivate::movement</a></div><div class="ttdeci">QxtSpanSlider::HandleMovementMode movement</div><div class="ttdef"><b>Definition:</b> qxtspanslider_p.h:68</div></div>
+<div class="ttc" id="aclass_qxt_span_slider_private_html_a9d6b22bf195ba6d947c9d3379a7a0330"><div class="ttname"><a href="class_qxt_span_slider_private.html#a9d6b22bf195ba6d947c9d3379a7a0330">QxtSpanSliderPrivate::pick</a></div><div class="ttdeci">int pick(const QPoint &amp;pt) const</div><div class="ttdef"><b>Definition:</b> qxtspanslider_p.h:46</div></div>
+<div class="ttc" id="aclass_qxt_span_slider_private_html_aa899f66eab1f16c0a4cc3c2e99d98e8b"><div class="ttname"><a href="class_qxt_span_slider_private.html#aa899f66eab1f16c0a4cc3c2e99d98e8b">QxtSpanSliderPrivate::blockTracking</a></div><div class="ttdeci">bool blockTracking</div><div class="ttdef"><b>Definition:</b> qxtspanslider_p.h:70</div></div>
+<div class="ttc" id="aclass_qxt_span_slider_private_html_acaff5f8aaf5bca2a648df31e3357b196"><div class="ttname"><a href="class_qxt_span_slider_private.html#acaff5f8aaf5bca2a648df31e3357b196">QxtSpanSliderPrivate::upper</a></div><div class="ttdeci">int upper</div><div class="ttdef"><b>Definition:</b> qxtspanslider_p.h:59</div></div>
+<div class="ttc" id="aclass_qxt_span_slider_private_html_ad28d080108e6ed7fd0891de03fc36a79"><div class="ttname"><a href="class_qxt_span_slider_private.html#ad28d080108e6ed7fd0891de03fc36a79">QxtSpanSliderPrivate::lower</a></div><div class="ttdeci">int lower</div><div class="ttdef"><b>Definition:</b> qxtspanslider_p.h:58</div></div>
+<div class="ttc" id="aqxtspanslider_8h_html"><div class="ttname"><a href="qxtspanslider_8h.html">qxtspanslider.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

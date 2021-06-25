@@ -46,8 +46,8 @@ ICurve * SQLite3Loader::loadCurve(int curveIndex){
     f_query.prepare("SELECT LDCurveID,LDCLastСhanges,LDCMnemonic,\
                     LDCTimeID,LDCDepthID, LDCShortCutID,\
                     LDCSizeOffsetInByte,LDCSizeOfType,LDCDataType,\
-                    LDCRecordPoint, LDCUID,LDCDATA\
-               FROM LogDataCurve\
+                    LDCRecordPoint, LDCUID,LDCDATA \
+               FROM LogDataCurve \
                WHERE LogDataCurve.LDCurveID = ?;");
     f_query.addBindValue(curveIndex);
     f_query.exec();
@@ -61,10 +61,11 @@ ICurve * SQLite3Loader::loadCurve(int curveIndex){
         uint f_sizeOffsetInBytes = f_query.value("LDCSizeOffsetInByte").toUInt();
         f_curve->setSizeOffsetInBytes(f_sizeOffsetInBytes);
         QByteArray f_compressedData = f_query.value("LDCDATA").toByteArray();
-        QByteArray *f_decompressedData = new QByteArray();
-        GFMLoader::gzipDecompress(f_compressedData,*f_decompressedData);
-        f_curve->setData(f_decompressedData->data(),f_decompressedData->size() / f_sizeOffsetInBytes);
+        QByteArray f_decompressedData;
+        GFMLoader::gzipDecompress(f_compressedData,f_decompressedData);
+        f_curve->setData(f_decompressedData.data(),f_decompressedData.size() / f_sizeOffsetInBytes);
         f_curve->setDesc(loadDesc(curveIndex));
+        f_curve->setShortCut(*loadShortCut(curveIndex));
         return f_curve;
     }
     return nullptr;
@@ -78,9 +79,9 @@ Desc *SQLite3Loader::loadDesc(int curveIndex){
     auto f_calibrations = f_desc->calibrations();
 
     QSqlQuery f_query;
-    f_query.prepare("SELECT LogDataParamInfo.LDPIIndex,LogDataParamInfo.LDPIValue,LogDataParamInfo.LDPIType\
-                    FROM LogDataLinkCurveParamInfo\
-                    JOIN LogDataParamInfo ON LogDataParamInfo.LDParamInfoID = LogDataLinkCurveParamInfo.LDLPPIParamInfoID\
+    f_query.prepare("SELECT LogDataParamInfo.LDPIIndex,LogDataParamInfo.LDPIValue,LogDataParamInfo.LDPIType \
+                    FROM LogDataLinkCurveParamInfo \
+                    JOIN LogDataParamInfo ON LogDataParamInfo.LDParamInfoID = LogDataLinkCurveParamInfo.LDLPPIParamInfoID \
                     WHERE LogDataLinkCurveParamInfo.LDLPPICurveID = ?;");
     f_query.addBindValue(curveIndex);
     f_query.exec();
@@ -93,4 +94,27 @@ Desc *SQLite3Loader::loadDesc(int curveIndex){
             f_parameters->insert(f_query.value("LogDataParamInfo.LDPIIndex").toString(),f_query.value("LogDataParamInfo.LDPIValue").toString());
     }
     return f_desc;
+}
+
+ShortCut *SQLite3Loader::loadShortCut(int curveIndex){
+    if(!m_db->isOpen())
+        return nullptr;
+
+    QSqlQuery f_query;
+    f_query.prepare("\
+SELECT LogDataShortCut.LDSCRef,LogDataShortCut.LDSCName \n\
+FROM LogDataShortCut \n\
+JOIN LogDataCurve ON LogDataCurve.LDCShortCutID = LogDataShortCut.LDShortCutID \n\
+WHERE LogDataCurve.LDCurveID=?;");
+    f_query.addBindValue(curveIndex);
+    f_query.exec();
+    if(!f_query.lastError().text().isEmpty())
+        return nullptr;
+    ShortCut *f_shortCut = new ShortCut();
+
+    while(f_query.next()){
+        f_shortCut->setRef(f_query.value("LDSCRef").toString());
+        f_shortCut->setName(f_query.value("LDSCName").toString());
+    }
+    return f_shortCut;
 }

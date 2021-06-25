@@ -26,7 +26,7 @@ OneWaveWidget::OneWaveWidget(AGraphicItem *item)
 
 
     QString valueRange = item->curve()->desc()->param("val_range");
-    int f_minimum = valueRange.left(valueRange.indexOf("..")).toDouble();
+    int f_minimum = valueRange.left(valueRange.indexOf("..")).toDouble() - 20;
     int f_maximum = valueRange.mid(valueRange.indexOf("..") + 2).toDouble();
     m_sliderAmplitude->setRange(f_minimum,f_maximum);
     m_sliderAmplitude->setSpan(m_sliderAmplitude->minimum(),m_sliderAmplitude->maximum());
@@ -104,7 +104,7 @@ OneWaveWidget::OneWaveWidget(ICurve *curve){
 
 
     QString valueRange = curve->desc()->param("val_range");
-    int f_minimum = valueRange.left(valueRange.indexOf("..")).toDouble();
+    int f_minimum = valueRange.left(valueRange.indexOf("..")).toDouble() - 20;
     int f_maximum = valueRange.mid(valueRange.indexOf("..") + 2).toDouble();
     m_sliderAmplitude->setRange(f_minimum,f_maximum);
     m_sliderAmplitude->setSpan(m_sliderAmplitude->minimum(),m_sliderAmplitude->maximum());

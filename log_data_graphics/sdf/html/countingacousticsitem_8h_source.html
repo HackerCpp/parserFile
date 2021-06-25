@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_GRAPHICS: Исходный файл E:/MyQtProgram/parserGfm/log_data_graphics/inc/acousticsEditor/countingacousticsitem.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_GRAPHICS
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_53603dfb3fbca8a964ef75a71799598b.html">log_data_graphics</a></li><li class="navelem"><a class="el" href="dir_55342455956423183f7a145b2d21cf95.html">inc</a></li><li class="navelem"><a class="el" href="dir_1a4c2f3184f1711e7e5f7c6041db6c9a.html">acousticsEditor</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">countingacousticsitem.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="countingacousticsitem_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef COUNTINGACOUSTICSITEM_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define COUNTINGACOUSTICSITEM_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="objectoftheboard_8h.html">objectoftheboard.h</a>&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="datacountingacoustics_8h.html">datacountingacoustics.h</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="class_counting_acoustics_item.html">    6</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_counting_acoustics_item.html">CountingAcousticsItem</a> : <span class="keyword">public</span> <a class="code" href="class_object_of_the_board.html">ObjectOfTheBoard</a></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <a class="code" href="class_data_counting_acoustics.html">DataCountingAcoustics</a> *m_dataAcoustics;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <a class="code" href="class_counting_acoustics_item.html#a5912e86f2fe14a7b9c55004e8c2ce14b">CountingAcousticsItem</a>(<a class="code" href="class_data_counting_acoustics.html">DataCountingAcoustics</a> *dataAcoustics,<span class="keywordtype">int</span> width);</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="class_counting_acoustics_item.html#a4925ec55d535aa3761b62bc30d5f5edd">   11</a></span>&#160;    <a class="code" href="class_counting_acoustics_item.html#a4925ec55d535aa3761b62bc30d5f5edd">~CountingAcousticsItem</a>()<span class="keyword">override</span>{}</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_counting_acoustics_item.html#a43f4baace7b5c7ad566e3e4ca8b70e10">paint</a>(QPainter *painter, <span class="keyword">const</span> QStyleOptionGraphicsItem*, QWidget*)<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">virtual</span> QRectF <a class="code" href="class_counting_acoustics_item.html#a01968a8391a158b7ee9cb6ac097920b6">boundingRect</a>()<span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_counting_acoustics_item.html#afd5935b2cc25ef6c8c8beece9b01efc9">changeVisibilityZone</a>(QRectF visibilityZone);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_counting_acoustics_item.html#a63d254e5ad15dd439b24c0b6d1e33de6">changeSize</a>(<span class="keywordtype">int</span> width);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_counting_acoustics_item.html#a6a75f7435ea903f60aff976185cd3097">toSetTheLocationOfTheImageAfterDrawing</a>()<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_counting_acoustics_item.html#adfce9735afc21e22535bdf3a33a6e9b0">run</a>()<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;};</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// COUNTINGACOUSTICSITEM_H</span></div>
+<div class="ttc" id="aclass_counting_acoustics_item_html"><div class="ttname"><a href="class_counting_acoustics_item.html">CountingAcousticsItem</a></div><div class="ttdef"><b>Definition:</b> countingacousticsitem.h:7</div></div>
+<div class="ttc" id="aclass_counting_acoustics_item_html_a01968a8391a158b7ee9cb6ac097920b6"><div class="ttname"><a href="class_counting_acoustics_item.html#a01968a8391a158b7ee9cb6ac097920b6">CountingAcousticsItem::boundingRect</a></div><div class="ttdeci">virtual QRectF boundingRect() const override</div><div class="ttdef"><b>Definition:</b> countingacousticsitem.cpp:31</div></div>
+<div class="ttc" id="aclass_counting_acoustics_item_html_a43f4baace7b5c7ad566e3e4ca8b70e10"><div class="ttname"><a href="class_counting_acoustics_item.html#a43f4baace7b5c7ad566e3e4ca8b70e10">CountingAcousticsItem::paint</a></div><div class="ttdeci">virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *) override</div><div class="ttdef"><b>Definition:</b> countingacousticsitem.cpp:26</div></div>
+<div class="ttc" id="aclass_counting_acoustics_item_html_a4925ec55d535aa3761b62bc30d5f5edd"><div class="ttname"><a href="class_counting_acoustics_item.html#a4925ec55d535aa3761b62bc30d5f5edd">CountingAcousticsItem::~CountingAcousticsItem</a></div><div class="ttdeci">~CountingAcousticsItem() override</div><div class="ttdef"><b>Definition:</b> countingacousticsitem.h:11</div></div>
+<div class="ttc" id="aclass_counting_acoustics_item_html_a5912e86f2fe14a7b9c55004e8c2ce14b"><div class="ttname"><a href="class_counting_acoustics_item.html#a5912e86f2fe14a7b9c55004e8c2ce14b">CountingAcousticsItem::CountingAcousticsItem</a></div><div class="ttdeci">CountingAcousticsItem(DataCountingAcoustics *dataAcoustics, int width)</div><div class="ttdef"><b>Definition:</b> countingacousticsitem.cpp:5</div></div>
+<div class="ttc" id="aclass_counting_acoustics_item_html_a63d254e5ad15dd439b24c0b6d1e33de6"><div class="ttname"><a href="class_counting_acoustics_item.html#a63d254e5ad15dd439b24c0b6d1e33de6">CountingAcousticsItem::changeSize</a></div><div class="ttdeci">void changeSize(int width)</div><div class="ttdef"><b>Definition:</b> countingacousticsitem.cpp:57</div></div>
+<div class="ttc" id="aclass_counting_acoustics_item_html_a6a75f7435ea903f60aff976185cd3097"><div class="ttname"><a href="class_counting_acoustics_item.html#a6a75f7435ea903f60aff976185cd3097">CountingAcousticsItem::toSetTheLocationOfTheImageAfterDrawing</a></div><div class="ttdeci">void toSetTheLocationOfTheImageAfterDrawing() override</div><div class="ttdef"><b>Definition:</b> countingacousticsitem.cpp:85</div></div>
+<div class="ttc" id="aclass_counting_acoustics_item_html_adfce9735afc21e22535bdf3a33a6e9b0"><div class="ttname"><a href="class_counting_acoustics_item.html#adfce9735afc21e22535bdf3a33a6e9b0">CountingAcousticsItem::run</a></div><div class="ttdeci">void run() override</div><div class="ttdef"><b>Definition:</b> countingacousticsitem.cpp:96</div></div>
+<div class="ttc" id="aclass_counting_acoustics_item_html_afd5935b2cc25ef6c8c8beece9b01efc9"><div class="ttname"><a href="class_counting_acoustics_item.html#afd5935b2cc25ef6c8c8beece9b01efc9">CountingAcousticsItem::changeVisibilityZone</a></div><div class="ttdeci">void changeVisibilityZone(QRectF visibilityZone)</div><div class="ttdef"><b>Definition:</b> countingacousticsitem.cpp:52</div></div>
+<div class="ttc" id="aclass_data_counting_acoustics_html"><div class="ttname"><a href="class_data_counting_acoustics.html">DataCountingAcoustics</a></div><div class="ttdef"><b>Definition:</b> datacountingacoustics.h:6</div></div>
+<div class="ttc" id="aclass_object_of_the_board_html"><div class="ttname"><a href="class_object_of_the_board.html">ObjectOfTheBoard</a></div><div class="ttdef"><b>Definition:</b> objectoftheboard.h:10</div></div>
+<div class="ttc" id="adatacountingacoustics_8h_html"><div class="ttname"><a href="datacountingacoustics_8h.html">datacountingacoustics.h</a></div></div>
+<div class="ttc" id="aobjectoftheboard_8h_html"><div class="ttname"><a href="objectoftheboard_8h.html">objectoftheboard.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

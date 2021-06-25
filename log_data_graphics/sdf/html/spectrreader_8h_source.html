@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_GRAPHICS: Исходный файл E:/MyQtProgram/parserGfm/log_data_graphics/inc/spectrReader/spectrreader.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_GRAPHICS
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_53603dfb3fbca8a964ef75a71799598b.html">log_data_graphics</a></li><li class="navelem"><a class="el" href="dir_55342455956423183f7a145b2d21cf95.html">inc</a></li><li class="navelem"><a class="el" href="dir_f2ae106b4003225912847c6f66e2461a.html">spectrReader</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">spectrreader.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="spectrreader_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SPECTRREADER_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SPECTRREADER_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;QWidget&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="vspectritem_8h.html">vspectritem.h</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QGraphicsScene&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QVBoxLayout&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;QGraphicsItem&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;QSplitter&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;QToolBar&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;QLineEdit&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;QSlider&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;QGraphicsView&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;QComboBox&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;QPushButton&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="filter_list_model_8h.html">filterListModel.h</a>&quot;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="filterlistview_8h.html">filterlistview.h</a>&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="objectoftheboard_8h.html">objectoftheboard.h</a>&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;QRadioButton&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="basecurvereader_8h.html">basecurvereader.h</a>&quot;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="onewavewidget_8h.html">onewavewidget.h</a>&quot;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="spectrviewer_8h.html">spectrviewer.h</a>&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">class </span>IInterpreterLogData;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">class </span>InterpreterEditor;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="class_spectr_reader.html">   26</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_spectr_reader.html">SpectrReader</a> : <span class="keyword">public</span> <a class="code" href="class_base_curve_reader.html">BaseCurveReader</a></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    IInterpreterLogData * m_pythonInterpreter;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    InterpreterEditor *m_pyEditor;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="class_one_wave_widget.html">OneWaveWidget</a> *m_oneWaveWidget;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">int</span> m_widht;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    QVBoxLayout *m_vMainLayout;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    QSplitter *m_splitterFiltersAndSpectrs, *m_spectrSplitter,*m_baseVSplitter;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    QList&lt;SpectrViewer *&gt; *m_listSpectrViewer;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    QToolBar *m_toolBar;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="class_q_slider.html">QSlider</a> *m_sliderWidth;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    QComboBox *m_comboFilters;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    QPushButton *m_btnAddFilter;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="class_filter_list_model.html">FilterListModel</a> *m_filterListModel;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="class_filter_list_view.html">FilterListView</a> *m_filterListView;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    QVBoxLayout *m_vLayoutFilters;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    QWidget *m_widgetFilters;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    QHBoxLayout *m_hLayoutBtnFilters;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    QPushButton *m_btnApplyFilters,*m_btnRollBack;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="class_spectr_reader.html#a164c657dd0bf5d9cd68807d40fa45387">SpectrReader</a>(<a class="code" href="class_v_spectr_item.html">VSpectrItem</a> *spectrItem);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="class_spectr_reader.html#a046708454b912477547a6a4a4fca9453">~SpectrReader</a>()<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectr_reader.html#ac6817bf12d364549f7edd032ca747cdf">changrVisibilityZone</a>(QRectF visibilitiRect);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectr_reader.html#ac3d078fcf37cbe3bfc90d516ddd82adf">resizeEvent</a>(QResizeEvent *event)<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectr_reader.html#a9009b3b809360b9719ce63f06f43a0bd">dragEnterEvent</a>(QDragEnterEvent *event)<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectr_reader.html#a42d49535fb836071971672c115d9c8af">dragMoveEvent</a>(QDragMoveEvent *event)<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectr_reader.html#aa35ccc7d9fcf68d50b013be4dc183867">dropEvent</a>(QDropEvent *event)<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectr_reader.html#a05ec54c5e1feb905cd1992a6bb2f8e8a">sliderWidthChange</a>(<span class="keywordtype">int</span> width);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectr_reader.html#a5a08369be460bd2fcdce4cf1d6cb5be3">insertFilter</a>();</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectr_reader.html#ae67b3035ac31c51e8b2e06674972f735">rollBackFilters</a>();</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectr_reader.html#aa87714a9669f819a9d9d79393ef58e54">applyAllFilters</a>();</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectr_reader.html#a456d0d1cfc191479ca9281792fc154bb">apply</a>()<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectr_reader.html#a3e5c8acc0f6ded1a23a8eb6ab42b7e5d">updateOneWaweWidget</a>(QPoint scenePoint);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectr_reader.html#a1bae71a36e3a45ca5aad6f874c8f6e22">allUpdate</a>();</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_spectr_reader.html#a13a685376b9d4daf2401fa8a6a9e07a2">changeBordersOfTheFilters</a>(QPoint leftTop,QPoint rightDown);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;};</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// SPECTRREADER_H</span></div>
+<div class="ttc" id="abasecurvereader_8h_html"><div class="ttname"><a href="basecurvereader_8h.html">basecurvereader.h</a></div></div>
+<div class="ttc" id="aclass_base_curve_reader_html"><div class="ttname"><a href="class_base_curve_reader.html">BaseCurveReader</a></div><div class="ttdef"><b>Definition:</b> basecurvereader.h:6</div></div>
+<div class="ttc" id="aclass_filter_list_model_html"><div class="ttname"><a href="class_filter_list_model.html">FilterListModel</a></div><div class="ttdef"><b>Definition:</b> filterListModel.h:18</div></div>
+<div class="ttc" id="aclass_filter_list_view_html"><div class="ttname"><a href="class_filter_list_view.html">FilterListView</a></div><div class="ttdef"><b>Definition:</b> filterlistview.h:6</div></div>
+<div class="ttc" id="aclass_one_wave_widget_html"><div class="ttname"><a href="class_one_wave_widget.html">OneWaveWidget</a></div><div class="ttdef"><b>Definition:</b> onewavewidget.h:12</div></div>
+<div class="ttc" id="aclass_q_slider_html"><div class="ttname"><a href="class_q_slider.html">QSlider</a></div></div>
+<div class="ttc" id="aclass_spectr_reader_html"><div class="ttname"><a href="class_spectr_reader.html">SpectrReader</a></div><div class="ttdef"><b>Definition:</b> spectrreader.h:27</div></div>
+<div class="ttc" id="aclass_spectr_reader_html_a046708454b912477547a6a4a4fca9453"><div class="ttname"><a href="class_spectr_reader.html#a046708454b912477547a6a4a4fca9453">SpectrReader::~SpectrReader</a></div><div class="ttdeci">~SpectrReader() override</div><div class="ttdef"><b>Definition:</b> spectrreader.cpp:108</div></div>
+<div class="ttc" id="aclass_spectr_reader_html_a05ec54c5e1feb905cd1992a6bb2f8e8a"><div class="ttname"><a href="class_spectr_reader.html#a05ec54c5e1feb905cd1992a6bb2f8e8a">SpectrReader::sliderWidthChange</a></div><div class="ttdeci">void sliderWidthChange(int width)</div><div class="ttdef"><b>Definition:</b> spectrreader.cpp:154</div></div>
+<div class="ttc" id="aclass_spectr_reader_html_a13a685376b9d4daf2401fa8a6a9e07a2"><div class="ttname"><a href="class_spectr_reader.html#a13a685376b9d4daf2401fa8a6a9e07a2">SpectrReader::changeBordersOfTheFilters</a></div><div class="ttdeci">void changeBordersOfTheFilters(QPoint leftTop, QPoint rightDown)</div><div class="ttdef"><b>Definition:</b> spectrreader.cpp:303</div></div>
+<div class="ttc" id="aclass_spectr_reader_html_a164c657dd0bf5d9cd68807d40fa45387"><div class="ttname"><a href="class_spectr_reader.html#a164c657dd0bf5d9cd68807d40fa45387">SpectrReader::SpectrReader</a></div><div class="ttdeci">SpectrReader(VSpectrItem *spectrItem)</div><div class="ttdef"><b>Definition:</b> spectrreader.cpp:16</div></div>
+<div class="ttc" id="aclass_spectr_reader_html_a1bae71a36e3a45ca5aad6f874c8f6e22"><div class="ttname"><a href="class_spectr_reader.html#a1bae71a36e3a45ca5aad6f874c8f6e22">SpectrReader::allUpdate</a></div><div class="ttdeci">void allUpdate()</div><div class="ttdef"><b>Definition:</b> spectrreader.cpp:272</div></div>
+<div class="ttc" id="aclass_spectr_reader_html_a3e5c8acc0f6ded1a23a8eb6ab42b7e5d"><div class="ttname"><a href="class_spectr_reader.html#a3e5c8acc0f6ded1a23a8eb6ab42b7e5d">SpectrReader::updateOneWaweWidget</a></div><div class="ttdeci">void updateOneWaweWidget(QPoint scenePoint)</div><div class="ttdef"><b>Definition:</b> spectrreader.cpp:299</div></div>
+<div class="ttc" id="aclass_spectr_reader_html_a42d49535fb836071971672c115d9c8af"><div class="ttname"><a href="class_spectr_reader.html#a42d49535fb836071971672c115d9c8af">SpectrReader::dragMoveEvent</a></div><div class="ttdeci">void dragMoveEvent(QDragMoveEvent *event) override</div><div class="ttdef"><b>Definition:</b> spectrreader.cpp:169</div></div>
+<div class="ttc" id="aclass_spectr_reader_html_a456d0d1cfc191479ca9281792fc154bb"><div class="ttname"><a href="class_spectr_reader.html#a456d0d1cfc191479ca9281792fc154bb">SpectrReader::apply</a></div><div class="ttdeci">void apply() override</div><div class="ttdef"><b>Definition:</b> spectrreader.cpp:280</div></div>
+<div class="ttc" id="aclass_spectr_reader_html_a5a08369be460bd2fcdce4cf1d6cb5be3"><div class="ttname"><a href="class_spectr_reader.html#a5a08369be460bd2fcdce4cf1d6cb5be3">SpectrReader::insertFilter</a></div><div class="ttdeci">void insertFilter()</div><div class="ttdef"><b>Definition:</b> spectrreader.cpp:207</div></div>
+<div class="ttc" id="aclass_spectr_reader_html_a9009b3b809360b9719ce63f06f43a0bd"><div class="ttname"><a href="class_spectr_reader.html#a9009b3b809360b9719ce63f06f43a0bd">SpectrReader::dragEnterEvent</a></div><div class="ttdeci">void dragEnterEvent(QDragEnterEvent *event) override</div><div class="ttdef"><b>Definition:</b> spectrreader.cpp:159</div></div>
+<div class="ttc" id="aclass_spectr_reader_html_aa35ccc7d9fcf68d50b013be4dc183867"><div class="ttname"><a href="class_spectr_reader.html#aa35ccc7d9fcf68d50b013be4dc183867">SpectrReader::dropEvent</a></div><div class="ttdeci">void dropEvent(QDropEvent *event) override</div><div class="ttdef"><b>Definition:</b> spectrreader.cpp:179</div></div>
+<div class="ttc" id="aclass_spectr_reader_html_aa87714a9669f819a9d9d79393ef58e54"><div class="ttname"><a href="class_spectr_reader.html#aa87714a9669f819a9d9d79393ef58e54">SpectrReader::applyAllFilters</a></div><div class="ttdeci">void applyAllFilters()</div><div class="ttdef"><b>Definition:</b> spectrreader.cpp:228</div></div>
+<div class="ttc" id="aclass_spectr_reader_html_ac3d078fcf37cbe3bfc90d516ddd82adf"><div class="ttname"><a href="class_spectr_reader.html#ac3d078fcf37cbe3bfc90d516ddd82adf">SpectrReader::resizeEvent</a></div><div class="ttdeci">void resizeEvent(QResizeEvent *event) override</div><div class="ttdef"><b>Definition:</b> spectrreader.cpp:149</div></div>
+<div class="ttc" id="aclass_spectr_reader_html_ac6817bf12d364549f7edd032ca747cdf"><div class="ttname"><a href="class_spectr_reader.html#ac6817bf12d364549f7edd032ca747cdf">SpectrReader::changrVisibilityZone</a></div><div class="ttdeci">void changrVisibilityZone(QRectF visibilitiRect)</div><div class="ttdef"><b>Definition:</b> spectrreader.cpp:143</div></div>
+<div class="ttc" id="aclass_spectr_reader_html_ae67b3035ac31c51e8b2e06674972f735"><div class="ttname"><a href="class_spectr_reader.html#ae67b3035ac31c51e8b2e06674972f735">SpectrReader::rollBackFilters</a></div><div class="ttdeci">void rollBackFilters()</div><div class="ttdef"><b>Definition:</b> spectrreader.cpp:211</div></div>
+<div class="ttc" id="aclass_v_spectr_item_html"><div class="ttname"><a href="class_v_spectr_item.html">VSpectrItem</a></div><div class="ttdef"><b>Definition:</b> vspectritem.h:8</div></div>
+<div class="ttc" id="afilter_list_model_8h_html"><div class="ttname"><a href="filter_list_model_8h.html">filterListModel.h</a></div></div>
+<div class="ttc" id="afilterlistview_8h_html"><div class="ttname"><a href="filterlistview_8h.html">filterlistview.h</a></div></div>
+<div class="ttc" id="aobjectoftheboard_8h_html"><div class="ttname"><a href="objectoftheboard_8h.html">objectoftheboard.h</a></div></div>
+<div class="ttc" id="aonewavewidget_8h_html"><div class="ttname"><a href="onewavewidget_8h.html">onewavewidget.h</a></div></div>
+<div class="ttc" id="aspectrviewer_8h_html"><div class="ttname"><a href="spectrviewer_8h.html">spectrviewer.h</a></div></div>
+<div class="ttc" id="avspectritem_8h_html"><div class="ttname"><a href="vspectritem_8h.html">vspectritem.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

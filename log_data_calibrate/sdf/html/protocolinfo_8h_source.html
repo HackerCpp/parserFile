@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_CALIBRATE: Исходный файл E:/MyQtProgram/parserGfm/log_data_calibrate/src/protocolinfo.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_CALIBRATE
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_2d0751fb3bbd35f5629786370ddff2ab.html">log_data_calibrate</a></li><li class="navelem"><a class="el" href="dir_8a129a56028b7b1f9377e01dcb8ce97e.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">protocolinfo.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="protocolinfo_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef PROTOCOLINFO_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define PROTOCOLINFO_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="coeffs_8h.html">coeffs.h</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QVector&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="operator_8h.html">operator.h</a>&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;QDateTime&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">class </span>ICurve;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">class </span><a class="code" href="class_q_widget.html">QWidget</a>;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">class </span>QVBoxLayout;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">class </span>QPushButton;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">class </span>QWebEngineView;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efcae59b8d112465192b8f49fa49cea287d3">   15</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efc">TypeSpectrum</a>{<a class="code" href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efca23895ad96cb3f574e37efa42544a218a">MINIMUM_SPECTRUM</a>,<a class="code" href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efcae59b8d112465192b8f49fa49cea287d3">MAXIMUM_SPECTRUM</a>,<a class="code" href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efca6729cca04769af3828e8960c696e687b">NOISE_SPECTRUM</a>,<a class="code" href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efca4273153519c72c5aa491e12fa7253a28">TYPE_SPECTRUM_MAX</a>};</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_protocol_info.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_protocol_info.html">ProtocolInfo</a></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    QString m_deviceName,m_deviceNum,m_channelName;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="class_operator.html">Operator</a> m_operator;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    QVector&lt;CoeffsLinearDependence&gt; *m_coeffsUp;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    QVector&lt;CoeffsLinearDependence&gt; *m_coeffsDown;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    QVector&lt;ICurve*&gt; m_sourceSpectrums{<a class="code" href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efca4273153519c72c5aa491e12fa7253a28">TYPE_SPECTRUM_MAX</a>,<span class="keyword">nullptr</span>};</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    QVector&lt;ICurve*&gt; m_approximatedSpectrums{<a class="code" href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efca4273153519c72c5aa491e12fa7253a28">TYPE_SPECTRUM_MAX</a>,<span class="keyword">nullptr</span>};</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    QVector&lt;ICurve*&gt; m_referenceSpectrums{<a class="code" href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efca4273153519c72c5aa491e12fa7253a28">TYPE_SPECTRUM_MAX</a>,<span class="keyword">nullptr</span>};</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    QString m_dateTime;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">int</span> m_indexRefDB;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="class_protocol_info.html#ab17750be4e9b4c4352029d783fc64754">ProtocolInfo</a>(QString currentDayTime = QDateTime().currentDateTime().toString());</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_protocol_info.html#a266bc4728de3da7914371ec4a5369c47">addReference</a>(<span class="keyword">const</span> QVector&lt;ICurve*&gt; &amp;referenceSpectrums,<span class="keywordtype">int</span> <a class="code" href="class_protocol_info.html#aa766d49a196e823972ac136fbdd36ba3">indexRefDB</a> = 0);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_protocol_info.html#aba05b36dccea512e8b7d0a8c21aa4f83">addSource</a>(<span class="keyword">const</span> QVector&lt;ICurve*&gt; &amp;sourceSpectrums);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_protocol_info.html#afac85e5d1acad99d37027ac5e68ad4f2">addApproximated</a>(<span class="keyword">const</span> QVector&lt;ICurve*&gt; &amp;approximatedSpectrums);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_protocol_info.html#a0354db9e1c3576a4b618b702c523c4ce">addCoeffs</a>(QVector&lt;CoeffsLinearDependence&gt; *<a class="code" href="class_protocol_info.html#ad54762b5c843f2b54025887eff4ae55f">coeffsUp</a>,QVector&lt;CoeffsLinearDependence&gt; *<a class="code" href="class_protocol_info.html#a7c6a6f782531611988f39567c5e5afeb">coeffsDown</a>);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_protocol_info.html#a59a1532cc4e2d20231025035b772a72e">addOperator</a>(<a class="code" href="class_operator.html">Operator</a> <a class="code" href="class_protocol_info.html#aadc082300052e16ee234d59763abd586">operatorer</a>);</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="class_protocol_info.html#a4e0c9be64a824b46639f8a06284e0136">   38</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_protocol_info.html#a4e0c9be64a824b46639f8a06284e0136">addChannelName</a>(QString <a class="code" href="class_protocol_info.html#af52cefedaf2d055a54fb17993e4188aa">channelName</a>){m_channelName = <a class="code" href="class_protocol_info.html#af52cefedaf2d055a54fb17993e4188aa">channelName</a>;}</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="class_protocol_info.html#ac004cdeed7ee5a2e5260793a058268da">   40</a></span>&#160;    QString <a class="code" href="class_protocol_info.html#ac004cdeed7ee5a2e5260793a058268da">deviceName</a>()<span class="keyword">const</span>{<span class="keywordflow">return</span> m_deviceName;}</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="class_protocol_info.html#afd1c40d554466f121a6137a33527fddb">   41</a></span>&#160;    QString <a class="code" href="class_protocol_info.html#afd1c40d554466f121a6137a33527fddb">deviceNum</a>()<span class="keyword">const</span>{<span class="keywordflow">return</span> m_deviceNum;}</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="class_protocol_info.html#af52cefedaf2d055a54fb17993e4188aa">   42</a></span>&#160;    QString <a class="code" href="class_protocol_info.html#af52cefedaf2d055a54fb17993e4188aa">channelName</a>()<span class="keyword">const</span>{<span class="keywordflow">return</span> m_channelName;}</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="class_protocol_info.html#aadc082300052e16ee234d59763abd586">   43</a></span>&#160;    <a class="code" href="class_operator.html">Operator</a> <a class="code" href="class_protocol_info.html#aadc082300052e16ee234d59763abd586">operatorer</a>()<span class="keyword">const</span>{<span class="keywordflow">return</span> m_operator;}</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="class_protocol_info.html#adfbf6e60265c82ac03b4780d64e0984a">   45</a></span>&#160;    ICurve *<a class="code" href="class_protocol_info.html#adfbf6e60265c82ac03b4780d64e0984a">reference</a>(<a class="code" href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efc">TypeSpectrum</a> type)<span class="keyword">const</span>{<span class="keywordflow">return</span> m_referenceSpectrums[type];}</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="class_protocol_info.html#a99d7ad535f360737aa9c1ce5be71a612">   46</a></span>&#160;    ICurve *<a class="code" href="class_protocol_info.html#a99d7ad535f360737aa9c1ce5be71a612">approximated</a>(<a class="code" href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efc">TypeSpectrum</a> type)<span class="keyword">const</span>{<span class="keywordflow">return</span> m_approximatedSpectrums[type];}</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="class_protocol_info.html#a5365ebe68d405f2ba19513f9e199a418">   47</a></span>&#160;    ICurve *<a class="code" href="class_protocol_info.html#a5365ebe68d405f2ba19513f9e199a418">source</a>(<a class="code" href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efc">TypeSpectrum</a> type)<span class="keyword">const</span>{<span class="keywordflow">return</span> m_sourceSpectrums[type];}</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="class_protocol_info.html#acd1191a39965e433a79794d1983f1a32">   49</a></span>&#160;    <span class="keyword">const</span> QVector&lt;ICurve*&gt; &amp;<a class="code" href="class_protocol_info.html#acd1191a39965e433a79794d1983f1a32">references</a>()<span class="keyword">const</span>{<span class="keywordflow">return</span> m_referenceSpectrums;}</div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="class_protocol_info.html#a26655b79bf5bab891560bbf76e7f7fbc">   50</a></span>&#160;    <span class="keyword">const</span> QVector&lt;ICurve*&gt; &amp;<a class="code" href="class_protocol_info.html#a26655b79bf5bab891560bbf76e7f7fbc">approximateds</a>()<span class="keyword">const</span>{<span class="keywordflow">return</span> m_approximatedSpectrums;}</div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="class_protocol_info.html#abdd9ae81a3f930963b3523d6f90643fa">   51</a></span>&#160;    <span class="keyword">const</span> QVector&lt;ICurve*&gt; &amp;<a class="code" href="class_protocol_info.html#abdd9ae81a3f930963b3523d6f90643fa">sources</a>()<span class="keyword">const</span>{<span class="keywordflow">return</span> m_sourceSpectrums;}</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="class_protocol_info.html#ad54762b5c843f2b54025887eff4ae55f">   53</a></span>&#160;    QVector&lt;CoeffsLinearDependence&gt; *<a class="code" href="class_protocol_info.html#ad54762b5c843f2b54025887eff4ae55f">coeffsUp</a>()<span class="keyword">const</span>{<span class="keywordflow">return</span> m_coeffsUp;}</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="class_protocol_info.html#a7c6a6f782531611988f39567c5e5afeb">   54</a></span>&#160;    QVector&lt;CoeffsLinearDependence&gt; *<a class="code" href="class_protocol_info.html#a7c6a6f782531611988f39567c5e5afeb">coeffsDown</a>()<span class="keyword">const</span>{<span class="keywordflow">return</span> m_coeffsDown;}</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="class_protocol_info.html#a8a528f99b9f7de1d94e68adb79317d80">   55</a></span>&#160;    QString <a class="code" href="class_protocol_info.html#a8a528f99b9f7de1d94e68adb79317d80">dateTime</a>(){<span class="keywordflow">return</span> m_dateTime;}</div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="class_protocol_info.html#aa766d49a196e823972ac136fbdd36ba3">   56</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_protocol_info.html#aa766d49a196e823972ac136fbdd36ba3">indexRefDB</a>()<span class="keyword">const</span>{<span class="keywordflow">return</span> m_indexRefDB;}</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;};</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// PROTOCOLINFO_H</span></div>
+<div class="ttc" id="aclass_operator_html"><div class="ttname"><a href="class_operator.html">Operator</a></div><div class="ttdef"><b>Definition:</b> operator.h:6</div></div>
+<div class="ttc" id="aclass_protocol_info_html"><div class="ttname"><a href="class_protocol_info.html">ProtocolInfo</a></div><div class="ttdef"><b>Definition:</b> protocolinfo.h:18</div></div>
+<div class="ttc" id="aclass_protocol_info_html_a0354db9e1c3576a4b618b702c523c4ce"><div class="ttname"><a href="class_protocol_info.html#a0354db9e1c3576a4b618b702c523c4ce">ProtocolInfo::addCoeffs</a></div><div class="ttdeci">void addCoeffs(QVector&lt; CoeffsLinearDependence &gt; *coeffsUp, QVector&lt; CoeffsLinearDependence &gt; *coeffsDown)</div><div class="ttdef"><b>Definition:</b> protocolinfo.cpp:31</div></div>
+<div class="ttc" id="aclass_protocol_info_html_a26655b79bf5bab891560bbf76e7f7fbc"><div class="ttname"><a href="class_protocol_info.html#a26655b79bf5bab891560bbf76e7f7fbc">ProtocolInfo::approximateds</a></div><div class="ttdeci">const QVector&lt; ICurve * &gt; &amp; approximateds() const</div><div class="ttdef"><b>Definition:</b> protocolinfo.h:50</div></div>
+<div class="ttc" id="aclass_protocol_info_html_a266bc4728de3da7914371ec4a5369c47"><div class="ttname"><a href="class_protocol_info.html#a266bc4728de3da7914371ec4a5369c47">ProtocolInfo::addReference</a></div><div class="ttdeci">void addReference(const QVector&lt; ICurve * &gt; &amp;referenceSpectrums, int indexRefDB=0)</div><div class="ttdef"><b>Definition:</b> protocolinfo.cpp:10</div></div>
+<div class="ttc" id="aclass_protocol_info_html_a4e0c9be64a824b46639f8a06284e0136"><div class="ttname"><a href="class_protocol_info.html#a4e0c9be64a824b46639f8a06284e0136">ProtocolInfo::addChannelName</a></div><div class="ttdeci">void addChannelName(QString channelName)</div><div class="ttdef"><b>Definition:</b> protocolinfo.h:38</div></div>
+<div class="ttc" id="aclass_protocol_info_html_a5365ebe68d405f2ba19513f9e199a418"><div class="ttname"><a href="class_protocol_info.html#a5365ebe68d405f2ba19513f9e199a418">ProtocolInfo::source</a></div><div class="ttdeci">ICurve * source(TypeSpectrum type) const</div><div class="ttdef"><b>Definition:</b> protocolinfo.h:47</div></div>
+<div class="ttc" id="aclass_protocol_info_html_a59a1532cc4e2d20231025035b772a72e"><div class="ttname"><a href="class_protocol_info.html#a59a1532cc4e2d20231025035b772a72e">ProtocolInfo::addOperator</a></div><div class="ttdeci">void addOperator(Operator operatorer)</div><div class="ttdef"><b>Definition:</b> protocolinfo.cpp:36</div></div>
+<div class="ttc" id="aclass_protocol_info_html_a7c6a6f782531611988f39567c5e5afeb"><div class="ttname"><a href="class_protocol_info.html#a7c6a6f782531611988f39567c5e5afeb">ProtocolInfo::coeffsDown</a></div><div class="ttdeci">QVector&lt; CoeffsLinearDependence &gt; * coeffsDown() const</div><div class="ttdef"><b>Definition:</b> protocolinfo.h:54</div></div>
+<div class="ttc" id="aclass_protocol_info_html_a8a528f99b9f7de1d94e68adb79317d80"><div class="ttname"><a href="class_protocol_info.html#a8a528f99b9f7de1d94e68adb79317d80">ProtocolInfo::dateTime</a></div><div class="ttdeci">QString dateTime()</div><div class="ttdef"><b>Definition:</b> protocolinfo.h:55</div></div>
+<div class="ttc" id="aclass_protocol_info_html_a99d7ad535f360737aa9c1ce5be71a612"><div class="ttname"><a href="class_protocol_info.html#a99d7ad535f360737aa9c1ce5be71a612">ProtocolInfo::approximated</a></div><div class="ttdeci">ICurve * approximated(TypeSpectrum type) const</div><div class="ttdef"><b>Definition:</b> protocolinfo.h:46</div></div>
+<div class="ttc" id="aclass_protocol_info_html_aa766d49a196e823972ac136fbdd36ba3"><div class="ttname"><a href="class_protocol_info.html#aa766d49a196e823972ac136fbdd36ba3">ProtocolInfo::indexRefDB</a></div><div class="ttdeci">int indexRefDB() const</div><div class="ttdef"><b>Definition:</b> protocolinfo.h:56</div></div>
+<div class="ttc" id="aclass_protocol_info_html_aadc082300052e16ee234d59763abd586"><div class="ttname"><a href="class_protocol_info.html#aadc082300052e16ee234d59763abd586">ProtocolInfo::operatorer</a></div><div class="ttdeci">Operator operatorer() const</div><div class="ttdef"><b>Definition:</b> protocolinfo.h:43</div></div>
+<div class="ttc" id="aclass_protocol_info_html_ab17750be4e9b4c4352029d783fc64754"><div class="ttname"><a href="class_protocol_info.html#ab17750be4e9b4c4352029d783fc64754">ProtocolInfo::ProtocolInfo</a></div><div class="ttdeci">ProtocolInfo(QString currentDayTime=QDateTime().currentDateTime().toString())</div><div class="ttdef"><b>Definition:</b> protocolinfo.cpp:4</div></div>
+<div class="ttc" id="aclass_protocol_info_html_aba05b36dccea512e8b7d0a8c21aa4f83"><div class="ttname"><a href="class_protocol_info.html#aba05b36dccea512e8b7d0a8c21aa4f83">ProtocolInfo::addSource</a></div><div class="ttdeci">void addSource(const QVector&lt; ICurve * &gt; &amp;sourceSpectrums)</div><div class="ttdef"><b>Definition:</b> protocolinfo.cpp:17</div></div>
+<div class="ttc" id="aclass_protocol_info_html_abdd9ae81a3f930963b3523d6f90643fa"><div class="ttname"><a href="class_protocol_info.html#abdd9ae81a3f930963b3523d6f90643fa">ProtocolInfo::sources</a></div><div class="ttdeci">const QVector&lt; ICurve * &gt; &amp; sources() const</div><div class="ttdef"><b>Definition:</b> protocolinfo.h:51</div></div>
+<div class="ttc" id="aclass_protocol_info_html_ac004cdeed7ee5a2e5260793a058268da"><div class="ttname"><a href="class_protocol_info.html#ac004cdeed7ee5a2e5260793a058268da">ProtocolInfo::deviceName</a></div><div class="ttdeci">QString deviceName() const</div><div class="ttdef"><b>Definition:</b> protocolinfo.h:40</div></div>
+<div class="ttc" id="aclass_protocol_info_html_acd1191a39965e433a79794d1983f1a32"><div class="ttname"><a href="class_protocol_info.html#acd1191a39965e433a79794d1983f1a32">ProtocolInfo::references</a></div><div class="ttdeci">const QVector&lt; ICurve * &gt; &amp; references() const</div><div class="ttdef"><b>Definition:</b> protocolinfo.h:49</div></div>
+<div class="ttc" id="aclass_protocol_info_html_ad54762b5c843f2b54025887eff4ae55f"><div class="ttname"><a href="class_protocol_info.html#ad54762b5c843f2b54025887eff4ae55f">ProtocolInfo::coeffsUp</a></div><div class="ttdeci">QVector&lt; CoeffsLinearDependence &gt; * coeffsUp() const</div><div class="ttdef"><b>Definition:</b> protocolinfo.h:53</div></div>
+<div class="ttc" id="aclass_protocol_info_html_adfbf6e60265c82ac03b4780d64e0984a"><div class="ttname"><a href="class_protocol_info.html#adfbf6e60265c82ac03b4780d64e0984a">ProtocolInfo::reference</a></div><div class="ttdeci">ICurve * reference(TypeSpectrum type) const</div><div class="ttdef"><b>Definition:</b> protocolinfo.h:45</div></div>
+<div class="ttc" id="aclass_protocol_info_html_af52cefedaf2d055a54fb17993e4188aa"><div class="ttname"><a href="class_protocol_info.html#af52cefedaf2d055a54fb17993e4188aa">ProtocolInfo::channelName</a></div><div class="ttdeci">QString channelName() const</div><div class="ttdef"><b>Definition:</b> protocolinfo.h:42</div></div>
+<div class="ttc" id="aclass_protocol_info_html_afac85e5d1acad99d37027ac5e68ad4f2"><div class="ttname"><a href="class_protocol_info.html#afac85e5d1acad99d37027ac5e68ad4f2">ProtocolInfo::addApproximated</a></div><div class="ttdeci">void addApproximated(const QVector&lt; ICurve * &gt; &amp;approximatedSpectrums)</div><div class="ttdef"><b>Definition:</b> protocolinfo.cpp:25</div></div>
+<div class="ttc" id="aclass_protocol_info_html_afd1c40d554466f121a6137a33527fddb"><div class="ttname"><a href="class_protocol_info.html#afd1c40d554466f121a6137a33527fddb">ProtocolInfo::deviceNum</a></div><div class="ttdeci">QString deviceNum() const</div><div class="ttdef"><b>Definition:</b> protocolinfo.h:41</div></div>
+<div class="ttc" id="aclass_q_widget_html"><div class="ttname"><a href="class_q_widget.html">QWidget</a></div></div>
+<div class="ttc" id="acoeffs_8h_html"><div class="ttname"><a href="coeffs_8h.html">coeffs.h</a></div></div>
+<div class="ttc" id="aoperator_8h_html"><div class="ttname"><a href="operator_8h.html">operator.h</a></div></div>
+<div class="ttc" id="aprotocolinfo_8h_html_a5bcc7bbc6df6703aa7f6d54f7d8c3efc"><div class="ttname"><a href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efc">TypeSpectrum</a></div><div class="ttdeci">TypeSpectrum</div><div class="ttdef"><b>Definition:</b> protocolinfo.h:15</div></div>
+<div class="ttc" id="aprotocolinfo_8h_html_a5bcc7bbc6df6703aa7f6d54f7d8c3efca23895ad96cb3f574e37efa42544a218a"><div class="ttname"><a href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efca23895ad96cb3f574e37efa42544a218a">MINIMUM_SPECTRUM</a></div><div class="ttdeci">@ MINIMUM_SPECTRUM</div><div class="ttdef"><b>Definition:</b> protocolinfo.h:15</div></div>
+<div class="ttc" id="aprotocolinfo_8h_html_a5bcc7bbc6df6703aa7f6d54f7d8c3efca4273153519c72c5aa491e12fa7253a28"><div class="ttname"><a href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efca4273153519c72c5aa491e12fa7253a28">TYPE_SPECTRUM_MAX</a></div><div class="ttdeci">@ TYPE_SPECTRUM_MAX</div><div class="ttdef"><b>Definition:</b> protocolinfo.h:15</div></div>
+<div class="ttc" id="aprotocolinfo_8h_html_a5bcc7bbc6df6703aa7f6d54f7d8c3efca6729cca04769af3828e8960c696e687b"><div class="ttname"><a href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efca6729cca04769af3828e8960c696e687b">NOISE_SPECTRUM</a></div><div class="ttdeci">@ NOISE_SPECTRUM</div><div class="ttdef"><b>Definition:</b> protocolinfo.h:15</div></div>
+<div class="ttc" id="aprotocolinfo_8h_html_a5bcc7bbc6df6703aa7f6d54f7d8c3efcae59b8d112465192b8f49fa49cea287d3"><div class="ttname"><a href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efcae59b8d112465192b8f49fa49cea287d3">MAXIMUM_SPECTRUM</a></div><div class="ttdeci">@ MAXIMUM_SPECTRUM</div><div class="ttdef"><b>Definition:</b> protocolinfo.h:15</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

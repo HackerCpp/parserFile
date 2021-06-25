@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_GRAPHICS: Исходный файл E:/MyQtProgram/parserGfm/log_data_graphics/inc/spectrReader/onewavewidget.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_GRAPHICS
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_53603dfb3fbca8a964ef75a71799598b.html">log_data_graphics</a></li><li class="navelem"><a class="el" href="dir_55342455956423183f7a145b2d21cf95.html">inc</a></li><li class="navelem"><a class="el" href="dir_f2ae106b4003225912847c6f66e2461a.html">spectrReader</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">onewavewidget.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="onewavewidget_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef ONEWAVEWIDGET_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define ONEWAVEWIDGET_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;QtCharts&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">class </span>ICurve;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">class </span><a class="code" href="class_a_graphic_item.html">AGraphicItem</a>;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">class </span><a class="code" href="class_model_one_wave.html">ModelOneWave</a>;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">class </span><a class="code" href="class_chart_view_for_one_wave_widget.html">ChartViewForOneWaveWidget</a>;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">class </span><a class="code" href="class_qxt_span_slider.html">QxtSpanSlider</a>;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="class_one_wave_widget.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_one_wave_widget.html">OneWaveWidget</a> : <span class="keyword">public</span> QWidget</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="class_chart_view_for_one_wave_widget.html">ChartViewForOneWaveWidget</a> *m_chartView;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    QValueAxis *xAxis;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    QValueAxis *yAxis;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    QList&lt;QPair&lt;AGraphicItem *, QLineSeries *&gt; &gt; *m_items;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    QList&lt;QPair&lt;ICurve *, QLineSeries *&gt; &gt; *m_curves;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    QSplitter *m_hSplitter;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="class_qxt_span_slider.html">QxtSpanSlider</a> *m_sliderAmplitude, *m_sliderFrequency;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    QVBoxLayout *m_vLayout;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    QGridLayout *m_graphicGridLayout;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    QWidget *m_graphicsWidget;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="class_model_one_wave.html">ModelOneWave</a> *m_modelOneWave;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="class_q_table_view.html">QTableView</a> *m_tableViewOneWavenfo;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="class_one_wave_widget.html#a4c096bd23ae6fc28b17a0137791e47ab">OneWaveWidget</a>(<a class="code" href="class_a_graphic_item.html">AGraphicItem</a> *item);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="class_one_wave_widget.html#a4c096bd23ae6fc28b17a0137791e47ab">OneWaveWidget</a>(ICurve *curve);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="class_one_wave_widget.html#adf4e010625b1c4482fd7a871d7f25546">~OneWaveWidget</a>();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_one_wave_widget.html#a663a63c11315c0cefaa36fb85267bb92">update</a>(<span class="keyword">const</span> QList&lt;QPointF&gt; &amp;newPoints);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_one_wave_widget.html#a663a63c11315c0cefaa36fb85267bb92">update</a>(QPoint point);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_one_wave_widget.html#a663a63c11315c0cefaa36fb85267bb92">update</a>(uint indexStr);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_one_wave_widget.html#af109e03d1b8fd6128da54d8279843dc7">addItem</a>(<a class="code" href="class_a_graphic_item.html">AGraphicItem</a> *item);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_one_wave_widget.html#a9c684d6527726a1b6a78d3af77d3e317">addCurve</a>(ICurve *curve);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_one_wave_widget.html#a7a6f8ce3a9e1939296a8e8891dd54bd6">removeCurve</a>(<span class="keyword">const</span> ICurve *curve);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_one_wave_widget.html#ac9e36b0beb3294441e0338bcf2b5ccd2">removeLastCurve</a>();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_one_wave_widget.html#a1f8e1b1808b9bf7e66ab3f7cb2513274">changeVerticalCoord</a>(<span class="keywordtype">int</span> downValue ,<span class="keywordtype">int</span> upValue);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_one_wave_widget.html#a07de0eb6088df8b5166abf7bc7133c0d">changeHorizontalCoord</a>(<span class="keywordtype">int</span> downValue ,<span class="keywordtype">int</span> upValue);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;};</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// ONEWAVEWIDGET_H</span></div>
+<div class="ttc" id="aclass_a_graphic_item_html"><div class="ttname"><a href="class_a_graphic_item.html">AGraphicItem</a></div><div class="ttdef"><b>Definition:</b> agraphicitem.h:9</div></div>
+<div class="ttc" id="aclass_chart_view_for_one_wave_widget_html"><div class="ttname"><a href="class_chart_view_for_one_wave_widget.html">ChartViewForOneWaveWidget</a></div><div class="ttdef"><b>Definition:</b> chartvievforonewavewidget.h:11</div></div>
+<div class="ttc" id="aclass_model_one_wave_html"><div class="ttname"><a href="class_model_one_wave.html">ModelOneWave</a></div><div class="ttdef"><b>Definition:</b> modelonewave.h:23</div></div>
+<div class="ttc" id="aclass_one_wave_widget_html"><div class="ttname"><a href="class_one_wave_widget.html">OneWaveWidget</a></div><div class="ttdef"><b>Definition:</b> onewavewidget.h:12</div></div>
+<div class="ttc" id="aclass_one_wave_widget_html_a07de0eb6088df8b5166abf7bc7133c0d"><div class="ttname"><a href="class_one_wave_widget.html#a07de0eb6088df8b5166abf7bc7133c0d">OneWaveWidget::changeHorizontalCoord</a></div><div class="ttdeci">void changeHorizontalCoord(int downValue, int upValue)</div><div class="ttdef"><b>Definition:</b> onewavewidget.cpp:260</div></div>
+<div class="ttc" id="aclass_one_wave_widget_html_a1f8e1b1808b9bf7e66ab3f7cb2513274"><div class="ttname"><a href="class_one_wave_widget.html#a1f8e1b1808b9bf7e66ab3f7cb2513274">OneWaveWidget::changeVerticalCoord</a></div><div class="ttdeci">void changeVerticalCoord(int downValue, int upValue)</div><div class="ttdef"><b>Definition:</b> onewavewidget.cpp:256</div></div>
+<div class="ttc" id="aclass_one_wave_widget_html_a4c096bd23ae6fc28b17a0137791e47ab"><div class="ttname"><a href="class_one_wave_widget.html#a4c096bd23ae6fc28b17a0137791e47ab">OneWaveWidget::OneWaveWidget</a></div><div class="ttdeci">OneWaveWidget(AGraphicItem *item)</div><div class="ttdef"><b>Definition:</b> onewavewidget.cpp:12</div></div>
+<div class="ttc" id="aclass_one_wave_widget_html_a663a63c11315c0cefaa36fb85267bb92"><div class="ttname"><a href="class_one_wave_widget.html#a663a63c11315c0cefaa36fb85267bb92">OneWaveWidget::update</a></div><div class="ttdeci">void update(const QList&lt; QPointF &gt; &amp;newPoints)</div><div class="ttdef"><b>Definition:</b> onewavewidget.cpp:173</div></div>
+<div class="ttc" id="aclass_one_wave_widget_html_a7a6f8ce3a9e1939296a8e8891dd54bd6"><div class="ttname"><a href="class_one_wave_widget.html#a7a6f8ce3a9e1939296a8e8891dd54bd6">OneWaveWidget::removeCurve</a></div><div class="ttdeci">void removeCurve(const ICurve *curve)</div><div class="ttdef"><b>Definition:</b> onewavewidget.cpp:240</div></div>
+<div class="ttc" id="aclass_one_wave_widget_html_a9c684d6527726a1b6a78d3af77d3e317"><div class="ttname"><a href="class_one_wave_widget.html#a9c684d6527726a1b6a78d3af77d3e317">OneWaveWidget::addCurve</a></div><div class="ttdeci">void addCurve(ICurve *curve)</div><div class="ttdef"><b>Definition:</b> onewavewidget.cpp:226</div></div>
+<div class="ttc" id="aclass_one_wave_widget_html_ac9e36b0beb3294441e0338bcf2b5ccd2"><div class="ttname"><a href="class_one_wave_widget.html#ac9e36b0beb3294441e0338bcf2b5ccd2">OneWaveWidget::removeLastCurve</a></div><div class="ttdeci">void removeLastCurve()</div><div class="ttdef"><b>Definition:</b> onewavewidget.cpp:250</div></div>
+<div class="ttc" id="aclass_one_wave_widget_html_adf4e010625b1c4482fd7a871d7f25546"><div class="ttname"><a href="class_one_wave_widget.html#adf4e010625b1c4482fd7a871d7f25546">OneWaveWidget::~OneWaveWidget</a></div><div class="ttdeci">~OneWaveWidget()</div><div class="ttdef"><b>Definition:</b> onewavewidget.cpp:169</div></div>
+<div class="ttc" id="aclass_one_wave_widget_html_af109e03d1b8fd6128da54d8279843dc7"><div class="ttname"><a href="class_one_wave_widget.html#af109e03d1b8fd6128da54d8279843dc7">OneWaveWidget::addItem</a></div><div class="ttdeci">void addItem(AGraphicItem *item)</div><div class="ttdef"><b>Definition:</b> onewavewidget.cpp:212</div></div>
+<div class="ttc" id="aclass_q_table_view_html"><div class="ttname"><a href="class_q_table_view.html">QTableView</a></div></div>
+<div class="ttc" id="aclass_qxt_span_slider_html"><div class="ttname"><a href="class_qxt_span_slider.html">QxtSpanSlider</a></div><div class="ttdoc">The QxtSpanSlider widget is a QSlider with two handles.</div><div class="ttdef"><b>Definition:</b> qxtspanslider.h:41</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

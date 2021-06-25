@@ -22,7 +22,7 @@ INCLUDEPATH += inc\
                ../log_data_loader/include \
                 ../log_data_saver/inc \
                 ../log_data_interpreter/include \
-                ../log_data_calibrate \
+                ../log_data_calibrate/src \
                 ../geometrologyDB
 
 LIBS += \

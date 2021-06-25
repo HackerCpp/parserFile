@@ -1,0 +1,25 @@
+<map id="Иерархия классов. Графический вид." name="Иерархия классов. Графический вид.">
+<area shape="rect" id="node1" title=" " alt="" coords="5,385,80,412"/>
+<area shape="rect" id="node2" href="$class_base_curve_reader.html" title=" " alt="" coords="159,31,295,57"/>
+<area shape="rect" id="node4" href="$class_base_settings_window.html" title=" " alt="" coords="150,107,305,133"/>
+<area shape="rect" id="node8" href="$class_base_standart_widget.html" title=" " alt="" coords="151,157,304,184"/>
+<area shape="rect" id="node10" href="$class_choosing_a_path.html" title=" " alt="" coords="168,208,287,235"/>
+<area shape="rect" id="node11" href="$class_combo_board.html" title=" " alt="" coords="174,259,281,285"/>
+<area shape="rect" id="node12" href="$class_curve_shift_tool.html" title=" " alt="" coords="170,309,285,336"/>
+<area shape="rect" id="node13" href="$class_custom_progress_bar.html" title=" " alt="" coords="152,360,303,387"/>
+<area shape="rect" id="node14" href="$class_displaying_acoustics.html" title=" " alt="" coords="153,411,301,437"/>
+<area shape="rect" id="node15" href="$class_multicolor_selection.html" title=" " alt="" coords="156,461,299,488"/>
+<area shape="rect" id="node16" href="$class_one_wave_widget.html" title=" " alt="" coords="165,512,290,539"/>
+<area shape="rect" id="node17" href="$class_reseption_curve.html" title=" " alt="" coords="166,563,289,589"/>
+<area shape="rect" id="node18" href="$class_set_of_curves.html" title=" " alt="" coords="176,613,279,640"/>
+<area shape="rect" id="node19" href="$class_settings_item.html" title=" " alt="" coords="175,664,279,691"/>
+<area shape="rect" id="node23" href="$class_widget_select_wave_segment.html" title=" " alt="" coords="128,715,327,741"/>
+<area shape="rect" id="node3" href="$class_spectr_reader.html" title=" " alt="" coords="399,5,509,32"/>
+<area shape="rect" id="node5" href="$class_browser_graphic_items.html" title=" " alt="" coords="375,56,533,83"/>
+<area shape="rect" id="node6" href="$class_curve_editor.html" title=" " alt="" coords="406,107,502,133"/>
+<area shape="rect" id="node7" href="$class_settings_items.html" title=" " alt="" coords="399,157,509,184"/>
+<area shape="rect" id="node9" href="$class_acoustics_editor.html" title=" " alt="" coords="394,208,514,235"/>
+<area shape="rect" id="node20" href="$class_settings_acu_item.html" title=" " alt="" coords="390,613,518,640"/>
+<area shape="rect" id="node21" href="$class_settings_line_item.html" title=" " alt="" coords="389,664,519,691"/>
+<area shape="rect" id="node22" href="$class_settings_spectr_item.html" title=" " alt="" coords="381,715,527,741"/>
+</map>

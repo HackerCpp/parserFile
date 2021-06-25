@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_GRAPHICS: Исходный файл E:/MyQtProgram/parserGfm/log_data_graphics/inc/items/labelitem.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_GRAPHICS
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_53603dfb3fbca8a964ef75a71799598b.html">log_data_graphics</a></li><li class="navelem"><a class="el" href="dir_55342455956423183f7a145b2d21cf95.html">inc</a></li><li class="navelem"><a class="el" href="dir_de596e210b672c9a6f9cfeeec750f35b.html">items</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">labelitem.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="labelitem_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef LABELITEM_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define LABELITEM_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="objectoftheboard_8h.html">objectoftheboard.h</a>&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;ldlabel.h&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="boardfortrack_8h.html">boardfortrack.h</a>&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="agraphictrack_8h.html">agraphictrack.h</a>&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;QMenu&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="class_l_d_label_item.html">    9</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_l_d_label_item.html">LDLabelItem</a> : <span class="keyword">public</span> <a class="code" href="class_object_of_the_board.html">ObjectOfTheBoard</a>{</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    LDLabel *m_label;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <a class="code" href="class_board_for_track.html">BoardForTrack</a> *m_board;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <a class="code" href="class_a_graphic_track.html">AGraphicTrack</a> *m_trackParent;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">bool</span> m_isPress,m_isActive;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    QPointF m_prevPoint;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    QFont m_font;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    QRect m_textRect;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    QSizeF m_sizePixels;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    QMenu *m_itemMenu;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="class_l_d_label_item.html#a63372382617792707c26d6783e1e8691">LDLabelItem</a>(<a class="code" href="class_board_for_track.html">BoardForTrack</a> *board,LDLabel *label,<a class="code" href="class_a_graphic_track.html">AGraphicTrack</a> *trackParent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="class_l_d_label_item.html#ad7a854be4486e8d3e0517fc4e3452f9c">~LDLabelItem</a>();</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_l_d_label_item.html#a355ba7e75c1514bdd48416b29cb2c571">addParentTrack</a>(<a class="code" href="class_a_graphic_track.html">AGraphicTrack</a> *trackParent);</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="class_l_d_label_item.html#a595895a8663e4075d12650aec1a5d34d">   26</a></span>&#160;    LDLabel *<a class="code" href="class_l_d_label_item.html#a595895a8663e4075d12650aec1a5d34d">ldLabel</a>(){<span class="keywordflow">return</span> m_label;}</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    QRectF <a class="code" href="class_l_d_label_item.html#af8295d93522c07ed9262d2b56811f495">boundingRect</a>()<span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_l_d_label_item.html#aa2e04ed3a3699d60a462f459041cbf87">paint</a>(QPainter *painter, <span class="keyword">const</span> QStyleOptionGraphicsItem*, QWidget*)<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_l_d_label_item.html#a4d77f25117efa8f190670888896900bf">toSetTheLocationOfTheImageAfterDrawing</a>()<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_l_d_label_item.html#a125cf75662db7607a93500f2d4ca3ea6">run</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="class_l_d_label_item.html#a2063fddd1e10c307b0ded0a37c591952">   32</a></span>&#160;    QSizeF <a class="code" href="class_l_d_label_item.html#a2063fddd1e10c307b0ded0a37c591952">size</a>(){<span class="keywordflow">return</span> m_label-&gt;size();}</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_l_d_label_item.html#a0754fc30db5ccd04b7d325ce7a4a3044">setSize</a>(QSizeF <a class="code" href="class_l_d_label_item.html#a2063fddd1e10c307b0ded0a37c591952">size</a>);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    QSize <a class="code" href="class_l_d_label_item.html#a356597dbb3fbbef67ca0d9f426c45c25">textSize</a>();</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    QRect <a class="code" href="class_l_d_label_item.html#a5d7047e22f5c28f71d0356e58da0fefb">textRect</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    QRect <a class="code" href="class_l_d_label_item.html#a7a32139c5caf1dab84f749e2c2b850c1">lineRect</a>();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_l_d_label_item.html#adb0b8afc1a97816fb030f0524f7d3ba6">updateParam</a>();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_l_d_label_item.html#a5c7af5453fe300bb41e2eae7d1ba2dce">mousePressEvent</a>(QGraphicsSceneMouseEvent *event)<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_l_d_label_item.html#a8688ac2c58f760918a45364983f1de6e">mouseMoveEvent</a>(QGraphicsSceneMouseEvent *event)<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_l_d_label_item.html#aab42da24ae07f2edee381a71a3167639">mouseReleaseEvent</a>(QGraphicsSceneMouseEvent *event)<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_l_d_label_item.html#a6aacf1811ac34c074508d1b4fcfe1e29">mouseDoubleClickEvent</a>(QGraphicsSceneMouseEvent *event)<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_l_d_label_item.html#ac3396f3b0219fa728903aaa6c6e85add">keyPressEvent</a>(QKeyEvent *event)<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_l_d_label_item.html#a164696b654b032bc95e171d7fdb59f6a">removeThis</a>();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;};</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// LABELITEM_H</span></div>
+<div class="ttc" id="aagraphictrack_8h_html"><div class="ttname"><a href="agraphictrack_8h.html">agraphictrack.h</a></div></div>
+<div class="ttc" id="aboardfortrack_8h_html"><div class="ttname"><a href="boardfortrack_8h.html">boardfortrack.h</a></div></div>
+<div class="ttc" id="aclass_a_graphic_track_html"><div class="ttname"><a href="class_a_graphic_track.html">AGraphicTrack</a></div><div class="ttdef"><b>Definition:</b> agraphictrack.h:17</div></div>
+<div class="ttc" id="aclass_board_for_track_html"><div class="ttname"><a href="class_board_for_track.html">BoardForTrack</a></div><div class="ttdef"><b>Definition:</b> boardfortrack.h:11</div></div>
+<div class="ttc" id="aclass_l_d_label_item_html"><div class="ttname"><a href="class_l_d_label_item.html">LDLabelItem</a></div><div class="ttdef"><b>Definition:</b> labelitem.h:9</div></div>
+<div class="ttc" id="aclass_l_d_label_item_html_a0754fc30db5ccd04b7d325ce7a4a3044"><div class="ttname"><a href="class_l_d_label_item.html#a0754fc30db5ccd04b7d325ce7a4a3044">LDLabelItem::setSize</a></div><div class="ttdeci">void setSize(QSizeF size)</div><div class="ttdef"><b>Definition:</b> labelitem.cpp:93</div></div>
+<div class="ttc" id="aclass_l_d_label_item_html_a125cf75662db7607a93500f2d4ca3ea6"><div class="ttname"><a href="class_l_d_label_item.html#a125cf75662db7607a93500f2d4ca3ea6">LDLabelItem::run</a></div><div class="ttdeci">void run() override</div><div class="ttdef"><b>Definition:</b> labelitem.cpp:89</div></div>
+<div class="ttc" id="aclass_l_d_label_item_html_a164696b654b032bc95e171d7fdb59f6a"><div class="ttname"><a href="class_l_d_label_item.html#a164696b654b032bc95e171d7fdb59f6a">LDLabelItem::removeThis</a></div><div class="ttdeci">void removeThis()</div><div class="ttdef"><b>Definition:</b> labelitem.cpp:31</div></div>
+<div class="ttc" id="aclass_l_d_label_item_html_a2063fddd1e10c307b0ded0a37c591952"><div class="ttname"><a href="class_l_d_label_item.html#a2063fddd1e10c307b0ded0a37c591952">LDLabelItem::size</a></div><div class="ttdeci">QSizeF size()</div><div class="ttdef"><b>Definition:</b> labelitem.h:32</div></div>
+<div class="ttc" id="aclass_l_d_label_item_html_a355ba7e75c1514bdd48416b29cb2c571"><div class="ttname"><a href="class_l_d_label_item.html#a355ba7e75c1514bdd48416b29cb2c571">LDLabelItem::addParentTrack</a></div><div class="ttdeci">void addParentTrack(AGraphicTrack *trackParent)</div><div class="ttdef"><b>Definition:</b> labelitem.cpp:35</div></div>
+<div class="ttc" id="aclass_l_d_label_item_html_a356597dbb3fbbef67ca0d9f426c45c25"><div class="ttname"><a href="class_l_d_label_item.html#a356597dbb3fbbef67ca0d9f426c45c25">LDLabelItem::textSize</a></div><div class="ttdeci">QSize textSize()</div><div class="ttdef"><b>Definition:</b> labelitem.cpp:100</div></div>
+<div class="ttc" id="aclass_l_d_label_item_html_a4d77f25117efa8f190670888896900bf"><div class="ttname"><a href="class_l_d_label_item.html#a4d77f25117efa8f190670888896900bf">LDLabelItem::toSetTheLocationOfTheImageAfterDrawing</a></div><div class="ttdeci">void toSetTheLocationOfTheImageAfterDrawing() override</div><div class="ttdef"><b>Definition:</b> labelitem.cpp:85</div></div>
+<div class="ttc" id="aclass_l_d_label_item_html_a595895a8663e4075d12650aec1a5d34d"><div class="ttname"><a href="class_l_d_label_item.html#a595895a8663e4075d12650aec1a5d34d">LDLabelItem::ldLabel</a></div><div class="ttdeci">LDLabel * ldLabel()</div><div class="ttdef"><b>Definition:</b> labelitem.h:26</div></div>
+<div class="ttc" id="aclass_l_d_label_item_html_a5c7af5453fe300bb41e2eae7d1ba2dce"><div class="ttname"><a href="class_l_d_label_item.html#a5c7af5453fe300bb41e2eae7d1ba2dce">LDLabelItem::mousePressEvent</a></div><div class="ttdeci">void mousePressEvent(QGraphicsSceneMouseEvent *event) override</div><div class="ttdef"><b>Definition:</b> labelitem.cpp:128</div></div>
+<div class="ttc" id="aclass_l_d_label_item_html_a5d7047e22f5c28f71d0356e58da0fefb"><div class="ttname"><a href="class_l_d_label_item.html#a5d7047e22f5c28f71d0356e58da0fefb">LDLabelItem::textRect</a></div><div class="ttdeci">QRect textRect() const</div><div class="ttdef"><b>Definition:</b> labelitem.cpp:108</div></div>
+<div class="ttc" id="aclass_l_d_label_item_html_a63372382617792707c26d6783e1e8691"><div class="ttname"><a href="class_l_d_label_item.html#a63372382617792707c26d6783e1e8691">LDLabelItem::LDLabelItem</a></div><div class="ttdeci">LDLabelItem(BoardForTrack *board, LDLabel *label, AGraphicTrack *trackParent=nullptr)</div><div class="ttdef"><b>Definition:</b> labelitem.cpp:12</div></div>
+<div class="ttc" id="aclass_l_d_label_item_html_a6aacf1811ac34c074508d1b4fcfe1e29"><div class="ttname"><a href="class_l_d_label_item.html#a6aacf1811ac34c074508d1b4fcfe1e29">LDLabelItem::mouseDoubleClickEvent</a></div><div class="ttdeci">void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) override</div><div class="ttdef"><b>Definition:</b> labelitem.cpp:157</div></div>
+<div class="ttc" id="aclass_l_d_label_item_html_a7a32139c5caf1dab84f749e2c2b850c1"><div class="ttname"><a href="class_l_d_label_item.html#a7a32139c5caf1dab84f749e2c2b850c1">LDLabelItem::lineRect</a></div><div class="ttdeci">QRect lineRect()</div><div class="ttdef"><b>Definition:</b> labelitem.cpp:112</div></div>
+<div class="ttc" id="aclass_l_d_label_item_html_a8688ac2c58f760918a45364983f1de6e"><div class="ttname"><a href="class_l_d_label_item.html#a8688ac2c58f760918a45364983f1de6e">LDLabelItem::mouseMoveEvent</a></div><div class="ttdeci">void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override</div><div class="ttdef"><b>Definition:</b> labelitem.cpp:136</div></div>
+<div class="ttc" id="aclass_l_d_label_item_html_aa2e04ed3a3699d60a462f459041cbf87"><div class="ttname"><a href="class_l_d_label_item.html#aa2e04ed3a3699d60a462f459041cbf87">LDLabelItem::paint</a></div><div class="ttdeci">void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *) override</div><div class="ttdef"><b>Definition:</b> labelitem.cpp:62</div></div>
+<div class="ttc" id="aclass_l_d_label_item_html_aab42da24ae07f2edee381a71a3167639"><div class="ttname"><a href="class_l_d_label_item.html#aab42da24ae07f2edee381a71a3167639">LDLabelItem::mouseReleaseEvent</a></div><div class="ttdeci">void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override</div><div class="ttdef"><b>Definition:</b> labelitem.cpp:149</div></div>
+<div class="ttc" id="aclass_l_d_label_item_html_ac3396f3b0219fa728903aaa6c6e85add"><div class="ttname"><a href="class_l_d_label_item.html#ac3396f3b0219fa728903aaa6c6e85add">LDLabelItem::keyPressEvent</a></div><div class="ttdeci">void keyPressEvent(QKeyEvent *event) override</div><div class="ttdef"><b>Definition:</b> labelitem.cpp:162</div></div>
+<div class="ttc" id="aclass_l_d_label_item_html_ad7a854be4486e8d3e0517fc4e3452f9c"><div class="ttname"><a href="class_l_d_label_item.html#ad7a854be4486e8d3e0517fc4e3452f9c">LDLabelItem::~LDLabelItem</a></div><div class="ttdeci">~LDLabelItem()</div><div class="ttdef"><b>Definition:</b> labelitem.cpp:27</div></div>
+<div class="ttc" id="aclass_l_d_label_item_html_adb0b8afc1a97816fb030f0524f7d3ba6"><div class="ttname"><a href="class_l_d_label_item.html#adb0b8afc1a97816fb030f0524f7d3ba6">LDLabelItem::updateParam</a></div><div class="ttdeci">void updateParam()</div><div class="ttdef"><b>Definition:</b> labelitem.cpp:121</div></div>
+<div class="ttc" id="aclass_l_d_label_item_html_af8295d93522c07ed9262d2b56811f495"><div class="ttname"><a href="class_l_d_label_item.html#af8295d93522c07ed9262d2b56811f495">LDLabelItem::boundingRect</a></div><div class="ttdeci">QRectF boundingRect() const override</div><div class="ttdef"><b>Definition:</b> labelitem.cpp:43</div></div>
+<div class="ttc" id="aclass_object_of_the_board_html"><div class="ttname"><a href="class_object_of_the_board.html">ObjectOfTheBoard</a></div><div class="ttdef"><b>Definition:</b> objectoftheboard.h:10</div></div>
+<div class="ttc" id="aobjectoftheboard_8h_html"><div class="ttname"><a href="objectoftheboard_8h.html">objectoftheboard.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

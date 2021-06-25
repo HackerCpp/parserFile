@@ -128,14 +128,15 @@ SettingsItem::SettingsItem(AGraphicItem *item,SelectingArea *selectingArea):
 {
     m_mainVLout = new QVBoxLayout;
 
+    QString f_unit = item->curve()->mnemonic().mid(item->curve()->mnemonic().indexOf("("));
     QStringList f_names;
-    f_names << tr("Left Border:units") << tr("Zero offset:mm");
+    f_names << tr(QString("Left Border:"+ f_unit).toStdString().c_str()) << tr("Zero offset:mm");
     m_leftBorderSettings = new Selection(f_names,(int)!m_item->itemInfo()->isBeginValue());
     m_leftBorderSettings->setValue("Left Border",QString::number(m_item->itemInfo()->beginValue() / 10));
     m_leftBorderSettings->setValue("Zero offset",QString::number(m_item->itemInfo()->zeroOffset() / 10));
 
     f_names.clear();
-    f_names << tr("Right Border:units") << tr("Scale:unit/sm");
+    f_names << tr(QString("Right Border:"+ f_unit).toStdString().c_str()) << tr(QString("Scale:"+f_unit+"/sm").toStdString().c_str());
     m_rightBorderSettings = new Selection(f_names,(int)!m_item->itemInfo()->isEndValue());
     m_rightBorderSettings->setValue("Right Border",QString::number(m_item->itemInfo()->endValue()));
     m_rightBorderSettings->setValue("Scale",QString::number((1/m_item->itemInfo()->scale()) * 10));
@@ -225,7 +226,7 @@ SettingsLineItem::SettingsLineItem(AGraphicItem *lineItem,SelectingArea *selecti
 {
     m_lineItem = dynamic_cast<VLineItem*>(lineItem);
     if(!m_lineItem){
-        qDebug() << "не удалось преобразовать AGraphicItem в VLineItem присоздании окна настроек";
+        qDebug() << "не удалось преобразовать AGraphicItem в VLineItem при создании окна настроек";
         return;
     }
     m_lineItemInfo = dynamic_cast<LineItem *>(m_lineItem->itemInfo());

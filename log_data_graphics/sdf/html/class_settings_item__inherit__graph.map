@@ -1,0 +1,7 @@
+<map id="SettingsItem" name="SettingsItem">
+<area shape="rect" id="node1" title=" " alt="" coords="171,80,275,107"/>
+<area shape="rect" id="node3" href="$class_settings_acu_item.html" title=" " alt="" coords="5,155,133,181"/>
+<area shape="rect" id="node4" href="$class_settings_line_item.html" title=" " alt="" coords="157,155,288,181"/>
+<area shape="rect" id="node5" href="$class_settings_spectr_item.html" title=" " alt="" coords="312,155,459,181"/>
+<area shape="rect" id="node2" title=" " alt="" coords="185,5,260,32"/>
+</map>

@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_GRAPHICS: Исходный файл E:/MyQtProgram/parserGfm/log_data_graphics/inc/ruler.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_GRAPHICS
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_53603dfb3fbca8a964ef75a71799598b.html">log_data_graphics</a></li><li class="navelem"><a class="el" href="dir_55342455956423183f7a145b2d21cf95.html">inc</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">ruler.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="ruler_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef RULER_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define RULER_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="objectoftheboard_8h.html">objectoftheboard.h</a>&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="boardfortrack_8h.html">boardfortrack.h</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="class_ruler.html">    6</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_ruler.html">Ruler</a> : <span class="keyword">public</span> <a class="code" href="class_object_of_the_board.html">ObjectOfTheBoard</a></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keywordtype">int</span> m_width;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keywordtype">int</span> m_positionX;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <a class="code" href="class_board_for_track.html">BoardForTrack</a> *m_board;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    QPointF m_prevPoint;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keywordtype">void</span> mousePressEvent(QGraphicsSceneMouseEvent *event)<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">void</span> mouseMoveEvent(QGraphicsSceneMouseEvent *event)<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">void</span> mouseReleaseEvent(QGraphicsSceneMouseEvent *event)<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="class_ruler.html#aa7610eba0e170ecbd71efe14b4a9cfc5">Ruler</a>(<a class="code" href="class_board_for_track.html">BoardForTrack</a> *board);</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_ruler.html#aca09a00cf43041b72bd941f3035696b7">   19</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_ruler.html#aca09a00cf43041b72bd941f3035696b7">~Ruler</a>()<span class="keyword">override</span>{}</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_ruler.html#aa038f3992c00586232465a4d4e57aabd">paint</a>(QPainter *painter, <span class="keyword">const</span> QStyleOptionGraphicsItem*, QWidget*)<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_ruler.html#aaff39fbe77916f51218b87972f741668">run</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    QRectF <a class="code" href="class_ruler.html#a41b55af1019ff917d0405c8230a6228b">boundingRect</a>()<span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_ruler.html#a453d6e94b07e47f5d27624852dbc5b4d">resizePictures</a>()<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_ruler.html#a7cbcc04c1c15b348f41f52956bc438f5">toSetTheLocationOfTheImageAfterDrawing</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;};</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// RULER_H</span></div>
+<div class="ttc" id="aboardfortrack_8h_html"><div class="ttname"><a href="boardfortrack_8h.html">boardfortrack.h</a></div></div>
+<div class="ttc" id="aclass_board_for_track_html"><div class="ttname"><a href="class_board_for_track.html">BoardForTrack</a></div><div class="ttdef"><b>Definition:</b> boardfortrack.h:11</div></div>
+<div class="ttc" id="aclass_object_of_the_board_html"><div class="ttname"><a href="class_object_of_the_board.html">ObjectOfTheBoard</a></div><div class="ttdef"><b>Definition:</b> objectoftheboard.h:10</div></div>
+<div class="ttc" id="aclass_ruler_html"><div class="ttname"><a href="class_ruler.html">Ruler</a></div><div class="ttdef"><b>Definition:</b> ruler.h:7</div></div>
+<div class="ttc" id="aclass_ruler_html_a41b55af1019ff917d0405c8230a6228b"><div class="ttname"><a href="class_ruler.html#a41b55af1019ff917d0405c8230a6228b">Ruler::boundingRect</a></div><div class="ttdeci">QRectF boundingRect() const override</div><div class="ttdef"><b>Definition:</b> ruler.cpp:106</div></div>
+<div class="ttc" id="aclass_ruler_html_a453d6e94b07e47f5d27624852dbc5b4d"><div class="ttname"><a href="class_ruler.html#a453d6e94b07e47f5d27624852dbc5b4d">Ruler::resizePictures</a></div><div class="ttdeci">void resizePictures() override</div><div class="ttdef"><b>Definition:</b> ruler.cpp:91</div></div>
+<div class="ttc" id="aclass_ruler_html_a7cbcc04c1c15b348f41f52956bc438f5"><div class="ttname"><a href="class_ruler.html#a7cbcc04c1c15b348f41f52956bc438f5">Ruler::toSetTheLocationOfTheImageAfterDrawing</a></div><div class="ttdeci">void toSetTheLocationOfTheImageAfterDrawing() override</div><div class="ttdef"><b>Definition:</b> ruler.cpp:32</div></div>
+<div class="ttc" id="aclass_ruler_html_aa038f3992c00586232465a4d4e57aabd"><div class="ttname"><a href="class_ruler.html#aa038f3992c00586232465a4d4e57aabd">Ruler::paint</a></div><div class="ttdeci">void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *) override</div><div class="ttdef"><b>Definition:</b> ruler.cpp:43</div></div>
+<div class="ttc" id="aclass_ruler_html_aa7610eba0e170ecbd71efe14b4a9cfc5"><div class="ttname"><a href="class_ruler.html#aa7610eba0e170ecbd71efe14b4a9cfc5">Ruler::Ruler</a></div><div class="ttdeci">Ruler(BoardForTrack *board)</div><div class="ttdef"><b>Definition:</b> ruler.cpp:7</div></div>
+<div class="ttc" id="aclass_ruler_html_aaff39fbe77916f51218b87972f741668"><div class="ttname"><a href="class_ruler.html#aaff39fbe77916f51218b87972f741668">Ruler::run</a></div><div class="ttdeci">void run() override</div><div class="ttdef"><b>Definition:</b> ruler.cpp:49</div></div>
+<div class="ttc" id="aclass_ruler_html_aca09a00cf43041b72bd941f3035696b7"><div class="ttname"><a href="class_ruler.html#aca09a00cf43041b72bd941f3035696b7">Ruler::~Ruler</a></div><div class="ttdeci">virtual ~Ruler() override</div><div class="ttdef"><b>Definition:</b> ruler.h:19</div></div>
+<div class="ttc" id="aobjectoftheboard_8h_html"><div class="ttname"><a href="objectoftheboard_8h.html">objectoftheboard.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

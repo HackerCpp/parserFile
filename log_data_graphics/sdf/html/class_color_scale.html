@@ -1,0 +1,297 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_GRAPHICS: Класс ColorScale</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_GRAPHICS
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="#pub-static-methods">Открытые статические члены</a> &#124;
+<a href="class_color_scale-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle">
+<div class="title">Класс ColorScale</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="colorscale_8h_source.html">colorscale.h</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:ColorScale:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_color_scale__inherit__graph.png" border="0" usemap="#a_color_scale_inherit__map" alt="Inheritance graph"/></div>
+<map name="a_color_scale_inherit__map" id="a_color_scale_inherit__map">
+<area shape="rect" title=" " alt="" coords="61,80,152,107"/>
+<area shape="rect" title=" " alt="" coords="5,5,208,32"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<div class="dynheader">
+Граф связей класса ColorScale:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_color_scale__coll__graph.png" border="0" usemap="#a_color_scale_coll__map" alt="Collaboration graph"/></div>
+<map name="a_color_scale_coll__map" id="a_color_scale_coll__map">
+<area shape="rect" title=" " alt="" coords="61,80,152,107"/>
+<area shape="rect" title=" " alt="" coords="5,5,208,32"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">см. легенду</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a5802325f281af632bcae5f44315c7965"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_color_scale.html#a5802325f281af632bcae5f44315c7965">ColorScale</a> ()</td></tr>
+<tr class="separator:a5802325f281af632bcae5f44315c7965"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d087a68684f715727467326a8391662"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_color_scale.html#a3d087a68684f715727467326a8391662">insert</a> (double position, QColor color)</td></tr>
+<tr class="separator:a3d087a68684f715727467326a8391662"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ddba49b094b3ed48ae6624765926830"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_color_scale.html#a8ddba49b094b3ed48ae6624765926830">fillTab</a> (QColor *colorTab, int size, <a class="el" href="namespace_interpolation_function.html#aef76d83c11729dccf822aa842f814c62">InterpolationFunction::InterpolationFunction</a> function=<a class="el" href="namespace_interpolation_function.html#aef76d83c11729dccf822aa842f814c62a19048ba8667b652cef70bd530244cdf3">InterpolationFunction::Linear</a>) const</td></tr>
+<tr class="separator:a8ddba49b094b3ed48ae6624765926830"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabf8af3684ab10546bcf0877afe4957f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_color_scale.html#aabf8af3684ab10546bcf0877afe4957f">draw</a> (<a class="el" href="class_q_image.html">QImage</a> &amp;img, QRect area, const QPointF &amp;start, const QPointF &amp;end, <a class="el" href="namespace_gradient_style.html#a8b0b438e7ad9a0aab9c8bf6c02daa38d">GradientStyle::GradientStyle</a> style=<a class="el" href="namespace_gradient_style.html#a8b0b438e7ad9a0aab9c8bf6c02daa38da32979e1cf4a9486d83d1c2b106bf519b">GradientStyle::Linear</a>, int size=500) const</td></tr>
+<tr class="separator:aabf8af3684ab10546bcf0877afe4957f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Открытые статические члены</h2></td></tr>
+<tr class="memitem:aeefcbdc8de80606ec59a04417749d8c0"><td class="memItemLeft" align="right" valign="top">static QColor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_color_scale.html#aeefcbdc8de80606ec59a04417749d8c0">get_linear_color</a> (qreal value, MulticolorItem multicol1, MulticolorItem multicol2)</td></tr>
+<tr class="separator:aeefcbdc8de80606ec59a04417749d8c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Конструктор(ы)</h2>
+<a id="a5802325f281af632bcae5f44315c7965"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5802325f281af632bcae5f44315c7965">&#9670;&nbsp;</a></span>ColorScale()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ColorScale::ColorScale </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="aabf8af3684ab10546bcf0877afe4957f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabf8af3684ab10546bcf0877afe4957f">&#9670;&nbsp;</a></span>draw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ColorScale::draw </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_q_image.html">QImage</a> &amp;&#160;</td>
+          <td class="paramname"><em>img</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QRect&#160;</td>
+          <td class="paramname"><em>area</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QPointF &amp;&#160;</td>
+          <td class="paramname"><em>start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QPointF &amp;&#160;</td>
+          <td class="paramname"><em>end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_gradient_style.html#a8b0b438e7ad9a0aab9c8bf6c02daa38d">GradientStyle::GradientStyle</a>&#160;</td>
+          <td class="paramname"><em>style</em> = <code><a class="el" href="namespace_gradient_style.html#a8b0b438e7ad9a0aab9c8bf6c02daa38da32979e1cf4a9486d83d1c2b106bf519b">GradientStyle::Linear</a></code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em> = <code>500</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_color_scale_aabf8af3684ab10546bcf0877afe4957f_cgraph.png" border="0" usemap="#aclass_color_scale_aabf8af3684ab10546bcf0877afe4957f_cgraph" alt=""/></div>
+<map name="aclass_color_scale_aabf8af3684ab10546bcf0877afe4957f_cgraph" id="aclass_color_scale_aabf8af3684ab10546bcf0877afe4957f_cgraph">
+<area shape="rect" title=" " alt="" coords="5,132,133,159"/>
+<area shape="rect" href="class_color_scale.html#a8ddba49b094b3ed48ae6624765926830" title=" " alt="" coords="181,31,316,57"/>
+<area shape="rect" href="colorscale_8cpp.html#a61d26476735a9cd39b5acb272b1d7844" title=" " alt="" coords="193,81,305,108"/>
+<area shape="rect" href="colorscale_8cpp.html#a3ea15d5297de40aab4e16457b4b65c48" title=" " alt="" coords="191,132,307,159"/>
+<area shape="rect" href="colorscale_8cpp.html#a40372eeb01c896b5fd17e0ec19dc48a6" title=" " alt="" coords="191,183,306,209"/>
+<area shape="rect" href="colorscale_8cpp.html#a9b9c546570c14e4625e7598bf0b48dec" title=" " alt="" coords="191,233,306,260"/>
+<area shape="rect" href="colorscale_8cpp.html#a91d4ce1eba67f0d363d96aea658ead5e" title=" " alt="" coords="364,5,505,32"/>
+<area shape="rect" href="colorscale_8cpp.html#af3321293fe0ecc07b78a74e1ac0ea2fa" title=" " alt="" coords="366,56,503,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a8ddba49b094b3ed48ae6624765926830"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ddba49b094b3ed48ae6624765926830">&#9670;&nbsp;</a></span>fillTab()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ColorScale::fillTab </td>
+          <td>(</td>
+          <td class="paramtype">QColor *&#160;</td>
+          <td class="paramname"><em>colorTab</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_interpolation_function.html#aef76d83c11729dccf822aa842f814c62">InterpolationFunction::InterpolationFunction</a>&#160;</td>
+          <td class="paramname"><em>function</em> = <code><a class="el" href="namespace_interpolation_function.html#aef76d83c11729dccf822aa842f814c62a19048ba8667b652cef70bd530244cdf3">InterpolationFunction::Linear</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_color_scale_a8ddba49b094b3ed48ae6624765926830_cgraph.png" border="0" usemap="#aclass_color_scale_a8ddba49b094b3ed48ae6624765926830_cgraph" alt=""/></div>
+<map name="aclass_color_scale_a8ddba49b094b3ed48ae6624765926830_cgraph" id="aclass_color_scale_a8ddba49b094b3ed48ae6624765926830_cgraph">
+<area shape="rect" title=" " alt="" coords="5,31,140,57"/>
+<area shape="rect" href="colorscale_8cpp.html#a91d4ce1eba67f0d363d96aea658ead5e" title=" " alt="" coords="188,5,329,32"/>
+<area shape="rect" href="colorscale_8cpp.html#af3321293fe0ecc07b78a74e1ac0ea2fa" title=" " alt="" coords="190,56,327,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aeefcbdc8de80606ec59a04417749d8c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeefcbdc8de80606ec59a04417749d8c0">&#9670;&nbsp;</a></span>get_linear_color()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QColor ColorScale::get_linear_color </td>
+          <td>(</td>
+          <td class="paramtype">qreal&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">MulticolorItem&#160;</td>
+          <td class="paramname"><em>multicol1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">MulticolorItem&#160;</td>
+          <td class="paramname"><em>multicol2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3d087a68684f715727467326a8391662"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d087a68684f715727467326a8391662">&#9670;&nbsp;</a></span>insert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ColorScale::insert </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>position</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QColor&#160;</td>
+          <td class="paramname"><em>color</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>Объявления и описания членов классов находятся в файлах:<ul>
+<li>E:/MyQtProgram/parserGfm/log_data_graphics/inc/tools/<a class="el" href="colorscale_8h_source.html">colorscale.h</a></li>
+<li>E:/MyQtProgram/parserGfm/log_data_graphics/src/tools/<a class="el" href="colorscale_8cpp.html">colorscale.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

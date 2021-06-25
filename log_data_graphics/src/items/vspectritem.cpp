@@ -13,23 +13,7 @@ VSpectrItem::VSpectrItem(AItem *itemInfo,ICurve *curve,BoardForTrack *board)
     else{
         qDebug() << "VSpectrItem::VSpectrItem Не удалось преобразовать AItemInfo в SpectItemInfo" << itemInfo->name();
     }
-    bool ok = true;
-    QString f_dataStep = m_curve->desc()->param("data_step");
-    m_dataStep =  f_dataStep.left(f_dataStep.indexOf("(")).toDouble(&ok);
-    if(!ok){
-        qDebug() << "VSpectrItem::VSpectrItem Не удалось преобразовать data_step в VSpectrItem constructor";
-        m_dataStep = 2;
-    }
-    else{
-        QString f_type = f_dataStep.mid(f_dataStep.indexOf("("));
-        if(f_type == "(USEC)")
-           ;
-        else if(f_type == "(HZ)")
-           ;
-        else{
-            qDebug() << "VSpectrItem::VSpectrItem не описанный тип данных data_step spectr" << f_type;
-        }
-    }
+    bool ok;
     QString f_dataBegin = m_curve->desc()->param("data_begin");
     m_dataBegin = f_dataBegin.left(f_dataBegin.indexOf("(")).toDouble(&ok);
     if(!ok){

@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_GRAPHICS: Исходный файл E:/MyQtProgram/parserGfm/log_data_graphics/inc/objectoftheboard.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_GRAPHICS
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_53603dfb3fbca8a964ef75a71799598b.html">log_data_graphics</a></li><li class="navelem"><a class="el" href="dir_55342455956423183f7a145b2d21cf95.html">inc</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">objectoftheboard.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="objectoftheboard_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef OBJECTOFTHEBOARD_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define OBJECTOFTHEBOARD_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;QGraphicsItem&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QDebug&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QThread&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QDragEnterEvent&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;QGraphicsSceneMouseEvent&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="class_object_of_the_board.html">    9</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_object_of_the_board.html">ObjectOfTheBoard</a> : <span class="keyword">public</span> <a class="code" href="class_q_thread.html">QThread</a>,<span class="keyword">public</span> <a class="code" href="class_q_graphics_item.html">QGraphicsItem</a></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_object_of_the_board.html#ae4d603de0f87935ccf737428a35581d8">   14</a></span>&#160;    QRectF <a class="code" href="class_object_of_the_board.html#ae4d603de0f87935ccf737428a35581d8">m_visibilitySquare</a>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_object_of_the_board.html#aeacd1fd6a762b97fd8a1dbe288c8c3ac">   15</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_object_of_the_board.html#aeacd1fd6a762b97fd8a1dbe288c8c3ac">m_endRedraw</a>,<a class="code" href="class_object_of_the_board.html#aa417443ed2695f44524f85a42f9ef65c">m_needToRedraw</a>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_object_of_the_board.html#a2a29acbce052e6b831489d3da1c56bb5">   16</a></span>&#160;    <a class="code" href="class_q_image.html">QImage</a> *<a class="code" href="class_object_of_the_board.html#a2a29acbce052e6b831489d3da1c56bb5">m_curentPixmap</a>,*<a class="code" href="class_object_of_the_board.html#adc10eadb5959bc70819db05a0cb47492">m_doublePixMap</a>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_object_of_the_board.html#a9853e7d0f26c7ccc18f0cb11b01027c3">   17</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_object_of_the_board.html#a9853e7d0f26c7ccc18f0cb11b01027c3">m_topPositionPicture</a>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_object_of_the_board.html#abd1fe2eb4ee2d3c66561d0ad561676f0">   18</a></span>&#160;    <span class="keyword">virtual</span> QRectF <a class="code" href="class_object_of_the_board.html#abd1fe2eb4ee2d3c66561d0ad561676f0">boundingRect</a>()<span class="keyword">const override</span>{<span class="keywordflow">return</span> <a class="code" href="class_object_of_the_board.html#ae4d603de0f87935ccf737428a35581d8">m_visibilitySquare</a>;}</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_object_of_the_board.html#a176f32583ba9c24aff2b9952fb95cc5e">redraw</a>();</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_object_of_the_board.html#a487eb0b765e0e1addac31a4f520043a4">sceneUpdate</a>();</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_object_of_the_board.html#a4cc7aad904fd306a618f47ac5df38b06">toSetTheLocationOfTheImageAfterDrawing</a>();</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_object_of_the_board.html#aa10996b76a1d1e508b269736dc1e0d8d">ObjectOfTheBoard</a>();</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_object_of_the_board.html#a49ba73b5ca51de536840e5fc5119a082">~ObjectOfTheBoard</a>()<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="class_object_of_the_board.html#afdb71ee65dc5f0cedc0e498a0d3a705e">   26</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_object_of_the_board.html#afdb71ee65dc5f0cedc0e498a0d3a705e">resize</a>(){}</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="class_object_of_the_board.html#a82a12b943b859fbcc8703bab4c7fb912">   27</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_object_of_the_board.html#a82a12b943b859fbcc8703bab4c7fb912">resizePictures</a>(){}</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_object_of_the_board.html#a46d5f4ba7c6ede89e90ba7882ba7ac8c">swapPixMap</a>();</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="class_object_of_the_board.html#a82fa7c41c748ad339142d38b0e3b8241">   29</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_object_of_the_board.html#a82fa7c41c748ad339142d38b0e3b8241">mouseMoveEvent</a>(QGraphicsSceneMouseEvent *event)<span class="keyword"> override</span>{QGraphicsItem::mouseMoveEvent(event);}</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_object_of_the_board.html#a4b3e6eadb1e6ad0bd00f40d19c1eaff5">changingTheVisibilityZone</a>(QRectF newVisibilityZone);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_object_of_the_board.html#a44153a37ff08e7ac17ad3a5e40b6cab6">needToRedraw</a>();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;};</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// OBJECTOFTHEBOARD_H</span></div>
+<div class="ttc" id="aclass_object_of_the_board_html"><div class="ttname"><a href="class_object_of_the_board.html">ObjectOfTheBoard</a></div><div class="ttdef"><b>Definition:</b> objectoftheboard.h:10</div></div>
+<div class="ttc" id="aclass_object_of_the_board_html_a176f32583ba9c24aff2b9952fb95cc5e"><div class="ttname"><a href="class_object_of_the_board.html#a176f32583ba9c24aff2b9952fb95cc5e">ObjectOfTheBoard::redraw</a></div><div class="ttdeci">void redraw()</div><div class="ttdef"><b>Definition:</b> objectoftheboard.cpp:39</div></div>
+<div class="ttc" id="aclass_object_of_the_board_html_a2a29acbce052e6b831489d3da1c56bb5"><div class="ttname"><a href="class_object_of_the_board.html#a2a29acbce052e6b831489d3da1c56bb5">ObjectOfTheBoard::m_curentPixmap</a></div><div class="ttdeci">QImage * m_curentPixmap</div><div class="ttdef"><b>Definition:</b> objectoftheboard.h:16</div></div>
+<div class="ttc" id="aclass_object_of_the_board_html_a44153a37ff08e7ac17ad3a5e40b6cab6"><div class="ttname"><a href="class_object_of_the_board.html#a44153a37ff08e7ac17ad3a5e40b6cab6">ObjectOfTheBoard::needToRedraw</a></div><div class="ttdeci">void needToRedraw()</div><div class="ttdef"><b>Definition:</b> objectoftheboard.cpp:33</div></div>
+<div class="ttc" id="aclass_object_of_the_board_html_a46d5f4ba7c6ede89e90ba7882ba7ac8c"><div class="ttname"><a href="class_object_of_the_board.html#a46d5f4ba7c6ede89e90ba7882ba7ac8c">ObjectOfTheBoard::swapPixMap</a></div><div class="ttdeci">virtual void swapPixMap()</div><div class="ttdef"><b>Definition:</b> objectoftheboard.cpp:66</div></div>
+<div class="ttc" id="aclass_object_of_the_board_html_a487eb0b765e0e1addac31a4f520043a4"><div class="ttname"><a href="class_object_of_the_board.html#a487eb0b765e0e1addac31a4f520043a4">ObjectOfTheBoard::sceneUpdate</a></div><div class="ttdeci">virtual void sceneUpdate()</div><div class="ttdef"><b>Definition:</b> objectoftheboard.cpp:54</div></div>
+<div class="ttc" id="aclass_object_of_the_board_html_a49ba73b5ca51de536840e5fc5119a082"><div class="ttname"><a href="class_object_of_the_board.html#a49ba73b5ca51de536840e5fc5119a082">ObjectOfTheBoard::~ObjectOfTheBoard</a></div><div class="ttdeci">virtual ~ObjectOfTheBoard() override</div><div class="ttdef"><b>Definition:</b> objectoftheboard.cpp:12</div></div>
+<div class="ttc" id="aclass_object_of_the_board_html_a4b3e6eadb1e6ad0bd00f40d19c1eaff5"><div class="ttname"><a href="class_object_of_the_board.html#a4b3e6eadb1e6ad0bd00f40d19c1eaff5">ObjectOfTheBoard::changingTheVisibilityZone</a></div><div class="ttdeci">void changingTheVisibilityZone(QRectF newVisibilityZone)</div><div class="ttdef"><b>Definition:</b> objectoftheboard.cpp:20</div></div>
+<div class="ttc" id="aclass_object_of_the_board_html_a4cc7aad904fd306a618f47ac5df38b06"><div class="ttname"><a href="class_object_of_the_board.html#a4cc7aad904fd306a618f47ac5df38b06">ObjectOfTheBoard::toSetTheLocationOfTheImageAfterDrawing</a></div><div class="ttdeci">virtual void toSetTheLocationOfTheImageAfterDrawing()</div><div class="ttdef"><b>Definition:</b> objectoftheboard.cpp:50</div></div>
+<div class="ttc" id="aclass_object_of_the_board_html_a82a12b943b859fbcc8703bab4c7fb912"><div class="ttname"><a href="class_object_of_the_board.html#a82a12b943b859fbcc8703bab4c7fb912">ObjectOfTheBoard::resizePictures</a></div><div class="ttdeci">virtual void resizePictures()</div><div class="ttdef"><b>Definition:</b> objectoftheboard.h:27</div></div>
+<div class="ttc" id="aclass_object_of_the_board_html_a82fa7c41c748ad339142d38b0e3b8241"><div class="ttname"><a href="class_object_of_the_board.html#a82fa7c41c748ad339142d38b0e3b8241">ObjectOfTheBoard::mouseMoveEvent</a></div><div class="ttdeci">virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override</div><div class="ttdef"><b>Definition:</b> objectoftheboard.h:29</div></div>
+<div class="ttc" id="aclass_object_of_the_board_html_a9853e7d0f26c7ccc18f0cb11b01027c3"><div class="ttname"><a href="class_object_of_the_board.html#a9853e7d0f26c7ccc18f0cb11b01027c3">ObjectOfTheBoard::m_topPositionPicture</a></div><div class="ttdeci">int m_topPositionPicture</div><div class="ttdef"><b>Definition:</b> objectoftheboard.h:17</div></div>
+<div class="ttc" id="aclass_object_of_the_board_html_aa10996b76a1d1e508b269736dc1e0d8d"><div class="ttname"><a href="class_object_of_the_board.html#aa10996b76a1d1e508b269736dc1e0d8d">ObjectOfTheBoard::ObjectOfTheBoard</a></div><div class="ttdeci">ObjectOfTheBoard()</div><div class="ttdef"><b>Definition:</b> objectoftheboard.cpp:6</div></div>
+<div class="ttc" id="aclass_object_of_the_board_html_aa417443ed2695f44524f85a42f9ef65c"><div class="ttname"><a href="class_object_of_the_board.html#aa417443ed2695f44524f85a42f9ef65c">ObjectOfTheBoard::m_needToRedraw</a></div><div class="ttdeci">bool m_needToRedraw</div><div class="ttdef"><b>Definition:</b> objectoftheboard.h:15</div></div>
+<div class="ttc" id="aclass_object_of_the_board_html_abd1fe2eb4ee2d3c66561d0ad561676f0"><div class="ttname"><a href="class_object_of_the_board.html#abd1fe2eb4ee2d3c66561d0ad561676f0">ObjectOfTheBoard::boundingRect</a></div><div class="ttdeci">virtual QRectF boundingRect() const override</div><div class="ttdef"><b>Definition:</b> objectoftheboard.h:18</div></div>
+<div class="ttc" id="aclass_object_of_the_board_html_adc10eadb5959bc70819db05a0cb47492"><div class="ttname"><a href="class_object_of_the_board.html#adc10eadb5959bc70819db05a0cb47492">ObjectOfTheBoard::m_doublePixMap</a></div><div class="ttdeci">QImage * m_doublePixMap</div><div class="ttdef"><b>Definition:</b> objectoftheboard.h:16</div></div>
+<div class="ttc" id="aclass_object_of_the_board_html_ae4d603de0f87935ccf737428a35581d8"><div class="ttname"><a href="class_object_of_the_board.html#ae4d603de0f87935ccf737428a35581d8">ObjectOfTheBoard::m_visibilitySquare</a></div><div class="ttdeci">QRectF m_visibilitySquare</div><div class="ttdef"><b>Definition:</b> objectoftheboard.h:14</div></div>
+<div class="ttc" id="aclass_object_of_the_board_html_aeacd1fd6a762b97fd8a1dbe288c8c3ac"><div class="ttname"><a href="class_object_of_the_board.html#aeacd1fd6a762b97fd8a1dbe288c8c3ac">ObjectOfTheBoard::m_endRedraw</a></div><div class="ttdeci">bool m_endRedraw</div><div class="ttdef"><b>Definition:</b> objectoftheboard.h:15</div></div>
+<div class="ttc" id="aclass_object_of_the_board_html_afdb71ee65dc5f0cedc0e498a0d3a705e"><div class="ttname"><a href="class_object_of_the_board.html#afdb71ee65dc5f0cedc0e498a0d3a705e">ObjectOfTheBoard::resize</a></div><div class="ttdeci">virtual void resize()</div><div class="ttdef"><b>Definition:</b> objectoftheboard.h:26</div></div>
+<div class="ttc" id="aclass_q_graphics_item_html"><div class="ttname"><a href="class_q_graphics_item.html">QGraphicsItem</a></div></div>
+<div class="ttc" id="aclass_q_image_html"><div class="ttname"><a href="class_q_image.html">QImage</a></div></div>
+<div class="ttc" id="aclass_q_thread_html"><div class="ttname"><a href="class_q_thread.html">QThread</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

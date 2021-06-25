@@ -1,0 +1,12 @@
+<map id="Иерархия классов. Графический вид." name="Иерархия классов. Графический вид.">
+<area shape="rect" id="node1" href="$class_q_object.html" title=" " alt="" coords="5,183,79,209"/>
+<area shape="rect" id="node2" href="$class_geology_s_q_lite_d_b.html" title="Базовый класс для работы с базой данных SQlite3. Конструктор подключается к базе данных...." alt="" coords="127,208,261,235"/>
+<area shape="rect" id="node7" href="$class_picture_chart.html" title=" " alt="" coords="143,157,245,184"/>
+<area shape="rect" id="node3" href="$class_reference_loader.html" title=" " alt="" coords="321,107,451,133"/>
+<area shape="rect" id="node4" href="$class_reference_saver.html" title=" " alt="" coords="325,208,447,235"/>
+<area shape="rect" id="node5" href="$class_saver_loader_calib_d_b.html" title=" " alt="" coords="309,259,463,285"/>
+<area shape="rect" id="node6" href="$class_selecting_i_d_from_d_b.html" title=" " alt="" coords="313,157,459,184"/>
+<area shape="rect" id="node8" href="$class_q_widget.html" title=" " alt="" coords="157,81,231,108"/>
+<area shape="rect" id="node9" href="$class_protocol_noise.html" title=" " alt="" coords="331,5,441,32"/>
+<area shape="rect" id="node10" href="$class_spectrs_set.html" title=" " alt="" coords="339,56,433,83"/>
+</map>

@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_GRAPHICS: Исходный файл E:/MyQtProgram/parserGfm/log_data_graphics/inc/tools/customdelegates.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_GRAPHICS
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_53603dfb3fbca8a964ef75a71799598b.html">log_data_graphics</a></li><li class="navelem"><a class="el" href="dir_55342455956423183f7a145b2d21cf95.html">inc</a></li><li class="navelem"><a class="el" href="dir_f249a64485145ebec929808e1d66b406.html">tools</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">customdelegates.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="customdelegates_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CUSTOMDELEGATES_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CUSTOMDELEGATES_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;QStyledItemDelegate&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="class_custom_delegates.html">    5</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_custom_delegates.html">CustomDelegates</a>{</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <a class="code" href="class_custom_delegates.html#a1b91db2c8f3795942bf4fab474b34cb7">CustomDelegates</a>();</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;};</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="class_check_box_delegate.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_check_box_delegate.html">CheckBoxDelegate</a> : <span class="keyword">public</span> <a class="code" href="class_q_styled_item_delegate.html">QStyledItemDelegate</a></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="class_check_box_delegate.html#a94ac224dc9c2b6849816e3c1a04ebfe8">CheckBoxDelegate</a>(<a class="code" href="class_q_object.html">QObject</a> *parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="comment">// QAbstractItemDelegate interface</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_check_box_delegate.html#a39ab95518c6c14c61c779dff6e6ccee2">paint</a>(QPainter *painter, <span class="keyword">const</span> QStyleOptionViewItem &amp;option, <span class="keyword">const</span> QModelIndex &amp;index) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    QWidget *<a class="code" href="class_check_box_delegate.html#a334d9abf0128e94bd07b17aa191a67f9">createEditor</a>(QWidget *parent, <span class="keyword">const</span> QStyleOptionViewItem &amp;option, <span class="keyword">const</span> QModelIndex &amp;index) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_check_box_delegate.html#a840b7a223824770792c3fcce18d692e0">setEditorData</a>(QWidget *editor, <span class="keyword">const</span> QModelIndex &amp;index) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_check_box_delegate.html#af81a1f1e01756f185e437acf6d31834b">setModelData</a>(QWidget *editor, QAbstractItemModel *model, <span class="keyword">const</span> QModelIndex &amp;index) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_check_box_delegate.html#a92b0b54f2104ab6613e8fb78155f5d7b">updateEditorGeometry</a>(QWidget *editor, <span class="keyword">const</span> QStyleOptionViewItem &amp;option, <span class="keyword">const</span> QModelIndex &amp;index) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;};</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">/**************************************************************************************/</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="class_color_delegate.html">   27</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_color_delegate.html">ColorDelegate</a> : <span class="keyword">public</span> <a class="code" href="class_q_styled_item_delegate.html">QStyledItemDelegate</a></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="class_color_delegate.html#aed83e960d1f9c0944542e9d12536ec15">ColorDelegate</a>(<a class="code" href="class_q_object.html">QObject</a> *parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_color_delegate.html#a9b120aaaa2c28ffea303d2adcca1990d">paint</a>(QPainter *painter, <span class="keyword">const</span> QStyleOptionViewItem &amp;option, <span class="keyword">const</span> QModelIndex &amp;index) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    QWidget *<a class="code" href="class_color_delegate.html#a5e5ee5894e9fd695dc14fa5641548675">createEditor</a>(QWidget *parent, <span class="keyword">const</span> QStyleOptionViewItem &amp;option, <span class="keyword">const</span> QModelIndex &amp;index) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_color_delegate.html#a8363a84ddd667c24a5ce6dd05761d20e">setEditorData</a>(QWidget *editor, <span class="keyword">const</span> QModelIndex &amp;index) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_color_delegate.html#a7af3effd62ad207d1ef6af2776b78db9">setModelData</a>(QWidget *editor, QAbstractItemModel *model, <span class="keyword">const</span> QModelIndex &amp;index) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_color_delegate.html#adfaaf72d0ff511d1c5fca637b07811f3">updateEditorGeometry</a>(QWidget *editor, <span class="keyword">const</span> QStyleOptionViewItem &amp;option, <span class="keyword">const</span> QModelIndex &amp;index) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;};</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">/**************************************************************************************/</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="class_combo_box_delegate.html">   41</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_combo_box_delegate.html">ComboBoxDelegate</a> : <span class="keyword">public</span> <a class="code" href="class_q_styled_item_delegate.html">QStyledItemDelegate</a></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    QStringList m_values;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="class_combo_box_delegate.html#a1ec9e0a4f89707ae6014948284290a04">ComboBoxDelegate</a>(QStringList values,<a class="code" href="class_q_object.html">QObject</a> *parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">//void paint(QPainter *painter, const QStyleOptionViewItem &amp;option, const QModelIndex &amp;index) const;</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    QWidget *<a class="code" href="class_combo_box_delegate.html#aa026243eac2ae757edb2486fa6bbde70">createEditor</a>(QWidget *parent, <span class="keyword">const</span> QStyleOptionViewItem &amp;option, <span class="keyword">const</span> QModelIndex &amp;index) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_combo_box_delegate.html#ab9e0f147c9847505621d5c68f5ccdec3">setEditorData</a>(QWidget *editor, <span class="keyword">const</span> QModelIndex &amp;index) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_combo_box_delegate.html#a89a80181bdb50fd753b9fe19d720dcb2">setModelData</a>(QWidget *editor, QAbstractItemModel *model, <span class="keyword">const</span> QModelIndex &amp;index) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">//void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &amp;option, const QModelIndex &amp;index) const;</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;};</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CUSTOMDELEGATES_H</span></div>
+<div class="ttc" id="aclass_check_box_delegate_html"><div class="ttname"><a href="class_check_box_delegate.html">CheckBoxDelegate</a></div><div class="ttdef"><b>Definition:</b> customdelegates.h:12</div></div>
+<div class="ttc" id="aclass_check_box_delegate_html_a334d9abf0128e94bd07b17aa191a67f9"><div class="ttname"><a href="class_check_box_delegate.html#a334d9abf0128e94bd07b17aa191a67f9">CheckBoxDelegate::createEditor</a></div><div class="ttdeci">QWidget * createEditor(QWidget *parent, const QStyleOptionViewItem &amp;option, const QModelIndex &amp;index) const override</div><div class="ttdef"><b>Definition:</b> customdelegates.cpp:21</div></div>
+<div class="ttc" id="aclass_check_box_delegate_html_a39ab95518c6c14c61c779dff6e6ccee2"><div class="ttname"><a href="class_check_box_delegate.html#a39ab95518c6c14c61c779dff6e6ccee2">CheckBoxDelegate::paint</a></div><div class="ttdeci">void paint(QPainter *painter, const QStyleOptionViewItem &amp;option, const QModelIndex &amp;index) const override</div><div class="ttdef"><b>Definition:</b> customdelegates.cpp:64</div></div>
+<div class="ttc" id="aclass_check_box_delegate_html_a840b7a223824770792c3fcce18d692e0"><div class="ttname"><a href="class_check_box_delegate.html#a840b7a223824770792c3fcce18d692e0">CheckBoxDelegate::setEditorData</a></div><div class="ttdeci">void setEditorData(QWidget *editor, const QModelIndex &amp;index) const override</div><div class="ttdef"><b>Definition:</b> customdelegates.cpp:34</div></div>
+<div class="ttc" id="aclass_check_box_delegate_html_a92b0b54f2104ab6613e8fb78155f5d7b"><div class="ttname"><a href="class_check_box_delegate.html#a92b0b54f2104ab6613e8fb78155f5d7b">CheckBoxDelegate::updateEditorGeometry</a></div><div class="ttdeci">void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &amp;option, const QModelIndex &amp;index) const override</div><div class="ttdef"><b>Definition:</b> customdelegates.cpp:49</div></div>
+<div class="ttc" id="aclass_check_box_delegate_html_a94ac224dc9c2b6849816e3c1a04ebfe8"><div class="ttname"><a href="class_check_box_delegate.html#a94ac224dc9c2b6849816e3c1a04ebfe8">CheckBoxDelegate::CheckBoxDelegate</a></div><div class="ttdeci">CheckBoxDelegate(QObject *parent=nullptr)</div><div class="ttdef"><b>Definition:</b> customdelegates.cpp:15</div></div>
+<div class="ttc" id="aclass_check_box_delegate_html_af81a1f1e01756f185e437acf6d31834b"><div class="ttname"><a href="class_check_box_delegate.html#af81a1f1e01756f185e437acf6d31834b">CheckBoxDelegate::setModelData</a></div><div class="ttdeci">void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &amp;index) const override</div><div class="ttdef"><b>Definition:</b> customdelegates.cpp:41</div></div>
+<div class="ttc" id="aclass_color_delegate_html"><div class="ttname"><a href="class_color_delegate.html">ColorDelegate</a></div><div class="ttdef"><b>Definition:</b> customdelegates.h:28</div></div>
+<div class="ttc" id="aclass_color_delegate_html_a5e5ee5894e9fd695dc14fa5641548675"><div class="ttname"><a href="class_color_delegate.html#a5e5ee5894e9fd695dc14fa5641548675">ColorDelegate::createEditor</a></div><div class="ttdeci">QWidget * createEditor(QWidget *parent, const QStyleOptionViewItem &amp;option, const QModelIndex &amp;index) const</div><div class="ttdef"><b>Definition:</b> customdelegates.cpp:103</div></div>
+<div class="ttc" id="aclass_color_delegate_html_a7af3effd62ad207d1ef6af2776b78db9"><div class="ttname"><a href="class_color_delegate.html#a7af3effd62ad207d1ef6af2776b78db9">ColorDelegate::setModelData</a></div><div class="ttdeci">void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &amp;index) const</div><div class="ttdef"><b>Definition:</b> customdelegates.cpp:119</div></div>
+<div class="ttc" id="aclass_color_delegate_html_a8363a84ddd667c24a5ce6dd05761d20e"><div class="ttname"><a href="class_color_delegate.html#a8363a84ddd667c24a5ce6dd05761d20e">ColorDelegate::setEditorData</a></div><div class="ttdeci">void setEditorData(QWidget *editor, const QModelIndex &amp;index) const</div><div class="ttdef"><b>Definition:</b> customdelegates.cpp:113</div></div>
+<div class="ttc" id="aclass_color_delegate_html_a9b120aaaa2c28ffea303d2adcca1990d"><div class="ttname"><a href="class_color_delegate.html#a9b120aaaa2c28ffea303d2adcca1990d">ColorDelegate::paint</a></div><div class="ttdeci">void paint(QPainter *painter, const QStyleOptionViewItem &amp;option, const QModelIndex &amp;index) const</div><div class="ttdef"><b>Definition:</b> customdelegates.cpp:93</div></div>
+<div class="ttc" id="aclass_color_delegate_html_adfaaf72d0ff511d1c5fca637b07811f3"><div class="ttname"><a href="class_color_delegate.html#adfaaf72d0ff511d1c5fca637b07811f3">ColorDelegate::updateEditorGeometry</a></div><div class="ttdeci">void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &amp;option, const QModelIndex &amp;index) const</div><div class="ttdef"><b>Definition:</b> customdelegates.cpp:126</div></div>
+<div class="ttc" id="aclass_color_delegate_html_aed83e960d1f9c0944542e9d12536ec15"><div class="ttname"><a href="class_color_delegate.html#aed83e960d1f9c0944542e9d12536ec15">ColorDelegate::ColorDelegate</a></div><div class="ttdeci">ColorDelegate(QObject *parent=nullptr)</div><div class="ttdef"><b>Definition:</b> customdelegates.cpp:89</div></div>
+<div class="ttc" id="aclass_combo_box_delegate_html"><div class="ttname"><a href="class_combo_box_delegate.html">ComboBoxDelegate</a></div><div class="ttdef"><b>Definition:</b> customdelegates.h:42</div></div>
+<div class="ttc" id="aclass_combo_box_delegate_html_a1ec9e0a4f89707ae6014948284290a04"><div class="ttname"><a href="class_combo_box_delegate.html#a1ec9e0a4f89707ae6014948284290a04">ComboBoxDelegate::ComboBoxDelegate</a></div><div class="ttdeci">ComboBoxDelegate(QStringList values, QObject *parent=nullptr)</div><div class="ttdef"><b>Definition:</b> customdelegates.cpp:133</div></div>
+<div class="ttc" id="aclass_combo_box_delegate_html_a89a80181bdb50fd753b9fe19d720dcb2"><div class="ttname"><a href="class_combo_box_delegate.html#a89a80181bdb50fd753b9fe19d720dcb2">ComboBoxDelegate::setModelData</a></div><div class="ttdeci">void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &amp;index) const</div><div class="ttdef"><b>Definition:</b> customdelegates.cpp:159</div></div>
+<div class="ttc" id="aclass_combo_box_delegate_html_aa026243eac2ae757edb2486fa6bbde70"><div class="ttname"><a href="class_combo_box_delegate.html#aa026243eac2ae757edb2486fa6bbde70">ComboBoxDelegate::createEditor</a></div><div class="ttdeci">QWidget * createEditor(QWidget *parent, const QStyleOptionViewItem &amp;option, const QModelIndex &amp;index) const</div><div class="ttdef"><b>Definition:</b> customdelegates.cpp:142</div></div>
+<div class="ttc" id="aclass_combo_box_delegate_html_ab9e0f147c9847505621d5c68f5ccdec3"><div class="ttname"><a href="class_combo_box_delegate.html#ab9e0f147c9847505621d5c68f5ccdec3">ComboBoxDelegate::setEditorData</a></div><div class="ttdeci">void setEditorData(QWidget *editor, const QModelIndex &amp;index) const</div><div class="ttdef"><b>Definition:</b> customdelegates.cpp:153</div></div>
+<div class="ttc" id="aclass_custom_delegates_html"><div class="ttname"><a href="class_custom_delegates.html">CustomDelegates</a></div><div class="ttdef"><b>Definition:</b> customdelegates.h:5</div></div>
+<div class="ttc" id="aclass_custom_delegates_html_a1b91db2c8f3795942bf4fab474b34cb7"><div class="ttname"><a href="class_custom_delegates.html#a1b91db2c8f3795942bf4fab474b34cb7">CustomDelegates::CustomDelegates</a></div><div class="ttdeci">CustomDelegates()</div><div class="ttdef"><b>Definition:</b> customdelegates.cpp:11</div></div>
+<div class="ttc" id="aclass_q_object_html"><div class="ttname"><a href="class_q_object.html">QObject</a></div></div>
+<div class="ttc" id="aclass_q_styled_item_delegate_html"><div class="ttname"><a href="class_q_styled_item_delegate.html">QStyledItemDelegate</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

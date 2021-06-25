@@ -1,0 +1,12 @@
+<map id="GraphicEditor::addForms" name="GraphicEditor::addForms">
+<area shape="rect" id="node1" title=" " alt="" coords="5,81,185,108"/>
+<area shape="rect" id="node2" href="$class_a_graphic_board.html#aee03a3f8c6268c77835e5b871aa31c70" title=" " alt="" coords="483,56,660,83"/>
+<area shape="rect" id="node9" href="$class_graphic_editor.html#adc05dc1d9c5c40839cf5a1c02c4eef9c" title=" " alt="" coords="233,81,435,108"/>
+<area shape="rect" id="node10" href="$class_a_graphic_board.html#a45e4d8eeba2d102a36ee386690d2b935" title=" " alt="" coords="253,132,415,159"/>
+<area shape="rect" id="node3" href="$class_a_graphic_track.html#ac6e116451a351aae691213a2b7e026a1" title=" " alt="" coords="708,31,881,57"/>
+<area shape="rect" id="node4" href="$class_a_graphic_board.html#af5b19173cec62cba85b3b33a8161ff4a" title=" " alt="" coords="713,81,877,108"/>
+<area shape="rect" id="node5" href="$class_a_graphic_track.html#a11dbdb0ef068cd0a4bb72e6e91184483" title=" " alt="" coords="929,5,1135,32"/>
+<area shape="rect" id="node6" href="$class_draw_settings.html#a569b21556b08471cd3f57c6a39f8ff46" title=" " alt="" coords="937,56,1127,83"/>
+<area shape="rect" id="node7" href="$class_a_graphic_track.html#ac5ee1c646d59440ffdc625756b1fe6d2" title=" " alt="" coords="952,107,1112,133"/>
+<area shape="rect" id="node8" href="$class_a_graphic_track.html#a4f21d9c5fa6c33fa7a0c01d11e4601ee" title=" " alt="" coords="943,157,1121,184"/>
+</map>

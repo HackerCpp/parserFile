@@ -1,0 +1,15 @@
+<map id="DisplayingAcoustics::DisplayingAcoustics" name="DisplayingAcoustics::DisplayingAcoustics">
+<area shape="rect" id="node1" title=" " alt="" coords="5,116,161,157"/>
+<area shape="rect" id="node2" href="$class_acu_view.html#a9595ba3aec90165c5dd8e7d547f32250" title=" " alt="" coords="226,94,391,121"/>
+<area shape="rect" id="node13" href="$class_widget_select_wave_segment.html#a44fcefc28a224044ae2538470e0a9c5b" title=" " alt="" coords="209,145,408,187"/>
+<area shape="rect" id="node3" href="$class_counting_acoustics_item.html#a01968a8391a158b7ee9cb6ac097920b6" title=" " alt="" coords="456,39,625,80"/>
+<area shape="rect" id="node5" href="$class_counting_acoustics_item.html#a63d254e5ad15dd439b24c0b6d1e33de6" title=" " alt="" coords="456,136,625,177"/>
+<area shape="rect" id="node4" href="$class_data_counting_acoustics.html#a481f731a33e0b193b178e3466851f3b6" title=" " alt="" coords="693,5,863,47"/>
+<area shape="rect" id="node6" href="$class_data_counting_acoustics.html#ac3a8efeefafd8a56ce33111146181554" title=" " alt="" coords="693,71,863,112"/>
+<area shape="rect" id="node7" href="$class_data_counting_acoustics.html#a6f57edff8577fcaf15f8a1a9db262d21" title=" " alt="" coords="693,136,863,177"/>
+<area shape="rect" id="node8" href="$class_a_graphic_item.html#ae419fab6815c31e96ba2bbfa986ca74f" title=" " alt="" coords="701,202,855,229"/>
+<area shape="rect" id="node9" href="$class_board_for_track.html#ac18a8081170805bd6df840d95b415768" title=" " alt="" coords="673,253,883,279"/>
+<area shape="rect" id="node11" href="$class_board_for_track.html#a234123d4cce4675ae3f238f84151f0df" title=" " alt="" coords="674,303,882,330"/>
+<area shape="rect" id="node10" href="$class_draw_settings.html#a3527c884df24f575c314a57c128cd76d" title=" " alt="" coords="931,253,1133,279"/>
+<area shape="rect" id="node12" href="$class_draw_settings.html#ace8ac6718193cf82bc7d3fa0987f18df" title=" " alt="" coords="931,303,1133,330"/>
+</map>

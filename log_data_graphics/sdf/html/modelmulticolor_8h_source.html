@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_GRAPHICS: Исходный файл E:/MyQtProgram/parserGfm/log_data_graphics/inc/spectrReader/modelmulticolor.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_GRAPHICS
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_53603dfb3fbca8a964ef75a71799598b.html">log_data_graphics</a></li><li class="navelem"><a class="el" href="dir_55342455956423183f7a145b2d21cf95.html">inc</a></li><li class="navelem"><a class="el" href="dir_f2ae106b4003225912847c6f66e2461a.html">spectrReader</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">modelmulticolor.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="modelmulticolor_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef MODELMULTICOLOR_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define MODELMULTICOLOR_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;QAbstractListModel&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;aitem.h&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="class_model_multicolor.html">    6</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_model_multicolor.html">ModelMulticolor</a> : <span class="keyword">public</span> <a class="code" href="class_q_abstract_list_model.html">QAbstractListModel</a></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    QStringList m_headerList;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    QList&lt;MulticolorItem&gt; *m_listMulticolor;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    QList&lt;MulticolorItem&gt; *m_listMulticolorOriginal;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <a class="code" href="class_model_multicolor.html#a1bc72b74162ed76f314599fbfe908918">ModelMulticolor</a>(QList&lt;MulticolorItem&gt; *listMulticolor);</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="class_model_multicolor.html#a771824d477330fc7e2a4b56a8dca439d">~ModelMulticolor</a>()<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    QVariant <a class="code" href="class_model_multicolor.html#a713a4cd7cd5231647d1bba46a5eec970">data</a>(<span class="keyword">const</span> QModelIndex &amp;index, <span class="keywordtype">int</span> role = Qt::DisplayRole) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_model_multicolor.html#ae232a25033ceae02abd1d2c9aaf5ab1e">rowCount</a>(<span class="keyword">const</span> QModelIndex &amp;parent = QModelIndex()) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_model_multicolor.html#ae77130a88e2a6356391872bf42eee87b">columnCount</a>(<span class="keyword">const</span> QModelIndex &amp;parent = QModelIndex()) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    QVariant <a class="code" href="class_model_multicolor.html#a0fdef03dedea97ee5a46d78a14262f0f">headerData</a>(<span class="keywordtype">int</span> section, Qt::Orientation orientation, <span class="keywordtype">int</span> role) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    Qt::ItemFlags <a class="code" href="class_model_multicolor.html#afcd19ededdf41bed867c4e73d6e4b8e6">flags</a>(<span class="keyword">const</span> QModelIndex &amp;index) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_model_multicolor.html#acc9e8ccc3383154a0537b3d982ed74ef">setData</a>(<span class="keyword">const</span> QModelIndex &amp;index, <span class="keyword">const</span> QVariant &amp;value, <span class="keywordtype">int</span> role)<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_model_multicolor.html#a177b989617cc2b171bf2153d72cbd8d0">apply</a>();</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_model_multicolor.html#ae2ea97bdf1e420c3ed1970429a72526e">insertColor</a>();</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_model_multicolor.html#aaeb1d8c0a561418f96dd4636c2e8d151">removeColor</a>();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_model_multicolor.html#a8e39099667fb3a8bf60bc564bce8096b">calculateHSV</a>();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_model_multicolor.html#a8cd3f2609481ed65ac86eae868028db5">calculateRainbow</a>();</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;};</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// MODELMULTICOLOR_H</span></div>
+<div class="ttc" id="aclass_model_multicolor_html"><div class="ttname"><a href="class_model_multicolor.html">ModelMulticolor</a></div><div class="ttdef"><b>Definition:</b> modelmulticolor.h:7</div></div>
+<div class="ttc" id="aclass_model_multicolor_html_a0fdef03dedea97ee5a46d78a14262f0f"><div class="ttname"><a href="class_model_multicolor.html#a0fdef03dedea97ee5a46d78a14262f0f">ModelMulticolor::headerData</a></div><div class="ttdeci">QVariant headerData(int section, Qt::Orientation orientation, int role) const override</div><div class="ttdef"><b>Definition:</b> modelmulticolor.cpp:60</div></div>
+<div class="ttc" id="aclass_model_multicolor_html_a177b989617cc2b171bf2153d72cbd8d0"><div class="ttname"><a href="class_model_multicolor.html#a177b989617cc2b171bf2153d72cbd8d0">ModelMulticolor::apply</a></div><div class="ttdeci">void apply()</div><div class="ttdef"><b>Definition:</b> modelmulticolor.cpp:114</div></div>
+<div class="ttc" id="aclass_model_multicolor_html_a1bc72b74162ed76f314599fbfe908918"><div class="ttname"><a href="class_model_multicolor.html#a1bc72b74162ed76f314599fbfe908918">ModelMulticolor::ModelMulticolor</a></div><div class="ttdeci">ModelMulticolor(QList&lt; MulticolorItem &gt; *listMulticolor)</div><div class="ttdef"><b>Definition:</b> modelmulticolor.cpp:4</div></div>
+<div class="ttc" id="aclass_model_multicolor_html_a713a4cd7cd5231647d1bba46a5eec970"><div class="ttname"><a href="class_model_multicolor.html#a713a4cd7cd5231647d1bba46a5eec970">ModelMulticolor::data</a></div><div class="ttdeci">QVariant data(const QModelIndex &amp;index, int role=Qt::DisplayRole) const override</div><div class="ttdef"><b>Definition:</b> modelmulticolor.cpp:22</div></div>
+<div class="ttc" id="aclass_model_multicolor_html_a771824d477330fc7e2a4b56a8dca439d"><div class="ttname"><a href="class_model_multicolor.html#a771824d477330fc7e2a4b56a8dca439d">ModelMulticolor::~ModelMulticolor</a></div><div class="ttdeci">~ModelMulticolor() override</div><div class="ttdef"><b>Definition:</b> modelmulticolor.cpp:17</div></div>
+<div class="ttc" id="aclass_model_multicolor_html_a8cd3f2609481ed65ac86eae868028db5"><div class="ttname"><a href="class_model_multicolor.html#a8cd3f2609481ed65ac86eae868028db5">ModelMulticolor::calculateRainbow</a></div><div class="ttdeci">void calculateRainbow()</div><div class="ttdef"><b>Definition:</b> modelmulticolor.cpp:169</div></div>
+<div class="ttc" id="aclass_model_multicolor_html_a8e39099667fb3a8bf60bc564bce8096b"><div class="ttname"><a href="class_model_multicolor.html#a8e39099667fb3a8bf60bc564bce8096b">ModelMulticolor::calculateHSV</a></div><div class="ttdeci">void calculateHSV()</div><div class="ttdef"><b>Definition:</b> modelmulticolor.cpp:141</div></div>
+<div class="ttc" id="aclass_model_multicolor_html_aaeb1d8c0a561418f96dd4636c2e8d151"><div class="ttname"><a href="class_model_multicolor.html#aaeb1d8c0a561418f96dd4636c2e8d151">ModelMulticolor::removeColor</a></div><div class="ttdeci">void removeColor()</div><div class="ttdef"><b>Definition:</b> modelmulticolor.cpp:131</div></div>
+<div class="ttc" id="aclass_model_multicolor_html_acc9e8ccc3383154a0537b3d982ed74ef"><div class="ttname"><a href="class_model_multicolor.html#acc9e8ccc3383154a0537b3d982ed74ef">ModelMulticolor::setData</a></div><div class="ttdeci">bool setData(const QModelIndex &amp;index, const QVariant &amp;value, int role) override</div><div class="ttdef"><b>Definition:</b> modelmulticolor.cpp:90</div></div>
+<div class="ttc" id="aclass_model_multicolor_html_ae232a25033ceae02abd1d2c9aaf5ab1e"><div class="ttname"><a href="class_model_multicolor.html#ae232a25033ceae02abd1d2c9aaf5ab1e">ModelMulticolor::rowCount</a></div><div class="ttdeci">int rowCount(const QModelIndex &amp;parent=QModelIndex()) const override</div><div class="ttdef"><b>Definition:</b> modelmulticolor.cpp:50</div></div>
+<div class="ttc" id="aclass_model_multicolor_html_ae2ea97bdf1e420c3ed1970429a72526e"><div class="ttname"><a href="class_model_multicolor.html#ae2ea97bdf1e420c3ed1970429a72526e">ModelMulticolor::insertColor</a></div><div class="ttdeci">void insertColor()</div><div class="ttdef"><b>Definition:</b> modelmulticolor.cpp:123</div></div>
+<div class="ttc" id="aclass_model_multicolor_html_ae77130a88e2a6356391872bf42eee87b"><div class="ttname"><a href="class_model_multicolor.html#ae77130a88e2a6356391872bf42eee87b">ModelMulticolor::columnCount</a></div><div class="ttdeci">int columnCount(const QModelIndex &amp;parent=QModelIndex()) const override</div><div class="ttdef"><b>Definition:</b> modelmulticolor.cpp:55</div></div>
+<div class="ttc" id="aclass_model_multicolor_html_afcd19ededdf41bed867c4e73d6e4b8e6"><div class="ttname"><a href="class_model_multicolor.html#afcd19ededdf41bed867c4e73d6e4b8e6">ModelMulticolor::flags</a></div><div class="ttdeci">Qt::ItemFlags flags(const QModelIndex &amp;index) const override</div><div class="ttdef"><b>Definition:</b> modelmulticolor.cpp:72</div></div>
+<div class="ttc" id="aclass_q_abstract_list_model_html"><div class="ttname"><a href="class_q_abstract_list_model.html">QAbstractListModel</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

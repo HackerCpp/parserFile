@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_GRAPHICS: Исходный файл E:/MyQtProgram/parserGfm/log_data_graphics/inc/rightborder.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_GRAPHICS
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_885cc87fac2d91e269af0a5a959fa5f6.html">E:</a></li><li class="navelem"><a class="el" href="dir_e6005e8945f4bd791bfe52532f2cccd5.html">MyQtProgram</a></li><li class="navelem"><a class="el" href="dir_e8d58501715e67dbe2623c88abad55d3.html">parserGfm</a></li><li class="navelem"><a class="el" href="dir_53603dfb3fbca8a964ef75a71799598b.html">log_data_graphics</a></li><li class="navelem"><a class="el" href="dir_55342455956423183f7a145b2d21cf95.html">inc</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">rightborder.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="rightborder_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef RIGHTBORDER_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define RIGHTBORDER_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;QImage&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QPainter&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QWidget&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QDebug&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="class_border.html">    8</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_border.html">Border</a> : <span class="keyword">public</span> <a class="code" href="class_q_image.html">QImage</a>{</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="class_border.html#af016db94270da91a5f272cac92e9aa60">   10</a></span>&#160;    <a class="code" href="class_border.html#af016db94270da91a5f272cac92e9aa60">Border</a>(<span class="keywordtype">int</span> width,<span class="keywordtype">int</span> height,Format format = QImage::Format_ARGB32)</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        :<a class="code" href="class_q_image.html">QImage</a>(width,height,<a class="code" href="class_q_image.html">QImage</a>::Format_ARGB32){Q_UNUSED(format)}</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="class_border.html#a68f19c8077602fff0222dc8aac044101">   12</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_border.html#a68f19c8077602fff0222dc8aac044101">~Border</a>(){}</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_border.html#a222858759c41bf051abc45dc9108f7d4">   14</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_border.html#a222858759c41bf051abc45dc9108f7d4">click</a>(<span class="keywordtype">bool</span> isClick){Q_UNUSED(isClick)}</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_border.html#a37fc9fd2f0f902e3cebc878a495fc42a">   15</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_border.html#a37fc9fd2f0f902e3cebc878a495fc42a">setopen</a>(<span class="keywordtype">bool</span> isOpen){Q_UNUSED(isOpen)}</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;};</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_right_border.html">   18</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_right_border.html">RightBorder</a> : <span class="keyword">public</span> <a class="code" href="class_border.html">Border</a>{</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="class_q_image.html">QImage</a> *m_collapseTab,*m_expandTab,*m_curentTab;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="class_right_border.html#a18227c6bfbefab6b7cd417044535031a">RightBorder</a>();</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_right_border.html#a49acb0e82a121381a505df10f233024e">~RightBorder</a>()<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_right_border.html#a2efdeb730ed52ad04052f0881fca0029">click</a>(<span class="keywordtype">bool</span> isClick)<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_right_border.html#ad918e9c69c9cbb3d7892ea46c0c6c339">setopen</a>(<span class="keywordtype">bool</span> isOpen)<span class="keyword">override</span>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;};</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// RIGHTBORDER_H</span></div>
+<div class="ttc" id="aclass_border_html"><div class="ttname"><a href="class_border.html">Border</a></div><div class="ttdef"><b>Definition:</b> rightborder.h:8</div></div>
+<div class="ttc" id="aclass_border_html_a222858759c41bf051abc45dc9108f7d4"><div class="ttname"><a href="class_border.html#a222858759c41bf051abc45dc9108f7d4">Border::click</a></div><div class="ttdeci">virtual void click(bool isClick)</div><div class="ttdef"><b>Definition:</b> rightborder.h:14</div></div>
+<div class="ttc" id="aclass_border_html_a37fc9fd2f0f902e3cebc878a495fc42a"><div class="ttname"><a href="class_border.html#a37fc9fd2f0f902e3cebc878a495fc42a">Border::setopen</a></div><div class="ttdeci">virtual void setopen(bool isOpen)</div><div class="ttdef"><b>Definition:</b> rightborder.h:15</div></div>
+<div class="ttc" id="aclass_border_html_a68f19c8077602fff0222dc8aac044101"><div class="ttname"><a href="class_border.html#a68f19c8077602fff0222dc8aac044101">Border::~Border</a></div><div class="ttdeci">virtual ~Border()</div><div class="ttdef"><b>Definition:</b> rightborder.h:12</div></div>
+<div class="ttc" id="aclass_border_html_af016db94270da91a5f272cac92e9aa60"><div class="ttname"><a href="class_border.html#af016db94270da91a5f272cac92e9aa60">Border::Border</a></div><div class="ttdeci">Border(int width, int height, Format format=QImage::Format_ARGB32)</div><div class="ttdef"><b>Definition:</b> rightborder.h:10</div></div>
+<div class="ttc" id="aclass_q_image_html"><div class="ttname"><a href="class_q_image.html">QImage</a></div></div>
+<div class="ttc" id="aclass_right_border_html"><div class="ttname"><a href="class_right_border.html">RightBorder</a></div><div class="ttdef"><b>Definition:</b> rightborder.h:18</div></div>
+<div class="ttc" id="aclass_right_border_html_a18227c6bfbefab6b7cd417044535031a"><div class="ttname"><a href="class_right_border.html#a18227c6bfbefab6b7cd417044535031a">RightBorder::RightBorder</a></div><div class="ttdeci">RightBorder()</div><div class="ttdef"><b>Definition:</b> rightborder.cpp:3</div></div>
+<div class="ttc" id="aclass_right_border_html_a2efdeb730ed52ad04052f0881fca0029"><div class="ttname"><a href="class_right_border.html#a2efdeb730ed52ad04052f0881fca0029">RightBorder::click</a></div><div class="ttdeci">void click(bool isClick) override</div><div class="ttdef"><b>Definition:</b> rightborder.cpp:39</div></div>
+<div class="ttc" id="aclass_right_border_html_a49acb0e82a121381a505df10f233024e"><div class="ttname"><a href="class_right_border.html#a49acb0e82a121381a505df10f233024e">RightBorder::~RightBorder</a></div><div class="ttdeci">virtual ~RightBorder() override</div><div class="ttdef"><b>Definition:</b> rightborder.cpp:34</div></div>
+<div class="ttc" id="aclass_right_border_html_ad918e9c69c9cbb3d7892ea46c0c6c339"><div class="ttname"><a href="class_right_border.html#ad918e9c69c9cbb3d7892ea46c0c6c339">RightBorder::setopen</a></div><div class="ttdeci">void setopen(bool isOpen) override</div><div class="ttdef"><b>Definition:</b> rightborder.cpp:51</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

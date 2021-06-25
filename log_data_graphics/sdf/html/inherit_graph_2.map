@@ -1,0 +1,9 @@
+<map id="Иерархия классов. Графический вид." name="Иерархия классов. Графический вид.">
+<area shape="rect" id="node1" href="$class_board_for_track.html" title=" " alt="" coords="7,5,121,32"/>
+<area shape="rect" id="node2" href="$class_a_graphic_board.html" title=" " alt="" coords="171,5,289,32"/>
+<area shape="rect" id="node3" href="$class_vertical_board.html" title=" " alt="" coords="337,5,445,32"/>
+<area shape="rect" id="node4" href="$class_q_graphics_view.html" title=" " alt="" coords="5,81,123,108"/>
+<area shape="rect" id="node5" href="$class_acu_view.html" title=" " alt="" coords="193,56,267,83"/>
+<area shape="rect" id="node6" href="$class_graphic_header.html" title=" " alt="" coords="171,107,289,133"/>
+<area shape="rect" id="node7" href="$class_spectr_viewer.html" title=" " alt="" coords="177,157,283,184"/>
+</map>

@@ -102,7 +102,7 @@ int SQLite3Saver::saveCurve(const ICurve &curve){
      f_query.addBindValue(curve.recordPoint());
      f_query.addBindValue(curve.uniqID());
      QByteArray f_baCompressed;
-     GFMSaver::gzipCompress(curve.data(),f_baCompressed,9);
+     GFMSaver::gzipCompress(curve.data(),f_baCompressed,7);
      f_query.addBindValue(f_baCompressed);
     f_query.exec();
     int f_currentIndexCurve = findCurve(curve);
@@ -198,11 +198,11 @@ int SQLite3Saver::updateCurve(const ICurve &curve){
     QSqlQuery f_query;
     f_query.prepare(
         "UPDATE LogDataCurve\
-        SET LDCLastСhanges = ?,LDCMnemonic = ?,LDCTimeID = ?,\
-            LDCDepthID = ?,LDCShortCutID = ?,LDCSizeOffsetInByte = ?,\
-            LDCSizeOfType = ?,LDCDataType = ?,LDCRecordPoint = ?,\
-            LDCDATA = ?\
-        WHERE LDCUID = ?");
+        SET LDCLastСhanges = ?,LDCMnemonic = ?,LDCTimeID=?,\
+            LDCDepthID=?,LDCShortCutID=?,LDCSizeOffsetInByte=?,\
+            LDCSizeOfType = ?,LDCDataType = ?,LDCRecordPoint =?,\
+            LDCDATA=? \
+        WHERE LDCUID=?");
      f_query.addBindValue(QDateTime::currentDateTime().toString());
      f_query.addBindValue(curve.mnemonic());
      f_query.addBindValue(f_timeId);
@@ -212,7 +212,9 @@ int SQLite3Saver::updateCurve(const ICurve &curve){
      f_query.addBindValue(curve.sizeOffsetInBytes() / curve.sizeOffset());
      f_query.addBindValue(curve.dataType());
      f_query.addBindValue(curve.recordPoint());
-     f_query.addBindValue(curve.data());
+     QByteArray f_baCompressed;
+     GFMSaver::gzipCompress(curve.data(),f_baCompressed,7);
+     f_query.addBindValue(f_baCompressed);
      f_query.addBindValue(curve.uniqID());
     f_query.exec();
 

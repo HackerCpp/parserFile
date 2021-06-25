@@ -1,0 +1,6 @@
+<map id="AGraphicBoard" name="AGraphicBoard">
+<area shape="rect" id="node1" title=" " alt="" coords="74,80,193,107"/>
+<area shape="rect" id="node4" href="$class_vertical_board.html" title=" " alt="" coords="79,155,187,181"/>
+<area shape="rect" id="node2" href="$class_q_graphics_view.html" title=" " alt="" coords="5,5,123,32"/>
+<area shape="rect" id="node3" href="$class_board_for_track.html" title=" " alt="" coords="147,5,261,32"/>
+</map>

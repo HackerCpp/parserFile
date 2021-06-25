@@ -1,0 +1,21 @@
+<map id="Иерархия классов. Графический вид." name="Иерархия классов. Графический вид.">
+<area shape="rect" id="node1" href="$class_a_graphic_item.html" title=" " alt="" coords="9,56,119,83"/>
+<area shape="rect" id="node2" href="$class_vertical_item.html" title=" " alt="" coords="202,56,301,83"/>
+<area shape="rect" id="node3" href="$class_two_dimensional_array_item.html" title=" " alt="" coords="380,107,568,133"/>
+<area shape="rect" id="node6" href="$class_v_line_item.html" title=" " alt="" coords="431,56,517,83"/>
+<area shape="rect" id="node7" href="$class_v_mark_item.html" title=" " alt="" coords="429,5,519,32"/>
+<area shape="rect" id="node4" href="$class_v_acu_item.html" title=" " alt="" coords="626,132,710,159"/>
+<area shape="rect" id="node5" href="$class_v_spectr_item.html" title=" " alt="" coords="617,81,719,108"/>
+<area shape="rect" id="node8" href="$class_q_graphics_item.html" title=" " alt="" coords="5,284,123,311"/>
+<area shape="rect" id="node9" href="$class_object_of_the_board.html" title=" " alt="" coords="182,259,321,285"/>
+<area shape="rect" id="node17" href="$class_selecting_area.html" title=" " alt="" coords="196,309,307,336"/>
+<area shape="rect" id="node10" href="$class_a_graphic_track.html" title=" " alt="" coords="417,309,531,336"/>
+<area shape="rect" id="node12" href="$class_counting_acoustics_item.html" title=" " alt="" coords="389,360,559,387"/>
+<area shape="rect" id="node13" href="$class_graphic_item_for_spectr.html" title=" " alt="" coords="393,411,555,437"/>
+<area shape="rect" id="node14" href="$class_header_item.html" title=" " alt="" coords="425,157,523,184"/>
+<area shape="rect" id="node15" href="$class_l_d_label_item.html" title=" " alt="" coords="423,208,525,235"/>
+<area shape="rect" id="node16" href="$class_ruler.html" title=" " alt="" coords="447,259,501,285"/>
+<area shape="rect" id="node11" href="$class_vertical_track.html" title=" " alt="" coords="616,309,720,336"/>
+<area shape="rect" id="node18" href="$class_q_thread.html" title=" " alt="" coords="26,201,102,228"/>
+<area shape="rect" id="node19" href="$class_drawing_through_a_disk.html" title=" " alt="" coords="171,139,332,165"/>
+</map>

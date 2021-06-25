@@ -1,0 +1,653 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LOG_DATA_CALIBRATE: Класс ProtocolInfo</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LOG_DATA_CALIBRATE
+   &#160;<span id="projectnumber">1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Поиск');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="class_protocol_info-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle">
+<div class="title">Класс ProtocolInfo</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="protocolinfo_8h_source.html">protocolinfo.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:ab17750be4e9b4c4352029d783fc64754"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_protocol_info.html#ab17750be4e9b4c4352029d783fc64754">ProtocolInfo</a> (QString currentDayTime=QDateTime().currentDateTime().toString())</td></tr>
+<tr class="separator:ab17750be4e9b4c4352029d783fc64754"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a266bc4728de3da7914371ec4a5369c47"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_protocol_info.html#a266bc4728de3da7914371ec4a5369c47">addReference</a> (const QVector&lt; ICurve * &gt; &amp;referenceSpectrums, int <a class="el" href="class_protocol_info.html#aa766d49a196e823972ac136fbdd36ba3">indexRefDB</a>=0)</td></tr>
+<tr class="separator:a266bc4728de3da7914371ec4a5369c47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba05b36dccea512e8b7d0a8c21aa4f83"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_protocol_info.html#aba05b36dccea512e8b7d0a8c21aa4f83">addSource</a> (const QVector&lt; ICurve * &gt; &amp;sourceSpectrums)</td></tr>
+<tr class="separator:aba05b36dccea512e8b7d0a8c21aa4f83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afac85e5d1acad99d37027ac5e68ad4f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_protocol_info.html#afac85e5d1acad99d37027ac5e68ad4f2">addApproximated</a> (const QVector&lt; ICurve * &gt; &amp;approximatedSpectrums)</td></tr>
+<tr class="separator:afac85e5d1acad99d37027ac5e68ad4f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0354db9e1c3576a4b618b702c523c4ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_protocol_info.html#a0354db9e1c3576a4b618b702c523c4ce">addCoeffs</a> (QVector&lt; <a class="el" href="struct_coeffs_linear_dependence.html">CoeffsLinearDependence</a> &gt; *<a class="el" href="class_protocol_info.html#ad54762b5c843f2b54025887eff4ae55f">coeffsUp</a>, QVector&lt; <a class="el" href="struct_coeffs_linear_dependence.html">CoeffsLinearDependence</a> &gt; *<a class="el" href="class_protocol_info.html#a7c6a6f782531611988f39567c5e5afeb">coeffsDown</a>)</td></tr>
+<tr class="separator:a0354db9e1c3576a4b618b702c523c4ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59a1532cc4e2d20231025035b772a72e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_protocol_info.html#a59a1532cc4e2d20231025035b772a72e">addOperator</a> (<a class="el" href="class_operator.html">Operator</a> <a class="el" href="class_protocol_info.html#aadc082300052e16ee234d59763abd586">operatorer</a>)</td></tr>
+<tr class="separator:a59a1532cc4e2d20231025035b772a72e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e0c9be64a824b46639f8a06284e0136"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_protocol_info.html#a4e0c9be64a824b46639f8a06284e0136">addChannelName</a> (QString <a class="el" href="class_protocol_info.html#af52cefedaf2d055a54fb17993e4188aa">channelName</a>)</td></tr>
+<tr class="separator:a4e0c9be64a824b46639f8a06284e0136"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac004cdeed7ee5a2e5260793a058268da"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_protocol_info.html#ac004cdeed7ee5a2e5260793a058268da">deviceName</a> () const</td></tr>
+<tr class="separator:ac004cdeed7ee5a2e5260793a058268da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd1c40d554466f121a6137a33527fddb"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_protocol_info.html#afd1c40d554466f121a6137a33527fddb">deviceNum</a> () const</td></tr>
+<tr class="separator:afd1c40d554466f121a6137a33527fddb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af52cefedaf2d055a54fb17993e4188aa"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_protocol_info.html#af52cefedaf2d055a54fb17993e4188aa">channelName</a> () const</td></tr>
+<tr class="separator:af52cefedaf2d055a54fb17993e4188aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadc082300052e16ee234d59763abd586"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_operator.html">Operator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_protocol_info.html#aadc082300052e16ee234d59763abd586">operatorer</a> () const</td></tr>
+<tr class="separator:aadc082300052e16ee234d59763abd586"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfbf6e60265c82ac03b4780d64e0984a"><td class="memItemLeft" align="right" valign="top">ICurve *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_protocol_info.html#adfbf6e60265c82ac03b4780d64e0984a">reference</a> (<a class="el" href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efc">TypeSpectrum</a> type) const</td></tr>
+<tr class="separator:adfbf6e60265c82ac03b4780d64e0984a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99d7ad535f360737aa9c1ce5be71a612"><td class="memItemLeft" align="right" valign="top">ICurve *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_protocol_info.html#a99d7ad535f360737aa9c1ce5be71a612">approximated</a> (<a class="el" href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efc">TypeSpectrum</a> type) const</td></tr>
+<tr class="separator:a99d7ad535f360737aa9c1ce5be71a612"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5365ebe68d405f2ba19513f9e199a418"><td class="memItemLeft" align="right" valign="top">ICurve *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_protocol_info.html#a5365ebe68d405f2ba19513f9e199a418">source</a> (<a class="el" href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efc">TypeSpectrum</a> type) const</td></tr>
+<tr class="separator:a5365ebe68d405f2ba19513f9e199a418"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd1191a39965e433a79794d1983f1a32"><td class="memItemLeft" align="right" valign="top">const QVector&lt; ICurve * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_protocol_info.html#acd1191a39965e433a79794d1983f1a32">references</a> () const</td></tr>
+<tr class="separator:acd1191a39965e433a79794d1983f1a32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26655b79bf5bab891560bbf76e7f7fbc"><td class="memItemLeft" align="right" valign="top">const QVector&lt; ICurve * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_protocol_info.html#a26655b79bf5bab891560bbf76e7f7fbc">approximateds</a> () const</td></tr>
+<tr class="separator:a26655b79bf5bab891560bbf76e7f7fbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdd9ae81a3f930963b3523d6f90643fa"><td class="memItemLeft" align="right" valign="top">const QVector&lt; ICurve * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_protocol_info.html#abdd9ae81a3f930963b3523d6f90643fa">sources</a> () const</td></tr>
+<tr class="separator:abdd9ae81a3f930963b3523d6f90643fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad54762b5c843f2b54025887eff4ae55f"><td class="memItemLeft" align="right" valign="top">QVector&lt; <a class="el" href="struct_coeffs_linear_dependence.html">CoeffsLinearDependence</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_protocol_info.html#ad54762b5c843f2b54025887eff4ae55f">coeffsUp</a> () const</td></tr>
+<tr class="separator:ad54762b5c843f2b54025887eff4ae55f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c6a6f782531611988f39567c5e5afeb"><td class="memItemLeft" align="right" valign="top">QVector&lt; <a class="el" href="struct_coeffs_linear_dependence.html">CoeffsLinearDependence</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_protocol_info.html#a7c6a6f782531611988f39567c5e5afeb">coeffsDown</a> () const</td></tr>
+<tr class="separator:a7c6a6f782531611988f39567c5e5afeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a528f99b9f7de1d94e68adb79317d80"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_protocol_info.html#a8a528f99b9f7de1d94e68adb79317d80">dateTime</a> ()</td></tr>
+<tr class="separator:a8a528f99b9f7de1d94e68adb79317d80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa766d49a196e823972ac136fbdd36ba3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_protocol_info.html#aa766d49a196e823972ac136fbdd36ba3">indexRefDB</a> () const</td></tr>
+<tr class="separator:aa766d49a196e823972ac136fbdd36ba3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Конструктор(ы)</h2>
+<a id="ab17750be4e9b4c4352029d783fc64754"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab17750be4e9b4c4352029d783fc64754">&#9670;&nbsp;</a></span>ProtocolInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ProtocolInfo::ProtocolInfo </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>currentDayTime</em> = <code>QDateTime().currentDateTime().toString()</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="afac85e5d1acad99d37027ac5e68ad4f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afac85e5d1acad99d37027ac5e68ad4f2">&#9670;&nbsp;</a></span>addApproximated()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ProtocolInfo::addApproximated </td>
+          <td>(</td>
+          <td class="paramtype">const QVector&lt; ICurve * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>approximatedSpectrums</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4e0c9be64a824b46639f8a06284e0136"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e0c9be64a824b46639f8a06284e0136">&#9670;&nbsp;</a></span>addChannelName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ProtocolInfo::addChannelName </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>channelName</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_protocol_info_a4e0c9be64a824b46639f8a06284e0136_cgraph.png" border="0" usemap="#aclass_protocol_info_a4e0c9be64a824b46639f8a06284e0136_cgraph" alt=""/></div>
+<map name="aclass_protocol_info_a4e0c9be64a824b46639f8a06284e0136_cgraph" id="aclass_protocol_info_a4e0c9be64a824b46639f8a06284e0136_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,225,32"/>
+<area shape="rect" href="class_protocol_info.html#af52cefedaf2d055a54fb17993e4188aa" title=" " alt="" coords="273,5,468,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a0354db9e1c3576a4b618b702c523c4ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0354db9e1c3576a4b618b702c523c4ce">&#9670;&nbsp;</a></span>addCoeffs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ProtocolInfo::addCoeffs </td>
+          <td>(</td>
+          <td class="paramtype">QVector&lt; <a class="el" href="struct_coeffs_linear_dependence.html">CoeffsLinearDependence</a> &gt; *&#160;</td>
+          <td class="paramname"><em>coeffsUp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QVector&lt; <a class="el" href="struct_coeffs_linear_dependence.html">CoeffsLinearDependence</a> &gt; *&#160;</td>
+          <td class="paramname"><em>coeffsDown</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_protocol_info_a0354db9e1c3576a4b618b702c523c4ce_cgraph.png" border="0" usemap="#aclass_protocol_info_a0354db9e1c3576a4b618b702c523c4ce_cgraph" alt=""/></div>
+<map name="aclass_protocol_info_a0354db9e1c3576a4b618b702c523c4ce_cgraph" id="aclass_protocol_info_a0354db9e1c3576a4b618b702c523c4ce_cgraph">
+<area shape="rect" title=" " alt="" coords="5,31,175,57"/>
+<area shape="rect" href="class_protocol_info.html#a7c6a6f782531611988f39567c5e5afeb" title=" " alt="" coords="223,5,401,32"/>
+<area shape="rect" href="class_protocol_info.html#ad54762b5c843f2b54025887eff4ae55f" title=" " alt="" coords="231,56,393,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a59a1532cc4e2d20231025035b772a72e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59a1532cc4e2d20231025035b772a72e">&#9670;&nbsp;</a></span>addOperator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ProtocolInfo::addOperator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_operator.html">Operator</a>&#160;</td>
+          <td class="paramname"><em>operatorer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_protocol_info_a59a1532cc4e2d20231025035b772a72e_cgraph.png" border="0" usemap="#aclass_protocol_info_a59a1532cc4e2d20231025035b772a72e_cgraph" alt=""/></div>
+<map name="aclass_protocol_info_a59a1532cc4e2d20231025035b772a72e_cgraph" id="aclass_protocol_info_a59a1532cc4e2d20231025035b772a72e_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,192,32"/>
+<area shape="rect" href="class_protocol_info.html#aadc082300052e16ee234d59763abd586" title=" " alt="" coords="240,5,413,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a266bc4728de3da7914371ec4a5369c47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a266bc4728de3da7914371ec4a5369c47">&#9670;&nbsp;</a></span>addReference()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ProtocolInfo::addReference </td>
+          <td>(</td>
+          <td class="paramtype">const QVector&lt; ICurve * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>referenceSpectrums</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>indexRefDB</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_protocol_info_a266bc4728de3da7914371ec4a5369c47_cgraph.png" border="0" usemap="#aclass_protocol_info_a266bc4728de3da7914371ec4a5369c47_cgraph" alt=""/></div>
+<map name="aclass_protocol_info_a266bc4728de3da7914371ec4a5369c47_cgraph" id="aclass_protocol_info_a266bc4728de3da7914371ec4a5369c47_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,199,32"/>
+<area shape="rect" href="class_protocol_info.html#aa766d49a196e823972ac136fbdd36ba3" title=" " alt="" coords="247,5,425,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aba05b36dccea512e8b7d0a8c21aa4f83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba05b36dccea512e8b7d0a8c21aa4f83">&#9670;&nbsp;</a></span>addSource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ProtocolInfo::addSource </td>
+          <td>(</td>
+          <td class="paramtype">const QVector&lt; ICurve * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>sourceSpectrums</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a99d7ad535f360737aa9c1ce5be71a612"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99d7ad535f360737aa9c1ce5be71a612">&#9670;&nbsp;</a></span>approximated()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ICurve* ProtocolInfo::approximated </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efc">TypeSpectrum</a>&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a26655b79bf5bab891560bbf76e7f7fbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26655b79bf5bab891560bbf76e7f7fbc">&#9670;&nbsp;</a></span>approximateds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const QVector&lt;ICurve*&gt;&amp; ProtocolInfo::approximateds </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af52cefedaf2d055a54fb17993e4188aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af52cefedaf2d055a54fb17993e4188aa">&#9670;&nbsp;</a></span>channelName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString ProtocolInfo::channelName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7c6a6f782531611988f39567c5e5afeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c6a6f782531611988f39567c5e5afeb">&#9670;&nbsp;</a></span>coeffsDown()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QVector&lt;<a class="el" href="struct_coeffs_linear_dependence.html">CoeffsLinearDependence</a>&gt;* ProtocolInfo::coeffsDown </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad54762b5c843f2b54025887eff4ae55f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad54762b5c843f2b54025887eff4ae55f">&#9670;&nbsp;</a></span>coeffsUp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QVector&lt;<a class="el" href="struct_coeffs_linear_dependence.html">CoeffsLinearDependence</a>&gt;* ProtocolInfo::coeffsUp </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8a528f99b9f7de1d94e68adb79317d80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a528f99b9f7de1d94e68adb79317d80">&#9670;&nbsp;</a></span>dateTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString ProtocolInfo::dateTime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac004cdeed7ee5a2e5260793a058268da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac004cdeed7ee5a2e5260793a058268da">&#9670;&nbsp;</a></span>deviceName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString ProtocolInfo::deviceName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afd1c40d554466f121a6137a33527fddb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd1c40d554466f121a6137a33527fddb">&#9670;&nbsp;</a></span>deviceNum()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString ProtocolInfo::deviceNum </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa766d49a196e823972ac136fbdd36ba3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa766d49a196e823972ac136fbdd36ba3">&#9670;&nbsp;</a></span>indexRefDB()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ProtocolInfo::indexRefDB </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aadc082300052e16ee234d59763abd586"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadc082300052e16ee234d59763abd586">&#9670;&nbsp;</a></span>operatorer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_operator.html">Operator</a> ProtocolInfo::operatorer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adfbf6e60265c82ac03b4780d64e0984a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfbf6e60265c82ac03b4780d64e0984a">&#9670;&nbsp;</a></span>reference()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ICurve* ProtocolInfo::reference </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efc">TypeSpectrum</a>&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acd1191a39965e433a79794d1983f1a32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd1191a39965e433a79794d1983f1a32">&#9670;&nbsp;</a></span>references()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const QVector&lt;ICurve*&gt;&amp; ProtocolInfo::references </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5365ebe68d405f2ba19513f9e199a418"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5365ebe68d405f2ba19513f9e199a418">&#9670;&nbsp;</a></span>source()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ICurve* ProtocolInfo::source </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="protocolinfo_8h.html#a5bcc7bbc6df6703aa7f6d54f7d8c3efc">TypeSpectrum</a>&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abdd9ae81a3f930963b3523d6f90643fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdd9ae81a3f930963b3523d6f90643fa">&#9670;&nbsp;</a></span>sources()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const QVector&lt;ICurve*&gt;&amp; ProtocolInfo::sources </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>Объявления и описания членов классов находятся в файлах:<ul>
+<li>E:/MyQtProgram/parserGfm/log_data_calibrate/src/<a class="el" href="protocolinfo_8h_source.html">protocolinfo.h</a></li>
+<li>E:/MyQtProgram/parserGfm/log_data_calibrate/src/<a class="el" href="protocolinfo_8cpp.html">protocolinfo.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>
