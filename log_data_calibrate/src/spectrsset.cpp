@@ -20,7 +20,7 @@ SpectrsSet::SpectrsSet(ICurve *curve,QWidget *parent)
     m_idReference = m_idOriginal = 0;
 
     m_duplicateSpectr = ICurve::curveCreater(*m_originalSpectr);
-    m_duplicateSpectr->setMnemonic("duplicateSpectrum(DB)");
+    m_duplicateSpectr->setMnemonic("calculateSpectrum(DB)");
 
     m_mainSplitter = new QSplitter(Qt::Vertical);
     m_mainHLayout = new QHBoxLayout;
@@ -389,7 +389,7 @@ void SpectrsSet::openProtocol(){
     bool bOk;
     QString f_operatorName = QInputDialog::getText( 0, tr("Operator name:(last name first name patronymic)"),"",QLineEdit::Normal,"",&bOk);
     Operator f_operator(f_operatorName);
-    ProtocolNoise *f_noiseProtocol = new ProtocolNoise();
+    ProtocolNoise *f_noiseProtocol = new ProtocolNoise(false);
     f_noiseProtocol->addReference(m_referenceSpectrums,m_idReference);
     f_noiseProtocol->addSource(m_sourceSpectrums);
     f_noiseProtocol->addApproximated(m_approximatedSpectrums);

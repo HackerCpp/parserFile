@@ -35,14 +35,14 @@ public:
 
     bool removeCurveOne(ICurve *curve);
 
-    uint numberOfVectors(){return m_numberOfVectors;}
-    QList<ICurve*> *curves();
-    QList<ShortCut> *shortCuts();
-    QString nameRecord();
-    QString moduleMnemonic(){return m_moduleMnemonics;}
-    QString plugins(){return m_plugins;}
-    ICurve *time(){return m_mainTime;}
-    ICurve *depth(){return m_mainDepth;}
+    uint numberOfVectors()const{return m_numberOfVectors;}
+    QList<ICurve*> *curves()const;
+    QList<ShortCut> *shortCuts()const;
+    QString nameRecord()const;
+    QString moduleMnemonic()const{return m_moduleMnemonics;}
+    QString plugins()const{return m_plugins;}
+    ICurve *time()const{return m_mainTime;}
+    ICurve *depth()const{return m_mainDepth;}
 
 signals:
     void dataUpdate();

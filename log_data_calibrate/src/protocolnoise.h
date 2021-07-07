@@ -27,10 +27,11 @@ class ProtocolNoise : public QWidget
     QVector<ICurve*> m_sourceSpectrums{TYPE_SPECTRUM_MAX,nullptr};
     QVector<ICurve*> m_approximatedSpectrums{TYPE_SPECTRUM_MAX,nullptr};
     QVector<ICurve*> m_referenceSpectrums{TYPE_SPECTRUM_MAX,nullptr};
+    bool m_isLoadedDB;
 
 public:
-    ProtocolNoise(QWidget* parent = nullptr);
-    ProtocolNoise(QString dateTime,QWidget* parent = nullptr);
+    ProtocolNoise(bool is_loadedDB,QWidget* parent = nullptr);
+    ProtocolNoise(QString dateTime,bool is_loadedDB,QWidget* parent = nullptr);
     void addReference(const QVector<ICurve*> &referenceSpectrum,int indexRefDB);
     void addSource(const QVector<ICurve*> &sourceSpectrums);
     void addApproximated(const QVector<ICurve*> &approximatedSpectrum);

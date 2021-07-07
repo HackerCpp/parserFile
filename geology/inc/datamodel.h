@@ -10,7 +10,7 @@ using namespace std;
 class DataModel : public  QAbstractItemModel
 {
     QVector<shared_ptr<ILogData> > *m_logDataVector;
-    ILogData *m_curentLogData;
+    ILogData *m_currentLogData;
 
 public:
     DataModel();
@@ -30,8 +30,8 @@ public:
     Qt::ItemFlags flags(const QModelIndex &index) const override;
     bool deleteBlock(IBlock *block);
 
-    void setCurentLogData(ILogData *logData){m_curentLogData = logData;}
-    ILogData *curentLogData(){return m_curentLogData;}
+    void setCurentLogData(ILogData *logData){m_currentLogData = logData;}
+    ILogData *curentLogData(){return m_currentLogData;}
 
 };
 

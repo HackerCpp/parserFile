@@ -1,8 +1,9 @@
 <map id="ReferenceSaver" name="ReferenceSaver">
-<area shape="rect" id="node1" title=" " alt="" coords="194,171,317,197"/>
-<area shape="rect" id="node2" href="$class_geology_s_q_lite_d_b.html" title="Базовый класс для работы с базой данных SQlite3. Конструктор подключается к базе данных...." alt="" coords="188,95,323,121"/>
+<area shape="rect" id="node1" title=" " alt="" coords="273,171,395,197"/>
+<area shape="rect" id="node2" href="$class_geology_s_q_lite_d_b.html" title="Базовый класс для работы с базой данных SQlite3. Конструктор подключается к базе данных...." alt="" coords="267,95,401,121"/>
 <area shape="rect" id="node3" href="$class_q_object.html" title=" " alt="" coords="5,5,79,32"/>
-<area shape="rect" id="node4" title=" " alt="" coords="103,5,229,32"/>
-<area shape="rect" id="node5" title=" " alt="" coords="253,5,436,32"/>
-<area shape="rect" id="node6" title=" " alt="" coords="460,5,509,32"/>
+<area shape="rect" id="node4" title=" " alt="" coords="103,5,285,32"/>
+<area shape="rect" id="node5" title=" " alt="" coords="309,5,359,32"/>
+<area shape="rect" id="node6" title=" " alt="" coords="383,5,547,32"/>
+<area shape="rect" id="node7" title=" " alt="" coords="571,5,649,32"/>
 </map>

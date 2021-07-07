@@ -8,6 +8,7 @@
 #include <QGridLayout>
 #include <QLabel>
 #include <QLineEdit>
+#include <QCheckBox>
 
 class PairWidget : public QWidget {
     QHBoxLayout *m_mainLayuot;
@@ -20,11 +21,16 @@ public:
 
 };
 
+/*!
+*  \authors Пряников Алексей Владимирович
+*
+*   \brief Данный виджет создаёт новую кривую.В дата блоке.
+*/
 class NewCurveTab : public BaseSettingsWindow
 {
     DataBlock *m_dataBlock;
-    QComboBox *m_comboDrawType,*m_comboShortCuts;
-    QLineEdit *m_lineSize,*m_lineOffset,*m_lineMnemonic;
+    QComboBox *m_comboMnemonicks,*m_comboShortCuts;
+    QLineEdit /*m_lineSize,*m_lineOffset,*/*m_lineMnemonic;
     QVBoxLayout *m_boxLayout;
     QList<PairWidget *> *m_listWidgetPair;
 
@@ -35,6 +41,9 @@ public:
     ~NewCurveTab();
 
     void apply();
+
+public slots:
+    void changeMnemonic();
 };
 
 #endif // NEWCURVETAB_H

@@ -38,6 +38,7 @@ Menu::Menu(QWidget *parent)
     saveFileMenu->addAction (tr("&GFM"),m_parentWindow, SLOT(saveGFM()));
     saveFileMenu->addAction (tr("&LIS"),m_parentWindow, SLOT(saveLIS()));
     saveFileMenu->addAction (tr("&LAS"),m_parentWindow, SLOT(saveLAS()));
+    saveFileMenu->addAction (tr("&Database"),m_parentWindow, SLOT(saveDatabase()));
     fileMenu->addMenu(saveFileMenu);
 
     fileMenu->addAction(tr("&Add from file"),m_parentWindow, SLOT(addFromFile()));

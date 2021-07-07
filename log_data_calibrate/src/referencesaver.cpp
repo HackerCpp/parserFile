@@ -13,7 +13,7 @@
 
 
 
-ReferenceSaver::ReferenceSaver(QSqlDatabase *db) : GeologySQLiteDB(db){}
+ReferenceSaver::ReferenceSaver() : GeologySQLiteDB(){}
 
 ReferenceSaver::~ReferenceSaver(){}
 
@@ -53,8 +53,8 @@ int ReferenceSaver::findReference(int devID,QString lastChange,int cMaxID,int cM
     if(!m_db->isOpen())
         return 0;
     QSqlQuery f_query;
-    f_query.prepare("SELECT SCReferenceID\
-               FROM SpectrumCalibReference \
+    f_query.prepare("SELECT SCReferenceID\n\
+               FROM SpectrumCalibReference \n\
                WHERE SCRDeviceID=? AND SCRLastChanges=? AND SCRCurveMaxID=? AND SCRCurveMinID=? AND SCRLines=? AND SCRDataStep=?;");
     f_query.addBindValue(devID);
     f_query.addBindValue(lastChange);
@@ -63,8 +63,9 @@ int ReferenceSaver::findReference(int devID,QString lastChange,int cMaxID,int cM
     f_query.addBindValue(lines);
     f_query.addBindValue(dataStep);
     f_query.exec();
-    qDebug() << f_query.lastError().text();
-    if(f_query.next())
+    qDebug() << "Find reference error : "<< f_query.lastError().text();
+    if(f_query.next()){
        return f_query.value(0).toInt();
+    }
    return 0;
 }

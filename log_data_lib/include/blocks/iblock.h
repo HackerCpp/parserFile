@@ -28,7 +28,7 @@ public:
     IBlock(const IBlock &block){Q_UNUSED(block)}
     virtual ~IBlock();
 
-    virtual TypeBlock name();
+    virtual TypeBlock name()const;
     virtual bool parser(const char *body,uint32_t size);
 
     static IBlock * blockCreater(IBlock::TypeBlock type);

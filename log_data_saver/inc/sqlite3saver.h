@@ -24,21 +24,28 @@ class SAVER_EXPORT SQLite3Saver : public ASaverLogData
 {
     std::unique_ptr<QSettings> m_settings;
     QSqlDatabase *m_db;
+    bool m_isDeleteDB;
 public:
     /*!
      * \param[in] db Указатель на базу данных.
      *  База данных должна быть открыта(подключена)
      */
-    explicit SQLite3Saver(QSqlDatabase *db);
+    explicit SQLite3Saver(QSqlDatabase *db = nullptr);
     ~SQLite3Saver();
 
-    int saveCurve(const ICurve &curve);
+    bool save()override;
+
+    int saveDataBlockAndCurves(const IBlock &block);
+    int saveDataBlock(const IBlock &block);
+    int saveBlock(const IBlock &block);
+    int saveCurve(const ICurve &curve,int indexDataBlock = 0);
     int saveShortCut(const ShortCut &shortCut);
     int saveParamInfo(Paraminfo &paramInfo,Parameters::Type type);
     int saveDesc(const Desc &desc,int indexCurve);
     int linkCurveAndParamInfo(int indexCurve, int indexParamInfo);
     int updateCurve(const ICurve &curve);
 
+    int findDataBlock(const IBlock &block);
     int findShortCut(const ShortCut &shortCut);
     int findParamInfo(const Paraminfo &paramInfo,Parameters::Type type);
     int findLinkCurveAndParamInfo(int indexCurve, int indexParamInfo);

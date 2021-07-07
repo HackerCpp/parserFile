@@ -27,13 +27,13 @@ class GeologySQLiteDB : public QObject
 {
 
 protected:
-    QSqlDatabase *m_db;
+    static QSqlDatabase *m_db;
+    static int m_countDB;
     std::unique_ptr<QSettings> m_settings;
     bool m_isDeleteDB;
     void createDB();
 public:
     GeologySQLiteDB();
-    GeologySQLiteDB(QSqlDatabase *db);
     virtual ~GeologySQLiteDB();
 };
 

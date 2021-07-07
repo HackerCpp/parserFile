@@ -54,9 +54,11 @@ void LogDataCalibrate::changeDevice(){
 
 void LogDataCalibrate::openProtocol(){
 
-    QString query = "SELECT Calibrations.CalibID,Calibrations.CDateTime,\
-            CalibDevice.CDName,CalibDevice.CDNumber,Calibrations.CChannel,\
-            SpectrumCalibCoeffs.SCCDataStep,SpectrumCalibCoeffs.SCCNumLines\n\
+    QString query = "SELECT Calibrations.CalibID,Calibrations.CDateTime as 'Date time',\
+            CalibDevice.CDName as 'Device name',CalibDevice.CDNumber as 'Device number', \n\
+            Calibrations.CChannel as 'Channel',\
+            SpectrumCalibCoeffs.SCCDataStep as 'Data step',\n\
+            SpectrumCalibCoeffs.SCCNumLines as 'Lines'\n\
             FROM Calibrations\n\
             JOIN CalibDevice ON CalibDevice.CDeviceID=Calibrations.CDeviceID\n\
             JOIN SpectrumCalibCoeffs ON SpectrumCalibCoeffs.SCCoeffsID=Calibrations.CCoeffsDownID;";
@@ -64,6 +66,7 @@ void LogDataCalibrate::openProtocol(){
     int f_calibID = f_selectingID->getID();
     if(f_calibID < 1)
         return;
-    SaverLoaderCalibDB *f_loaderCalib = new SaverLoaderCalibDB();
+    //auto f_loaderCalib = new SaverLoaderCalibDB();
+    auto f_loaderCalib = std::make_unique<SaverLoaderCalibDB>();
     f_loaderCalib->loadNoiseProtocol(f_calibID);
 }

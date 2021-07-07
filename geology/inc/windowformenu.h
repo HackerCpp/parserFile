@@ -15,6 +15,7 @@ public slots:
     virtual void saveGFM(){}
     virtual void saveLIS(){}
     virtual void saveLAS(){}
+    virtual void saveDatabase(){}
     virtual void openConsolePython(){}
     virtual void openEditorPython(){}
     virtual void insertCalibrationInTheScript(){}

@@ -21,7 +21,7 @@ class ReferenceLoader : public QWidget,public GeologySQLiteDB
     int m_currentCurveIndex;
 
 public:
-    explicit ReferenceLoader(int lines,QString data_step,QSqlDatabase *db = nullptr);
+    explicit ReferenceLoader(int lines,QString data_step);
     ~ReferenceLoader();
 
     void loadRefCurves(QVector<ICurve*> &referenceSpectrums,int &idReference);

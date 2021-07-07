@@ -10,7 +10,7 @@ IBlock::IBlock(){}
 IBlock::~IBlock(){}
 
 
-IBlock::TypeBlock IBlock::name(){
+IBlock::TypeBlock IBlock::name()const{
     return NO_BLOCK;
 }
 

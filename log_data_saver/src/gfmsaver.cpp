@@ -36,7 +36,7 @@ GFMSaver::~GFMSaver(){
 bool GFMSaver::save(){
     m_isReady = false;
     if(!m_blocks){
-        qDebug() << "Нечего сохранять,добавьте данные";
+        qDebug() << "Нечего сохранять,добавьте данные GFMSaver::save()";
     }
     QDateTime date;
     QString stringDate = date.currentDateTime().toString("dd_MM_yyyy_hh_mm");

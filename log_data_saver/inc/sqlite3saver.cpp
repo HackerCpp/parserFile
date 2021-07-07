@@ -14,10 +14,38 @@
 
 
 SQLite3Saver::SQLite3Saver(QSqlDatabase *db) :
-    m_db(db)
+    m_db(db),m_isDeleteDB(false)
 {
+
+    if(!m_db){
+        m_isDeleteDB = true;
+        m_settings = std::make_unique<QSettings>(new QSettings("settings.ini",QSettings::IniFormat));
+        m_db = new QSqlDatabase(QSqlDatabase::addDatabase("QSQLITE"));
+        /*QString f_openPath = m_settings->value("paths/pathOpenDB").toString();
+        QString filePath = QFileDialog().getOpenFileName(nullptr, tr("Open File"),f_openPath,tr("*.db"));
+        if(filePath.isEmpty())
+            return;
+        m_settings->setValue("paths/pathOpenDB",filePath);*/
+        m_db->setDatabaseName("sqliteDB\\GeoDB.db");
+        if(!m_db->open()){
+            qDebug() << m_db->lastError().text();
+        }
+    }
     if(m_db->isOpen()){
         QSqlQuery f_query;
+        f_query.prepare(
+            "CREATE TABLE IF NOT EXISTS LogDataDataBlock (\
+                    LDDataBlockID       INTEGER PRIMARY KEY AUTOINCREMENT,\
+                    LDDBLastСhanges     DATETIME,\
+                    LDDBQuantityVectors STRING,\
+                    LDDBModuleMnemonic  STRING,\
+                    LDDBNameRecord      STRING,\
+                    LDDCPlugins         TEXT,\
+                    LDDCTimeID          INTEGER REFERENCES LogDataCurve (LDCurveID),\
+                    LDDCDepthID         INTEGER REFERENCES LogDataCurve (LDCurveID) \
+                );");
+        f_query.exec();
+        qDebug() << f_query.lastError().text();
         f_query.prepare(
             "CREATE TABLE IF NOT EXISTS LogDataCurve (\
                     LDCurveID           INTEGER  PRIMARY KEY AUTOINCREMENT UNIQUE,\
@@ -31,7 +59,10 @@ SQLite3Saver::SQLite3Saver(QSqlDatabase *db) :
                     LDCDataType         TEXT,\
                     LDCRecordPoint      DOUBLE,\
                     LDCUID              TEXT,\
-                    LDCDATA             BLOB\
+                    LDCDATA             BLOB,\
+                    LDCCompressionRatio DOUBLE,\
+                    LDCCompressionMethod INTEGER  DEFAULT (1),\
+                    LDCDataBlockID       INTEGER  REFERENCES LogDataDataBlock (LDDataBlockID) \
                 );");
         f_query.exec();
         qDebug() << f_query.lastError().text();
@@ -61,9 +92,93 @@ SQLite3Saver::SQLite3Saver(QSqlDatabase *db) :
 }
 
 SQLite3Saver::~SQLite3Saver(){
+    if(m_isDeleteDB){
+        if(m_db){
+            if(m_db->isOpen())
+                m_db->close();
+            delete m_db;m_db = nullptr;
+        }
+        QSqlDatabase::removeDatabase(QLatin1String(QSqlDatabase::defaultConnection));
+    }
 }
 
-int SQLite3Saver::saveCurve(const ICurve &curve){
+
+bool SQLite3Saver::save(){
+    m_isReady = false;
+    if(!m_blocks){
+        qDebug() << "Нечего сохранять,добавьте данные GFMSaver::save()";
+    }
+    for(auto block : *m_blocks)
+        saveBlock(*block);
+
+    m_isReady = true;
+    return true;
+}
+
+int SQLite3Saver::saveDataBlockAndCurves(const IBlock &block){
+    auto f_dataBlock = dynamic_cast<const DataBlock *>(&block);
+    if(!m_db->isOpen() || !f_dataBlock)
+        return 0;
+    int f_indexDataBlock = saveDataBlock(block);
+    if(!f_indexDataBlock)
+        return f_indexDataBlock;
+    for(auto curve : *f_dataBlock->curves()){
+        saveCurve(*curve,f_indexDataBlock);
+    }
+
+}
+
+int SQLite3Saver::saveDataBlock(const IBlock &block){
+    auto f_dataBlock = dynamic_cast<const DataBlock *>(&block);
+    if(!m_db->isOpen() || !f_dataBlock)
+        return 0;
+    if(int indexDataBlock = findDataBlock(block);indexDataBlock)
+        return indexDataBlock;
+    QSqlQuery f_query;
+    f_query.prepare(
+"INSERT INTO LogDataDataBlock (\
+    LDDBLastСhanges,LDDBQuantityVectors,LDDBModuleMnemonic,\
+    LDDBNameRecord,LDDCPlugins,LDDCTimeID,LDDCDepthID)\n\
+VALUES (?,?,?,?,?,?,?);");
+    f_query.addBindValue(QDateTime::currentDateTime().toString());
+    f_query.addBindValue(f_dataBlock->numberOfVectors());
+    f_query.addBindValue(f_dataBlock->moduleMnemonic());
+    f_query.addBindValue(f_dataBlock->nameRecord());
+    f_query.addBindValue(f_dataBlock->plugins());
+    f_query.addBindValue(saveCurve(*f_dataBlock->time()));
+    f_query.addBindValue(saveCurve(*f_dataBlock->depth()));
+    f_query.exec();
+    return findDataBlock(block);
+
+    return 0;
+}
+
+int SQLite3Saver::saveBlock(const IBlock &block){
+    switch (block.name()) {
+        case IBlock::NO_BLOCK:{
+            break;
+        }
+        case IBlock::DATA_BLOCK:{
+            return saveDataBlockAndCurves(block);
+            break;
+        }
+        case IBlock::FORMS_BLOCK:{
+            break;
+        }
+        case IBlock::TOOLINFO_BLOCK:{
+            break;
+        }
+        case IBlock::HEADER_BLOCK:{
+            break;
+        }
+        case IBlock::LABELS_BLOCK:{
+            break;
+        }
+    }
+    return 0;
+}
+
+int SQLite3Saver::saveCurve(const ICurve &curve,int indexDataBlock ){
     if(!m_db->isOpen())
         return 0;
     if(findCurve(curve))
@@ -88,9 +203,10 @@ int SQLite3Saver::saveCurve(const ICurve &curve){
         "INSERT INTO LogDataCurve (\
         LDCLastСhanges,LDCMnemonic,LDCTimeID,LDCDepthID,\
         LDCShortCutID,LDCSizeOffsetInByte,LDCSizeOfType,\
-        LDCDataType,LDCRecordPoint,LDCUID,LDCDATA)\
+        LDCDataType,LDCRecordPoint,LDCUID,LDCDATA,\
+        LDCCompressionRatio,LDCCompressionMethod,LDCDataBlockID)\n\
         VALUES (\
-        ?,?,?,?,?,?,?,?,?,?,?);");
+        ?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
      f_query.addBindValue(QDateTime::currentDateTime().toString());
      f_query.addBindValue(curve.mnemonic());
      f_query.addBindValue(f_timeId);
@@ -104,6 +220,9 @@ int SQLite3Saver::saveCurve(const ICurve &curve){
      QByteArray f_baCompressed;
      GFMSaver::gzipCompress(curve.data(),f_baCompressed,7);
      f_query.addBindValue(f_baCompressed);
+     f_query.addBindValue((qreal)curve.data().size() / (qreal)f_baCompressed.size() );
+     f_query.addBindValue(1);
+     f_query.addBindValue(indexDataBlock);
     f_query.exec();
     int f_currentIndexCurve = findCurve(curve);
     if(f_currentIndexCurve)
@@ -227,6 +346,27 @@ int SQLite3Saver::updateCurve(const ICurve &curve){
 
 
 
+int SQLite3Saver::findDataBlock(const IBlock &block){
+    auto f_dataBlock = dynamic_cast<const DataBlock *>(&block);
+    if(!m_db->isOpen() || !f_dataBlock)
+        return 0;
+    QSqlQuery f_query;
+    f_query.prepare("\
+SELECT LDDataBlockID \n\
+FROM LogDataDataBlock \n\
+WHERE LogDataDataBlock.LDDBQuantityVectors = ? \n\
+AND LogDataDataBlock.LDDBModuleMnemonic=?\n\
+AND LogDataDataBlock.LDDBNameRecord=? ;");
+    f_query.addBindValue(f_dataBlock->numberOfVectors());
+    f_query.addBindValue(f_dataBlock->moduleMnemonic());
+    f_query.addBindValue(f_dataBlock->nameRecord());
+    f_query.exec();
+
+    if(f_query.next())
+       return f_query.value(0).toInt();
+
+   return 0;
+}
 
 int SQLite3Saver::findShortCut(const ShortCut &shortCut){
     if(!m_db->isOpen())

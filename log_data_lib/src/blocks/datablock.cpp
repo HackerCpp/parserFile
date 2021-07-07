@@ -118,15 +118,14 @@ bool DataBlock::removeCurveOne(ICurve *curve){
     return m_numberOfVectors;
 }*/
 
-QList<ICurve*> *DataBlock::curves(){
+QList<ICurve*> *DataBlock::curves()const{
     return m_curves;
 }
 
-QList<ShortCut> *DataBlock::shortCuts(){
+QList<ShortCut> *DataBlock::shortCuts()const{
     return m_shortCuts;
 }
 
-QString DataBlock:: nameRecord()
-{
+QString DataBlock::nameRecord()const{
     return m_nameRecord;
 }

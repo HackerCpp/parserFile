@@ -7,7 +7,7 @@ enum ReferenceStatus{STATUS_ORDINARY,STATUS_REFERENCE};
 class ReferenceSaver : public GeologySQLiteDB
 {
 public:
-    explicit ReferenceSaver(QSqlDatabase *db);
+    explicit ReferenceSaver();
     ~ReferenceSaver()override;
 
     int saveReference(const QVector<ICurve*> &referenceSpectrums,int deviceID,ReferenceStatus status = STATUS_ORDINARY);

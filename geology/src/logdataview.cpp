@@ -22,7 +22,6 @@ LogDataView::LogDataView(QWidget *parent) : QWidget(parent)
 
 LogDataView::~LogDataView(){
     if(m_logDataList){delete m_logDataList; m_logDataList = nullptr;}
-
 }
 
 void LogDataView::addLogData(shared_ptr<ILogData> logData){

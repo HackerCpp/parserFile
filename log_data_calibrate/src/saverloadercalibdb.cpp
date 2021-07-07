@@ -140,9 +140,13 @@ int SaverLoaderCalibDB::saveCoeffs(const QVector<CoeffsLinearDependence> &coeffs
 }
 
 int SaverLoaderCalibDB::saveReference(const QVector<ICurve*> &referenceSpectrums,ReferenceStatus status){
-    auto f_saverRef = std::make_unique<ReferenceSaver>(m_db);
+    if(!m_db->isOpen())
+        return 0;
+    auto f_saverRef = std::make_unique<ReferenceSaver>();
     int indexDevice = saveDevice(referenceSpectrums[MAXIMUM_SPECTRUM]->shortCut().deviceName(),referenceSpectrums[MAXIMUM_SPECTRUM]->shortCut().deviceNum(),"");
-    return f_saverRef->saveReference(referenceSpectrums,indexDevice,status);
+    int indexReferenceSaved = f_saverRef->saveReference(referenceSpectrums,indexDevice,status);
+    qDebug() << indexReferenceSaved;
+    return indexReferenceSaved;
 }
 
 int SaverLoaderCalibDB::saveNoiseProtocol(std::shared_ptr<ProtocolInfo> protInfo){
@@ -178,7 +182,7 @@ int SaverLoaderCalibDB::saveNoiseProtocol(std::shared_ptr<ProtocolInfo> protInfo
 }
 
 void SaverLoaderCalibDB::loadReference(int lines,QString data_step,QVector<ICurve*> &referenceSpectrums,int &idReference){
-    ReferenceLoader(lines,data_step,m_db).loadRefCurves(referenceSpectrums,idReference);
+    ReferenceLoader(lines,data_step).loadRefCurves(referenceSpectrums,idReference);
 }
 
 void SaverLoaderCalibDB::loadReference(int index,QVector<ICurve*> &referenceSpectrums){
@@ -286,7 +290,7 @@ WHERE CalibID = ?;");
     f_referenceSpectrums[MINIMUM_SPECTRUM]->setMnemonic("Reference_MIN(DB)");
     f_referenceSpectrums[NOISE_SPECTRUM]->setMnemonic("Reference_NOISE(DB)");
 
-    ProtocolNoise *f_noiseProtocol = new ProtocolNoise(f_dateTime);
+    ProtocolNoise *f_noiseProtocol = new ProtocolNoise(f_dateTime,true);
     f_noiseProtocol->addReference(f_referenceSpectrums,f_referenceRefID);
     f_noiseProtocol->addSource(f_sourceSpectrums);
     QVector<CoeffsLinearDependence> *f_coeffsUp;

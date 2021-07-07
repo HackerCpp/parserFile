@@ -76,25 +76,30 @@ QString PictureChart::refToPicture(const ICurve &curveMAX,const ICurve &curveAVE
 }
 
 QString PictureChart::coeffToPicture(QVector<CoeffsLinearDependence> *coeffs){
+
+
     QChartView f_chart;
-    QValueAxis f_xAxis,f_yAxis;
+    QValueAxis f_xAxis,f_yAxisA,f_yAxisB;
 
     QLineSeries f_seriesA,f_seriesB;
     f_seriesA.setName(tr("coefficients A"));
     f_seriesB.setName(tr("coefficients B"));
     f_seriesA.setPen(QPen(Qt::green,1));
+    f_yAxisA.setLabelsColor(Qt::green);
     f_seriesB.setPen(QPen(Qt::blue,1));
+    f_yAxisB.setLabelsColor(Qt::blue);
     f_xAxis.setGridLinePen(QPen(Qt::black,0.1));
-    f_yAxis.setGridLinePen(QPen(Qt::black,0.1));
+    f_yAxisA.setGridLinePen(QPen(Qt::black,0.1));
+    f_yAxisB.setGridLinePen(QPen(Qt::black,0.1));
     f_xAxis.setTitleText("Lines");
 
     f_chart.chart()->legend()->setFont(QFont("Times new roman",24,QFont::Bold));
     f_chart.chart()->addSeries(&f_seriesA);
     f_chart.chart()->addSeries(&f_seriesB);
-    f_chart.chart()->setAxisX(&f_xAxis, &f_seriesA);   // Назначить ось xAxis, осью X для diagramA
-    f_chart.chart()->setAxisY(&f_yAxis, &f_seriesA);
-    f_chart.chart()->setAxisX(&f_xAxis, &f_seriesB);   // Назначить ось xAxis, осью X для diagramA
-    f_chart.chart()->setAxisY(&f_yAxis, &f_seriesB);
+    f_chart.chart()->setAxisX(&f_xAxis, &f_seriesA);
+    f_chart.chart()->setAxisY(&f_yAxisA, &f_seriesA);
+    f_chart.chart()->setAxisX(&f_xAxis, &f_seriesB);
+    f_chart.chart()->setAxisY(&f_yAxisB, &f_seriesB);
 
     QList<QPointF> f_coeffsA;
     QList<QPointF> f_coeffsB;
@@ -103,6 +108,16 @@ QString PictureChart::coeffToPicture(QVector<CoeffsLinearDependence> *coeffs){
     qreal m_maximumA = 0 ;
     qreal m_minimumB = 1 ;
     qreal m_maximumB = 0 ;
+    /*for(auto&& [coef_a,coef_b] : *coeffs){
+        m_minimumA = m_minimumA < coef_a ? m_minimumA : coef_a;
+        m_maximumA = m_maximumA > coef_a ? m_maximumA : coef_a;
+        m_minimumB = m_minimumB < coef_b ? m_minimumB : coef_b;
+        m_maximumB = m_maximumB > coef_b ? m_maximumB : coef_b;
+        f_coeffsA.push_back(QPointF(f_y,coef_a));
+        f_coeffsB.push_back(QPointF(f_y++,coef_b));
+    }
+    f_yAxis.setRange(m_minimumA < m_minimumB ? m_minimumA : m_minimumB,m_maximumA > m_maximumB ? m_maximumA : m_maximumB);*/
+
     for(auto&& [coef_a,coef_b] : *coeffs){
         m_minimumA = m_minimumA < coef_a ? m_minimumA : coef_a;
         m_maximumA = m_maximumA > coef_a ? m_maximumA : coef_a;
@@ -111,7 +126,13 @@ QString PictureChart::coeffToPicture(QVector<CoeffsLinearDependence> *coeffs){
         f_coeffsA.push_back(QPointF(f_y,coef_a));
         f_coeffsB.push_back(QPointF(f_y++,coef_b));
     }
-    f_yAxis.setRange(m_minimumA < m_minimumB ? m_minimumA : m_minimumB,m_maximumA > m_maximumB ? m_maximumA : m_maximumB);
+    f_yAxisA.setTickCount(5);
+    f_yAxisB.setTickCount(5);
+    f_yAxisA.setRange(m_minimumA,m_maximumA + (m_maximumA - m_minimumA));
+    f_yAxisB.setRange(m_minimumB - (m_maximumB - m_minimumB),m_maximumB);
+    //f_yAxisA.setRange(m_minimumA,m_maximumA);
+    //f_yAxisB.setRange(m_minimumB,m_maximumB);
+
     f_xAxis.setRange(0,coeffs->size());
     f_seriesA.replace(f_coeffsA);
     f_seriesB.replace(f_coeffsB);

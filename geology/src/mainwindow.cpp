@@ -7,6 +7,7 @@
 #include "gfmsaver.h"
 #include "lassaver.h"
 #include "lissaver.h"
+#include "sqlite3saver.h"
 #include "tabinterpretations.h"
 #include "geometrologydb.h"
 #include <QProcess>
@@ -15,7 +16,6 @@
 #include "geoloader.h"
 #include "interpretercreater.h"
 #include <QInputDialog>
-#include <string_view>
 #include "logdatacalibrate.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -47,7 +47,6 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow(){
     if(m_settings){delete m_settings; m_settings = nullptr;}
-
 }
 
 bool MainWindow::eventFilter(QObject *o, QEvent *e){
@@ -152,6 +151,9 @@ void MainWindow::saveLIS(){
 
 void MainWindow::saveLAS(){
     saveFile(new LASSaver());
+}
+void MainWindow::saveDatabase(){
+    saveFile(new SQLite3Saver());
 }
 
 void MainWindow::fileExists(QString filePath){

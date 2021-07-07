@@ -5,6 +5,9 @@
 #include <QFileDialog>
 #include <QSettings>
 
+QSqlDatabase *GeologySQLiteDB::m_db = nullptr;
+int GeologySQLiteDB::m_countDB = 0;
+
 void GeologySQLiteDB::createDB(){
     m_isDeleteDB = true;
     m_settings = std::make_unique<QSettings>(new QSettings("settings.ini",QSettings::IniFormat));
@@ -20,21 +23,17 @@ void GeologySQLiteDB::createDB(){
     }
 }
 
-GeologySQLiteDB::GeologySQLiteDB()
-{
-    createDB();
-}
 
-GeologySQLiteDB::GeologySQLiteDB(QSqlDatabase *db)
-    :m_db(db),m_isDeleteDB(false){
+GeologySQLiteDB::GeologySQLiteDB(){
     if(!m_db){
         createDB();
     }
-
+    ++m_countDB;
 }
 
 GeologySQLiteDB::~GeologySQLiteDB(){
-    if(m_isDeleteDB){
+    m_countDB--;
+    if(!m_countDB){
         if(m_db){
             if(m_db->isOpen())
                 m_db->close();

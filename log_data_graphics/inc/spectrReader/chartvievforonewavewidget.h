@@ -11,7 +11,7 @@ class ChartViewForOneWaveWidget : public QChartView
 {
     Q_OBJECT
     QGraphicsTextItem *m_textItem;
-    QGraphicsLineItem *m_verticalLine;
+    QGraphicsLineItem *m_verticalLine,*m_horizontalLine;
     ModelOneWave * m_modelOneWave;
 
     bool m_flagMousePress;

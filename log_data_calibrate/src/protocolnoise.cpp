@@ -14,9 +14,8 @@
 #include <QDateTime>
 #include <QMessageBox>
 
-ProtocolNoise::ProtocolNoise(QWidget* parent)
-    : QWidget(parent)
-
+ProtocolNoise::ProtocolNoise(bool is_loadedDB,QWidget* parent)
+    : QWidget(parent),m_isLoadedDB(is_loadedDB)
 {
     m_settings = std::make_unique<QSettings>(new QSettings("settings.ini",QSettings::IniFormat));
     m_pictureCreater = std::make_unique<PictureChart>();
@@ -33,8 +32,8 @@ ProtocolNoise::ProtocolNoise(QWidget* parent)
     connect(m_btnSaveFile,&QPushButton::released,this,&ProtocolNoise::saveProtocol);
 }
 
-ProtocolNoise::ProtocolNoise(QString dateTime,QWidget* parent)
-    : QWidget(parent)
+ProtocolNoise::ProtocolNoise(QString dateTime,bool is_loadedDB,QWidget* parent)
+    : QWidget(parent),m_isLoadedDB(is_loadedDB)
 {
     m_settings = std::make_unique<QSettings>(new QSettings("settings.ini",QSettings::IniFormat));
     m_pictureCreater = std::make_unique<PictureChart>();
@@ -115,7 +114,8 @@ void ProtocolNoise::saveProtocol(){
         return;
     m_settings->setValue("paths/lastSaveNoiseProtocol",filePath);
     m_webView->page()->printToPdf(filePath);
-
+    if(m_isLoadedDB)
+        return;
     hide();
     auto f_saverDB = std::make_unique<SaverLoaderCalibDB>();
     f_saverDB->saveNoiseProtocol(m_protocolinfo);

@@ -29,6 +29,7 @@ public slots:
     void saveGFM()override final;
     void saveLIS() override final;
     void saveLAS() override final;
+    void saveDatabase() override final;
     void fileExists(QString filePath);
     void openConsolePython()override final;
     void openEditorPython()override final;

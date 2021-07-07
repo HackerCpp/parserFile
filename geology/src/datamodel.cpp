@@ -12,7 +12,7 @@
 
 DataModel::DataModel(){
     m_logDataVector = new QVector<shared_ptr<ILogData> >;
-    m_curentLogData = nullptr;
+    m_currentLogData = nullptr;
 }
 
 DataModel::~DataModel(){
@@ -20,7 +20,7 @@ DataModel::~DataModel(){
 }
 
 void DataModel::addLogData(std::shared_ptr<ILogData> logData){
-    m_curentLogData = logData.get();
+    m_currentLogData = logData.get();
     if(m_logDataVector){
        beginInsertRows(QModelIndex(),m_logDataVector->size(), m_logDataVector->size());
        m_logDataVector->push_back(logData);
@@ -516,7 +516,7 @@ QVariant DataModel::data(const QModelIndex &index, int role )const{
     else if(role == Qt::CheckStateRole){
         if (dynamic_cast<ILogData*>(static_cast<QObject*>(index.internalPointer()))){
             ILogData *f_logData = static_cast<ILogData *>(index.internalPointer());
-            if(f_logData == m_curentLogData)
+            if(f_logData == m_currentLogData)
                 return Qt::Checked;
             else
                 return Qt::Unchecked;

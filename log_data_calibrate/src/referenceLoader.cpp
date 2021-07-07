@@ -18,8 +18,8 @@
 #include "protocolinfo.h"
 
 
-ReferenceLoader::ReferenceLoader(int lines,QString data_step,QSqlDatabase *db)
-    : GeologySQLiteDB(db){
+ReferenceLoader::ReferenceLoader(int lines,QString data_step)
+    : GeologySQLiteDB(){
 
     m_currentCurveIndex = -1;
     m_model = new QSqlQueryModel;
